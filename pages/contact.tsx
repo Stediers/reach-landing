@@ -12,6 +12,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import ImageComponent from "@components/ImageComponent";
 import TextInput from "@components/input/TextInput";
 import TextArea from "@components/input/TextArea";
+import Widget from "@components/Widget";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import {
   getItemsFromLocalStorage,
@@ -409,6 +410,7 @@ function Index({ cookieExists }: { cookieExists: boolean }) {
             link="/contact"
             className="bg-primary text-white font-medium"
           />
+          <Widget />
         </div>
       </div>
       <div
