@@ -1,0 +1,173 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+* {
+  /*TODO: Remove this*/
+  /* border: 1px solid black; */
+}
+
+.min-h-screen-fix {
+  min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  min-height: calc(100dvh);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+input,
+textarea,
+button,
+select,
+div,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer components {
+  .bg-primary {
+    background-color: #f40e1e;
+  }
+
+  .text-primary {
+    color: #f40e1e;
+  }
+
+  .border-primary {
+    border-color: #f40e1e;
+  }
+
+  .progress-bar {
+    background: #b9b9b9;
+  }
+
+  .progress-bar1 {
+    background: linear-gradient(
+      to right,
+      black 0%,
+      black 20%,
+      #b9b9b9 20%,
+      #b9b9b9 100%
+    );
+  }
+
+  .progress-bar2 {
+    background: linear-gradient(
+      to right,
+      black 0%,
+      black 40%,
+      #b9b9b9 40%,
+      #b9b9b9 100%
+    );
+  }
+  .progress-bar3 {
+    background: linear-gradient(
+      to right,
+      black 0%,
+      black 60%,
+      #b9b9b9 60%,
+      #b9b9b9 100%
+    );
+  }
+  .progress-bar4 {
+    background: linear-gradient(
+      to right,
+      black 0%,
+      black 80%,
+      #b9b9b9 80%,
+      #b9b9b9 100%
+    );
+  }
+
+  .progress-bar5 {
+    background-color: black;
+  }
+
+  .progress-bard {
+    background: #b9b9b9;
+  }
+
+  .progress-bard1 {
+    background: linear-gradient(
+      to bottom,
+      black 0%,
+      black 20%,
+      #b9b9b9 20%,
+      #b9b9b9 100%
+    );
+  }
+
+  .progress-bard2 {
+    background: linear-gradient(
+      to bottom,
+      black 0%,
+      black 40%,
+      #b9b9b9 40%,
+      #b9b9b9 100%
+    );
+  }
+  .progress-bard3 {
+    background: linear-gradient(
+      to bottom,
+      black 0%,
+      black 60%,
+      #b9b9b9 60%,
+      #b9b9b9 100%
+    );
+  }
+  .progress-bard4 {
+    background: linear-gradient(
+      to bottom,
+      black 0%,
+      black 80%,
+      #b9b9b9 80%,
+      #b9b9b9 100%
+    );
+  }
+
+  .progress-bard5 {
+    background-color: black;
+  }
+
+  .fade-in {
+    animation: fade-in 0.5s ease-in-out;
+  }
+
+  .wiggly {
+    animation: wiggly 2s ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes wiggly {
+    0% {
+      transform: rotate(0deg);
+    }
+    8.33% {
+      transform: rotate(5deg);
+    }
+    16.33% {
+      transform: rotate(-5deg);
+    }
+    25% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,109 @@
+import { AddAddressRequest } from "@api_functions/address/add-address";
+import Button from "@components/Button";
+import { LocationCardWithName } from "@components/LocationCard";
+import AddressInput, { AddressNameInput } from "@components/input/AddressInput";
+import { showSnackBar } from "@components/notifications/Snackbar";
+import { State } from "@data/enums";
+import { LocationAttributes } from "@data/types";
+import { Loader } from "@googlemaps/js-api-loader";
+import DesktopWrapper from "@wrapper/responsive/DesktopWrapper";
+import router from "next/router";
+import { useEffect } from "react";
+
+export default function Desktop({
+  location,
+  setLocation,
+  name,
+  setName,
+  formValidation,
+  saveButtonState,
+  setSaveButtonState,
+  addAddress,
+}: {
+  location: LocationAttributes | null;
+  setLocation: React.Dispatch<React.SetStateAction<LocationAttributes | null>>;
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  formValidation: {
+    name: boolean;
+    location: boolean;
+  };
+  saveButtonState: State;
+  setSaveButtonState: React.Dispatch<React.SetStateAction<State>>;
+  addAddress: (request: AddAddressRequest) => Promise<boolean>;
+}) {
+  // Show Map
+  useEffect(() => {
+    const documentMap = document.getElementById("map");
+    if (!documentMap) return;
+    const loader = new Loader({
+      apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+      version: "weekly",
+      libraries: ["places"],
+    });
+    loader.load().then(() => {
+      const map = new google.maps.Map(documentMap as HTMLElement, {
+        center: location
+          ? {
+              lat: location.lat,
+              lng: location.lng,
+            }
+          : { lat: 0, lng: 0 },
+        zoom: 15,
+      });
+      new google.maps.Marker({
+        position: location ? { lat: location.lat, lng: location.lng } : null,
+        map: map,
+      });
+    });
+  }, [location?.addressLine2]);
+
+  return (
+    <DesktopWrapper
+      className="flex flex-col items-start justify-start space-y-10 w-full"
+      header="Add Address"
+    >
+      <div className="flex flex-col items-start justify-start space-y-5 w-full">
+        <AddressNameInput addressName={name} setAddressName={setName} />
+        <AddressInput location={location} setLocation={setLocation} />
+      </div>
+      <div className="w-full h-[30rem] bg-background rounded-lg overflow-hidden">
+        <div id="map" className="w-full h-full rounded-lg"></div>
+      </div>
+      <div className="flex flex-col items-start justify-start space-y-5 w-full">
+        <p className="text-lg font-medium">Before you save</p>
+        <p className="text-base font-normal text-textsubtle">
+          Please make sure that the address is correct
+        </p>
+        <Button
+          text="Save"
+          className={`bg-success text-white px-3 py-3 rounded-lg font-medium w-full text-center max-w-md`}
+          onClick={async () => {
+            setSaveButtonState(State.LOADING);
+            if (!location) {
+              showSnackBar({
+                message: "Please select a location",
+                state: State.ERROR,
+              });
+              setSaveButtonState(State.SUCCESS);
+              return;
+            }
+            const response = await addAddress({
+              location: location,
+              locationName: name,
+            });
+            if (response) {
+              router.push("/console/profile/manage-addresses");
+            } else {
+              setSaveButtonState(State.SUCCESS);
+            }
+          }}
+          buttonState={saveButtonState}
+          disabled={
+            formValidation.name && formValidation.location ? false : true
+          }
+        />
+      </div>
+    </DesktopWrapper>
+  );
+}
