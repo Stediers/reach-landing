@@ -300,7 +300,7 @@ function NavBar({ cookieExists }: { cookieExists: boolean }) {
         <div className="flex items-center justify-center space-x-7">
           <NavLink text="Blogs" link="#blogs" />
           <NavLink text="FAQs" link="#faqs" />
-          <NavLink text="Contact Us" link="#contact-us" />
+          <NavLink text="Contact Us" link="/contact" />
           <NavLink text="About Us" link="#about-us" />
         </div>
         <div className="max-w-[200px] w-full">
@@ -354,7 +354,7 @@ function NavBar({ cookieExists }: { cookieExists: boolean }) {
                   <NavLink text="FAQs" link="#faqs" />
                 </div>
                 <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="Contact Us" link="#contact-us" />
+                  <NavLink text="Contact Us" link="/contact" />
                 </div>
                 <div className="" onClick={() => setIsOpen(false)}>
                   <NavLink text="About Us" link="#about-us" />

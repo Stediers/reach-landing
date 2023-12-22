@@ -12,13 +12,11 @@ import { AiOutlineMenu } from "react-icons/ai";
 import ImageComponent from "@components/ImageComponent";
 import TextInput from "@components/input/TextInput";
 import TextArea from "@components/input/TextArea";
-import { showCustomJSXPopup } from "@components/notifications/Popup";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import {
   getItemsFromLocalStorage,
   setItemsToLocalStorage,
 } from "@api_functions/internal/local-storage";
-import { showSnackBar } from "@components/notifications/Snackbar";
 import {
   FcBarChart,
   FcBearish,
@@ -370,21 +368,36 @@ function Index({ cookieExists }: { cookieExists: boolean }) {
         <div className="flex flex-col space-y-2 text-text h-full w-screen sm:w-[500px]">
           <div className="text-3xl">How can we help?</div>
           <div>Send us a message!</div>
-          <input
+          {/* <input
             type="text"
             className="border-2 rounded-md p-1"
             placeholder="Enter your Email"
-          />
-          <select className="border-2 rounded-md">
+          /> */}
+          <TextInput
+            placeholder="Enter your Email"
+            value={""}
+            onChange={function (value: string): void {
+              throw new Error("Function not implemented.");
+            }}
+          ></TextInput>
+          {/* <select className="border-2 rounded-md">
             <option>General Doubts</option>
             <option>Refund Related</option>
             <option>Reporting Gigworker</option>
-          </select>
+          </select> */}
+          <TextDropDown title={"Type"} body={"Abc, cde"}></TextDropDown>
 
-          <textarea
+          {/* <textarea
             className="borer-2 rounded-md p-1"
             placeholder="Enter your message here..."
-          ></textarea>
+          ></textarea> */}
+          <TextArea
+            title={"Complaint"}
+            value={""}
+            onChange={function (value: string): void {
+              throw new Error("Function not implemented.");
+            }}
+          ></TextArea>
           <Button
             text="Submit"
             link="/contact"
