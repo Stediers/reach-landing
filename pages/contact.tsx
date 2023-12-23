@@ -358,6 +358,7 @@ function Index({ cookieExists }: { cookieExists: boolean }) {
       className="flex flex-col items-center justify-center space-y-10 w-full min-h-screen-fix relative"
       id="Index"
     >
+      <Widget />
       <div className="grid grid-cols-1 lg:grid-cols-2 w-full justify-items-center gap-y-10 lg:gap-y-0">
         <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-3 pt-10 lg:pt-0">
           <Logo
@@ -410,7 +411,6 @@ function Index({ cookieExists }: { cookieExists: boolean }) {
             link="/contact"
             className="bg-primary text-white font-medium"
           />
-          <Widget />
         </div>
       </div>
       <div
