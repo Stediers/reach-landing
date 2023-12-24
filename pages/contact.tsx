@@ -12,7 +12,6 @@ import { AiOutlineMenu } from "react-icons/ai";
 import ImageComponent from "@components/ImageComponent";
 import TextInput from "@components/input/TextInput";
 import TextArea from "@components/input/TextArea";
-import Widget from "@components/Widget";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import {
   getItemsFromLocalStorage,
@@ -358,7 +357,6 @@ function Index({ cookieExists }: { cookieExists: boolean }) {
       className="flex flex-col items-center justify-center space-y-10 w-full min-h-screen-fix relative"
       id="Index"
     >
-      <Widget />
       <div className="grid grid-cols-1 lg:grid-cols-2 w-full justify-items-center gap-y-10 lg:gap-y-0">
         <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-3 pt-10 lg:pt-0">
           <Logo
@@ -366,51 +364,6 @@ function Index({ cookieExists }: { cookieExists: boolean }) {
             textStyle="font-medium lg:text-4xl text-2xl"
           />
           <WordPopUp words={words} delay={0.2} />
-        </div>
-        <div className="flex flex-col space-y-2 text-text h-full w-screen sm:w-[500px]">
-          <div className="text-3xl">How can we help?</div>
-          <div>Send us a message!</div>
-          {/* <input
-            type="text"
-            className="border-2 rounded-md p-1"
-            placeholder="Enter your Email"
-          /> */}
-          <TextInput
-            placeholder="Enter your Email"
-            value={""}
-            onChange={function (value: string): void {
-              throw new Error("Function not implemented.");
-            }}
-          ></TextInput>
-          {/* <select className="border-2 rounded-md">
-            <option>General Doubts</option>
-            <option>Refund Related</option>
-            <option>Reporting Gigworker</option>
-          </select> */}
-          <TextDropDown title={"Type"} body={"Abc, cde"}></TextDropDown>
-
-          {/* <textarea
-            className="borer-2 rounded-md p-1"
-            placeholder="Enter your message here..."
-          ></textarea> */}
-          <TextArea
-            title={"Complaint"}
-            value={""}
-            onChange={function (value: string): void {
-              throw new Error("Function not implemented.");
-            }}
-          ></TextArea>
-          <Button
-            text="Submit"
-            link="/contact"
-            className="bg-primary text-white font-medium"
-          />
-          <div className="text-center py-4">OR</div>
-          <Button
-            text="Talk with our Chatbot"
-            link="/contact"
-            className="bg-primary text-white font-medium"
-          />
         </div>
       </div>
       <div

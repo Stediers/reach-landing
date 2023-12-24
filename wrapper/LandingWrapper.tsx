@@ -24,8 +24,9 @@ export default function LandingWrapper({
     <>
       <Head>
         <title>{title}</title>
-        <Script>
-          {`function setDocHeight() {
+      </Head>
+      <Script id="abcd">
+        {`function setDocHeight() {
             document.documentElement.style.setProperty(
               "--vh",
               window.innerHeight * 0.01 + "px"
@@ -33,8 +34,29 @@ export default function LandingWrapper({
           }
           setDocHeight();
           window.addEventListener("resize", setDocHeight);`}
-        </Script>
-      </Head>
+      </Script>
+      <Script id="widgetfw">
+        {`
+                window.fwSettings = {
+                  'widget_id': ${process.env.NEXT_PUBLIC_WIDGET_ID}
+                };
+                !function() {
+                  if ("function" !== typeof window.FreshworksWidget) {
+                    var n = function() {
+                      n.q.push(arguments)
+                    };
+                    n.q = [];
+                    window.FreshworksWidget = n
+                  }
+                }();
+              `}
+      </Script>
+      <Script
+        type="text/javascript"
+        src={`https://ind-widget.freshworks.com/widgets/${process.env.NEXT_PUBLIC_WIDGET_ID}.js`}
+        async
+        defer
+      ></Script>
       <main
         className={`w-full min-h-screen-fix flex flex-col space-y-3 items-center relative scroll-smooth`}
       >
