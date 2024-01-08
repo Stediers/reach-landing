@@ -4,8 +4,8 @@ import React, { PropsWithChildren } from "react";
 import Loading from "@components/Loading";
 import Button from "@components/Button";
 import Script from "next/script";
-import AddToHomeScreen from "@components/notifications/prompt";
 import Footer from "@components/footer/Footer";
+import NavBar from "@components/navbar/DektopNavBar";
 
 export default function LandingWrapper({
   title,
@@ -60,6 +60,7 @@ export default function LandingWrapper({
       <main
         className={`w-full min-h-screen-fix flex flex-col space-y-3 items-center relative scroll-smooth`}
       >
+        <NavBar />
         {state === State.LOADING && (
           <div className="flex-1 flex flex-col justify-center items-center space-y-2">
             <Loading className="w-10 h-10" />

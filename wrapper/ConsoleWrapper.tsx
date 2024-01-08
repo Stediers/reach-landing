@@ -9,7 +9,6 @@ import React, {
 import Loading from "@components/Loading";
 import Button from "@components/Button";
 import Script from "next/script";
-import AddToHomeScreen from "@components/notifications/prompt";
 import Footer from "@components/footer/Footer";
 import { AiOutlineWarning } from "react-icons/ai";
 import { getWindowSize } from "@helper_functions/getWindowSize";
@@ -139,7 +138,6 @@ export default function ConsoleWrapper({
               key={"success"}
             >
               <div className={`flex-1 flex justify-center w-full`}>
-                {showPopupState ? <AddToHomeScreen /> : null}
                 {windowSize.innerWidth < 1024 ? mobileJSX : desktopJSX}
               </div>
             </motion.div>

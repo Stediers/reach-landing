@@ -1,22 +1,15 @@
 import Logo from "@components/Logo";
 import { State } from "@data/enums";
 import { ReactNode, useEffect, useState } from "react";
-import Button from "@components/Button";
 import "swiper/css";
 import "swiper/css/pagination";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import TextDropDown from "@components/TextDropDown";
-import { getCookie } from "@api_functions/internal/cookie";
 import LandingWrapper from "@wrapper/LandingWrapper";
-import { AiOutlineMenu } from "react-icons/ai";
 import ImageComponent from "@components/ImageComponent";
 import TextInput from "@components/input/TextInput";
 import TextArea from "@components/input/TextArea";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import {
-  getItemsFromLocalStorage,
-  setItemsToLocalStorage,
-} from "@api_functions/internal/local-storage";
 import {
   FcBarChart,
   FcBearish,
@@ -25,6 +18,11 @@ import {
   FcGoogle,
   FcPositiveDynamic,
 } from "react-icons/fc";
+import NavBar from "@components/navbar/DektopNavBar";
+import {
+  getItemsFromLocalStorage,
+  setItemsToLocalStorage,
+} from "@helper_functions/local-storage";
 
 const faqs = [
   {
@@ -49,60 +47,7 @@ const faqs = [
   },
 ];
 
-const promises = [
-  {
-    // icon: <FcDonate className={iconStyle} />,
-    heading: "No Commission Charges",
-    description: "Keep what you earn, zero deductions!",
-    image: "/images/promise-1.svg",
-  },
-  {
-    heading: "Complete Control",
-    description: "Own your profile, be independent and bold!",
-    image: "/images/promise-2.svg",
-  },
-  {
-    heading: "Know your Reach",
-    description: "Maximize growth with powerful analytics!",
-    image: "/images/promise-3.svg",
-  },
-];
-
 export default function Main() {
-  const [showNavbar, setShowNavbar] = useState(false);
-  const [cookieExists, setCookieExists] = useState(false);
-  useEffect(() => {
-    const cookie = getCookie("gig-token");
-    if (cookie) {
-      setCookieExists(true);
-    }
-  }, []);
-  // take user to console if they are logged in
-  // useEffect(() => {
-  //   const token = getCookie("gig-token");
-  //   if (token) {
-  //     Router.push("/console");
-  //   }
-  // });
-
-  // onscroll down hide navbar, onscroll up show navbar
-  useEffect(
-    () => {
-      let prevScrollPos = window.pageYOffset;
-      window.onscroll = () => {
-        const currentScrollPos = window.pageYOffset;
-        if (prevScrollPos > currentScrollPos) {
-          setShowNavbar(true);
-        } else {
-          setShowNavbar(false);
-        }
-        prevScrollPos = currentScrollPos;
-      };
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
   useEffect(() => {
     // scroll to top of page on load
     window.scrollTo(0, 0);
@@ -116,189 +61,9 @@ export default function Main() {
       state={State.SUCCESS}
       className="relative flex flex-col items-center justify-center scroll-smooth"
     >
-      <NavBar cookieExists={cookieExists} />
-      <Index cookieExists={cookieExists} />
-      <OurPlatform cookieExists={cookieExists} />
+      <Index />
       <FAQ />
-      {/* Change FAQs to single line and collapsable. */}
     </LandingWrapper>
-  );
-}
-
-function NavBar({ cookieExists }: { cookieExists: boolean }) {
-  const [isOpen, setIsOpen] = useState(false);
-  useEffect(
-    () => {
-      const element = document.getElementById("navbar");
-      if (element) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setIsOpen(false);
-            }
-          },
-          { threshold: 0.5 }
-        );
-        observer.observe(element);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
-  return (
-    <motion.div
-      className="flex flex-row justify-between items-center w-full py-5 px-7 fixed top-0 left-0 z-50 bg-white border-b border-gray"
-      id="navbar"
-      initial={{ opacity: 0, y: -100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-      exit={{ opacity: 0, y: -100 }}
-      key={"navbar"}
-    >
-      <div className="flex items-center justify-center lg:space-x-5 space-x-3 shrink-0">
-        <p className="lg:text-xl text-lg font-medium">REACH</p>
-        <p className="lg:text-xl font-medium">|</p>
-        <div className="flex items-center justify-center space-x-5">
-          <p className="lg:text-lg text-md font-medium">Be your own boss</p>
-        </div>
-      </div>
-      <div className="lg:flex items-center justify-end space-x-5 w-full hidden">
-        <div className="flex items-center justify-center space-x-7">
-          <NavLink text="Blogs" link="#blogs" />
-          <NavLink text="FAQs" link="#faqs" />
-          <NavLink text="Contact Us" link="#contact-us" />
-          <NavLink text="About Us" link="#about-us" />
-        </div>
-        <div className="max-w-[200px] w-full">
-          {cookieExists ? (
-            <Button
-              text="Go to Console"
-              link="/console"
-              className="bg-primary text-white font-medium"
-            />
-          ) : (
-            <Button
-              text="Sign In"
-              link="/user/sign-in"
-              className="bg-primary text-white font-medium"
-            />
-          )}
-        </div>
-      </div>
-      <AiOutlineMenu
-        className="lg:hidden text-2xl"
-        onClick={() => setIsOpen(!isOpen)}
-      />
-      <AnimatePresence mode="wait">
-        {isOpen && (
-          <motion.div
-            className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center overflow-hidden px-5 bg-black bg-opacity-40"
-            onClick={() => setIsOpen(false)}
-            key={"navbar-popup"}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="flex flex-col items-center justify-center space-y-5 lg:hidden px-10 py-5 rounded-lg bg-white w-full"
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, y: -100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-              exit={{ opacity: 0, y: -100 }}
-            >
-              {/* <AiOutlineCloseCircle
-                className="text-2xl"
-                onClick={() => setIsOpen(false)}
-              /> */}
-              <div className="flex flex-col items-center justify-center space-y-5 w-full">
-                <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="Blogs" link="#blogs" />
-                </div>
-                <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="FAQs" link="#faqs" />
-                </div>
-                <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="Contact Us" link="#contact-us" />
-                </div>
-                <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="About Us" link="#about-us" />
-                </div>
-              </div>
-              <div className="max-w-[200px] w-full">
-                {cookieExists ? (
-                  <Button
-                    text="Go to Console"
-                    link="/console"
-                    className="bg-primary text-white font-medium"
-                  />
-                ) : (
-                  <Button
-                    text="Sign In"
-                    link="/user/sign-in"
-                    className="bg-primary text-white font-medium"
-                  />
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
-function NavLink({
-  text,
-  link,
-  className,
-}: {
-  text: string;
-  link: string;
-  className?: string;
-}) {
-  const [highlight, setHighlight] = useState(false);
-  //if section is in view, highlight the link
-  useEffect(
-    () => {
-      const element = document.getElementById(link.split("#")[1]);
-      if (element) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setHighlight(true);
-            } else {
-              setHighlight(false);
-            }
-          },
-          { threshold: 0.5 }
-        );
-        observer.observe(element);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-  return (
-    <p
-      className={`text-md font-medium shrink-0 cursor-pointer ${className} ${
-        highlight ? "text-primary underline underline-offset-8" : ""
-      }`}
-      onClick={() => {
-        //smooth scroll to section
-        const element = document.getElementById(link.split("#")[1]);
-        //make sure navbar doesn't overlap with section
-        if (element) {
-          const y =
-            element.getBoundingClientRect().top + window.pageYOffset - 90;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }
-      }}
-    >
-      {text}
-    </p>
   );
 }
 
@@ -350,7 +115,7 @@ function WordPopUp({
   );
 }
 
-function Index({ cookieExists }: { cookieExists: boolean }) {
+function Index() {
   const words = "US";
   return (
     <div
@@ -366,7 +131,7 @@ function Index({ cookieExists }: { cookieExists: boolean }) {
           <WordPopUp words={words} delay={0.2} />
         </div>
       </div>
-      <div
+      {/* <div
         className="absolute bottom-0 left-0 w-full flex items-center justify-center cursor-pointer"
         onClick={() => {
           const element = document.getElementById("features");
@@ -376,7 +141,7 @@ function Index({ cookieExists }: { cookieExists: boolean }) {
             window.scrollTo({ top: y, behavior: "smooth" });
           }
         }}
-      ></div>
+      ></div> */}
     </div>
   );
 }
@@ -416,6 +181,7 @@ const platforms = [
     description: "We are constantly working to improve your experience!",
   },
 ];
+
 function OurPlatform({ cookieExists }: { cookieExists: boolean }) {
   return (
     <HeaderWrapper

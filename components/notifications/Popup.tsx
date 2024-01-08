@@ -19,10 +19,7 @@ import ImageComponent from "@components/ImageComponent";
 import { StaticImageData } from "next/image";
 import PopupWrapper from "@wrapper/PopupWrapper";
 import { State } from "@data/enums";
-import AvatarEditor from "react-avatar-editor";
 import { showSnackBar } from "./Snackbar";
-import devLog from "@helper_functions/devLog";
-import { FcInfo } from "react-icons/fc";
 import InfoIcon from "@public/lottie/info-icon.json";
 interface ImagePopupProps {
   src: string | StaticImageData;
@@ -564,117 +561,6 @@ export async function showQrCodePopup({
     if (document.body.classList.contains("overflow-hidden")) return;
 
     root.render(<QrCodePopup qrCode={code} onOk={onOk} title={title} />);
-  });
-}
-
-function ImageEditingModal({
-  onOk,
-  onCancel,
-  borderRadius = 250,
-  image,
-}: {
-  onOk: (image: File) => void;
-  onCancel: () => void;
-  borderRadius?: number;
-  image: File;
-}) {
-  const editor = useRef<AvatarEditor>(null);
-  return (
-    <PopupWrapper
-      onClose={() => {
-        onCancel();
-      }}
-    >
-      <div className="flex flex-col items-center justify-center space-y-5 w-full">
-        <AvatarEditor
-          image={URL.createObjectURL(image)}
-          width={250}
-          height={250}
-          border={50}
-          color={[255, 255, 255, 0.6]} // RGBA
-          scale={1.2}
-          rotate={0}
-          ref={editor}
-          borderRadius={borderRadius}
-        />
-        <div className="flex flex-row items-center justify-center space-x-2 w-full">
-          <Button
-            className="border border-black"
-            text="Remove"
-            onClick={() => {
-              onCancel();
-            }}
-          />
-          <Button
-            className="bg-info text-white"
-            text="Save"
-            onClick={async () => {
-              if (editor.current) {
-                const canvas = editor.current.getImageScaledToCanvas();
-                canvas.toBlob((blob) => {
-                  const fileTypes = ["image/png", "image/jpeg"];
-                  if (!fileTypes.includes(image.type)) {
-                    showSnackBar({
-                      message: "Invalid image type",
-                      state: State.ERROR,
-                    });
-                    return;
-                  }
-                  if (blob) {
-                    onOk(new File([blob], image.name, { type: image.type }));
-                  } else {
-                    showSnackBar({
-                      message: "Something went wrong",
-                      state: State.ERROR,
-                    });
-                  }
-                });
-              } else {
-                onCancel();
-                showSnackBar({
-                  message: "Something went wrong",
-                  state: State.ERROR,
-                });
-              }
-            }}
-          />
-        </div>
-      </div>
-    </PopupWrapper>
-  );
-}
-
-export async function showImageEditingModal({
-  onOk,
-  onCancel,
-  borderRadius = 250,
-  image,
-}: {
-  onOk: (image: File) => void;
-  onCancel: () => void;
-  borderRadius?: number;
-  image: File;
-}): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const container = document.createElement("div");
-    document.body.appendChild(container);
-    const root = createRoot(container);
-    const onClose = () => {
-      root.unmount();
-      onCancel();
-    };
-
-    root.render(
-      <ImageEditingModal
-        onOk={(image) => {
-          root.unmount();
-          onOk(image);
-        }}
-        onCancel={onClose}
-        image={image}
-        borderRadius={borderRadius}
-      />
-    );
   });
 }
 
