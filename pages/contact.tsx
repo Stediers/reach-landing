@@ -18,7 +18,7 @@ import {
   FcGoogle,
   FcPositiveDynamic,
 } from "react-icons/fc";
-import NavBar from "@components/navbar/DektopNavBar";
+import NavBar from "@components/navbar/DesktopNavBar";
 import {
   getItemsFromLocalStorage,
   setItemsToLocalStorage,
@@ -131,7 +131,7 @@ function Index() {
           <WordPopUp words={words} delay={0.2} />
         </div>
       </div>
-      {/* <div
+      <div
         className="absolute bottom-0 left-0 w-full flex items-center justify-center cursor-pointer"
         onClick={() => {
           const element = document.getElementById("features");
@@ -141,7 +141,7 @@ function Index() {
             window.scrollTo({ top: y, behavior: "smooth" });
           }
         }}
-      ></div> */}
+      ></div>
     </div>
   );
 }

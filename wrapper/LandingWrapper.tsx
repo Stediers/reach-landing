@@ -5,7 +5,7 @@ import Loading from "@components/Loading";
 import Button from "@components/Button";
 import Script from "next/script";
 import Footer from "@components/footer/Footer";
-import NavBar from "@components/navbar/DektopNavBar";
+import NavBar from "@components/navbar/DesktopNavBar";
 
 export default function LandingWrapper({
   title,
