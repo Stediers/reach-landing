@@ -13,6 +13,7 @@ export default function LandingWrapper({
   showFooter = false,
   state = State.LOADING,
   className,
+  showNavbar = true,
 }: PropsWithChildren<{
   title: string;
   showNavbar?: boolean;
@@ -58,9 +59,9 @@ export default function LandingWrapper({
         defer
       ></Script>
       <main
-        className={`w-full min-h-screen-fix flex flex-col space-y-3 items-center relative scroll-smooth`}
+        className={`w-full min-h-screen-fix flex flex-col items-center relative scroll-smooth`}
       >
-        <NavBar />
+        {showNavbar && <NavBar />}
         {state === State.LOADING && (
           <div className="flex-1 flex flex-col justify-center items-center space-y-2">
             <Loading className="w-10 h-10" />

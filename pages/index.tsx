@@ -39,6 +39,7 @@ import {
   getItemsFromLocalStorage,
   setItemsToLocalStorage,
 } from "@helper_functions/local-storage";
+import LandingPageImage1 from "@public/images/prices-mockup.webp";
 
 const faqs = [
   {
@@ -141,20 +142,21 @@ export default function Main() {
     window.scrollTo(0, 0);
   }, []);
 
+  const [showNavbar, setShowNavbar] = useState(true);
+
   return (
     <LandingWrapper
       title="Reach"
-      showNavbar={false}
       showFooter={true}
       state={State.SUCCESS}
       className="relative flex flex-col items-center justify-center scroll-smooth"
+      showNavbar={showNavbar}
     >
-      <Index cookieExists={cookieExists} />
-      <OurFeatures cookieExists={cookieExists} />
-      <OurPromise cookieExists={cookieExists} />
+      <Index />
+      <Blogs />
       <WhatWeBelieve cookieExists={cookieExists} />
       {/* <Blogs cookieExists={cookieExists} /> */}
-      <FAQ />
+      {/* <FAQ /> */}
       {/* <div className="w-full flex flex-col items-center justify-center space-y-5">
         <LineHeader title="More from Reach" />
         <YoutubeEmbed />
@@ -163,13 +165,12 @@ export default function Main() {
   );
 }
 
-function Blogs({ cookieExists }: { cookieExists: boolean }) {
+function Blogs() {
   return (
     <HeaderWrapper
       title="LEARN AND GROW"
       className="items-center justify-center w-full flex flex-col space-y-16"
       id="blogs"
-      bgColor="bg-success text-white"
     >
       <div className="lg:grid grid-cols-3 justify-items-center lg:gap-y-32 gap-y-10 lg:gap-x-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
         <BlogCard
@@ -224,12 +225,11 @@ function Blogs({ cookieExists }: { cookieExists: boolean }) {
     link: string;
   }) {
     return (
-      <div className="flex flex-col items-center justify-center space-y-4">
+      <div className="flex flex-col items-center justify-center space-y-4 cursor-pointer">
         <ImageComponent
           src={image}
           alt={title}
-          className="rounded-2xl lg:w-[20rem] lg:h-[20rem] border border-gray w-[12rem] h-[12rem]"
-          whileHover={{ scale: 1.05 }}
+          className="rounded-2xl lg:w-[20rem] lg:h-[20rem] border border-gray w-[12rem] h-[12rem] hover:scale-105 transition duration-200 cursor-pointer"
         />
         <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
           <p className="lg:text-2xl text-lg font-medium text-center">{title}</p>
@@ -288,211 +288,82 @@ function WordPopUp({
   );
 }
 
-function Index({ cookieExists }: { cookieExists: boolean }) {
-  const words = "Be your own Boss".split(" ");
+function Index() {
+  const words = "Empowering the Gig Economy".split(" ");
   return (
     <div
-      className="flex flex-col items-center justify-center space-y-10 w-full min-h-screen-fix relative"
+      className="flex flex-col items-center justify-start space-y-20 w-full min-h-screen-fix px-10"
       id="Index"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full justify-items-center gap-y-10 lg:gap-y-0">
-        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-3 pt-10 lg:pt-0">
-          <Logo
-            wings="lg:w-[18rem] w-[12rem]"
-            textStyle="font-medium lg:text-4xl text-2xl"
-          />
-          <WordPopUp words={words.join(" ")} delay={0.2} />
-          <div className="flex flex-col items-center justify-center space-y-5 w-full lg:pt-3 pt-1">
-            {cookieExists ? (
-              <Button
-                text="Go to Console"
-                buttonState={State.SUCCESS}
-                link="/console"
-                className="bg-primary text-white font-medium"
-              />
-            ) : (
-              <Button
-                text="Sign In"
-                buttonState={State.SUCCESS}
-                link="/user/sign-in"
-                className="bg-primary text-white font-medium "
-              />
-            )}
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-center space-y-5 w-screen sm:w-[500px]">
-          <Swiper
-            // @ts-ignore
-            modules={[Pagination, Autoplay]}
-            centeredSlides={true}
-            className="w-full flex items-center justify-center"
-            slidesPerView={1}
-            spaceBetween={100}
-            loop={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-          >
-            <SwiperSlide>
-              <Image
-                src={CarWashService}
-                alt="Reach."
-                className=""
-                width={500}
-                height={500}
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                src={CateringService}
-                alt="Reach."
-                className=""
-                width={500}
-                height={500}
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                src={DriverService}
-                alt="Reach."
-                className=""
-                width={500}
-                height={500}
-              />
-            </SwiperSlide>
-          </Swiper>
-        </div>
+      <ImageComponent
+        className="!absolute top-0 left-0 w-full h-[40rem] object-cover z-[-1] opacity-70"
+        src={LandingPageImage1}
+        alt="background"
+      />
+      <div className="flex flex-col items-center justify-center lg:space-y-3 space-y-3 pt-10">
+        <Logo
+          wings="lg:w-[18rem] w-[12rem]"
+          textStyle="font-medium lg:text-4xl text-2xl"
+        />
+        <WordPopUp words={words.join(" ")} delay={0.2} />
       </div>
-      <div
-        className="absolute bottom-0 left-0 w-full flex items-center justify-center cursor-pointer"
-        onClick={() => {
-          const element = document.getElementById("features");
-          if (element) {
-            const y =
-              element.getBoundingClientRect().top + window.pageYOffset - 40;
-            window.scrollTo({ top: y, behavior: "smooth" });
-          }
-        }}
+      <motion.div
+        className="grid grid-cols-1 lg:grid-cols-3 justify-items-center gap-y-10 gap-x-10 w-full lg:justify-items-center items-start flex-1"
+        initial={{ opacity: 0 }}
+        transition={{ duration: 0.6 }}
+        //happen only once
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
       >
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <p className="text-lg font-medium">Scroll down to learn more</p>
-          <MdKeyboardArrowDown className="text-4xl animate-bounce" />
-        </div>
-      </div>
+        <DescriptionCard
+          title="Find the right partner for your needs."
+          description="Get your work done by the best in the business. We have a wide range of services to choose from. We are here to help you reach your dreams and achieve your goals."
+          linkText="Find Services"
+          link="/user/sign-up"
+        />
+        <DescriptionCard
+          title="Become the best in the business."
+          description="Showcase your skills and get hired by the best in the business. We are here to help you reach your dreams and achieve your goals."
+          linkText="Become a Partner"
+          link="/user/sign-up"
+        />
+        <DescriptionCard
+          title="Join Us in our journey."
+          description="Are you passionate about the gig economy? We are here to help you reach your dreams and achieve your goals."
+          linkText="Find Jobs"
+          link="/user/sign-up"
+        />
+      </motion.div>
     </div>
   );
 }
 
-function OurPromise({ cookieExists }: { cookieExists: boolean }) {
+function DescriptionCard({
+  title,
+  description,
+  linkText = "Find Services",
+  link,
+}: {
+  title: string;
+  description: string;
+  linkText?: string;
+  link: string;
+}) {
+  const [hover, setHover] = useState(false);
   return (
-    <HeaderWrapper
-      title="OUR PROMISE"
-      className="items-center justify-center w-full flex flex-col space-y-16"
-      id="benefits"
-      bgColor="bg-text text-white"
-    >
-      <div className="lg:flex flex-col space-y-5 items-center justify-start hidden w-full">
-        {promises.map((feature, index) => (
-          <ImageWithText
-            image={feature.image}
-            text={feature.description}
-            align={index % 2 === 0 ? "left" : "right"}
-            title={feature.heading}
-            key={index}
-          />
-        ))}
+    <Card className="w-full max-w-[800px] flex flex-col items-center justify-start space-y-5 h-[30rem] bg-white shadow-md">
+      <p className="lg:text-xl font-medium text-lg text-center pt-[8rem]">
+        {title}
+      </p>
+      <p className="lg:text-md text-base text-center">{description}</p>
+      <div className="max-w-[200px] w-full">
+        <Button
+          text={linkText}
+          link={link}
+          className="bg-primary text-white font-medium"
+        />
       </div>
-      <div className="flex flex-col items-center justify-center space-y-16 lg:hidden">
-        {promises.map((feature, index) => (
-          <div
-            key={index}
-            className="grid grid-rows-2 items-center justify-items-center"
-          >
-            <ImageComponent
-              className="w-[10rem] h-[10rem]"
-              src={feature.image}
-              alt={feature.heading}
-              border={false}
-            />
-            <div className="flex flex-col items-center justify-center space-y-2">
-              <span className="text-lg lg:text-xl font-medium text-center">
-                {feature.heading}
-              </span>
-              <span className="text-md text-center">{feature.description}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </HeaderWrapper>
-  );
-
-  function ImageWithText({
-    image,
-    text,
-    align = "left",
-    title,
-  }: {
-    image: string;
-    text: string;
-    align?: "left" | "right";
-    title: string;
-  }) {
-    return (
-      <div className="justify-items-center grid grid-cols-2 gap-x-10 gap-y-10 w-full max-w-6xl">
-        {align === "left" && (
-          <ImageComponent
-            src={image}
-            alt={text}
-            className="w-[20rem] h-[20rem]"
-            key={text}
-            border={false}
-          />
-        )}
-        <div className="flex flex-col items-center justify-center space-y-2 max-w-md">
-          <p className="text-lg lg:text-xl font-medium text-center">{title}</p>
-          <p className="text-md text-center">{text}</p>
-        </div>
-        {align === "right" && (
-          <ImageComponent
-            src={image}
-            alt={text}
-            className="w-[20rem] h-[20rem]"
-            key={text}
-            border={false}
-          />
-        )}
-      </div>
-    );
-  }
-}
-
-function OurFeatures({ cookieExists }: { cookieExists: boolean }) {
-  return (
-    <HeaderWrapper
-      title="OUR FEATURES"
-      className="flex flex-col items-center justify-center space-y-16 lg:!pb-[10rem]"
-      id="features"
-    >
-      <div className="lg:grid grid-cols-3 justify-items-center lg:gap-y-32 gap-y-10 lg:gap-x-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
-        {features.map((feature, index) => (
-          <div
-            className="flex flex-col items-center justify-center space-y-4"
-            key={index}
-          >
-            {feature.icon}
-            <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
-              <p className="lg:text-2xl text-lg font-medium text-center">
-                {feature.heading}
-              </p>
-              <p className="lg:text-md text-base text-center">
-                {feature.description}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </HeaderWrapper>
+    </Card>
   );
 }
 

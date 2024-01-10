@@ -27,7 +27,7 @@ export default function NavBar() {
 
   return (
     <motion.div
-      className="flex flex-row justify-between items-center w-full py-5 px-7 fixed top-0 left-0 z-50 bg-white border-b border-gray"
+      className="flex flex-row justify-between items-center w-full py-5 px-7 sticky top-0 left-0 z-50 bg-white border-b border-gray"
       id="navbar"
       initial={{ opacity: 0, y: -100 }}
       animate={{ opacity: 1, y: 0 }}
@@ -41,7 +41,9 @@ export default function NavBar() {
         </Link>
         <p className="lg:text-xl font-medium">|</p>
         <div className="flex items-center justify-center space-x-5">
-          <p className="lg:text-lg text-md font-medium">Be your own boss</p>
+          <p className="lg:text-lg text-md font-medium">
+            Empowering the gig economy
+          </p>
         </div>
       </div>
       <div className="lg:flex items-center justify-end space-x-5 w-full hidden">

@@ -62,7 +62,11 @@ export default function ImageComponent({
           onError={() => {
             setIsError(true);
           }}
-          onLoadingComplete={() => {
+          // onLoadingComplete={() => {
+          //   setIsLoaded(true);
+          // }}
+          onLoad={() => {
+            devLog("loaded image");
             setIsLoaded(true);
           }}
           onLoadStart={() => {
