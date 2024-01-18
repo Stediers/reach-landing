@@ -8,7 +8,9 @@ import {
   FcBarChart,
   FcGoogle,
   FcConferenceCall,
+  FcBullish,
 } from "react-icons/fc";
+import { CiTrophy } from "react-icons/ci";
 import Button from "@components/Button";
 import Card from "@components/Card";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,7 +21,11 @@ import Image, { StaticImageData } from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import TextDropDown from "@components/TextDropDown";
 import { BsDatabaseFillSlash } from "react-icons/bs";
-import { MdKeyboardArrowDown, MdPersonSearch } from "react-icons/md";
+import {
+  MdKeyboardArrowDown,
+  MdOutlinePriceCheck,
+  MdPersonSearch,
+} from "react-icons/md";
 import LandingWrapper from "@wrapper/LandingWrapper";
 import Link from "next/link";
 import CarWashService from "@public/images/car_wash_service.svg";
@@ -153,8 +159,9 @@ export default function Main() {
       showNavbar={showNavbar}
     >
       <Index />
-      {/* <Blogs /> */}
-      <WhoAndWhat />
+      <What />
+      <How />
+      <CustomerStories />
       {/* <WhatWeBelieve cookieExists={cookieExists} /> */}
       <FAQ />
       {/* <div className="w-full flex flex-col items-center justify-center space-y-5">
@@ -165,76 +172,158 @@ export default function Main() {
   );
 }
 
-function WhoAndWhat() {
+function CustomerStories() {
+  return (
+    <HeaderWrapper
+      title="Customer Stories"
+      className="items-center justify-center w-full flex flex-col space-y-16"
+      id="customer-stories"
+    >
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+        <CustomerCard
+          name="Pooja"
+          designation="Makeup Artist"
+          quote="Hi"
+          image="/images/what-we-believe-3.webp"
+        />
+        <CustomerCard
+          name="Parthiban"
+          designation="Photographer"
+          quote="Hi"
+          image="/images/what-we-believe-1.webp"
+        />
+        <CustomerCard
+          name="Saravanan"
+          designation="Caterer"
+          quote="Hi"
+          image="/images/what-we-believe-2.webp"
+        />
+        <CustomerCard
+          name="Pooja"
+          designation="Makeup Artist"
+          quote="Hi"
+          image="/images/what-we-believe-3.webp"
+        />
+        <CustomerCard
+          name="Parthiban"
+          designation="Photographer"
+          quote="Hi"
+          image="/images/what-we-believe-1.webp"
+        />
+        <CustomerCard
+          name="Saravanan"
+          designation="Caterer"
+          quote="Hi"
+          image="/images/what-we-believe-2.webp"
+        />
+      </div>
+    </HeaderWrapper>
+  );
+
+  function CustomerCard({
+    name,
+    designation,
+    quote,
+    image,
+  }: {
+    name: string;
+    designation: string;
+    quote: string;
+    image: string;
+  }) {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-4 lg:space-y-7">
+        <ImageComponent
+          src={image}
+          alt={name}
+          className="rounded-2xl lg:w-[18rem] lg:h-[18rem] border border-gray w-[12rem] h-[12rem]"
+          whileHover={{ scale: 1.05 }}
+        />
+        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
+          <p className="lg:text-2xl text-lg font-medium text-center">{name}</p>
+          <p className="lg:text-md text-base text-center text-info">
+            {designation}
+          </p>
+        </div>
+      </div>
+    );
+  }
+}
+
+function How() {
+  return (
+    <HeaderWrapper
+      title="How does it work?"
+      className="items-center justify-center w-full flex flex-col space-y-16"
+      id="how-it-works"
+    >
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+        <FeatureCard
+          icon={<FcConferenceCall className={iconStyle} />}
+          heading="Find the right partner"
+          description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
+        />
+        <FeatureCard
+          icon={<FcBarChart className={iconStyle} />}
+          heading="Communicate"
+          description="Communicate what you offer and showcase your expertise."
+        />
+        <FeatureCard
+          icon={<FcBullish className={iconStyle} />}
+          heading="Get the job done"
+          description="Get the job done and get paid. It's that simple!"
+        />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function What() {
   return (
     <HeaderWrapper
       title="What is Reach?"
       className="items-center justify-center w-full flex flex-col space-y-16"
       id="who-we-are-and-what-we-do"
     >
-      {/* <div className="flex flex-row items-start justify-start space-x-10 w-full">
-        <ImageComponent
-          alt="car wash service"
-          src={CarWashService}
-          className="w-[25rem] h-[25rem] shrink-0"
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+        <FeatureCard
+          icon={<CiTrophy className={iconStyle} />}
+          heading="Talent is everywhere"
+          description="Upcoming lack of opportunities for the youth is a major concern. Lets change that!"
         />
-        <p className="lg:text-lg text-md max-w-2xl w-full">
-          Reach is a platform that connects customers with service providers. We
-          are here to help you reach your dreams and achieve your goals.
-        </p>
-      </div> */}
-      <div className="w-full max-w-[800px] flex flex-col items-center justify-center space-y-3">
-        <p className="lg:text-lg text-lg text-center">
-          &quot;Hard work beats talent when talent doesn&apos;t work hard&quot;
-        </p>
+        <FeatureCard
+          icon={<FcBarChart className={iconStyle} />}
+          heading="Communication"
+          description="Lets bridge the gap between the service providers and the customers."
+        />
+        <FeatureCard
+          icon={<MdOutlinePriceCheck className={iconStyle} />}
+          heading="Cost Effective"
+          description="Low cost of entry for the service providers and low cost of services for the customers."
+        />
       </div>
     </HeaderWrapper>
   );
+}
 
-  function FeatureCard({
-    icon,
-    heading,
-    description,
-  }: {
-    icon: ReactNode;
-    heading: string;
-    description: string;
-  }) {
-    return (
-      <div className="flex flex-col items-center justify-center space-y-4">
-        {icon}
-        <p className="lg:text-2xl text-lg font-medium text-center">{heading}</p>
-        <p className="lg:text-md text-base text-center">{description}</p>
-      </div>
-    );
-  }
-
-  function PromiseCard({
-    heading,
-    description,
-    image,
-  }: {
-    heading: string;
-    description: string;
-    image: string;
-  }) {
-    return (
-      <div className="flex flex-col items-center justify-center space-y-4">
-        <ImageComponent
-          src={image}
-          alt={heading}
-          className="rounded-2xl lg:w-[20rem] lg:h-[20rem] border border-gray w-[12rem] h-[12rem]"
-          whileHover={{ scale: 1.05 }}
-        />
-        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
-          <p className="lg:text-2xl text-lg font-medium text-center">
-            {heading}
-          </p>
-          <p className="lg:text-md text-base text-center">{description}</p>
-        </div>
-      </div>
-    );
-  }
+function FeatureCard({
+  icon,
+  heading,
+  description,
+}: {
+  icon: ReactNode;
+  heading: string;
+  description: string;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center space-y-4">
+      {icon}
+      <p className="lg:text-2xl text-lg font-medium text-center">{heading}</p>
+      <p className="lg:text-md text-base text-center max-w-[20rem]">
+        {description}
+      </p>
+    </div>
+  );
 }
 
 function Blogs() {
