@@ -39,6 +39,7 @@ export default function Main() {
           ]}
           nonFeatures={[]}
           isPopular
+          plus="Basic"
         />
         <PricingCard
           title="Pro"
@@ -51,6 +52,7 @@ export default function Main() {
             "Get a Pro Badge",
           ]}
           nonFeatures={[]}
+          plus="Standard"
         />
       </div>
     </LandingWrapper>
@@ -64,6 +66,7 @@ interface PricingProps {
   features: string[];
   nonFeatures: string[];
   isPopular?: boolean;
+  plus?: string;
 }
 
 function PricingCard(props: PricingProps) {
@@ -79,7 +82,15 @@ function PricingCard(props: PricingProps) {
         </span>
       )}
       <div className="flex flex-col items-start justify-start space-y-3 w-full pb-3">
-        <h1 className="text-xl font-medium">{props.title}</h1>
+        <div className="flex items-center justify-start space-x-2">
+          <h1 className="text-xl font-medium">{props.title}</h1>
+          {props.plus && (
+            <div className="flex items-center justify-center space-x-1">
+              <span className="text-sm font-semibold">+</span>
+              <span className="text-sm font-semibold">{props.plus}</span>
+            </div>
+          )}
+        </div>
         <h2 className="text-sm tracking-wider title-font mb-1 font-medium">
           {props.description}
         </h2>
