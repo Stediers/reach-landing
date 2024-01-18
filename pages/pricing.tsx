@@ -71,9 +71,13 @@ interface PricingProps {
 function PricingCard(props: PricingProps) {
   return (
     <Card className="!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-between relative">
-      {props.isPopular && (
+      {props.isPopular ? (
         <span className="bg-success text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl font-medium">
           MOST POPULAR
+        </span>
+      ) : (
+        <span className="hidden text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl font-medium">
+          BASIC
         </span>
       )}
       <div className="flex flex-col items-start justify-start space-y-3 w-full pb-3">
