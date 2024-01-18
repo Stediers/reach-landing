@@ -1,7 +1,6 @@
 import Logo from "@components/Logo";
 import { State } from "@data/enums";
-import ConsoleWrapper from "@wrapper/ConsoleWrapper";
-import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   FcPositiveDynamic,
   FcCalendar,
@@ -20,13 +19,13 @@ import Image, { StaticImageData } from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import TextDropDown from "@components/TextDropDown";
 import { BsDatabaseFillSlash } from "react-icons/bs";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdPersonSearch } from "react-icons/md";
 import LandingWrapper from "@wrapper/LandingWrapper";
 import Link from "next/link";
 import CarWashService from "@public/images/car_wash_service.svg";
 import CateringService from "@public/images/catering_service.svg";
 import DriverService from "@public/images/driver_service.svg";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiFillStar, AiOutlineMenu } from "react-icons/ai";
 import ImageComponent from "@components/ImageComponent";
 import { useRouter } from "next/router";
 import TextInput from "@components/input/TextInput";
@@ -40,6 +39,7 @@ import {
   setItemsToLocalStorage,
 } from "@helper_functions/local-storage";
 import LandingPageImage1 from "@public/images/prices-mockup.webp";
+import { GiJourney } from "react-icons/gi";
 
 const faqs = [
   {
@@ -153,10 +153,9 @@ export default function Main() {
       showNavbar={showNavbar}
     >
       <Index />
-      <Blogs />
+      {/* <Blogs /> */}
       <WhatWeBelieve cookieExists={cookieExists} />
-      {/* <Blogs cookieExists={cookieExists} /> */}
-      {/* <FAQ /> */}
+      <FAQ />
       {/* <div className="w-full flex flex-col items-center justify-center space-y-5">
         <LineHeader title="More from Reach" />
         <YoutubeEmbed />
@@ -230,6 +229,7 @@ function Blogs() {
           src={image}
           alt={title}
           className="rounded-2xl lg:w-[20rem] lg:h-[20rem] border border-gray w-[12rem] h-[12rem] hover:scale-105 transition duration-200 cursor-pointer"
+          whileHover={{ scale: 1.0 }}
         />
         <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
           <p className="lg:text-2xl text-lg font-medium text-center">{title}</p>
@@ -295,11 +295,12 @@ function Index() {
       className="flex flex-col items-center justify-start space-y-20 w-full min-h-screen-fix px-10"
       id="Index"
     >
-      <ImageComponent
+      {/* <ImageComponent
         className="!absolute top-0 left-0 w-full h-[40rem] object-cover z-[-1] opacity-70"
         src={LandingPageImage1}
         alt="background"
-      />
+      /> */}
+      <div className="h-[40rem] w-full absolute top-0 left-0 z-[-1]" />
       <div className="flex flex-col items-center justify-center lg:space-y-3 space-y-3 pt-10">
         <Logo
           wings="lg:w-[18rem] w-[12rem]"
@@ -316,18 +317,21 @@ function Index() {
         viewport={{ once: true }}
       >
         <DescriptionCard
-          title="Find the right partner for your needs."
-          description="Get your work done by the best in the business. We have a wide range of services to choose from. We are here to help you reach your dreams and achieve your goals."
+          icon={<MdPersonSearch className="w-24 h-24 text-text" />}
+          title="Find the right partner."
+          description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
           linkText="Find Services"
           link="/user/sign-up"
         />
         <DescriptionCard
+          icon={<AiFillStar className="w-24 h-24 text-rating-2.5" />}
           title="Become the best in the business."
-          description="Showcase your skills and get hired by the best in the business. We are here to help you reach your dreams and achieve your goals."
+          description="Communicate what you offer and showcase your expertise. No commission charges!"
           linkText="Become a Partner"
           link="/user/sign-up"
         />
         <DescriptionCard
+          icon={<GiJourney className="w-24 h-24 text-text" />}
           title="Join Us in our journey."
           description="Are you passionate about the gig economy? We are here to help you reach your dreams and achieve your goals."
           linkText="Find Jobs"
@@ -343,19 +347,21 @@ function DescriptionCard({
   description,
   linkText = "Find Services",
   link,
+  icon,
 }: {
   title: string;
   description: string;
   linkText?: string;
   link: string;
+  icon: ReactNode;
 }) {
-  const [hover, setHover] = useState(false);
   return (
-    <Card className="w-full max-w-[800px] flex flex-col items-center justify-start space-y-5 h-[30rem] bg-white shadow-md">
-      <p className="lg:text-xl font-medium text-lg text-center pt-[8rem]">
-        {title}
-      </p>
-      <p className="lg:text-md text-base text-center">{description}</p>
+    <Card className="w-full max-w-[800px] flex flex-col items-center justify-between space-y-5 min-h-full bg-white shadow-md !pt-10 !pb-20">
+      <div className="flex flex-col items-center justify-center space-y-4">
+        {icon}
+        <p className="lg:text-xl font-medium text-lg text-center">{title}</p>
+        <p className="lg:text-md text-base text-center">{description}</p>
+      </div>
       <div className="max-w-[200px] w-full">
         <Button
           text={linkText}
@@ -476,7 +482,7 @@ function FAQ() {
           </p>
         </div>
         <div className="max-w-[200px] w-full">
-          <Button
+          {/* <Button
             text="Ask"
             onClick={() => {
               showCustomJSXPopup({
@@ -524,11 +530,15 @@ function FAQ() {
               });
             }}
             className="bg-info text-white font-medium"
+          /> */}
+          <Button
+            text="Ask"
+            link="/contact"
+            className="bg-info text-white font-medium"
           />
         </div>
         <p className="lg:text-md text-base text-center max-w-2xl">
-          Any and All questions are welcome. We are here to help you reach your
-          dreams and achieve your goals.
+          Any and All questions are welcome. Dont be shy now!
         </p>
       </div>
     </HeaderWrapper>

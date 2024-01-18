@@ -6,24 +6,6 @@ import { AiOutlineMenu } from "react-icons/ai";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(
-    () => {
-      const element = document.getElementById("navbar");
-      if (element) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setIsOpen(false);
-            }
-          },
-          { threshold: 0.5 }
-        );
-        observer.observe(element);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
 
   return (
     <motion.div
@@ -48,26 +30,12 @@ export default function NavBar() {
       </div>
       <div className="lg:flex items-center justify-end space-x-5 w-full hidden">
         <div className="flex items-center justify-center space-x-7">
-          <NavLink text="Blogs" link="#blogs" />
+          {/* <NavLink text="Blogs" link="#blogs" /> */}
           <NavLink text="FAQs" link="#faqs" />
           <NavLink text="Contact Us" link="/contact" />
           <NavLink text="About Us" link="#about-us" />
+          <NavLink text="Pricing" link="/pricing" />
         </div>
-        {/* <div className="max-w-[200px] w-full">
-          {cookieExists ? (
-            <Button
-              text="Go to Console"
-              link="/console"
-              className="bg-primary text-white font-medium"
-            />
-          ) : (
-            <Button
-              text="Sign In"
-              link="/user/sign-in"
-              className="bg-primary text-white font-medium"
-            />
-          )}
-        </div> */}
       </div>
       <AiOutlineMenu
         className="lg:hidden text-2xl"
@@ -165,7 +133,8 @@ function NavLink({
     []
   );
   return (
-    <p
+    <Link
+      href={link}
       className={`text-md font-medium shrink-0 cursor-pointer ${className} ${
         highlight ? "text-primary underline underline-offset-8" : ""
       }`}
@@ -181,6 +150,6 @@ function NavLink({
       }}
     >
       {text}
-    </p>
+    </Link>
   );
 }
