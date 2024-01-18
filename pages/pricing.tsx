@@ -2,6 +2,7 @@ import LandingWrapper from "@wrapper/LandingWrapper";
 import { State } from "@data/enums";
 import { useEffect } from "react";
 import Card from "@components/Card";
+import Button from "@components/Button";
 
 export default function Main() {
   useEffect(() => {
@@ -17,8 +18,92 @@ export default function Main() {
       className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5"
       showNavbar={true}
     >
-      <PricingSection />
+      {/* <PricingSection /> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl">
+        <PricingCard
+          title="Basic"
+          commission={0}
+          description="Get in touch with partners for free and have your needs met. Feel free to explore the platform."
+          features={["No booking fee", "Unlimited Partners to connect with"]}
+          nonFeatures={["Lack of partner verification", "No dedicated support"]}
+        />
+        <PricingCard
+          title="Standard"
+          commission={10}
+          description="Create bookings on the platform and get a dedicated support to assist you with your bookings."
+          features={[
+            "Pay a booking fee of 10%",
+            "Dedicated Customer Support",
+            "Know your partner's verification status",
+            "Give Feedback on partner's performance",
+            "Get a Pro Badge",
+          ]}
+          nonFeatures={[]}
+        />
+        <PricingCard
+          title="Pro"
+          commission={20}
+          description="Find the best partners for your needs and have 100% cashback if you are not satisfied."
+          features={[
+            "Pay a booking fee of 10%",
+            "Dedicated Customer Support",
+            "Know your partner's verification status",
+            "Give Feedback on partner's performance",
+            "Get a Pro Badge",
+          ]}
+          nonFeatures={[]}
+        />
+      </div>
     </LandingWrapper>
+  );
+}
+
+interface PricingProps {
+  title: string;
+  description: string;
+  commission: number;
+  features: string[];
+  nonFeatures: string[];
+}
+
+function PricingCard(props: PricingProps) {
+  return (
+    <Card className="!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-between">
+      <div className="flex flex-col items-start justify-start space-y-3 w-full pb-3">
+        <h1 className="text-xl font-medium">{props.title}</h1>
+        <h2 className="text-sm tracking-wider title-font mb-1 font-medium">
+          {props.description}
+        </h2>
+        <div className="flex items-center justify-start space-x-2 pt-5">
+          <span className="text-[3rem] text-gray-700 font-semibold">
+            {props.commission}
+          </span>
+          <span className="block text-[2rem] font-semibold">%</span>
+          <span className="text-textsubtle font-medium">
+            of the partner&apos;s fee
+          </span>
+        </div>
+      </div>
+      <div className="flex flex-col space-y-4 w-full pt-5 pb-5 justify-start h-full">
+        <ul className="flex flex-col space-y-4">
+          {props.features.map((feature, index) => (
+            <li key={index} className="flex items-start space-x-2">
+              <span className="text-success font-semibold">&#10003;</span>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+        <ul className="flex flex-col space-y-4">
+          {props.nonFeatures.map((nonFeature, index) => (
+            <li key={index} className="flex items-start space-x-2">
+              <span className="text-error font-semibold">&#10005;</span>
+              <span className="text-textsubtle">{nonFeature}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <Button text="Claim Now" className="bg-info text-white" link="/signup" />
+    </Card>
   );
 }
 
@@ -81,7 +166,7 @@ const PricingOption: React.FC<PricingOptionProps> = ({
             </ul>
           </div>
         </div>
-        <p className="text-xs pt-5">
+        <p className="text-sm pt-5">
           {subtitle ? subtitle : "Lorem ipsum dolor sit amet consectetur."}
         </p>
       </div>
@@ -117,7 +202,7 @@ function PricingSection() {
             subtitle="For individuals trying out Reach"
           />
           <PricingOption
-            title="PRO"
+            title="STANDARD"
             percentage={10}
             features={[
               "Pay a booking fee of 10%",
@@ -130,8 +215,8 @@ function PricingSection() {
             isPopular
             subtitle="For individuals looking to get the best out of Reach"
           />
-          {/* <PricingOption
-            title="BUSINESS"
+          <PricingOption
+            title="PRO"
             percentage={20}
             features={[
               "Pay a booking fee of 20%",
@@ -142,7 +227,7 @@ function PricingSection() {
             ]}
             nonFeatures={[]}
             subtitle="For businesses with more than 5 employees"
-          /> */}
+          />
         </div>
       </div>
     </section>
