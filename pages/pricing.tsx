@@ -1,38 +1,13 @@
-import { getCookie } from "@helper_functions/cookie";
 import LandingWrapper from "@wrapper/LandingWrapper";
 import { State } from "@data/enums";
-import { useState, useEffect } from "react";
-import AnimatedTabs from "@components/Tabs";
-import Button from "@components/Button";
-import Checker from "@components/Checker";
+import { useEffect } from "react";
 import Card from "@components/Card";
 
 export default function Main() {
-  const [cookieExists, setCookieExists] = useState(false);
-  useEffect(() => {
-    const cookie = getCookie("gig-token");
-    if (cookie) {
-      setCookieExists(true);
-    }
-  }, []);
-  // take user to console if they are logged in
-  // useEffect(() => {
-  //   const token = getCookie("gig-token");
-  //   if (token) {
-  //     Router.push("/console");
-  //   }
-  // });
-
-  // onscroll down hide navbar, onscroll up show navbar
-
   useEffect(() => {
     // scroll to top of page on load
     window.scrollTo(0, 0);
   }, []);
-
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [tabs, setTabs] = useState(["Partner", "Customer"]);
-  const [selectedTab, setSelectedTab] = useState("Partner");
 
   return (
     <LandingWrapper
@@ -40,21 +15,128 @@ export default function Main() {
       showFooter={true}
       state={State.SUCCESS}
       className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5"
-      showNavbar={showNavbar}
+      showNavbar={true}
     >
-      <OrganizationSubscription
-        advantages={[
-          "First premium advantage",
-          "Second advantage weekly",
-          "Third advantage donate to project",
-          "Fourth, access to all components weekly",
-        ]}
-        discountPercentage={2}
-        phoneNumber="+1 (234) 567-8901"
-        title="Help us help you"
-        key={"organization"}
-      />
+      <PricingSection />
     </LandingWrapper>
+  );
+}
+
+interface PricingOptionProps {
+  title: string;
+  percentage?: number;
+  features: string[];
+  nonFeatures: string[];
+  isPopular?: boolean;
+  subtitle?: string;
+}
+
+const PricingOption: React.FC<PricingOptionProps> = ({
+  title,
+  percentage,
+  features,
+  isPopular,
+  subtitle,
+  nonFeatures,
+}) => {
+  return (
+    <div
+      className={`p-4 xl:w-1/3 md:w-1/2 w-full ${
+        isPopular ? "border-indigo-500" : "border-gray-300"
+      }`}
+    >
+      <div className="min-h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden justify-between">
+        {isPopular && (
+          <span className="bg-primary text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl font-medium">
+            MOST PRICES
+          </span>
+        )}
+        <div className="flex flex-col items-start justify-center space-y-2 w-full pb-3">
+          <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
+            {title}
+          </h2>
+          <h1 className="text-4xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none flex justify-start items-center w-full">
+            <span className="font-medium text-4xl">{percentage}</span>
+            <span className="text-xl ml-1 font-normal text-gray-500">%</span>
+          </h1>
+          <div className="flex flex-col space-y-4 w-full pt-5">
+            <ul className="flex flex-col space-y-4">
+              {features.map((feature, index) => (
+                <li key={index} className="flex items-start space-x-2">
+                  <span className="text-success font-semibold">&#10003;</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <ul className="flex flex-col space-y-4">
+              {nonFeatures.map((nonFeature, index) => (
+                <li key={index} className="flex items-start space-x-2">
+                  <span className="text-error font-semibold">&#10005;</span>
+                  <span className="text-textsubtle">{nonFeature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p className="text-xs pt-5">
+          {subtitle ? subtitle : "Lorem ipsum dolor sit amet consectetur."}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+function PricingSection() {
+  return (
+    <section className="body-font overflow-hidden">
+      <div className="container mx-auto flex flex-col space-y-10">
+        <div className="flex flex-col text-center w-full space-y-5">
+          <h1 className="sm:text-4xl text-3xl font-medium">Pricing</h1>
+          <p className="lg:w-2/3 mx-auto leading-relaxed text-md text-gray-500">
+            This Fee Structure helps us to keep the lights on and also minimize
+            the cost for our users.
+          </p>
+        </div>
+        <div className="flex flex-wrap w-full">
+          <PricingOption
+            title="BASIC"
+            percentage={0}
+            features={["No booking fee", "Unlimited Partners"]}
+            nonFeatures={[
+              "Lack of partner verification",
+              "No dedicated support",
+            ]}
+            subtitle="For individuals trying out Reach"
+          />
+          <PricingOption
+            title="PRO"
+            percentage={10}
+            features={[
+              "Dedicated Customer Support",
+              "Partner Verification status badge",
+              "Give Feedback",
+              "Priority Badge",
+            ]}
+            nonFeatures={[]}
+            isPopular
+            subtitle="For individuals looking to get the best out of Reach"
+          />
+          <PricingOption
+            title="BUSINESS"
+            percentage={20}
+            features={[
+              "Dedicated Customer Support",
+              "Professional Verification status badge",
+              "Give Feedback",
+              "Business Badge",
+              "Dedicated Relationship Manager",
+            ]}
+            nonFeatures={[]}
+            subtitle="For businesses with more than 5 employees"
+          />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -78,20 +160,16 @@ const OrganizationSubscription: React.FC<OrganizationSubscriptionProps> = ({
           {title}
         </h2>
       </div>
-      <Card className="lg:mt-12 mt-10 items-center justify-center lg:max-w-[400px] lg:!p-5">
-        <h3 className="text-3xl font-semibold text-center">Platform Fee</h3>
-        <div>
-          <div className="relative flex flex-col items-center justify-center space-y-0">
-            <div className="flex items-end space-x-2">
-              <span className="text-[5rem] text-gray-700 font-bold">
-                {discountPercentage}
-              </span>
-              <div className="pb-1">
-                <span className="block text-[4rem] font-bold">%</span>
-              </div>
-            </div>
-            <span className="text-textsubtle font-medium">(Capped at 800)</span>
+      <Card className="flex items-center justify-center lg:max-w-[400px] lg:!p-5">
+        <h3 className="text-3xl font-semibold text-center">Booking Fee</h3>
+        <div className="relative flex flex-col items-center justify-center space-y-0">
+          <div className="flex items-center justify-center space-x-2">
+            <span className="text-[5rem] text-gray-700 font-bold">
+              {discountPercentage}
+            </span>
+            <span className="block text-[4rem] font-bold">%</span>
           </div>
+          <span className="text-textsubtle font-medium">(Capped at 800)</span>
         </div>
         <ul role="list" className="w-full space-y-4 py-6 m-auto text-gray-600">
           {advantages.map((advantage, index) => (
