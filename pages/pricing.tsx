@@ -59,7 +59,7 @@ const PricingOption: React.FC<PricingOptionProps> = ({
             <span className="font-medium text-4xl">{percentage}</span>
             <span className="text-xl ml-1 font-normal text-gray-500">%</span>
             <span className="text-base ml-3 font-medium">
-              of the partner's service fee
+              of the partner&apos;s fee
             </span>
           </h1>
           <div className="flex flex-col space-y-4 w-full pt-5">
