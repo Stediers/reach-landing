@@ -39,6 +39,7 @@ export default function Main() {
             "Get a Pro Badge",
           ]}
           nonFeatures={[]}
+          isPopular
         />
         <PricingCard
           title="Pro"
@@ -64,11 +65,17 @@ interface PricingProps {
   commission: number;
   features: string[];
   nonFeatures: string[];
+  isPopular?: boolean;
 }
 
 function PricingCard(props: PricingProps) {
   return (
-    <Card className="!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-between">
+    <Card className="!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-between relative">
+      {props.isPopular && (
+        <span className="bg-success text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl font-medium">
+          MOST POPULAR
+        </span>
+      )}
       <div className="flex flex-col items-start justify-start space-y-3 w-full pb-3">
         <h1 className="text-xl font-medium">{props.title}</h1>
         <h2 className="text-sm tracking-wider title-font mb-1 font-medium">
