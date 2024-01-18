@@ -48,7 +48,7 @@ const PricingOption: React.FC<PricingOptionProps> = ({
       <div className="min-h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden justify-between">
         {isPopular && (
           <span className="bg-primary text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl font-medium">
-            MOST PRICES
+            MOST POPULAR
           </span>
         )}
         <div className="flex flex-col items-start justify-center space-y-2 w-full pb-3">
@@ -58,6 +58,9 @@ const PricingOption: React.FC<PricingOptionProps> = ({
           <h1 className="text-4xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none flex justify-start items-center w-full">
             <span className="font-medium text-4xl">{percentage}</span>
             <span className="text-xl ml-1 font-normal text-gray-500">%</span>
+            <span className="text-base ml-3 font-medium">
+              of the partner's service fee
+            </span>
           </h1>
           <div className="flex flex-col space-y-4 w-full pt-5">
             <ul className="flex flex-col space-y-4">
@@ -105,6 +108,7 @@ function PricingSection() {
               "No booking fee",
               "Unlimited Partners to connect with",
               "Give Feedback",
+              "Get a Basic Badge",
             ]}
             nonFeatures={[
               "Lack of partner verification",
