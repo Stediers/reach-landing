@@ -32,6 +32,7 @@ export default function Main() {
           commission={10}
           description="Create bookings on the platform and get a dedicated support to assist you with your bookings."
           features={[
+            "All Basic features",
             "Dedicated Customer Support",
             "Know your partner's verification status",
             "Give Feedback on partner's performance",
@@ -46,6 +47,7 @@ export default function Main() {
           commission={20}
           description="Find the best partners for your needs and have 100% cashback if you are not satisfied."
           features={[
+            "All Standard features",
             "Dedicated Relationship Manager",
             "Complete cashback if you are not satisfied",
             "Know your partner's verification status and any other information you need",
