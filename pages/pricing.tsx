@@ -101,7 +101,11 @@ function PricingSection() {
           <PricingOption
             title="BASIC"
             percentage={0}
-            features={["No booking fee", "Unlimited Partners"]}
+            features={[
+              "No booking fee",
+              "Unlimited Partners to connect with",
+              "Give Feedback",
+            ]}
             nonFeatures={[
               "Lack of partner verification",
               "No dedicated support",
@@ -112,10 +116,11 @@ function PricingSection() {
             title="PRO"
             percentage={10}
             features={[
+              "Pay a booking fee of 10%",
               "Dedicated Customer Support",
-              "Partner Verification status badge",
-              "Give Feedback",
-              "Priority Badge",
+              "Know your partner's verification status",
+              "Give Feedback on partner's performance",
+              "Get a Pro Badge",
             ]}
             nonFeatures={[]}
             isPopular
@@ -125,11 +130,11 @@ function PricingSection() {
             title="BUSINESS"
             percentage={20}
             features={[
-              "Dedicated Customer Support",
-              "Professional Verification status badge",
-              "Give Feedback",
-              "Business Badge",
+              "Pay a booking fee of 20%",
               "Dedicated Relationship Manager",
+              "Know your partner's verification status and any other information you need",
+              "Give Feedback on partner's performance",
+              "Get a Business Badge",
             ]}
             nonFeatures={[]}
             subtitle="For businesses with more than 5 employees"
