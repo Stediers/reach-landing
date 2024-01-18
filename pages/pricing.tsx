@@ -130,7 +130,7 @@ function PricingSection() {
             isPopular
             subtitle="For individuals looking to get the best out of Reach"
           />
-          <PricingOption
+          {/* <PricingOption
             title="BUSINESS"
             percentage={20}
             features={[
@@ -142,7 +142,7 @@ function PricingSection() {
             ]}
             nonFeatures={[]}
             subtitle="For businesses with more than 5 employees"
-          />
+          /> */}
         </div>
       </div>
     </section>
