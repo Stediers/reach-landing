@@ -35,6 +35,7 @@ export default function NavBar() {
           <NavLink text="Contact Us" link="/contact" />
           <NavLink text="About Us" link="#about-us" />
           <NavLink text="Pricing" link="/pricing" />
+          <NavLink text="Careers" link="/careers" />
         </div>
       </div>
       <AiOutlineMenu

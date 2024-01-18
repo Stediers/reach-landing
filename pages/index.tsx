@@ -154,7 +154,8 @@ export default function Main() {
     >
       <Index />
       {/* <Blogs /> */}
-      <WhatWeBelieve cookieExists={cookieExists} />
+      <WhoAndWhat />
+      {/* <WhatWeBelieve cookieExists={cookieExists} /> */}
       <FAQ />
       {/* <div className="w-full flex flex-col items-center justify-center space-y-5">
         <LineHeader title="More from Reach" />
@@ -162,6 +163,78 @@ export default function Main() {
       </div> */}
     </LandingWrapper>
   );
+}
+
+function WhoAndWhat() {
+  return (
+    <HeaderWrapper
+      title="What is Reach?"
+      className="items-center justify-center w-full flex flex-col space-y-16"
+      id="who-we-are-and-what-we-do"
+    >
+      {/* <div className="flex flex-row items-start justify-start space-x-10 w-full">
+        <ImageComponent
+          alt="car wash service"
+          src={CarWashService}
+          className="w-[25rem] h-[25rem] shrink-0"
+        />
+        <p className="lg:text-lg text-md max-w-2xl w-full">
+          Reach is a platform that connects customers with service providers. We
+          are here to help you reach your dreams and achieve your goals.
+        </p>
+      </div> */}
+      <div className="w-full max-w-[800px] flex flex-col items-center justify-center space-y-3">
+        <p className="lg:text-lg text-lg text-center">
+          &quot;Hard work beats talent when talent doesn&apos;t work hard&quot;
+        </p>
+      </div>
+    </HeaderWrapper>
+  );
+
+  function FeatureCard({
+    icon,
+    heading,
+    description,
+  }: {
+    icon: ReactNode;
+    heading: string;
+    description: string;
+  }) {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-4">
+        {icon}
+        <p className="lg:text-2xl text-lg font-medium text-center">{heading}</p>
+        <p className="lg:text-md text-base text-center">{description}</p>
+      </div>
+    );
+  }
+
+  function PromiseCard({
+    heading,
+    description,
+    image,
+  }: {
+    heading: string;
+    description: string;
+    image: string;
+  }) {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <ImageComponent
+          src={image}
+          alt={heading}
+          className="rounded-2xl lg:w-[20rem] lg:h-[20rem] border border-gray w-[12rem] h-[12rem]"
+          whileHover={{ scale: 1.05 }}
+        />
+        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
+          <p className="lg:text-2xl text-lg font-medium text-center">
+            {heading}
+          </p>
+          <p className="lg:text-md text-base text-center">{description}</p>
+        </div>
+      </div>
+    );
+  }
 }
 
 function Blogs() {
@@ -290,9 +363,11 @@ function WordPopUp({
 
 function Index() {
   const words = "Empowering the Gig Economy".split(" ");
+  const partnerLink = process.env.NEXT_PUBLIC_PARTNER_LINK || "/user/sign-up";
+  const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
     <div
-      className="flex flex-col items-center justify-start space-y-20 w-full min-h-screen-fix px-10"
+      className="flex flex-col items-center justify-start space-y-20 w-full px-10"
       id="Index"
     >
       {/* <ImageComponent
@@ -300,8 +375,7 @@ function Index() {
         src={LandingPageImage1}
         alt="background"
       /> */}
-      <div className="h-[40rem] w-full absolute top-0 left-0 z-[-1]" />
-      <div className="flex flex-col items-center justify-center lg:space-y-3 space-y-3 pt-10">
+      <div className="flex flex-col items-center justify-center lg:space-y-3 space-y-3 pt-5">
         <Logo
           wings="lg:w-[18rem] w-[12rem]"
           textStyle="font-medium lg:text-4xl text-2xl"
@@ -318,21 +392,21 @@ function Index() {
       >
         <DescriptionCard
           icon={<MdPersonSearch className="w-24 h-24 text-text" />}
-          title="Find the right partner."
+          title="Find the right partner"
           description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
           linkText="Find Services"
-          link="/user/sign-up"
+          link={customerLink}
         />
         <DescriptionCard
           icon={<AiFillStar className="w-24 h-24 text-rating-2.5" />}
-          title="Become the best in the business."
+          title="Become the best in the business"
           description="Communicate what you offer and showcase your expertise. No commission charges!"
           linkText="Become a Partner"
-          link="/user/sign-up"
+          link={partnerLink}
         />
         <DescriptionCard
-          icon={<GiJourney className="w-24 h-24 text-text" />}
-          title="Join Us in our journey."
+          icon={<GiJourney className="w-24 h-24 text-info" />}
+          title="Join Us in our journey"
           description="Are you passionate about the gig economy? We are here to help you reach your dreams and achieve your goals."
           linkText="Find Jobs"
           link="/user/sign-up"
@@ -356,7 +430,7 @@ function DescriptionCard({
   icon: ReactNode;
 }) {
   return (
-    <Card className="w-full max-w-[800px] flex flex-col items-center justify-between space-y-5 min-h-full bg-white shadow-md !pt-10 !pb-20">
+    <Card className="w-full max-w-[800px] flex flex-col items-center justify-between space-y-5 min-h-[28rem] bg-white shadow-md !pt-10 !pb-20">
       <div className="flex flex-col items-center justify-center space-y-4">
         {icon}
         <p className="lg:text-xl font-medium text-lg text-center">{title}</p>

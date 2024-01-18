@@ -19,43 +19,49 @@ export default function Main() {
       showNavbar={true}
     >
       {/* <PricingSection /> */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl">
-        <PricingCard
-          title="Basic"
-          commission={0}
-          description="Get in touch with partners for free and have your needs met. Feel free to explore the platform."
-          features={["No booking fee", "Unlimited Partners to connect with"]}
-          nonFeatures={["Lack of partner verification", "No dedicated support"]}
-        />
-        <PricingCard
-          title="Standard"
-          commission={10}
-          description="Create bookings on the platform and get a dedicated support to assist you with your bookings."
-          features={[
-            "All Basic features",
-            "Dedicated Customer Support",
-            "Know your partner's verification status",
-            "Give Feedback on partner's performance",
-            "Get a Standard Badge",
-          ]}
-          nonFeatures={[]}
-          isPopular
-          plus="Basic"
-        />
-        <PricingCard
-          title="Pro"
-          commission={20}
-          description="Find the best partners for your needs and have 100% cashback if you are not satisfied."
-          features={[
-            "All Standard features",
-            "Dedicated Relationship Manager",
-            "Complete cashback if you are not satisfied",
-            "Know your partner's verification status and any other information you need",
-            "Get a Pro Badge",
-          ]}
-          nonFeatures={[]}
-          plus="Standard"
-        />
+      <div className="flex flex-col items-center justify-center space-y-10 w-full">
+        <p className="text-3xl font-semibold text-center">Pricing</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl">
+          <PricingCard
+            title="Basic"
+            commission={0}
+            description="Get in touch with partners for free and have your needs met. Feel free to explore the platform."
+            features={["No booking fee", "Unlimited Partners to connect with"]}
+            nonFeatures={[
+              "Lack of partner verification",
+              "No dedicated support",
+            ]}
+          />
+          <PricingCard
+            title="Standard"
+            commission={10}
+            description="Create bookings on the platform and get a dedicated support to assist you with your bookings."
+            features={[
+              "All Basic features",
+              "Dedicated Customer Support",
+              "Know your partner's verification status",
+              "Give Feedback on partner's performance",
+              "Get a Standard Badge",
+            ]}
+            nonFeatures={[]}
+            isPopular
+            // plus="Basic"
+          />
+          <PricingCard
+            title="Pro"
+            commission={20}
+            description="Find the best partners for your needs and have 100% cashback if you are not satisfied."
+            features={[
+              "All Standard features",
+              "Dedicated Relationship Manager",
+              "Complete cashback if you are not satisfied",
+              "Know your partner's verification status and any other information you need",
+              "Get a Pro Badge",
+            ]}
+            nonFeatures={[]}
+            // plus="Standard"
+          />
+        </div>
       </div>
     </LandingWrapper>
   );
