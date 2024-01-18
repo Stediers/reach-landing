@@ -165,7 +165,6 @@ export default function Main() {
       <How />
       <CustomerStories />
       {/* <WhatWeBelieve cookieExists={cookieExists} /> */}
-      <FAQ />
       {/* <div className="w-full flex flex-col items-center justify-center space-y-5">
         <LineHeader title="More from Reach" />
         <YoutubeEmbed />
