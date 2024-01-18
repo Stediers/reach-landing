@@ -1,6 +1,7 @@
 import Logo from "@components/Logo";
 import { State } from "@data/enums";
 import { ReactNode, useEffect, useState } from "react";
+import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import {
   FcPositiveDynamic,
   FcCalendar,
@@ -46,6 +47,7 @@ import {
 } from "@helper_functions/local-storage";
 import LandingPageImage1 from "@public/images/prices-mockup.webp";
 import { GiJourney } from "react-icons/gi";
+import { FaHandshake } from "react-icons/fa";
 
 const faqs = [
   {
@@ -264,7 +266,7 @@ function How() {
           description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
         />
         <FeatureCard
-          icon={<FcBarChart className={iconStyle} />}
+          icon={<HiChatBubbleLeftRight className={iconStyle} />}
           heading="Communicate"
           description="Communicate what you offer and showcase your expertise."
         />
@@ -287,17 +289,19 @@ function What() {
     >
       <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
         <FeatureCard
-          icon={<CiTrophy className={iconStyle} />}
+          icon={<CiTrophy className={`${iconStyle} text-yellow-500`} />}
           heading="Talent is everywhere"
           description="Upcoming lack of opportunities for the youth is a major concern. Lets change that!"
         />
         <FeatureCard
-          icon={<FcBarChart className={iconStyle} />}
+          icon={<FaHandshake className={`${iconStyle} text-green-500`} />}
           heading="Communication"
           description="Lets bridge the gap between the service providers and the customers."
         />
         <FeatureCard
-          icon={<MdOutlinePriceCheck className={iconStyle} />}
+          icon={
+            <MdOutlinePriceCheck className={`${iconStyle} text-blue-500`} />
+          }
           heading="Cost Effective"
           description="Low cost of entry for the service providers and low cost of services for the customers."
         />
