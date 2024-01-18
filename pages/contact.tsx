@@ -23,6 +23,8 @@ import {
   getItemsFromLocalStorage,
   setItemsToLocalStorage,
 } from "@helper_functions/local-storage";
+import Button from "@components/Button";
+import { showSnackBar } from "@components/notifications/Snackbar";
 
 const faqs = [
   {
@@ -116,13 +118,44 @@ function WordPopUp({
 }
 
 function Index() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [question, setQuestion] = useState("");
+  const [buttonState, setButtonState] = useState(State.SUCCESS);
+
   const words = "US";
+
+  function validateForm() {
+    if (name === "")
+      showSnackBar({
+        message: "Please enter your name",
+        state: State.ERROR,
+      });
+    else if (phone === "" || !isValidPhoneNumber("+91" + phone))
+      showSnackBar({
+        message: "Please enter a valid phone number",
+        state: State.ERROR,
+      });
+    else if (email === "" || !email.includes("@"))
+      showSnackBar({
+        message: "Please enter valid email",
+        state: State.ERROR,
+      });
+    else if (question === "")
+      showSnackBar({
+        message: "Please enter your query",
+        state: State.ERROR,
+      });
+    else return true;
+  }
+
   return (
     <div
-      className="flex flex-col items-center justify-center space-y-10 w-full min-h-screen-fix relative"
+      className="flex items-start justify-center space-y-10 w-full min-h-screen-fix relative"
       id="Index"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full justify-items-center gap-y-10 lg:gap-y-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full justify-items-center gap-y-5 lg:gap-y-0">
         <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-3 pt-10 lg:pt-0">
           <Logo
             wings="lg:w-[18rem] w-[12rem]"
@@ -130,18 +163,72 @@ function Index() {
           />
           <WordPopUp words={words} delay={0.2} />
         </div>
+        <div className="flex flex-col w-full space-y-5 md:space-y-10 p-5 md:p-20">
+          <div className="flex flex-row space-x-3">
+            <TextInput
+              type="text"
+              placeholder="John Doe"
+              title="Name"
+              onChange={(value) => {
+                setName(value);
+              }}
+              value={name}
+              errorText={""}
+              maxLength={15}
+            />
+            <TextInput
+              type="text"
+              placeholder="9876543210"
+              title="Phone"
+              onChange={(value) => {
+                setPhone(value);
+              }}
+              value={phone}
+              errorText={""}
+              maxLength={10}
+            />
+          </div>
+          <TextInput
+            type="text"
+            placeholder="john.doe@gmail.com"
+            title="Email"
+            onChange={(value) => {
+              setEmail(value);
+            }}
+            value={email}
+            errorText={""}
+            maxLength={30}
+          />
+          <TextArea
+            value={question}
+            onChange={(value) => {
+              setQuestion(value);
+            }}
+            title="Message"
+            placeholder="I want to know more about ..."
+          />
+          <p className="block p-2 text-center md:text-left text-md md:text-lg/8">
+            Please let us know what your query is about and we will get back to
+            you as soon as possible.
+          </p>
+          <Button
+            text="Submit"
+            buttonState={buttonState}
+            className=" w-full bg-primary text-white max-w-xs sm:max-w-sm self-center"
+            onClick={() => {
+              setButtonState(State.LOADING);
+              validateForm()
+                ? showSnackBar({
+                    message: "Your query has been submitted successfully",
+                    state: State.SUCCESS,
+                  })
+                : null;
+              setButtonState(State.SUCCESS);
+            }}
+          />
+        </div>
       </div>
-      <div
-        className="absolute bottom-0 left-0 w-full flex items-center justify-center cursor-pointer"
-        onClick={() => {
-          const element = document.getElementById("features");
-          if (element) {
-            const y =
-              element.getBoundingClientRect().top + window.pageYOffset - 40;
-            window.scrollTo({ top: y, behavior: "smooth" });
-          }
-        }}
-      ></div>
+      {/* add contact form  */}
     </div>
   );
 }
