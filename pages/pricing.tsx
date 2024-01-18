@@ -32,11 +32,10 @@ export default function Main() {
           commission={10}
           description="Create bookings on the platform and get a dedicated support to assist you with your bookings."
           features={[
-            "Pay a booking fee of 10%",
             "Dedicated Customer Support",
             "Know your partner's verification status",
             "Give Feedback on partner's performance",
-            "Get a Pro Badge",
+            "Get a Standard Badge",
           ]}
           nonFeatures={[]}
           isPopular
@@ -46,10 +45,9 @@ export default function Main() {
           commission={20}
           description="Find the best partners for your needs and have 100% cashback if you are not satisfied."
           features={[
-            "Pay a booking fee of 10%",
-            "Dedicated Customer Support",
-            "Know your partner's verification status",
-            "Give Feedback on partner's performance",
+            "Dedicated Relationship Manager",
+            "Complete cashback if you are not satisfied",
+            "Know your partner's verification status and any other information you need",
             "Get a Pro Badge",
           ]}
           nonFeatures={[]}
