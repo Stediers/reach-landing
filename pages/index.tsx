@@ -14,38 +14,22 @@ import {
 import { CiTrophy } from "react-icons/ci";
 import Button from "@components/Button";
 import Card from "@components/Card";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import Image, { StaticImageData } from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import TextDropDown from "@components/TextDropDown";
-import { BsDatabaseFillSlash } from "react-icons/bs";
-import {
-  MdKeyboardArrowDown,
-  MdOutlinePriceCheck,
-  MdPersonSearch,
-} from "react-icons/md";
+import { MdOutlinePriceCheck, MdPersonSearch } from "react-icons/md";
 import LandingWrapper from "@wrapper/LandingWrapper";
-import Link from "next/link";
-import CarWashService from "@public/images/car_wash_service.svg";
-import CateringService from "@public/images/catering_service.svg";
-import DriverService from "@public/images/driver_service.svg";
 import { AiFillStar, AiOutlineMenu } from "react-icons/ai";
 import ImageComponent from "@components/ImageComponent";
-import { useRouter } from "next/router";
 import TextInput from "@components/input/TextInput";
 import TextArea from "@components/input/TextArea";
-import { showCustomJSXPopup } from "@components/notifications/Popup";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import { showSnackBar } from "@components/notifications/Snackbar";
 import { getCookie } from "@helper_functions/cookie";
 import {
   getItemsFromLocalStorage,
   setItemsToLocalStorage,
 } from "@helper_functions/local-storage";
-import LandingPageImage1 from "@public/images/prices-mockup.webp";
 import { GiJourney } from "react-icons/gi";
 import { FaHandshake } from "react-icons/fa";
 
@@ -128,13 +112,6 @@ const promises = [
 ];
 
 export default function Main() {
-  const [cookieExists, setCookieExists] = useState(false);
-  useEffect(() => {
-    const cookie = getCookie("gig-token");
-    if (cookie) {
-      setCookieExists(true);
-    }
-  }, []);
   // take user to console if they are logged in
   // useEffect(() => {
   //   const token = getCookie("gig-token");
@@ -163,8 +140,8 @@ export default function Main() {
       <Index />
       <What />
       <How />
-      <CustomerStories />
-      <HappyPartners />
+      {/* <CustomerStories />
+      <HappyPartners /> */}
       {/* <WhatWeBelieve cookieExists={cookieExists} /> */}
       {/* <div className="w-full flex flex-col items-center justify-center space-y-5">
         <LineHeader title="More from Reach" />

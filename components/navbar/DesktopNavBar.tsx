@@ -1,4 +1,3 @@
-import Button from "@components/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
@@ -33,7 +32,7 @@ export default function NavBar() {
           REACH
         </Link>
         <p className="lg:text-xl font-medium hidden lg:block">|</p>
-        <div className="flex items-center justify-center space-x-5 hidden lg:flex">
+        <div className="items-center justify-center space-x-5 hidden lg:flex">
           <p className="lg:text-lg text-md font-medium">
             Empowering the gig economy
           </p>
