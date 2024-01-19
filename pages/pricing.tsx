@@ -21,30 +21,33 @@ export default function Main() {
       <HeaderWrapper
         title="Pricing"
         id="pricing"
-        className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-8 max-w-6xl"
+        className="items-center justify-center w-full flex flex-col lg:space-y-12 space-y-8 max-w-6xl"
       >
+        <p className="text-center text-lg max-w-4xl">
+          Choose one of the plans when creating a booking on our platform. Feel
+          free to explore each plan and the benefits they offer.
+        </p>
         <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
           <PricingCard
             title="Basic"
             commission={0}
             description="Get in touch with partners for free and have your needs met. Feel free to explore the platform."
-            features={["Unlimited Partners to connect with"]}
-            nonFeatures={[
-              "Lack of partner verification",
-              "No dedicated support, you are on your own",
-              "Cannot avail partner discounts",
+            features={[
+              "Choose 2 slots per booking",
+              "Low partner response rate",
+              "Basic Support",
             ]}
+            nonFeatures={[]}
           />
           <PricingCard
             title="Standard"
             commission={10}
             description="The real experience of Reach. Get the best partners for your needs and have a dedicated support team to assist you."
             features={[
-              "Access to exciting partner discounts",
+              "Choose 10 slots per booking",
               "First 3 bookings are free",
-              "Have a support team to assist you with your bookings",
-              "Know your partner's verification status",
-              "Give Feedback on partner's performance",
+              "High partner response rate",
+              "Dedicated Customer Support",
               "Get a Standard Badge",
             ]}
             nonFeatures={[]}
@@ -56,10 +59,10 @@ export default function Main() {
             commission={20}
             description="Find the best partners for your needs and have 100% cashback if you are not satisfied."
             features={[
-              "All Standard features",
+              "Unlimited slots per booking",
               "Dedicated Relationship Manager",
-              "Complete cashback if you are not satisfied",
-              "Know your partner's verification status and any other information you need",
+              "Complete cashback if anything goes south",
+              "Highest partner response rate",
               "Get a Pro Badge",
             ]}
             nonFeatures={[]}
