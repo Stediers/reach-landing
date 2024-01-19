@@ -1,11 +1,21 @@
-import Button from "@components/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+
+type NavLinkType = {
+  text: string;
+  link: string;
+};
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const menu: NavLinkType[] = [
+    { text: "Pricing", link: "/pricing" },
+    { text: "About Us", link: "/about" },
+    { text: "Contact Us", link: "/contact" },
+    { text: "Terms of Service", link: "/terms" },
+  ];
 
   return (
     <motion.div
@@ -21,8 +31,8 @@ export default function NavBar() {
         <Link className="lg:text-xl text-lg font-medium" href={"/"}>
           REACH
         </Link>
-        <p className="lg:text-xl font-medium">|</p>
-        <div className="flex items-center justify-center space-x-5">
+        <p className="lg:text-xl font-medium hidden lg:block">|</p>
+        <div className="items-center justify-center space-x-5 hidden lg:flex">
           <p className="lg:text-lg text-md font-medium">
             Empowering the gig economy
           </p>
@@ -30,12 +40,14 @@ export default function NavBar() {
       </div>
       <div className="lg:flex items-center justify-end space-x-5 w-full hidden">
         <div className="flex items-center justify-center space-x-7">
-          {/* <NavLink text="Blogs" link="#blogs" /> */}
-          <NavLink text="FAQs" link="#faqs" />
-          <NavLink text="Contact Us" link="/contact" />
-          <NavLink text="About Us" link="#about-us" />
-          <NavLink text="Pricing" link="/pricing" />
-          <NavLink text="Careers" link="/careers" />
+          {menu.map((link, i) => (
+            <NavLink
+              key={i}
+              text={link.text}
+              link={link.link}
+              className="text-md font-medium"
+            />
+          ))}
         </div>
       </div>
       <AiOutlineMenu
@@ -66,18 +78,14 @@ export default function NavBar() {
                   onClick={() => setIsOpen(false)}
                 /> */}
               <div className="flex flex-col items-center justify-center space-y-5 w-full">
-                <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="Blogs" link="#blogs" />
-                </div>
-                <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="FAQs" link="#faqs" />
-                </div>
-                <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="Contact Us" link="#contact-us" />
-                </div>
-                <div className="" onClick={() => setIsOpen(false)}>
-                  <NavLink text="About Us" link="#about-us" />
-                </div>
+                {menu.map((link, i) => (
+                  <NavLinkMobile
+                    key={i}
+                    text={link.text}
+                    link={link.link}
+                    setIsOpen={setIsOpen}
+                  />
+                ))}
               </div>
               {/* <div className="max-w-[200px] w-full">
                 {cookieExists ? (
@@ -99,6 +107,22 @@ export default function NavBar() {
         )}
       </AnimatePresence>
     </motion.div>
+  );
+}
+
+function NavLinkMobile({
+  setIsOpen,
+  text,
+  link,
+}: {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  text: string;
+  link: string;
+}) {
+  return (
+    <div className="" onClick={() => setIsOpen(false)}>
+      <NavLink text={text} link={link} />
+    </div>
   );
 }
 
