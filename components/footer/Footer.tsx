@@ -239,7 +239,7 @@ export default function Footer() {
                 <li>
                   <Link
                     className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
+                    href="/contact"
                   >
                     {" "}
                     Support{" "}
@@ -296,7 +296,7 @@ export default function Footer() {
                       />
                     </svg>
 
-                    <span className="flex-1 text-gray-700">0123456789</span>
+                    <span className="flex-1 text-gray-700">+91 7550083900</span>
                   </Link>
                 </li>
 
@@ -333,7 +333,9 @@ export default function Footer() {
         <div className="mt-12 border-t border-gray-100 pt-6">
           <div className="text-center sm:flex sm:justify-between sm:text-left">
             <p className="text-base text-gray-500">
-              <span className="block sm:inline">All rights reserved.</span>
+              <span className="block sm:inline">
+                Reach | All rights reserved.
+              </span>
               <span className="flex space-x-3 items-center justify-center sm:justify-start pt-3">
                 <Link
                   className="inline-block text-white underline transition hover:text-white/75"
@@ -351,10 +353,6 @@ export default function Footer() {
                   Privacy Policy
                 </Link>
               </span>
-            </p>
-
-            <p className="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0">
-              &copy; 2022 Company Name
             </p>
           </div>
         </div>
