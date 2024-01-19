@@ -15,7 +15,7 @@ export default function Main() {
       title="Reach"
       showFooter={true}
       state={State.SUCCESS}
-      className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5"
+      className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-3"
       showNavbar={true}
     >
       {/* <PricingSection /> */}
@@ -26,19 +26,21 @@ export default function Main() {
             title="Basic"
             commission={0}
             description="Get in touch with partners for free and have your needs met. Feel free to explore the platform."
-            features={["No booking fee", "Unlimited Partners to connect with"]}
+            features={["Unlimited Partners to connect with"]}
             nonFeatures={[
               "Lack of partner verification",
-              "No dedicated support",
+              "No dedicated support, you are on your own",
+              "Cannot avail partner discounts",
             ]}
           />
           <PricingCard
             title="Standard"
             commission={10}
-            description="Create bookings on the platform and get a dedicated support to assist you with your bookings."
+            description="The real experience of Reach. Get the best partners for your needs and have a dedicated support team to assist you."
             features={[
-              "All Basic features",
-              "Dedicated Customer Support",
+              "Access to exciting partner discounts",
+              "First 3 bookings are free",
+              "Have a support team to assist you with your bookings",
               "Know your partner's verification status",
               "Give Feedback on partner's performance",
               "Get a Standard Badge",
@@ -99,11 +101,11 @@ function PricingCard(props: PricingProps) {
             </div>
           )}
         </div>
-        <h2 className="text-sm tracking-wider title-font mb-1 font-medium">
+        <h2 className="text-sm tracking-wider title-font mb-1 font-medium h-[4rem]">
           {props.description}
         </h2>
         <div className="flex items-center justify-start space-x-2 pt-5">
-          <span className="text-[3rem] text-gray-700 font-semibold">
+          <span className="lg:text-[3rem] text-[2.5rem] text-gray-700 font-semibold">
             {props.commission}
           </span>
           <span className="block text-[2rem] font-semibold">%</span>
@@ -130,7 +132,7 @@ function PricingCard(props: PricingProps) {
           ))}
         </ul>
       </div>
-      <Button text="Claim Now" className="bg-info text-white" link="/signup" />
+      {/* <Button text="Claim Now" className="bg-info text-white" link="/signup" /> */}
     </Card>
   );
 }

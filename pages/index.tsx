@@ -157,13 +157,14 @@ export default function Main() {
       title="Reach"
       showFooter={true}
       state={State.SUCCESS}
-      className="relative flex flex-col items-center justify-center scroll-smooth"
+      className="relative flex flex-col items-center justify-center scroll-smooth lg:p-0 p-5"
       showNavbar={showNavbar}
     >
       <Index />
       <What />
       <How />
       <CustomerStories />
+      <HappyPartners />
       {/* <WhatWeBelieve cookieExists={cookieExists} /> */}
       {/* <div className="w-full flex flex-col items-center justify-center space-y-5">
         <LineHeader title="More from Reach" />
@@ -173,10 +174,88 @@ export default function Main() {
   );
 }
 
+function HappyPartners() {
+  return (
+    <HeaderWrapper
+      title="Happy Partners"
+      className="items-center justify-center w-full flex flex-col space-y-16"
+      id="happy-partners"
+    >
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+        <PartnerCard
+          name="Pooja"
+          designation="Makeup Artist"
+          quote="Hi"
+          image="/images/what-we-believe-3.webp"
+        />
+        <PartnerCard
+          name="Parthiban"
+          designation="Photographer"
+          quote="Hi"
+          image="/images/what-we-believe-1.webp"
+        />
+        <PartnerCard
+          name="Saravanan"
+          designation="Caterer"
+          quote="Hi"
+          image="/images/what-we-believe-2.webp"
+        />
+        <PartnerCard
+          name="Pooja"
+          designation="Makeup Artist"
+          quote="Hi"
+          image="/images/what-we-believe-3.webp"
+        />
+        <PartnerCard
+          name="Parthiban"
+          designation="Photographer"
+          quote="Hi"
+          image="/images/what-we-believe-1.webp"
+        />
+        <PartnerCard
+          name="Saravanan"
+          designation="Caterer"
+          quote="Hi"
+          image="/images/what-we-believe-2.webp"
+        />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function PartnerCard({
+  name,
+  designation,
+  quote,
+  image,
+}: {
+  name: string;
+  designation: string;
+  quote: string;
+  image: string;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center space-y-4">
+      <ImageComponent
+        src={image}
+        alt={name}
+        className="rounded-2xl lg:w-[18rem] lg:h-[18rem] border border-gray w-[12rem] h-[12rem]"
+        whileHover={{ scale: 1.05 }}
+      />
+      <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
+        <p className="lg:text-2xl text-lg font-medium text-center">{name}</p>
+        <p className="lg:text-md text-base text-center text-info">
+          {designation}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function CustomerStories() {
   return (
     <HeaderWrapper
-      title="Customer Stories"
+      title="Happy Customers"
       className="items-center justify-center w-full flex flex-col space-y-16"
       id="customer-stories"
     >
@@ -290,7 +369,7 @@ function What() {
         <FeatureCard
           icon={<CiTrophy className={`${iconStyle} text-yellow-500`} />}
           heading="Talent is everywhere"
-          description="Upcoming lack of opportunities for the youth is a major concern. Lets change that!"
+          description="Lack of opportunities for the youth is a major concern. Lets change that!"
         />
         <FeatureCard
           icon={<FaHandshake className={`${iconStyle} text-green-500`} />}
@@ -459,7 +538,7 @@ function Index() {
   const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
     <div
-      className="flex flex-col items-center justify-start space-y-20 w-full px-10"
+      className="flex flex-col items-center justify-start space-y-20 w-full lg:px-10"
       id="Index"
     >
       {/* <ImageComponent
@@ -522,7 +601,7 @@ function DescriptionCard({
   icon: ReactNode;
 }) {
   return (
-    <Card className="w-full max-w-[800px] flex flex-col items-center justify-between space-y-5 min-h-[28rem] bg-white shadow-md !pt-10 !pb-20">
+    <Card className="w-full max-w-[800px] flex flex-col items-center justify-between space-y-5 lg:min-h-[28rem] min-h-[10rem] bg-white shadow-md lg:!pt-10 !pt-5 lg:!pb-20 !pb-10">
       <div className="flex flex-col items-center justify-center space-y-4">
         {icon}
         <p className="lg:text-xl font-medium text-lg text-center">{title}</p>
