@@ -12,7 +12,7 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const menu: NavLinkType[] = [
     { text: "Pricing", link: "/pricing" },
-    { text: "About Us", link: "/about" },
+    { text: "About Us", link: "/about-us" },
     { text: "Contact Us", link: "/contact" },
     { text: "Terms of Service", link: "/terms-of-service" },
   ];
