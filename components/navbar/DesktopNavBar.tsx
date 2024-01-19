@@ -14,7 +14,7 @@ export default function NavBar() {
     { text: "Pricing", link: "/pricing" },
     { text: "About Us", link: "/about" },
     { text: "Contact Us", link: "/contact" },
-    { text: "Terms of Service", link: "/terms" },
+    { text: "Terms of Service", link: "/terms-of-service" },
   ];
 
   return (
@@ -73,10 +73,6 @@ export default function NavBar() {
               transition={{ duration: 0.2 }}
               exit={{ opacity: 0, y: -100 }}
             >
-              {/* <AiOutlineCloseCircle
-                  className="text-2xl"
-                  onClick={() => setIsOpen(false)}
-                /> */}
               <div className="flex flex-col items-center justify-center space-y-5 w-full">
                 {menu.map((link, i) => (
                   <NavLinkMobile
@@ -87,21 +83,6 @@ export default function NavBar() {
                   />
                 ))}
               </div>
-              {/* <div className="max-w-[200px] w-full">
-                {cookieExists ? (
-                  <Button
-                    text="Go to Console"
-                    link="/console"
-                    className="bg-primary text-white font-medium"
-                  />
-                ) : (
-                  <Button
-                    text="Sign In"
-                    link="/user/sign-in"
-                    className="bg-primary text-white font-medium"
-                  />
-                )}
-              </div> */}
             </motion.div>
           </motion.div>
         )}

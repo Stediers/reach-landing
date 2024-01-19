@@ -23,19 +23,19 @@ export default function Main() {
         id="pricing"
         className="items-center justify-center w-full flex flex-col lg:space-y-12 space-y-8 max-w-6xl"
       >
-        <p className="text-center text-lg max-w-4xl">
+        <p className="text-center lg:text-lg text-md max-w-4xl lg:leading-9">
           Choose one of the plans when creating a booking on our platform. Feel
           free to explore each plan and the benefits they offer.
         </p>
         <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
           <PricingCard
             title="Basic"
-            commission={0}
+            commission={2}
             description="Get in touch with partners for free and have your needs met. Feel free to explore the platform."
             features={[
               "Choose 2 slots per booking",
               "Low partner response rate",
-              "Basic Support",
+              "Basic Customer Support",
             ]}
             nonFeatures={[]}
           />
@@ -125,7 +125,7 @@ interface PricingProps {
 function PricingCard(props: PricingProps) {
   return (
     <Card
-      className={`!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-start relative min-h-full ${
+      className={`lg:!px-10 !px-5 lg:!py-10 !py-5 flex flex-col !space-y-5 justify-start relative min-h-full ${
         props.isPopular ? "border-success border-2" : ""
       }`}
     >
