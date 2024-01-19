@@ -1,8 +1,9 @@
 import LandingWrapper from "@wrapper/LandingWrapper";
 import { State } from "@data/enums";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import Card from "@components/Card";
 import Button from "@components/Button";
+import { motion } from "framer-motion";
 
 export default function Main() {
   useEffect(() => {
@@ -15,13 +16,15 @@ export default function Main() {
       title="Reach"
       showFooter={true}
       state={State.SUCCESS}
-      className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-3"
+      className="relative flex flex-col items-center justify-start scroll-smooth lg:p-10 p-5"
       showNavbar={true}
     >
-      {/* <PricingSection /> */}
-      <div className="flex flex-col items-center justify-center space-y-10 w-full">
-        <p className="text-3xl font-semibold text-center">Pricing</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl">
+      <HeaderWrapper
+        title="Pricing"
+        id="pricing"
+        className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-8"
+      >
+        <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
           <PricingCard
             title="Basic"
             commission={0}
@@ -64,8 +67,46 @@ export default function Main() {
             // plus="Standard"
           />
         </div>
-      </div>
+      </HeaderWrapper>
     </LandingWrapper>
+  );
+}
+
+function HeaderWrapper({
+  children,
+  title,
+  bgColor = "bg-white text-text",
+  className,
+  id,
+  showHeader = true,
+}: {
+  children: ReactNode;
+  title: string;
+  bgColor?: string;
+  className?: string;
+  id?: string;
+  showHeader?: boolean;
+}) {
+  return (
+    <motion.div
+      id={id}
+      className={`${className} w-full ${bgColor}`}
+      initial={{ opacity: 0 }}
+      transition={{ duration: 0.6 }}
+      //happen only once
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
+      {showHeader && (
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <h1 className="text-2xl lg:text-4xl font-medium text-center first-letter:capitalize">
+            {title}
+          </h1>
+          <div className="h-px w-[80%] bg-primary" />
+        </div>
+      )}
+      {children}
+    </motion.div>
   );
 }
 
@@ -81,7 +122,7 @@ interface PricingProps {
 
 function PricingCard(props: PricingProps) {
   return (
-    <Card className="!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-between relative">
+    <Card className="!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-start relative min-h-full">
       {props.isPopular ? (
         <span className="bg-success text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl font-medium">
           MOST POPULAR
