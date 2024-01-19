@@ -25,6 +25,7 @@ import {
 } from "@helper_functions/local-storage";
 import Button from "@components/Button";
 import { showSnackBar } from "@components/notifications/Snackbar";
+import SelectInput from "@components/input/SelectInput";
 
 const faqs = [
   {
@@ -58,62 +59,12 @@ export default function Main() {
   return (
     <LandingWrapper
       title="Reach"
-      showNavbar={false}
       showFooter={true}
       state={State.SUCCESS}
-      className="relative flex flex-col items-center justify-center scroll-smooth"
+      className="relative flex flex-col items-center justify-center scroll-smooth px-10"
     >
       <Index />
-      <FAQ />
     </LandingWrapper>
-  );
-}
-
-function WordPopUp({
-  words,
-  delay,
-}: {
-  words: string;
-  delay: number;
-  className?: string;
-}) {
-  const wordsArray = words.split(" ");
-  const typeVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-  return (
-    <motion.div
-      variants={typeVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      animate="animate"
-      className="flex items-center justify-center space-x-1 text-2xl font-medium"
-    >
-      {wordsArray.map((word, index) => (
-        <motion.span
-          key={index}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: {
-                delay: index * 0.2,
-              },
-            },
-          }}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </motion.div>
   );
 }
 
@@ -122,6 +73,7 @@ function Index() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
+  const [type, setType] = useState("");
   const [buttonState, setButtonState] = useState(State.SUCCESS);
 
   const words = "US";
@@ -152,81 +104,94 @@ function Index() {
 
   return (
     <div
-      className="flex items-start justify-center space-y-10 w-full min-h-screen-fix relative"
+      className="flex items-start justify-start w-full min-h-screen-fix relative"
       id="Index"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full justify-items-center gap-y-5 lg:gap-y-0">
-        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-3 pt-10 lg:pt-0">
-          <Logo
-            wings="lg:w-[18rem] w-[12rem]"
-            textStyle="font-medium lg:text-4xl text-2xl"
-          />
-          <WordPopUp words={words} delay={0.2} />
-        </div>
-        <div className="flex flex-col w-full space-y-5 md:space-y-10 p-5 md:p-20">
-          <div className="flex flex-row space-x-3">
-            <TextInput
-              type="text"
-              placeholder="John Doe"
-              title="Name"
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full justify-items-center gap-y-5 lg:gap-y-0 relative">
+        <HeaderWrapper
+          title="Contact Us"
+          className="items-start justify-start w-full flex flex-col space-y-8"
+        >
+          <div className="flex flex-col w-full space-y-5">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-5 gap-x-5 w-full">
+              <TextInput
+                type="text"
+                placeholder="John Doe"
+                title="Name"
+                onChange={(value) => {
+                  setName(value);
+                }}
+                value={name}
+                errorText={""}
+                maxLength={15}
+                mandatory={true}
+              />
+              <TextInput
+                type="text"
+                placeholder="9876543210"
+                title="Phone"
+                onChange={(value) => {
+                  setPhone(value);
+                }}
+                value={phone}
+                errorText={""}
+                maxLength={10}
+              />
+              <TextInput
+                type="text"
+                placeholder="john.doe@gmail.com"
+                title="Email"
+                onChange={(value) => {
+                  setEmail(value);
+                }}
+                value={email}
+                errorText={""}
+                maxLength={30}
+              />
+            </div>
+            <TextArea
+              value={question}
               onChange={(value) => {
-                setName(value);
+                setQuestion(value);
               }}
-              value={name}
-              errorText={""}
-              maxLength={15}
+              title="Message"
+              placeholder="I want to know more about ..."
             />
-            <TextInput
-              type="text"
-              placeholder="9876543210"
-              title="Phone"
-              onChange={(value) => {
-                setPhone(value);
+            <Button
+              text="Submit"
+              buttonState={buttonState}
+              className=" w-full bg-primary text-white max-w-xs sm:max-w-sm self-center"
+              onClick={() => {
+                setButtonState(State.LOADING);
+                validateForm()
+                  ? showSnackBar({
+                      message: "Your query has been submitted successfully",
+                      state: State.SUCCESS,
+                    })
+                  : null;
+                setButtonState(State.SUCCESS);
               }}
-              value={phone}
-              errorText={""}
-              maxLength={10}
             />
           </div>
-          <TextInput
-            type="text"
-            placeholder="john.doe@gmail.com"
-            title="Email"
-            onChange={(value) => {
-              setEmail(value);
-            }}
-            value={email}
-            errorText={""}
-            maxLength={30}
-          />
-          <TextArea
-            value={question}
-            onChange={(value) => {
-              setQuestion(value);
-            }}
-            title="Message"
-            placeholder="I want to know more about ..."
-          />
-          <p className="block p-2 text-center md:text-left text-md md:text-lg/8">
-            Please let us know what your query is about and we will get back to
-            you as soon as possible.
-          </p>
-          <Button
-            text="Submit"
-            buttonState={buttonState}
-            className=" w-full bg-primary text-white max-w-xs sm:max-w-sm self-center"
-            onClick={() => {
-              setButtonState(State.LOADING);
-              validateForm()
-                ? showSnackBar({
-                    message: "Your query has been submitted successfully",
-                    state: State.SUCCESS,
-                  })
-                : null;
-              setButtonState(State.SUCCESS);
-            }}
-          />
-        </div>
+        </HeaderWrapper>
+        <HeaderWrapper
+          title="FAQ's"
+          className="items-start justify-center w-full flex flex-col space-y-8 sticky top-0"
+        >
+          <div className="flex flex-col items-center justify-center space-y-5 lg:space-y-10">
+            {faqs.map((faq, index) => (
+              <div
+                className={`w-full rounded-lg flex flex-col space-y-1 max-w-[800px]`}
+                key={index}
+              >
+                <div className="flex items-start justify-between text-base transition duration-75 w-full space-x-3">
+                  <span className="font-medium text-lg">{faq.question}</span>
+                </div>
+                <p className="text-md/8">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </HeaderWrapper>
       </div>
       {/* add contact form  */}
     </div>
@@ -433,14 +398,12 @@ function HeaderWrapper({
   bgColor = "bg-white text-text",
   className,
   id,
-  showHeader = true,
 }: {
   children: ReactNode;
   title: string;
   bgColor?: string;
   className?: string;
   id?: string;
-  showHeader?: boolean;
 }) {
   return (
     <motion.div
@@ -452,14 +415,12 @@ function HeaderWrapper({
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
     >
-      {showHeader && (
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <h1 className="text-2xl lg:text-4xl font-medium text-center first-letter:capitalize">
-            {title}
-          </h1>
-          <div className="h-px w-[80%] bg-primary" />
-        </div>
-      )}
+      <div className="flex flex-col items-start justify-center space-y-2">
+        <h1 className="text-2xl lg:text-4xl font-medium text-center first-letter:capitalize">
+          {title}
+        </h1>
+        <div className="h-px w-[80%] bg-primary" />
+      </div>
       {children}
     </motion.div>
   );
