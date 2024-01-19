@@ -2,7 +2,6 @@ import LandingWrapper from "@wrapper/LandingWrapper";
 import { State } from "@data/enums";
 import { ReactNode, useEffect } from "react";
 import Card from "@components/Card";
-import Button from "@components/Button";
 import { motion } from "framer-motion";
 
 export default function Main() {
@@ -22,7 +21,7 @@ export default function Main() {
       <HeaderWrapper
         title="Pricing"
         id="pricing"
-        className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-8"
+        className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-8 max-w-6xl"
       >
         <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
           <PricingCard
@@ -122,9 +121,13 @@ interface PricingProps {
 
 function PricingCard(props: PricingProps) {
   return (
-    <Card className="!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-start relative min-h-full">
+    <Card
+      className={`!px-10 !pt-10 !pb-10 flex flex-col !space-y-5 justify-start relative min-h-full ${
+        props.isPopular ? "border-success border-2" : ""
+      }`}
+    >
       {props.isPopular ? (
-        <span className="bg-success text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl font-medium">
+        <span className="bg-success text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl font-medium shadow-lg">
           MOST POPULAR
         </span>
       ) : (
