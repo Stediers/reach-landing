@@ -7,7 +7,13 @@ export default function Footer() {
   return (
     <footer className="bg-text text-white">
       <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-12 flex flex-col justify-start items-center space-y-20">
-        <Logo wings="w-[12rem]" textStyle="text-2xl" />
+        <div className="space-y-3 max-w-lg text-center">
+          <Logo wings="w-[12rem]" textStyle="text-2xl" />
+          <p className="text-gray leading-7">
+            {`NO.514/8, Pethampalayam Road Mekkur, Perundurai, Erode, Erode-
+            638052, Tamil Nadu`}
+          </p>
+        </div>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <p className="text-lg font-semibold w-full text-center lg:text-left">
@@ -178,39 +184,39 @@ export default function Footer() {
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-gray-900">Our Services</p>
+              <p className="text-lg font-medium text-gray-900">Legal</p>
 
               <ul className="mt-8 space-y-4 text-base">
                 <li>
                   <Link
                     className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
+                    href="/terms-of-service"
                   >
-                    Web Development
+                    Terms of Service
                   </Link>
                 </li>
 
                 <li>
                   <Link
                     className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
+                    href="/privacy-policy"
                   >
                     {" "}
-                    Web Design{" "}
+                    Privacy Policy{" "}
                   </Link>
                 </li>
 
                 <li>
                   <Link
                     className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
+                    href="/refund-policy"
                   >
                     {" "}
-                    Marketing{" "}
+                    Cancellation and Refund Policy{" "}
                   </Link>
                 </li>
 
-                <li>
+                {/* <li>
                   <Link
                     className="text-gray-700 transition hover:text-gray-700/75"
                     href="/"
@@ -218,7 +224,7 @@ export default function Footer() {
                     {" "}
                     Google Ads{" "}
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -248,14 +254,14 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div className="text-center sm:text-left">
+            <div className="text-center sm:text-left break-all">
               <p className="text-lg font-medium text-gray-900">Contact Us</p>
 
               <ul className="mt-8 space-y-4 text-base">
                 <li>
                   <Link
                     className="flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
-                    href="/"
+                    href="mailto:reachgig.connect@gmail.com"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -272,7 +278,9 @@ export default function Footer() {
                       />
                     </svg>
 
-                    <span className="flex-1 text-gray-700">john@doe.com</span>
+                    <span className="flex-1 text-gray-700">
+                      reachgig.connect@gmail.com
+                    </span>
                   </Link>
                 </li>
 
@@ -330,13 +338,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-gray-100 pt-6">
-          <div className="text-center sm:flex sm:justify-between sm:text-left">
+        <div className="mt-12  pt-6">
+          <div className="text-center sm:flex sm:justify-between ">
             <p className="text-base text-gray-500">
               <span className="block sm:inline">
-                Reach | All rights reserved.
+                © 2023 Reachgig Corp Pvt. Ltd.
               </span>
-              <span className="flex space-x-3 items-center justify-center sm:justify-start pt-3">
+              {/* <span className="flex space-x-3 items-center justify-center sm:justify-start pt-3">
                 <Link
                   className="inline-block text-white underline transition hover:text-white/75"
                   href="/"
@@ -352,7 +360,7 @@ export default function Footer() {
                 >
                   Privacy Policy
                 </Link>
-              </span>
+              </span> */}
             </p>
           </div>
         </div>

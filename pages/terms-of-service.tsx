@@ -603,7 +603,9 @@ export default function Main() {
             <span className={textHighlight}>6. POLICY</span>
           </div>
           <div data-custom-class="body_text">
-            All sales are final and no refund will be issued.
+            Please refer to the Cancellation and Refund Policy for cancellation
+            and refunds terms in relation to usage of the Platform for availing
+            Services.
           </div>
           <div data-custom-class="body_text">
             We use Google Maps API for locating and verifying addresses. By

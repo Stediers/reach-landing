@@ -27,7 +27,9 @@ export default function RefundPolicy() {
       <div className={body}>
         <div className={section}>
           <div className={title}>
-            <span className={textHighlight}>REFUND POLICY</span>
+            <span className={textHighlight}>
+              CANCELLATION AND REFUND POLICY
+            </span>
           </div>
           <div className={subtitle}>
             <span className={textHighlight}>Last updated</span>{" "}
@@ -87,7 +89,7 @@ export default function RefundPolicy() {
           </div>
           <div>
             <a href="#cancellation-eligibility" className={link2}>
-              2. CANCELLATION ELIGIBILITY
+              2. CANCELLATION AND REFUND ELIGIBILITY
             </a>
           </div>
           <div>
@@ -149,11 +151,17 @@ export default function RefundPolicy() {
         </div>
         <div className={section} id="cancellation-eligibility">
           <div className={heading1}>
-            <span className={textHighlight}>2. CANCELLATION ELIGIBILITY</span>
+            <span className={textHighlight}>
+              2. CANCELLATION AND REFUND ELIGIBILITY
+            </span>
           </div>
           <p>
             Customers are free to cancel until the booking is confirmed. After
-            confirmation:
+            confirmation, refunds are given only if the service provider fails
+            to follow through with the appointment
+            {` (This is done to ensure that service providers are not
+                    inconvenienced by cancellations)`}
+            . The refund amount is as:
           </p>
           <ul className={list}>
             <li>
@@ -186,7 +194,7 @@ export default function RefundPolicy() {
             </span>
           </div>
           <p>
-            {` Customers can cancel bookings directly from the bookings page. For
+            {`Before booking confirmation, customers can cancel bookings directly from the bookings page. For
             issues after confirmation, users can press the "Help" button in the
             bookings page or contact us at`}{" "}
             <a className={link} href="mailto:reachgig.connect@gmail.com">
@@ -200,9 +208,9 @@ export default function RefundPolicy() {
             <span className={textHighlight}>4. CANCELLATION LIMITATIONS</span>
           </div>
           <p>
-            After confirmation, if the user wants to cancel the booking they
-            will get only {"60%"} of booking fee in case of basic, {"80%"} of
-            booking fee in case of standard and 100% in case of pro.
+            After booking confirmation, Refunds are given only if the service
+            provider fails to follow through with the appointment. Otherwise,
+            the booking fee is non-refundable.
           </p>
         </div>
         <div className={section} id="refund-processing-time">
@@ -230,22 +238,10 @@ export default function RefundPolicy() {
             <span className={textHighlight}>7. FREE CANCELLATIONS</span>
           </div>
           <p>
-            All cancellations before booking confirmation are free. After
-            confirmation:
+            {`All cancellations before booking confirmation are free. After
+            confirmation, customers can cancel bookings via the "Help" button in
+            the bookings page but will not be eligible for a refund.`}
           </p>
-          <ul className={list}>
-            <li>
-              <span className={textHighlight}>Basic:</span> 3/5 or 60% of the
-              booking fee
-            </li>
-            <li>
-              <span className={textHighlight}>Standard:</span> 4/5 or 80% of the
-              booking fee
-            </li>
-            <li>
-              <span className={textHighlight}>Pro:</span> 100% refund
-            </li>
-          </ul>
         </div>
         <div className={section} id="customer-support">
           <div className={heading1}>
