@@ -73,7 +73,7 @@ export default function RefundPolicy() {
           </div>
           <div data-custom-class="body_text">
             You can contact us by phone at &#43;917550083900&#44; or email at
-            connect@reachgig.com.
+            reachgig.connect@gmail.com.
           </div>
         </div>
         <div className={section}>
@@ -189,8 +189,8 @@ export default function RefundPolicy() {
             {` Customers can cancel bookings directly from the bookings page. For
             issues after confirmation, users can press the "Help" button in the
             bookings page or contact us at`}{" "}
-            <a className={link} href="mailto:connect@reachgig.com">
-              connect@reachgig.com
+            <a className={link} href="mailto:reachgig.connect@gmail.com">
+              reachgig.connect@gmail.com
             </a>
             .
           </p>
@@ -253,8 +253,8 @@ export default function RefundPolicy() {
           </div>
           <p>
             Customers can contact us at{" "}
-            <a className={link} href="mailto:connect@reachgig.com">
-              connect@reachgig.com
+            <a className={link} href="mailto:reachgig.connect@gmail.com">
+              reachgig.connect@gmail.com
             </a>{" "}
             for assistance.
           </p>

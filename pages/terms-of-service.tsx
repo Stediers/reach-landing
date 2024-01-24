@@ -84,7 +84,7 @@ export default function Main() {
           </div>
           <div data-custom-class="body_text">
             You can contact us by phone at &#43;917550083900&#44; or email at
-            connect@reachgig.com.
+            reachgig.connect@gmail.com.
           </div>
           <div data-custom-class="body_text">
             These Legal Terms constitute a legally binding agreement made
@@ -340,7 +340,7 @@ export default function Main() {
               If you wish to make any use of the Services&#44; Content&#44; or
               Marks other than as set out in this section or elsewhere in our
               Legal Terms&#44; please address your request to&#58;
-              connect@reachgig.com. If we ever grant you the permission to
+              reachgig.connect@gmail.com. If we ever grant you the permission to
               post&#44; reproduce&#44; or publicly display any part of our
               Services or Content&#44; you must identify us as the owners or
               licensors of the Services&#44; Content&#44; or Marks and ensure
@@ -1603,7 +1603,7 @@ export default function Main() {
           <div data-custom-class="body_text">
             <span className={textHighlight}>
               {" "}
-              Email&#58; &nbsp;connect@reachgig.com{" "}
+              Email&#58; &nbsp;reachgig.connect@gmail.com{" "}
             </span>
           </div>
         </div>
