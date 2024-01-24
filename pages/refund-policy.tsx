@@ -174,9 +174,7 @@ export default function RefundPolicy() {
               booking fee
             </li>
             <li>
-              <span className={textHighlight}>Pro:</span>{" "}
-              {`100% refund (or if the
-                service provider doesn't follow through with the appointment)`}
+              <span className={textHighlight}>Pro:</span> {`100% refund`}
             </li>
             <li>
               <span className={textHighlight}>
