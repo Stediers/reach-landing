@@ -30,7 +30,7 @@ export default function Main() {
         <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
           <PricingCard
             title="Basic"
-            commission={2}
+            commission={5}
             description="Get in touch with partners for free and have your needs met. Feel free to explore the platform."
             features={[
               "Choose 2 slots per booking",
