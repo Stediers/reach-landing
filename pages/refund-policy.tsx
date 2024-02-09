@@ -1,5 +1,6 @@
 import { State } from "@data/enums";
 import LandingWrapper from "@wrapper/LandingWrapper";
+import Link from "next/link";
 import React from "react";
 
 export default function RefundPolicy() {
@@ -50,18 +51,18 @@ export default function RefundPolicy() {
         <div className={section}>
           <div data-custom-class="body_text">
             We operate the website&nbsp;
-            <a
+            <Link
               rel="noreferrer"
               href="http://www.reachgig.com"
               target="_blank"
               className={link}
             >
               http&#58;//www.reachgig.com
-            </a>
+            </Link>
             &nbsp; &#40;the &#39;<span className={textHighlight}>Site</span>
             &#39;&#41;&#44; the mobile application Reachgig &#40;the &#39;
             <span className={textHighlight}>App</span>&#39;&#41;&#44; as well as
-            any other related products and services that refer or link to these
+            any other related products and services that refer or a to these
             legal terms &#40;the &#39;
             <span className={textHighlight}>Legal Terms</span>&#39;&#41;
             &#40;collectively&#44; the &#39;
@@ -83,49 +84,49 @@ export default function RefundPolicy() {
             <span className={textHighlight}>TABLE OF CONTENTS</span>
           </div>
           <div>
-            <a href="#pricing-types" className={link2}>
+            <Link href="#pricing-types" className={link2}>
               1. PRICING TYPES
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#cancellation-eligibility" className={link2}>
+            <Link href="#cancellation-eligibility" className={link2}>
               2. CANCELLATION AND REFUND ELIGIBILITY
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#cancellation-request-process" className={link2}>
+            <Link href="#cancellation-request-process" className={link2}>
               3. CANCELLATION REQUEST PROCESS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#cancellation-limitations" className={link2}>
+            <Link href="#cancellation-limitations" className={link2}>
               4. CANCELLATION LIMITATIONS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#refund-processing-time" className={link2}>
+            <Link href="#refund-processing-time" className={link2}>
               5. REFUND PROCESSING TIME
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#malicious-requests" className={link2}>
+            <Link href="#malicious-requests" className={link2}>
               6. MALICIOUS REQUESTS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#free-cancellations" className={link2}>
+            <Link href="#free-cancellations" className={link2}>
               7. FREE CANCELLATIONS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#customer-support" className={link2}>
+            <Link href="#customer-support" className={link2}>
               8. CUSTOMER SUPPORT
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#faqs" className={link2}>
+            <Link href="#faqs" className={link2}>
               9. FAQs
-            </a>
+            </Link>
           </div>
         </div>
         {/* generate shells for each section with respective ids */}
@@ -195,9 +196,9 @@ export default function RefundPolicy() {
             {`Before booking confirmation, customers can cancel bookings directly from the bookings page. For
             issues after confirmation, users can press the "Help" button in the
             bookings page or contact us at`}{" "}
-            <a className={link} href="mailto:reachgig.connect@gmail.com">
+            <Link className={link} href="mailto:reachgig.connect@gmail.com">
               reachgig.connect@gmail.com
-            </a>
+            </Link>
             .
           </p>
         </div>
@@ -238,7 +239,7 @@ export default function RefundPolicy() {
           <p>
             {`All cancellations before booking confirmation are free. After
             confirmation, customers can cancel bookings via the "Help" button in
-            the bookings page but will not be eligible for a refund.`}
+            the bookings page but will not be eligible for Link refund.`}
           </p>
         </div>
         <div className={section} id="customer-support">
@@ -247,9 +248,9 @@ export default function RefundPolicy() {
           </div>
           <p>
             Customers can contact us at{" "}
-            <a className={link} href="mailto:reachgig.connect@gmail.com">
+            <Link className={link} href="mailto:reachgig.connect@gmail.com">
               reachgig.connect@gmail.com
-            </a>{" "}
+            </Link>{" "}
             for assistance.
           </p>
         </div>
@@ -260,13 +261,13 @@ export default function RefundPolicy() {
 
           <p>
             Users can refer to the FAQs on our website at{" "}
-            <a
+            <Link
               className={link}
               href="https://reachgig.com/faqs"
               target="_blank"
             >
               reachgig.com/faqs
-            </a>{" "}
+            </Link>{" "}
             for additional information.
           </p>
         </div>

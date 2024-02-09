@@ -59,14 +59,14 @@ export default function Main() {
         <div className={section}>
           <div data-custom-class="body_text">
             We operate the website&nbsp;
-            <a
+            <Link
               rel="noreferrer"
               href="http://www.reachgig.com"
               target="_blank"
               className={link}
             >
               http&#58;//www.reachgig.com
-            </a>
+            </Link>
             &nbsp; &#40;the &#39;<span className={textHighlight}>Site</span>
             &#39;&#41;&#44; the mobile application Reach &#40;the &#39;
             <span className={textHighlight}>App</span>&#39;&#41;&#44; as well as
@@ -118,145 +118,145 @@ export default function Main() {
             <span className={textHighlight}>TABLE OF CONTENTS</span>
           </div>
           <div>
-            <a href="#services" className={link2}>
+            <Link href="#services" className={link2}>
               1. OUR SERVICES
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#ip" className={link2}>
+            <Link href="#ip" className={link2}>
               2. INTELLECTUAL PROPERTY RIGHTS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#userreps" className={link2}>
+            <Link href="#userreps" className={link2}>
               3. USER REPRESENTATIONS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#userreg" className={link2}>
+            <Link href="#userreg" className={link2}>
               4. USER REGISTRATION
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#purchases" className={link2}>
+            <Link href="#purchases" className={link2}>
               5. PURCHASES AND PAYMENT
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#returnno" className={link2}>
+            <Link href="#returnno" className={link2}>
               6. POLICY
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#prohibited" className={link2}>
+            <Link href="#prohibited" className={link2}>
               7. PROHIBITED ACTIVITIES
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#ugc" className={link2}>
+            <Link href="#ugc" className={link2}>
               8. USER GENERATED CONTRIBUTIONS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#license" className={link2}>
+            <Link href="#license" className={link2}>
               9. CONTRIBUTION LICENCE&nbsp;
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#reviews" className={link2}>
+            <Link href="#reviews" className={link2}>
               10. GUIDELINES FOR REVIEWS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#mobile" className={link2}>
+            <Link href="#mobile" className={link2}>
               11. MOBILE APPLICATION LICENCE
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#socialmedia" className={link2}>
+            <Link href="#socialmedia" className={link2}>
               12. SOCIAL MEDIA
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#thirdparty" className={link2}>
+            <Link href="#thirdparty" className={link2}>
               13. THIRD-PARTY WEBSITES AND CONTENT
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#sitemanage" className={link2}>
+            <Link href="#sitemanage" className={link2}>
               14. SERVICES MANAGEMENT
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#ppno" className={link2}>
+            <Link href="#ppno" className={link2}>
               15. PRIVACY POLICY
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#copyrightno" className={link2}>
+            <Link href="#copyrightno" className={link2}>
               16. COPYRIGHT INFRINGEMENTS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#terms" className={link2}>
+            <Link href="#terms" className={link2}>
               17. TERM AND TERMINATION
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#modifications" className={link2}>
+            <Link href="#modifications" className={link2}>
               18. MODIFICATIONS AND INTERRUPTIONS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#law" className={link2}>
+            <Link href="#law" className={link2}>
               19. GOVERNING LAW
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#disputes" className={link2}>
+            <Link href="#disputes" className={link2}>
               20. DISPUTE RESOLUTION
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#corrections" className={link2}>
+            <Link href="#corrections" className={link2}>
               21. CORRECTIONS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#disclaimer" className={link2}>
+            <Link href="#disclaimer" className={link2}>
               22. DISCLAIMER
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#liability" className={link2}>
+            <Link href="#liability" className={link2}>
               23. LIMITATIONS OF LIABILITY
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#indemnification" className={link2}>
+            <Link href="#indemnification" className={link2}>
               24. INDEMNIFICATION
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#userdata" className={link2}>
+            <Link href="#userdata" className={link2}>
               25. USER DATA
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#electronic" className={link2}>
+            <Link href="#electronic" className={link2}>
               26. ELECTRONIC COMMUNICATIONS&#44; TRANSACTIONS&#44; AND
               SIGNATURES
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#misc" className={link2}>
+            <Link href="#misc" className={link2}>
               27. MISCELLANEOUS
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="#contact" className={link2}>
+            <Link href="#contact" className={link2}>
               28. CONTACT US
-            </a>
+            </Link>
           </div>
         </div>
         <div id="services" className={section}>
@@ -311,9 +311,9 @@ export default function Main() {
             <div data-custom-class="body_text">
               Subject to your compliance with these Legal Terms&#44; including
               the &#39;
-              <a href="#prohibited" className={link}>
+              <Link href="#prohibited" className={link}>
                 PROHIBITED ACTIVITIES
-              </a>
+              </Link>
               &#39; section below&#44; we grant you a non-exclusive&#44;
               non-transferable&#44; revocable licence to&#58;
             </div>
@@ -354,8 +354,8 @@ export default function Main() {
               Services&#44; Content&#44; and Marks.
             </div>
             <div data-custom-class="body_text">
-              Any breach of these Intellectual Property Rights will constitute a
-              material breach of our Legal Terms and your right to use our
+              Any breach of these Intellectual Property Rights will constitute
+              Link material breach of our Legal Terms and your right to use our
               Services will terminate immediately.
             </div>
             <div className={heading2}>
@@ -365,12 +365,12 @@ export default function Main() {
             </div>
             <div data-custom-class="body_text">
               Please review this section and the &#39;
-              <a href="#prohibited" className={link}>
+              <Link href="#prohibited" className={link}>
                 PROHIBITED ACTIVITIES
-              </a>
+              </Link>
               &#39; section carefully prior to using our Services to understand
-              the &#40;a&#41; rights you give us and &#40;b&#41; obligations you
-              have when you post or upload any content through the Services.
+              the &#40;Link&#41; rights you give us and &#40;b&#41; obligations
+              you have when you post or upload any content through the Services.
             </div>
             <div data-custom-class="body_text">
               <span className={textHighlight}>Submissions&#58;</span> By
@@ -395,7 +395,7 @@ export default function Main() {
               graphics&#44; comments&#44; reviews&#44; rating suggestions&#44;
               personal information&#44; or other material
               &#40;&#39;Contributions&#39;&#41;. Any Submission that is publicly
-              posted shall also be treated as a Contribution.
+              posted shall also be treated as Link Contribution.
             </div>
             <div data-custom-class="body_text">
               You understand that Contributions may be viewable by other users
@@ -403,7 +403,7 @@ export default function Main() {
             </div>
             <div data-custom-class="body_text">
               <span className={textHighlight}>
-                When you post Contributions&#44; you grant us a licence
+                When you post Contributions&#44; you grant us Link licence
                 &#40;including use of your name&#44; trademarks&#44; and
                 logos&#41;&#58;&nbsp;
               </span>
@@ -442,9 +442,9 @@ export default function Main() {
             <ul>
               <li data-custom-class="body_text">
                 confirm that you have read and agree with our &#39;
-                <a href="#prohibited" className={link}>
+                <Link href="#prohibited" className={link}>
                   PROHIBITED ACTIVITIES
-                </a>
+                </Link>
                 &#39; and will not post&#44; send&#44; publish&#44; upload&#44;
                 or transmit through the Services any Submission nor post any
                 Contribution that is illegal&#44; harassing&#44; hateful&#44;
@@ -473,8 +473,9 @@ export default function Main() {
               You are solely responsible for your Submissions and/or
               Contributions and you expressly agree to reimburse us for any and
               all losses that we may suffer because of your breach of
-              &#40;a&#41; this section&#44; &#40;b&#41; any third party&rsquo;s
-              intellectual property rights&#44; or &#40;c&#41; applicable law.
+              &#40;Link&#41; this section&#44; &#40;b&#41; any third
+              party&rsquo;s intellectual property rights&#44; or &#40;c&#41;
+              applicable law.
             </div>
             <div data-custom-class="body_text">
               <span className={textHighlight}>
@@ -495,9 +496,9 @@ export default function Main() {
               believe that any material available on or through the Services
               infringes upon any copyright you own or control&#44; please
               immediately refer to the &#39;
-              <a href="#copyrightno" className={link}>
+              <Link href="#copyrightno" className={link}>
                 COPYRIGHT INFRINGEMENTS&nbsp;
-              </a>
+              </Link>
               &#39; section below.
             </div>
           </div>
@@ -610,14 +611,14 @@ export default function Main() {
           <div data-custom-class="body_text">
             We use Google Maps API for locating and verifying addresses. By
             using our platform you are also bound by Google&#39;s{" "}
-            <a
+            <Link
               rel="noopener noreferrer"
               target="_blank"
               className={link}
               href="https://policies.google.com/terms?hl=en-US"
             >
               Terms of Service.
-            </a>
+            </Link>
           </div>
         </div>
         <div id="prohibited" className={section}>
@@ -870,9 +871,9 @@ export default function Main() {
               preference&#44; or physical handicap.
             </li>
             <li data-custom-class="body_text">
-              Your Contributions do not otherwise violate&#44; or link to
-              material that violates&#44; any provision of these Legal
-              Terms&#44; or any applicable law or regulation.
+              Your Contributions do not otherwise violate&#44; or a to material
+              that violates&#44; any provision of these Legal Terms&#44; or any
+              applicable law or regulation.
             </li>
           </ul>
           <div data-custom-class="body_text">
@@ -1074,9 +1075,9 @@ export default function Main() {
           <div>
             <br />
             <div data-custom-class="body_text">
-              As part of the functionality of the Services&#44; you may link
-              your account with online accounts you have with third-party
-              service providers &#40;each such account&#44; a &#39;Third-Party
+              As part of the functionality of the Services&#44; you may a your
+              account with online accounts you have with third-party service
+              providers &#40;each such account&#44; a &#39;Third-Party
               Account&#39;&#41; by either&#58; &#40;1&#41; providing your
               Third-Party Account login information through the Services; or
               &#40;2&#41; allowing us to access your Third-Party Account&#44; as
@@ -1097,22 +1098,22 @@ export default function Main() {
               Services via your account&#44; including without limitation any
               friend lists and &#40;2&#41; we may submit to and receive from
               your Third-Party Account additional information to the extent you
-              are notified when you link your account with the Third-Party
-              Account. Depending on the Third-Party Accounts you choose and
-              subject to the privacy settings that you have set in such
-              Third-Party Accounts&#44; personally identifiable information that
-              you post to your Third-Party Accounts may be available on and
-              through your account on the Services. Please note that if a
-              Third-Party Account or associated service becomes unavailable or
-              our access to such Third-Party Account is terminated by the
-              third-party service provider&#44; then Social Network Content may
-              no longer be available on and through the Services. You will have
-              the ability to disable the connection between your account on the
-              Services and your Third-Party Accounts at any time. PLEASE NOTE
-              THAT YOUR RELATIONSHIP WITH THE THIRD-PARTY SERVICE PROVIDERS
-              ASSOCIATED WITH YOUR THIRD-PARTY ACCOUNTS IS GOVERNED SOLELY BY
-              YOUR AGREEMENT&#40;S&#41; WITH SUCH THIRD-PARTY SERVICE PROVIDERS.
-              We make no effort to review any Social Network Content for any
+              are notified when you a your account with the Third-Party Account.
+              Depending on the Third-Party Accounts you choose and subject to
+              the privacy settings that you have set in such Third-Party
+              Accounts&#44; personally identifiable information that you post to
+              your Third-Party Accounts may be available on and through your
+              account on the Services. Please note that if a Third-Party Account
+              or associated service becomes unavailable or our access to such
+              Third-Party Account is terminated by the third-party service
+              provider&#44; then Social Network Content may no longer be
+              available on and through the Services. You will have the ability
+              to disable the connection between your account on the Services and
+              your Third-Party Accounts at any time. PLEASE NOTE THAT YOUR
+              RELATIONSHIP WITH THE THIRD-PARTY SERVICE PROVIDERS ASSOCIATED
+              WITH YOUR THIRD-PARTY ACCOUNTS IS GOVERNED SOLELY BY YOUR
+              AGREEMENT&#40;S&#41; WITH SUCH THIRD-PARTY SERVICE PROVIDERS. We
+              make no effort to review any Social Network Content for any
               purpose&#44; including but not limited to&#44; for accuracy&#44;
               legality&#44; or non-infringement&#44; and we are not responsible
               for any Social Network Content. You acknowledge and agree that we
@@ -1233,7 +1234,7 @@ export default function Main() {
             believe that any material available on or through the Services
             infringes upon any copyright you own or control&#44; please
             immediately notify us using the contact information provided below
-            &#40;a &#39;Notification&#39;&#41;. A copy of your Notification will
+            &#40;a &#39;Notification&#39;&#41;. a copy of your Notification will
             be sent to the person who posted or stored the material addressed in
             the Notification. Please be advised that pursuant to applicable law
             you may be held liable for damages if you make material
@@ -1425,7 +1426,7 @@ export default function Main() {
             WARRANTIES&#44; EXPRESS OR IMPLIED&#44; IN CONNECTION WITH THE
             SERVICES AND YOUR USE THEREOF&#44; INCLUDING&#44; WITHOUT
             LIMITATION&#44; THE IMPLIED WARRANTIES OF MERCHANTABILITY&#44;
-            FITNESS FOR A PARTICULAR PURPOSE&#44; AND NON-INFRINGEMENT. WE MAKE
+            FITNESS FOR a PARTICULAR PURPOSE&#44; AND NON-INFRINGEMENT. WE MAKE
             NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS
             OF THE SERVICES&#39; CONTENT OR THE CONTENT OF ANY WEBSITES OR
             MOBILE APPLICATIONS LINKED TO THE SERVICES AND WE WILL ASSUME NO
@@ -1441,16 +1442,16 @@ export default function Main() {
             HORSES&#44; OR THE LIKE WHICH MAY BE TRANSMITTED TO OR THROUGH THE
             SERVICES BY ANY THIRD PARTY&#44; AND/OR &#40;6&#41; ANY ERRORS OR
             OMISSIONS IN ANY CONTENT AND MATERIALS OR FOR ANY LOSS OR DAMAGE OF
-            ANY KIND INCURRED AS A RESULT OF THE USE OF ANY CONTENT POSTED&#44;
+            ANY KIND INCURRED AS a RESULT OF THE USE OF ANY CONTENT POSTED&#44;
             TRANSMITTED&#44; OR OTHERWISE MADE AVAILABLE VIA THE SERVICES. WE DO
             NOT WARRANT&#44; ENDORSE&#44; GUARANTEE&#44; OR ASSUME
-            RESPONSIBILITY FOR ANY PRODUCT OR SERVICE ADVERTISED OR OFFERED BY A
+            RESPONSIBILITY FOR ANY PRODUCT OR SERVICE ADVERTISED OR OFFERED BY a
             THIRD PARTY THROUGH THE SERVICES&#44; ANY HYPERLINKED WEBSITE&#44;
             OR ANY WEBSITE OR MOBILE APPLICATION FEATURED IN ANY BANNER OR OTHER
-            ADVERTISING&#44; AND WE WILL NOT BE A PARTY TO OR IN ANY WAY BE
+            ADVERTISING&#44; AND WE WILL NOT BE a PARTY TO OR IN ANY WAY BE
             RESPONSIBLE FOR MONITORING ANY TRANSACTION BETWEEN YOU AND ANY
             THIRD-PARTY PROVIDERS OF PRODUCTS OR SERVICES. AS WITH THE PURCHASE
-            OF A PRODUCT OR SERVICE THROUGH ANY MEDIUM OR IN ANY
+            OF a PRODUCT OR SERVICE THROUGH ANY MEDIUM OR IN ANY
             ENVIRONMENT&#44; YOU SHOULD USE YOUR BEST JUDGEMENT AND EXERCISE
             CAUTION WHERE APPROPRIATE.
           </div>

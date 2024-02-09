@@ -1,5 +1,6 @@
 import { State } from "@data/enums";
 import LandingWrapper from "@wrapper/LandingWrapper";
+import Link from "next/link";
 import React from "react";
 
 export default function PrivacyPolicy() {
@@ -30,7 +31,7 @@ export default function PrivacyPolicy() {
         </div>
         <div className={subtitle}>
           <span className={textHighlight}>
-            Last updated December 19 &#44; 2023{" "}
+            Last updated February 09 &#44; 2024{" "}
           </span>
         </div>
         <div>
@@ -728,6 +729,13 @@ export default function PrivacyPolicy() {
             archives&#41; &#44; then we will securely store your personal
             information and isolate it from any further processing until
             deletion is possible&#46;
+          </div>
+          <div>
+            Refer to our{" "}
+            <Link href={"/data-retention-policy"} className={link}>
+              Data Retention Policy
+            </Link>{" "}
+            for more details&#46;
           </div>
         </div>
         <div className={section}>
