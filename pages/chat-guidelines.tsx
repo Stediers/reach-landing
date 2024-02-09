@@ -82,15 +82,15 @@ export default function Main() {
             <span className={textHighlight}>1&#46; PURPOSE</span>
           </div>
           <div>
-            We offer a user-user chat feature to connect service providers and
+            {`We offer a user-user chat feature to connect service providers and
             customers for convenient booking experiences. Remember, the chat is
             solely for booking-related communication. Let's keep it
-            professional, helpful, and respectful!
+            professional, helpful, and respectful!`}
           </div>
         </div>
         <div className={section}>
           <div id="notallowed" className={heading1}>
-            <span className={textHighlight}>2&#46; WHAT'S NOT ALLOWED</span>
+            <span className={textHighlight}>2&#46; {`WHAT'S NOT ALLOWED`}</span>
           </div>
           <ul className={list}>
             <li>
@@ -99,8 +99,8 @@ export default function Main() {
             </li>
             <li>
               <span className={textHighlight}>Misinformation & Spam:</span>{" "}
-              Don't spread misinformation, fake news, or spam. Stick to topics
-              relevant to booking services on our platform.
+              {`Don't spread misinformation, fake news, or spam. Stick to topics
+              relevant to booking services on our platform.`}
             </li>
             <li>
               <span className={textHighlight}>
@@ -111,9 +111,10 @@ export default function Main() {
               prohibited.{" "}
             </li>
             <li>
-              <span className={textHighlight}>Illegal Activities:</span> Don't
+              <span className={textHighlight}>Illegal Activities:</span>{" "}
+              {`Don't
               discuss or solicit any illegal activities. Remember, you're
-              responsible for adhering to all applicable laws.
+              responsible for adhering to all applicable laws.`}
             </li>
             <li>
               <span className={textHighlight}>Off-Topic Content:</span> Keep
@@ -137,9 +138,9 @@ export default function Main() {
             <span className={textHighlight}>4&#46; DATA PRIVACY</span>
           </div>
           <div>
-            We prioritize user privacy. Remember, don't share sensitive
-            information like financial details or addresses in chat messages.
-            Please refer to our{" "}
+            {` We prioritize user privacy. Remember, don't share sensitive
+                information like financial details or addresses in chat messages.
+                Please refer to our`}{" "}
             <Link href={"/privacy-policy"} className={link}>
               Privacy Policy
             </Link>{" "}
@@ -151,10 +152,10 @@ export default function Main() {
             <span className={textHighlight}>5&#46; REPORTING VIOLATIONS</span>
           </div>
           <div>
-            We take violations seriously. If you encounter any offensive,
+            {`  We take violations seriously. If you encounter any offensive,
             harmful, or suspicious activity, report it immediately using the
             "Report" button within the chat window. We'll promptly review and
-            take necessary action.{" "}
+            take necessary action.`}{" "}
           </div>
         </div>
         <div className={section}>
@@ -164,7 +165,7 @@ export default function Main() {
           <ul className={list}>
             <li>
               <span className={textHighlight}>Respectful Communication:</span>{" "}
-              You're responsible for your own messages and interactions.
+              {` You're responsible for your own messages and interactions.`}
             </li>
             <li>
               <span className={textHighlight}>Professionalism:</span> Keep your
@@ -184,8 +185,8 @@ export default function Main() {
           </ul>
         </div>
         <span className={textHighlight}>
-          Let's work together to make Reachgig a comfortable and productive
-          space for everyone!
+          {`  Let's work together to make Reachgig a comfortable and productive
+          space for everyone!`}
         </span>
       </div>
     </LandingWrapper>
