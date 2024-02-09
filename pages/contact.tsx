@@ -164,11 +164,41 @@ function Index() {
               onClick={() => {
                 setButtonState(State.LOADING);
                 validateForm()
-                  ? showSnackBar({
-                      message: "Your query has been submitted successfully",
-                      state: State.SUCCESS,
+                  ? fetch("/api/mail_api", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/text",
+                      },
+                      body: JSON.stringify({
+                        name,
+                        phone,
+                        email,
+                        message: question,
+                      }),
                     })
-                  : null;
+                      .then((res) => res.json())
+                      .then((data) => {
+                        if (data.error_code) {
+                          showSnackBar({
+                            message: "Error Submitting form",
+                            state: State.ERROR,
+                          });
+                        } else {
+                          showSnackBar({
+                            message: "Form submitted successfully!",
+                            state: State.SUCCESS,
+                          });
+                        }
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                        showSnackBar({
+                          message: "Error sending mail",
+                          state: State.ERROR,
+                        });
+                      })
+                  : setButtonState(State.SUCCESS);
+
                 setButtonState(State.SUCCESS);
               }}
             />

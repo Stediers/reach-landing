@@ -292,3 +292,11 @@ export interface OfflineAppointmentSnapshot
     [key: string]: number;
   };
 }
+
+
+export type FormContent = {
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+}
