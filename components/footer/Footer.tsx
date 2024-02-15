@@ -1,5 +1,4 @@
 import Logo from "@components/Logo";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import React, { ReactNode } from "react";
 
@@ -20,7 +19,7 @@ export default function Footer() {
               Get in touch with us
             </p>
 
-            <p className="mt-6 max-w-xs text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
+            <p className="mt-6 max-w-xs text-center leading-relaxed sm:max-w-xs sm:text-left">
               Join the community and get in touch with us on social media or
               email.
             </p>
@@ -141,41 +140,29 @@ export default function Footer() {
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2 pt-5 lg:pt-0">
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-gray-900">About Us</p>
+              <p className="text-lg font-medium ">About Us</p>
 
               <ul className="mt-8 space-y-4 !text-base">
                 <li>
-                  <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
-                  >
+                  <Link className=" transition hover:/75" href="/about-us">
                     Company History
                   </Link>
                 </li>
 
                 <li>
-                  <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
-                  >
+                  <Link className=" transition hover:/75" href="/about-us">
                     Meet the Team
                   </Link>
                 </li>
 
                 <li>
-                  <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
-                  >
+                  <Link className=" transition hover:/75" href="/about-us">
                     Employee Handbook
                   </Link>
                 </li>
 
                 <li>
-                  <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
-                  >
+                  <Link className=" transition hover:/75" href="/about-us">
                     {" "}
                     Careers{" "}
                   </Link>
@@ -184,13 +171,13 @@ export default function Footer() {
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-gray-900">Legal</p>
+              <p className="text-lg font-medium ">Legal</p>
 
               <ul className="mt-8 space-y-4 text-base">
                 <li>
                   <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/terms-of-service"
+                    className=" transition hover:/75"
+                    href="/compliance/terms-of-service"
                   >
                     Terms of Service
                   </Link>
@@ -198,8 +185,8 @@ export default function Footer() {
 
                 <li>
                   <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/privacy-policy"
+                    className=" transition hover:/75"
+                    href="/compliance/privacy-policy"
                   >
                     {" "}
                     Privacy Policy{" "}
@@ -207,18 +194,35 @@ export default function Footer() {
                 </li>
 
                 <li>
-                  <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/refund-policy"
-                  >
+                  <Link className=" transition hover:/75" href="/refund-policy">
                     {" "}
                     Cancellation and Refund Policy{" "}
                   </Link>
                 </li>
 
+                <li>
+                  <Link
+                    className=" transition hover:/75"
+                    href="/compliance/data-retention-policy"
+                  >
+                    {" "}
+                    Data Retention Policy{" "}
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    className=" transition hover:/75"
+                    href="/compliance/chat-guidelines"
+                  >
+                    {" "}
+                    Chat Guidelines{" "}
+                  </Link>
+                </li>
+
                 {/* <li>
                   <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
+                    className=" transition hover:/75"
                     href="/"
                   >
                     {" "}
@@ -229,24 +233,18 @@ export default function Footer() {
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-gray-900">Helpful Links</p>
+              <p className="text-lg font-medium ">Helpful Links</p>
 
               <ul className="mt-8 space-y-4 text-base">
                 <li>
-                  <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
-                  >
+                  <Link className=" transition hover:/75" href="/">
                     {" "}
                     FAQs{" "}
                   </Link>
                 </li>
 
                 <li>
-                  <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/contact"
-                  >
+                  <Link className=" transition hover:/75" href="/contact">
                     {" "}
                     Support{" "}
                   </Link>
@@ -255,7 +253,7 @@ export default function Footer() {
             </div>
 
             <div className="text-center sm:text-left break-all">
-              <p className="text-lg font-medium text-gray-900">Contact Us</p>
+              <p className="text-lg font-medium ">Contact Us</p>
 
               <ul className="mt-8 space-y-4 text-base">
                 <li>
@@ -265,7 +263,7 @@ export default function Footer() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 shrink-0 text-gray-900"
+                      className="h-5 w-5 shrink-0 "
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -278,9 +276,7 @@ export default function Footer() {
                       />
                     </svg>
 
-                    <span className="flex-1 text-gray-700">
-                      reachgig.connect@gmail.com
-                    </span>
+                    <span className="flex-1 ">reachgig.connect@gmail.com</span>
                   </Link>
                 </li>
 
@@ -291,7 +287,7 @@ export default function Footer() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 shrink-0 text-gray-900"
+                      className="h-5 w-5 shrink-0 "
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -304,35 +300,9 @@ export default function Footer() {
                       />
                     </svg>
 
-                    <span className="flex-1 text-gray-700">+91 7550083900</span>
+                    <span className="flex-1">+91 7550083900</span>
                   </Link>
                 </li>
-
-                {/* <li className="flex items-start justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 shrink-0 text-gray-900"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-
-                  <address className="-mt-0.5 flex-1 not-italic text-gray-700">
-                    213 Lane, London, United Kingdom
-                  </address>
-                </li> */}
               </ul>
             </div>
           </div>
@@ -340,69 +310,14 @@ export default function Footer() {
 
         <div className="mt-12  pt-6">
           <div className="text-center sm:flex sm:justify-between ">
-            <p className="text-base text-gray-500">
+            <p className="text-base text-white">
               <span className="block sm:inline">
                 © 2023 Reachgig Corp Pvt. Ltd.
               </span>
-              {/* <span className="flex space-x-3 items-center justify-center sm:justify-start pt-3">
-                <Link
-                  className="inline-block text-white underline transition hover:text-white/75"
-                  href="/"
-                >
-                  Terms & Conditions
-                </Link>
-
-                <span>&middot;</span>
-
-                <Link
-                  className="inline-block text-white underline transition hover:text-white/75"
-                  href="/"
-                >
-                  Privacy Policy
-                </Link>
-              </span> */}
             </p>
           </div>
         </div>
       </div>
     </footer>
-  );
-}
-
-function HeaderWrapper({
-  children,
-  title,
-  inverted,
-  className,
-  id,
-}: {
-  children: ReactNode;
-  title: string;
-  inverted?: boolean;
-  className?: string;
-  id?: string;
-}) {
-  return (
-    <motion.div
-      id={id}
-      className={`${className} py-16 w-full px-7 ${
-        inverted ? "bg-[#222222] text-white" : ""
-      }`}
-      initial={{ opacity: 0 }}
-      transition={{ duration: 0.6 }}
-      //happen only once
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-    >
-      {title && (
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <h1 className="text-2xl font-medium text-center first-letter:capitalize">
-            {title}
-          </h1>
-          <div className="h-px w-[80%] bg-primary" />
-        </div>
-      )}
-      {children}
-    </motion.div>
   );
 }

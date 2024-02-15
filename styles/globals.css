@@ -1,196 +1,95 @@
 @tailwind base;
-
 @tailwind components;
-
 @tailwind utilities;
 
-* {
-  /*TODO: Remove this*/
-  /* border: 1px solid black; */
+/* default animation for tap on mobile*/
+@layer utilities {
+  .tap {
+    scale: 1.2;
+  }
 }
 
-.min-h-screen-fix {
-  min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-  min-height: calc(100dvh);
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+
+    --primary: 356 91% 51%;
+    --primary-foreground: 60 9.1% 97.8%;
+
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+
+    --radius: 0.5rem;
+
+    --text: 0, 0%, 18%;
+    --text-foreground: 0, 0%, 100%;
+
+    --text-subtle: 0, 0%, 40%;
+    --text-subtle-foreground: 0, 0%, 100%;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 24 5.7% 82.9%;
+
+    --text: 0, 0%, 100%;
+    --text-foreground: 0, 0%, 18%;
+
+    --text-subtle: 0, 0%, 100%;
+    --text-subtle-foreground: 0, 0%, 40%;
+  }
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-input,
-textarea,
-button,
-select,
-div,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-@layer components {
-  .bg-primary {
-    background-color: #f40e1e;
+@layer base {
+  * {
+    @apply border-border;
   }
-
-  .text-primary {
-    color: #f40e1e;
-  }
-
-  .border-primary {
-    border-color: #f40e1e;
-  }
-
-  .progress-bar {
-    background: #b9b9b9;
-  }
-
-  .progress-bar1 {
-    background: linear-gradient(
-      to right,
-      black 0%,
-      black 20%,
-      #b9b9b9 20%,
-      #b9b9b9 100%
-    );
-  }
-
-  .progress-bar2 {
-    background: linear-gradient(
-      to right,
-      black 0%,
-      black 40%,
-      #b9b9b9 40%,
-      #b9b9b9 100%
-    );
-  }
-  .progress-bar3 {
-    background: linear-gradient(
-      to right,
-      black 0%,
-      black 60%,
-      #b9b9b9 60%,
-      #b9b9b9 100%
-    );
-  }
-  .progress-bar4 {
-    background: linear-gradient(
-      to right,
-      black 0%,
-      black 80%,
-      #b9b9b9 80%,
-      #b9b9b9 100%
-    );
-  }
-
-  .progress-bar5 {
-    background-color: black;
-  }
-
-  .progress-bard {
-    background: #b9b9b9;
-  }
-
-  .progress-bard1 {
-    background: linear-gradient(
-      to bottom,
-      black 0%,
-      black 20%,
-      #b9b9b9 20%,
-      #b9b9b9 100%
-    );
-  }
-
-  .progress-bard2 {
-    background: linear-gradient(
-      to bottom,
-      black 0%,
-      black 40%,
-      #b9b9b9 40%,
-      #b9b9b9 100%
-    );
-  }
-  .progress-bard3 {
-    background: linear-gradient(
-      to bottom,
-      black 0%,
-      black 60%,
-      #b9b9b9 60%,
-      #b9b9b9 100%
-    );
-  }
-  .progress-bard4 {
-    background: linear-gradient(
-      to bottom,
-      black 0%,
-      black 80%,
-      #b9b9b9 80%,
-      #b9b9b9 100%
-    );
-  }
-
-  .progress-bard5 {
-    background-color: black;
-  }
-
-  .fade-in {
-    animation: fade-in 0.5s ease-in-out;
-  }
-
-  .wiggly {
-    animation: wiggly 2s ease-in-out;
-    animation-iteration-count: infinite;
-  }
-
-  @keyframes wiggly {
-    0% {
-      transform: rotate(0deg);
-    }
-    8.33% {
-      transform: rotate(5deg);
-    }
-    16.33% {
-      transform: rotate(-5deg);
-    }
-    25% {
-      transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
-
-  @keyframes fade-in {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .gradient {
-    background: rgb(120, 65, 69);
-    background: -moz-linear-gradient(
-      180deg,
-      rgba(120, 65, 69, 1) 0%,
-      rgba(244, 14, 30, 1) 35%,
-      rgba(255, 255, 255, 1) 100%
-    );
-    background: -webkit-linear-gradient(
-      180deg,
-      rgba(120, 65, 69, 1) 0%,
-      rgba(244, 14, 30, 1) 35%,
-      rgba(255, 255, 255, 1) 100%
-    );
-    background: linear-gradient(
-      180deg,
-      rgba(120, 65, 69, 1) 0%,
-      rgba(244, 14, 30, 1) 35%,
-      rgba(255, 255, 255, 1) 100%
-    );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#784145",endColorstr="#ffffff",GradientType=1);
+  body {
+    @apply bg-background text-foreground;
   }
 }

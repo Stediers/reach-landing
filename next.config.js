@@ -1,9 +1,4 @@
-const withPWA = require("next-pwa")({
-  dest: "public",
-  disable: process.env.NODE_ENV === "development",
-});
-
-module.exports = withPWA({
+module.exports = {
   reactStrictMode: false,
   images: {
     domains: [
@@ -15,4 +10,7 @@ module.exports = withPWA({
       "service4762.s3.ap-south-1.amazonaws.com",
     ],
   },
-});
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
+};

@@ -32,8 +32,6 @@ export default function Setting({
     <Card
       onClick={onClick}
       className={`${className} ${whileTap || hover ? "cursor-pointer" : ""}`}
-      whileTap={whileTap}
-      whileHover={hover ? { scale: 1.02 } : undefined}
     >
       <div className="flex flex-row items-center justify-between space-x-3 w-full">
         <div className="flex flex-col items-start justify-start space-y-1">

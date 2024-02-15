@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-import Button from "../Button";
 import QRCode from "react-qr-code";
 import Setting from "@components/Setting";
 import { createRoot } from "react-dom/client";
@@ -21,6 +19,7 @@ import PopupWrapper from "@wrapper/PopupWrapper";
 import { State } from "@data/enums";
 import { showSnackBar } from "./Snackbar";
 import InfoIcon from "@public/lottie/info-icon.json";
+import { Button } from "@components/ui/button";
 interface ImagePopupProps {
   src: string | StaticImageData;
   alt: string;
@@ -125,7 +124,6 @@ function CustomJSXPopup(props: CustomJSXPopupProps) {
         <div className="flex flex-row items-center justify-center space-x-2 w-full">
           {props.showOkButton && (
             <Button
-              text={props.okText || "OK"}
               onClick={() => {
                 if (props.onOk) props.onOk();
               }}
@@ -134,11 +132,12 @@ function CustomJSXPopup(props: CustomJSXPopupProps) {
                   ? props.okButtonClassName
                   : "border-success border-2 w-full font-medium text-success py-2 px-5 rounded-lg"
               }`}
-            />
+            >
+              {props.okText || "OK"}
+            </Button>
           )}
           {props.onClose && props.showCancelButton && (
             <Button
-              text={props.cancelText || "Cancel"}
               onClick={() => {
                 if (props.onClose) props.onClose();
               }}
@@ -147,7 +146,9 @@ function CustomJSXPopup(props: CustomJSXPopupProps) {
                   ? props.cancelButtonClassName
                   : "border-danger border-2 w-full font-medium text-danger py-2 px-5 rounded-lg"
               }`}
-            />
+            >
+              {props.cancelText || "Cancel"}
+            </Button>
           )}
         </div>
       </motion.div>
@@ -248,11 +249,9 @@ function InfoPopup(props: InfoPopupProps) {
           )}
         </div>
 
-        <Button
-          text="OK"
-          onClick={props.onOk}
-          className="border-success border-2 w-full font-medium text-white bg-success py-2 px-5 rounded-lg sticky bottom-2"
-        />
+        <Button onClick={props.onOk} variant="success">
+          OK
+        </Button>
       </motion.div>
     </div>
   );
@@ -409,16 +408,12 @@ export function YesNoPopup(props: YesNoPopupProps) {
         <h3 className="font-medium text-xl">{props.title}</h3>
         <p className="pt-2 pb-5 text-md text-center">{props.message}</p>
         <div className="flex space-x-3 w-full">
-          <Button
-            onClick={props.onConfirm}
-            text={props.okText || "Yes"}
-            className="bg-success text-white py-2 rounded-lg w-full"
-          />
-          <Button
-            className="bg-danger text-white py-2 rounded-lg w-full"
-            onClick={props.onCancel}
-            text={props.cancelText || "No"}
-          />
+          <Button onClick={props.onConfirm} variant={"success"}>
+            {props.okText || "Yes"}
+          </Button>
+          <Button variant={"outline"} onClick={props.onCancel}>
+            {props.cancelText || "No"}
+          </Button>
         </div>
       </motion.div>
     </div>
@@ -481,11 +476,9 @@ function OkPopup(props: OkPopupProps) {
       >
         <h3 className="font-medium text-xl">{props.title}</h3>
         <p className="py-4 text-md text-center">{props.message}</p>
-        <Button
-          text="OK"
-          onClick={props.onOk}
-          className="border-success border-2 w-full font-medium text-success py-2 px-5 rounded-lg"
-        />
+        <Button variant={"success"} onClick={props.onOk}>
+          OK
+        </Button>
       </motion.div>
     </div>
   );
@@ -532,11 +525,9 @@ function QrCodePopup(props: QrCodePopupProps) {
       >
         <h3 className="font-medium text-xl text-center">{props.title}</h3>
         <QRCode value={props.qrCode} />
-        <Button
-          text="OK"
-          onClick={props.onOk}
-          className="border-success border-2 w-full font-medium text-success py-2 px-5 rounded-lg"
-        />
+        <Button onClick={props.onOk} variant={"success"}>
+          OK
+        </Button>
       </motion.div>
     </div>
   );
