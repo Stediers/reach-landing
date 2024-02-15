@@ -3,7 +3,7 @@ import Card from "@components/Card";
 
 export default function Main() {
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth px-5 pt-10">
+    <div className="relative flex flex-col items-center justify-center scroll-smooth px-5 py-10">
       <HeaderWrapper
         title="Pricing"
         id="pricing"
@@ -14,46 +14,22 @@ export default function Main() {
           free to explore each plan and the benefits they offer.
         </p>
         <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
-          <PricingCard
-            title="Basic"
-            commission={5}
-            description="Get in touch with partners for free and have your needs met. Feel free to explore the platform."
-            features={[
-              "Choose 2 slots per booking",
-              "Low partner response rate",
-              "Basic Customer Support",
-            ]}
-            nonFeatures={[]}
-          />
+          <div />
           <PricingCard
             title="Standard"
-            commission={10}
+            commission={5}
             description="The real experience of Reach. Get the best partners for your needs and have a dedicated support team to assist you."
             features={[
-              "Choose 10 slots per booking",
+              "Choose 3 slots per booking",
               "First 3 bookings are free",
               "High partner response rate",
               "Dedicated Customer Support",
-              "Get a Standard Badge",
             ]}
             nonFeatures={[]}
             isPopular
             // plus="Basic"
           />
-          <PricingCard
-            title="Pro"
-            commission={20}
-            description="Find the best partners for your needs and have 100% cashback if you are not satisfied."
-            features={[
-              "Unlimited slots per booking",
-              "Dedicated Relationship Manager",
-              "Complete cashback if anything goes south",
-              "Highest partner response rate",
-              "Get a Pro Badge",
-            ]}
-            nonFeatures={[]}
-            // plus="Standard"
-          />
+          <div />
         </div>
       </HeaderWrapper>
     </div>

@@ -15,7 +15,7 @@ export default function Main() {
   const textHighlight = "font-medium";
 
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth">
+    <div className="relative flex flex-col items-center justify-center scroll-smooth p-5 lg:p-10">
       <div className={body}>
         <div className={title}>
           <span className={textHighlight}>CHAT GUIDELINES</span>
