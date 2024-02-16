@@ -1,7 +1,30 @@
 import { State } from "@data/enums";
-
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Refund Policy",
+    template: "%s | Refund Policy",
+  },
+  description: "Refund and Cancellation policy for ReachGig services",
+  openGraph: {
+    title: "Refund Policy",
+    description: "Refund and Cancellation policy for ReachGig services",
+    url: "https://reachgig.com/compliance/refund-policy",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "Refund Policy",
+      },
+    ],
+    locale: "en_US",
+  },
+};
 
 export default function RefundPolicy() {
   const title = "text-xl md:text-3xl";

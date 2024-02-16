@@ -1,7 +1,29 @@
-import { State } from "@data/enums";
-
 import Link from "next/link";
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Privacy Policy",
+    template: "%s | Privacy Policy",
+  },
+  description: "Learn about our privacy policy",
+  openGraph: {
+    title: "Privacy Policy",
+    description: "Learn about ReachGig's privacy policy",
+    url: "https://reachgig.com/privacy-policy",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "Privacy Policy",
+      },
+    ],
+    locale: "en_US",
+  },
+};
 
 export default function PrivacyPolicy() {
   const title = "text-xl md:text-3xl";

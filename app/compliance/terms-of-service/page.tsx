@@ -1,8 +1,28 @@
-import { State } from "@data/enums";
-import { ReactNode, useEffect } from "react";
-import Card from "@components/Card";
-import { motion } from "framer-motion";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Terms of Use",
+    template: "%s | Terms of Use",
+  },
+  description: "Terms of Use for ReachGig",
+  openGraph: {
+    title: "Terms of Use",
+    description: "Terms of Use for ReachGig",
+    url: "https://reachgig.com/terms",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "Terms of Use",
+      },
+    ],
+    locale: "en_US",
+  },
+};
 
 export default function Main() {
   const title = "text-xl md:text-3xl";

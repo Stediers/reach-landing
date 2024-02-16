@@ -1,4 +1,30 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Chat Guidelines",
+    template: "%s | Chat Guidelines",
+  },
+  description:
+    "Chat guidelines for ReachGig users. We aim to provide a safe and respectful environment for all users.",
+  openGraph: {
+    title: "Chat Guidelines",
+    description:
+      "Chat guidelines for ReachGig users. We aim to provide a safe and respectful environment for all users.",
+    url: "https://reachgig.com/compliance/chat-guidelines",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "Chat Guidelines",
+      },
+    ],
+    locale: "en_US",
+  },
+};
 
 export default function Main() {
   const title = "text-xl md:text-3xl";

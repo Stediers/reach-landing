@@ -1,5 +1,31 @@
 import { Button } from "@components/ui/button";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: {
+    default: "About ReachGig",
+    template: "%s | About Us",
+  },
+  description:
+    "Learn about our mission and story. We are committed to providing opportunities for the youth in the gig economy.",
+  openGraph: {
+    title: "About ReachGig",
+    description:
+      "Learn about our mission and story. We are committed to providing opportunities for the youth in the gig economy.",
+    url: "https://reachgig.com/about-us",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "About Us",
+      },
+    ],
+    locale: "en_US",
+  },
+};
 
 export default function Page() {
   return (

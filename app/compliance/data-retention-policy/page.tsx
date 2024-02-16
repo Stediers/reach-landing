@@ -1,4 +1,28 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Data Retention Policy",
+    template: "%s | Data Retention Policy",
+  },
+  description: "Learn about ReachGig's data retention policy",
+  openGraph: {
+    title: "Data Retention Policy",
+    description: "Learn about ReachGig's data retention policy",
+    url: "https://reachgig.com/compliance/data-retention-policy",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "Data Retention Policy",
+      },
+    ],
+    locale: "en_US",
+  },
+};
 
 export default function Main() {
   const title = "text-xl md:text-3xl";
