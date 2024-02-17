@@ -20,6 +20,14 @@ import {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import React from "react";
 import { cn } from "@lib/utils";
 import { Separator } from "@components/ui/separator";
@@ -105,6 +113,13 @@ function DesktopNav() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
+              <Link href="/bookings" passHref legacyBehavior>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Bookings
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
               <NavigationMenuTrigger>Compliance</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 grid-cols-2 w-[600px]">
@@ -173,18 +188,35 @@ function MobileNav() {
               <Link target="_blank" href={"http://www.partner.reachgig.com/"}>
                 Partner with us
               </Link>
+              <Link target="_blank" href={"http://www.reachgig.com/pricing"}>
+                Pricing
+              </Link>
+              <Link target="_blank" href={"http://www.reachgig.com/bookings"}>
+                Bookings
+              </Link>
               <Link target="_blank" href={"http://www.reachgig.com/blog"}>
                 Blogs
               </Link>
               <Link target="_blank" href={"http://www.reachgig.com/contact"}>
                 Contact Us
               </Link>
-              <Link
-                target="_blank"
-                href={"http://www.reachgig.com/privacy-policy"}
-              >
-                Privacy Policy
-              </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger>Compliance</DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {components.map((component) => (
+                    <DropdownMenuItem key={component.title}>
+                      <Link
+                        target="_blank"
+                        href={component.href}
+                        legacyBehavior
+                        passHref
+                      >
+                        {component.title}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </SheetContent>
         </Sheet>
