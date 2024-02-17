@@ -48,11 +48,11 @@ function Header() {
         Bookings are effortless with ReachGig!
       </h1>
       <p>
-        In today's dynamic gig economy, finding reliable service providers can
-        be a daunting task. However, our platform offers a range of benefits for
-        both customers and partners, fostering a seamless and transparent
-        experience for all parties involved. Here's why booking services on our
-        platform stands out:
+        {`In today's dynamic gig economy, finding reliable service providers can
+          be a daunting task. However, our platform offers a range of benefits for
+          both customers and partners, fostering a seamless and transparent
+          experience for all parties involved. Here's why booking services on our
+          platform stands out:`}
       </p>
     </div>
   );
@@ -76,9 +76,7 @@ function FairPricing() {
           Conventional booking advances range from{" "}
           <span className="text-primary">2000 Rs - 5000 Rs</span> ! Our platform
           charges only a nominal{" "}
-          <span className="text-success">
-            5% service fee, capped at 800 rupees
-          </span>
+          <span className="text-success">5% service fee, capped at 800 Rs</span>
           , ensuring affordability for customers and fair compensation for
           service providers.
         </p>
@@ -102,9 +100,9 @@ function FeedbackSystem() {
           height={100}
         />
         <p>
-          Make informed decisions effortlessly! With our transparent feedback
+          {`Make informed decisions effortlessly! With our transparent feedback
           system, customers can easily gauge service quality through authentic
-          user reviews, empowering both parties to strive for excellence.
+          user reviews, empowering both parties to strive for excellence.`}
         </p>
       </div>
     </div>
@@ -126,10 +124,10 @@ function Communication() {
           height={100}
         />
         <p>
-          Streamline your service experience! Our native chat platform
+          {`Streamline your service experience! Our native chat platform
           facilitates seamless communication between customers and service
           providers, allowing for clear expectations and tailored service
-          delivery.
+          delivery.`}
         </p>
       </div>
     </div>
@@ -151,10 +149,10 @@ function Variety() {
           height={100}
         />
         <p>
-          From online to at-home services, our platform provides a wide array of
+          {`From online to at-home services, our platform provides a wide array of
           options. Detailed listings include partner experience, gender served,
           ratings, visuals, requirements, inclusions, exclusions, and discounts,
-          ensuring tailored bookings for every need.
+          ensuring tailored bookings for every need.`}
         </p>
       </div>
     </div>
@@ -176,10 +174,10 @@ function Disputes() {
           height={100}
         />
         <p>
-          We've got your back. In case of disputes, our support team is just a
+          {`We've got your back. In case of disputes, our support team is just a
           click away. With prompt intervention via the help button or contact
           form, we ensure quick resolution, fostering trust and satisfaction
-          among users.
+          among users.`}
         </p>
       </div>
     </div>

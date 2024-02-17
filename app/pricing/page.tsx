@@ -2,7 +2,7 @@ import React from "react";
 import Pricing from "./pricing";
 import { Metadata } from "next";
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
   title: {
     default: "Pricing",
     template: "%s | Pricing",
