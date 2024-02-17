@@ -13,8 +13,34 @@ import { GiJourney } from "react-icons/gi";
 import { FaHandshake } from "react-icons/fa";
 import { Button } from "@components/ui/button";
 import Link from "next/link";
+import { Metadata } from "next";
 
 const iconStyle = "lg:w-28 lg:h-28 w-20 h-20";
+
+export const metadata: Metadata = {
+  title: {
+    default: "ReachGig",
+    template: "%s",
+  },
+  description:
+    "Find the best services and partners for your needs. Empowering the Gig Economy.",
+  openGraph: {
+    title: "ReachGig",
+    description:
+      "Find the best services and partners for your needs. Empowering the Gig Economy.",
+    url: "https://reachgig.com",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "ReachGig",
+      },
+    ],
+    locale: "en_US",
+  },
+};
 
 export default function Page() {
   return (
