@@ -30,7 +30,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import React from "react";
 import { cn } from "@lib/utils";
-import { Separator } from "@components/ui/separator";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -84,7 +83,7 @@ function DesktopNav() {
         <div className="flex flex-col">
           <p className="text-xl font-medium">ReachGig</p>
           <p className="text-sm text-gray-500 tracking-wide">
-            Relax, we got you covered
+            Be your own Boss.
           </p>
         </div>
       </Link>
@@ -137,20 +136,24 @@ function DesktopNav() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <NavigationMenu orientation="vertical">
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <Button
-                variant="success"
-                size="sm"
-                className="text-sm"
-                onClick={() => window.open("https://partner.reachgig.com/")}
-              >
-                Become a Partner
-              </Button>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+        <div className="grid grid-cols-2 gap-5">
+          <Button
+            variant="success"
+            size="default"
+            className="text-base"
+            onClick={() => window.open("https://partner.reachgig.com/")}
+          >
+            Become a Partner
+          </Button>
+          <Button
+            variant="outline"
+            size="default"
+            className="text-base"
+            onClick={() => window.open("https://app.reachgig.com/")}
+          >
+            Find Partners
+          </Button>
+        </div>
       </div>
     </div>
   );

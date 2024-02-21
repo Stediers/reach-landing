@@ -9,10 +9,33 @@
   }
 }
 
+.gradient {
+  background: rgb(120, 65, 69);
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(120, 65, 69, 1) 0%,
+    rgba(244, 14, 30, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(120, 65, 69, 1) 0%,
+    rgba(244, 14, 30, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(120, 65, 69, 1) 0%,
+    rgba(244, 14, 30, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#784145",endColorstr="#ffffff",GradientType=1);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
+    --foreground: 192 14% 7%;
 
     --card: 0 0% 100%;
     --card-foreground: 20 14.3% 4.1%;

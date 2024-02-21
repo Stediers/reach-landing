@@ -4,12 +4,12 @@ import React, { ReactNode } from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-text text-white">
-      <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-12 flex flex-col justify-start items-center space-y-20">
+    <footer className="bg-foreground !text-white w-full">
+      <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-10 sm:px-6 lg:px-8 lg:pt-12 flex flex-col justify-start items-center space-y-20">
         <div className="space-y-3 max-w-lg text-center">
-          <Logo wings="w-[12rem]" textStyle="text-2xl" />
+          <Logo wings="w-[10rem]" text="ReachGig" />
           <p className="text-gray leading-7">
-            {`NO.514/8, Pethampalayam Road Mekkur, Perundurai, Erode, Erode-
+            {`NO.514/8, Pethampalayam Road Mekkur, Perundurai, Erode, Erode -
             638052, Tamil Nadu`}
           </p>
         </div>
@@ -19,7 +19,7 @@ export default function Footer() {
               Get in touch with us
             </p>
 
-            <p className="mt-6 max-w-xs text-center leading-relaxed sm:max-w-xs sm:text-left">
+            <p className="mt-6 max-w-xs text-center leading-relaxed text-gray-200 sm:max-w-xs sm:text-left">
               Join the community and get in touch with us on social media or
               email.
             </p>
@@ -30,7 +30,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-white transition hover:text-white/75"
+                  className="text-gray-200 transition hover:text-white/75"
                 >
                   <span className="sr-only">Facebook</span>
                   <svg
@@ -53,7 +53,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-white transition hover:text-white/75"
+                  className="text-gray-200 transition hover:text-white/75"
                 >
                   <span className="sr-only">Instagram</span>
                   <svg
@@ -76,7 +76,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-white transition hover:text-white/75"
+                  className="text-gray-200 transition hover:text-white/75"
                 >
                   <span className="sr-only">Twitter</span>
                   <svg
@@ -95,7 +95,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-white transition hover:text-white/75"
+                  className="text-gray-200 transition hover:text-white/75"
                 >
                   <span className="sr-only">GitHub</span>
                   <svg
@@ -118,7 +118,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-white transition hover:text-white/75"
+                  className="text-gray-200 transition hover:text-white/75"
                 >
                   <span className="sr-only">Dribbble</span>
                   <svg
@@ -138,46 +138,58 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2 pt-5 lg:pt-0">
-            <div className="text-center sm:text-left">
-              <p className="text-lg font-medium ">About Us</p>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:col-span-2 pt-5 lg:pt-0">
+            {/* <div className="text-center sm:text-left">
+              <p className="text-lg font-medium text-white">About Us</p>
 
               <ul className="mt-8 space-y-4 !text-base">
                 <li>
-                  <Link className=" transition hover:/75" href="/about-us">
+                  <Link
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/"
+                  >
                     Company History
                   </Link>
                 </li>
 
                 <li>
-                  <Link className=" transition hover:/75" href="/about-us">
+                  <Link
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/"
+                  >
                     Meet the Team
                   </Link>
                 </li>
 
                 <li>
-                  <Link className=" transition hover:/75" href="/about-us">
+                  <Link
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/"
+                  >
                     Employee Handbook
                   </Link>
                 </li>
 
                 <li>
-                  <Link className=" transition hover:/75" href="/about-us">
+                  <Link
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/"
+                  >
                     {" "}
                     Careers{" "}
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium ">Legal</p>
+              <p className="text-lg font-medium text-white">Legal</p>
 
               <ul className="mt-8 space-y-4 text-base">
                 <li>
                   <Link
-                    className=" transition hover:/75"
-                    href="/compliance/terms-of-service"
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/terms-of-service"
                   >
                     Terms of Service
                   </Link>
@@ -185,8 +197,8 @@ export default function Footer() {
 
                 <li>
                   <Link
-                    className=" transition hover:/75"
-                    href="/compliance/privacy-policy"
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/privacy-policy"
                   >
                     {" "}
                     Privacy Policy{" "}
@@ -194,57 +206,36 @@ export default function Footer() {
                 </li>
 
                 <li>
-                  <Link className=" transition hover:/75" href="/refund-policy">
+                  <Link
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/refund-policy"
+                  >
                     {" "}
                     Cancellation and Refund Policy{" "}
                   </Link>
                 </li>
-
-                <li>
-                  <Link
-                    className=" transition hover:/75"
-                    href="/compliance/data-retention-policy"
-                  >
-                    {" "}
-                    Data Retention Policy{" "}
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    className=" transition hover:/75"
-                    href="/compliance/chat-guidelines"
-                  >
-                    {" "}
-                    Chat Guidelines{" "}
-                  </Link>
-                </li>
-
-                {/* <li>
-                  <Link
-                    className=" transition hover:/75"
-                    href="/"
-                  >
-                    {" "}
-                    Google Ads{" "}
-                  </Link>
-                </li> */}
               </ul>
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium ">Helpful Links</p>
+              <p className="text-lg font-medium text-white">Helpful Links</p>
 
               <ul className="mt-8 space-y-4 text-base">
                 <li>
-                  <Link className=" transition hover:/75" href="/">
+                  <Link
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/"
+                  >
                     {" "}
                     FAQs{" "}
                   </Link>
                 </li>
 
                 <li>
-                  <Link className=" transition hover:/75" href="/contact">
+                  <Link
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/contact"
+                  >
                     {" "}
                     Support{" "}
                   </Link>
@@ -253,7 +244,7 @@ export default function Footer() {
             </div>
 
             <div className="text-center sm:text-left break-all">
-              <p className="text-lg font-medium ">Contact Us</p>
+              <p className="text-lg font-medium text-white">Contact Us</p>
 
               <ul className="mt-8 space-y-4 text-base">
                 <li>
@@ -263,7 +254,7 @@ export default function Footer() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 shrink-0 "
+                      className="h-5 w-5 shrink-0 text-white"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -276,18 +267,20 @@ export default function Footer() {
                       />
                     </svg>
 
-                    <span className="flex-1 ">reachgig.connect@gmail.com</span>
+                    <span className="flex-1 text-gray-200 underline-offset-4">
+                      Mail Us
+                    </span>
                   </Link>
                 </li>
 
                 <li>
                   <Link
                     className="flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
-                    href="/"
+                    href="tel:+917550083900"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 shrink-0 "
+                      className="h-5 w-5 shrink-0 text-white"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -300,7 +293,9 @@ export default function Footer() {
                       />
                     </svg>
 
-                    <span className="flex-1">+91 7550083900</span>
+                    <span className="flex-1 text-gray-200 underline underline-offset-4">
+                      Call Us
+                    </span>
                   </Link>
                 </li>
               </ul>
@@ -310,7 +305,7 @@ export default function Footer() {
 
         <div className="mt-12  pt-6">
           <div className="text-center sm:flex sm:justify-between ">
-            <p className="text-base text-white">
+            <p className="text-base text-gray-200">
               <span className="block sm:inline">
                 © 2023 Reachgig Corp Pvt. Ltd.
               </span>

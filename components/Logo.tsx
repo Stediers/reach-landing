@@ -2,11 +2,11 @@ import Link from "next/link";
 import ReachSVG from "./svg/ReachSVG";
 
 export default function Logo({
-  textStyle,
-  text = "REACH",
-  wings,
+  textStyle = "text-2xl font-medium",
+  text = "ReachGig",
+  wings = "w-[10rem]",
   color = "#f40e1e",
-  href = "/console",
+  href = "/",
   flap = false,
 }: {
   textStyle?: string;

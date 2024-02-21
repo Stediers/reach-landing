@@ -3,19 +3,28 @@ import { ReactNode } from "react";
 import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import { FcConferenceCall, FcBullish } from "react-icons/fc";
 import { CiTrophy } from "react-icons/ci";
-import Card from "@components/Card";
 import "swiper/css";
 import "swiper/css/pagination";
 import { MdOutlinePriceCheck, MdPersonSearch } from "react-icons/md";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillCloseCircle, AiFillStar } from "react-icons/ai";
 import ImageComponent from "@components/ImageComponent";
 import { GiJourney } from "react-icons/gi";
 import { FaHandshake } from "react-icons/fa";
 import { Button } from "@components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
+import { BsShield, BsShieldCheck } from "react-icons/bs";
+import ReachSVG from "@components/svg/ReachSVG";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@components/ui/card";
 
-const iconStyle = "lg:w-28 lg:h-28 w-20 h-20";
+const iconStyle = "lg:w-24 lg:h-24 w-20 h-20";
 
 export const metadata: Metadata = {
   title: {
@@ -44,10 +53,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth px-5">
+    <div className="relative flex flex-col items-center justify-center scroll-smooth">
       <Index />
       <What />
-      <How />
+      <ByeByeScammers />
+      <JoinReach />
       {/* <CustomerStories />
       <HappyPartners /> */}
       {/* <WhatWeBelieve cookieExists={cookieExists} /> */}
@@ -215,28 +225,59 @@ function CustomerStories() {
   }
 }
 
-function How() {
+function ByeByeScammers() {
+  return (
+    <div
+      className="flex flex-col items-center justify-center w-full lg:min-h-[70vh] min-h-[50vh] bg-success px-10 lg:px-0"
+      id="Index"
+    >
+      <div className="flex flex-col items-center justify-start w-full max-w-7xl space-y-5">
+        <BsShieldCheck className="lg:w-24 lg:h-24 w-20 h-20 text-white" />
+        <h3 className="lg:text-5xl text-3xl font-bold text-white">
+          Bye Bye Scammers
+        </h3>
+        <p className="lg:text-lg text-md text-center max-w-xl text-white">
+          We have a strict verification process to ensure that only genuine
+          service providers are listed on ReachGig.
+        </p>
+        <div className="flex flex-col items-center justify-center space-y-5 lg:space-y-0 lg:flex-row lg:space-x-5 pt-5">
+          <Button asChild variant="outline">
+            <Link href="/user/sign-up">How does it work?</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function JoinReach() {
   return (
     <HeaderWrapper
-      title="How does it work?"
+      title="What are you waiting for?"
       className="items-center justify-center w-full flex flex-col space-y-16"
-      id="how-it-works"
+      id="who-we-are-and-what-we-do"
     >
-      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
-        <FeatureCard
-          icon={<FcConferenceCall className={iconStyle} />}
-          heading="Find the right partner"
-          description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
+      <div className="grid lg:grid-cols-3 grid-cols-1 justify-items-center gap-x-10 gap-y-20 w-full max-w-7xl">
+        <DescriptionCard
+          title="Become a Partner"
+          description="Join ReachGig"
+          linkText="Join Now"
+          link="/user/sign-up"
+          icon={<MdPersonSearch className={iconStyle} />}
         />
-        <FeatureCard
-          icon={<HiChatBubbleLeftRight className={iconStyle} />}
-          heading="Communicate"
-          description="Communicate what you offer and showcase your expertise."
+        <DescriptionCard
+          title="Search for Services"
+          description="Join ReachGig"
+          linkText="Join Now"
+          link="/user/sign-up"
+          icon={<GiJourney className={iconStyle} />}
         />
-        <FeatureCard
-          icon={<FcBullish className={iconStyle} />}
-          heading="Get the job done"
-          description="Get the job done and get paid. It's that simple!"
+        <DescriptionCard
+          title="Careers"
+          description="Help us change the way we work and earn."
+          linkText="Join Now"
+          link="/user/sign-up"
+          icon={<AiFillStar className={iconStyle} />}
         />
       </div>
     </HeaderWrapper>
@@ -246,7 +287,7 @@ function How() {
 function What() {
   return (
     <HeaderWrapper
-      title="What is Reach?"
+      title="What we Do"
       className="items-center justify-center w-full flex flex-col space-y-16"
       id="who-we-are-and-what-we-do"
     >
@@ -267,6 +308,21 @@ function What() {
           }
           heading="Cost Effective"
           description="Low cost of entry for the service providers and low cost of services for the customers."
+        />
+        <FeatureCard
+          icon={<FcConferenceCall className={iconStyle} />}
+          heading="Find the right partner"
+          description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
+        />
+        <FeatureCard
+          icon={<HiChatBubbleLeftRight className={iconStyle} />}
+          heading="Communicate"
+          description="Communicate what you offer and showcase your expertise."
+        />
+        <FeatureCard
+          icon={<FcBullish className={iconStyle} />}
+          heading="Get the job done"
+          description="Get the job done and get paid. It's that simple!"
         />
       </div>
     </HeaderWrapper>
@@ -293,152 +349,44 @@ function FeatureCard({
   );
 }
 
-function Blogs() {
-  return (
-    <HeaderWrapper
-      title="LEARN AND GROW"
-      className="items-center justify-center w-full flex flex-col space-y-16"
-      id="blogs"
-    >
-      <div className="lg:grid grid-cols-3 justify-items-center lg:gap-y-32 gap-y-10 lg:gap-x-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
-        <BlogCard
-          title="How to get more clients?"
-          image="/images/blog-1.svg"
-          description="Learn how to get more clients on Reach."
-          link="/blog/how-to-get-more-clients"
-        />
-        <BlogCard
-          title="How to get more clients?"
-          image="/images/blog-1.svg"
-          description="Learn how to get more clients on Reach."
-          link="/blog/how-to-get-more-clients"
-        />
-        <BlogCard
-          title="How to get more clients?"
-          image="/images/blog-1.svg"
-          description="Learn how to get more clients on Reach."
-          link="/blog/how-to-get-more-clients"
-        />
-        <BlogCard
-          title="How to get more clients?"
-          image="/images/blog-1.svg"
-          description="Learn how to get more clients on Reach."
-          link="/blog/how-to-get-more-clients"
-        />
-        <BlogCard
-          title="How to get more clients?"
-          image="/images/blog-1.svg"
-          description="Learn how to get more clients on Reach."
-          link="/blog/how-to-get-more-clients"
-        />
-        <BlogCard
-          title="How to get more clients?"
-          image="/images/blog-1.svg"
-          description="Learn how to get more clients on Reach."
-          link="/blog/how-to-get-more-clients"
-        />
-      </div>
-    </HeaderWrapper>
-  );
-
-  function BlogCard({
-    title,
-    image,
-    description,
-    link,
-  }: {
-    title: string;
-    image: string;
-    description: string;
-    link: string;
-  }) {
-    return (
-      <div className="flex flex-col items-center justify-center space-y-4 cursor-pointer">
-        <ImageComponent
-          src={image}
-          alt={title}
-          className="rounded-2xl lg:w-[20rem] lg:h-[20rem] border border-gray w-[12rem] h-[12rem] hover:scale-105 transition duration-200 cursor-pointer"
-          whileHover={{ scale: 1.0 }}
-        />
-        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
-          <p className="lg:text-2xl text-lg font-medium text-center">{title}</p>
-          <p className="lg:text-md text-base text-center">{description}</p>
-        </div>
-      </div>
-    );
-  }
-}
-
-function WordPopUp({
-  words,
-  delay,
-}: {
-  words: string;
-  delay: number;
-  className?: string;
-}) {
-  const wordsArray = words.split(" ");
-  const typeVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-  return (
-    <div className="flex items-center justify-center space-x-1 text-lg font-medium">
-      {wordsArray.map((word, index) => (
-        <span key={index}>{word}</span>
-      ))}
-    </div>
-  );
-}
-
 function Index() {
   const words = "Empowering the Gig Economy".split(" ");
   const partnerLink = process.env.NEXT_PUBLIC_PARTNER_LINK || "/user/sign-up";
   const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
     <div
-      className="flex flex-col items-center justify-start space-y-20 w-full lg:px-10"
+      className="flex flex-col items-center justify-center w-full min-h-[70vh] bg-foreground"
       id="Index"
     >
-      {/* <ImageComponent
-        className="!absolute top-0 left-0 w-full h-[40rem] object-cover z-[-1] opacity-70"
-        src={LandingPageImage1}
-        alt="background"
-      /> */}
-      <div className="flex flex-col items-center justify-center lg:space-y-3 space-y-3 pt-5">
-        <Logo
-          wings="lg:w-[12rem] w-[12rem]"
-          textStyle="font-medium lg:text-3xl text-2xl"
-        />
-        <WordPopUp words={words.join(" ")} delay={0.2} />
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-center gap-y-10 gap-x-10 w-full lg:justify-items-center items-start flex-1">
-        <DescriptionCard
-          icon={<MdPersonSearch className="w-24 h-24 text-text" />}
-          title="Find the right partner"
-          description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
-          linkText="Find Services"
-          link={customerLink}
-        />
-        <DescriptionCard
-          icon={<AiFillStar className="w-24 h-24 text-rating-2.5" />}
-          title="Become the best in the business"
-          description="Communicate what you offer and showcase your expertise. No commission charges!"
-          linkText="Become a Partner"
-          link={partnerLink}
-        />
-        <DescriptionCard
-          icon={<GiJourney className="w-24 h-24 text-info" />}
-          title="Join Us in our journey"
-          description="Are you passionate about the gig economy? We are here to help you reach your dreams and achieve your goals."
-          linkText="Find Jobs"
-          link="/user/sign-up"
-        />
+      <div className="flex lg:flex-row flex-col items-center lg:justify-between justify-start space-y-10 lg:space-y-0 w-full max-w-7xl px-5 py-10 lg:px-16">
+        <div className="flex flex-col lg:items-start items-center justify-center space-y-5">
+          <div className="lg:hidden flex">
+            <ReachSVG color="#f40e1e" className="w-40" />
+          </div>
+          <h1 className="lg:text-5xl text-3xl font-bold lg:text-left text-center text-white">
+            <span className="text-primary leading-relaxed">Empowering</span>{" "}
+            <br />
+            the Gig Economy
+          </h1>
+          <p className="lg:text-lg text-md text-center text-white">
+            Lets change the way we work and earn.
+          </p>
+          <div className="grid grid-cols-2 gap-5 pt-5">
+            <Button asChild variant="success">
+              <Link href={partnerLink}>Become a Partner</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href={customerLink}>Find Partners</Link>
+            </Button>
+          </div>
+        </div>
+        <div className="flex flex-col items-start justify-center space-y-5">
+          <ImageComponent
+            src="/images/index-image.webp"
+            alt="ReachGig"
+            className="rounded-2xl lg:w-[25rem] lg:h-[25rem] w-[15rem] h-[15rem]"
+          />
+        </div>
       </div>
     </div>
   );
@@ -458,17 +406,21 @@ function DescriptionCard({
   icon: ReactNode;
 }) {
   return (
-    <Card className="w-full max-w-[800px] flex flex-col items-center justify-between space-y-5 lg:min-h-[28rem] min-h-[10rem] bg-white shadow-md lg:!pt-10 !pt-5 lg:!pb-20 !pb-10">
-      <div className="flex flex-col items-center justify-center space-y-4">
-        {icon}
-        <p className="lg:text-xl font-medium text-lg text-center">{title}</p>
-        <p className="lg:text-md text-base text-center">{description}</p>
-      </div>
-      <div className="max-w-[200px] w-full">
-        <Button className="bg-primary text-white font-medium" asChild>
-          <Link href={link}>{linkText}</Link>
-        </Button>
-      </div>
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-center justify-center space-x-5">{icon}</div>
+      </CardContent>
+      <CardFooter>
+        <div className="flex items-center justify-center space-y-5 lg:space-y-0 lg:flex-row lg:space-x-5 pt-5">
+          <Button asChild variant="default">
+            <Link href={link}>{linkText}</Link>
+          </Button>
+        </div>
+      </CardFooter>
     </Card>
   );
 }
@@ -566,18 +518,5 @@ function HeaderWrapper({
       )}
       {children}
     </div>
-  );
-}
-
-function YoutubeEmbed() {
-  // logic to fetch latest Reach video from youtube
-
-  return (
-    <iframe
-      src="https://www.youtube.com/embed/me_DDgXNgpY"
-      title="YouTube video player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowFullScreen
-    />
   );
 }
