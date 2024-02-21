@@ -382,9 +382,10 @@ function Index() {
         </div>
         <div className="flex flex-col items-start justify-center space-y-5">
           <ImageComponent
-            src="/images/index-image.webp"
+            src="/images/index.svg"
             alt="ReachGig"
             className="rounded-2xl lg:w-[25rem] lg:h-[25rem] w-[15rem] h-[15rem]"
+            border={false}
           />
         </div>
       </div>
