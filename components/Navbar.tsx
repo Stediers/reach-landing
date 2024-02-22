@@ -149,7 +149,7 @@ function DesktopNav() {
             variant="outline"
             size="default"
             className="text-base"
-            onClick={() => window.open("https://app.reachgig.com/")}
+            onClick={() => window.open("https://customer.reachgig.com/")}
           >
             Find Partners
           </Button>
