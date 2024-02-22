@@ -1,3 +1,4 @@
+import ImageComponent from "@components/ImageComponent";
 import { Button } from "@components/ui/button";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -30,40 +31,40 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth">
+    <div className="relative flex flex-col items-center justify-center scroll-smooth lg:space-y-20 space-y-10 pb-20">
       <Hero />
       <Section />
+      <WhatWeBelieve />
     </div>
   );
 }
 
 function Section() {
   return (
-    <section className="bg-blueGray-200 -mt-28 !w-full">
+    <section className="!w-full pb-10">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap">
-          <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center"></div>
+          <div className="pt-6 w-full md:w-4/12 px-4 text-center"></div>
         </div>
-        <div className="flex flex-wrap items-center mt-16">
+        <div className="flex flex-wrap items-center">
           <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
-            <h3 className="text-2xl mb-2 font-semibold leading-normal">
+            <h3 className="text-4xl mb-2 font-semibold leading-normal">
               The Mission
             </h3>
-            <p className="text-md font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-              Lack of opportunities for the youth in the gig economy is a
-              problem that has been around for a while. We are here to change
-              the narrative.
+            <p className="text-md italic text-info leading-relaxed mt-4 mb-4 text-blueGray-600">
+              &quot;We build too many walls and not enough bridges&quot; - Isaac
+              Newton
             </p>
-            <p className="text-md font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
-              The gig economy is a free market system in which temporary
-              positions are common and organizations contract with independent
-              workers for short-term engagements. The trend toward a gig economy
-              has begun. A study by Intuit predicted that by 2020, 40 percent of
-              American workers would be independent contractors.
+            <p className="text-md leading-relaxed mt-0 mb-4 text-blueGray-600">
+              Our mission is to provide opportunities for the youth in the gig
+              economy. We are committed to providing a platform for the youth to
+              connect with potential employers and clients. We believe that the
+              youth are the future and we are committed to providing them with
+              the tools they need to succeed in the gig economy.
             </p>
           </div>
           <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
-            <div className="relative flex flex-col min-w-0 break-words w-full mb-2 shadow-lg rounded-lg bg-info">
+            <div className="relative flex flex-col min-w-0 break-words w-full mb-2 shadow-lg rounded-lg">
               <Image
                 alt="..."
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1051&amp;q=80"
@@ -78,13 +79,13 @@ function Section() {
                   viewBox="0 0 583 95"
                   className="absolute left-0 w-full block h-95-px -top-94-px"
                 ></svg>
-                <h4 className="text-xl font-bold text-white">
-                  Top Notch Services
+                <h4 className="text-xl font-semibold">
+                  Future of the Gig Economy
                 </h4>
-                <p className="text-md font-light mt-2 text-white">
-                  The Arctic Ocean freezes every winter and much of the sea-ice
-                  then thaws every summer, and that process will continue
-                  whatever happens.
+                <p className="text-md mt-2">
+                  The gig economy is growing at an unprecedented rate. We are
+                  committed to providing opportunities for the youth in the gig
+                  economy.
                 </p>
               </blockquote>
             </div>
@@ -95,9 +96,73 @@ function Section() {
   );
 }
 
+function WhatWeBelieve() {
+  return (
+    <div
+      title="WE BELIEVE IN YOU"
+      className="items-center justify-center w-full flex flex-col space-y-16"
+      id="about-us"
+    >
+      <p className="lg:text-5xl text-3xl font-bold text-center">
+        We <span className="text-primary">Believe</span> in You
+      </p>
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+        <ImageWithQuote
+          image="/images/what-we-believe-1.webp"
+          quote="Hi"
+          name="Deepakindresh N"
+          designation="Head of Marketing"
+        />
+        <ImageWithQuote
+          designation="Chief Executive Officer"
+          name="Harshavardhan J"
+          quote="Hi"
+          image="/images/what-we-believe-3.webp"
+        />
+        <ImageWithQuote
+          image="/images/what-we-believe-2.webp"
+          quote="Hi"
+          name="Gautthum J"
+          designation="Chief Operating Officer"
+        />
+      </div>
+    </div>
+  );
+
+  function ImageWithQuote({
+    image,
+    quote,
+    name,
+    designation,
+  }: {
+    image: string;
+    quote: string;
+    name: string;
+    designation: string;
+  }) {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <ImageComponent
+          src={image}
+          alt={name}
+          className="rounded-2xl lg:w-[18rem] lg:h-[18rem] border border-gray w-[12rem] h-[12rem]"
+          whileHover={{ scale: 1.05 }}
+        />
+        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
+          <p className="lg:text-2xl text-lg font-medium text-center">{name}</p>
+          <p className="lg:text-md text-base text-center">Co Founder</p>
+          <p className="lg:text-md text-base text-center text-info">
+            {designation}
+          </p>
+        </div>
+      </div>
+    );
+  }
+}
+
 function Hero() {
   return (
-    <div className="bg-primary w-full">
+    <div className="bg-foreground w-full">
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
           <div className="flex flex-col mb-16 sm:text-center sm:mb-0">
@@ -121,36 +186,15 @@ function Hero() {
             <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
               <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
                 <span className="relative inline-block">
-                  <svg
-                    viewBox="0 0 52 24"
-                    fill="currentColor"
-                    className="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-deep-purple-accent-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
-                  >
-                    <defs>
-                      <pattern
-                        id="700c93bf-0068-4e32-aafe-ef5b6a647708"
-                        x="0"
-                        y="0"
-                        width=".135"
-                        height=".30"
-                      >
-                        <circle cx="1" cy="1" r=".7" />
-                      </pattern>
-                    </defs>
-                    <rect
-                      fill="url(#700c93bf-0068-4e32-aafe-ef5b6a647708)"
-                      width="52"
-                      height="24"
-                    />
-                  </svg>
                   <span className="relative">Our</span>
                 </span>{" "}
                 Story
               </h2>
               <p className="text-base text-indigo-100 md:text-lg !leading-10">
-                Our Story is one of passion, dedication and hard work. We are
-                here to change the narrative of the gig economy by providing
-                opportunities for the youth.
+                Learn more on how a group of college students came together to
+                solve a problem that has been around for a while. We are
+                committed to providing opportunities for the youth in the gig
+                economy.
               </p>
             </div>
             <div className="max-w-xl sm:mx-auto sm:text-center lg:max-w-2xl">
