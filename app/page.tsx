@@ -242,7 +242,7 @@ function ByeByeScammers() {
         </p>
         <div className="flex flex-col items-center justify-center space-y-5 lg:space-y-0 lg:flex-row lg:space-x-5 pt-5">
           <Button asChild variant="outline">
-            <Link href="/user/sign-up">How does it work?</Link>
+            <Link href="/verification">How does it work?</Link>
           </Button>
         </div>
       </div>
