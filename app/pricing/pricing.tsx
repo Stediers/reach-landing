@@ -3,35 +3,25 @@ import Card from "@components/Card";
 
 export default function Main() {
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth px-5 py-10">
-      <HeaderWrapper
-        title="Pricing"
-        id="pricing"
-        className="items-center justify-center w-full flex flex-col lg:space-y-12 space-y-8 max-w-6xl"
-      >
-        <p className="text-center lg:text-lg text-md max-w-4xl lg:leading-9">
-          Choose one of the plans when creating a booking on our platform. Feel
-          free to explore each plan and the benefits they offer.
-        </p>
-        <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
-          <div />
-          <PricingCard
-            title="Standard"
-            commission={5}
-            description="The real experience of Reach. Get the best partners for your needs and have a dedicated support team to assist you."
-            features={[
-              "Choose 3 slots per booking",
-              "First 3 bookings are free",
-              "High partner response rate",
-              "Dedicated Customer Support",
-            ]}
-            nonFeatures={[]}
-            isPopular
-            // plus="Basic"
-          />
-          <div />
-        </div>
-      </HeaderWrapper>
+    <div className="relative flex flex-col items-center justify-center scroll-smooth px-5">
+      <div className="lg:grid grid-cols-1 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0 max-w-2xl">
+        <div />
+        <PricingCard
+          title="Standard"
+          commission={5}
+          description="The real experience of Reach. Get the best partners for your needs and have a dedicated support team to assist you."
+          features={[
+            "Choose 3 slots per booking",
+            "First 3 bookings are free",
+            "High partner response rate",
+            "Dedicated Customer Support",
+          ]}
+          nonFeatures={[]}
+          isPopular
+          // plus="Basic"
+        />
+        <div />
+      </div>
     </div>
   );
 }
@@ -79,7 +69,7 @@ interface PricingProps {
 function PricingCard(props: PricingProps) {
   return (
     <Card
-      className={`lg:!px-10 !px-5 lg:!py-10 !py-5 flex flex-col !space-y-5 justify-start relative min-h-full ${
+      className={`lg:!px-10 !px-5 lg:!py-10 !py-5 flex flex-col !space-y-5 justify-start relative min-h-full max-w-sm ${
         props.isPopular ? "border-success border-2" : ""
       }`}
     >

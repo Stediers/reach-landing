@@ -1,6 +1,7 @@
 "use client";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -119,6 +120,13 @@ function DesktopNav() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
+              <Link href="/verification" passHref legacyBehavior>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Verification
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
               <NavigationMenuTrigger>Compliance</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 grid-cols-2 w-[600px]">
@@ -185,24 +193,23 @@ function MobileNav() {
               </SheetTitle>
             </SheetHeader>
             <div className=" w-full flex flex-col items-center justify-center font-medium text-lg space-y-5">
-              <Link target="_blank" href={"http://www.reachgig.com/about-us"}>
-                About Us
-              </Link>
-              <Link target="_blank" href={"http://www.partner.reachgig.com/"}>
-                Partner with us
-              </Link>
-              <Link target="_blank" href={"http://www.reachgig.com/pricing"}>
-                Pricing
-              </Link>
-              <Link target="_blank" href={"http://www.reachgig.com/bookings"}>
-                Bookings
-              </Link>
-              <Link target="_blank" href={"http://www.reachgig.com/blog"}>
-                Blogs
-              </Link>
-              <Link target="_blank" href={"http://www.reachgig.com/contact"}>
-                Contact Us
-              </Link>
+              <SheetClose>
+                <Link href={"/about-us"}>About Us</Link>
+              </SheetClose>
+              <SheetClose>
+                <Link target="_blank" href={"http://www.partner.reachgig.com/"}>
+                  Partner with us
+                </Link>
+              </SheetClose>
+              <SheetClose>
+                <Link href={"/pricing"}>Pricing</Link>
+              </SheetClose>
+              <SheetClose>
+                <Link href={"/bookings"}>Bookings</Link>
+              </SheetClose>
+              <SheetClose>
+                <Link href={"/contact"}>Contact Us</Link>
+              </SheetClose>
               <DropdownMenu>
                 <DropdownMenuTrigger>Compliance</DropdownMenuTrigger>
                 <DropdownMenuContent>

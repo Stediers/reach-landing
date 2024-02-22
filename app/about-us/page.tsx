@@ -163,38 +163,24 @@ function WhatWeBelieve() {
 function Hero() {
   return (
     <div className="bg-foreground w-full">
-      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="px-10 py-16 mx-auto lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
-          <div className="flex flex-col mb-16 sm:text-center sm:mb-0">
-            <div className="mb-6 sm:mx-auto">
-              <div className="flex items-center justify-center w-28 sm:mx-auto">
-                <svg
-                  className="w-full h-full text-white"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-            </div>
+          <div className="flex flex-col space-y-5 items-center mb-16 text-center sm:mb-0">
+            <ImageComponent
+              src="/images/about-us.svg"
+              alt="About Us"
+              className="w-[15rem] h-[15rem] object-cover"
+              border={false}
+            />
             <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-              <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
+              <h2 className="max-w-lg mb-6  text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
                 <span className="relative inline-block">
-                  <span className="relative">Our</span>
+                  <span className="relative">About Us</span>
                 </span>{" "}
-                Story
               </h2>
-              <p className="text-base text-indigo-100 md:text-lg !leading-10">
-                Learn more on how a group of college students came together to
-                solve a problem that has been around for a while. We are
-                committed to providing opportunities for the youth in the gig
-                economy.
+              <p className="text-lg text-indigo-100 md:text-lg !leading-10">
+                Learn about our mission and story. We are committed to providing
+                opportunities for the youth in the gig economy.
               </p>
             </div>
             <div className="max-w-xl sm:mx-auto sm:text-center lg:max-w-2xl">

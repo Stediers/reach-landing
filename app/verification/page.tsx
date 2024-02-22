@@ -38,11 +38,11 @@ export default function Main() {
     <div className="relative flex flex-col items-center justify-center space-y-10 sm:space-y-10 scroll-smooth pb-20">
       <Hero />
       <div className="grid gap-10 px-10 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
-        <FairPricing />
-        <FeedbackSystem />
-        <Communication />
-        <Variety />
-        <Disputes />
+        <ProfanityFilter />
+        <Identity />
+        <MobileNumber />
+        <SkillVerification />
+        <Report />
       </div>
     </div>
   );
@@ -55,20 +55,21 @@ function Hero() {
         <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
           <div className="flex flex-col space-y-5 items-center mb-16 text-center sm:mb-0">
             <ImageComponent
-              src="/images/booking.svg"
-              alt="About Us"
+              src="/images/verification.svg"
+              alt="Verification"
               className="w-[15rem] h-[15rem] object-cover"
               border={false}
             />
             <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-              <h2 className="max-w-lg mb-6  text-3xl font-bold leading-none text-white sm:text-4xl md:mx-auto">
+              <h2 className="max-w-lg mb-6  text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
                 <span className="relative inline-block">
-                  <span className="relative">Bookings</span>
+                  <span className="relative">Verifications</span>
                 </span>{" "}
               </h2>
               <p className="text-base text-indigo-100 md:text-lg !leading-10">
-                Leran more about our booking system and how it works. Reap the
-                benefits of our platform today!
+                Know who you&apos;re dealing with. Our verification process
+                ensures that you can trust the service providers on our
+                platform.
               </p>
             </div>
             <div className="max-w-xl sm:mx-auto sm:text-center lg:max-w-2xl">
@@ -83,31 +84,27 @@ function Hero() {
   );
 }
 
-function FairPricing() {
+function ProfanityFilter() {
   return (
     <ComponentWrapper>
-      {" "}
       <ImageComponent
-        src="/images/fair-pricing.svg"
+        src="/images/profanity.svg"
         className="w-48 h-48 object-cover lg:hidden"
         alt="Fair Pricing"
         border={false}
       />
       <div className="flex flex-col space-y-5 leading-7 text-center md:text-left md:w-full md:flex md:flex-col md:space-y-10 md:leading-7">
-        <h2 className="max-w-lg font-medium leading-10 text-3xl ">
-          Fair Pricing
+        <h2 className="max-w-lg font-medium leading-10 text-3xl">
+          Profanity Filter
         </h2>
         <p className="text-lg">
-          Conventional booking advances range from{" "}
-          <span className="text-primary">2000 Rs - 5000 Rs</span> ! Our platform
-          charges only a nominal{" "}
-          <span className="text-success">5% service fee, capped at 800 Rs</span>
-          , ensuring affordability for customers and fair compensation for
-          service providers.
+          Our Manual Profanity Filter ensures that all content on our platform
+          is appropriate for all users. This ensures a safe and comfortable
+          environment for all users.
         </p>
       </div>
       <ImageComponent
-        src="/images/fair-pricing.svg"
+        src="/images/profanity.svg"
         className="w-[18rem] h-[18rem] object-cover hidden lg:block"
         alt="Fair Pricing"
         border={false}
@@ -116,29 +113,29 @@ function FairPricing() {
   );
 }
 
-function FeedbackSystem() {
+function SkillVerification() {
   return (
     <ComponentWrapper>
       {" "}
       <ImageComponent
-        src="/images/feedback.svg"
+        src="/images/skill-verification.svg"
         className="w-48 h-48 object-cover lg:hidden"
         alt="Feedback System"
         border={false}
       />
       <div className="flex flex-col space-y-5 leading-7 text-center md:text-left md:w-full md:flex md:flex-col md:space-y-10 md:leading-7">
         <h2 className="max-w-lg font-medium leading-10 text-3xl ">
-          Transparent Feedback System
+          Skill Verification
         </h2>
         <p className="text-lg">
-          Make informed decisions effortlessly! With our transparent feedback
-          system, customers can easily gauge service quality through authentic
-          user reviews, empowering both parties to strive for excellence.
+          Our skill verification process ensures that the service providers on
+          our platform are skilled and experienced in their respective fields.
+          Say goodbye to unqualified service providers!
         </p>
       </div>
       <ImageComponent
-        src="/images/feedback.svg"
-        className="w-[20rem] h-[20rem] object-cover hidden lg:block"
+        src="/images/skill-verification.svg"
+        className="w-[15rem] h-[15rem] object-cover hidden lg:block"
         alt="Fair Pricing"
         border={false}
       />
@@ -146,89 +143,85 @@ function FeedbackSystem() {
   );
 }
 
-function Communication() {
+function MobileNumber() {
   return (
     <ComponentWrapper>
-      {" "}
       <ImageComponent
-        src="/images/communication.svg"
+        src="/images/mobile-verification.svg"
         className="w-48 h-48 object-cover lg:hidden"
-        alt="Communication System"
+        alt="MobileNumber System"
         border={false}
       />
       <div className="flex flex-col space-y-5 leading-7 text-center md:text-left md:w-full md:flex md:flex-col md:space-y-10 md:leading-7">
         <h2 className="max-w-lg font-medium leading-10 text-3xl ">
-          Seamless Communication
+          Mobile Number Verification
         </h2>
         <p className="text-lg">
-          Streamline your service experience! Our native chat platform
-          facilitates seamless communication between customers and service
-          providers, allowing for clear expectations and tailored service
-          delivery.
+          Our mobile number verification process ensures that the service
+          providers on our platform are real and can be contacted easily. We
+          ensure that the service providers are easily reachable.
         </p>
       </div>
       <ImageComponent
-        src="/images/communication.svg"
+        src="/images/mobile-verification.svg"
         className="w-[20rem] h-[20rem] object-cover hidden lg:block"
-        alt="Seamless Communication"
+        alt="Seamless MobileNumber"
         border={false}
       />
     </ComponentWrapper>
   );
 }
 
-function Variety() {
+function Identity() {
   return (
     <ComponentWrapper>
-      {" "}
       <ImageComponent
-        src="/images/variety.svg"
+        src="/images/identity.svg"
         className="w-48 h-48 object-cover lg:hidden"
-        alt="Variety of Services"
+        alt="Identity of Services"
         border={false}
       />
       <div className="flex flex-col space-y-5 leading-7 text-center md:text-left md:w-full md:flex md:flex-col md:space-y-10 md:leading-7">
         <h2 className="max-w-lg font-medium leading-10 text-3xl ">
-          Variety of Services
+          Identity Verification
         </h2>
         <p className="text-lg">
-          From online to at-home services, our platform provides a wide array of
-          options. Detailed listings include partner experience
+          Our identity verification process ensures that the service providers
+          on our platform are who they say they are. We ensure that the service
+          providers are real and genuine.
         </p>
       </div>
       <ImageComponent
-        src="/images/variety.svg"
+        src="/images/identity.svg"
         className="w-[20rem] h-[20rem] object-cover hidden lg:block"
-        alt="Variety of Services"
+        alt="Identity of Services"
         border={false}
       />
     </ComponentWrapper>
   );
 }
 
-function Disputes() {
+function Report() {
   return (
     <ComponentWrapper>
-      {" "}
       <ImageComponent
-        src="/images/support.svg"
+        src="/images/report.svg"
         className="w-48 h-48 object-cover lg:hidden"
         alt="Dispute Resolution"
         border={false}
       />
       <div className="flex flex-col space-y-5 leading-7 text-center md:text-left md:w-full md:flex md:flex-col md:space-y-10 md:leading-7">
         <h2 className="max-w-lg font-medium leading-10 text-3xl ">
-          Dispute Resolution
+          Report System
         </h2>
         <p className="text-lg">
-          We&apos;ve got your back. In case of disputes, our support team is
-          just a click away. With prompt intervention via the help button or
-          contact form, we ensure quick resolution, fostering trust and
-          satisfaction among users.
+          Even if we miss something, you can report any inappropriate content or
+          service providers on our platform. This ensures that our platform is
+          safe and comfortable for all users.
         </p>
       </div>
       <ImageComponent
-        src="/images/support.svg"
+        src="/images/report.svg"
         className="w-[20rem] h-[20rem] object-cover hidden lg:block"
         alt="Dispute Resolution"
         border={false}
