@@ -10,11 +10,11 @@ import ComponentWrapper from "@wrapper/ComponentWrapper";
 
 export const metadata: Metadata = {
   title: {
-    default: "Bookings on ReachGig",
-    template: "%s | Bookings",
+    default: "Bookings",
+    template: "%s | ReachGig",
   },
   description:
-    "Get the best prices, partners and services when booking with ReachGig!",
+    "Book the best services at the best prices. Get the best partners and services when booking with ReachGig!",
   openGraph: {
     title: "Bookings on ReachGig",
     description:

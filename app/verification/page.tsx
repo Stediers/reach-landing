@@ -10,15 +10,15 @@ import ComponentWrapper from "@wrapper/ComponentWrapper";
 
 export const metadata: Metadata = {
   title: {
-    default: "Bookings on ReachGig",
-    template: "%s | Bookings",
+    default: "Verification",
+    template: "%s | ReachGig",
   },
   description:
-    "Get the best prices, partners and services when booking with ReachGig!",
+    "Know who you're dealing with. Our verification process ensures that you can trust the service providers on our platform.",
   openGraph: {
-    title: "Bookings on ReachGig",
+    title: "Verification",
     description:
-      "Get the best prices, partners and services when booking with ReachGig!",
+      "Know who you're dealing with. Our verification process ensures that you can trust the service providers on our platform.",
     url: "https://reachgig.com/bookings",
     type: "website",
     images: [
@@ -90,10 +90,10 @@ function ProfanityFilter() {
       <ImageComponent
         src="/images/profanity.svg"
         className="w-48 h-48 object-cover lg:hidden"
-        alt="Fair Pricing"
+        alt="Profanity"
         border={false}
       />
-      <div className="flex flex-col space-y-5 leading-7 text-center md:text-left md:w-full md:flex md:flex-col md:space-y-10 md:leading-7">
+      <div className="flex flex-col space-y-3 leading-7 text-center md:text-left md:w-full md:flex md:flex-col md:space-y-10 md:leading-7">
         <h2 className="max-w-lg font-medium leading-10 text-3xl">
           Profanity Filter
         </h2>
