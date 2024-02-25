@@ -9,6 +9,7 @@ import TextArea from "@components/input/TextArea";
 import { showSnackBar } from "@components/notifications/Snackbar";
 import { Button } from "@components/ui/button";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
+import { isValidPhoneNumber } from "libphonenumber-js";
 
 const faqs = [
   {
@@ -45,25 +46,65 @@ export default function Main() {
 function Index() {
   const [name, setName] = useState("");
   const [question, setQuestion] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  function validateForm() {
+    if (name === "") {
+      return false;
+    } else if (question === "" || question.length < 10) {
+      return false;
+    } else if (phone === "") {
+      return false;
+    } else if (email === "") {
+      return false;
+    } else if (!isValidPhoneNumber("+91" + phone)) {
+      return false;
+    } else return true;
+  }
 
   return (
     <HeaderWrapper
       title="Contact Us"
-      className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10 max-w-lg"
+      className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10 max-w-xl"
     >
       <div className="flex flex-col w-full space-y-5">
-        <TextInput
-          type="text"
-          placeholder="John Doe"
-          title="Name"
-          onChange={(value) => {
-            setName(value);
-          }}
-          value={name}
-          errorText={name === "" ? "Name is required" : ""}
-          maxLength={15}
-          mandatory={true}
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-5 gap-x-5 w-full">
+          <TextInput
+            type="text"
+            placeholder="John Doe"
+            title="Name"
+            onChange={(value) => {
+              setName(value);
+            }}
+            value={name}
+            errorText={""}
+            maxLength={15}
+            mandatory={true}
+          />
+          <TextInput
+            type="text"
+            placeholder="9876543210"
+            title="Phone"
+            onChange={(value) => {
+              setPhone(value);
+            }}
+            value={phone}
+            errorText={""}
+            maxLength={10}
+          />
+          <TextInput
+            type="text"
+            placeholder="john.doe@gmail.com"
+            title="Email"
+            onChange={(value) => {
+              setEmail(value);
+            }}
+            value={email}
+            errorText={""}
+            maxLength={30}
+          />
+        </div>
         <TextArea
           value={question}
           onChange={(value) => {
@@ -75,13 +116,33 @@ function Index() {
         />
         <Button
           variant="default"
-          onclick={async () => {
-            if (!validateForm({ name, question })) return;
-            window.open(
-              `mailto:reachgig.connect@gmail.com?subject=Query from ${name}&body=${question}`
-            );
+          onClick={async () => {
+            // if (validateForm()) return;
+            const res = await fetch("/api/mail_api", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name,
+                question,
+                phone,
+                email,
+              }),
+            });
+            if (res.status !== 200) {
+              showSnackBar({
+                message: "Failed to submit form!",
+                state: State.ERROR,
+              });
+            } else {
+              showSnackBar({
+                message: "Form submitted successfully!",
+                state: State.SUCCESS,
+              });
+            }
           }}
-          disabled={validateForm({ name, question }) ? false : true}
+          disabled={!validateForm()}
         >
           Submit
         </Button>

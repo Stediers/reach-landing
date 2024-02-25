@@ -293,10 +293,9 @@ export interface OfflineAppointmentSnapshot
   };
 }
 
-
 export type FormContent = {
   name: string;
   phone: string;
   email: string;
-  message: string;
-}
+  question: string;
+};
