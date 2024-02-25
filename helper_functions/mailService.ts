@@ -23,11 +23,15 @@ export async function sendMail({ content }: { content: FormContent }) {
     `,
   };
 
-  transporter.sendMail(mailOptions, function (error: Error) {
-    if (error) {
-      throw new Error(error.message);
-    } else {
-      return true;
-    }
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, function (error: Error) {
+      if (error) {
+        reject(error);
+        throw new Error(error.message);
+      } else {
+        resolve(true);
+        return true;
+      }
+    });
   });
 }

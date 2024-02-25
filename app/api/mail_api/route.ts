@@ -3,9 +3,7 @@ import { sendMail } from "helper_functions/mailService";
 import { FormContent } from "@data/types";
 import { NextRequest, NextResponse as Response } from "next/server";
 
-// This is an example of how to send a server-side email
 export async function POST(req: NextRequest) {
-  //@ts-ignore
   const body = await req.json();
   try {
     if (!body) {
