@@ -152,3 +152,8 @@ export enum IndianLanguages {
   TELUGU = "telugu",
   URDU = "urdu",
 }
+
+export enum BlogCategory {
+  TIPS = "tips",
+  STORY = "story",
+}

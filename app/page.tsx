@@ -23,6 +23,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@components/ui/card";
+import ComponentWrapper from "@wrapper/ComponentWrapper";
+import SideComponent from "@components/SideComponent";
 
 const iconStyle = "lg:w-24 lg:h-24 w-20 h-20";
 
@@ -57,7 +59,7 @@ export default function Page() {
       <Index />
       <What />
       <ByeByeScammers />
-      <JoinReach />
+      <BecomeAPartner />
       {/* <CustomerStories />
       <HappyPartners /> */}
       {/* <WhatWeBelieve cookieExists={cookieExists} /> */}
@@ -67,162 +69,6 @@ export default function Page() {
       </div> */}
     </div>
   );
-}
-
-function HappyPartners() {
-  return (
-    <HeaderWrapper
-      title="Happy Partners"
-      className="items-center justify-center w-full flex flex-col space-y-16"
-      id="happy-partners"
-    >
-      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
-        <PartnerCard
-          name="Pooja"
-          designation="Makeup Artist"
-          quote="Hi"
-          image="/images/what-we-believe-3.webp"
-        />
-        <PartnerCard
-          name="Parthiban"
-          designation="Photographer"
-          quote="Hi"
-          image="/images/what-we-believe-1.webp"
-        />
-        <PartnerCard
-          name="Saravanan"
-          designation="Caterer"
-          quote="Hi"
-          image="/images/what-we-believe-2.webp"
-        />
-        <PartnerCard
-          name="Pooja"
-          designation="Makeup Artist"
-          quote="Hi"
-          image="/images/what-we-believe-3.webp"
-        />
-        <PartnerCard
-          name="Parthiban"
-          designation="Photographer"
-          quote="Hi"
-          image="/images/what-we-believe-1.webp"
-        />
-        <PartnerCard
-          name="Saravanan"
-          designation="Caterer"
-          quote="Hi"
-          image="/images/what-we-believe-2.webp"
-        />
-      </div>
-    </HeaderWrapper>
-  );
-}
-
-function PartnerCard({
-  name,
-  designation,
-  quote,
-  image,
-}: {
-  name: string;
-  designation: string;
-  quote: string;
-  image: string;
-}) {
-  return (
-    <div className="flex flex-col items-center justify-center space-y-4">
-      <ImageComponent
-        src={image}
-        alt={name}
-        className="rounded-2xl lg:w-[18rem] lg:h-[18rem] border border-gray w-[12rem] h-[12rem]"
-        whileHover={{ scale: 1.05 }}
-      />
-      <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
-        <p className="lg:text-2xl text-lg font-medium text-center">{name}</p>
-        <p className="lg:text-md text-base text-center text-info">
-          {designation}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function CustomerStories() {
-  return (
-    <HeaderWrapper
-      title="Happy Customers"
-      className="items-center justify-center w-full flex flex-col space-y-16"
-      id="customer-stories"
-    >
-      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
-        <CustomerCard
-          name="Pooja"
-          designation="Makeup Artist"
-          quote="Hi"
-          image="/images/what-we-believe-3.webp"
-        />
-        <CustomerCard
-          name="Parthiban"
-          designation="Photographer"
-          quote="Hi"
-          image="/images/what-we-believe-1.webp"
-        />
-        <CustomerCard
-          name="Saravanan"
-          designation="Caterer"
-          quote="Hi"
-          image="/images/what-we-believe-2.webp"
-        />
-        <CustomerCard
-          name="Pooja"
-          designation="Makeup Artist"
-          quote="Hi"
-          image="/images/what-we-believe-3.webp"
-        />
-        <CustomerCard
-          name="Parthiban"
-          designation="Photographer"
-          quote="Hi"
-          image="/images/what-we-believe-1.webp"
-        />
-        <CustomerCard
-          name="Saravanan"
-          designation="Caterer"
-          quote="Hi"
-          image="/images/what-we-believe-2.webp"
-        />
-      </div>
-    </HeaderWrapper>
-  );
-
-  function CustomerCard({
-    name,
-    designation,
-    quote,
-    image,
-  }: {
-    name: string;
-    designation: string;
-    quote: string;
-    image: string;
-  }) {
-    return (
-      <div className="flex flex-col items-center justify-center space-y-4 lg:space-y-7">
-        <ImageComponent
-          src={image}
-          alt={name}
-          className="rounded-2xl lg:w-[18rem] lg:h-[18rem] border border-gray w-[12rem] h-[12rem]"
-          whileHover={{ scale: 1.05 }}
-        />
-        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
-          <p className="lg:text-2xl text-lg font-medium text-center">{name}</p>
-          <p className="lg:text-md text-base text-center text-info">
-            {designation}
-          </p>
-        </div>
-      </div>
-    );
-  }
 }
 
 function ByeByeScammers() {
@@ -250,36 +96,55 @@ function ByeByeScammers() {
   );
 }
 
-function JoinReach() {
+function BecomeAPartner() {
   return (
     <HeaderWrapper
-      title="What are you waiting for?"
+      title="Become a Partner"
       className="items-center justify-center w-full flex flex-col space-y-16"
       id="who-we-are-and-what-we-do"
     >
-      <div className="grid lg:grid-cols-3 grid-cols-1 justify-items-center gap-x-10 gap-y-20 w-full max-w-7xl">
-        <DescriptionCard
-          title="Become a Partner"
-          description="Join ReachGig"
-          linkText="Join Now"
-          link="/user/sign-up"
-          icon={<MdPersonSearch className={iconStyle} />}
+      <Button asChild variant="success" className="w-fit">
+        <Link href="/user/sign-up" className="w-fit">
+          Get Started
+        </Link>
+      </Button>
+      <div className="grid gap-10 px-10 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
+        <SideComponent
+          title="Less Ghosting"
+          description="Let your custome know what, how and when you offer your services before they reach out to you. This will help you get more genuine leads."
+          imageUrl="/images/ghost.svg"
         />
-        <DescriptionCard
-          title="Search for Services"
-          description="Join ReachGig"
-          linkText="Join Now"
-          link="/user/sign-up"
-          icon={<GiJourney className={iconStyle} />}
+        <SideComponent
+          title="Avoid Negotiations"
+          description="Have complete control over your pricing and services. No more negotiations and haggling."
+          imageUrl="/images/negotiate.svg"
         />
-        <DescriptionCard
-          title="Careers"
-          description="Help us change the way we work and earn."
-          linkText="Join Now"
-          link="/user/sign-up"
-          icon={<AiFillStar className={iconStyle} />}
+        <SideComponent
+          title="Be Discovered"
+          description="We enable you and your services to be found on Google and other search engines. This enhances your online presence."
+          imageUrl="/images/discover.svg"
         />
+        <SideComponent
+          title="Get Paid on Time"
+          description="Get paid for your services. No more chasing payments. We take care of it for you."
+          imageUrl="/images/paid.svg"
+        />
+        <SideComponent
+          title="Customer Reviews"
+          description="Get genuine reviews from your customers, helping you build your reputation and credibility."
+          imageUrl="/images/review.svg"
+        />
+        {/* <SideComponent
+          title="Join the Community"
+          description="Leverage our social media to connect with other experts in your field and grow your business."
+          imageUrl="/images/community.svg"
+        /> */}
       </div>
+      <Button asChild variant="success" className="w-fit">
+        <Link href="/user/sign-up" className="w-fit">
+          Get Started
+        </Link>
+      </Button>
     </HeaderWrapper>
   );
 }
@@ -369,14 +234,14 @@ function Index() {
             the Gig Economy
           </h1>
           <p className="lg:text-lg text-md text-center text-white">
-            Lets change the way we work and earn.
+            Join us and be part of the revolution.
           </p>
           <div className="grid grid-cols-2 gap-5 pt-5">
             <Button asChild variant="success">
               <Link href={partnerLink}>Become a Partner</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href={customerLink}>Find Partners</Link>
+              <Link href={`${customerLink}/explore`}>Find Services</Link>
             </Button>
           </div>
         </div>
@@ -391,105 +256,6 @@ function Index() {
       </div>
     </div>
   );
-}
-
-function DescriptionCard({
-  title,
-  description,
-  linkText = "Find Services",
-  link,
-  icon,
-}: {
-  title: string;
-  description: string;
-  linkText?: string;
-  link: string;
-  icon: ReactNode;
-}) {
-  return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex items-center justify-center space-x-5">{icon}</div>
-      </CardContent>
-      <CardFooter>
-        <div className="flex items-center justify-center space-y-5 lg:space-y-0 lg:flex-row lg:space-x-5 pt-5">
-          <Button asChild variant="default">
-            <Link href={link}>{linkText}</Link>
-          </Button>
-        </div>
-      </CardFooter>
-    </Card>
-  );
-}
-
-function WhatWeBelieve({ cookieExists }: { cookieExists: boolean }) {
-  return (
-    <HeaderWrapper
-      title="WE BELIEVE IN YOU"
-      className="items-center justify-center w-full flex flex-col space-y-16"
-      id="about-us"
-    >
-      <p className="lg:text-lg text-md text-center max-w-2xl">
-        We are a team of passionate individuals who believe in the power of
-        dreams. We are here to help you reach your dreams and achieve your
-        goals.
-      </p>
-      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
-        <ImageWithQuote
-          image="/images/what-we-believe-1.webp"
-          quote="Hi"
-          name="Deepakindresh N"
-          designation="Head of Marketing"
-        />
-        <ImageWithQuote
-          designation="Chief Executive Officer"
-          name="Harshavardhan J"
-          quote="Hi"
-          image="/images/what-we-believe-3.webp"
-        />
-        <ImageWithQuote
-          image="/images/what-we-believe-2.webp"
-          quote="Hi"
-          name="Gautthum J"
-          designation="Chief Operating Officer"
-        />
-      </div>
-    </HeaderWrapper>
-  );
-
-  function ImageWithQuote({
-    image,
-    quote,
-    name,
-    designation,
-  }: {
-    image: string;
-    quote: string;
-    name: string;
-    designation: string;
-  }) {
-    return (
-      <div className="flex flex-col items-center justify-center space-y-4">
-        <ImageComponent
-          src={image}
-          alt={name}
-          className="rounded-2xl lg:w-[20rem] lg:h-[20rem] border border-gray w-[12rem] h-[12rem]"
-          whileHover={{ scale: 1.05 }}
-        />
-        <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
-          <p className="lg:text-2xl text-lg font-medium text-center">{name}</p>
-          <p className="lg:text-md text-base text-center">Co Founder</p>
-          <p className="lg:text-md text-base text-center text-info">
-            {designation}
-          </p>
-        </div>
-      </div>
-    );
-  }
 }
 
 function HeaderWrapper({

@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import React from "react";
 import { cn } from "@lib/utils";
+import { menus } from "@data/menu";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -91,41 +92,15 @@ function DesktopNav() {
       <div className="flex justify-between items-center space-x-5 w-full">
         <NavigationMenu orientation="vertical">
           <NavigationMenuList>
-            <NavigationMenuItem>
-              <Link href="/about-us" passHref legacyBehavior>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  About Us
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/contact" passHref legacyBehavior>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Contact Us
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/pricing" passHref legacyBehavior>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Pricing
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/bookings" passHref legacyBehavior>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Bookings
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/verification" passHref legacyBehavior>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Verification
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+            {menus.map((menu) => (
+              <NavigationMenuItem key={menu.title}>
+                <Link href={menu.path} passHref legacyBehavior>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    {menu.title}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            ))}
             <NavigationMenuItem>
               <NavigationMenuTrigger>Compliance</NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -193,23 +168,11 @@ function MobileNav() {
               </SheetTitle>
             </SheetHeader>
             <div className=" w-full flex flex-col items-center justify-center font-medium text-lg space-y-5">
-              <SheetClose>
-                <Link href={"/about-us"}>About Us</Link>
-              </SheetClose>
-              <SheetClose>
-                <Link target="_blank" href={"http://www.partner.reachgig.com/"}>
-                  Partner with us
-                </Link>
-              </SheetClose>
-              <SheetClose>
-                <Link href={"/pricing"}>Pricing</Link>
-              </SheetClose>
-              <SheetClose>
-                <Link href={"/bookings"}>Bookings</Link>
-              </SheetClose>
-              <SheetClose>
-                <Link href={"/contact"}>Contact Us</Link>
-              </SheetClose>
+              {menus.map((menu) => (
+                <SheetClose key={menu.title}>
+                  <Link href={menu.path}>{menu.title}</Link>
+                </SheetClose>
+              ))}
               <DropdownMenu>
                 <DropdownMenuTrigger>Compliance</DropdownMenuTrigger>
                 <DropdownMenuContent>
