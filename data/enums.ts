@@ -155,10 +155,5 @@ export enum IndianLanguages {
 
 export enum BlogCategory {
   TIPS = "tips",
-  NEWS = "news",
-  UPDATES = "updates",
-  TECH = "tech",
-  BUSINESS = "business",
-  LIFESTYLE = "lifestyle",
-  HEALTH = "health",
+  STORY = "story",
 }

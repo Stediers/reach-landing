@@ -9,6 +9,8 @@ import ImageComponent from "@components/ImageComponent";
 import ComponentWrapper from "@wrapper/ComponentWrapper";
 import Hero from "@components/Hero";
 import { Badge } from "@components/ui/badge";
+import { BlogTag } from "@wrapper/BlogWrapper";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: {
@@ -42,34 +44,13 @@ export default function Page() {
         title="Blogs"
         subtitle="Get the latest news, updates and tips on ReachGig!"
       />
-      <SemiNav />
-      <div className="grid gap-10 px-10 lg:grid-cols-3 lg:px-20 justify-items-center max-w-[100rem]">
+      {/* <SemiNav /> */}
+      <div className="grid gap-10 px-10 lg:grid-cols-3 lg:px-20 justify-items-center max-w-[100rem] pt-10">
         <BlogCard
-          title="How to get the best services"
-          description="Get the best services at the best prices. Get the best partners and services when booking with ReachGig!"
+          title="Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions"
+          description="In today's gig economy, where flexibility and independence are highly valued, mastering the art of client transactions is key to success as a gig worker. Whether you're a makeup artist, gym trainer, or any other type of gig worker, adhering to best practices can elevate your professionalism and enhance client satisfaction."
           imageUrl="/images/booking.svg"
-          link="https://reachgig.com/blogs/how-to-get-the-best-services"
-          tags={[BlogCategory.NEWS, BlogCategory.TIPS]}
-        />
-        <BlogCard
-          title="How to verify your account"
-          description="Know who you're dealing with. Our verification process ensures that you can trust the service providers on our platform."
-          imageUrl="/images/verification.svg"
-          link="https://reachgig.com/blogs/how-to-verify-your-account"
-          tags={[BlogCategory.TIPS]}
-        />
-        <BlogCard
-          title="How to get the best services"
-          description="Get the best services at the best prices. Get the best partners and services when booking with ReachGig!"
-          imageUrl="/images/booking.svg"
-          link="https://reachgig.com/blogs/how-to-get-the-best-services"
-          tags={[BlogCategory.NEWS]}
-        />
-        <BlogCard
-          title="How to verify your account"
-          description="Know who you're dealing with. Our verification process ensures that you can trust the service providers on our platform."
-          imageUrl="/images/verification.svg"
-          link="https://reachgig.com/blogs/how-to-verify-your-account"
+          link="/blogs/mastering-the-art-of-gig-work"
           tags={[BlogCategory.TIPS]}
         />
       </div>
@@ -84,7 +65,7 @@ function SemiNav() {
         {Object.values(BlogCategory).map((category) => (
           <Button
             variant="info"
-            className="first-letter:capitalize"
+            className="first-letter:capitalize lg:w-[10rem] w-[8rem]"
             key={category}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -106,10 +87,13 @@ function BlogCard({
   description: string;
   imageUrl: string;
   link: string;
-  tags: string[];
+  tags: BlogCategory[];
 }) {
   return (
-    <div className="flex flex-col items-center justify-start space-y-5 pt-10">
+    <Link
+      className="flex flex-col items-center justify-start space-y-5 p-3 group hover:cursor-pointer"
+      href={link}
+    >
       <ImageComponent
         src={imageUrl}
         alt={title}
@@ -118,28 +102,24 @@ function BlogCard({
       <div className="flex flex-col items-center justify-center lg:items-start space-y-3">
         <div className="lg:flex flex-row items-center justify-center lg:justify-start space-x-3 hidden">
           {tags.map((tag) => (
-            <Badge variant="infoOutline" key={tag}>
-              <p className="text-xs font-medium text-info">{tag}</p>
-            </Badge>
+            <BlogTag tag={tag} key={tag} />
           ))}
         </div>
-        <h2 className="text-2xl font-medium text-center lg:text-left tracking-tight w-full hover:cursor-pointer hover:underline underline-offset-4">
+        <h2 className="text-2xl font-medium text-center lg:text-left tracking-tight w-full hover:cursor-pointer hover:underline underline-offset-4 group-hover:underline">
           {title}
         </h2>
         <div className="flex flex-row items-center justify-center lg:justify-start space-x-3 lg:hidden">
           {tags.map((tag) => (
-            <Badge variant="infoOutline" key={tag}>
-              <p className="text-xs font-medium text-info">{tag}</p>
-            </Badge>
+            <BlogTag tag={tag} key={tag} />
           ))}
         </div>
-        <p className="text-base text-center lg:text-left w-full max-h-[5rem] overflow-ellipsis">
-          {description}
+        <p className="text-base text-center lg:text-left w-full">
+          {description.substring(0, 150)}...
         </p>
         <Button variant="info" asChild size="sm">
           Read More
         </Button>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -38,11 +38,21 @@ export default function Page() {
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
       <BlogWrapper
         readTime={5}
-        date={new Date()}
-        tags={[BlogCategory.NEWS, BlogCategory.TIPS]}
-        title="How to get the best services"
+        date={{
+          day: 27,
+          month: 2,
+          year: 2024,
+        }}
+        tags={[BlogCategory.TIPS]}
+        title="Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions"
         imageUrl="/images/booking.svg"
         link="/how-to-get-the-best-services"
+        authors={[
+          {
+            name: "DeepakIndresh Narayana Gandhi",
+            link: "https://www.linkedin.com/in/deepakindresh-n/",
+          },
+        ]}
       >
         <BlogText>
           The best service is the one that fulfills your needs. It is the one
