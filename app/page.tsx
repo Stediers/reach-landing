@@ -182,11 +182,6 @@ function What() {
           description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
         />
         <FeatureCard
-          icon={<HiChatBubbleLeftRight className={iconStyle} />}
-          heading="Communicate"
-          description="Communicate what you offer and showcase your expertise."
-        />
-        <FeatureCard
           icon={<FcBullish className={iconStyle} />}
           heading="Get the job done"
           description="Get the job done and get paid. It's that simple!"
@@ -202,7 +197,7 @@ function Index() {
   const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
     <div
-      className="flex flex-col items-center justify-center w-full min-h-[70vh] bg-foreground"
+      className="flex flex-col items-center justify-center w-full min-h-[75vh] bg-foreground"
       id="Index"
     >
       <div className="flex lg:flex-row flex-col items-center lg:justify-between justify-start space-y-10 lg:space-y-0 w-full max-w-7xl px-5 py-10 lg:px-16">
