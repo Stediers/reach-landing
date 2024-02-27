@@ -38,14 +38,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth pb-20">
-      <Hero
-        image="/images/blogs.svg"
-        title="Blogs"
-        subtitle="Get the latest news, updates and tips on ReachGig!"
-      />
-      {/* <SemiNav /> */}
-      <div className="grid gap-10 px-10 lg:grid-cols-3 lg:px-20 justify-items-center max-w-[100rem] pt-10">
+    <div className="relative flex flex-col items-center justify-center scroll-smooth pb-20 pt-10 max-w-[100rem]">
+      <h1 className="text-4xl font-semibold w-full px-10">
+        Learn with ReachGig
+      </h1>
+      <div className="grid gap-10 px-10 lg:grid-cols-3 lg:px-20 justify-items-center pt-10">
         <BlogCard
           title="Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions"
           description="In today's gig economy, where flexibility and independence are highly valued, mastering the art of client transactions is key to success as a gig worker. Whether you're a makeup artist, gym trainer, or any other type of gig worker, adhering to best practices can elevate your professionalism and enhance client satisfaction."
