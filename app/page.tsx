@@ -15,6 +15,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { BsShield, BsShieldCheck } from "react-icons/bs";
 import ReachSVG from "@components/svg/ReachSVG";
+import HeaderWrapper from "@wrapper/HeaderWrapper";
+import FeatureCard from "@components/FeatureCard";
 import {
   Card,
   CardContent,
@@ -194,26 +196,6 @@ function What() {
   );
 }
 
-function FeatureCard({
-  icon,
-  heading,
-  description,
-}: {
-  icon: ReactNode;
-  heading: string;
-  description: string;
-}) {
-  return (
-    <div className="flex flex-col items-center justify-center space-y-4">
-      {icon}
-      <p className="lg:text-2xl text-lg font-medium text-center">{heading}</p>
-      <p className="lg:text-md text-base text-center max-w-[20rem]">
-        {description}
-      </p>
-    </div>
-  );
-}
-
 function Index() {
   const words = "Empowering the Gig Economy".split(" ");
   const partnerLink = process.env.NEXT_PUBLIC_PARTNER_LINK || "/user/sign-up";
@@ -254,36 +236,6 @@ function Index() {
           />
         </div>
       </div>
-    </div>
-  );
-}
-
-function HeaderWrapper({
-  children,
-  title,
-  bgColor = "bg-white text-text",
-  className,
-  id,
-  showHeader = true,
-}: {
-  children: ReactNode;
-  title: string;
-  bgColor?: string;
-  className?: string;
-  id?: string;
-  showHeader?: boolean;
-}) {
-  return (
-    <div id={id} className={`${className} py-16 w-full px-7 ${bgColor}`}>
-      {showHeader && (
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <h1 className="text-2xl lg:text-3xl font-medium text-center first-letter:capitalize">
-            {title}
-          </h1>
-          <div className="h-px w-[80%] bg-primary" />
-        </div>
-      )}
-      {children}
     </div>
   );
 }

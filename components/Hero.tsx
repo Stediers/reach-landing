@@ -20,14 +20,15 @@ export default function Hero({
               alt={title}
               className="w-[15rem] h-[15rem] object-cover"
               border={false}
+              popup={false}
             />
             <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-              <h2 className="max-w-lg mb-6  text-3xl font-bold leading-none text-white sm:text-4xl md:mx-auto">
+              <h2 className="max-w-lg mb-6 tracking-wide text-3xl font-bold leading-none text-white sm:text-4xl md:mx-auto">
                 <span className="relative inline-block">
                   <span className="relative">{title}</span>
                 </span>{" "}
               </h2>
-              <p className="text-base text-indigo-100 md:text-lg !leading-10">
+              <p className="text-base lg:text-lg text-white !leading-10">
                 {subtitle}
               </p>
             </div>

@@ -21,60 +21,23 @@ import {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import React from "react";
 import { cn } from "@lib/utils";
-import { menus } from "@data/menu";
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Terms of Service",
-    href: "/compliance/terms-of-service",
-    description:
-      "The rules and guidelines that users must agree to in order to use a service.",
-  },
-  {
-    title: "Privacy Policy",
-    href: "/compliance/privacy-policy",
-    description:
-      "A legal document that discloses how a website gathers, stores, and shares a user's data.",
-  },
-  {
-    title: "Data Retention Policy",
-    href: "/compliance/data-retention-policy",
-    description:
-      "A policy that outlines how long data is stored after the data is no longer needed.",
-  },
-  {
-    title: "Refund Policy",
-    href: "/compliance/refund-policy",
-    description: "A document that outlines the terms of a refund.",
-  },
-  {
-    title: "Chat Guidelines",
-    href: "/compliance/chat-guidelines",
-    description:
-      "A set of rules and guidelines that users must agree to in order to use a chat service.",
-  },
-];
+import { learn, legal, menus } from "@data/menu";
+import UnderlinedHeader from "./UnderlinedHeader";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const path = usePathname();
   return (
     <div className="py-4 px-5 border-b sticky top-0 z-10 bg-white">
-      <MobileNav />
-      <DesktopNav />
+      <MobileNav path={path} />
+      <DesktopNav path={path} />
     </div>
   );
 }
 
-function DesktopNav() {
+function DesktopNav({ path }: { path: string }) {
   return (
     <div className="lg:flex justify-start space-x-10 w-full items-center hidden">
       <Link
@@ -92,20 +55,11 @@ function DesktopNav() {
       <div className="flex justify-between items-center space-x-5 w-full">
         <NavigationMenu orientation="vertical">
           <NavigationMenuList>
-            {menus.map((menu) => (
-              <NavigationMenuItem key={menu.title}>
-                <Link href={menu.path} passHref legacyBehavior>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    {menu.title}
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            ))}
             <NavigationMenuItem>
               <NavigationMenuTrigger>Compliance</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 grid-cols-2 w-[600px]">
-                  {components.map((component) => (
+                  {legal.map((component) => (
                     <ListItem
                       key={component.title}
                       title={component.title}
@@ -117,6 +71,35 @@ function DesktopNav() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>How does it work?</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-4 grid-cols-2 w-[600px]">
+                  {learn.map((component) => (
+                    <ListItem
+                      key={component.title}
+                      title={component.title}
+                      href={component.href}
+                    >
+                      {component.description}
+                    </ListItem>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            {menus.map((menu) => (
+              <NavigationMenuItem key={menu.title}>
+                <Link href={menu.path} passHref legacyBehavior>
+                  <NavigationMenuLink
+                    className={`${navigationMenuTriggerStyle()} ${
+                      path === menu.path ? "border-primary border" : ""
+                    }`}
+                  >
+                    {menu.title}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            ))}
           </NavigationMenuList>
         </NavigationMenu>
         <div className="grid grid-cols-2 gap-5">
@@ -142,7 +125,7 @@ function DesktopNav() {
   );
 }
 
-function MobileNav() {
+function MobileNav({ path }: { path: string }) {
   return (
     <div className="flex justify-between space-x-5 w-full items-center lg:hidden">
       <div className="flex items-center space-x-4 shrink-0">
@@ -162,18 +145,27 @@ function MobileNav() {
           </SheetTrigger>
           <SheetContent className="space-y-5">
             <SheetHeader>
-              <SheetTitle className="text-xl justify-center items-center flex flex-col space-y-1 ">
-                <p>Menu</p>
-                <div className="w-[30%] border-b border-primary"></div>
+              <SheetTitle className="text-xl justify-center items-end flex flex-col space-y-1 ">
+                <UnderlinedHeader title="Where to?" align="items-end" />
               </SheetTitle>
             </SheetHeader>
-            <div className=" w-full flex flex-col items-center justify-center font-medium text-lg space-y-5">
+            <div className=" w-full flex flex-col items-end justify-center font-medium text-lg space-y-5">
               {menus.map((menu) => (
-                <SheetClose key={menu.title}>
-                  <Link href={menu.path}>{menu.title}</Link>
+                <SheetClose key={menu.title} asChild>
+                  <Link
+                    href={menu.path}
+                    className={`${path === menu.path ? "text-primary" : ""}`}
+                  >
+                    {menu.title}
+                  </Link>
                 </SheetClose>
               ))}
-              <DropdownMenu>
+              {legal.map((component) => (
+                <SheetClose key={component.title} asChild>
+                  <Link href={component.href}>{component.title}</Link>
+                </SheetClose>
+              ))}
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger>Compliance</DropdownMenuTrigger>
                 <DropdownMenuContent>
                   {components.map((component) => (
@@ -189,7 +181,7 @@ function MobileNav() {
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
-              </DropdownMenu>
+              </DropdownMenu> */}
             </div>
           </SheetContent>
         </Sheet>

@@ -1,10 +1,9 @@
-import React from "react";
-import Pricing from "./pricing";
+import React, { ReactNode } from "react";
+import { ArrowDownCircle, CheckCheckIcon, Shield } from "lucide-react";
 import { Metadata } from "next";
-import { Button } from "@components/ui/button";
-import { BiRupee } from "react-icons/bi";
-import ImageComponent from "@components/ImageComponent";
-import Hero from "@components/Hero";
+import HeaderWrapper from "@wrapper/HeaderWrapper";
+import FeatureCard from "@components/FeatureCard";
+import { BsSafe } from "react-icons/bs";
 
 export const metadata: Metadata = {
   title: {
@@ -31,51 +30,83 @@ export const metadata: Metadata = {
   },
 };
 
-// function Hero() {
-//   return (
-//     <div className="bg-foreground w-full">
-//       <div className="px-10 py-16 mx-auto lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-//         <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
-//           <div className="flex flex-col space-y-5 items-center mb-16 text-center sm:mb-0">
-//             <ImageComponent
-//               src="/images/pricing.svg"
-//               alt="Pricing"
-//               className="w-[15rem] h-[15rem] object-cover"
-//               border={false}
-//             />
-//             <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-//               <h2 className="max-w-lg mb-6  text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
-//                 <span className="relative inline-block">
-//                   <span className="relative">Pricing</span>
-//                 </span>{" "}
-//               </h2>
-//               <p className="text-base text-indigo-100 md:text-lg !leading-10">
-//                 We are a business that is committed to providing the best
-//                 services at the best prices. Scroll down to see our pricing
-//                 plans.
-//               </p>
-//             </div>
-//             <div className="max-w-xl sm:mx-auto sm:text-center lg:max-w-2xl">
-//               <Button variant="info" asChild>
-//                 Join Us
-//               </Button>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:space-y-20 space-y-10 pb-20">
-      <Hero
-        image="/images/pricing.svg"
-        title="Pricing"
-        subtitle="We are a business that is committed to providing the best services at the best prices. Scroll down to see our pricing plans."
-      />
+      <Hero />
       <Pricing />
+      <WhatYouGet />
     </div>
+  );
+}
+
+function Hero() {
+  return (
+    <div className="lg:min-h-[75vh] min-h-[60vh] bg-foreground w-full flex flex-col items-center justify-center">
+      <div className="max-w-4xl text-center">
+        <h1 className="lg:text-5xl text-3xl font-semibold text-white !leading-relaxed px-10">
+          Say Goodbye to <span className="text-error">hefty advances</span>
+          &nbsp; and hello to <span className="text-success">fair pricing</span>
+          .
+        </h1>
+        <div className="flex flex-col space-y-5 items-center mt-10">
+          <ArrowDownCircle className="w-12 h-12 text-white mx-auto" />
+          <p className="text-white text-base">See our pricing plan below.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Pricing() {
+  return (
+    <div className="max-w-4xl lg:min-h-[50vh] min-h-[30vh] w-full flex flex-col items-center justify-center lg:space-y-7 space-y-7 px-10">
+      <p className="text-center text-base tracking-wider font-medium text-success">
+        PAID BY THE CLIENT
+      </p>
+      <div className="flex flex-col items-center space-y-7">
+        <div className="flex flex-col items-center space-y-5">
+          <h2 className="lg:text-5xl text-3xl text-center font-semibold">
+            &nbsp;
+            <span className="">5%</span> Booking Advance
+          </h2>
+        </div>
+        <p className="text-lg text-center max-w-md lg:!leading-10 leading-8">
+          You pay a <span className="font-semibold">5%</span> booking advance
+          upto a maximum of <span className="font-semibold">₹500</span> for
+          booking a service. The advance is refundable if the service is not
+          provided.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function WhatYouGet() {
+  return (
+    <HeaderWrapper
+      className="min-h-[30vh] w-full flex flex-col items-center justify-center lg:space-y-20 space-y-10 px-10"
+      title="What you get"
+    >
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+        <FeatureCard
+          icon={
+            <CheckCheckIcon className="w-12 h-12 lg:w-32 lg:h-32 text-success" />
+          }
+          heading="Proof of appointment"
+          description="Have a documented proof of your appointment with an invoice."
+        />
+        <FeatureCard
+          icon={<Shield className="w-12 h-12 lg:w-32 lg:h-32 text-success" />}
+          heading="Secure payment"
+          description="Payment is secure and is only released after the job is done."
+        />
+        <FeatureCard
+          icon={<BsSafe className="w-12 h-12 lg:w-32 lg:h-32 text-success" />}
+          heading="Refundable advances"
+          description="If anything goes wrong, your advance is refundable."
+        />
+      </div>
+    </HeaderWrapper>
   );
 }

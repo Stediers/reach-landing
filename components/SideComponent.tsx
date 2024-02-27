@@ -34,6 +34,7 @@ export default function SideComponent({
         className={`${desktopImageClassName} hidden lg:block`}
         alt={title}
         border={false}
+        popup={false}
       />
     </ComponentWrapper>
   );
