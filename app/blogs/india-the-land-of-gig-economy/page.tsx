@@ -63,24 +63,25 @@ export default function Page() {
           economy. However, behind the allure of flexible work and independence,
           there are also hidden realities and challenges that come with this new
           way of working. In this article, we will delve into the secrets behind
-          India's gig economy, exploring the corporate landscape, the impact on
-          workers, and the future trends shaping this evolving sector.
+          India&apos;s gig economy, exploring the corporate landscape, the
+          impact on workers, and the future trends shaping this evolving sector.
         </BlogText>
         <BlogSubTitle title="The emergence of India's gig economy">
           <BlogText>
-            India's gig economy has seen a rapid rise in recent years, driven by
-            various factors. One key driver is the growth of the start-up
-            ecosystem in the country. With the government's push towards
-            entrepreneurship and digital India initiatives, many young
+            India&apos;s gig economy has seen a rapid rise in recent years,
+            driven by various factors. One key driver is the growth of the
+            start-up ecosystem in the country. With the government&apos;s push
+            towards entrepreneurship and digital India initiatives, many young
             entrepreneurs are venturing into the market, creating new platforms
             and opportunities for gig workers.
           </BlogText>
           <BlogText>
-            Additionally, India's large population and skilled workforce have
-            contributed to the expansion of the gig economy. The country's
-            burgeoning middle class, with its increasing income levels and
-            aspirations, has created a demand for a wide range of gig services
-            such as food delivery, home services, and e-commerce logistics.
+            Additionally, India&apos;s large population and skilled workforce
+            have contributed to the expansion of the gig economy. The
+            country&apos;s burgeoning middle class, with its increasing income
+            levels and aspirations, has created a demand for a wide range of gig
+            services such as food delivery, home services, and e-commerce
+            logistics.
           </BlogText>
           <BlogText>
             Moreover, the proliferation of smartphones and internet connectivity
@@ -93,16 +94,16 @@ export default function Page() {
             not without its challenges. In the next section, we will explore
             some of the realities and implications of this new way of working
             for both gig workers and the larger corporate landscape. Stay tuned
-            to unravel the secrets behind India's gig economy.
+            to unravel the secrets behind India&apos;s gig economy.
           </BlogText>
         </BlogSubTitle>
         <BlogSubTitle title="The benefits and challenges of the gig economy in India">
           <BlogText>
-            Now that we have understood the driving factors behind India's gig
-            economy, it's time to delve into its benefits and challenges. The
-            gig economy has undoubtedly brought about a myriad of opportunities,
-            but it is important to assess both the positives and negatives to
-            gain a holistic perspective.
+            Now that we have understood the driving factors behind India&apos;s
+            gig economy, it&apos;s time to delve into its benefits and
+            challenges. The gig economy has undoubtedly brought about a myriad
+            of opportunities, but it is important to assess both the positives
+            and negatives to gain a holistic perspective.
           </BlogText>
           <BlogText>
             One of the key benefits of the gig economy in India is the
@@ -133,14 +134,14 @@ export default function Page() {
             compensation and working conditions. They may encounter difficulty
             in negotiating rates or be subjected to exploitation by companies
             that try to maximize their profits by underpaying gig workers. This
-            raises questions of workers' rights and the need for regulations to
-            protect their interests.
+            raises questions of workers&apos; rights and the need for
+            regulations to protect their interests.
           </BlogText>
           <BlogText>
             In the next section, we will explore the role of government and
             corporations in addressing these challenges and creating a
             sustainable gig economy ecosystem. Join us as we uncover the reality
-            behind India's gig economy and the potential solutions for a
+            behind India&apos;s gig economy and the potential solutions for a
             balanced and inclusive future.
           </BlogText>
         </BlogSubTitle>
@@ -153,10 +154,10 @@ export default function Page() {
             market. One significant impact of the gig economy is the shifting
             dynamics of employment relationships. Unlike traditional jobs, where
             employees have long-term contracts and are considered part of a
-            company's core workforce, gig workers are independent contractors
-            who operate on a project-by-project basis. This has resulted in a
-            greater emphasis on short-term engagements rather than long-term
-            employment.
+            company&apos;s core workforce, gig workers are independent
+            contractors who operate on a project-by-project basis. This has
+            resulted in a greater emphasis on short-term engagements rather than
+            long-term employment.
           </BlogText>
           <BlogText>
             The gig economy has also fostered a culture of entrepreneurship and
@@ -262,12 +263,12 @@ export default function Page() {
             enhance the skills and employability of gig workers.
           </BlogText>
           <BlogText>
-            Overall, the government's efforts to create a conducive environment
-            for gig workers through policies and regulations are a step in the
-            right direction. However, there is still a need for continued
-            collaboration and dialogue between the government, gig platforms,
-            and workers to address emerging challenges and ensure a fair and
-            sustainable gig economy in India.
+            Overall, the government&apos;s efforts to create a conducive
+            environment for gig workers through policies and regulations are a
+            step in the right direction. However, there is still a need for
+            continued collaboration and dialogue between the government, gig
+            platforms, and workers to address emerging challenges and ensure a
+            fair and sustainable gig economy in India.
           </BlogText>
         </BlogSubTitle>
         <BlogSubTitle title="The future of the gig economy in India">
