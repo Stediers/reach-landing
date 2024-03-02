@@ -156,4 +156,5 @@ export enum IndianLanguages {
 export enum BlogCategory {
   TIPS = "tips",
   STORY = "story",
+  INFORMATION = "information",
 }

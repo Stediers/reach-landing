@@ -50,6 +50,13 @@ export default function Page() {
           link="/blogs/mastering-the-art-of-gig-work"
           tags={[BlogCategory.TIPS]}
         />
+        <BlogCard
+          title="India:The Land of Gig Economy"
+          description="India is a land of opportunities, and the gig economy is no exception. With the rise of digital platforms and the increasing demand for flexible work, the gig economy is booming in India. If you're looking to join the gig economy in India, here's what you need to know."
+          imageUrl="/images/booking.svg"
+          link="/blogs/india-the-land-of-gig-economy"
+          tags={[BlogCategory.INFORMATION]}
+        />
       </div>
     </div>
   );
