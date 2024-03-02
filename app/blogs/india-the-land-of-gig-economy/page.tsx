@@ -38,7 +38,7 @@ export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
       <BlogWrapper
-        readTime={5}
+        readTime={12}
         date={{
           day: 2,
           month: 3,
@@ -46,7 +46,7 @@ export default function Page() {
         }}
         tags={[BlogCategory.INFORMATION]}
         title="India: The Land of Gig Economy"
-        imageUrl="/images/booking.svg"
+        imageUrl="/images/why-reachgig-is-your-ultimate-platform.svg"
         link="/india-the-land-of-gig-economy"
         authors={[
           {

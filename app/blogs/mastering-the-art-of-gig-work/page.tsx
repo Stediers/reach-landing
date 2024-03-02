@@ -51,7 +51,7 @@ export default function Page() {
         authors={[
           {
             name: "Deepakindresh Narayana Gandhi",
-            link: "https://www.linkedin.com/in/deepakindresh-n/",
+            link: "https://www.instagram.com/deepakintherace/",
           },
         ]}
       >

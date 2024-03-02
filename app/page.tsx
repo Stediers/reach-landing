@@ -106,7 +106,7 @@ function BecomeAPartner() {
       id="who-we-are-and-what-we-do"
     >
       <Button asChild variant="success" className="w-fit">
-        <Link href="/user/sign-up" className="w-fit">
+        <Link href="https://partner.reachgig.com" className="w-fit">
           Get Started
         </Link>
       </Button>
@@ -143,7 +143,7 @@ function BecomeAPartner() {
         /> */}
       </div>
       <Button asChild variant="success" className="w-fit">
-        <Link href="/user/sign-up" className="w-fit">
+        <Link href="https://partner.reachgig.com" className="w-fit">
           Get Started
         </Link>
       </Button>
@@ -218,7 +218,7 @@ function Index() {
               <Link href={partnerLink}>Become a Partner</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href={`${customerLink}/explore`}>Find Services</Link>
+              <Link href={`${customerLink}`}>Find Services</Link>
             </Button>
           </div>
         </div>
