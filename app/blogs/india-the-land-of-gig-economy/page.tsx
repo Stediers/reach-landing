@@ -46,7 +46,7 @@ export default function Page() {
         }}
         tags={[BlogCategory.INFORMATION]}
         title="India: The Land of Gig Economy"
-        imageUrl="/images/why-reachgig-is-your-ultimate-platform.svg"
+        imageUrl="/images/india-the-land-of-gig-economy.svg"
         link="/india-the-land-of-gig-economy"
         authors={[
           {

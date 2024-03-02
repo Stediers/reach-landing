@@ -53,14 +53,14 @@ export default function Page() {
         <BlogCard
           title="India: The Land of Gig Economy"
           description="India is a land of opportunities, and the gig economy is no exception. With the rise of digital platforms and the increasing demand for flexible work, the gig economy is booming in India. If you're looking to join the gig economy in India, here's what you need to know."
-          imageUrl="/images/booking.svg"
+          imageUrl="/images/india-the-land-of-gig-economy.svg"
           link="/blogs/india-the-land-of-gig-economy"
           tags={[BlogCategory.INFORMATION]}
         />
         <BlogCard
           title="Why ReachGig is Your Ultimate Platform"
           description='Welcome to ReachGig, your gateway to a world of opportunities tailored specifically for Gig professionals like yourself. You might be wondering, "What sets ReachGig apart from the sea of corporate websites out there?" Allow us to shed some light on that.'
-          imageUrl="/images/reachcover.png"
+          imageUrl="/images/why-reachgig-is-your-ultimate-platform.png"
           link="/blogs/why-reachgig-is-your-ultimate-platform"
           tags={[BlogCategory.INFORMATION]}
         />
