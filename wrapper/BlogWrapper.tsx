@@ -158,9 +158,15 @@ export function BlogText({ children }: { children: React.ReactNode }) {
   return <p className="text-base text-[#374151] leading-9">{children}</p>;
 }
 
-export function BlogList({ list }: { list: string[] }) {
+export function BlogList({
+  list,
+  numbered,
+}: {
+  list: string[];
+  numbered?: boolean;
+}) {
   return (
-    <ul className="list-disc pl-5">
+    <ul className={`${numbered ? "list-decimal" : "list-disc"} pl-5`}>
       {list.map((item) => (
         <li className="py-1 text-[#374151] lg:leading-9 leading-7" key={item}>
           {item}
