@@ -113,7 +113,7 @@ function BecomeAPartner() {
       <div className="grid gap-10 px-10 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
         <SideComponent
           title="Less Ghosting"
-          description="Let your custome know what, how and when you offer your services before they reach out to you. This will help you get more genuine leads."
+          description="Let your r know what, how and when you offer your services before they reach out to you. This will help you get more genuine leads."
           imageUrl="/images/ghost.svg"
         />
         <SideComponent
