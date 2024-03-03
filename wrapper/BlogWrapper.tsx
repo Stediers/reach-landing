@@ -126,7 +126,7 @@ export function BlogWrapper({
           </div>
         </div>
         <ImageComponent
-          src="/images/booking.svg"
+          src={imageUrl}
           alt="Booking"
           className="w-full h-80 object-cover rounded-lg"
         />

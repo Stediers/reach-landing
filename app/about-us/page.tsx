@@ -56,11 +56,19 @@ function Section() {
               Newton
             </p>
             <p className="text-md leading-relaxed mt-0 mb-4 text-blueGray-600">
-              Our mission is to provide opportunities for the youth in the gig
-              economy. We are committed to providing a platform for the youth to
-              connect with potential employers and clients. We believe that the
-              youth are the future and we are committed to providing them with
-              the tools they need to succeed in the gig economy.
+              We hope this cutting-edge platform champions the gig economy and
+              the incredible talent that fuels it. We believe that every gig
+              worker, whether a freelancer, independent contractor, or creative
+              entrepreneur, deserves a spotlight to showcase their skills and
+              work.
+              <br />
+              <br />
+              Our mission is to empower gig workers to tell their unique stories
+              through their work. We provide a digital canvas for you to proudly
+              display your accomplishments, projects, and services. Whether
+              you're a freelance designer, a developer, a writer, or any kind of
+              gig worker, we're here to help you stand out in a crowded
+              marketplace.
             </p>
           </div>
           <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
@@ -83,9 +91,9 @@ function Section() {
                   Future of the Gig Economy
                 </h4>
                 <p className="text-md mt-2">
-                  The gig economy is growing at an unprecedented rate. We are
-                  committed to providing opportunities for the youth in the gig
-                  economy.
+                  We know that traditional resumes and job applications often
+                  fall short when it comes to capturing the essence of a gig
+                  worker's abilities. That's where we come in.
                 </p>
               </blockquote>
             </div>
@@ -179,8 +187,9 @@ function Hero() {
                 </span>{" "}
               </h2>
               <p className="text-lg text-indigo-100 md:text-lg !leading-10">
-                Learn about our mission and story. We are committed to providing
-                opportunities for the youth in the gig economy.
+                Who are we? We are one of you. We are pioneers, rebels who want
+                to challenge the traditional 9-5 model and bring the best out of
+                everyone by helping them reach their audience.
               </p>
             </div>
             <div className="max-w-xl sm:mx-auto sm:text-center lg:max-w-2xl">
