@@ -39,7 +39,7 @@ export default function Page() {
       <BlogWrapper
         readTime={4}
         date={{
-          day: 27,
+          day: 3,
           month: "March",
           year: 2024,
         }}

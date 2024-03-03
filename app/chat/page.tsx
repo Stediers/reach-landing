@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import Hero from "@components/Hero";
 import SideComponent from "@components/SideComponent";
+import { ArrowDownCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: {
@@ -31,11 +32,16 @@ export const metadata: Metadata = {
 export default function Main() {
   return (
     <div className="relative flex flex-col items-center justify-center space-y-10 sm:space-y-10 scroll-smooth pb-20">
-      <Hero
-        image="/images/booking.svg"
-        title="Chats"
-        subtitle="Seperate your personal and professional life with ReachGig's chat feature. Chat with your customers and partners without sharing your personal number."
-      />
+      <Hero>
+        <h1 className="lg:text-5xl text-3xl font-semibold text-white !leading-relaxed px-10">
+          Making <span className="text-success">Communication</span>
+          &nbsp; easier and more <span className="text-primary">Secure</span>
+        </h1>
+        <div className="flex flex-col space-y-5 items-center mt-10">
+          <ArrowDownCircle className="w-12 h-12 text-white mx-auto" />
+          <p className="text-white text-base">See what you get!</p>
+        </div>
+      </Hero>
       <div className="grid gap-10 px-10 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
         <SideComponent
           title="Easy to Use"

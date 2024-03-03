@@ -72,9 +72,9 @@ function Pricing() {
           </h2>
         </div>
         <p className="text-lg text-center max-w-md lg:!leading-10 leading-8">
-          You pay a <span className="font-semibold">5%</span> booking advance
-          upto a maximum of <span className="font-semibold">₹500</span> for
-          booking a service. The advance is refundable if the service is not
+          The client pays a <span className="font-semibold">5%</span> booking
+          advance upto a maximum of <span className="font-semibold">₹500</span>{" "}
+          for booking a service. The advance is refundable if the service is not
           provided.
         </p>
       </div>

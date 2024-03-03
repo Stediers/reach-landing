@@ -1,10 +1,9 @@
-import { State } from "@data/enums";
 import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
 import { BiRupee } from "react-icons/bi";
 import { Button } from "@components/ui/button";
-import { BookIcon } from "lucide-react";
+import { ArrowDownCircle, BookIcon } from "lucide-react";
 import ImageComponent from "@components/ImageComponent";
 import ComponentWrapper from "@wrapper/ComponentWrapper";
 import Hero from "@components/Hero";
@@ -38,11 +37,17 @@ export const metadata: Metadata = {
 export default function Main() {
   return (
     <div className="relative flex flex-col items-center justify-center space-y-10 sm:space-y-10 scroll-smooth pb-20">
-      <Hero
-        image="/images/booking.svg"
-        title="Bookings"
-        subtitle="Book the best services at the best prices. Get the best partners and services when booking with ReachGig!"
-      />
+      <Hero>
+        <h1 className="lg:text-5xl text-3xl font-semibold text-white !leading-relaxed px-10">
+          Effortlessly avail a <span className="text-success">Booking</span>
+          &nbsp; from your
+          <span className="text-primary"> Favourite</span>&nbsp;partner
+        </h1>
+        <div className="flex flex-col space-y-5 items-center mt-10">
+          <ArrowDownCircle className="w-12 h-12 text-white mx-auto" />
+          <p className="text-white text-base">See what you get!</p>
+        </div>
+      </Hero>
       <div className="grid gap-10 px-10 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
         <SideComponent
           title="Fair Pricing"

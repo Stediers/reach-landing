@@ -81,7 +81,11 @@ export function BlogWrapper({
           <h1 className="lg:text-3xl text-2xl font-semibold">{title}</h1>
           <div className="flex flex-row space-x-2 justify-start items-center">
             <p className="text-sm text-textsubtle">
-              {createdDate.toDateString()}
+              {createdDate.toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
             </p>
             <div className="h-[5px] w-[5px] bg-textsubtle rounded-full overflow-hidden" />
             <p className="text-sm text-textsubtle">
