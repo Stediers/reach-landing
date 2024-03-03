@@ -8,7 +8,6 @@ import {
   BlogText,
   BlogWrapper,
 } from "@wrapper/BlogWrapper";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: {
@@ -41,7 +40,7 @@ export default function Page() {
         readTime={4}
         date={{
           day: 27,
-          month: 2,
+          month: "March",
           year: 2024,
         }}
         tags={[BlogCategory.TIPS]}

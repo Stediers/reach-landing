@@ -41,12 +41,12 @@ export default function Page() {
         readTime={5}
         date={{
           day: 27,
-          month: 2,
+          month: "February",
           year: 2024,
         }}
         tags={[BlogCategory.TIPS]}
         title="Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions"
-        imageUrl="/images/booking.svg"
+        imageUrl="/images/why-reachgig-is-your-ultimate-platform.png"
         link="/how-to-get-the-best-services"
         authors={[
           {

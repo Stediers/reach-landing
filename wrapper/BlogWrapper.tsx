@@ -22,7 +22,19 @@ export function BlogWrapper({
   tags: BlogCategory[];
   date: {
     day: number;
-    month: number;
+    month:
+      | "January"
+      | "February"
+      | "March"
+      | "April"
+      | "May"
+      | "June"
+      | "July"
+      | "August"
+      | "September"
+      | "October"
+      | "November"
+      | "December";
     year: number;
   };
   imageUrl: string;
@@ -32,7 +44,33 @@ export function BlogWrapper({
     link: string;
   }[];
 }) {
-  const createdDate = new Date(date.year, date.month + 1, date.day);
+  const month =
+    date.month === "January"
+      ? 0
+      : date.month === "February"
+      ? 1
+      : date.month === "March"
+      ? 2
+      : date.month === "April"
+      ? 3
+      : date.month === "May"
+      ? 4
+      : date.month === "June"
+      ? 5
+      : date.month === "July"
+      ? 6
+      : date.month === "August"
+      ? 7
+      : date.month === "September"
+      ? 8
+      : date.month === "October"
+      ? 9
+      : date.month === "November"
+      ? 10
+      : date.month === "December"
+      ? 11
+      : 0;
+  const createdDate = new Date(date.year, month, date.day);
   return (
     <div className="max-w-3xl mx-auto rounded-lg lg:pb-10 lg:px-8 relative ">
       <div className="flex flex-col lg:space-y-7 space-y-4">

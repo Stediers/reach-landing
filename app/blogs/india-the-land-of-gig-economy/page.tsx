@@ -41,7 +41,7 @@ export default function Page() {
         readTime={12}
         date={{
           day: 2,
-          month: 3,
+          month: "March",
           year: 2024,
         }}
         tags={[BlogCategory.INFORMATION]}
