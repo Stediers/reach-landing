@@ -66,9 +66,9 @@ function Section() {
               Our mission is to empower gig workers to tell their unique stories
               through their work. We provide a digital canvas for you to proudly
               display your accomplishments, projects, and services. Whether
-              you're a freelance designer, a developer, a writer, or any kind of
-              gig worker, we're here to help you stand out in a crowded
-              marketplace.
+              you&apos;re a freelance designer, a developer, a writer, or any
+              kind of gig worker, we&apos;re here to help you stand out in a
+              crowded marketplace.
             </p>
           </div>
           <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
@@ -93,7 +93,7 @@ function Section() {
                 <p className="text-md mt-2">
                   We know that traditional resumes and job applications often
                   fall short when it comes to capturing the essence of a gig
-                  worker's abilities. That's where we come in.
+                  worker&apos;s abilities. That&apos;s where we come in.
                 </p>
               </blockquote>
             </div>
