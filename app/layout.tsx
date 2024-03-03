@@ -6,6 +6,7 @@ import { GoogleAnalyticsTracking } from "@scripts/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "@components/Navbar";
 import Footer from "@components/footer/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const fontSans = Poppins({
   subsets: ["latin"],
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {children}
           <Footer />
           <Analytics />
+          <SpeedInsights />
         </body>
       </html>
     </>
