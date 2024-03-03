@@ -67,21 +67,23 @@ export const learn: { title: string; href: string; description: string }[] = [
   {
     title: "Bookings",
     href: "/bookings",
-    description: "See how it works",
+    description:
+      "Learn how and why choosing to book with us is the best decision",
   },
   {
     title: "Verification",
     href: "/verification",
-    description: "Verify your account",
+    description: "How do we verify our partners? Find out here",
   },
   {
     title: "Contact us",
     href: "/contact",
-    description: "Need help?",
+    description: "If you need anything, we are here to help",
   },
   {
     title: "Chat",
     href: "/chat",
-    description: "Connect with clients without leaking your contact",
+    description:
+      "Our in platform chat is the safest way to communicate to partners before you know them",
   },
 ];
