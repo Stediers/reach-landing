@@ -72,7 +72,7 @@ export function BlogWrapper({
       : 0;
   const createdDate = new Date(date.year, month, date.day);
   return (
-    <div className="max-w-3xl mx-auto rounded-lg lg:pb-10 lg:px-8 relative pt-10">
+    <div className="max-w-3xl mx-auto rounded-lg lg:pb-10 lg:px-8 relative pt-5">
       <div className="flex flex-col lg:space-y-7 space-y-4">
         <Link href="/blogs" className="w-full">
           <ArrowLeft className="w-6 h-6 text-primary hover:cursor-pointer hover:saturate-100" />
