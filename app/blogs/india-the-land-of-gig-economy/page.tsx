@@ -11,27 +11,9 @@ import {
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Blogs",
-    template: "%s | ReachGig",
-  },
+  title: "India: The Land of Gig Economy",
   description:
-    "Blog posts on ReachGig. Get the latest news, updates and tips on ReachGig!",
-  openGraph: {
-    title: "Blogs on ReachGig",
-    description: "Get the latest news, updates and tips on ReachGig!",
-    url: "https://reachgig.com/blogs",
-    type: "website",
-    images: [
-      {
-        url: "",
-        width: 800,
-        height: 600,
-        alt: "Booking",
-      },
-    ],
-    locale: "en_US",
-  },
+    "The gig economy has been a hot topic in recent years, with many individuals turning to freelance work and short-term contracts rather than traditional corporate employment. India, with its booming start-up culture and vast pool of talent, has become a hub for the gig economy. However, behind the allure of flexible work and independence, there are also hidden realities and challenges that come with this new way of working. In this article, we will delve into the secrets behind India's gig economy, exploring the corporate landscape, the impact on workers, and the future trends shaping this evolving sector.",
 };
 
 export default function Page() {

@@ -11,27 +11,9 @@ import {
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Blogs",
-    template: "%s | ReachGig",
-  },
+  title: "Navigating the Legal Maze: A Guide for Freelancers",
   description:
-    "Blog posts on ReachGig. Get the latest news, updates and tips on ReachGig!",
-  openGraph: {
-    title: "Blogs on ReachGig",
-    description: "Get the latest news, updates and tips on ReachGig!",
-    url: "https://reachgig.com/blogs",
-    type: "website",
-    images: [
-      {
-        url: "",
-        width: 800,
-        height: 600,
-        alt: "Booking",
-      },
-    ],
-    locale: "en_US",
-  },
+    "In today's rapidly evolving landscape of work, the rise of freelancing and gig work has reshaped the traditional notions of employment. No longer confined to a nine-to-five office job, individuals are embracing the freedom and flexibility offered by freelancing, turning their passions and skills into lucrative careers.",
 };
 
 export default function Page() {

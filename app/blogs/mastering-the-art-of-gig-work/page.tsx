@@ -11,27 +11,10 @@ import {
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Blogs",
-    template: "%s | ReachGig",
-  },
+  title:
+    "Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions",
   description:
-    "Blog posts on ReachGig. Get the latest news, updates and tips on ReachGig!",
-  openGraph: {
-    title: "Blogs on ReachGig",
-    description: "Get the latest news, updates and tips on ReachGig!",
-    url: "https://reachgig.com/blogs",
-    type: "website",
-    images: [
-      {
-        url: "",
-        width: 800,
-        height: 600,
-        alt: "Booking",
-      },
-    ],
-    locale: "en_US",
-  },
+    "In today's gig economy, where flexibility and independence are highly valued, mastering the art of client transactions is key to success as a gig worker. Whether you're a makeup artist, gym trainer, or any other type of gig worker, adhering to best practices can elevate your professionalism and enhance client satisfaction.",
 };
 
 export default function Page() {

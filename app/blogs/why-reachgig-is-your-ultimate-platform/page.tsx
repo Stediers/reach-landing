@@ -10,27 +10,9 @@ import {
 } from "@wrapper/BlogWrapper";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Blogs",
-    template: "%s | ReachGig",
-  },
+  title: "Why ReachGig Is Your Ultimate Platform",
   description:
-    "Blog posts on ReachGig. Get the latest news, updates and tips on ReachGig!",
-  openGraph: {
-    title: "Blogs on ReachGig",
-    description: "Get the latest news, updates and tips on ReachGig!",
-    url: "https://reachgig.com/blogs",
-    type: "website",
-    images: [
-      {
-        url: "",
-        width: 800,
-        height: 600,
-        alt: "Booking",
-      },
-    ],
-    locale: "en_US",
-  },
+    "Welcome to ReachGig, your gateway to a world of opportunities tailored specifically for Gig professionals like yourself. You might be wondering, 'What sets ReachGig apart from the sea of corporate websites out there?' Allow us to shed some light on that.",
 };
 
 export default function Page() {
