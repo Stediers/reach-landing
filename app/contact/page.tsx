@@ -3,10 +3,7 @@ import Contact from "./contact-us";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Contact Us",
-    template: "%s | Contact Us",
-  },
+  title: "Contact Us",
   description:
     "ReachGig is the best platform for booking services from freelancers. Get in touch with us today!",
   openGraph: {

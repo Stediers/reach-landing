@@ -5,10 +5,7 @@ import SideComponent from "@components/SideComponent";
 import { ArrowDownCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Chats",
-    template: "%s | ReachGig",
-  },
+  title: "Chats",
   description:
     "Book the best services at the best prices. Get the best partners and services when booking with ReachGig!",
   openGraph: {

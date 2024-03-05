@@ -23,28 +23,29 @@ export const metadata: Metadata = {
     default: "ReachGig",
     template: "%s | ReachGig",
   },
+  alternates: {
+    canonical: "https://reachgig.com",
+  },
   description: "ReachGig",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black",
-    startupImage: "/public/512.png",
+  openGraph: {
     title: "ReachGig",
+    description:
+      "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
+    url: "https://reachgig.com",
+    type: "website",
+    images: [
+      {
+        url: "/public/512.png",
+        width: 800,
+        height: 600,
+        alt: "ReachGig",
+      },
+    ],
+    locale: "en_US",
   },
   metadataBase: new URL("https://reachgig.com"),
   applicationName: "ReachGig",
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      nosnippet: false,
-      noarchive: false,
-      noimageindex: false,
-      notranslate: false,
-    },
-  },
+  robots: "index, follow",
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {

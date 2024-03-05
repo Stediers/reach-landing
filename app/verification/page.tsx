@@ -11,10 +11,7 @@ import Hero from "@components/Hero";
 import SideComponent from "@components/SideComponent";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Verification",
-    template: "%s | ReachGig",
-  },
+  title: "Verification",
   description:
     "Know who you're dealing with. Our verification process ensures that you can trust the service providers on our platform.",
   openGraph: {

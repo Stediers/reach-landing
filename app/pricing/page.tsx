@@ -6,12 +6,9 @@ import FeatureCard from "@components/FeatureCard";
 import { BsSafe } from "react-icons/bs";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Pricing",
-    template: "%s | ReachGig",
-  },
+  title: "Pricing",
   description:
-    "ReachGig offers the best prices for the best services. Explore our platform today!",
+    "ReachGig offers the best prices for the best services. With a 5% booking advance, we ensure that both the client and the service provider are protected.",
   openGraph: {
     title: "Pricing",
     description:

@@ -1,31 +1,15 @@
-import Logo from "@components/Logo";
-import { ReactNode } from "react";
-import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import { FcConferenceCall, FcBullish } from "react-icons/fc";
 import { CiTrophy } from "react-icons/ci";
-import "swiper/css";
-import "swiper/css/pagination";
-import { MdOutlinePriceCheck, MdPersonSearch } from "react-icons/md";
-import { AiFillCloseCircle, AiFillStar } from "react-icons/ai";
+import { MdOutlinePriceCheck } from "react-icons/md";
 import ImageComponent from "@components/ImageComponent";
-import { GiJourney } from "react-icons/gi";
 import { FaHandshake } from "react-icons/fa";
 import { Button } from "@components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
-import { BsShield, BsShieldCheck } from "react-icons/bs";
+import { BsShieldCheck } from "react-icons/bs";
 import ReachSVG from "@components/svg/ReachSVG";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
 import FeatureCard from "@components/FeatureCard";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@components/ui/card";
-import ComponentWrapper from "@wrapper/ComponentWrapper";
 import SideComponent from "@components/SideComponent";
 
 const iconStyle = "lg:w-24 lg:h-24 w-20 h-20";
@@ -33,26 +17,26 @@ const iconStyle = "lg:w-24 lg:h-24 w-20 h-20";
 export const metadata: Metadata = {
   title: {
     default: "ReachGig",
-    template: "%s",
+    template: "%s on ReachGig",
   },
   description:
     "Find the best services and partners for your needs. Empowering the Gig Economy.",
-  openGraph: {
-    title: "ReachGig",
-    description:
-      "Find the best services and partners for your needs. Empowering the Gig Economy.",
-    url: "https://reachgig.com",
-    type: "website",
-    images: [
-      {
-        url: "",
-        width: 800,
-        height: 600,
-        alt: "ReachGig",
-      },
-    ],
-    locale: "en_US",
-  },
+  // openGraph: {
+  //   title: "ReachGig",
+  //   description:
+  //     "Find the best services and partners for your needs. Empowering the Gig Economy.",
+  //   url: "https://reachgig.com",
+  //   type: "website",
+  //   images: [
+  //     {
+  //       url: "",
+  //       width: 800,
+  //       height: 600,
+  //       alt: "ReachGig",
+  //     },
+  //   ],
+  //   locale: "en_US",
+  // },
 };
 
 export default function Page() {
@@ -62,20 +46,13 @@ export default function Page() {
       <What />
       <ByeByeScammers />
       <BecomeAPartner />
-      {/* <CustomerStories />
-      <HappyPartners /> */}
-      {/* <WhatWeBelieve cookieExists={cookieExists} /> */}
-      {/* <div className="w-full flex flex-col items-center justify-center space-y-5">
-        <LineHeader title="More from Reach" />
-        <YoutubeEmbed />
-      </div> */}
     </div>
   );
 }
 
 function ByeByeScammers() {
   return (
-    <div
+    <section
       className="flex flex-col items-center justify-center w-full lg:min-h-[70vh] min-h-[50vh] bg-success px-10 lg:px-0"
       id="Index"
     >
@@ -94,7 +71,7 @@ function ByeByeScammers() {
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -192,11 +169,10 @@ function What() {
 }
 
 function Index() {
-  const words = "Empowering the Gig Economy".split(" ");
   const partnerLink = process.env.NEXT_PUBLIC_PARTNER_LINK || "/user/sign-up";
   const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
-    <div
+    <section
       className="flex flex-col items-center justify-center w-full min-h-[75vh] bg-foreground"
       id="Index"
     >
@@ -231,6 +207,6 @@ function Index() {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

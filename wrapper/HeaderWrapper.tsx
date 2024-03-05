@@ -16,16 +16,16 @@ export default function HeaderWrapper({
   showHeader?: boolean;
 }) {
   return (
-    <div id={id} className={`${className} py-16 w-full px-7 ${bgColor}`}>
+    <section id={id} className={`${className} py-16 w-full px-7 ${bgColor}`}>
       {showHeader && (
         <div className="flex flex-col items-center justify-center space-y-2 lg:space-y-4">
-          <h1 className="text-3xl lg:text-4xl font-medium text-center first-letter:capitalize">
+          <h2 className="text-3xl lg:text-4xl font-medium text-center first-letter:capitalize">
             {title}
-          </h1>
+          </h2>
           <div className="h-px w-[80%] bg-primary" />
         </div>
       )}
       {children}
-    </div>
+    </section>
   );
 }

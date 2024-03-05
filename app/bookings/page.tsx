@@ -1,19 +1,11 @@
 import React from "react";
-import Image from "next/image";
 import { Metadata } from "next";
-import { BiRupee } from "react-icons/bi";
-import { Button } from "@components/ui/button";
-import { ArrowDownCircle, BookIcon } from "lucide-react";
-import ImageComponent from "@components/ImageComponent";
-import ComponentWrapper from "@wrapper/ComponentWrapper";
+import { ArrowDownCircle } from "lucide-react";
 import Hero from "@components/Hero";
 import SideComponent from "@components/SideComponent";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Bookings",
-    template: "%s | ReachGig",
-  },
+  title: "Bookings",
   description:
     "Book the best services at the best prices. Get the best partners and services when booking with ReachGig!",
   openGraph: {

@@ -5,7 +5,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/search",
     },
     sitemap: "https://reachgig.com/sitemap.xml",
   };
