@@ -99,20 +99,21 @@ function WhatWeBelieve() {
         <ImageWithQuote
           image="/images/what-we-believe-1.webp"
           quote="Hi"
-          name="Deepakindresh N"
-          designation="Head of Marketing"
+          name="Ponjayarani"
+          designation="Director"
         />
         <ImageWithQuote
           designation="Chief Executive Officer"
           name="Harshavardhan J"
+          coFounder
           quote="Hi"
           image="/images/what-we-believe-3.webp"
         />
         <ImageWithQuote
           image="/images/what-we-believe-2.webp"
           quote="Hi"
-          name="Gautthum J"
-          designation="Chief Operating Officer"
+          name="Shanthi J"
+          designation="Director"
         />
       </div>
     </div>
@@ -123,11 +124,13 @@ function WhatWeBelieve() {
     quote,
     name,
     designation,
+    coFounder,
   }: {
     image: string;
     quote: string;
     name: string;
     designation: string;
+    coFounder?: boolean;
   }) {
     return (
       <div className="flex flex-col items-center justify-center space-y-4">
@@ -139,7 +142,9 @@ function WhatWeBelieve() {
         />
         <div className="flex flex-col items-center justify-center lg:space-y-2 space-y-1">
           <p className="lg:text-2xl text-lg font-medium text-center">{name}</p>
-          <p className="lg:text-md text-base text-center">Co Founder</p>
+          {coFounder && (
+            <p className="lg:text-md text-base text-center">Co Founder</p>
+          )}
           <p className="lg:text-md text-base text-center text-info">
             {designation}
           </p>
