@@ -128,14 +128,18 @@ function DesktopNav({ path }: { path: string }) {
 function MobileNav({ path }: { path: string }) {
   return (
     <div className="flex justify-between space-x-5 w-full items-center lg:hidden">
-      <div className="flex items-center space-x-4 shrink-0">
+      <Link
+        className="flex items-center space-x-4 shrink-0 hover:cursor-pointer"
+        href="/"
+        passHref
+      >
         <div className="flex flex-col">
-          <p className="text-2xl font-medium">ReachGig</p>
+          <p className="text-xl font-medium">ReachGig</p>
           <p className="text-sm text-gray-500 tracking-wide">
-            Relax, we got you covered
+            Be your own Boss.
           </p>
         </div>
-      </div>
+      </Link>
       <div className="lg:hidden flex items-center space-x-5 self-end">
         <Sheet>
           <SheetTrigger asChild>
