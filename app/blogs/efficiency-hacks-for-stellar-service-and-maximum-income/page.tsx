@@ -36,16 +36,17 @@ export default function Page() {
       >
         <BlogText>
           <span className="font-medium">
-            Ever feel like there aren't enough hours in the day to juggle client
-            deadlines, project management, and marketing your freelance
+            Ever feel like there aren&apos;t enough hours in the day to juggle
+            client deadlines, project management, and marketing your freelance
             business?{" "}
           </span>
-          You're not alone. But what if you could streamline your workflow,
+          You&apos;re not alone. But what if you could streamline your workflow,
           freeing up valuable time and headspace to focus on the work you love
           and attract more clients? By implementing efficient systems and
           processes, you can transform your freelance practice into a well-oiled
-          machine. Here are some essential "efficiency hacks" to elevate your
-          service delivery, impress clients, and maximize your income:
+          machine. Here are some essential &quot;efficiency hacks&quot; to
+          elevate your service delivery, impress clients, and maximize your
+          income:
         </BlogText>
         <BlogSubTitle title="Template Magic: Say Goodbye to Reinventing the Wheel!">
           <BlogText>
@@ -114,11 +115,11 @@ export default function Page() {
             refine your estimates for future projects.
           </BlogText>
           <BlogText>
-            By implementing these efficiency hacks, you'll be well on your way
-            to achieving "Freelance Freedom." Remember, a streamlined workflow
-            allows you to focus on what matters most: delivering exceptional
-            service to your clients, growing your business, and achieving your
-            financial goals.{" "}
+            By implementing these efficiency hacks, you&apos;ll be well on your
+            way to achieving &quot;Freelance Freedom&quot;. Remember, a
+            streamlined workflow allows you to focus on what matters most:
+            delivering exceptional service to your clients, growing your
+            business, and achieving your financial goals.{" "}
           </BlogText>
         </BlogSubTitle>
         <BlogText>
