@@ -72,7 +72,7 @@ export default function Page() {
             link="/blogs/navigating-the-legal-maze"
             tags={[BlogCategory.INFORMATION, BlogCategory.TIPS]}
           />
-          <BlogCard
+          {/* <BlogCard
             title="Freelance Freedom: Efficiency Hacks for Stellar Service & Maximum Income"
             description={`Ever feel like there aren't enough hours in the day to juggle client
             deadlines, project management, and marketing your freelance business?
@@ -85,7 +85,7 @@ export default function Page() {
             imageUrl="/images/efficiency-hacks.svg"
             link="/blogs/efficiency-hacks-for-stellar-service-and-maximum-income"
             tags={[BlogCategory.TIPS]}
-          />
+          /> */}
         </div>
       </div>
     </div>
