@@ -72,6 +72,18 @@ export default function Page() {
             link="/blogs/navigating-the-legal-maze"
             tags={[BlogCategory.INFORMATION, BlogCategory.TIPS]}
           />
+          <BlogCard
+            title="The Ultimate Guide to Mental Health and Wellbeing for Solopreneurs: How Freelancers Can Avoid Burnout"
+            description="The freelance life beckons with promises of freedom, flexibility, and
+            being your own boss. It's a dream many chase, and for good reason.
+            But the reality of solopreneurship can have a hidden downside:
+            isolation, long hours, and blurred work-life boundaries. These factors,
+            if left unchecked, can take a toll on something crucial - your mental
+            health."
+            imageUrl="/images/mental-health.svg"
+            link="/blogs/mental-health-and-wellbeing-for-freelancers"
+            tags={[BlogCategory.TIPS]}
+          />
           {/* <BlogCard
             title="Freelance Freedom: Efficiency Hacks for Stellar Service & Maximum Income"
             description={`Ever feel like there aren't enough hours in the day to juggle client

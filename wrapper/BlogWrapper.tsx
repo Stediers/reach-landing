@@ -4,6 +4,7 @@ import { Badge } from "@components/ui/badge";
 import { BlogCategory } from "@data/enums";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { Key } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 export function BlogWrapper({
@@ -166,13 +167,13 @@ export function BlogList({
   list,
   numbered,
 }: {
-  list: string[];
+  list: string[] | JSX.Element[];
   numbered?: boolean;
 }) {
   return (
     <ul className={`${numbered ? "list-decimal" : "list-disc"} pl-5`}>
-      {list.map((item) => (
-        <li className="py-1 text-[#374151] lg:leading-9 leading-7" key={item}>
+      {list.map((item, index) => (
+        <li className="py-1 text-[#374151] lg:leading-9 leading-7" key={index}>
           {item}
         </li>
       ))}
