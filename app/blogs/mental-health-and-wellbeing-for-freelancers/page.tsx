@@ -10,6 +10,13 @@ import {
 } from "@wrapper/BlogWrapper";
 import Link from "next/link";
 
+export const metadata: Metadata = {
+  title:
+    "The Ultimate Guide to Mental Health and Wellbeing for Solopreneurs: How Freelancers Can Avoid Burnout",
+  description:
+    "Conquer Freelance Burnout & Thrive as a Solopreneur!  Discover self-care tips, work-life balance hacks, and strategies to combat isolation. Learn how to prioritize mental health for a successful freelance career. #freelancing #wellbeing #mentalhealth ",
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">

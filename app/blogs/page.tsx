@@ -84,6 +84,13 @@ export default function Page() {
             link="/blogs/mental-health-and-wellbeing-for-freelancers"
             tags={[BlogCategory.TIPS]}
           />
+          <BlogCard
+            title="10 Safety Tips for Gig Workers in the Modern Economy"
+            description="In today's fast-paced gig economy, gig workers face unique challenges and safety concerns while navigating various gigs and tasks. Whether you're delivering food, providing rideshare services, or freelancing as a digital nomad, prioritizing safety is paramount. Here are ten essential safety tips to help gig workers stay safe and secure in your day-to-day work."
+            imageUrl="/images/secure.svg"
+            link="/blogs/safety-tips-for-gig-workers"
+            tags={[BlogCategory.TIPS]}
+          />
           {/* <BlogCard
             title="Freelance Freedom: Efficiency Hacks for Stellar Service & Maximum Income"
             description={`Ever feel like there aren't enough hours in the day to juggle client
