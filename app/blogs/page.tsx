@@ -91,6 +91,13 @@ export default function Page() {
             link="/blogs/safety-tips-for-gig-workers"
             tags={[BlogCategory.TIPS]}
           />
+          <BlogCard
+            title="Exploring the World of Work: Owning a Business vs Doing Gigs"
+            description="In today's dynamic economy, individuals have more options than ever when it comes to earning a living. Two popular paths that many people consider are owning a business and doing gigs. Each option offers its own set of advantages and disadvantages, and understanding the differences can help you make an informed decision about your career path."
+            imageUrl="/images/gigvb.svg"
+            link="/blogs/gigs-vs-business"
+            tags={[BlogCategory.INFORMATION]}
+          />
           {/* <BlogCard
             title="Freelance Freedom: Efficiency Hacks for Stellar Service & Maximum Income"
             description={`Ever feel like there aren't enough hours in the day to juggle client

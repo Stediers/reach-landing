@@ -22,8 +22,8 @@ export default function Page() {
       <BlogWrapper
         readTime={5}
         date={{
-          day: 27,
-          month: "February",
+          day: 10,
+          month: "April",
           year: 2024,
         }}
         tags={[BlogCategory.TIPS]}
