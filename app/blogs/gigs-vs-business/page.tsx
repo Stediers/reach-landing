@@ -52,7 +52,7 @@ export default function Page() {
               "Variety: Gig work provides opportunities to work on diverse projects, collaborate with different clients or companies, and gain experience in various industries or sectors.",
               "Low Barrier to Entry: Many gig opportunities have low barriers to entry, requiring minimal upfront investment or specialized skills. This makes gig work accessible to a wide range of individuals, including students, retirees, and freelancers.",
               "Work-Life Balance: Gig work can offer better work-life balance and autonomy, allowing individuals to prioritize personal time, family commitments, or other interests while earning an income.",
-              "Skill Development: Gigs offer opportunities for skill development, learning, and professional growth and do only what you love and not have the hastle to do unecessary work.",
+              "Skill Development: Gigs offer opportunities for skill development, learning, and professional growth and do only what you love and not have the hassle to do unnecessary work.",
               "Lack of Benefits: Gig workers typically do not receive traditional employee benefits such as health insurance, retirement plans, paid leave, or job security. But don't worry, we got you covered ;)",
               "Income Instability: Gig work can be unpredictable, with fluctuating income levels and inconsistent work opportunities. But this is no different from owning a business, right?",
               "Independence: Gig workers have autonomy and independence in managing their work, setting their rates, and choosing their clients or projects.",
