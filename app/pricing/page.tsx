@@ -57,7 +57,7 @@ function Hero() {
 
 function Pricing() {
   return (
-    <div className="max-w-4xl lg:min-h-[50vh] min-h-[30vh] w-full flex flex-col items-center justify-center lg:space-y-7 space-y-7 px-10">
+    <div className="max-w-4xl lg:min-h-[40vh] min-h-[30vh] w-full flex flex-col items-center justify-center lg:space-y-7 space-y-7 px-10">
       <p className="text-center text-base tracking-wider font-medium text-success">
         PAID BY THE CLIENT
       </p>
@@ -65,14 +65,12 @@ function Pricing() {
         <div className="flex flex-col items-center space-y-5">
           <h2 className="lg:text-5xl text-3xl text-center font-semibold">
             &nbsp;
-            <span className="">5%</span> Booking Advance
+            <span className="">20%</span> Advance
           </h2>
         </div>
         <p className="text-lg text-center max-w-md lg:!leading-10 leading-8">
-          The client pays a <span className="font-semibold">5%</span> booking
-          advance upto a maximum of <span className="font-semibold">₹500</span>{" "}
-          for booking a service. The advance is refundable if the service is not
-          provided.
+          This is dont to make sure that partners on our platform can reserve a
+          slot for you. This is refundable if the job is not done.
         </p>
       </div>
     </div>

@@ -64,12 +64,12 @@ export const legal: { title: string; href: string; description: string }[] = [
 ];
 
 export const learn: { title: string; href: string; description: string }[] = [
-  {
-    title: "Bookings",
-    href: "/bookings",
-    description:
-      "Learn how and why choosing to book with us is the best decision",
-  },
+  // {
+  //   title: "Bookings",
+  //   href: "/bookings",
+  //   description:
+  //     "Learn how and why choosing to book with us is the best decision",
+  // },
   {
     title: "Verification",
     href: "/verification",
@@ -80,10 +80,10 @@ export const learn: { title: string; href: string; description: string }[] = [
     href: "/contact",
     description: "If you need anything, we are here to help",
   },
-  {
-    title: "Chat",
-    href: "/chat",
-    description:
-      "Our in platform chat is the safest way to communicate to partners before you know them",
-  },
+  // {
+  //   title: "Chat",
+  //   href: "/chat",
+  //   description:
+  //     "Our in platform chat is the safest way to communicate to partners before you know them",
+  // },
 ];
