@@ -98,6 +98,13 @@ export default function Page() {
             link="/blogs/gigs-vs-business"
             tags={[BlogCategory.INFORMATION]}
           />
+          <BlogCard
+            title="Financial Management Tips for the Freelancers of India"
+            description="For freelancers in India, effective financial management is crucial for maintaining stability and compliance with tax laws. In this comprehensive guide, we'll provide step-by-step tips to help freelancers manage their finances efficiently and navigate the complexities of taxation in India."
+            imageUrl="/images/finance.svg"
+            link="/blogs/financial-management-tips"
+            tags={[BlogCategory.TIPS]}
+          />
           {/* <BlogCard
             title="Freelance Freedom: Efficiency Hacks for Stellar Service & Maximum Income"
             description={`Ever feel like there aren't enough hours in the day to juggle client
