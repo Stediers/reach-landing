@@ -44,33 +44,27 @@ export default function Page() {
           Learn with ReachGig
         </h1>
         <div className="grid gap-10 lg:px-10 px-5 lg:grid-cols-3 justify-items-center lg:pt-10 pt-5">
+          {/* NEW BLOGS HERE */}
           <BlogCard
-            title="Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions"
-            description="In today's gig economy, where flexibility and independence are highly valued, mastering the art of client transactions is key to success as a gig worker. Whether you're a makeup artist, gym trainer, or any other type of gig worker, adhering to best practices can elevate your professionalism and enhance client satisfaction."
-            imageUrl="/images/booking.svg"
-            link="/blogs/mastering-the-art-of-gig-work"
+            title="Financial Management Tips for the Freelancers of India"
+            description="For freelancers in India, effective financial management is crucial for maintaining stability and compliance with tax laws. In this comprehensive guide, we'll provide step-by-step tips to help freelancers manage their finances efficiently and navigate the complexities of taxation in India."
+            imageUrl="/images/finance.svg"
+            link="/blogs/financial-management-tips"
             tags={[BlogCategory.TIPS]}
           />
           <BlogCard
-            title="India: The Land of Gig Economy"
-            description="India is a land of opportunities, and the gig economy is no exception. With the rise of digital platforms and the increasing demand for flexible work, the gig economy is booming in India. If you're looking to join the gig economy in India, here's what you need to know."
-            imageUrl="/images/india-the-land-of-gig-economy.svg"
-            link="/blogs/india-the-land-of-gig-economy"
+            title="Exploring the World of Work: Owning a Business vs Doing Gigs"
+            description="In today's dynamic economy, individuals have more options than ever when it comes to earning a living. Two popular paths that many people consider are owning a business and doing gigs. Each option offers its own set of advantages and disadvantages, and understanding the differences can help you make an informed decision about your career path."
+            imageUrl="/images/gigvb.svg"
+            link="/blogs/gigs-vs-business"
             tags={[BlogCategory.INFORMATION]}
           />
           <BlogCard
-            title="Why ReachGig is Your Ultimate Platform"
-            description='Welcome to ReachGig, your gateway to a world of opportunities tailored specifically for Gig professionals like yourself. You might be wondering, "What sets ReachGig apart from the sea of corporate websites out there?" Allow us to shed some light on that.'
-            imageUrl="/images/why-reachgig-is-your-ultimate-platform.png"
-            link="/blogs/why-reachgig-is-your-ultimate-platform"
-            tags={[BlogCategory.INFORMATION]}
-          />
-          <BlogCard
-            title="Navigating the Legal Maze: A Guide for Freelancers"
-            description="In today's rapidly evolving landscape of work, the rise of freelancing and gig work has reshaped the traditional notions of employment. No longer confined to a nine-to-five office job, individuals are embracing the freedom and flexibility offered by freelancing, turning their passions and skills into lucrative careers."
-            imageUrl="/images/navigating-the-legal-maze.svg"
-            link="/blogs/navigating-the-legal-maze"
-            tags={[BlogCategory.INFORMATION, BlogCategory.TIPS]}
+            title="10 Safety Tips for Gig Workers in the Modern Economy"
+            description="In today's fast-paced gig economy, gig workers face unique challenges and safety concerns while navigating various gigs and tasks. Whether you're delivering food, providing rideshare services, or freelancing as a digital nomad, prioritizing safety is paramount. Here are ten essential safety tips to help gig workers stay safe and secure in your day-to-day work."
+            imageUrl="/images/secure.svg"
+            link="/blogs/safety-tips-for-gig-workers"
+            tags={[BlogCategory.TIPS]}
           />
           <BlogCard
             title="The Ultimate Guide to Mental Health and Wellbeing for Solopreneurs: How Freelancers Can Avoid Burnout"
@@ -85,40 +79,33 @@ export default function Page() {
             tags={[BlogCategory.TIPS]}
           />
           <BlogCard
-            title="10 Safety Tips for Gig Workers in the Modern Economy"
-            description="In today's fast-paced gig economy, gig workers face unique challenges and safety concerns while navigating various gigs and tasks. Whether you're delivering food, providing rideshare services, or freelancing as a digital nomad, prioritizing safety is paramount. Here are ten essential safety tips to help gig workers stay safe and secure in your day-to-day work."
-            imageUrl="/images/secure.svg"
-            link="/blogs/safety-tips-for-gig-workers"
-            tags={[BlogCategory.TIPS]}
+            title="Navigating the Legal Maze: A Guide for Freelancers"
+            description="In today's rapidly evolving landscape of work, the rise of freelancing and gig work has reshaped the traditional notions of employment. No longer confined to a nine-to-five office job, individuals are embracing the freedom and flexibility offered by freelancing, turning their passions and skills into lucrative careers."
+            imageUrl="/images/navigating-the-legal-maze.svg"
+            link="/blogs/navigating-the-legal-maze"
+            tags={[BlogCategory.INFORMATION, BlogCategory.TIPS]}
           />
           <BlogCard
-            title="Exploring the World of Work: Owning a Business vs Doing Gigs"
-            description="In today's dynamic economy, individuals have more options than ever when it comes to earning a living. Two popular paths that many people consider are owning a business and doing gigs. Each option offers its own set of advantages and disadvantages, and understanding the differences can help you make an informed decision about your career path."
-            imageUrl="/images/gigvb.svg"
-            link="/blogs/gigs-vs-business"
+            title="Why ReachGig is Your Ultimate Platform"
+            description='Welcome to ReachGig, your gateway to a world of opportunities tailored specifically for Gig professionals like yourself. You might be wondering, "What sets ReachGig apart from the sea of corporate websites out there?" Allow us to shed some light on that.'
+            imageUrl="/images/why-reachgig-is-your-ultimate-platform.png"
+            link="/blogs/why-reachgig-is-your-ultimate-platform"
             tags={[BlogCategory.INFORMATION]}
           />
           <BlogCard
-            title="Financial Management Tips for the Freelancers of India"
-            description="For freelancers in India, effective financial management is crucial for maintaining stability and compliance with tax laws. In this comprehensive guide, we'll provide step-by-step tips to help freelancers manage their finances efficiently and navigate the complexities of taxation in India."
-            imageUrl="/images/finance.svg"
-            link="/blogs/financial-management-tips"
+            title="India: The Land of Gig Economy"
+            description="India is a land of opportunities, and the gig economy is no exception. With the rise of digital platforms and the increasing demand for flexible work, the gig economy is booming in India. If you're looking to join the gig economy in India, here's what you need to know."
+            imageUrl="/images/india-the-land-of-gig-economy.svg"
+            link="/blogs/india-the-land-of-gig-economy"
+            tags={[BlogCategory.INFORMATION]}
+          />
+          <BlogCard
+            title="Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions"
+            description="In today's gig economy, where flexibility and independence are highly valued, mastering the art of client transactions is key to success as a gig worker. Whether you're a makeup artist, gym trainer, or any other type of gig worker, adhering to best practices can elevate your professionalism and enhance client satisfaction."
+            imageUrl="/images/booking.svg"
+            link="/blogs/mastering-the-art-of-gig-work"
             tags={[BlogCategory.TIPS]}
           />
-          {/* <BlogCard
-            title="Freelance Freedom: Efficiency Hacks for Stellar Service & Maximum Income"
-            description={`Ever feel like there aren't enough hours in the day to juggle client
-            deadlines, project management, and marketing your freelance business?
-            You're not alone. But what if you could streamline your workflow,
-            freeing up valuable time and headspace to focus on the work you love
-            and attract more clients? By implementing efficient systems and
-            processes, you can transform your freelance practice into a well-oiled
-            machine. Here are some essential "efficiency hacks" to elevate your
-            service delivery, impress clients, and maximize your income`}
-            imageUrl="/images/efficiency-hacks.svg"
-            link="/blogs/efficiency-hacks-for-stellar-service-and-maximum-income"
-            tags={[BlogCategory.TIPS]}
-          /> */}
         </div>
       </div>
     </div>
