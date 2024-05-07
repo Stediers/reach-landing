@@ -1,6 +1,5 @@
 import { BlogCategory, State } from "@data/enums";
 import React from "react";
-import Image from "next/image";
 import { Metadata } from "next";
 import {
   BlogList,
@@ -8,7 +7,6 @@ import {
   BlogText,
   BlogWrapper,
 } from "@wrapper/BlogWrapper";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title:

@@ -46,6 +46,13 @@ export default function Page() {
         <div className="grid gap-10 lg:px-10 px-5 lg:grid-cols-3 justify-items-center lg:pt-10 pt-5">
           {/* NEW BLOGS HERE */}
           <BlogCard
+            title="Staying Motivated and Overcoming Freelance Burnout"
+            description="As freelancers, we're often depicted as living the dream - setting our own schedules, working from anywhere, and pursuing our passions on our own terms. However, the reality is that freelancing comes with its own set of challenges, one of the most prevalent being burnout. The relentless hustle, unpredictable income, and constant pressure to perform can take a toll on our mental and physical well-being, leading to feelings of exhaustion, disillusionment, and overwhelm. In this blog post, we'll explore the phenomenon of freelance burnout, its causes, and most importantly, how to overcome it and stay motivated in the long run."
+            imageUrl="/images/tired.svg"
+            link="/blogs/staying-motivated-and-overcoming-freelance-burnout"
+            tags={[BlogCategory.INFORMATION]}
+          />
+          <BlogCard
             title="Financial Management Tips for the Freelancers of India"
             description="For freelancers in India, effective financial management is crucial for maintaining stability and compliance with tax laws. In this comprehensive guide, we'll provide step-by-step tips to help freelancers manage their finances efficiently and navigate the complexities of taxation in India."
             imageUrl="/images/finance.svg"
