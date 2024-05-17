@@ -27,7 +27,7 @@ export const menus: Menu[] = [
     title: "Blogs",
     subtitle: "Read our blogs",
     icon: <FcBriefcase className="text-3xl" />,
-    path: "/blogs",
+    path: "/learn",
   },
 ];
 

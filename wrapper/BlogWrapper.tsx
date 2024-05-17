@@ -1,5 +1,5 @@
 import ImageComponent from "@components/ImageComponent";
-import Share from "@components/blogs/Share";
+import Share from "@components/learn/Share";
 import { Badge } from "@components/ui/badge";
 import { BlogCategory } from "@data/enums";
 import { ArrowLeft } from "lucide-react";
@@ -75,7 +75,7 @@ export function BlogWrapper({
   return (
     <div className="max-w-3xl mx-auto rounded-lg lg:pb-10 lg:px-8 relative pt-5">
       <div className="flex flex-col lg:space-y-7 space-y-4">
-        <Link href="/blogs" className="w-full">
+        <Link href="/learn" className="w-full">
           <ArrowLeft className="w-6 h-6 text-primary hover:cursor-pointer hover:saturate-100" />
         </Link>
         <div className="flex flex-col space-y-3">

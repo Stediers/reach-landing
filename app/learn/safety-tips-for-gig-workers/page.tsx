@@ -74,7 +74,7 @@ export default function Page() {
             potential scams or fraudulent offers. Here are some{" "}
             <Link
               className="text-info underline"
-              href="/blogs/mastering-the-art-of-gig-work"
+              href="/learn/mastering-the-art-of-gig-work"
             >
               best practices
             </Link>
@@ -121,7 +121,7 @@ export default function Page() {
             here to{" "}
             <Link
               className="text-info underline"
-              href="/blogs/mental-health-and-wellbeing-for-freelancers"
+              href="/learn/mental-health-and-wellbeing-for-freelancers"
             >
               learn more about mental health and wellbeing for freelancers
             </Link>
@@ -137,7 +137,7 @@ export default function Page() {
             and protecting your rights as a gig worker. Find out more about{" "}
             <Link
               className="text-info underline"
-              href="/blogs/navigating-the-legal-maze"
+              href="/learn/navigating-the-legal-maze"
             >
               navigating the legal maze as a freelancer here
             </Link>

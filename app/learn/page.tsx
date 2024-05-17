@@ -11,6 +11,7 @@ import Hero from "@components/Hero";
 import { Badge } from "@components/ui/badge";
 import { BlogTag } from "@wrapper/BlogWrapper";
 import Link from "next/link";
+import VideoCarousel from "@components/VideoCarousel";
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Blogs on ReachGig",
     description: "Get the latest news, updates and tips on ReachGig!",
-    url: "https://reachgig.com/blogs",
+    url: "https://reachgig.com/learn",
     type: "website",
     images: [
       {
@@ -38,39 +39,51 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="scroll-smooth pb-20 pt-10 w-full">
-      <div className="relative flex flex-col items-center justify-center max-w-[100rem] mx-auto">
-        <h1 className="lg:text-4xl text-2xl font-medium w-full lg:px-10 px-5">
-          Learn with ReachGig
+    <div className="scroll-smooth pb-20 pt-10 w-full space-y-10">
+      <div className="relative flex flex-col items-center justify-center max-w-[100rem] mx-auto space-y-5 lg:space-y-10 lg:px-10 px-5">
+        <h1 className="lg:text-4xl text-2xl font-medium w-full">
+          Our Podcasts
         </h1>
-        <div className="grid gap-10 lg:px-10 px-5 lg:grid-cols-3 justify-items-center lg:pt-10 pt-5">
+        <VideoCarousel
+          videos={[
+            "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
+            "https://www.youtube.com/embed/hb7DSyWHjZw?si=CwkgK4nSBQ1dlzNp",
+          ]}
+          basis="lg:basis-1/2"
+        />
+      </div>
+      <div className="relative flex flex-col items-center justify-center max-w-[100rem] mx-auto">
+        <h2 className="lg:text-4xl text-2xl font-medium w-full lg:px-10 px-5">
+          Learn with ReachGig
+        </h2>
+        <div className="grid gap-20 lg:px-10 px-5 lg:grid-cols-3 justify-items-center lg:pt-10 pt-5">
           {/* NEW BLOGS HERE */}
           <BlogCard
             title="Staying Motivated and Overcoming Freelance Burnout"
             description="As freelancers, we're often depicted as living the dream - setting our own schedules, working from anywhere, and pursuing our passions on our own terms. However, the reality is that freelancing comes with its own set of challenges, one of the most prevalent being burnout. The relentless hustle, unpredictable income, and constant pressure to perform can take a toll on our mental and physical well-being, leading to feelings of exhaustion, disillusionment, and overwhelm. In this blog post, we'll explore the phenomenon of freelance burnout, its causes, and most importantly, how to overcome it and stay motivated in the long run."
             imageUrl="/images/tired.svg"
-            link="/blogs/staying-motivated-and-overcoming-freelance-burnout"
+            link="/learn/staying-motivated-and-overcoming-freelance-burnout"
             tags={[BlogCategory.INFORMATION]}
           />
           <BlogCard
             title="Financial Management Tips for the Freelancers of India"
             description="For freelancers in India, effective financial management is crucial for maintaining stability and compliance with tax laws. In this comprehensive guide, we'll provide step-by-step tips to help freelancers manage their finances efficiently and navigate the complexities of taxation in India."
             imageUrl="/images/finance.svg"
-            link="/blogs/financial-management-tips"
+            link="/learn/financial-management-tips"
             tags={[BlogCategory.TIPS]}
           />
           <BlogCard
             title="Exploring the World of Work: Owning a Business vs Doing Gigs"
             description="In today's dynamic economy, individuals have more options than ever when it comes to earning a living. Two popular paths that many people consider are owning a business and doing gigs. Each option offers its own set of advantages and disadvantages, and understanding the differences can help you make an informed decision about your career path."
             imageUrl="/images/gigvb.svg"
-            link="/blogs/gigs-vs-business"
+            link="/learn/gigs-vs-business"
             tags={[BlogCategory.INFORMATION]}
           />
           <BlogCard
             title="10 Safety Tips for Gig Workers in the Modern Economy"
             description="In today's fast-paced gig economy, gig workers face unique challenges and safety concerns while navigating various gigs and tasks. Whether you're delivering food, providing rideshare services, or freelancing as a digital nomad, prioritizing safety is paramount. Here are ten essential safety tips to help gig workers stay safe and secure in your day-to-day work."
             imageUrl="/images/secure.svg"
-            link="/blogs/safety-tips-for-gig-workers"
+            link="/learn/safety-tips-for-gig-workers"
             tags={[BlogCategory.TIPS]}
           />
           <BlogCard
@@ -82,35 +95,35 @@ export default function Page() {
             if left unchecked, can take a toll on something crucial - your mental
             health."
             imageUrl="/images/mental-health.svg"
-            link="/blogs/mental-health-and-wellbeing-for-freelancers"
+            link="/learn/mental-health-and-wellbeing-for-freelancers"
             tags={[BlogCategory.TIPS]}
           />
           <BlogCard
             title="Navigating the Legal Maze: A Guide for Freelancers"
             description="In today's rapidly evolving landscape of work, the rise of freelancing and gig work has reshaped the traditional notions of employment. No longer confined to a nine-to-five office job, individuals are embracing the freedom and flexibility offered by freelancing, turning their passions and skills into lucrative careers."
             imageUrl="/images/navigating-the-legal-maze.svg"
-            link="/blogs/navigating-the-legal-maze"
+            link="/learn/navigating-the-legal-maze"
             tags={[BlogCategory.INFORMATION, BlogCategory.TIPS]}
           />
           <BlogCard
             title="Why ReachGig is Your Ultimate Platform"
             description='Welcome to ReachGig, your gateway to a world of opportunities tailored specifically for Gig professionals like yourself. You might be wondering, "What sets ReachGig apart from the sea of corporate websites out there?" Allow us to shed some light on that.'
             imageUrl="/images/why-reachgig-is-your-ultimate-platform.png"
-            link="/blogs/why-reachgig-is-your-ultimate-platform"
+            link="/learn/why-reachgig-is-your-ultimate-platform"
             tags={[BlogCategory.INFORMATION]}
           />
           <BlogCard
             title="India: The Land of Gig Economy"
             description="India is a land of opportunities, and the gig economy is no exception. With the rise of digital platforms and the increasing demand for flexible work, the gig economy is booming in India. If you're looking to join the gig economy in India, here's what you need to know."
             imageUrl="/images/india-the-land-of-gig-economy.svg"
-            link="/blogs/india-the-land-of-gig-economy"
+            link="/learn/india-the-land-of-gig-economy"
             tags={[BlogCategory.INFORMATION]}
           />
           <BlogCard
             title="Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions"
             description="In today's gig economy, where flexibility and independence are highly valued, mastering the art of client transactions is key to success as a gig worker. Whether you're a makeup artist, gym trainer, or any other type of gig worker, adhering to best practices can elevate your professionalism and enhance client satisfaction."
             imageUrl="/images/booking.svg"
-            link="/blogs/mastering-the-art-of-gig-work"
+            link="/learn/mastering-the-art-of-gig-work"
             tags={[BlogCategory.TIPS]}
           />
         </div>
