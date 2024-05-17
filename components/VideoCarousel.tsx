@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import ImageComponent from "./ImageComponent";
 import {
   Carousel,
   CarouselApi,
@@ -9,7 +8,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
-import Image from "next/image";
 
 export default function VideoCarousel({
   videos,
@@ -81,7 +79,7 @@ export default function VideoCarousel({
           </>
         ) : null}
       </Carousel>
-      {showImagePreview ? (
+      {/* {showImagePreview ? (
         <div className="flex flex-row items-center justify-start w-full overflow-x-scroll hide-scrollbar space-x-2">
           {videos.map((image, index) => (
             <ImageComponent
@@ -100,7 +98,7 @@ export default function VideoCarousel({
             />
           ))}
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }
