@@ -56,7 +56,7 @@ export default function Page() {
             "https://user4762.s3.ap-south-1.amazonaws.com/8A6B802E-B52C-405E-A939-E08D671F2F82.jpeg",
           ]}
           link="https://customer.reachgig.com/service/b2c066bd-82f4-4225-b260-ef6f4cfcad47"
-          name="Mohan Subramanian"
+          name="Mohan Subramaniam"
           profession="Mr. World"
           key={1}
         />
