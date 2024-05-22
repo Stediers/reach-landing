@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "Have a look at the profiles of our freelancers who have onboarded with us and have successfully completed appointments with clients.",
   openGraph: {
-    title: "Pricing",
+    title: "Successful Freelancers",
     description:
       "Have a look at the profiles of our freelancers who have onboarded with us and have successfully completed appointments with clients.",
     url: "https://reachgig.com/successful-freelancers",
