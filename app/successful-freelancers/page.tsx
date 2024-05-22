@@ -51,7 +51,7 @@ export default function Page() {
           key={1}
         />
         <ProfileCard
-          description="I am the winner of the Mr. World competition and have been a professional Fitness Trainer for 10 years. I have helped my clients achieve their fitness goals and lead a healthy lifestyle."
+          description="I have trained over a 100 champions who have gone on to win titles on various stages"
           images={[
             "https://user4762.s3.ap-south-1.amazonaws.com/8A6B802E-B52C-405E-A939-E08D671F2F82.jpeg",
           ]}
