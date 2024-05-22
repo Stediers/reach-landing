@@ -1,5 +1,11 @@
 import React, { ReactNode } from "react";
-import { ArrowDownCircle, CheckCheckIcon, Shield } from "lucide-react";
+import {
+  ArrowDownCircle,
+  CheckCheckIcon,
+  HandCoinsIcon,
+  Shield,
+  ShieldPlus,
+} from "lucide-react";
 import { Metadata } from "next";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
 import FeatureCard from "@components/FeatureCard";
@@ -29,10 +35,19 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth lg:space-y-20 space-y-10 pb-20">
+    <div className="relative flex flex-col items-center justify-center scroll-smooth lg:space-y-16 space-y-10 pb-20">
       <Hero />
       <Pricing />
+      <HowItWorks />
       <WhatYouGet />
+    </div>
+  );
+}
+
+function NumberCircle({ number }: { number: number }) {
+  return (
+    <div className="w-12 h-12 lg:w-16 lg:h-16 border-success border-2 rounded-full flex items-center justify-center">
+      <p className="text-success font-medium text-xl lg:text-2xl">{number}</p>
     </div>
   );
 }
@@ -42,9 +57,11 @@ function Hero() {
     <div className="lg:min-h-[75vh] min-h-[60vh] bg-foreground w-full flex flex-col items-center justify-center">
       <div className="max-w-4xl text-center">
         <h1 className="lg:text-5xl text-3xl font-semibold text-white !leading-relaxed px-10">
-          Say Goodbye to <span className="text-error">hefty advances</span>
-          &nbsp; and hello to <span className="text-success">fair pricing</span>
-          .
+          Say Goodbye to
+          <br />
+          <span className="text-error">hefty commisions</span>
+          &nbsp; and hello to <br />
+          <span className="text-success">fair pricing</span>.
         </h1>
         <div className="flex flex-col space-y-5 items-center mt-10">
           <ArrowDownCircle className="w-12 h-12 text-white mx-auto" />
@@ -69,8 +86,8 @@ function Pricing() {
           </h2>
         </div>
         <p className="text-lg text-center max-w-md lg:!leading-10 leading-8">
-          This is dont to make sure that partners on our platform can reserve a
-          slot for you. This is refundable if the job is not done.
+          This advance is yours and we hold it until the appointment is
+          completed.
         </p>
       </div>
     </div>
@@ -81,25 +98,64 @@ function WhatYouGet() {
   return (
     <HeaderWrapper
       className="min-h-[30vh] w-full flex flex-col items-center justify-center lg:space-y-20 space-y-10 px-10"
-      title="What you get"
+      title="Benefits"
     >
-      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 gap-y-10 w-full lg:items-start lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
         <FeatureCard
           icon={
-            <CheckCheckIcon className="w-12 h-12 lg:w-32 lg:h-32 text-success" />
+            <CheckCheckIcon className="w-16 h-16 lg:w-28 lg:h-28 text-success" />
           }
           heading="Proof of appointment"
-          description="Have a documented proof of your appointment with an invoice."
+          description="Have a documented proof of your appointment with feedback. This can be used for future references, which can help you get more clients."
         />
         <FeatureCard
-          icon={<Shield className="w-12 h-12 lg:w-32 lg:h-32 text-success" />}
-          heading="Secure payment"
-          description="Payment is secure and is only released after the job is done."
+          icon={
+            <ShieldPlus className="w-16 h-16 lg:w-28 lg:h-28 text-success" />
+          }
+          heading="Trust and safety"
+          description="By holding the advance, we ensure that both the client and the service provider are protected and are committed to the success of the appointment."
         />
         <FeatureCard
-          icon={<BsSafe className="w-12 h-12 lg:w-32 lg:h-32 text-success" />}
-          heading="Refundable advances"
-          description="If anything goes wrong, your advance is refundable."
+          icon={<BsSafe className="w-16 h-16 lg:w-28 lg:h-28 text-success" />}
+          heading="Reminders"
+          description="We understand the value of your time. So go ahead and enjoy your life while we remind you of your upcoming appointments for both you and your clients."
+        />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function HowItWorks() {
+  return (
+    <HeaderWrapper
+      className="min-h-[30vh] w-full flex flex-col items-center justify-center lg:space-y-20 space-y-10 px-10"
+      title="How it works"
+    >
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-20 lg:items-start w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+        <FeatureCard
+          icon={<NumberCircle number={1} />}
+          heading="Get a Callback"
+          description="Clients go through your profile and state their requirements through a callback request. it is your choice to accept or reject the request."
+        />
+        <FeatureCard
+          icon={<NumberCircle number={2} />}
+          heading="Schedule an appointment"
+          description="If the request is accepted, you schedule an appointment on the platform. By scheduling an appointment, you agree to the terms and conditions of the platform."
+        />
+        <FeatureCard
+          icon={<NumberCircle number={3} />}
+          heading="Client pays advance"
+          description="Client pays 20% of the total amount as an advance. This advance is held by ReachGig until the appointment is completed."
+        />
+        <FeatureCard
+          icon={<NumberCircle number={4} />}
+          heading="Complete the appointment"
+          description="Enter the OTP provided by the client to complete the appointment. Once the appointment is completed, the advance is released to you within 48 hours."
+        />
+        <FeatureCard
+          icon={<NumberCircle number={5} />}
+          heading="All done!"
+          description="You have successfully completed the appointment and the client is satisfied. You can now rate the client and the client can rate you."
         />
       </div>
     </HeaderWrapper>

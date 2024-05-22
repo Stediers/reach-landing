@@ -29,6 +29,12 @@ export const menus: Menu[] = [
     icon: <FcBriefcase className="text-3xl" />,
     path: "/learn",
   },
+  {
+    title: "Successful Freelancers",
+    subtitle: "View our successful freelancers",
+    icon: <FcHome className="text-3xl" />,
+    path: "/successful-freelancers",
+  },
 ];
 
 export const legal: { title: string; href: string; description: string }[] = [

@@ -10,7 +10,7 @@ export default function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 lg:space-y-10">
+    <div className="flex flex-col items-center justify-center space-y-6 lg:space-y-10">
       {icon}
       <div className="flex flex-col items-center justify-center lg:space-y-5 space-y-3">
         <h3 className="lg:text-3xl text-2xl font-medium text-center">
