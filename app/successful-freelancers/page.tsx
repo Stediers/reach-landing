@@ -41,7 +41,7 @@ export default function Page() {
       <Hero />
       <div className="w-full flex flex-col items-center justify-center space-y-20 lg:px-10 px-5">
         <ProfileCard
-          description="I am a professional makeup artist with 5 years of experience. I have worked with clients from all over the world and have delivered high-quality makeup that has helped my clients look their best."
+          description="I am a professional makeup artist with 3 years of experience. I have worked with clients from all over Tamil Nadu and have delivered high-quality makeup that has helped my clients look their best."
           images={[
             "https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg",
           ]}
