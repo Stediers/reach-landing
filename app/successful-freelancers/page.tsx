@@ -14,14 +14,14 @@ import { Button } from "@components/ui/button";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Successful Freelancers",
   description:
-    "ReachGig offers the best prices for the best services. With a 5% booking advance, we ensure that both the client and the service provider are protected.",
+    "Have a look at the profiles of our freelancers who have onboarded with us and have successfully completed appointments with clients.",
   openGraph: {
     title: "Pricing",
     description:
-      "ReachGig offers the best prices for the best services. Explore our platform today!",
-    url: "https://reachgig.com/pricing",
+      "Have a look at the profiles of our freelancers who have onboarded with us and have successfully completed appointments with clients.",
+    url: "https://reachgig.com/successful-freelancers",
     type: "website",
     images: [
       {
@@ -51,7 +51,7 @@ export default function Page() {
           key={1}
         />
         <ProfileCard
-          description="I have trained over a 100 champions who have gone on to win titles on various stages"
+          description="I am the winner of the Mr. World competition and have been a professional Fitness Trainer for over a decade. I have trained over a 100 champions who have gone on to win titles on various stages."
           images={[
             "https://user4762.s3.ap-south-1.amazonaws.com/8A6B802E-B52C-405E-A939-E08D671F2F82.jpeg",
           ]}
