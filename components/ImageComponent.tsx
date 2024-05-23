@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import { useState } from "react";
 import { showImagePopup } from "./notifications/Popup";
 import { BiError } from "react-icons/bi";
+import { motion } from "framer-motion";
 import devLog from "@helper_functions/devLog";
 
 export default function ImageComponent({
@@ -15,6 +16,7 @@ export default function ImageComponent({
   popup = true,
   whileHover,
   onClick,
+  objectFit = "cover",
 }: {
   src: string | StaticImageData;
   className?: string;
@@ -24,14 +26,16 @@ export default function ImageComponent({
   popup?: boolean;
   whileHover?: { scale: number };
   onClick?: () => void;
+  objectFit?: "cover" | "contain";
 }) {
   const [isLoaded, setIsLoaded] = useState(true);
   const [isError, setIsError] = useState(false);
   return (
-    <div
+    <motion.div
       className={`relative overflow-hidden ${className} ${
         border ? "border border-gray" : ""
       }`}
+      whileHover={whileHover}
     >
       {!isLoaded || isError ? (
         <div className="w-full h-full flex justify-center items-center">
@@ -52,7 +56,7 @@ export default function ImageComponent({
           sizes="100%"
           fill
           className="shrink-0"
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: objectFit }}
           onClick={() => {
             onClick && onClick();
             if (!popup) return;
@@ -61,7 +65,7 @@ export default function ImageComponent({
           onError={() => {
             setIsError(true);
           }}
-          onLoadingComplete={() => {
+          onLoad={() => {
             setIsLoaded(true);
           }}
           onLoadStart={() => {
@@ -71,7 +75,7 @@ export default function ImageComponent({
           priority={priority}
         />
       )}
-    </div>
+    </motion.div>
   );
 }
 

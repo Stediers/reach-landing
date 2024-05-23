@@ -11,6 +11,11 @@ import ReachSVG from "@components/svg/ReachSVG";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
 import FeatureCard from "@components/FeatureCard";
 import SideComponent from "@components/SideComponent";
+import FreelancerWhatsapp from "@public/images/freelancer-whatsapp.png";
+import Service from "@public/images/service.png";
+import Image from "next/image";
+import "@styles/globals.css";
+import { MoveDownIcon, MoveRightIcon } from "lucide-react";
 
 const iconStyle = "lg:w-24 lg:h-24 w-20 h-20";
 
@@ -44,9 +49,52 @@ export default function Page() {
     <div className="relative flex flex-col items-center justify-center scroll-smooth">
       <Index />
       <What />
+      <TransformationDesktop />
       <ByeByeScammers />
       <BecomeAPartner />
     </div>
+  );
+}
+
+function TransformationDesktop() {
+  return (
+    <HeaderWrapper
+      title="The Potential"
+      className="items-center justify-center w-full flex flex-col space-y-16 max-w-7xl lg:px-10 px-5"
+      id="who-we-are-and-what-we-do"
+    >
+      <div className="grid gap-10 lg:grid-cols-3 w-full justify-items-center items-center">
+        <ImageComponent
+          alt="freelancer-whatsapp"
+          src={FreelancerWhatsapp}
+          className="lg:w-[20rem] h-[40rem] !object-contain w-full !rounded-lg overflow-hidden"
+          priority
+          objectFit="contain"
+          border={false}
+        />
+        <div
+          className="lg:flex flex-col items-center justify-center space-y-5 w-full hidden"
+          hidden
+        >
+          <MoveRightIcon className="lg:w-24 lg:h-24 w-20 h-20 text-primary" />
+          <p className="lg:text-lg text-md text-center max-w-xl">
+            Convert in a matter of minutes
+          </p>
+        </div>
+        <div className="flex flex-col items-center justify-center space-y-5 lg:hidden">
+          <p className="lg:text-lg text-lg text-center max-w-xl">
+            Convert in a matter of minutes
+          </p>
+          <MoveDownIcon className="lg:w-24 lg:h-24 w-20 h-20 text-primary" />
+        </div>
+        <iframe
+          src="https://customer.reachgig.com/service/b52989ea-1448-42cd-8d52-c808d0dedbe4"
+          className="lg:w-[22rem] w-full h-[40rem] border-primary border-2 cursor-no-drop pointer-events-none rounded-lg"
+          allow="autoplay; fullscreen"
+          allowFullScreen
+        />
+      </div>
+    </HeaderWrapper>
   );
 }
 
