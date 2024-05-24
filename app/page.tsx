@@ -109,7 +109,7 @@ function ByeByeScammers() {
         <h3 className="lg:text-5xl text-3xl font-bold text-white">
           Bye Bye Scammers
         </h3>
-        <p className="lg:text-lg text-md text-center max-w-xl text-white">
+        <p className="text-lg text-center max-w-xl text-white">
           We have a strict verification process to ensure that only genuine
           service providers are listed on ReachGig.
         </p>
@@ -127,15 +127,10 @@ function BecomeAPartner() {
   return (
     <HeaderWrapper
       title="Become a Partner"
-      className="items-center justify-center w-full flex flex-col space-y-16"
+      className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10"
       id="who-we-are-and-what-we-do"
     >
-      <Button asChild variant="success" className="w-fit">
-        <Link href="https://partner.reachgig.com" className="w-fit">
-          Get Started
-        </Link>
-      </Button>
-      <div className="grid gap-10 px-10 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
+      <div className="grid gap-10 px-5 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
         <SideComponent
           title="Less Ghosting"
           description="Let your customer know what, how and when you offer your services before they reach out to you. This will help you get more genuine leads."

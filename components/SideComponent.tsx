@@ -27,7 +27,7 @@ export default function SideComponent({
         <h2 className="max-w-lg font-medium leading-10 lg:text-3xl text-2xl">
           {title}
         </h2>
-        <p className="lg:text-lg text-base">{description}</p>
+        <p className="text-lg w-full">{description}</p>
       </div>
       <ImageComponent
         src={imageUrl}
