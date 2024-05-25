@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="scroll-smooth pb-20 pt-10 w-full space-y-10">
-      <div className="relative flex flex-col items-center justify-center max-w-[100rem] mx-auto space-y-5 lg:space-y-10 lg:px-10 px-5">
+      <div className="relative flex flex-col items-center justify-center mx-auto space-y-5 lg:space-y-10 lg:px-10 px-5">
         <h1 className="lg:text-4xl text-2xl font-medium w-full">
           Our Podcasts
         </h1>
@@ -52,11 +52,11 @@ export default function Page() {
           basis="lg:basis-1/2"
         />
       </div>
-      <div className="relative flex flex-col items-center justify-center max-w-[100rem] mx-auto">
+      <div className="relative flex flex-col items-center justify-center mx-auto">
         <h2 className="lg:text-4xl text-2xl font-medium w-full lg:px-10 px-5">
           Learn with ReachGig
         </h2>
-        <div className="grid gap-20 lg:px-10 px-5 lg:grid-cols-3 justify-items-center lg:pt-10 pt-5">
+        <div className="grid gap-20 lg:px-10 px-5 lg:grid-cols-3 justify-items-center lg:pt-10 pt-5 2xl:grid-cols-4">
           {/* NEW BLOGS HERE */}
           <BlogCard
             title="Staying Motivated and Overcoming Freelance Burnout"
