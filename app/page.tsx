@@ -130,7 +130,7 @@ function BecomeAPartner() {
       className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10"
       id="who-we-are-and-what-we-do"
     >
-      <div className="grid gap-10 px-5 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
+      <div className="grid gap-10 px-5 lg:grid-cols-2 lg:px-10 justify-items-center">
         <SideComponent
           title="Less Ghosting"
           description="Let your customer know what, how and when you offer your services before they reach out to you. This will help you get more genuine leads."
@@ -178,33 +178,33 @@ function What() {
       className="items-center justify-center w-full flex flex-col space-y-16"
       id="who-we-are-and-what-we-do"
     >
-      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-center justify-center space-y-10 lg:space-y-0">
+      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-start justify-center space-y-10 lg:space-y-0">
         <FeatureCard
           icon={<CiTrophy className={`${iconStyle} text-yellow-500`} />}
-          heading="Talent is everywhere"
-          description="Lack of opportunities for the youth is a major concern. Lets change that!"
+          heading="Level up"
+          description="Improve how your present your services to your customers."
         />
         <FeatureCard
           icon={<FaHandshake className={`${iconStyle} text-green-500`} />}
-          heading="Communication"
+          heading="Effective Communication"
           description="Lets bridge the gap between the service providers and the customers."
         />
         <FeatureCard
           icon={
             <MdOutlinePriceCheck className={`${iconStyle} text-blue-500`} />
           }
-          heading="Cost Effective"
-          description="Low cost of entry for the service providers and low cost of services for the customers."
+          heading="Price is Right"
+          description="Find the right price for your services and get paid on time."
         />
         <FeatureCard
           icon={<FcConferenceCall className={iconStyle} />}
-          heading="Find the right partner"
-          description="Find the right partner for your needs. Makeup, Photography, Catering, and many more."
+          heading="Community"
+          description="Learn from other experts in your field and grow your business."
         />
         <FeatureCard
           icon={<FcBullish className={iconStyle} />}
           heading="Get the job done"
-          description="Get the job done and get paid. It's that simple!"
+          description="Quick and seamless process to get the job done with ease."
         />
       </div>
     </HeaderWrapper>
@@ -230,7 +230,7 @@ function Index() {
             the Gig Economy
           </h1>
           <p className="lg:text-lg text-md text-center text-white">
-            Join us and be part of the revolution.
+            Level up and stand out.
           </p>
           <div className="grid grid-cols-2 gap-5 pt-5">
             <Button asChild variant="success">
