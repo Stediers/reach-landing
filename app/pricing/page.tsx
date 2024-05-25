@@ -74,7 +74,7 @@ function Hero() {
 
 function Pricing() {
   return (
-    <div className="max-w-4xl lg:min-h-[40vh] min-h-[30vh] w-full flex flex-col items-center justify-center lg:space-y-7 space-y-7 px-10">
+    <div className="max-w-2xl lg:min-h-[40vh] min-h-[30vh] w-full flex flex-col items-center justify-center lg:space-y-7 space-y-7 px-10 rounded-lg lg:border-2 border-success">
       <p className="text-center text-base tracking-wider font-medium text-success">
         PAID BY THE CLIENT
       </p>

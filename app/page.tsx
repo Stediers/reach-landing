@@ -12,8 +12,7 @@ import HeaderWrapper from "@wrapper/HeaderWrapper";
 import FeatureCard from "@components/FeatureCard";
 import SideComponent from "@components/SideComponent";
 import FreelancerWhatsapp from "@public/images/freelancer-whatsapp.png";
-import Service from "@public/images/service.png";
-import Image from "next/image";
+import PhoneProfile from "@public/images/phone-profile.png";
 import "@styles/globals.css";
 import { MoveDownIcon, MoveRightIcon } from "lucide-react";
 
@@ -87,11 +86,19 @@ function TransformationDesktop() {
           </p>
           <MoveDownIcon className="lg:w-24 lg:h-24 w-20 h-20 text-primary" />
         </div>
-        <iframe
+        {/* <iframe
           src="https://customer.reachgig.com/service/b52989ea-1448-42cd-8d52-c808d0dedbe4"
           className="lg:w-[22rem] w-full h-[40rem] border-primary border-2 cursor-no-drop pointer-events-none rounded-lg"
           allow="autoplay; fullscreen"
           allowFullScreen
+        /> */}
+        <ImageComponent
+          alt="phone-profile"
+          src={PhoneProfile}
+          className="lg:w-[20rem] h-[40rem] !object-contain w-full !rounded-lg overflow-hidden"
+          priority
+          objectFit="contain"
+          border={false}
         />
       </div>
     </HeaderWrapper>
