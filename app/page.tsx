@@ -15,6 +15,7 @@ import FreelancerWhatsapp from "@public/images/freelancer-whatsapp.png";
 import PhoneProfile from "@public/images/phone-profile.png";
 import "@styles/globals.css";
 import { MoveDownIcon, MoveRightIcon } from "lucide-react";
+import { AspectRatio } from "@components/ui/aspect-ratio";
 
 const iconStyle = "lg:w-24 lg:h-24 w-20 h-20";
 
@@ -47,10 +48,10 @@ export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth">
       <Index />
-      <What />
+      <BecomeAPartner />
       <TransformationDesktop />
       <ByeByeScammers />
-      <BecomeAPartner />
+      <What />
     </div>
   );
 }
@@ -133,20 +134,20 @@ function ByeByeScammers() {
 function BecomeAPartner() {
   return (
     <HeaderWrapper
-      title="Become a Partner"
+      title="Grow with us"
       className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10"
       id="who-we-are-and-what-we-do"
     >
       <div className="grid gap-10 px-5 lg:grid-cols-2 lg:px-10 justify-items-center">
         <SideComponent
+          title="Your own Profile"
+          description="Get your own profile page to showcase your services and expertise."
+          imageUrl="/images/brand-yourself.svg"
+        />
+        <SideComponent
           title="Less Ghosting"
           description="Let your customer know what, how and when you offer your services before they reach out to you. This will help you get more genuine leads."
           imageUrl="/images/ghost.svg"
-        />
-        <SideComponent
-          title="Avoid Negotiations"
-          description="Have complete control over your pricing and services. No more negotiations and haggling."
-          imageUrl="/images/negotiate.svg"
         />
         <SideComponent
           title="Be Discovered"
@@ -223,39 +224,49 @@ function Index() {
   const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
     <section
-      className="flex flex-col items-center justify-center w-full min-h-[75vh] bg-foreground"
+      className="flex flex-col items-center justify-center w-full min-h-[75vh] relative"
       id="Index"
     >
       <div className="flex lg:flex-row flex-col items-center lg:justify-between justify-start space-y-10 lg:space-y-0 w-full max-w-7xl px-5 py-10 lg:px-16">
         <div className="flex flex-col lg:items-start items-center justify-center space-y-5">
-          <div className="lg:hidden flex">
-            <ReachSVG color="#f40e1e" className="w-40" />
+          <div className="flex flex-col items-center justify-center space-y-4 lg:space-y-5 lg:items-start">
+            <div className="flex">
+              <ReachSVG color="#f40e1e" className="w-40" />
+            </div>
+            <h1 className="lg:text-5xl text-3xl font-bold lg:text-left text-center">
+              <span className="text-primary leading-relaxed">
+                Brand Yourself
+              </span>{" "}
+              <br />
+              the right way
+            </h1>
+            <p className="text-lg text-center">Stand out to your clients</p>
           </div>
-          <h1 className="lg:text-5xl text-3xl font-bold lg:text-left text-center text-white">
-            <span className="text-primary leading-relaxed">Empowering</span>{" "}
-            <br />
-            the Gig Economy
-          </h1>
-          <p className="lg:text-lg text-md text-center text-white">
-            Level up and stand out.
-          </p>
-          <div className="grid grid-cols-2 gap-5 pt-5">
+          <div className="grid grid-cols-1 gap-5 pt-5">
             <Button asChild variant="success">
-              <Link href={partnerLink}>Become a Partner</Link>
+              <Link href={partnerLink}>Start your Journey</Link>
             </Button>
-            <Button asChild variant="outline">
+            {/* <Button asChild variant="outline">
               <Link href={`${customerLink}`}>Find Services</Link>
-            </Button>
+            </Button> */}
           </div>
         </div>
-        <div className="flex flex-col items-start justify-center space-y-5">
-          <ImageComponent
-            src="/images/index.svg"
-            alt="ReachGig"
-            className="rounded-2xl lg:w-[25rem] lg:h-[25rem] w-[15rem] h-[15rem]"
-            border={false}
-          />
-        </div>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="!rounded-2xl lg:w-[40rem] lg:h-full w-full h-[15rem] overflow-hidden"
+        >
+          <source src="/videos/home-page.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {/* <div className="w-full lg:absolute flex justify-center !object-cover items-center overflow-hidden relative">
+          <video autoPlay loop muted playsInline className="w-full h-full">
+            <source src="/videos/home-page.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div> */}
       </div>
     </section>
   );
