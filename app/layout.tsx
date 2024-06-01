@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Navbar from "@components/Navbar";
 import Footer from "@components/footer/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import FacebookPixel from "@scripts/FacebookPixel";
 
 const fontSans = Poppins({
   subsets: ["latin"],
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
         <head />
         <GoogleAnalyticsTracking />
+        <FacebookPixel />
         <body
           className={`${cn(
             fontSans.className
