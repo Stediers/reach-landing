@@ -224,7 +224,7 @@ function Index() {
   const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
     <section
-      className="flex flex-col items-center justify-center w-full lg:min-h-[50vh] min-h-[75vh] relative"
+      className="flex flex-col items-center justify-center w-full lg:min-h-[50vh] xl:min-h-[75vh] relative"
       id="Index"
     >
       <div className="flex xl:flex-row flex-col items-center xl:justify-between justify-start space-y-10 xl:space-y-0 w-full max-w-7xl px-5 py-10 xl:px-16">
