@@ -99,10 +99,7 @@ function Index() {
               <Separator orientation="horizontal" />
             </div>
             <Link href={partnerLink}>
-              <Button
-                variant="success"
-                className="lg:max-w-[200px] sticky bottom-5"
-              >
+              <Button variant="success" className="lg:max-w-[200px]">
                 Let&apos;s get started
               </Button>
             </Link>
