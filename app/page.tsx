@@ -227,9 +227,9 @@ function Index() {
       className="flex flex-col items-center justify-center w-full min-h-[75vh] relative"
       id="Index"
     >
-      <div className="flex lg:flex-row flex-col items-center lg:justify-between justify-start space-y-10 lg:space-y-0 w-full max-w-7xl px-5 py-10 lg:px-16">
-        <div className="flex flex-col lg:items-start items-center justify-center space-y-5">
-          <div className="flex flex-col items-center justify-center space-y-4 lg:space-y-5 lg:items-start">
+      <div className="flex xl:flex-row flex-col items-center xl:justify-between justify-start space-y-10 xl:space-y-0 w-full max-w-7xl px-5 py-10 xl:px-16">
+        <div className="flex flex-col xl:items-start items-center justify-center space-y-5">
+          <div className="flex flex-col items-center justify-center space-y-4 xl:space-y-5 xl:items-start">
             <div className="flex">
               <ReachSVG color="#f40e1e" className="w-40" />
             </div>

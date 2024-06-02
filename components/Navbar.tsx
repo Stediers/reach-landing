@@ -39,7 +39,7 @@ export default function Navbar() {
 
 function DesktopNav({ path }: { path: string }) {
   return (
-    <div className="lg:flex justify-start space-x-10 w-full items-center hidden">
+    <div className="xl:flex justify-start space-x-10 w-full items-center hidden">
       <Link
         className="flex items-center space-x-4 shrink-0 hover:cursor-pointer"
         href="/"
@@ -127,7 +127,7 @@ function DesktopNav({ path }: { path: string }) {
 
 function MobileNav({ path }: { path: string }) {
   return (
-    <div className="flex justify-between space-x-5 w-full items-center lg:hidden">
+    <div className="flex justify-between space-x-5 w-full items-center xl:hidden">
       <Link
         className="flex items-center space-x-4 shrink-0 hover:cursor-pointer"
         href="/"
@@ -140,7 +140,7 @@ function MobileNav({ path }: { path: string }) {
           </p>
         </div>
       </Link>
-      <div className="lg:hidden flex items-center space-x-5 self-end">
+      <div className="xl:hidden flex items-center space-x-5 self-end">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" className="w-fit">
