@@ -98,13 +98,14 @@ function Index() {
               />
               <Separator orientation="horizontal" />
             </div>
-            <Button
-              asChild
-              variant="success"
-              className="lg:max-w-[200px] sticky bottom-5"
-            >
-              <Link href={partnerLink}>Let&apos;s get started</Link>
-            </Button>
+            <Link href={partnerLink}>
+              <Button
+                variant="success"
+                className="lg:max-w-[200px] sticky bottom-5"
+              >
+                Let&apos;s get started
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="hidden lg:flex lg:flex-col lg:items-end lg:justify-start pt-20 lg:space-y-5 h-full">
