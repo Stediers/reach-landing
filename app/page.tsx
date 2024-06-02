@@ -138,7 +138,7 @@ function BecomeAPartner() {
       className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10"
       id="who-we-are-and-what-we-do"
     >
-      <div className="grid gap-10 px-5 lg:grid-cols-2 lg:px-10 justify-items-center">
+      <div className="grid gap-10 px-5 lg:grid-cols-2 xl:px-10 justify-items-center">
         <SideComponent
           title="Your own Profile"
           description="Get your own profile page to showcase your services and expertise."
@@ -224,7 +224,7 @@ function Index() {
   const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
     <section
-      className="flex flex-col items-center justify-center w-full min-h-[75vh] relative"
+      className="flex flex-col items-center justify-center w-full lg:min-h-[50vh] min-h-[75vh] relative"
       id="Index"
     >
       <div className="flex xl:flex-row flex-col items-center xl:justify-between justify-start space-y-10 xl:space-y-0 w-full max-w-7xl px-5 py-10 xl:px-16">
