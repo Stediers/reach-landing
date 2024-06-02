@@ -138,7 +138,7 @@ function BecomeAPartner() {
       className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10"
       id="who-we-are-and-what-we-do"
     >
-      <div className="grid gap-10 px-5 lg:grid-cols-2 xl:px-10 justify-items-center">
+      <div className="grid gap-10 px-5 lg:grid-cols-2 xl:px-10 justify-items-center w-full">
         <SideComponent
           title="Your own Profile"
           description="Get your own profile page to showcase your services and expertise."
@@ -148,6 +148,11 @@ function BecomeAPartner() {
           title="Less Ghosting"
           description="Let your customer know what, how and when you offer your services before they reach out to you. This will help you get more genuine leads."
           imageUrl="/images/ghost.svg"
+        />
+        <SideComponent
+          title="You decide the Price"
+          description="You decide the price for your services. No more haggling with customers."
+          imageUrl="/images/price.svg"
         />
         <SideComponent
           title="Be Discovered"
@@ -220,8 +225,6 @@ function What() {
 }
 
 function Index() {
-  const partnerLink = process.env.NEXT_PUBLIC_PARTNER_LINK || "/user/sign-up";
-  const customerLink = process.env.NEXT_PUBLIC_CUSTOMER_LINK || "/user/sign-up";
   return (
     <section
       className="flex flex-col items-center justify-center w-full lg:min-h-[50vh] xl:min-h-[75vh] relative"
@@ -244,7 +247,7 @@ function Index() {
           </div>
           <div className="grid grid-cols-1 gap-5 pt-5">
             <Button asChild variant="success">
-              <Link href={partnerLink}>Start your Journey</Link>
+              <Link href="/onboarding-review">Start your Journey</Link>
             </Button>
             {/* <Button asChild variant="outline">
               <Link href={`${customerLink}`}>Find Services</Link>

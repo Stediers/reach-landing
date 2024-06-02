@@ -103,13 +103,8 @@ function DesktopNav({ path }: { path: string }) {
           </NavigationMenuList>
         </NavigationMenu>
         <div className="grid grid-cols-2 gap-5">
-          <Button
-            variant="success"
-            size="default"
-            className="text-base"
-            onClick={() => window.open("https://partner.reachgig.com/")}
-          >
-            Become a Partner
+          <Button asChild variant="success">
+            <Link href="/onboarding-review">Become a Partner</Link>
           </Button>
           <Button
             variant="outline"
