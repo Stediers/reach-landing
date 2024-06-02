@@ -73,7 +73,7 @@ function Index() {
               clients?
             </h1>
             <p className="lg:text-2xl text-xl font-medium">
-              Here is how can do it.
+              Here is how you can do it.
             </p>
           </div>
           <div className="flex flex-col items-start justify-center space-y-5 lg:space-y-10">
