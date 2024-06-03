@@ -86,14 +86,19 @@ export default function Main() {
             reachgig.connect@gmail.com.
           </div>
           <div data-custom-class="body_text">
-            This agreement <span className={textHighlight}>("Terms")</span>
+            This agreement{" "}
+            <span className={textHighlight}>(&quot;Terms&quot;)</span>
             governs the use of the ReachGig platform{" "}
-            <span className={textHighlight}>("Platform")</span> for booking and
-            appointment services between freelancers{" "}
-            <span className={textHighlight}>("Freelancers")</span>, clients
-            <span className={textHighlight}>("Clients")</span>, and ReachGig
-            Corporation Private Limited{" "}
-            <span className={textHighlight}>("We" or "Us")</span>.
+            <span className={textHighlight}>(&quot;Platform&quot;)</span> for
+            booking and appointment services between freelancers{" "}
+            <span className={textHighlight}>(&quot;Freelancers&quot;)</span>,
+            clients
+            <span className={textHighlight}>(&quot;Clients&quot;)</span>, and
+            ReachGig Corporation Private Limited{" "}
+            <span className={textHighlight}>
+              (&quot;We&quot; or &quot;Us&quot;)
+            </span>
+            .
           </div>
           <div data-custom-class="body_text">
             Users will be prompted about changes in the website or app.
@@ -193,8 +198,8 @@ export default function Main() {
             processed through a secure third-party payment gateway.
           </div>
           <div>
-            <span className={textHighlight}>2.2</span> The Client's payment will
-            be held in escrow until after the appointment.
+            <span className={textHighlight}>2.2</span> The Client&lsquo;s
+            payment will be held in escrow until after the appointment.
           </div>
           <div>
             <span className={textHighlight}>2.3</span> After the appointment,
@@ -205,7 +210,7 @@ export default function Main() {
             <span className={textHighlight}>2.4</span> In case of a dispute, We
             will mediate to find a resolution. If no resolution is reached, the
             escrowed funds may be withheld or refunded partially based on the
-            mediator's judgment.
+            mediator&lsquo;s judgment.
           </div>
         </div>
         <div className={section}>

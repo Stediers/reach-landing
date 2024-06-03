@@ -81,20 +81,25 @@ function Index() {
               <Separator orientation="horizontal" />
               <StepDetails
                 number={1}
-                title="Let us know about you"
+                title="Login with your mobile number"
                 description="By completing our short form, you will be able to create your profile in no time."
               />
               <Separator orientation="horizontal" />
               <StepDetails
                 number={2}
-                title="Add your first service"
-                description="You can either paste in your service template and let AI do the rest or create your service from scratch."
+                title={
+                  <>
+                    Let us and your clients{" "}
+                    <span className="text-info">know</span> more about you
+                  </>
+                }
+                description="Tell us about your skills, experience, and the services you offer."
               />
               <Separator orientation="horizontal" />
               <StepDetails
                 number={3}
-                title="Share your profile link"
-                description="Now that you have your profile, share it with your clients and start getting bookings."
+                title="All set!"
+                description="You are now ready to start getting hired by clients. Let's get started!"
               />
             </div>
             <Link href={partnerLink} className="w-full lg:max-w-[200px]">
@@ -121,7 +126,7 @@ function StepDetails({
   description,
   number,
 }: {
-  title: string;
+  title: string | React.ReactNode;
   description: string;
   number: number;
 }) {
@@ -129,7 +134,9 @@ function StepDetails({
     <div className="flex flex-row items-start justify-start space-x-5">
       <NumberCircle number={number} />
       <div className="flex flex-col items-start justify-center space-y-2 lg:space-y-3">
-        <h2 className="lg:text-xl text-lg font-medium">{title}</h2>
+        <div className="flex items-center justify-center space-x-3">
+          <h2 className="lg:text-xl text-lg font-medium">{title}</h2>
+        </div>
         <p className="lg:text-lg lg:!leading-relaxed text-base">
           {description}
         </p>
