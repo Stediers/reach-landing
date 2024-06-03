@@ -81,22 +81,21 @@ function Index() {
               <Separator orientation="horizontal" />
               <StepDetails
                 number={1}
-                title="Create your profile"
-                description="Let clients know who you are, what you do and how you can help them."
+                title="Let us know about you"
+                description="By completing our short form, you will be able to create your profile in no time."
               />
               <Separator orientation="horizontal" />
               <StepDetails
                 number={2}
                 title="Add your first service"
-                description="You can either paste your service template and let AI do the rest or create your service from scratch."
+                description="You can either paste in your service template and let AI do the rest or create your service from scratch."
               />
               <Separator orientation="horizontal" />
               <StepDetails
                 number={3}
                 title="Share your profile link"
-                description="Share your unique profile link in all your social media profiles and start getting noticed."
+                description="Now that you have your profile, share it with your clients and start getting bookings."
               />
-              <Separator orientation="horizontal" />
             </div>
             <Link href={partnerLink} className="w-full lg:max-w-[200px]">
               <Button variant="success" className="lg:max-w-[200px]">
