@@ -82,7 +82,7 @@ function Index() {
               <StepDetails
                 number={1}
                 title="Login with your mobile number"
-                description="By completing our short form, you will be able to create your profile in no time."
+                description="We will send you a one-time password to verify your number. This is to ensure that you are a real person."
               />
               <Separator orientation="horizontal" />
               <StepDetails
@@ -99,7 +99,7 @@ function Index() {
               <StepDetails
                 number={3}
                 title="All set!"
-                description="You are now ready to start getting hired by clients. Let's get started!"
+                description="You are now ready to start getting hired by clients. Be your own Boss!"
               />
             </div>
             <Link href={partnerLink} className="w-full lg:max-w-[200px]">
