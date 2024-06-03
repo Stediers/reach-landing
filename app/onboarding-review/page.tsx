@@ -90,7 +90,7 @@ function Index() {
                 title={
                   <>
                     Let us and your clients{" "}
-                    <span className="text-info">know</span> more about you
+                    <span className="text-primary">know more</span> about you
                   </>
                 }
                 description="Tell us about your skills, experience, and the services you offer."
