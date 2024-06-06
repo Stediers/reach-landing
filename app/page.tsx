@@ -109,7 +109,7 @@ function TransformationDesktop() {
 function ByeByeScammers() {
   return (
     <section
-      className="flex flex-col items-center justify-center w-full lg:min-h-[70vh] min-h-[50vh] bg-success px-10 lg:px-0"
+      className="flex flex-col items-center justify-center w-full lg:min-h-[70vh] min-h-[50vh] bg-success p-10 lg:px-0 lg:py-0 !text-center"
       id="Index"
     >
       <div className="flex flex-col items-center justify-start w-full max-w-7xl space-y-5">
