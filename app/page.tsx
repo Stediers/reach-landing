@@ -49,7 +49,7 @@ export default function Page() {
     <div className="relative flex flex-col items-center justify-center scroll-smooth">
       <Index />
       <BecomeAPartner />
-      <TransformationDesktop />
+      {/* <TransformationDesktop /> */}
       <ByeByeScammers />
       <What />
     </div>
@@ -259,11 +259,18 @@ function Index() {
           loop
           muted
           playsInline
-          className="!rounded-2xl lg:w-[40rem] lg:h-full w-full h-[15rem] overflow-hidden"
+          className="!rounded-2xl lg:w-[20rem] lg:h-full w-full h-[30rem] overflow-hidden"
         >
-          <source src="/videos/home-page.mp4" type="video/mp4" />
+          <source src="/videos/landing-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        {/* <ImageComponent
+          alt="phone-profile"
+          src={PhoneProfile}
+          className="lg:w-[20rem] h-[40rem] w-full !rounded-lg overflow-hidden"
+          priority
+          border={false}
+        /> */}
         {/* <div className="w-full lg:absolute flex justify-center !object-cover items-center overflow-hidden relative">
           <video autoPlay loop muted playsInline className="w-full h-full">
             <source src="/videos/home-page.mp4" type="video/mp4" />
