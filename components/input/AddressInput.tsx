@@ -1,12 +1,10 @@
-import Checker from "@components/Checker";
 import TextInput from "./TextInput";
 import { LocationAttributes } from "@data/types";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useEffect, useState } from "react";
 import { AddressName, AddressType, State } from "@data/enums";
 import { showSnackBar } from "@components/notifications/Snackbar";
-import LineHeader from "@components/LineHeader";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import TextInputWithDropdown from "./TextInputWithDropdown";
 import { City, State as StateType, Country, ICity } from "country-state-city";
 import Chip from "@components/Chip";

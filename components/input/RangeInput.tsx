@@ -27,7 +27,7 @@ export default function RangeInput({
 }) {
   return (
     <div className="flex flex-col space-y-3 w-full">
-      {title && <p className="text-base font-medium">{title}</p>}
+      {title && <p className="text-md font-medium">{title}</p>}
       <motion.input
         className={`w-full h-3 bg-gray rounded-md ${className} accent-primary focus:outline-none outline-none border-none`}
         type="range"

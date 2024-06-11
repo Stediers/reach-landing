@@ -17,7 +17,7 @@ const badgeVariants = cva(
         outline: "text-foreground",
         info: "border-transparent bg-info text-info-foreground hover:bg-info/80 text-white",
         infoOutline:
-          "text-info border-info hover:text-info-foreground text-white",
+          "text-info border-info hover:text-info-foreground text-info font-medium",
         success:
           "border-transparent bg-success text-success-foreground !text-white",
         successOutline:
@@ -25,6 +25,8 @@ const badgeVariants = cva(
         error: "border-transparent bg-error text-error-foreground text-white",
         errorOutline:
           "text-error border-error hover:text-error-foreground  text-white",
+        whiteOutline: "text-white border-white hover:text-white-foreground",
+        hardOutline: "text-text border-text",
       },
     },
     defaultVariants: {

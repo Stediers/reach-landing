@@ -7,16 +7,6 @@ export default function ReachSVG({
   color: string;
   flap?: boolean;
 }) {
-  const flapVariants = {
-    flap: {
-      rotate: [0, 10, 0],
-      transition: {
-        duration: 0.5,
-        repeat: Infinity,
-        repeatType: "reverse",
-      },
-    },
-  };
   return (
     <svg
       id="Layer_1"

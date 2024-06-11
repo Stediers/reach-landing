@@ -1,4 +1,3 @@
-import { SelectInputOption } from "@data/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
@@ -8,14 +7,16 @@ export default function SelectInput({
   className = "",
   options,
   onChange,
-  reset = false,
   defaultValue,
   titleClassName = "",
 }: {
   title?: string;
   className?: string;
-  reset?: boolean;
-  options: SelectInputOption[];
+  options: {
+    icon?: React.ReactNode;
+    text: string;
+    value: string | number;
+  }[];
   onChange: (value: string | number) => void;
   defaultValue?: string | undefined;
   titleClassName?: string;
@@ -26,10 +27,8 @@ export default function SelectInput({
   } | null>(options.find((option) => option.value === defaultValue) ?? null);
   const [showOptions, setShowOptions] = useState<boolean>(false);
   return (
-    <div className={`flex flex-col w-full relative ${className}`}>
-      <p className={`font-medium mb-1 w-full text-left ${titleClassName}`}>
-        {title}
-      </p>
+    <div className={`flex flex-col w-full relative ${className} space-y-2`}>
+      <p className={`text-md font-medium ${titleClassName}`}>{title}</p>
       <button
         className={`border-black border bg-white
         ${showOptions ? "rounded-t-md" : "rounded-md"}
@@ -40,7 +39,7 @@ export default function SelectInput({
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center space-x-2">
               <p className="text-base/6 first-letter:capitalize">
-                {reset ? "Select" : selectedElement.text}
+                {selectedElement.text}
               </p>
               {selectedElement.icon}
             </div>
@@ -94,7 +93,7 @@ function Option({
       onClick={onClick}
     >
       {icon ? (
-        <div className="flex items-center space-x-2 w-full justify-between">
+        <div className="flex items-center space-x-2 w-full">
           <p className="text-base">{text}</p>
           {icon}
         </div>

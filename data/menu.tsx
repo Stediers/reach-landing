@@ -1,5 +1,7 @@
+import { Search, Phone } from "lucide-react";
+import { AiOutlineEdit } from "react-icons/ai";
 import { FcHome, FcBusinessman, FcCalendar, FcBriefcase } from "react-icons/fc";
-import { MdLocalOffer } from "react-icons/md";
+import { HiLocationMarker } from "react-icons/hi";
 
 export type Menu = {
   title: string;
@@ -34,6 +36,36 @@ export const menus: Menu[] = [
     subtitle: "View our successful freelancers",
     icon: <FcHome className="text-3xl" />,
     path: "/successful-freelancers",
+  },
+];
+
+export const consoleMenus: Menu[] = [
+  {
+    title: "Explore",
+    subtitle: "Search for services",
+    icon: <Search className="w-6 h-6 shrink-0" />,
+    path: "/explore",
+  },
+  {
+    title: "Callbacks",
+    subtitle: "Request a callback",
+    icon: <Phone className="w-5 h-5 shrink-0" />,
+    path: "/console/callbacks",
+  },
+];
+
+export const userMenus: Menu[] = [
+  {
+    title: "Edit Profile",
+    subtitle: "Manage your profile",
+    icon: <AiOutlineEdit className="text-2xl shrink-0" />,
+    path: "/console/profile/edit",
+  },
+  {
+    title: "Address",
+    subtitle: "Manage your addresses",
+    icon: <HiLocationMarker className="text-3xl shrink-0" />,
+    path: "/console/profile/address",
   },
 ];
 

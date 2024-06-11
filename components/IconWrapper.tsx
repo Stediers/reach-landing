@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 
 export default function IconWrapper({
@@ -15,7 +16,7 @@ export default function IconWrapper({
 }) {
   return (
     <motion.div
-      className="flex flex-col items-center space-y-2 w-full"
+      className="flex flex-col items-center space-y-2 w-full max-h-[4rem]"
       onClick={onClick}
       whileTap={whileTap}
     >

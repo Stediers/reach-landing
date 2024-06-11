@@ -11,6 +11,13 @@ export default function LoadingWrapper({
   loadingSVGClassName = "w-6 h-6",
   showLogo = true,
   text = "Please wait...",
+  loadingJSX = (
+    <div className="flex flex-col space-y-2 flex-1 justify-center items-center">
+      {showLogo && <Logo />}
+      <Loading className={loadingSVGClassName} color="black" />
+      <p className={loadingTextClassName}>{text}</p>
+    </div>
+  ),
 }: PropsWithChildren<{
   pageState: State;
   className?: string;
@@ -18,16 +25,11 @@ export default function LoadingWrapper({
   text?: string;
   loadingTextClassName?: string;
   loadingSVGClassName?: string;
+  loadingJSX?: JSX.Element;
 }>) {
   return (
-    <div className="flex flex-col w-full">
-      {pageState === State.LOADING ? (
-        <div className="flex flex-col space-y-2 flex-1 justify-center items-center">
-          {showLogo && <Logo textStyle="text-lg" wings="w-[50%]" />}
-          <Loading className={loadingSVGClassName} color="black" />
-          <p className={loadingTextClassName}>{text}</p>
-        </div>
-      ) : null}
+    <div className="flex flex-col w-full space-y-3">
+      {pageState === State.LOADING ? loadingJSX : null}
       {pageState === State.ERROR ? (
         <div className="flex justify-center items-center h-screen">
           <div className="text-2xl font-medium">Error</div>

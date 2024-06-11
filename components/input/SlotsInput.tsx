@@ -1,53 +1,37 @@
 import Card from "@components/Card";
-import Chip from "@components/Chip";
 import LineHeader from "@components/LineHeader";
-import AnimatedTabs from "@components/Tabs";
 import { Slot, TabData } from "@data/types";
-import devLog from "@helper_functions/devLog";
-import { State } from "country-state-city";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import RadioInput from "./RadioInput";
 import { FaCloudSun, FaMoon, FaSun } from "react-icons/fa";
 
-export default function TimeSlots({
+export default function SlotsInput({
   date,
   interval,
-  selectedSlot,
-  setSelectedSlot,
+  selectedSlots,
+  setSelectedSlots,
   busySlots,
+  maxSlots,
 }: {
   date: Date;
   interval: number;
-  selectedSlot: Slot | null;
-  setSelectedSlot: Dispatch<SetStateAction<Slot | null>>;
+  selectedSlots: Slot[];
+  setSelectedSlots: Dispatch<SetStateAction<Slot[]>>;
   busySlots: Slot[];
+  maxSlots?: number;
 }) {
+  const defaultSlots: Slot[] = getSlotsForDate(date, interval);
   const [slots, setSlots] = useState<Slot[]>([]);
   const [period, setPeriod] = useState<"Morning" | "Afternoon" | "Night">(
-    selectedSlot ? findPeriodForSlot(selectedSlot) : "Morning"
+    selectedSlots[0] ? findPeriodForSlot(selectedSlots[0]) : "Morning"
   );
   useEffect(() => {
     const slots = getSlotsForDate(date, interval);
-    //remove slots before current time
     const now = new Date();
     now.setMinutes(now.getMinutes());
     const nowTime = now.getTime();
     const filteredSlots = slots.filter((slot) => slot.id > nowTime);
     setSlots(filterSlotsForPeriod(filteredSlots, period));
-    //find which period the selected slot is in
-    // if (selectedSlot) {
-    //   const selectedSlotDate = new Date(selectedSlot.id);
-    //   if (selectedSlotDate.getHours() < 12) {
-    //     setPeriod("Morning");
-    //   } else if (
-    //     selectedSlotDate.getHours() >= 12 &&
-    //     selectedSlotDate.getHours() < 18
-    //   ) {
-    //     setPeriod("Afternoon");
-    //   } else if (selectedSlotDate.getHours() >= 18) {
-    //     setPeriod("Night");
-    //   }
-    // }
   }, [date, interval, period]);
   return (
     <div className="w-full flex flex-col items-center space-y-5">
@@ -56,14 +40,14 @@ export default function TimeSlots({
           {
             icon: (
               <FaCloudSun
-                className={`text-4xl ${
+                className={`text-3xl ${
                   period === "Morning" ? "text-white" : "text-text"
                 }`}
               />
             ),
             onClick: () => {
               setPeriod("Morning");
-              setSelectedSlot(null);
+              // setSelectedSlot(null);
             },
             className: period === "Morning" ? "bg-info" : "bg-white",
             title: "Morning",
@@ -72,14 +56,14 @@ export default function TimeSlots({
           {
             icon: (
               <FaSun
-                className={`text-4xl ${
+                className={`text-3xl ${
                   period === "Afternoon" ? "text-white" : "text-text"
                 }`}
               />
             ),
             onClick: () => {
               setPeriod("Afternoon");
-              setSelectedSlot(null);
+              // setSelectedSlot(null);
             },
             className: period === "Afternoon" ? "bg-info" : "bg-white",
             title: "Afternoon",
@@ -88,14 +72,14 @@ export default function TimeSlots({
           {
             icon: (
               <FaMoon
-                className={`text-4xl ${
+                className={`text-2xl ${
                   period === "Night" ? "text-white" : "text-text"
                 }`}
               />
             ),
             onClick: () => {
               setPeriod("Night");
-              setSelectedSlot(null);
+              // setSelectedSlot(null);
             },
             className: period === "Night" ? "bg-info" : "bg-white",
             title: "Night",
@@ -111,9 +95,10 @@ export default function TimeSlots({
             <SlotCard
               key={slot.id}
               slot={slot}
-              selectedSlot={selectedSlot}
-              setSelectedSlot={setSelectedSlot}
+              selectedSlots={selectedSlots}
+              setSelectedSlots={setSelectedSlots}
               busySlots={busySlots}
+              maxSlots={maxSlots}
             />
           ))}
         </div>
@@ -143,10 +128,10 @@ function getSlotsForDate(date: Date, interval: number): Slot[] {
   const slots: Slot[] = [];
   const start = new Date(date);
   //start time to 5am
-  start.setHours(5, 0, 0, 0);
+  start.setHours(6, 0, 0, 0);
   //set end time to 11pm
   const end = new Date(date);
-  end.setHours(23, 0, 0, 0);
+  end.setHours(24, 0, 0, 0);
   while (start < end) {
     slots.push({
       id: start.getTime(),
@@ -189,32 +174,46 @@ function filterSlotsForPeriod(
 
 function SlotCard({
   slot,
-  selectedSlot,
-  setSelectedSlot,
+  selectedSlots,
+  setSelectedSlots,
   busySlots,
+  maxSlots,
 }: {
   slot: Slot;
-  selectedSlot: Slot | null;
-  setSelectedSlot: Dispatch<SetStateAction<Slot | null>>;
+  selectedSlots: Slot[];
+  setSelectedSlots: Dispatch<SetStateAction<Slot[]>>;
   busySlots: Slot[];
+  maxSlots?: number;
 }) {
+  const busy = busySlots.find((busySlot) => busySlot.id === slot.id);
   return (
     <Card
       className={`${
-        busySlots.find((busySlot) => busySlot.date === slot.date)
+        busy
           ? "bg-gray-200"
-          : selectedSlot?.id === slot.id
+          : selectedSlots.find((selectedSlot) => selectedSlot.id === slot.id)
           ? "bg-primary"
           : "bg-white"
-      } items-center`}
+      } items-center hover:cursor-pointer hover:scale-105 transition-all duration-200`}
       onClick={() => {
-        devLog(slot.date);
-        setSelectedSlot(slot);
+        if (busy) return;
+        setSelectedSlots((prev) => {
+          if (prev.find((prevSlot) => prevSlot.id === slot.id)) {
+            return prev.filter((prevSlot) => prevSlot.id !== slot.id);
+          } else {
+            if (maxSlots && prev.length >= maxSlots) {
+              return prev;
+            }
+            return [...prev, slot];
+          }
+        });
       }}
     >
       <p
         className={`text-base font-medium ${
-          selectedSlot?.id === slot.id ? "text-white" : "text-text"
+          selectedSlots.find((selectedSlot) => selectedSlot.id === slot.id)
+            ? "text-white"
+            : "text-text"
         }
         `}
       >
