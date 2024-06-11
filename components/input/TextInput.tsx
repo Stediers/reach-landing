@@ -1,5 +1,4 @@
 import Loading from "@components/Loading";
-import { showInfoPopup, showOkPopup } from "@components/notifications/Popup";
 import { State } from "@data/enums";
 import { AiFillPlusCircle, AiOutlineInfoCircle } from "react-icons/ai";
 import { FaExclamationTriangle } from "react-icons/fa";
@@ -23,6 +22,7 @@ export default function TextInput({
   maxLength,
   mandatory = false,
   loading = State.SUCCESS,
+  icon = <AiFillPlusCircle className="text-2xl text-primary" />,
 }: {
   title?: string;
   value: string | number;
@@ -42,24 +42,13 @@ export default function TextInput({
   maxLength?: number;
   mandatory?: boolean;
   loading?: State;
+  icon?: JSX.Element;
 }) {
   return (
     <div className="flex flex-col items-start justify-start space-y-1 w-full">
       <div className="flex flex-row items-center justify-between w-full space-x-3">
         <div className="flex flex-row items-center justify-start space-x-1">
           <p className={`font-medium ${titleClassName} shrink-0`}>{title}</p>
-          {showInfo && (
-            <AiOutlineInfoCircle
-              className="text-lg shrink-0 text-info"
-              onClick={() => {
-                showInfoPopup({
-                  icon: infoIcon,
-                  title: title!,
-                  message: infoText!,
-                });
-              }}
-            />
-          )}
           {mandatory && <p className="text-error">*</p>}
         </div>
         <p
@@ -90,19 +79,19 @@ export default function TextInput({
           }}
           className={`w-full text-base border-[1px] border-text rounded-md ${
             value ? "pr-8" : ""
-          } p-[0.65rem] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none ${errorText} ${
+          } p-[0.65rem] focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent appearance-none ${errorText} ${
             disabled ? "bg-gray" : "bg-white"
           }`}
           disabled={disabled}
           onKeyDown={onKeyDown}
           onFocus={(e) => e.target.select()}
         />
-        {onClick && (
-          <AiFillPlusCircle
-            className="absolute right-2 top-[0.65rem] text-xl text-primary bg-white cursor-pointer"
-            onClick={onClick}
-          />
-        )}
+        <div
+          onClick={onClick}
+          className="absolute right-2 top-[0.65rem] bg-white cursor-pointer"
+        >
+          {onClick && icon}
+        </div>
         {loading !== State.SUCCESS && (
           <div className="absolute right-2 top-[0.85rem]">
             {loading === State.LOADING ? (

@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import TextInput from "./TextInput";
 
 export default function TimeInput({
   date,
   setDate,
 }: {
   date: Date;
-  setDate: Dispatch<SetStateAction<Date | null>>;
+  setDate: Dispatch<SetStateAction<Date>>;
 }) {
   const [time, setTime] = useState({
     hours: date.getHours(),
@@ -17,37 +18,17 @@ export default function TimeInput({
   }, [time]);
 
   return (
-    <div className="w-full flex justify-between">
-      <div className="flex flex-col">
-        <label htmlFor="hours" className="text-textsubtle">
-          Hours
-        </label>
-        <input
-          type="number"
-          name="hours"
-          id="hours"
-          className="border border-textsubtle rounded-md p-2"
-          value={time.hours}
-          onChange={(e) =>
-            setTime({ ...time, hours: parseInt(e.target.value) })
-          }
-        />
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="minutes" className="text-textsubtle">
-          Minutes
-        </label>
-        <input
-          type="number"
-          name="minutes"
-          id="minutes"
-          className="border border-textsubtle rounded-md p-2"
-          value={time.minutes}
-          onChange={(e) =>
-            setTime({ ...time, minutes: parseInt(e.target.value) })
-          }
-        />
-      </div>
+    <div className="flex items-center space-x-3 border border-gray p-2 rounded-lg">
+      <p
+        className="text-text text-base"
+        onClick={() => {
+          setTime({ ...time, hours: time.hours - 1 });
+        }}
+      >
+        12
+      </p>
+      <p className="text-text text-base">:</p>
+      <p className="text-text text-base">00</p>
     </div>
   );
 }

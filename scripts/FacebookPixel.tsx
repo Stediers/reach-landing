@@ -1,3 +1,4 @@
+"use client";
 import Script from "next/script";
 
 const FacebookPixel = () => (
@@ -20,14 +21,14 @@ const FacebookPixel = () => (
         `,
       }}
     />
-    <noscript>
+    {/* <noscript>
       <img
         height="1"
         width="1"
         style={{ display: "none" }}
         src="https://www.facebook.com/tr?id=1489778595082022&ev=PageView&noscript=1"
       />
-    </noscript>
+    </noscript> */}
   </>
 );
 

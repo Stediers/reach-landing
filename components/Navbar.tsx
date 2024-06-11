@@ -104,15 +104,10 @@ function DesktopNav({ path }: { path: string }) {
         </NavigationMenu>
         <div className="grid grid-cols-2 gap-5">
           <Button asChild variant="success">
-            <Link href="/onboarding-review">Become a Partner</Link>
+            <Link href="/onboarding-review">Get your own Portfolio</Link>
           </Button>
-          <Button
-            variant="outline"
-            size="default"
-            className="text-base"
-            onClick={() => window.open("https://customer.reachgig.com/")}
-          >
-            Find Partners
+          <Button variant="outline" size="default" className="text-base">
+            <Link href="/explore">Find a Partner</Link>
           </Button>
         </div>
       </div>
@@ -164,23 +159,9 @@ function MobileNav({ path }: { path: string }) {
                   <Link href={component.href}>{component.title}</Link>
                 </SheetClose>
               ))}
-              {/* <DropdownMenu>
-                <DropdownMenuTrigger>Compliance</DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {components.map((component) => (
-                    <DropdownMenuItem key={component.title}>
-                      <Link
-                        target="_blank"
-                        href={component.href}
-                        legacyBehavior
-                        passHref
-                      >
-                        {component.title}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu> */}
+              <SheetClose key="Explore" asChild>
+                <Link href="/explore">Explore</Link>
+              </SheetClose>
             </div>
           </SheetContent>
         </Sheet>

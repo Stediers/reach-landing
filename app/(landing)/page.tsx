@@ -56,56 +56,6 @@ export default function Page() {
   );
 }
 
-function TransformationDesktop() {
-  return (
-    <HeaderWrapper
-      title="The Potential"
-      className="items-center justify-center w-full flex flex-col space-y-16 max-w-7xl lg:px-10 px-5"
-      id="who-we-are-and-what-we-do"
-    >
-      <div className="grid gap-10 lg:grid-cols-3 w-full justify-items-center items-center">
-        <ImageComponent
-          alt="freelancer-whatsapp"
-          src={FreelancerWhatsapp}
-          className="lg:w-[20rem] h-[40rem] !object-contain w-full !rounded-lg overflow-hidden"
-          priority
-          objectFit="contain"
-          border={false}
-        />
-        <div
-          className="lg:flex flex-col items-center justify-center space-y-5 w-full hidden"
-          hidden
-        >
-          <MoveRightIcon className="lg:w-24 lg:h-24 w-20 h-20 text-primary" />
-          <p className="lg:text-lg text-md text-center max-w-xl">
-            Convert in a matter of minutes
-          </p>
-        </div>
-        <div className="flex flex-col items-center justify-center space-y-5 lg:hidden">
-          <p className="lg:text-lg text-lg text-center max-w-xl">
-            Convert in a matter of minutes
-          </p>
-          <MoveDownIcon className="lg:w-24 lg:h-24 w-20 h-20 text-primary" />
-        </div>
-        {/* <iframe
-          src="https://customer.reachgig.com/service/b52989ea-1448-42cd-8d52-c808d0dedbe4"
-          className="lg:w-[22rem] w-full h-[40rem] border-primary border-2 cursor-no-drop pointer-events-none rounded-lg"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-        /> */}
-        <ImageComponent
-          alt="phone-profile"
-          src={PhoneProfile}
-          className="lg:w-[20rem] h-[40rem] !object-contain w-full !rounded-lg overflow-hidden"
-          priority
-          objectFit="contain"
-          border={false}
-        />
-      </div>
-    </HeaderWrapper>
-  );
-}
-
 function ByeByeScammers() {
   return (
     <section
@@ -245,10 +195,13 @@ function Index() {
             </h1>
             <p className="text-lg text-center">Stand out to your clients</p>
           </div>
-          <div className="grid grid-cols-1 gap-5 pt-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 pt-5">
             <Button asChild variant="success">
               <Link href="/onboarding-review">Start your Journey</Link>
             </Button>
+            <Link href="/explore">
+              <Button variant="outline">Find Services</Button>
+            </Link>
             {/* <Button asChild variant="outline">
               <Link href={`${customerLink}`}>Find Services</Link>
             </Button> */}

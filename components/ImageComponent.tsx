@@ -16,7 +16,9 @@ export default function ImageComponent({
   popup = true,
   whileHover,
   onClick,
-  objectFit = "cover",
+  objectPosition = "top",
+  unoptimized = false,
+  quality = 100,
 }: {
   src: string | StaticImageData;
   className?: string;
@@ -26,7 +28,18 @@ export default function ImageComponent({
   popup?: boolean;
   whileHover?: { scale: number };
   onClick?: () => void;
-  objectFit?: "cover" | "contain";
+  objectPosition?:
+    | "center"
+    | "top"
+    | "bottom"
+    | "left"
+    | "right"
+    | "top left"
+    | "top right"
+    | "bottom left"
+    | "bottom right";
+  unoptimized?: boolean;
+  quality?: number;
 }) {
   const [isLoaded, setIsLoaded] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -56,7 +69,7 @@ export default function ImageComponent({
           sizes="100%"
           fill
           className="shrink-0"
-          style={{ objectFit: objectFit }}
+          style={{ objectFit: "cover", objectPosition }}
           onClick={() => {
             onClick && onClick();
             if (!popup) return;
@@ -65,14 +78,16 @@ export default function ImageComponent({
           onError={() => {
             setIsError(true);
           }}
-          onLoad={() => {
+          onLoadingComplete={() => {
             setIsLoaded(true);
           }}
           onLoadStart={() => {
             devLog("loading image");
             setIsLoaded(false);
           }}
+          unoptimized={unoptimized}
           priority={priority}
+          quality={quality}
         />
       )}
     </motion.div>

@@ -4,10 +4,8 @@ import "@styles/globals.css";
 import { Metadata } from "next";
 import { GoogleAnalyticsTracking } from "@scripts/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/react";
-import Navbar from "@components/Navbar";
-import Footer from "@components/footer/Footer";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import FacebookPixel from "@scripts/FacebookPixel";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const fontSans = Poppins({
   subsets: ["latin"],
@@ -24,29 +22,17 @@ export const metadata: Metadata = {
     default: "ReachGig",
     template: "%s | ReachGig",
   },
-  alternates: {
-    canonical: "https://reachgig.com",
-  },
-  description: "ReachGig",
-  openGraph: {
+  description:
+    "The best platform to find and book the perfect freelancers and artists",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black",
+    startupImage: "/public/512.png",
     title: "ReachGig",
-    description:
-      "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
-    url: "https://reachgig.com",
-    type: "website",
-    images: [
-      {
-        url: "/public/512.png",
-        width: 800,
-        height: 600,
-        alt: "ReachGig",
-      },
-    ],
-    locale: "en_US",
   },
-  metadataBase: new URL("https://reachgig.com"),
+  manifest: "/manifest.json",
+  metadataBase: new URL("https://customer.reachgig.com"),
   applicationName: "ReachGig",
-  robots: "index, follow",
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -59,11 +45,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body
           className={`${cn(
             fontSans.className
-          )} text-text min-h-screen flex flex-col bg-white`}
+          )} text-text min-h-[100svh] w-full flex !bg-background`}
         >
-          <Navbar />
           {children}
-          <Footer />
+
           <Analytics />
           <SpeedInsights />
         </body>

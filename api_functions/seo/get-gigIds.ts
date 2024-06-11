@@ -1,0 +1,33 @@
+import { RequestMethod } from "@data/enums";
+import { ApiResult } from "@data/types";
+
+export type FetchGigIdsResponse = {
+  gigIds: string[];
+};
+
+export async function fetchGigIds(): Promise<FetchGigIdsResponse | null> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_UTILITY_API_URL}/get-gigIds`,
+      {
+        method: RequestMethod[RequestMethod.GET],
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data: ApiResult<FetchGigIdsResponse> = await response.json();
+    if (response.status === 200) {
+      if (data.errorMessage) {
+        return null;
+      }
+      return data.data ? data.data : null;
+    } else {
+      console.log(data.errorMessage);
+      throw new Error(data.errorMessage);
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

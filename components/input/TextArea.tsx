@@ -10,7 +10,7 @@ export default function TextArea({
   rows = 5,
   cols = 50,
 }: {
-  title: string;
+  title?: string;
   value: string | number;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -23,12 +23,16 @@ export default function TextArea({
 }) {
   return (
     <div className="flex flex-col items-start justify-start space-y-2 w-full">
-      <div className="flex flex-row items-center justify-between w-full space-x-3">
-        <h1 className={`${titleClassName} shrink-0`}>{title}</h1>
-        <p className={`text-xs text-red-500 mt-1 ${errorText ? "" : "hidden"}`}>
-          {errorText}
-        </p>
-      </div>
+      {title && (
+        <div className="flex flex-row items-center justify-between w-full space-x-3">
+          <h1 className={`${titleClassName} shrink-0`}>{title}</h1>
+          <p
+            className={`text-xs text-red-500 mt-1 ${errorText ? "" : "hidden"}`}
+          >
+            {errorText}
+          </p>
+        </div>
+      )}
       <textarea
         id={id}
         placeholder={placeholder}
@@ -38,7 +42,6 @@ export default function TextArea({
         disabled={disabled}
         rows={rows}
         cols={cols}
-        maxLength={rows * cols}
       />
     </div>
   );

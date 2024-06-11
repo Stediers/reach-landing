@@ -1,4 +1,3 @@
-import { closestMatch } from "closest-match";
 import { closest, distance } from "fastest-levenshtein";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
@@ -15,6 +14,7 @@ export default function TextInputWithDropdown({
   mandatory = false,
   value,
   resetAfterSelect = true,
+  onFocusSelect,
 }: {
   title: string;
   placeholder?: string;
@@ -27,6 +27,7 @@ export default function TextInputWithDropdown({
   mandatory?: boolean;
   value: string;
   resetAfterSelect?: boolean;
+  onFocusSelect?: boolean;
 }) {
   const [optionsToShow, setOptionsToShow] = useState<string[]>([]);
   const [text, setText] = useState(value);
@@ -54,6 +55,10 @@ export default function TextInputWithDropdown({
           type={type}
           placeholder={placeholder}
           value={text}
+          onFocus={(e) => {
+            //select the text on focus
+            if (onFocusSelect) e.target.select();
+          }}
           onChange={(e) => {
             setText(e.target.value);
             setOptionsToShow([]);
@@ -83,7 +88,7 @@ export default function TextInputWithDropdown({
             }
           }}
           className={`w-full text-base border-[1px] border-text rounded-md p-[0.65rem] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none ${errorText}
-          ${disabled ? "bg-gray" : "bg-white"}
+          ${disabled ? "bg-gray-200" : "bg-white"}
           `}
           disabled={disabled}
         />
