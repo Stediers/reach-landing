@@ -60,7 +60,7 @@ export function CustomDialog({
             {title.length > 30 ? title.slice(0, 30) + "..." : title}
           </DialogTitle>
           {description && (
-            <DialogDescription className="text-base">
+            <DialogDescription className="text-base text-left">
               {description}
             </DialogDescription>
           )}

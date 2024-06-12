@@ -487,82 +487,16 @@ function ContactMe({
             </p>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function Profile({
-  gig,
-  uniqueCategories,
-}: {
-  gig: FetchPartnerByPartnerIdResponse["partner"];
-  uniqueCategories: ServiceCategory[];
-}) {
-  return (
-    <div className="w-full flex flex-col items-center justify-between space-y-7">
-      <div className="flex flex-col items-center justify-center space-y-5 w-full max-w-lg z-10">
-        <ImageComponent
-          src={gig.imageUrl}
-          alt="Photo by Drew Beamer"
-          className="rounded-md object-contain border border-gray-300 w-40 h-40 lg:w-56 lg:h-56"
-        />
-        {uniqueCategories.length > 0 && (
-          <div className="flex flex-row items-center justify-center space-x-2 w-full flex-wrap">
-            {gig.languages.map((language) => (
-              <Badge key={language} variant="infoOutline">
-                <p className="text-xs lg:text-sm">
-                  {language.charAt(0).toUpperCase() + language.slice(1)}
-                </p>
-              </Badge>
-            ))}
-          </div>
-        )}
-        <div className="flex flex-col items-center justify-start space-y-1 w-full">
-          <h1 className="text-xl font-medium text-center px-5 first-letter:capitalize">
-            {gig.firstName + " " + gig.lastName}
-          </h1>
-          <p className="text-base font-normal text-center text-textsubtle">
-            {gig.designation}
+        <div className="flex flex-col items-start justify-start space-y-5 w-full pt-10 lg:pt-0">
+          <p className="lg:text-3xl text-2xl font-medium">
+            Explore our Marketplace!
           </p>
-        </div>
-      </div>
-      <div className="flex flex-col items-center justify-start space-y-10 w-full z-10">
-        <div className="grid grid-cols-3 gap-2 justify-items-center w-full  max-w-lg">
-          <IconWrapper
-            icon={
-              <AiFillStar className="text-yellow-500 w-8 h-8 lg:w-[2rem] lg:h-[2rem]" />
-            }
-            title={gig.rating ? gig.rating.toFixed(1) : "N/A"}
-          />
-          <IconWrapper
-            icon={
-              gig.gender === Gender.MALE ? (
-                <BsGenderMale className="text-blue-500 text-3xl lg:w-[2rem] lg:h-[2rem]" />
-              ) : gig.gender === Gender.FEMALE ? (
-                <BsGenderFemale className="text-pink-500 text-3xl lg:w-[2rem] lg:h-[2rem]" />
-              ) : (
-                <BsGenderTrans className="text-purple-500 text-3xl lg:w-[2rem] lg:h-[2rem]" />
-              )
-            }
-            title={gig.gender.charAt(0).toUpperCase() + gig.gender.slice(1)}
-          />
-          <IconWrapper
-            icon={
-              gig.available ? (
-                <MdEventAvailable className="text-success text-3xl lg:w-[2rem] lg:h-[2rem]" />
-              ) : (
-                <MdEventBusy className="text-danger text-3xl lg:w-[2rem] lg:h-[2rem]" />
-              )
-            }
-            title={gig.available ? "Available" : "Not Available"}
-          />
-        </div>
-        {gig.exposeMobileNumber ? (
-          <div className="grid grid-cols-1 sm:max-w-[20rem] gap-y-5 sm:gap-x-10 justify-items-center w-full lg:hidden max-w-2xl">
-            <CallSetting mobileNumber={gig.mobileNumber} />
+          <div className="flex flex-row items-center justify-start space-x-2">
+            <Button variant="default" asChild>
+              <Link href="/explore">Click here</Link>
+            </Button>
           </div>
-        ) : null}
+        </div>
       </div>
     </div>
   );
