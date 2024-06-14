@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Reach Gig",
     short_name: "ReachGig",
     description: "gig app",
-    start_url: "/",
+    start_url: "/explore",
     display: "standalone",
     background_color: "#ffffff",
     theme_color: "#ffffff",
