@@ -44,7 +44,7 @@ export default function ConsoleWrapper({
             exit={{ scale: 0.5, opacity: 0 }}
             key={"loading"}
           >
-            <Loading className="w-8 h-8" color="bg-primary" />
+            <Loading className="w-5 h-5" type="pulse" color="bg-primary" />
             <p className=" text-center font-medium text-xl pt-5">Loading...</p>
           </motion.div>
         ) : null}

@@ -99,7 +99,7 @@ export function ServicePopupMobile({
           )}
         </DrawerHeader>
         <DrawerFooter className="flex flex-col space-y-5 w-full items-start justify-start relative">
-          <div className="flex flex-col items-start justify-start w-full space-y-5 !overflow-y-scroll hide-scrollbar max-h-[50vh]">
+          <div className="flex flex-col items-start justify-start w-full space-y-5 !overflow-y-scroll hide-scrollbar max-h-[50svh]">
             {price && <PriceComponent price={price} />}
             <ListWrapper
               list={service.whatsIncluded}

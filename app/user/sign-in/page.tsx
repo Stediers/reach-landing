@@ -1,41 +1,60 @@
 "use client";
 import { sendOTP } from "@api_functions/auth/send-otp";
 import { verifyOTP } from "@api_functions/auth/verify-otp";
-import { getCookie, setCookie } from "@api_functions/internal/cookie";
+import { setCookie } from "@api_functions/internal/cookie";
+import ImageComponent from "@components/ImageComponent";
 import TextInput from "@components/input/TextInput";
 import Logo from "@components/Logo";
 import { Button } from "@components/ui/button";
+import {
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTP,
+} from "@components/ui/input-otp";
 import { Country, countries } from "@data/countries";
 import { State } from "@data/enums";
+import { verifyMobileNumber } from "@helper_functions/verify";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import { GetServerSidePropsContext } from "next";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import OtpInput from "react-otp-input";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import SignInImage from "../../../public/images/sign-in.svg";
+import SignInImage2 from "../../../public/images/sign-in-desktop.svg";
 
-export default function Main() {
-  const query = useSearchParams();
-  const redirectUrl = query.get("redirectUrl") || "/";
+export default function Page() {
+  const router = useRouter();
+  const params = useParams();
   const [showOTP, setShowOTP] = useState(false);
   const [mobileNumber, setMobileNumber] = useState("");
   const [country, setCountry] = useState<Country>(countries["India"]);
 
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirectUrl") || "/explore";
+
   return (
-    <div className="flex flex-col items-center justify-center space-y-5 flex-1 min-h-screen w-screen">
-      <div className="flex bg-white border-2 shadow-lg flex-col items-center w-[90%] py-5 rounded-xl max-w-[400px] px-5 space-y-5 h-fit">
-        <Logo
-          textStyle="font-medium text-3xl lg:text-4xl lg:font-medium lg:mt-2"
-          wings="w-[10rem] lg:w-[12rem]"
-        />
+    <div className="flex flex-col items-center justify-start space-y-10 px-5 flex-1 py-5">
+      <div className="flex flex-col items-center space-y-3 h-[25%]">
+        <Logo />
+        <p className="text-lg text-center font-medium">Be your own Boss</p>
+      </div>
+      <div className="w-full flex flex-col items-start justify-start max-w-lg space-y-5 lg:border lg:p-5 lg:rounded-lg bg-white">
+        {showOTP ? (
+          <p className="lg:text-2xl text-xl font-medium">Verify OTP</p>
+        ) : (
+          <p className="lg:text-2xl text-xl font-medium">Sign in</p>
+        )}
         {showOTP ? (
           <VerifyOTP
             mobileNumber={mobileNumber}
             setShowOTP={setShowOTP}
             country={country}
             redirectUrl={redirectUrl}
+            router={router}
           />
         ) : (
-          <MobileNumberInput
+          <MobileNumberInputMobile
             setShowOTP={setShowOTP}
             mobileNumber={mobileNumber}
             setMobileNumber={setMobileNumber}
@@ -43,12 +62,48 @@ export default function Main() {
             setCountry={setCountry}
           />
         )}
+        <p className="text-sm text-textsubtle pt-5">
+          By continuing, you agree to our{" "}
+          <span className="text-primary underline">Terms of Service</span> and{" "}
+          <span className="text-primary underline">Privacy Policy</span>
+        </p>
+      </div>
+      <div
+        className="absolute bottom-0 -z-10 w-full lg:flex justify-between items-end hidden"
+        hidden
+      >
+        <ImageComponent
+          src={SignInImage}
+          alt="Sign in"
+          className="w-full h-[30vh] lg:h-[40vh] lg:max-w-lg"
+          border={false}
+          objectFit="cover"
+        />
+        <ImageComponent
+          src={SignInImage2}
+          alt="Sign in"
+          className="w-full h-[30vh] lg:h-[30vh] lg:max-w-lg"
+          border={false}
+          objectFit="cover"
+        />
+      </div>
+      <div
+        className="absolute bottom-0 -z-10 w-full flex justify-between items-center lg:hidden"
+        hidden
+      >
+        <ImageComponent
+          src={SignInImage}
+          alt="Sign in"
+          className="w-full h-[30vh] lg:h-[40vh] lg:max-w-lg"
+          border={false}
+          objectFit="cover"
+        />
       </div>
     </div>
   );
 }
 
-function MobileNumberInput({
+function MobileNumberInputMobile({
   setShowOTP,
   mobileNumber,
   setMobileNumber,
@@ -66,16 +121,19 @@ function MobileNumberInput({
     <div className="space-y-4 w-full flex flex-col items-center">
       <TextInput
         type="tel"
-        placeholder="Ex: 9876543210"
+        placeholder=" Your mobile number"
         title="Mobile Number"
         onChange={(value) => setMobileNumber(value)}
         value={mobileNumber}
         autoFocus={true}
         errorText={
-          isValidPhoneNumber(country.code + mobileNumber)
+          mobileNumber.length == 0
+            ? ""
+            : isValidPhoneNumber(country.code + mobileNumber)
             ? ""
             : "Invalid mobile number"
         }
+        preIcon={<p className="text-base">{country.code}</p>}
         maxLength={country.maxLength}
         onKeyDown={async (e) => {
           if (mobileNumber.length == country.maxLength) {
@@ -91,32 +149,19 @@ function MobileNumberInput({
         }}
       />
       <Button
-        variant="default"
         disabled={!verifyMobileNumber(mobileNumber, country.maxLength)}
-        className="!w-full"
-        onClick={async () => {
-          setSendOTPButtonState(State.LOADING);
+        onclick={async () => {
           const response = await sendOTP(country.code + mobileNumber);
           if (response) {
             setShowOTP(true);
           }
-          setSendOTPButtonState(State.SUCCESS);
         }}
+        buttonstate={sendOTPButtonState}
       >
-        {sendOTPButtonState == State.LOADING ? "Sending OTP..." : "Send OTP"}
+        Send OTP
       </Button>
     </div>
   );
-}
-
-function verifyMobileNumber(mobileNumber: string, maxLength: number) {
-  if (mobileNumber.length != maxLength) {
-    return false;
-  } else if (!mobileNumber.match(/^[0-9]+$/)) {
-    return false;
-  } else {
-    return true;
-  }
 }
 
 function VerifyOTP({
@@ -124,24 +169,24 @@ function VerifyOTP({
   setShowOTP,
   country,
   redirectUrl,
+  router,
 }: {
   mobileNumber: string;
   setShowOTP: Dispatch<SetStateAction<boolean>>;
   country: Country;
   redirectUrl: string;
+  router: AppRouterInstance;
 }) {
-  const [OTP, setOTP] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   return !loading ? (
-    <div className="flex flex-col items-center w-full space-y-4">
+    <div className="flex flex-col items-start w-full space-y-4">
       <p className="text-center text-base font-normal">
-        Enter the OTP sent to <br />
-        <span className="font-medium text-md">
+        Enter the OTP sent to&nbsp;
+        <span className="font-medium text-base">
           {country.code} {mobileNumber}
-        </span>
+        </span>{" "}
       </p>
-      <OtpInput
+      {/* <OtpInput
         containerStyle={{
           width: "100%",
           display: "flex",
@@ -178,9 +223,37 @@ function VerifyOTP({
             className="!text-base border-[1px] border-text rounded-md !w-10 h-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none"
           />
         )}
+      /> */}
+      <InputOTP
+        maxLength={4}
+        pattern={REGEXP_ONLY_DIGITS}
+        render={({ slots }) => (
+          <InputOTPGroup className="gap-5">
+            {slots.map((slot, index) => (
+              <React.Fragment key={index}>
+                <InputOTPSlot className="rounded-md border" {...slot} />
+              </React.Fragment>
+            ))}{" "}
+          </InputOTPGroup>
+        )}
+        onChange={async (otp) => {
+          if (otp.length == 4) {
+            setLoading(true);
+            const response = await verifyOTP(country.code + mobileNumber, otp);
+
+            if (response) {
+              localStorage.setItem("mobileNumber", mobileNumber);
+              setCookie("user-token", response.token, 30);
+              router.push(redirectUrl);
+            }
+            return;
+          } else {
+            setLoading(false);
+          }
+        }}
       />
       <p
-        className="text-center text-sm text-primary underline underline-offset-4"
+        className="text-center text-sm text-primary underline underline-offset-4 cursor-pointer"
         onClick={() => setShowOTP(false)}
       >
         Change mobile number

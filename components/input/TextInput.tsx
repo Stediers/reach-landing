@@ -1,6 +1,10 @@
 import Loading from "@components/Loading";
 import { State } from "@data/enums";
-import { AiFillPlusCircle, AiOutlineInfoCircle } from "react-icons/ai";
+import {
+  AiFillCheckCircle,
+  AiFillPlusCircle,
+  AiOutlineInfoCircle,
+} from "react-icons/ai";
 import { FaExclamationTriangle } from "react-icons/fa";
 
 export default function TextInput({
@@ -21,8 +25,11 @@ export default function TextInput({
   autoFocus = false,
   maxLength,
   mandatory = false,
-  loading = State.SUCCESS,
-  icon = <AiFillPlusCircle className="text-2xl text-primary" />,
+  loading,
+  icon = (
+    <AiFillPlusCircle className="absolute right-2 top-[0.65rem] text-2xl text-primary bg-white cursor-pointer" />
+  ),
+  preIcon,
 }: {
   title?: string;
   value: string | number;
@@ -43,12 +50,25 @@ export default function TextInput({
   mandatory?: boolean;
   loading?: State;
   icon?: JSX.Element;
+  preIcon?: JSX.Element;
 }) {
   return (
     <div className="flex flex-col items-start justify-start space-y-1 w-full">
       <div className="flex flex-row items-center justify-between w-full space-x-3">
         <div className="flex flex-row items-center justify-start space-x-1">
           <p className={`font-medium ${titleClassName} shrink-0`}>{title}</p>
+          {/* {showInfo && (
+            <AiOutlineInfoCircle
+              className="text-lg shrink-0 text-info"
+              onClick={() => {
+                showInfoPopup({
+                  icon: infoIcon,
+                  title: title!,
+                  message: infoText!,
+                });
+              }}
+            />
+          )} */}
           {mandatory && <p className="text-error">*</p>}
         </div>
         <p
@@ -60,6 +80,11 @@ export default function TextInput({
         </p>
       </div>
       <div className="relative w-full">
+        {preIcon && (
+          <div className="absolute h-full w-fit flex justify-center items-center pl-3">
+            {preIcon}
+          </div>
+        )}
         <input
           id={id}
           autoFocus={autoFocus ? true : false}
@@ -79,9 +104,9 @@ export default function TextInput({
           }}
           className={`w-full text-base border-[1px] border-text rounded-md ${
             value ? "pr-8" : ""
-          } p-[0.65rem] focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent appearance-none ${errorText} ${
+          } p-[0.65rem] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none ${errorText} ${
             disabled ? "bg-gray" : "bg-white"
-          }`}
+          } ${preIcon ? "pl-10" : "pl-3"}`}
           disabled={disabled}
           onKeyDown={onKeyDown}
           onFocus={(e) => e.target.select()}
@@ -92,13 +117,15 @@ export default function TextInput({
         >
           {onClick && icon}
         </div>
-        {loading !== State.SUCCESS && (
-          <div className="absolute right-2 top-[0.85rem]">
+        {loading && (
+          <div className="absolute h-full right-2 top-0 flex justify-center items-center">
             {loading === State.LOADING ? (
-              <Loading />
-            ) : (
-              <FaExclamationTriangle className="text-error text-lg" />
-            )}
+              <Loading className="w-5 h-5 mr-1" type="circle" />
+            ) : loading === State.SUCCESS ? (
+              <AiFillCheckCircle className="text-success text-xl" />
+            ) : loading === State.ERROR ? (
+              <FaExclamationTriangle className="text-error text-xl" />
+            ) : null}
           </div>
         )}
       </div>

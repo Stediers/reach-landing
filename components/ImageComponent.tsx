@@ -19,6 +19,7 @@ export default function ImageComponent({
   objectPosition = "top",
   unoptimized = false,
   quality = 100,
+  objectFit = "cover",
 }: {
   src: string | StaticImageData;
   className?: string;
@@ -40,6 +41,7 @@ export default function ImageComponent({
     | "bottom right";
   unoptimized?: boolean;
   quality?: number;
+  objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
 }) {
   const [isLoaded, setIsLoaded] = useState(true);
   const [isError, setIsError] = useState(false);
