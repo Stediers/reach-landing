@@ -62,7 +62,7 @@ export default function Button({
             </div>
           ) : (
             <div className="flex items-center justify-center w-full">
-              <Loading className="w-6 h-6" color={loadingColor} />
+              <Loading className="w-6 h-6" color="bg-white" type="circle" />
             </div>
           )}
         </motion.div>
@@ -96,7 +96,7 @@ export default function Button({
       >
         <div className="flex items-center justify-center space-x-2">
           {buttonState === State.LOADING && (
-            <Loading className="w-6 h-6" color={loadingColor} />
+            <Loading className="w-6 h-6" color="bg-white" type="circle" />
           )}
           {buttonState === State.SUCCESS && (
             <div className="space-x-2 flex items-center">

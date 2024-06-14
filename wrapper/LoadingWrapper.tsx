@@ -14,7 +14,11 @@ export default function LoadingWrapper({
   loadingJSX = (
     <div className="flex flex-col space-y-2 flex-1 justify-center items-center">
       {showLogo && <Logo />}
-      <Loading className={loadingSVGClassName} color="black" />
+      <Loading
+        className={loadingSVGClassName}
+        color="bg-primary"
+        type="pulse"
+      />
       <p className={loadingTextClassName}>{text}</p>
     </div>
   ),
