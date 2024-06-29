@@ -38,6 +38,8 @@ import {
 import { openInNewTab } from "@helper_functions/newTab";
 import Chip from "./Chip";
 import PriceComponent from "./price/MobilePrice";
+import MobileLogin from "./sign-in/MobileNumber";
+import LoginPerks from "./LoginPerks";
 
 export function RequestCallback({ serviceId }: { serviceId: string }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -94,12 +96,14 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
                 Callback Details
               </Button>
             }
+            scaleBackground={false}
             title="Callback Requested"
             description="Your callback request has been successfully sent to the partner. They will get back to you shortly."
             footerJSX={
               <div className="grid grid-cols-2 gap-4 w-full">
                 <Button
-                  variant="success"
+                  variant="info"
+                  id="open"
                   onClick={() => {
                     openInNewTab(
                       `tel:${response.callback!!.partner.mobileNumber}`
@@ -198,16 +202,17 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
           <CustomDrawer
             triggerJSX={
               <Button variant="info" id="open">
-                Request Callback
+                Enquire Now
               </Button>
             }
-            title="Request Callback"
+            scaleBackground={false}
+            title="Enquire Now"
             description="Let the partner know you are interested in their service. They will get back to you shortly."
             footerJSX={
               <div className="flex flex-col space-y-2 w-full">
                 <Button
                   variant="success"
-                  disabled={message.length === 0}
+                  disabled={message.length === 0 || !state || !city}
                   onclick={async () => {
                     if (!state || !city) return;
                     const res = await requestCallback({
@@ -230,7 +235,7 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
                     }
                   }}
                 >
-                  <p className="text-md font-medium">Request Callback</p>
+                  <p className="text-md font-medium">Enquire Now</p>
                 </Button>
                 <DrawerClose className="w-full" id="close-drawer">
                   <Button variant="outline">
@@ -258,120 +263,47 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
           </CustomDrawer>
         ) : (
           <CustomDrawer
-            triggerJSX={<Button variant="info">Request Callback</Button>}
-            title="Login Required"
-            description="This feature is only available to logged in users."
-            footerJSX={<></>}
-          >
-            <div className="flex flex-col space-y-5 w-full">
-              <ImageComponent
-                alt="Login"
-                src="/images/login.svg"
-                className="w-full h-60"
-              />
-              <Button variant="success" asChild onClick={() => {}}>
-                <Link href={`/user/sign-in?redirectUrl=/service/${serviceId}`}>
-                  <p className="text-md font-medium">Login</p>
-                </Link>
+            triggerJSX={
+              <Button variant="info" id="open">
+                Enquire Now
               </Button>
-            </div>
+            }
+            title="Login Required"
+            scaleBackground={false}
+            description="This feature is only available to logged in users."
+            footerJSX={
+              <DrawerClose className="w-full" id="close-drawer" asChild>
+                <Button variant="outline">Close</Button>
+              </DrawerClose>
+            }
+          >
+            <MobileLogin
+              onVerifyOTP={() => {
+                const close = document.getElementById("close-drawer");
+                if (close) {
+                  close.click();
+                }
+              }}
+            />
           </CustomDrawer>
         )
       ) : (
         <CustomDrawer
-          triggerJSX={<Button variant="info">Request Callback</Button>}
+          triggerJSX={<Button variant="info">Enquire Now</Button>}
           title="Login Required"
           description="This feature is only available to logged in users."
           footerJSX={<></>}
         >
           <div className="flex flex-col space-y-5 w-full">
-            <ImageComponent
-              alt="Login"
-              src="/images/login.svg"
-              className="w-full h-60"
+            <MobileLogin
+              onVerifyOTP={() => {
+                const close = document.getElementById("close-drawer");
+              }}
             />
-            <Button variant="success" asChild onClick={() => {}}>
-              <Link href={`/user/sign-in?redirectUrl=/service/${serviceId}`}>
-                <p className="text-md font-medium">Login</p>
-              </Link>
-            </Button>
           </div>
         </CustomDrawer>
       )}
     </LoadingWrapper>
-  );
-}
-
-function LoginMobile({
-  setIsLoggedIn,
-}: {
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-}) {
-  const [showOTP, setShowOTP] = useState(false);
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [country, setCountry] = useState<Country>(countries["India"]);
-  const [sendOTPButtonState, setSendOTPButtonState] = useState(State.SUCCESS);
-
-  return (
-    <div className="flex flex-col items-center justify-center space-y-5 flex-1 w-full">
-      <div className="flex bg-white flex-col items-center w-full rounded-xl space-y-5 h-fit">
-        {showOTP ? (
-          <VerifyOTP
-            mobileNumber={mobileNumber}
-            country={country}
-            setIsLoggedIn={setIsLoggedIn}
-            id="close-login-drawer"
-          />
-        ) : (
-          <MobileNumberInput
-            setShowOTP={setShowOTP}
-            mobileNumber={mobileNumber}
-            setMobileNumber={setMobileNumber}
-            country={country}
-            setCountry={setCountry}
-            setSendOTPButtonState={setSendOTPButtonState}
-            sendOTPButtonState={sendOTPButtonState}
-          />
-        )}
-        <div className="grid grid-cols-1 gap-4 w-full">
-          {!showOTP ? (
-            <Button
-              variant="success"
-              disabled={!verifyMobileNumber(mobileNumber, country.maxLength)}
-              className="!w-full"
-              onClick={async () => {
-                setSendOTPButtonState(State.LOADING);
-                const response = await sendOTP(country.code + mobileNumber);
-                if (response) {
-                  setShowOTP(true);
-                }
-                setSendOTPButtonState(State.SUCCESS);
-              }}
-            >
-              {sendOTPButtonState == State.LOADING
-                ? "Sending OTP..."
-                : "Send OTP"}
-            </Button>
-          ) : (
-            <Button
-              variant="default"
-              disabled={!verifyMobileNumber(mobileNumber, country.maxLength)}
-              className={`!w-full`}
-              onClick={async () => {
-                setShowOTP(false);
-              }}
-            >
-              Change Mobile Number
-            </Button>
-          )}
-          <DrawerClose className="w-full" id="close-login-drawer">
-            <Button variant="outline">
-              <p className="text-md font-medium">Cancel</p>
-            </Button>
-          </DrawerClose>
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -511,10 +443,10 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
           <CustomDialog
             triggerJSX={
               <Button variant="info" id="open">
-                Request Callback
+                Enquire Now
               </Button>
             }
-            title="Request Callback"
+            title="Enquire Now"
             description="Let the partner know you are interested in their service. They will get back to you shortly."
             footerJSX={
               <div className="flex flex-col space-y-2 w-full">
@@ -543,7 +475,7 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
                     }
                   }}
                 >
-                  <p className="text-md font-medium">Request Callback</p>
+                  <p className="text-md font-medium">Enquire Now</p>
                 </Button>
               </div>
             }
@@ -566,7 +498,7 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
           </CustomDialog>
         ) : (
           <CustomDialog
-            triggerJSX={<Button variant="info">Request Callback</Button>}
+            triggerJSX={<Button variant="info">Enquire Now</Button>}
             title="Login Required"
             description="This feature is only available to logged in users."
             footerJSX={
@@ -588,7 +520,7 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
         )
       ) : (
         <CustomDialog
-          triggerJSX={<Button variant="info">Request Callback</Button>}
+          triggerJSX={<Button variant="info">Enquire Now</Button>}
           title="Login Required"
           description="This feature is only available to logged in users."
           footerJSX={<></>}

@@ -14,7 +14,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
 
-export default function MobileLogin() {
+export default function MobileLogin({
+  onVerifyOTP = () => {
+    window.location.reload();
+  },
+}: {
+  onVerifyOTP?: () => void;
+}) {
   const query = useSearchParams();
   const redirectUrl = query.get("redirectUrl");
   const [showOTP, setShowOTP] = useState(false);
@@ -22,13 +28,14 @@ export default function MobileLogin() {
   const [country, setCountry] = useState<Country>(countries["India"]);
 
   return (
-    <div className="flex flex-col items-center py-5 rounded-xl space-y-5 w-full">
+    <div className="flex flex-col items-center rounded-xl space-y-5 w-full">
       {showOTP ? (
         <VerifyOTP
           mobileNumber={mobileNumber}
           setShowOTP={setShowOTP}
           country={country}
           redirectUrl={redirectUrl}
+          onVerifyOTP={onVerifyOTP}
         />
       ) : (
         <MobileNumberInput
@@ -118,29 +125,33 @@ function VerifyOTP({
   setShowOTP,
   country,
   redirectUrl,
+  onVerifyOTP,
 }: {
   mobileNumber: string;
   setShowOTP: Dispatch<SetStateAction<boolean>>;
   country: Country;
   redirectUrl: string | null;
+  onVerifyOTP: () => void;
 }) {
   const [OTP, setOTP] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   return !loading ? (
-    <div className="flex flex-col items-center w-full space-y-4">
-      <p className="text-center text-base font-normal">
-        Enter the OTP sent to <br />
-        <span className="font-medium text-md">
+    <div className="flex flex-col items-start w-full space-y-4">
+      <div className="flex flex-col items-start w-full space-y-2">
+        <p className="text-base font-normal">
+          Enter the OTP sent to <br />
+        </p>
+        <p className="font-medium text-md">
           {country.code} {mobileNumber}
-        </span>
-      </p>
+        </p>
+      </div>
       <OtpInput
         containerStyle={{
           width: "100%",
           display: "flex",
           gap: "0.5rem",
-          justifyContent: "center",
+          justifyContent: "start",
         }}
         value={OTP.join("")}
         onChange={async (value) =>
@@ -152,6 +163,7 @@ function VerifyOTP({
             setOTP,
             router,
             redirectUrl,
+            onVerifyOTP,
           })
         }
         numInputs={4}

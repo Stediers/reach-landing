@@ -57,79 +57,106 @@ export function ServicePopupMobile({
   price?: Price;
 }) {
   return (
-    <Drawer closeThreshold={0.5}>
-      <DrawerTrigger asChild>
-        <div className="w-full">{triggerJSX}</div>
-      </DrawerTrigger>
-      <DrawerContent className="">
-        <DrawerHeader>
-          <DrawerTitle className="text-2xl font-medium first-letter:capitalize">
-            {service.title}
-          </DrawerTitle>
-          {service.rating !== null && service.rating > 0 ? (
-            <DrawerDescription className="flex flex-row items-center justify-center space-x-3">
-              <Badge
-                variant="infoOutline"
-                className="flex flex-row items-center space-x-1"
-              >
-                <p className="text-info text-sm font-medium">
-                  {service.rating.toFixed(1)}
-                </p>
-                <AiFillStar className="text-info !w-4 !h-4" />
-              </Badge>
-              {/* <Badge variant="infoOutline">
-                <p className="text-info text-sm font-medium">
-                  {service.category.charAt(0).toUpperCase() +
-                    service.category.slice(1)}
-                </p>
-              </Badge> */}
-            </DrawerDescription>
-          ) : (
-            <DrawerDescription className="flex flex-row items-center justify-center space-x-3">
-              <Badge variant="successOutline">
-                <p className="text-success text-sm font-medium">New</p>
-              </Badge>
-              {/* <Badge variant="infoOutline">
-                <p className="text-info text-sm font-medium">
-                  {service.category.charAt(0).toUpperCase() +
-                    service.category.slice(1)}
-                </p>
-              </Badge> */}
-            </DrawerDescription>
-          )}
-        </DrawerHeader>
-        <DrawerFooter className="flex flex-col space-y-5 w-full items-start justify-start relative">
-          <div className="flex flex-col items-start justify-start w-full space-y-5 !overflow-y-scroll hide-scrollbar max-h-[50svh]">
-            {price && <PriceComponent price={price} />}
-            <ListWrapper
-              list={service.whatsIncluded}
-              title="What's Included"
-              icon={<AiOutlineCheck className="text-success text-2xl" />}
-            />
-            <ListWrapper
-              list={service.whatsNotIncluded}
-              title="What's Not Included"
-              icon={<AiOutlineClose className="text-error text-2xl" />}
-            />
-            <ListWrapper
-              list={service.requirements}
-              title="Requirements"
-              icon={
-                <AiFillExclamationCircle className="text-danger text-2xl" />
-              }
-            />
-          </div>
-          <div className="flex flex-col items-start justify-start space-y-3 w-full sticky bottom-5">
-            {footerJSX}
-            <DrawerClose className="w-full">
-              <Button className="w-full text-base" variant="outline">
-                Close
-              </Button>
-            </DrawerClose>
-          </div>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+    // <Drawer closeThreshold={0.5}>
+    //   <DrawerTrigger asChild>
+    //     <div className="w-full">{triggerJSX}</div>
+    //   </DrawerTrigger>
+    //   <DrawerContent className="">
+    //     <DrawerHeader>
+    //       <DrawerTitle className="text-xl font-medium first-letter:capitalize">
+    //         {service.title}
+    //       </DrawerTitle>
+    //       {service.rating !== null && service.rating > 0 ? (
+    //         <DrawerDescription className="flex flex-row items-center justify-center space-x-3">
+    //           <Badge
+    //             variant="infoOutline"
+    //             className="flex flex-row items-center space-x-1"
+    //           >
+    //             <p className="text-info text-sm font-medium">
+    //               {service.rating.toFixed(1)}
+    //             </p>
+    //             <AiFillStar className="text-info !w-4 !h-4" />
+    //           </Badge>
+    //           {/* <Badge variant="infoOutline">
+    //             <p className="text-info text-sm font-medium">
+    //               {service.category.charAt(0).toUpperCase() +
+    //                 service.category.slice(1)}
+    //             </p>
+    //           </Badge> */}
+    //         </DrawerDescription>
+    //       ) : (
+    //         <DrawerDescription className="flex flex-row items-center justify-center space-x-3">
+    //           <Badge variant="successOutline">
+    //             <p className="text-success text-sm font-medium">New</p>
+    //           </Badge>
+    //           {/* <Badge variant="infoOutline">
+    //             <p className="text-info text-sm font-medium">
+    //               {service.category.charAt(0).toUpperCase() +
+    //                 service.category.slice(1)}
+    //             </p>
+    //           </Badge> */}
+    //         </DrawerDescription>
+    //       )}
+    //     </DrawerHeader>
+    //     <DrawerFooter className="flex flex-col space-y-5 w-full items-start justify-start relative">
+    //       <div className="flex flex-col items-start justify-start w-full space-y-5 !overflow-y-scroll hide-scrollbar max-h-[50svh]">
+    //         {price && <PriceComponent price={price} />}
+    //         <ListWrapper
+    //           list={service.whatsIncluded}
+    //           title="What's Included"
+    //           icon={<AiOutlineCheck className="text-success text-2xl" />}
+    //         />
+    //         <ListWrapper
+    //           list={service.whatsNotIncluded}
+    //           title="What's Not Included"
+    //           icon={<AiOutlineClose className="text-error text-2xl" />}
+    //         />
+    //         <ListWrapper
+    //           list={service.requirements}
+    //           title="Requirements"
+    //           icon={
+    //             <AiFillExclamationCircle className="text-danger text-2xl" />
+    //           }
+    //         />
+    //       </div>
+    //       <div className="flex flex-col items-start justify-start space-y-3 w-full sticky bottom-5">
+    //         {footerJSX}
+    //         <DrawerClose className="w-full">
+    //           <Button className="w-full text-base" variant="outline">
+    //             Close
+    //           </Button>
+    //         </DrawerClose>
+    //       </div>
+    //     </DrawerFooter>
+    //   </DrawerContent>
+    // </Drawer>
+    <CustomDrawer
+      title={service.title}
+      description={
+        service.rating !== null && service.rating > 0
+          ? "Rating: " + service.rating.toFixed(1)
+          : "New"
+      }
+      triggerJSX={triggerJSX}
+      footerJSX={footerJSX}
+    >
+      {price && <PriceComponent price={price} />}
+      <ListWrapper
+        list={service.whatsIncluded}
+        title="What's Included"
+        icon={<AiOutlineCheck className="text-success text-2xl" />}
+      />
+      <ListWrapper
+        list={service.whatsNotIncluded}
+        title="What's Not Included"
+        icon={<AiOutlineClose className="text-error text-2xl" />}
+      />
+      <ListWrapper
+        list={service.requirements}
+        title="Requirements"
+        icon={<AiFillExclamationCircle className="text-danger text-2xl" />}
+      />
+    </CustomDrawer>
   );
 }
 
@@ -406,6 +433,7 @@ export function CustomDrawer({
   children,
   description,
   triggerClassName,
+  scaleBackground = true,
 }: {
   title: string;
   triggerJSX: React.ReactNode;
@@ -413,9 +441,10 @@ export function CustomDrawer({
   children: React.ReactNode;
   description?: string;
   triggerClassName?: string;
+  scaleBackground?: boolean;
 }) {
   return (
-    <Drawer closeThreshold={0.5} shouldScaleBackground>
+    <Drawer closeThreshold={0.5} shouldScaleBackground={scaleBackground}>
       <DrawerTrigger asChild className={triggerClassName}>
         <div className="w-full flex justify-center">{triggerJSX}</div>
       </DrawerTrigger>

@@ -16,6 +16,8 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { BiLeftArrowAlt, BiRightArrow, BiRightArrowAlt } from "react-icons/bi";
+import { CrossIcon } from "lucide-react";
+import { MdClose } from "react-icons/md";
 
 export function CustomSheet({
   title,
@@ -40,18 +42,18 @@ export function CustomSheet({
       <SheetContent className="flex flex-col items-start justify-between w-full space-y-5">
         <div className="flex flex-col items-start justify-start w-full !space-y-5 overflow-y-scroll hide-scrollbar">
           <SheetHeader className="w-full flex flex-col items-start justify-start space-y-1">
-            <div className="flex flex-row items-center justify-start space-x-2 w-full">
-              {canClose && (
-                <SheetClose>
-                  <BiLeftArrowAlt className="w-8 h-8" />
-                </SheetClose>
-              )}
+            <div className="flex flex-row items-center justify-between space-x-2 w-full">
               <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2">
                 {title}
               </SheetTitle>
+              {canClose && (
+                <SheetClose>
+                  <MdClose className="w-6 h-6" />
+                </SheetClose>
+              )}
             </div>
             {description && (
-              <SheetDescription className="text-sm font-normal">
+              <SheetDescription className="text-base font-normal">
                 {description}
               </SheetDescription>
             )}

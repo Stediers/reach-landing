@@ -23,6 +23,7 @@ import {
   ServiceCardMobile,
 } from "@components/ServiceCard";
 import { debounce } from "lodash";
+import Loading from "@components/Loading";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -242,12 +243,11 @@ function Render({
       pageState={searchState}
       showLogo={false}
       loadingJSX={
-        <div className="flex flex-col items-center justify-center w-full lg:px-10 lg:py-10 py-5 min-h-full">
-          <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full">
-            {Array.from({ length: 80 }).map((_, index) => (
-              <ServiceCardSkeleton key={index} />
-            ))}
-          </div>
+        <div className="flex flex-col items-center justify-center space-y-5 w-full lg:px-10 py-10 min-h-full">
+          <Loading />
+          <p className="text-lg font-medium">
+            Searching for &quot;{search}&quot;
+          </p>
         </div>
       }
     >

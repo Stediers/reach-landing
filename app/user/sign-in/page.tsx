@@ -31,13 +31,15 @@ export default function Page() {
   const [country, setCountry] = useState<Country>(countries["India"]);
 
   const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirectUrl") || "/explore";
+  const redirectUrl = searchParams.get("redirectUrl") || "/";
 
   return (
     <div className="flex flex-col items-center justify-start space-y-10 px-5 flex-1 py-5">
       <div className="flex flex-col items-center space-y-3 h-[25%]">
         <Logo />
-        <p className="text-lg text-center font-medium">Be your own Boss</p>
+        <p className="text-lg text-center font-medium">
+          Find the Most Trustable Freelaners
+        </p>
       </div>
       <div className="w-full flex flex-col items-start justify-start max-w-lg space-y-5 lg:border lg:p-5 lg:rounded-lg bg-white">
         {showOTP ? (
@@ -205,7 +207,7 @@ function VerifyOTP({
             );
             if (response) {
               localStorage.setItem("mobileNumber", mobileNumber);
-              setCookie("user-token", response.token, 30);
+              setCookie("gig-token", response.token, 30);
               router.push(redirectUrl);
               return;
             } else {
@@ -243,12 +245,12 @@ function VerifyOTP({
 
             if (response) {
               localStorage.setItem("mobileNumber", mobileNumber);
-              setCookie("user-token", response.token, 30);
+              setCookie("gig-token", response.token, 30);
               router.push(redirectUrl);
+              return;
+            } else {
+              setLoading(false);
             }
-            return;
-          } else {
-            setLoading(false);
           }
         }}
       />

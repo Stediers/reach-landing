@@ -35,19 +35,21 @@ export default function SelectStateAndCity({
         indianStates[0].isoCode
     )
   );
-  const [istate, setIState] = useState<IState>(
-    indianStates.find((istate) => istate.name === state) ?? indianStates[0]
+  const [istate, setIState] = useState<IState | null>(
+    indianStates.find((istate) => istate.name === state) ?? null
   );
-  const [icity, setICity] = useState<ICity>(
-    indianCities.find((icity) => icity.name === city) ?? indianCities[0]
+  const [icity, setICity] = useState<ICity | null>(
+    indianCities.find((icity) => icity.name === city) ?? null
   );
 
   useEffect(() => {
     console.log("state changed", istate);
+    if (istate === null) return;
     onStateChange(istate);
   }, []);
 
   useEffect(() => {
+    if (icity === null) return;
     onCityChange(icity);
   }, []);
 
@@ -65,7 +67,6 @@ export default function SelectStateAndCity({
           const cities = City.getCitiesOfState("IN", state.isoCode);
           if (cities.length === 0) return;
           setIState(state);
-          setICity(cities[0]);
           setIndianCities(cities);
           onStateChange(state);
         }}
@@ -74,7 +75,7 @@ export default function SelectStateAndCity({
       />
       {selectCity && (
         <TextInputWithDropdown
-          value={icity.name.toString()}
+          value={icity ? icity.name.toString() : ""}
           mandatory={true}
           title="City"
           options={indianCities.map((city) => city.name)}

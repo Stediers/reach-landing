@@ -4,7 +4,11 @@ import { FetchPartnerResponse, FetchServiceResponse } from "@data/types";
 import { priceString, showPrice } from "@helper_functions/priceString";
 import { Star } from "lucide-react";
 import { BiCarousel } from "react-icons/bi";
-import { ServicePopupMobile, ServicePopupDesktop } from "./DrawerPopup";
+import {
+  ServicePopupMobile,
+  ServicePopupDesktop,
+  CustomDrawer,
+} from "./DrawerPopup";
 import ImageComponent from "./ImageComponent";
 import { RequestCallback } from "./RequestCallback";
 import {
@@ -22,6 +26,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { CustomDialog } from "./DialogPopup";
 import { Badge } from "./ui/badge";
 import BoxRating from "./BoxRating";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { DrawerClose } from "./ui/drawer";
 
 export function ServiceCardMobile({
   service,
@@ -37,16 +43,24 @@ export function ServiceCardMobile({
       price={service.price}
       service={service}
       footerJSX={
-        <Button variant="success">
-          <Link
-            href={`/service/${service.id}`}
-            passHref
-            rel="noopener"
-            target="_blank"
-          >
-            View Service
-          </Link>
-        </Button>
+        <div className="flex flex-col items-start justify-center space-y-3 w-full">
+          <div className="grid grid-cols-2 gap-x-2 w-full">
+            <Button variant="success">
+              <Link
+                href={`/service/${service.id}`}
+                passHref
+                rel="noopener"
+                target="_blank"
+              >
+                View Service
+              </Link>
+            </Button>
+            <RequestCallback serviceId={service.id} />
+          </div>
+          <DrawerClose asChild>
+            <Button variant="close">Close</Button>
+          </DrawerClose>
+        </div>
       }
       triggerJSX={serviceTrigger}
     />
@@ -348,18 +362,23 @@ export function ServiceTrigger({
         </div>
         {partner ? (
           <div className="w-10 h-10 z-40" onClick={(e) => e.stopPropagation()}>
-            <CustomDialog
+            <CustomDrawer
               footerJSX={
-                <Button variant="success">
-                  <Link
-                    href={`/partner/${partner.gigId}`}
-                    passHref
-                    rel="noopener"
-                    target="_blank"
-                  >
-                    View Partner
-                  </Link>
-                </Button>
+                <div className="grid grid-cols-2 gap-x-2 w-full">
+                  <Button variant="info">
+                    <Link
+                      href={`/partner/${partner.gigId}`}
+                      passHref
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      Learn More
+                    </Link>
+                  </Button>
+                  <DialogClose asChild>
+                    <Button variant="close">Close</Button>
+                  </DialogClose>
+                </div>
               }
               triggerJSX={
                 <Avatar className="border border-gray-500 w-10 h-10 rounded-full">
@@ -375,61 +394,53 @@ export function ServiceTrigger({
               description="View partner details"
             >
               <div className="flex flex-col items-start justify-center space-y-5 w-full hover:cursor-pointer">
-                <div className="flex flex-row items-start justify-start space-x-5">
-                  <Avatar className="border border-gray-500 w-44 h-44 rounded-lg">
-                    <AvatarImage
-                      src={partner?.imageUrl}
-                      alt={partner?.firstName}
-                      className="object-cover w-full h-full rounded-lg"
-                    />
-                    <AvatarFallback>{partner?.firstName[0]}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col items-start justify-center space-y-3">
-                    <div className="flex flex-col items-start justify-center space-y-1">
-                      <p className="text-lg font-medium first-letter:capitalize">
-                        {partner?.firstName} {partner?.lastName}
-                      </p>
-                      <p className="text-base text-primary font-medium">
-                        {partner?.designation}
-                      </p>
-                    </div>
-                    <div className="flex flex-row items-center justify-start space-x-2">
-                      <Badge variant="info">
-                        <p className="text-sm font-medium">
-                          {partner?.gender.charAt(0).toUpperCase() +
-                            partner.gender.slice(1)}
-                        </p>
+                <Avatar className="border border-gray-500 w-44 h-44 rounded-lg">
+                  <AvatarImage
+                    src={partner?.imageUrl}
+                    alt={partner?.firstName}
+                    className="object-cover w-full h-full rounded-lg"
+                  />
+                  <AvatarFallback>{partner?.firstName[0]}</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col items-start justify-center space-y-3">
+                  <div className="flex flex-col items-start justify-center space-y-1">
+                    <p className="text-lg font-medium first-letter:capitalize">
+                      {partner?.firstName} {partner?.lastName}
+                    </p>
+                    <p className="text-base text-primary font-medium">
+                      {partner?.designation}
+                    </p>
+                  </div>
+                  <div className="flex flex-row items-center justify-start space-x-2">
+                    <p className="text-base font-medium">
+                      {partner?.gender.charAt(0).toUpperCase() +
+                        partner.gender.slice(1)}
+                    </p>
+                    {partner?.rating && partner.rating > 0 ? (
+                      <Badge variant="success">
+                        <p className="text-sm font-medium">{partner?.rating}</p>
                       </Badge>
-                      {partner?.rating && partner.rating > 0 ? (
-                        <Badge variant="success">
-                          <p className="text-sm font-medium">
-                            {partner?.rating}
-                          </p>
-                        </Badge>
-                      ) : null}
-                    </div>
+                    ) : null}
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-x-5 w-full items-start">
-                  <div className="flex flex-col items-start justify-center space-y-1">
-                    <p className="text-base font-medium text-textsubtle">
-                      Languages Spoken
-                    </p>
-                    <p className="text-base font-medium">
-                      {partner?.languages.join(", ")}
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-start justify-center space-y-1">
-                    <p className="text-base font-medium text-textsubtle">
-                      Location
-                    </p>
-                    <p className="text-base font-medium">
-                      {partner?.city}, {partner?.state}
-                    </p>
-                  </div>
+                <div className="flex flex-col items-start justify-center space-y-1">
+                  <p className="text-base font-medium text-textsubtle">
+                    Languages Spoken
+                  </p>
+                  <p className="text-base font-medium">
+                    {partner?.languages.join(", ")}
+                  </p>
+                </div>
+                <div className="flex flex-col items-start justify-center space-y-1">
+                  <p className="text-base font-medium text-textsubtle">
+                    Location
+                  </p>
+                  <p className="text-base font-medium">
+                    {partner?.city}, {partner?.state}
+                  </p>
                 </div>
               </div>
-            </CustomDialog>
+            </CustomDrawer>
           </div>
         ) : null}
       </div>

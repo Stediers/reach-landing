@@ -4,7 +4,7 @@ import ReachSVG from "./svg/ReachSVG";
 export default function Logo({
   textStyle = "text-2xl font-medium",
   text = "ReachGig",
-  wings = "w-[10rem]",
+  wings = "w-[8rem]",
   color = "#f40e1e",
   href = "/",
   flap = false,

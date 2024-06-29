@@ -35,6 +35,7 @@ export async function verifyOTPOnChange({
   setOTP,
   router,
   redirectUrl,
+  onVerifyOTP,
 }: {
   mobileNumber: string;
   country: Country;
@@ -43,6 +44,7 @@ export async function verifyOTPOnChange({
   setOTP: Dispatch<SetStateAction<string[]>>;
   router: AppRouterInstance;
   redirectUrl: string | null;
+  onVerifyOTP: () => void;
 }) {
   if (isNaN(Number(value))) return;
   setOTP(value.split(""));
@@ -55,8 +57,7 @@ export async function verifyOTPOnChange({
       if (redirectUrl) {
         router.push(redirectUrl);
       } else {
-        console.log("reload");
-        window.location.reload();
+        onVerifyOTP();
       }
       return;
     } else {

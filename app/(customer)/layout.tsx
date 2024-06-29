@@ -13,7 +13,9 @@ import { CustomDrawer } from "@components/DrawerPopup";
 import ImageComponent from "@components/ImageComponent";
 import LineHeader from "@components/LineHeader";
 import Loading from "@components/Loading";
+import LoginPerks from "@components/LoginPerks";
 import Setting from "@components/Setting";
+import { SubUnderlinedHeader } from "@components/UnderlinedHeader";
 import RadioInput from "@components/input/RadioInput";
 import TextInput from "@components/input/TextInput";
 import { showSnackBar } from "@components/notifications/Snackbar";
@@ -967,8 +969,11 @@ function NavBar({
                   </Button>
                 </div>
               ) : (
-                <div className="px-1 w-full">
-                  <MobileLogin />
+                <div className="px-1 w-full flex flex-col space-y-3 items-start justify-center">
+                  <div className="py-5 w-full">
+                    <MobileLogin />
+                  </div>
+                  <LoginPerks />
                 </div>
               )}
             </CustomSheet>
