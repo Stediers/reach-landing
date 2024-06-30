@@ -6,6 +6,7 @@ import Logo from "@components/Logo";
 import {
   Gender,
   PreferredGender,
+  PricingType,
   ServiceCategory,
   ServiceType,
 } from "@data/enums";
@@ -56,6 +57,8 @@ import { priceString, showPrice } from "@helper_functions/priceString";
 import { Star } from "lucide-react";
 import { BiCarousel } from "react-icons/bi";
 import PartnerPrompt from "@components/PartnerPrompt";
+import PriceComponent from "@components/price/MobilePrice";
+import { calculateTotalPrice } from "@helper_functions/calculate-bill";
 
 export const generateMetadata = async ({
   params,
@@ -117,74 +120,23 @@ export default async function Page({
 
   function Mobile() {
     return response ? (
-      // <div
-      //   className="flex flex-col items-center justify-start w-full min-h-full py-5 px-5"
-      //   hidden
-      // >
-      //   {backLink && (
-      //     <Link
-      //       className="w-full flex flex-row items-center justify-start space-x-5"
-      //       href={backLink}
-      //     >
-      //       <BsArrowLeftShort className="text-4xl cursor-pointer self-start" />
-      //     </Link>
-      //   )}
-      //   <div className="flex flex-col items-center justify-start space-y-1 w-full">
-      //     <Logo text="ReachGig" textStyle="text-2xl font-medium" />
-      //   </div>
-      //   {event !== "preview" && (
-      //     <TrackProfileComponent gigId={response.partner.gigId} event={event} />
-      //   )}
-      //   <div className="flex flex-col items-center justify-start w-full min-h-full space-y-5 lg:space-y-10 bg-white lg:pt-10 pt-5">
-      //     <Profile gig={response.partner} uniqueCategories={uniqueCategories} />
-      //     <LineHeader title="My Services" className="lg:hidden" />
-      //     <div className="flex flex-col items-center lg:items-start justify-start space-y-5 lg:space-y-10 w-full">
-      //       {response.services.length > 0 ? (
-      //         <div className="flex flex-col items-center justify-start space-y-5 w-full">
-      //           <div
-      //             className="grid grid-cols-1 md:grid-cols-2 lg:hidden gap-y-10 lg:gap-x-10 w-full"
-      //             hidden
-      //           >
-      //             {response.services.map((service) => (
-      //               <ServiceCardMobile key={service.id} service={service} />
-      //             ))}
-      //           </div>
-      //           <div
-      //             className="hidden lg:grid grid-cols-3 2xl:grid-cols-4 gap-5 justify-items-center w-full"
-      //             hidden
-      //           >
-      //             {response.services.map((service) => (
-      //               <ServiceCardDesktop key={service.id} service={service} />
-      //             ))}
-      //           </div>
-      //         </div>
-      //       ) : (
-      //         <div className="flex flex-col items-center justify-center space-y-5 w-full">
-      //           <Image
-      //             alt="no services"
-      //             src="/images/no-services.svg"
-      //             width={200}
-      //             height={200}
-      //             priority
-      //           />
-      //           <h1 className="text-xl font-medium text-center">
-      //             No services available
-      //           </h1>
-      //         </div>
-      //       )}
-      //     </div>
-      //     <div
-      //       className="sticky bottom-10 right-5 hidden lg:block w-full py-5 self-end max-w-[20rem]"
-      //       hidden
-      //     >
-      //       <CallSetting mobileNumber={response.partner.mobileNumber} />
-      //     </div>
-      //   </div>
-      // </div>
       <div className="flex flex-col items-center justify-start w-full min-h-full pt-5 relative">
+        <div className="w-full flex flex-row items-center justify-start space-x-5 px-5">
+          {backLink && (
+            <Link
+              className="flex flex-row items-center justify-start space-x-5"
+              href={backLink}
+            >
+              <BsArrowLeftShort className="text-4xl cursor-pointer self-start" />
+            </Link>
+          )}
+        </div>
         <HeroPage response={response} />
         <AboutMe response={response} />
         <MyServices response={response} />
+        {response.packages.length > 0 ? (
+          <MyPackages response={response} />
+        ) : null}
         <ContactMe response={response} />
         <PartnerPrompt />
       </div>
@@ -421,6 +373,70 @@ function MyServices({
             service={service}
             serviceTrigger={<ServiceTriggerMobileProfile service={service} />}
           />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MyPackages({
+  response,
+}: {
+  response: FetchPartnerByPartnerIdResponse;
+}) {
+  return (
+    <div className="flex flex-col items-start justify-start w-full lg:min-h-screen lg:p-20 lg:py-16 lg:space-y-20 space-y-10 py-12 px-5 bg-white text-text">
+      <h2 className="lg:text-5xl text-3xl font-medium !leading-normal">
+        My
+        <br />
+        <span className="text-primary">Packages</span>
+      </h2>
+      <div className="grid lg:grid-cols-3 gap-14 w-full">
+        {response.packages.map((packageItem) => (
+          <Card
+            className="flex flex-col items-start justify-start w-full space-y-5"
+            key={packageItem.id}
+          >
+            <div className="flex flex-col items-start justify-start space-y-3 w-full">
+              <div className="flex flex-row items-center justify-between space-x-2 w-full">
+                <p className="lg:text-3xl text-xl font-medium">
+                  {packageItem.title}
+                </p>
+                <Badge>{packageItem.services.length + " in One"}</Badge>
+              </div>
+              <p className="lg:text-xl text-base">
+                {packageItem.description.length > 100
+                  ? packageItem.description.slice(0, 100) + "..."
+                  : packageItem.description}
+              </p>
+              <ul className="flex flex-col items-start justify-start space-y-2 w-full">
+                {packageItem.services.map((service) => (
+                  <li
+                    key={service.id}
+                    className="flex flex-row items-start justify-between w-full"
+                  >
+                    <p className="lg:text-lg text-base font-medium">
+                      {service.title}
+                    </p>
+                    <p className="lg:text-lg text-base">
+                      {priceString({
+                        price: calculateTotalPrice({
+                          discount: service.price.discount?.value ?? 0,
+                          price: service.price.price,
+                        }),
+                      })}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <PriceComponent
+              price={{
+                ...packageItem.price,
+                pricingType: PricingType.SESSION,
+              }}
+            />
+          </Card>
         ))}
       </div>
     </div>

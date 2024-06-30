@@ -40,6 +40,7 @@ import Chip from "./Chip";
 import PriceComponent from "./price/MobilePrice";
 import MobileLogin from "./sign-in/MobileNumber";
 import LoginPerks from "./LoginPerks";
+import MobileLoginPopup from "./sign-in/MobileLoginPopup";
 
 export function RequestCallback({ serviceId }: { serviceId: string }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -497,26 +498,26 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
             </div>
           </CustomDialog>
         ) : (
-          <CustomDialog
+          // <CustomDialog
+          //   triggerJSX={<Button variant="info">Enquire Now</Button>}
+          //   title="Login Required"
+          //   description="This feature is only available to logged in users."
+          // >
+          //   <MobileLogin
+          //     onVerifyOTP={() => {
+          //       const close = document.getElementById("close-drawer");
+          //       if (close) {
+          //         close.click();
+          //       }
+          //     }}
+          //   />
+          // </CustomDialog>
+          <MobileLoginPopup
+            onVerifyOTP={() => {
+              window.location.reload();
+            }}
             triggerJSX={<Button variant="info">Enquire Now</Button>}
-            title="Login Required"
-            description="This feature is only available to logged in users."
-            footerJSX={
-              <Button variant="success" asChild onClick={() => {}}>
-                <Link href={`/user/sign-in?redirectUrl=/service/${serviceId}`}>
-                  <p className="text-md font-medium">Login</p>
-                </Link>
-              </Button>
-            }
-          >
-            <div className="flex flex-col space-y-5 w-full">
-              <ImageComponent
-                alt="Login"
-                src="/images/login.svg"
-                className="w-full h-60"
-              />
-            </div>
-          </CustomDialog>
+          />
         )
       ) : (
         <CustomDialog

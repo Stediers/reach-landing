@@ -207,7 +207,7 @@ function VerifyOTP({
             );
             if (response) {
               localStorage.setItem("mobileNumber", mobileNumber);
-              setCookie("gig-token", response.token, 30);
+              setCookie("user-token", response.token, 30);
               router.push(redirectUrl);
               return;
             } else {
@@ -245,7 +245,7 @@ function VerifyOTP({
 
             if (response) {
               localStorage.setItem("mobileNumber", mobileNumber);
-              setCookie("gig-token", response.token, 30);
+              setCookie("user-token", response.token, 30);
               router.push(redirectUrl);
               return;
             } else {

@@ -593,18 +593,34 @@ export type RazorpayPayment = {
   paymentDbId: string;
 };
 
+export type ServicePackage = {
+  id: string;
+  title: string;
+  description: string;
+  price: ServicePackagePrice;
+  services: FetchServiceResponse[];
+};
+
+export type AppointmentBill = {
+  charge: number;
+  bookingFee: number;
+  platformFee: number;
+  total: number;
+};
+
+export type ServicePackagePrice = {
+  price: number; // in paisa
+  currency: Currency;
+  discount: Discount | null;
+  bookingBill: BookingBill;
+};
+
 export type FetchServiceResponse = {
   title: string;
   category: ServiceCategory;
   preferredGender: PreferredGender;
   rating: number | null;
-  addOns: {
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    imageUrls: string[];
-  }[];
+  addOns: AddOn[];
   price: Price;
   address: Address | null;
   imageUrls: string[];

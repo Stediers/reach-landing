@@ -245,9 +245,15 @@ function Render({
       loadingJSX={
         <div className="flex flex-col items-center justify-center space-y-5 w-full lg:px-10 py-10 min-h-full">
           <Loading />
-          <p className="text-lg font-medium">
-            Searching for &quot;{search}&quot;
-          </p>
+          {search.length > 0 ? (
+            <p className="text-lg font-medium">
+              Searching for &quot;{search}&quot;
+            </p>
+          ) : (
+            <p className="text-lg font-medium">
+              Finding the best services for you
+            </p>
+          )}
         </div>
       }
     >

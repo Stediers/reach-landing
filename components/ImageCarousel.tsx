@@ -66,18 +66,29 @@ export default function ImageCarousel({
         }}
       >
         <CarouselContent className="-ml-4">
-          {images.map((image, index) => (
-            <CarouselItem key={index} className="" id={index.toString()}>
-              <div className={`w-full ${imageHeight} relative rounded-lg`}>
-                <Image
-                  src={image}
-                  alt="Image"
-                  className="rounded-md object-contain border"
-                  fill
-                />
-              </div>
-            </CarouselItem>
-          ))}
+          {images.length > 0 ? (
+            images.map((image, index) => (
+              <CarouselItem key={index} className="" id={index.toString()}>
+                <div className={`w-full ${imageHeight} relative rounded-lg`}>
+                  <Image
+                    src={image}
+                    alt="Image"
+                    className="rounded-md object-contain border"
+                    fill
+                  />
+                </div>
+              </CarouselItem>
+            ))
+          ) : (
+            <div className={`w-full ${imageHeight} relative rounded-lg`}>
+              <Image
+                src="/images/negotiate.svg"
+                alt="Image"
+                className="rounded-md object-contain border"
+                fill
+              />
+            </div>
+          )}
         </CarouselContent>
         {showButtons && images.length > 1 ? (
           <>

@@ -3,12 +3,14 @@ import {
   ApiResult,
   FetchPartnerResponse,
   FetchServiceResponse,
+  ServicePackage,
 } from "@data/types";
 
 export type FetchPartnerByPartnerIdResponse = {
   partner: FetchPartnerResponse;
   referrals: number;
   services: FetchServiceResponse[];
+  packages: ServicePackage[];
 };
 
 export async function fetchPartnerByPartnerId(

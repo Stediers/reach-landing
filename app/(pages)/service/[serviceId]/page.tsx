@@ -34,6 +34,7 @@ import { MdLocationCity } from "react-icons/md";
 import { RequestCallback } from "@components/RequestCallback";
 import { User } from "lucide-react";
 import { CustomDialog } from "@components/DialogPopup";
+import { AddOnMobile } from "@components/AddOn";
 
 const getFullName = (firstName: string, lastName: string) => {
   return (
@@ -102,14 +103,16 @@ export default async function Page({
         className="flex flex-col items-center justify-start w-full min-h-full pt-5"
         hidden
       >
-        {backLink && (
-          <Link
-            className="w-full flex flex-row items-center justify-start space-x-5 pb-2 px-5"
-            href={backLink}
-          >
-            <BsArrowLeftShort className="text-4xl cursor-pointer self-start" />
-          </Link>
-        )}
+        <div className="w-full flex flex-row items-center justify-start space-x-5 px-5">
+          {backLink && (
+            <Link
+              className="flex flex-row items-center justify-start space-x-5"
+              href={backLink}
+            >
+              <BsArrowLeftShort className="text-4xl cursor-pointer self-start" />
+            </Link>
+          )}
+        </div>
         {event !== "preview" && (
           <TrackServiceComponent serviceId={serviceId} event={event} />
         )}
@@ -198,10 +201,22 @@ export default async function Page({
           <div className="sticky bottom-0 w-full lg:hidden bg-white py-3 !border-none !outline-none">
             <RequestCallback serviceId={serviceId} />
           </div>
-          <div
-            className="flex flex-col items-start justify-start w-full gap-y-5 lg:pt-0 lg:pb-10"
-            hidden
-          >
+          {service.addOns.length > 0 ? (
+            <div className="flex flex-col w items-start justify-start w-full gap-y-5 lg:pt-0 lg:pb-10">
+              <UnderlinedHeader
+                title="Add Ons"
+                align="items-start"
+                className="hidden lg:block"
+              />
+              <LineHeader title="Add Ons" className="lg:hidden" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-5 pt-5">
+                {service.addOns.map((addOn, index) => (
+                  <AddOnMobile key={index} addOn={addOn} />
+                ))}
+              </div>
+            </div>
+          ) : null}
+          <div className="flex flex-col items-start justify-start w-full gap-y-5 lg:pt-0 lg:pb-10">
             <div className="max-w-lg w-full">
               <UnderlinedHeader
                 title="Know more about me"
