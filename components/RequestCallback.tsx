@@ -514,7 +514,7 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
           // </CustomDialog>
           <MobileLoginPopup
             onVerifyOTP={() => {
-              window.location.reload();
+              // window.location.reload();
             }}
             triggerJSX={<Button variant="info">Enquire Now</Button>}
           />
