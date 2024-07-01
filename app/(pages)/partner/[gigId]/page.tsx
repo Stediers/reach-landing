@@ -352,6 +352,16 @@ function MyServices({
         <br />
         <span className="text-primary">Services</span>
       </h2>
+      {response.services.length === 0 ? (
+        <div className="flex flex-col items-start justify-start space-y-5 w-full">
+          <p className="lg:text-2xl text-lg font-normal">
+            I am currently not offering any services.
+          </p>
+          <p className="lg:text-2xl text-lg font-normal">
+            Please check back later.
+          </p>
+        </div>
+      ) : null}
       <div className="lg:grid grid-cols-3 gap-14 w-full hidden pt-10" hidden>
         {response.services
           .sort((a, b) => b.price.bookingBill.total - a.price.bookingBill.total)
