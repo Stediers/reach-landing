@@ -135,7 +135,7 @@ export default function ConsoleLayout({ children }: RootLayoutProps) {
 
   return (
     <div
-      className="w-full flex flex-col justify-start items-center relative !z-50"
+      className="w-full flex flex-col justify-start items-center relative !z-50 !hide-scrollbar"
       vaul-drawer-wrapper=""
     >
       <Link
