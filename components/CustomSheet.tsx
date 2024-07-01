@@ -39,7 +39,7 @@ export function CustomSheet({
       <SheetTrigger asChild>
         <div className="w-full">{triggerJSX}</div>
       </SheetTrigger>
-      <SheetContent className="flex flex-col items-start justify-between w-full space-y-5">
+      <SheetContent className="flex flex-col items-start justify-between w-full space-y-5 hide-scrollbar">
         <div className="flex flex-col items-start justify-start w-full !space-y-5 overflow-y-scroll hide-scrollbar">
           <SheetHeader className="w-full flex flex-col items-start justify-start space-y-1">
             <div className="flex flex-row items-center justify-between space-x-2 w-full">
