@@ -522,25 +522,15 @@ export type FetchAppointmentResponse = {
     partnerFeedback: Feedback | null;
     customerFeedback: CustomerFeedback | null;
   } | null;
-  cancelled: {
-    refundInitiated: boolean;
-  } | null;
   otp: string | null;
-  customerPayment: CustomerPayment[];
-  partnerPayout: PartnerPayout | null;
+  payment: RoutePayment;
 };
 
-export type CustomerPayment = {
-  status: PaymentStatus;
-  amountInPaisa: number;
-  paymentId: string;
-  url: string;
-};
-
-export type PartnerPayout = {
-  payoutStatus: PayoutStatus;
-  amountInPaisa: number;
-  razorpayId: string;
+export type RoutePayment = {
+  orderId: string;
+  transfer: boolean;
+  refund: boolean;
+  paid: boolean;
 };
 
 export type Callback = {

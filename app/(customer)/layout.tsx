@@ -169,11 +169,10 @@ export default function ConsoleLayout({ children }: RootLayoutProps) {
         ) : null}
         {path === "/explore" ? (
           <MobileFilter
-            categories={[]}
             filter={filter}
             setFilter={setFilter}
-            setSelectedCategory={setSelectedCategory}
-            selectedCategory={selectedCategory}
+            searchQuery={searchState}
+            setSearchQuery={setSearchState}
           />
         ) : null}
       </div>
@@ -518,7 +517,7 @@ function DesktopFilter({
         <div className="flex flex-row space-x-5 items-center justify-center">
           <DesktopServiceTypeDropdown filter={filter} setFilter={setFilter} />
           <DesktopMoreFiltersDropdown filter={filter} setFilter={setFilter} />
-          <SearchService
+          <SearchServiceDesktop
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
@@ -528,7 +527,7 @@ function DesktopFilter({
   );
 }
 
-function SearchService({
+function SearchServiceDesktop({
   searchQuery,
   setSearchQuery,
 }: {
@@ -600,33 +599,102 @@ function SearchService({
   );
 }
 
+function SearchServiceMobile({
+  searchQuery,
+  setSearchQuery,
+}: {
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+}) {
+  const [search, setSearch] = useState(searchQuery);
+  return (
+    <CustomSheet
+      title="Search"
+      canClose
+      description="Find the service you are looking for"
+      triggerJSX={
+        <Button
+          className="w-full !border-0 !rounded-none !border-b"
+          variant="outline"
+        >
+          <Search className="w-5 h-5" />
+        </Button>
+      }
+      footerJSX={
+        <SheetClose asChild>
+          <Button
+            variant="success"
+            className="w-full"
+            onClick={() => setSearchQuery(search)}
+          >
+            Search
+          </Button>
+        </SheetClose>
+      }
+    >
+      <div className="w-full space-y-5 flex flex-col">
+        <TextInput
+          value={search}
+          onChange={(value) => setSearch(value)}
+          placeholder="Search for a service"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setSearchQuery(search);
+            }
+          }}
+        />
+      </div>
+      <LineHeader title="Tips" />
+      <ul className="w-full space-y-5">
+        <li className="w-full flex flex-col space-y-1">
+          <p className="text-base font-medium">Use Keywords</p>
+          <p className="text-sm text-gray-500">
+            Use keywords to search for a service instead of a sentence. For
+            example, &quot;plumber&quot; instead of &quot;I need a plumber&quot;
+          </p>
+        </li>
+        <li className="w-full flex flex-col space-y-1">
+          <p className="text-base font-medium">Dont use Location</p>
+          <p className="text-sm text-gray-500">
+            Use the location filter to find services near you, please refrain
+            from searching for a location because it doesn&apos;t work yet.
+          </p>
+        </li>
+        <li className="w-full flex flex-col space-y-1">
+          <p className="text-base font-medium">
+            Don&apos;t Search for Partners
+          </p>
+          <p className="text-sm text-gray-500">
+            If you want to find a partner, use the &quot;Find a Partner&quot;
+            page instead of searching for a service. This will help you find the
+            right person for you.
+          </p>
+        </li>
+      </ul>
+    </CustomSheet>
+  );
+}
+
 function MobileFilter({
-  categories,
   filter,
   setFilter,
-  setSelectedCategory,
-  selectedCategory,
+  searchQuery,
+  setSearchQuery,
 }: {
-  categories: FetchServiceCategoriesResponse[];
   filter: WordSearchServiceRequest["filter"];
   setFilter: React.Dispatch<
     React.SetStateAction<WordSearchServiceRequest["filter"]>
   >;
-  setSelectedCategory: React.Dispatch<
-    React.SetStateAction<ServiceCategory | null>
-  >;
-  selectedCategory: ServiceCategory | null;
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
-    <div className="w-full grid lg:hidden grid-cols-2 bg-white" hidden>
+    <div
+      className="w-full grid lg:hidden grid-cols-2 bg-white overflow-x-scroll"
+      hidden
+    >
       <MobileServiceTypeDropdown filter={filter} setFilter={setFilter} />
-      <MobileMoreFiltersDropdown
-        filter={filter}
-        setFilter={setFilter}
-        categories={categories}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <MobileMoreFiltersDropdown filter={filter} setFilter={setFilter} />
     </div>
   );
 }
@@ -1037,19 +1105,11 @@ function UserMenuDesktop({ response }: { response: FetchMyProfileResponse }) {
 function MobileMoreFiltersDropdown({
   filter,
   setFilter,
-  categories,
-  setSelectedCategory,
-  selectedCategory,
 }: {
   filter: WordSearchServiceRequest["filter"];
   setFilter: React.Dispatch<
     React.SetStateAction<WordSearchServiceRequest["filter"]>
   >;
-  categories: FetchServiceCategoriesResponse[];
-  setSelectedCategory: React.Dispatch<
-    React.SetStateAction<ServiceCategory | null>
-  >;
-  selectedCategory: ServiceCategory | null;
 }) {
   const [online, setOnline] = useState(filter.online);
   const [verified, setVerified] = useState(filter.verified);

@@ -7,11 +7,10 @@ export default function checkHere({
 }): boolean {
   if (path === "/" && menuPath === "/") {
     return true;
-  } else if (path.startsWith("/booking") && menuPath === "/booking") {
-    return true;
-  } else if (path.startsWith("/callbacks") && menuPath === "/callbacks") {
-    return true;
-  } else if (path.startsWith("/chat") && menuPath === "/chat") {
+  } else if (
+    path.startsWith("/console/callbacks") &&
+    menuPath === "/console/callbacks"
+  ) {
     return true;
   } else if (path.startsWith("/my-payments") && menuPath === "/my-payments") {
     return true;
@@ -19,7 +18,10 @@ export default function checkHere({
     return true;
   } else if (path.startsWith("/explore") && menuPath === "/explore") {
     return true;
-  } else if (path.startsWith("/appointments") && menuPath === "/appointments") {
+  } else if (
+    path.startsWith("/console/appointments") &&
+    menuPath === "/console/appointments"
+  ) {
     return true;
   } else {
     return false;

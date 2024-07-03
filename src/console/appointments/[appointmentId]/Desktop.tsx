@@ -1,8 +1,8 @@
-import { generatePaymentLinkAppointment } from "@api_functions/appointments/generate-payment-link-appointment";
 import { RaiseDisputeRequest } from "@api_functions/disputes/raise-dispute";
 import AppointmentCard from "@components/AppointmentCard";
 import { BookingBillInvoice } from "@components/Bill";
 import Card from "@components/Card";
+import Checkout from "@components/Checkout";
 import { CustomDialog, ProfileDialog } from "@components/DialogPopup";
 import { ServicePopupDesktop } from "@components/DrawerPopup";
 import Setting from "@components/Setting";
@@ -19,6 +19,7 @@ import {
   CustomerFeedback,
   Price,
   Feedback,
+  RoutePayment,
 } from "@data/types";
 import { payWindow } from "@helper_functions/payment";
 import { priceString } from "@helper_functions/priceString";
@@ -55,7 +56,7 @@ export default function Desktop({
       title="View Appointment"
     >
       <div className="grid grid-cols-3 gap-x-10 w-full">
-        <AppointmentCard status={appointment.status} />
+        <AppointmentCard status={appointment.status} id={appointment.id} />
         <div className="grid grid-cols-3 gap-2 w-full col-span-2">
           {appointment.scheduled.address ? (
             <SubComp
@@ -112,6 +113,9 @@ export default function Desktop({
           status={appointment.status}
           price={appointment.price}
           appointmentId={appointment.id}
+          customerPayment={appointment.payment}
+          mobileNumber={appointment.customer.mobileNumber}
+          name={`${appointment.customer.name}`}
         />
       </div>
       <SubUnderlinedHeader title="Major Details" />
@@ -385,10 +389,16 @@ function CheckPayment({
   price,
   status,
   appointmentId,
+  customerPayment,
+  mobileNumber,
+  name,
 }: {
   price: Price;
   status: AppointmentStatus;
   appointmentId: string;
+  customerPayment: RoutePayment;
+  name: string;
+  mobileNumber: string;
 }) {
   return (
     <CustomDialog
@@ -417,20 +427,13 @@ function CheckPayment({
       title="Payment Details"
       description="What happened to the advance payment?"
       footerJSX={
-        <Button
-          variant="success"
-          disabled={status !== AppointmentStatus.PAYMENT_PENDING}
-          onclick={async () => {
-            const paymentLink = await generatePaymentLinkAppointment(
-              appointmentId
-            );
-            if (paymentLink) {
-              payWindow({ url: paymentLink });
-            }
-          }}
-        >
-          {status === AppointmentStatus.PAYMENT_PENDING ? "Pay Now" : "Paid"}
-        </Button>
+        <Checkout
+          disabled={customerPayment.paid ? true : false}
+          mobileNumber={mobileNumber}
+          name={name}
+          orderId={customerPayment?.orderId || ""}
+          onCompletePayment={async (response) => window.location.reload()}
+        />
       }
     >
       <BookingBillInvoice bill={price.bookingBill} />

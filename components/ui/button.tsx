@@ -5,10 +5,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@lib/utils";
 import { State } from "@data/enums";
-import Loading from "@components/Loading";
+
+//smooth transition for button
 
 const buttonVariants = cva(
-  "inline-flex items-center w-full justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center w-full justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed disabled:ring-offset-background active:scale-95 transform-gpu duration-200 ease-in-out focus-visible:ring-primary",
   {
     variants: {
       variant: {
@@ -28,12 +29,14 @@ const buttonVariants = cva(
         info: "bg-info text-white hover:bg-info/90 hover:text-info-foreground",
         error:
           "bg-error text-white hover:bg-error/90 hover:text-error-foreground",
+        successOutline: "border border-success text-success",
       },
       size: {
         default: "h-11 px-4 py-2 w-full",
-        sm: "h-9 rounded-md px-3 text-sm",
+        sm: "h-9 rounded-md px-3 !text-sm",
         lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        icon: "h-10 !w-10",
+        xl: "h-14 rounded-md px-8",
       },
     },
     defaultVariants: {
@@ -59,19 +62,22 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
     return buttonState === State.LOADING ? (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          "cursor-wait opacity-50"
+        )}
         ref={ref}
         disabled={true}
         {...props}
       >
-        <Loading className="w-6 h-6" />
+        Loading...
       </Comp>
     ) : (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-        onClick={async (e: any) => {
+        onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
           if (props.onclick) {
             setButtonState(State.LOADING);
             await props.onclick(e);
@@ -80,6 +86,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             props.onClick?.(e);
           }
         }}
+        disabled={props.disabled}
       />
     );
   }

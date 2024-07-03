@@ -9,7 +9,13 @@ import { BiRupee } from "react-icons/bi";
 import { FcExpired } from "react-icons/fc";
 import Card from "./Card";
 
-export default function AppointmentCard({ status }: { status: string }) {
+export default function AppointmentCard({
+  status,
+  id,
+}: {
+  status: string;
+  id: string;
+}) {
   const displayStatus = (
     status.charAt(0).toUpperCase() + status.slice(1)
   ).replace(/_/g, " ");
@@ -23,6 +29,9 @@ export default function AppointmentCard({ status }: { status: string }) {
         You have not paid the advance yet. Please pay the advance to confirm the
         appointment.
       </p>
+      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
+        {id}
+      </p>
     </Card>
   ) : status === AppointmentStatus.SCHEDULED ? (
     <Card className="w-full flex flex-col !items-center justify-start !space-y-1">
@@ -32,6 +41,9 @@ export default function AppointmentCard({ status }: { status: string }) {
       </p>
       <p className="text-base text-center font-normal">
         The appointment is scheduled.
+      </p>
+      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
+        {id}
       </p>
     </Card>
   ) : status === AppointmentStatus.COMPLETED ? (
@@ -44,6 +56,9 @@ export default function AppointmentCard({ status }: { status: string }) {
         Hurrah! Your appointment is done. You can now provide feedback to your
         partner.
       </p>
+      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
+        {id}
+      </p>
     </Card>
   ) : status === AppointmentStatus.CANCELLED ? (
     <Card className="w-full flex flex-col !items-center justify-start !space-y-1">
@@ -55,6 +70,9 @@ export default function AppointmentCard({ status }: { status: string }) {
         You have cancelled the appointment. The advance payment has been
         credited to the partner.
       </p>
+      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
+        {id}
+      </p>
     </Card>
   ) : status === AppointmentStatus.DISPUTED ? (
     <Card className="w-full flex flex-col !items-center justify-start !space-y-1">
@@ -64,6 +82,9 @@ export default function AppointmentCard({ status }: { status: string }) {
       </p>
       <p className="text-base text-center font-normal">
         Your appointment is {status}
+      </p>
+      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
+        {id}
       </p>
     </Card>
   ) : status === AppointmentStatus.REFUNDED ? (
@@ -76,6 +97,9 @@ export default function AppointmentCard({ status }: { status: string }) {
         You have been refunded. Plase wait or contact support if you have not
         recieved the refund
       </p>
+      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
+        {id}
+      </p>
     </Card>
   ) : status === AppointmentStatus.EXPIRED ? (
     <Card className="w-full flex flex-col !items-center justify-start !space-y-1">
@@ -86,6 +110,9 @@ export default function AppointmentCard({ status }: { status: string }) {
       <p className="text-base text-center font-normal">
         You can ask the partner to reschedule or ignore the appointment
       </p>
+      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
+        {id}
+      </p>
     </Card>
   ) : (
     <Card className="w-full flex flex-col !items-center justify-start !space-y-1">
@@ -94,6 +121,9 @@ export default function AppointmentCard({ status }: { status: string }) {
         {displayStatus}
       </p>
       <p className="text-base font-normal">Your appointment is {status}</p>
+      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
+        {id}
+      </p>
     </Card>
   );
 }

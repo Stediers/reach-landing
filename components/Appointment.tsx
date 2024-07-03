@@ -116,7 +116,9 @@ export default function Appointment({
       <PriceComponent price={appointment.price} />
       <div className="flex flex-row justify-between items-center w-full space-x-2">
         <Button variant="default" asChild>
-          <Link href={`/appointments/${appointment.id}`}>View Details</Link>
+          <Link href={`/console/appointments/${appointment.id}`}>
+            View Details
+          </Link>
         </Button>
       </div>
     </Card>
