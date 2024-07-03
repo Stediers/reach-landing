@@ -417,7 +417,7 @@ export function ProfilePopup({
 
 function BoxDetail({ title, icon }: { title: string; icon: React.ReactNode }) {
   return (
-    <Card className="flex flex-col items-center justify-center w-full col-span-1 border-none outline-none">
+    <Card className="flex flex-col items-center justify-center w-full col-span-1 border-none outline-none bg-white !shadow-none">
       <CardHeader className="pt-4 pb-2">{icon}</CardHeader>
       <CardContent className="pb-3">
         <p className="text-base font-medium text-center">{title}</p>

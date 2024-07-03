@@ -97,70 +97,11 @@ export default function Desktop({
     : [];
 
   return (
-    <DesktopWrapper
-      className="flex flex-col items-start space-y-5 w-full"
-      title="My Appointments"
-    >
-      {/* <div className="flex flex-row space-x-5 w-full max-w-lg">
-        <TextInput
-          type="text"
-          placeholder="Search your bookings"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e)}
-        />
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger>
-            <Button variant="default">Filter</Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="min-w-[15rem]"
-            onClick={(e) => e.preventDefault()}
-          >
-            <DropdownMenuLabel className="font-medium text-lg">
-              {filter.length === 7
-                ? "Showing all bookings"
-                : "Showing selected"}
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              {Object.values(AppointmentStatus).map((status) => (
-                <DropdownMenuCheckboxItem
-                  key={status}
-                  checked={filter.includes(status)}
-                  className={`text-base ${
-                    filter.includes(status) ? "text-success" : ""
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (filter.includes(status)) {
-                      setFilter((prev) =>
-                        prev.filter((item) => item !== status)
-                      );
-                    } else {
-                      setFilter((prev) => [...prev, status]);
-                    }
-                  }}
-                >
-                  {status}
-                </DropdownMenuCheckboxItem>
-              ))}
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div> */}
-
+    <DesktopWrapper className="flex flex-col items-start space-y-5 w-full">
       {response.length == 0 ? (
         <div className="flex flex-col items-start justify-center space-y-3 w-full pt-20">
           <p className=" text-center font-medium text-lg">
-            You don&apos;t have any bookings yet. Learn more about how to get
-            leads{" "}
-            <Link
-              href="https://www.reachgig.com/blogs/mastering-the-art-of-gig-work"
-              className="text-primary underline underline-offset-4"
-              target="_blank"
-            >
-              Here
-            </Link>
+            You don&apos;t have any appointments yet
           </p>
         </div>
       ) : null}

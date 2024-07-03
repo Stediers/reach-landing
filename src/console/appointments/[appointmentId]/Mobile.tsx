@@ -1,8 +1,8 @@
-import { generatePaymentLinkAppointment } from "@api_functions/appointments/generate-payment-link-appointment";
 import { RaiseDisputeRequest } from "@api_functions/disputes/raise-dispute";
 import AppointmentCard from "@components/AppointmentCard";
 import { BookingBillInvoice } from "@components/Bill";
 import Card from "@components/Card";
+import Checkout from "@components/Checkout";
 import {
   CustomDrawer,
   ProfilePopup,
@@ -23,10 +23,10 @@ import {
   State,
 } from "@data/enums";
 import {
-  CustomerPayment,
   Feedback,
   FetchAppointmentResponse,
   Price,
+  RoutePayment,
 } from "@data/types";
 import { payWindow } from "@helper_functions/payment";
 import { priceString } from "@helper_functions/priceString";
@@ -62,9 +62,9 @@ export default function Mobile({
     <MobileWrapper
       className="flex items-center flex-col justify-start space-y-5"
       header="View Appointment"
-      backLink="/appointments"
+      backLink="/console/appointments"
     >
-      <AppointmentCard status={appointment.status} />
+      <AppointmentCard status={appointment.status} id={appointment.id} />
       <LineHeader title="Appointment Details" />
       <div className="grid grid-cols-2 gap-5 w-full">
         <SubComp
@@ -127,7 +127,9 @@ export default function Mobile({
             price={appointment.price}
             status={appointment.status}
             appointmentId={appointment.id}
-            customerPayment={appointment.customerPayment}
+            customerPayment={appointment.payment}
+            mobileNumber={appointment.customer.mobileNumber}
+            name={`${appointment.customer.name}`}
           />
         </div>
       )}
@@ -157,9 +159,6 @@ export default function Mobile({
         triggerJSX={<Setting title="Your Partner" subtitle="View Profile" />}
       />
       {appointment.status === AppointmentStatus.REFUNDED && <Refund />}
-      <p className="text-sm font-medium first-letter:capitalize w-full text-center">
-        {appointment.id}
-      </p>
     </MobileWrapper>
   );
 }
@@ -410,11 +409,15 @@ function CheckPayment({
   status,
   appointmentId,
   customerPayment,
+  name,
+  mobileNumber,
 }: {
   price: Price;
   status: AppointmentStatus;
   appointmentId: string;
-  customerPayment: CustomerPayment[];
+  customerPayment: RoutePayment;
+  name: string;
+  mobileNumber: string;
 }) {
   return status === AppointmentStatus.PAYMENT_PENDING ? (
     <CustomDrawer
@@ -438,37 +441,13 @@ function CheckPayment({
       description="What happened to the advance payment?"
       footerJSX={
         <div className="grid grid-cols-2 gap-2 w-full">
-          <Button
-            variant="success"
-            disabled={status !== AppointmentStatus.PAYMENT_PENDING}
-            onclick={async () => {
-              const paid = customerPayment.find(
-                (item) => item.status === PaymentStatus.PAID
-              );
-              if (paid) {
-                showSnackBar({
-                  message: "Payment already done",
-                  state: State.ERROR,
-                });
-                return;
-              }
-              const link = customerPayment.find(
-                (item) => item.status === PaymentStatus.PENDING
-              );
-              if (link) {
-                payWindow({ url: link.url });
-              } else {
-                const paymentLink = await generatePaymentLinkAppointment(
-                  appointmentId
-                );
-                if (paymentLink) {
-                  payWindow({ url: paymentLink });
-                }
-              }
-            }}
-          >
-            {status === AppointmentStatus.PAYMENT_PENDING ? "Pay Now" : "Paid"}
-          </Button>
+          <Checkout
+            disabled={customerPayment.paid ? true : false}
+            mobileNumber={mobileNumber}
+            name={name}
+            orderId={customerPayment?.orderId || ""}
+            onCompletePayment={async (response) => window.location.reload()}
+          />
           <DrawerClose id="close-drawer" className="w-full">
             <Button variant="outline">Close</Button>
           </DrawerClose>
@@ -547,7 +526,7 @@ function SubComp({ title, data }: { title: string; data: string }) {
       <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
         {title}
       </p>
-      <p className="text-base first-letter:capitalize">{data}</p>
+      <p className="text-base font-medium first-letter:capitalize">{data}</p>
     </div>
   );
 }

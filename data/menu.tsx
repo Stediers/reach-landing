@@ -52,6 +52,12 @@ export const consoleMenus: Menu[] = [
     icon: <Phone className="w-5 h-5 shrink-0" />,
     path: "/console/callbacks",
   },
+  {
+    title: "Appointments",
+    subtitle: "Manage your appointments",
+    icon: <FcBusinessman className="text-3xl" />,
+    path: "/console/appointments",
+  },
 ];
 
 export const userMenus: Menu[] = [
