@@ -9,6 +9,7 @@ import { useState } from "react";
 import Loading from "./Loading";
 import { openInNewTab } from "@helper_functions/newTab";
 import { Button } from "./ui/button";
+import { PhoneCallIcon } from "lucide-react";
 
 export function CallSetting({ mobileNumber }: { mobileNumber: string }) {
   return (
@@ -17,7 +18,7 @@ export function CallSetting({ mobileNumber }: { mobileNumber: string }) {
       size={"lg"}
       onClick={() => window.open(`tel:${mobileNumber}`, "_self")}
     >
-      Reach Me
+      Reach Me <PhoneCallIcon size={20} className="ml-4" />
     </Button>
   );
 }
