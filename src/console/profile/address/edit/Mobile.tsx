@@ -46,11 +46,11 @@ export default function Mobile({
       <LineHeader title="New Location" />
       <AddressNameInput
         addressName={addressName}
-        setAddressName={setAddressName}
+        onChange={(value) => setAddressName(value)}
       />
       <AddressInput
         location={location}
-        setLocation={setLocation}
+        onChange={(value) => setLocation(value)}
         title="New Location"
       />
       <Button

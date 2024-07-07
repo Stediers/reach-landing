@@ -50,11 +50,11 @@ export default function Desktop({
         <div className="flex flex-col items-center justify-center space-y-7 w-full">
           <AddressNameInput
             addressName={addressName}
-            setAddressName={setAddressName}
+            onChange={(value) => setAddressName(value)}
           />
           <AddressInput
             location={location}
-            setLocation={setLocation}
+            onChange={(value) => setLocation(value)}
             title="New Location"
           />
           <Button

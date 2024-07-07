@@ -97,7 +97,6 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
                 Callback Details
               </Button>
             }
-            scaleBackground={false}
             title="Callback Requested"
             description="Your callback request has been successfully sent to the partner. They will get back to you shortly."
             footerJSX={
@@ -206,7 +205,6 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
                 Enquire Now
               </Button>
             }
-            scaleBackground={false}
             title="Enquire Now"
             description="Let the partner know you are interested in their service. They will get back to you shortly."
             footerJSX={
@@ -270,7 +268,6 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
               </Button>
             }
             title="Login Required"
-            scaleBackground={false}
             description="This feature is only available to logged in users."
             footerJSX={
               <DrawerClose className="w-full" id="close-drawer" asChild>

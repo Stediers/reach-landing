@@ -61,8 +61,14 @@ export default function Desktop({
       title="Add Address"
     >
       <div className="flex flex-col items-start justify-start space-y-5 w-full">
-        <AddressNameInput addressName={name} setAddressName={setName} />
-        <AddressInput location={location} setLocation={setLocation} />
+        <AddressNameInput
+          addressName={name}
+          onChange={(value) => setName(value)}
+        />
+        <AddressInput
+          location={location}
+          onChange={(value) => setLocation(value)}
+        />
       </div>
       <div className="w-full h-[30rem] bg-background rounded-lg overflow-hidden">
         <div id="map" className="w-full h-full rounded-lg"></div>

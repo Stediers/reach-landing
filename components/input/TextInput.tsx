@@ -1,4 +1,5 @@
 import Loading from "@components/Loading";
+import { Badge } from "@components/ui/badge";
 import { State } from "@data/enums";
 import {
   AiFillCheckCircle,
@@ -26,9 +27,7 @@ export default function TextInput({
   maxLength,
   mandatory = false,
   loading,
-  icon = (
-    <AiFillPlusCircle className="absolute right-2 top-[0.65rem] text-2xl text-primary bg-white cursor-pointer" />
-  ),
+  icon = <Badge>Add</Badge>,
   preIcon,
 }: {
   title?: string;
@@ -71,13 +70,6 @@ export default function TextInput({
           )} */}
           {mandatory && <p className="text-error">*</p>}
         </div>
-        <p
-          className={`text-xs lg:text-sm text-error mt-1 text-ellipsis overflow-hidden whitespace-nowrap ${
-            errorText ? "" : "hidden"
-          }`}
-        >
-          {errorText}
-        </p>
       </div>
       <div className="relative w-full">
         {preIcon && (
@@ -105,7 +97,7 @@ export default function TextInput({
           className={`w-full text-base border-[1px] border-text rounded-md ${
             value ? "pr-8" : ""
           } p-[0.65rem] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none ${errorText} ${
-            disabled ? "bg-gray" : "bg-white"
+            disabled ? "bg-gray-200" : "bg-white"
           } ${preIcon ? "pl-10" : "pl-3"}`}
           disabled={disabled}
           onKeyDown={onKeyDown}
@@ -129,6 +121,13 @@ export default function TextInput({
           </div>
         )}
       </div>
+      <p
+        className={`text-sm lg:text-sm text-error ml-1 pt-1 text-ellipsis overflow-hidden whitespace-nowrap ${
+          errorText ? "" : "hidden"
+        }`}
+      >
+        {errorText}
+      </p>
     </div>
   );
 }

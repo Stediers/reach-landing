@@ -1,8 +1,10 @@
+import { attachAddressAppointment } from "@api_functions/appointments/attach-address-appointment";
 import { RaiseDisputeRequest } from "@api_functions/disputes/raise-dispute";
 import AppointmentCard from "@components/AppointmentCard";
 import { BookingBillInvoice } from "@components/Bill";
 import Card from "@components/Card";
 import Checkout from "@components/Checkout";
+import { CustomSheet } from "@components/CustomSheet";
 import {
   CustomDrawer,
   ProfilePopup,
@@ -10,11 +12,13 @@ import {
 } from "@components/DrawerPopup";
 import LineHeader from "@components/LineHeader";
 import Setting from "@components/Setting";
+import AddressInput, { AddressNameInput } from "@components/input/AddressInput";
 import RatingInput from "@components/input/RatingInput";
 import TextArea from "@components/input/TextArea";
 import { showSnackBar } from "@components/notifications/Snackbar";
 import { Button } from "@components/ui/button";
 import { DrawerClose } from "@components/ui/drawer";
+import { SheetClose } from "@components/ui/sheet";
 import {
   AppointmentStatus,
   DisputeStatus,
@@ -23,13 +27,16 @@ import {
   State,
 } from "@data/enums";
 import {
+  Address,
   Feedback,
   FetchAppointmentResponse,
+  LocationAttributes,
   Price,
   RoutePayment,
 } from "@data/types";
 import { payWindow } from "@helper_functions/payment";
 import { priceString } from "@helper_functions/priceString";
+import verifyLocation from "@helper_functions/verifyLocation";
 import MobileWrapper from "@wrapper/responsive/MobileWrapper";
 import { Calendar } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -49,6 +56,8 @@ export default function Mobile({
   setRaiseDisputeRequest,
   raiseDispute,
   rateAppointment,
+  address,
+  setAddress,
 }: {
   partnerFeedback: Feedback;
   setPartnerFeedback: Dispatch<SetStateAction<Feedback>>;
@@ -57,6 +66,8 @@ export default function Mobile({
   setRaiseDisputeRequest: Dispatch<SetStateAction<RaiseDisputeRequest>>;
   raiseDispute: () => Promise<void>;
   rateAppointment: () => Promise<void>;
+  address: LocationAttributes | null;
+  setAddress: Dispatch<SetStateAction<LocationAttributes | null>>;
 }) {
   return (
     <MobileWrapper
@@ -100,6 +111,17 @@ export default function Mobile({
       {appointment.status !== AppointmentStatus.EXPIRED && (
         <div className="flex flex-col space-y-5 w-full">
           <LineHeader title="Actions" />
+          {appointment.service.serviceType === ServiceType.OFFLINE &&
+            !appointment.scheduled.address && (
+              <UpdateAddressDrawer
+                address={address}
+                setAddress={setAddress}
+                appointmentId={appointment.id}
+              />
+            )}
+          {/* {appointment.status === AppointmentStatus.PAYMENT_PENDING && (
+            <CancelAppointmentButton />
+          )} */}
           <RatingDrawer
             partnerFeedback={partnerFeedback}
             setPartnerFeedback={setPartnerFeedback}
@@ -160,6 +182,54 @@ export default function Mobile({
       />
       {appointment.status === AppointmentStatus.REFUNDED && <Refund />}
     </MobileWrapper>
+  );
+}
+
+function UpdateAddressDrawer({
+  address,
+  setAddress,
+  appointmentId,
+}: {
+  address: LocationAttributes | null;
+  setAddress: Dispatch<SetStateAction<LocationAttributes | null>>;
+  appointmentId: string;
+}) {
+  return (
+    <CustomSheet
+      triggerJSX={<Setting title="Update Address" subtitle="Tap to update" />}
+      title="Update Address"
+      description="Update the address to help the partner reach you"
+      footerJSX={
+        <div className="grid grid-cols-2 gap-2 w-full">
+          <Button
+            variant="success"
+            disabled={!address || !verifyLocation(address)}
+            onclick={async () => {
+              if (!address) {
+                return;
+              } else {
+                await attachAddressAppointment({
+                  address: address,
+                  appointmentId: appointmentId,
+                });
+
+                window.location.reload();
+              }
+            }}
+          >
+            Update
+          </Button>
+          <SheetClose id="close-drawer" className="w-full">
+            <Button variant="outline">Close</Button>
+          </SheetClose>
+        </div>
+      }
+    >
+      <AddressInput
+        location={address}
+        onChange={(value: LocationAttributes) => setAddress(value)}
+      />
+    </CustomSheet>
   );
 }
 
@@ -502,9 +572,7 @@ function CancelAppointmentButton() {
   return (
     <CustomDrawer
       triggerJSX={
-        <Button variant="link" className="!text-error">
-          Cancel Appointment
-        </Button>
+        <Setting title="Cancel Appointment" subtitle="Tap to cancel" />
       }
       title="Cancel Appointment"
       description="Are you sure you want to cancel this appointment?"

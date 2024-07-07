@@ -30,8 +30,14 @@ export default function Mobile({
       className="flex flex-col items-center justify-start space-y-5"
       header="Add Address"
     >
-      <AddressNameInput addressName={name} setAddressName={setName} />
-      <AddressInput location={location} setLocation={setLocation} />
+      <AddressNameInput
+        addressName={name}
+        onChange={(value) => setName(value)}
+      />
+      <AddressInput
+        location={location}
+        onChange={(value) => setLocation(value)}
+      />
       <Button
         variant="success"
         onclick={async () => {

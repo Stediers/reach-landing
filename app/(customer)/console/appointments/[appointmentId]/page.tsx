@@ -1,9 +1,16 @@
 "use client";
-import { AppointmentStatus, DisputeStatus, State } from "@data/enums";
 import {
+  AddressType,
+  AppointmentStatus,
+  DisputeStatus,
+  State,
+} from "@data/enums";
+import {
+  Address,
   CustomerFeedback,
   Feedback,
   FetchAppointmentResponse,
+  LocationAttributes,
 } from "@data/types";
 import Mobile from "@src/console/appointments/[appointmentId]/Mobile";
 import Desktop from "@src/console/appointments/[appointmentId]/Desktop";
@@ -31,6 +38,9 @@ export default function Page({
     userBehaviourRating: 0,
     review: "",
   });
+
+  const [address, setAddress] = useState<LocationAttributes | null>(null);
+
   useEffect(() => {
     setPageState(State.LOADING);
     fetchAppointment(params.appointmentId).then((res) => {
@@ -39,6 +49,9 @@ export default function Page({
         setResponse(res);
         if (res.completed && res.completed.partnerFeedback) {
           setPartnerFeedback(res.completed.partnerFeedback);
+        }
+        if (res.scheduled.address) {
+          setAddress(res.scheduled.address);
         }
       }
       setPageState(State.SUCCESS);
@@ -109,6 +122,8 @@ export default function Page({
                 partnerFeedback,
               })
             }
+            address={address}
+            setAddress={setAddress}
           />
         )
       }

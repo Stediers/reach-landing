@@ -432,24 +432,25 @@ export function CustomDrawer({
   footerJSX,
   children,
   description,
-  triggerClassName,
-  scaleBackground = true,
+  onInteractOutside,
 }: {
   title: string;
   triggerJSX: React.ReactNode;
   footerJSX: React.ReactNode;
   children: React.ReactNode;
   description?: string;
-  triggerClassName?: string;
-  scaleBackground?: boolean;
+  onInteractOutside?: () => void;
 }) {
   return (
-    <Drawer closeThreshold={0.5} shouldScaleBackground={scaleBackground}>
-      <DrawerTrigger asChild className={triggerClassName}>
+    <Drawer closeThreshold={0.5} shouldScaleBackground>
+      <DrawerTrigger asChild>
         <div className="w-full flex justify-center">{triggerJSX}</div>
       </DrawerTrigger>
-      <DrawerContent className="max-h-[80vh] w-full">
-        <DrawerHeader className="flex flex-col items-start text-left">
+      <DrawerContent
+        className="max-h-[80vh] w-full"
+        onInteractOutside={onInteractOutside}
+      >
+        <DrawerHeader className="flex flex-col items-start text-left  border-b !pb-3">
           <DrawerTitle className="text-xl font-medium first-letter:capitalize">
             {title}
           </DrawerTitle>

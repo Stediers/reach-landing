@@ -21,11 +21,11 @@ import { MdClose } from "react-icons/md";
 
 export function CustomSheet({
   title,
+  description,
   triggerJSX,
   footerJSX,
   children,
-  description,
-  canClose,
+  canClose = true,
 }: {
   title: string;
   triggerJSX: React.ReactNode;
@@ -39,28 +39,26 @@ export function CustomSheet({
       <SheetTrigger asChild>
         <div className="w-full">{triggerJSX}</div>
       </SheetTrigger>
-      <SheetContent className="flex flex-col items-start justify-between w-full space-y-5 hide-scrollbar">
-        <div className="flex flex-col items-start justify-start w-full !space-y-5 overflow-y-scroll hide-scrollbar">
-          <SheetHeader className="w-full flex flex-col items-start justify-start space-y-1">
-            <div className="flex flex-row items-center justify-between space-x-2 w-full">
-              <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2">
-                {title}
-              </SheetTitle>
-              {canClose && (
-                <SheetClose>
-                  <MdClose className="w-6 h-6" />
-                </SheetClose>
-              )}
-            </div>
+      <SheetContent className="flex flex-col items-start justify-between w-full space-y-5 !p-0 overflow-y-scroll hide-scrollbar">
+        <div className="flex flex-col items-start justify-start w-full space-y-0">
+          <SheetHeader className="w-full flex flex-col !items-start justify-start space-y-3 border-b bg-white p-5">
+            <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2">
+              {title}
+            </SheetTitle>
             {description && (
-              <SheetDescription className="text-base font-normal">
+              <SheetDescription className="text-base text-left">
                 {description}
               </SheetDescription>
             )}
+            {canClose && (
+              <SheetClose>
+                <MdClose className="w-6 h-6" />
+              </SheetClose>
+            )}
           </SheetHeader>
-          {children}
+          <div className="p-5 w-full">{children}</div>
         </div>
-        <SheetFooter className="w-full sticky bottom-5">
+        <SheetFooter className="w-full px-5 sticky bottom-0 bg-white border-t py-4">
           <div className="flex flex-col items-start justify-start space-y-5 w-full">
             {footerJSX}
           </div>

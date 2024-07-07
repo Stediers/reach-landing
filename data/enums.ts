@@ -260,6 +260,7 @@ export enum AddressType {
   HOME = "home",
   OFFICE = "office",
   APARTMENT = "apartment",
+  TEMP = "temp",
 }
 
 export enum IndianStates {

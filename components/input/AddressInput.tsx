@@ -1,10 +1,12 @@
+import Checker from "@components/Checker";
 import TextInput from "./TextInput";
 import { LocationAttributes } from "@data/types";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useEffect, useState } from "react";
 import { AddressName, AddressType, State } from "@data/enums";
 import { showSnackBar } from "@components/notifications/Snackbar";
-import { motion } from "framer-motion";
+import LineHeader from "@components/LineHeader";
+import { AnimatePresence, motion } from "framer-motion";
 import TextInputWithDropdown from "./TextInputWithDropdown";
 import { City, State as StateType, Country, ICity } from "country-state-city";
 import Chip from "@components/Chip";
@@ -13,11 +15,11 @@ import devLog from "@helper_functions/devLog";
 
 export default function AddressInput({
   location,
-  setLocation,
+  onChange,
   title,
 }: {
   location: LocationAttributes | null;
-  setLocation: React.Dispatch<React.SetStateAction<LocationAttributes | null>>;
+  onChange: (value: LocationAttributes) => void;
   title?: string;
 }) {
   const indiaCode = Country.getCountryByCode("IN");
@@ -160,7 +162,7 @@ export default function AddressInput({
           <Predictions
             predictions={predictions}
             setLocationQuery={setLocationQuery}
-            setLocation={setLocation}
+            onChange={onChange}
             setPredictions={setPredictions}
             geocoder={geocoder}
             setCanChangeState={setCanChangeState}
@@ -171,7 +173,7 @@ export default function AddressInput({
       )}
       {location !== null && (
         <div className="grid grid-cols-2 gap-4 w-full">
-          <div className="col-span-2 lg:col-span-1">
+          <div className="col-span-2 lg:col-span-2">
             <TextInput
               title="Primary Details"
               errorText={
@@ -184,27 +186,39 @@ export default function AddressInput({
               placeholder="Eg. Flat 404, Floor 4 OR 404, 4 etc.."
               value={location ? location.addressLine1 : ""}
               onChange={(value) => {
-                setLocation((prev) => ({
+                // setLocation((prev) => ({
+                //   addressLine1: value,
+                //   addressLine2: prev ? prev.addressLine2 : "",
+                //   city: prev ? prev.city : "",
+                //   state: prev ? prev.state : "",
+                //   country: prev ? prev.country : "",
+                //   lat: prev ? prev.lat : 0,
+                //   lng: prev ? prev.lng : 0,
+                //   postalCode: prev ? prev.postalCode : "",
+                //   landmark:
+                //     prev && prev.landmark && prev.landmark.length > 0
+                //       ? prev.landmark
+                //       : null,
+                //   addressType: prev ? prev.addressType : AddressType.APARTMENT,
+                // }));
+                onChange({
                   addressLine1: value,
-                  addressLine2: prev ? prev.addressLine2 : "",
-                  city: prev ? prev.city : "",
-                  state: prev ? prev.state : "",
-                  country: prev ? prev.country : "",
-                  lat: prev ? prev.lat : 0,
-                  lng: prev ? prev.lng : 0,
-                  postalCode: prev ? prev.postalCode : "",
-                  landmark:
-                    prev && prev.landmark && prev.landmark.length > 0
-                      ? prev.landmark
-                      : null,
-                  addressType: prev ? prev.addressType : AddressType.APARTMENT,
-                }));
+                  addressLine2: location.addressLine2,
+                  city: location.city,
+                  state: location.state,
+                  country: location.country,
+                  lat: location.lat,
+                  lng: location.lng,
+                  postalCode: location.postalCode,
+                  landmark: location.landmark,
+                  addressType: location.addressType,
+                });
               }}
             />
           </div>
           <TextInputWithDropdown
+            value=""
             title="State"
-            value={location.state}
             disabled={!canChangeState}
             resetAfterSelect={false}
             placeholder="Eg. Tamil Nadu"
@@ -219,46 +233,70 @@ export default function AddressInput({
                 state.isoCode
               );
               setCities(cities);
-              setLocation((prev) => ({
-                addressLine1: prev ? prev.addressLine1 : "",
-                addressLine2: prev ? prev.addressLine2 : "",
-                city: prev ? prev.city : "",
+              // setLocation((prev) => ({
+              //   addressLine1: prev ? prev.addressLine1 : "",
+              //   addressLine2: prev ? prev.addressLine2 : "",
+              //   city: prev ? prev.city : "",
+              //   state: value,
+              //   country: prev ? prev.country : "",
+              //   lat: prev ? prev.lat : 0,
+              //   lng: prev ? prev.lng : 0,
+              //   addressType: prev ? prev.addressType : AddressType.APARTMENT,
+              //   landmark:
+              //     prev && prev.landmark && prev.landmark.length > 0
+              //       ? prev.landmark
+              //       : null,
+              //   postalCode: prev ? prev.postalCode : "",
+              // }));
+              onChange({
+                addressLine1: location.addressLine1,
+                addressLine2: location.addressLine2,
+                city: location.city,
                 state: value,
-                country: prev ? prev.country : "",
-                lat: prev ? prev.lat : 0,
-                lng: prev ? prev.lng : 0,
-                addressType: prev ? prev.addressType : AddressType.APARTMENT,
-                landmark:
-                  prev && prev.landmark && prev.landmark.length > 0
-                    ? prev.landmark
-                    : null,
-                postalCode: prev ? prev.postalCode : "",
-              }));
+                country: location.country,
+                lat: location.lat,
+                lng: location.lng,
+                addressType: location.addressType,
+                landmark: location.landmark,
+                postalCode: location.postalCode,
+              });
             }}
           />
           <TextInputWithDropdown
+            value=""
             title="City"
             disabled={!canChangeCity}
             resetAfterSelect={false}
-            value={location.city}
             placeholder="Eg. Chennai"
             options={cities.map((city) => city.name)}
             onSelect={(value) => {
-              setLocation((prev) => ({
-                addressLine1: prev ? prev.addressLine1 : "",
-                addressLine2: prev ? prev.addressLine2 : "",
+              // setLocation((prev) => ({
+              //   addressLine1: prev ? prev.addressLine1 : "",
+              //   addressLine2: prev ? prev.addressLine2 : "",
+              //   city: value,
+              //   state: prev ? prev.state : "",
+              //   country: prev ? prev.country : "",
+              //   lat: prev ? prev.lat : 0,
+              //   lng: prev ? prev.lng : 0,
+              //   addressType: prev ? prev.addressType : AddressType.APARTMENT,
+              //   landmark:
+              //     prev && prev.landmark && prev.landmark.length > 0
+              //       ? prev.landmark
+              //       : null,
+              //   postalCode: prev ? prev.postalCode : "",
+              // }));
+              onChange({
+                addressLine1: location.addressLine1,
+                addressLine2: location.addressLine2,
                 city: value,
-                state: prev ? prev.state : "",
-                country: prev ? prev.country : "",
-                lat: prev ? prev.lat : 0,
-                lng: prev ? prev.lng : 0,
-                addressType: prev ? prev.addressType : AddressType.APARTMENT,
-                landmark:
-                  prev && prev.landmark && prev.landmark.length > 0
-                    ? prev.landmark
-                    : null,
-                postalCode: prev ? prev.postalCode : "",
-              }));
+                state: location.state,
+                country: location.country,
+                lat: location.lat,
+                lng: location.lng,
+                addressType: location.addressType,
+                landmark: location.landmark,
+                postalCode: location.postalCode,
+              });
             }}
           />
           <TextInput
@@ -267,22 +305,45 @@ export default function AddressInput({
             placeholder="Eg. 600096"
             disabled={!canChangePostalCode}
             value={location.postalCode}
+            errorText={
+              location
+                ? location.postalCode.length === 0
+                  ? "Postal code cannot be empty"
+                  : location.postalCode.length < 6
+                  ? "Postal code cannot be less than 6 characters"
+                  : location.postalCode.length > 6
+                  ? "Postal code cannot be more than 6 characters"
+                  : ""
+                : "Postal code cannot be empty"
+            }
             onChange={(value) => {
-              setLocation((prev) => ({
-                addressLine1: prev ? prev.addressLine1 : "",
-                addressLine2: prev ? prev.addressLine2 : "",
-                city: prev ? prev.city : "",
-                state: prev ? prev.state : "",
-                country: prev ? prev.country : "",
-                lat: prev ? prev.lat : 0,
-                lng: prev ? prev.lng : 0,
-                addressType: prev ? prev.addressType : AddressType.APARTMENT,
-                landmark:
-                  prev && prev.landmark && prev.landmark.length > 0
-                    ? prev.landmark
-                    : null,
+              // setLocation((prev) => ({
+              //   addressLine1: prev ? prev.addressLine1 : "",
+              //   addressLine2: prev ? prev.addressLine2 : "",
+              //   city: prev ? prev.city : "",
+              //   state: prev ? prev.state : "",
+              //   country: prev ? prev.country : "",
+              //   lat: prev ? prev.lat : 0,
+              //   lng: prev ? prev.lng : 0,
+              //   addressType: prev ? prev.addressType : AddressType.APARTMENT,
+              //   landmark:
+              //     prev && prev.landmark && prev.landmark.length > 0
+              //       ? prev.landmark
+              //       : null,
+              //   postalCode: value,
+              // }));
+              onChange({
+                addressLine1: location.addressLine1,
+                addressLine2: location.addressLine2,
+                city: location.city,
+                state: location.state,
+                country: location.country,
+                lat: location.lat,
+                lng: location.lng,
+                addressType: location.addressType,
+                landmark: location.landmark,
                 postalCode: value,
-              }));
+              });
             }}
           />
         </div>
@@ -293,79 +354,13 @@ export default function AddressInput({
 }
 export function AddressNameInput({
   addressName,
-  setAddressName,
+  onChange,
 }: {
   addressName: string;
-  setAddressName: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (value: string) => void;
 }) {
   return (
     <div className="flex flex-col items-start justify-center space-y-3 w-full">
-      {/* <RadioInput
-        options={[
-          {
-            icon: (
-              <AiFillHome
-                className={`text-2xl ${
-                  addressName === AddressName.HOME ? "text-white" : ""
-                }`}
-              />
-            ),
-            title:
-              AddressName.HOME.charAt(0).toUpperCase() +
-              AddressName.HOME.slice(1),
-            textColor: addressName === AddressName.HOME ? "text-white" : "",
-            className: addressName === AddressName.HOME ? "bg-info" : "",
-            onClick: () => {
-              setAddressName(AddressName.HOME);
-            },
-          },
-          {
-            icon: (
-              <MdWork
-                className={`text-2xl ${
-                  addressName === AddressName.OFFICE ? "text-white" : ""
-                }`}
-              />
-            ),
-            title:
-              AddressName.OFFICE.charAt(0).toUpperCase() +
-              AddressName.OFFICE.slice(1),
-            textColor: addressName === AddressName.OFFICE ? "text-white" : "",
-            className: addressName === AddressName.OFFICE ? "bg-info" : "",
-            onClick: () => {
-              setAddressName(AddressName.OFFICE);
-            },
-          },
-          {
-            icon: (
-              <MdApartment
-                className={`text-2xl ${
-                  addressName !== AddressName.OFFICE &&
-                  addressName !== AddressName.HOME
-                    ? "text-white"
-                    : ""
-                }`}
-              />
-            ),
-            title:
-              AddressName.OTHER.charAt(0).toUpperCase() +
-              AddressName.OTHER.slice(1),
-            textColor:
-              addressName !== AddressName.HOME &&
-              addressName !== AddressName.OFFICE
-                ? "text-white"
-                : "",
-            className:
-              addressName !== AddressName.HOME &&
-              addressName !== AddressName.OFFICE
-                ? "bg-info"
-                : "",
-            onClick: () => {
-              setAddressName("");
-            },
-          },
-        ]}
-      /> */}
       <motion.div
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: 1, height: "auto" }}
@@ -377,7 +372,8 @@ export function AddressNameInput({
           placeholder="Name your address"
           value={addressName}
           onChange={(value) =>
-            setAddressName(value.charAt(0).toUpperCase() + value.slice(1))
+            // setAddressName(value.charAt(0).toUpperCase() + value.slice(1))
+            onChange(value)
           }
           errorText={
             addressName.length === 0
@@ -398,12 +394,13 @@ export function AddressNameInput({
               exit={{ opacity: 0, y: -10 }}
               className="flex flex-row items-center justify-start space-x-1"
               onClick={() => {
-                setAddressName(name.charAt(0).toUpperCase() + name.slice(1));
+                // setAddressName(name.charAt(0).toUpperCase() + name.slice(1));
+                onChange(name.charAt(0).toUpperCase() + name.slice(1));
               }}
             >
               <Chip
                 title={name.charAt(0).toUpperCase() + name.slice(1)}
-                className={`${
+                className={`hover:cursor-pointer ${
                   addressName === name.charAt(0).toUpperCase() + name.slice(1)
                     ? "bg-info text-white"
                     : "border-text border"
@@ -421,7 +418,7 @@ export function AddressNameInput({
 function Predictions({
   predictions,
   setLocationQuery,
-  setLocation,
+  onChange,
   setPredictions,
   geocoder,
   setCanChangeState,
@@ -430,7 +427,7 @@ function Predictions({
 }: {
   predictions: google.maps.places.AutocompletePrediction[];
   setLocationQuery: React.Dispatch<React.SetStateAction<string>>;
-  setLocation: React.Dispatch<React.SetStateAction<LocationAttributes | null>>;
+  onChange: (value: LocationAttributes) => void;
   setPredictions: React.Dispatch<
     React.SetStateAction<google.maps.places.AutocompletePrediction[]>
   >;
@@ -516,23 +513,35 @@ function Predictions({
 
                   setLocationQuery(option.description);
 
-                  setLocation((prev) => ({
-                    addressLine1: prev ? prev.addressLine1 : "",
+                  // setLocation((prev) => ({
+                  //   addressLine1: prev ? prev.addressLine1 : "",
+                  //   addressLine2: option.description,
+                  //   city: city ? city : "",
+                  //   state: state ? state : "",
+                  //   country: country ? country : "",
+                  //   lat: lat,
+                  //   lng: lng,
+                  //   addressType: prev
+                  //     ? prev.addressType
+                  //     : AddressType.APARTMENT,
+                  //   landmark:
+                  //     prev && prev.landmark && prev.landmark.length > 0
+                  //       ? prev.landmark
+                  //       : null,
+                  //   postalCode: postalCode ? postalCode : "",
+                  // }));
+                  onChange({
+                    addressLine1: "",
                     addressLine2: option.description,
                     city: city ? city : "",
                     state: state ? state : "",
                     country: country ? country : "",
                     lat: lat,
                     lng: lng,
-                    addressType: prev
-                      ? prev.addressType
-                      : AddressType.APARTMENT,
-                    landmark:
-                      prev && prev.landmark && prev.landmark.length > 0
-                        ? prev.landmark
-                        : null,
+                    addressType: AddressType.APARTMENT,
+                    landmark: null,
                     postalCode: postalCode ? postalCode : "",
-                  }));
+                  });
                 }
               }
             );
