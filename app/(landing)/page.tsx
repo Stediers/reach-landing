@@ -109,25 +109,25 @@ function YourOwnProfile() {
         <div className="lg:grid grid-cols-1 lg:grid-cols-2 gap-10 w-full justify-between hidden">
           <FeatureCard
             heading="Personalized Profile"
-            icon={<BookIcon className="w-14 h-14 lg:w-20 lg:h-20" />}
+            icon={<BookIcon className="w-14 h-14 lg:w-16 lg:h-16" />}
             description="Create a personalized profile that showcases your skills and experience."
             className="bg-white text-text lg:p-5 rounded-2xl"
           />
           <FeatureCard
             heading="Lead Generation"
-            icon={<Flower className="w-14 h-14 lg:w-20 lg:h-20" />}
+            icon={<Flower className="w-14 h-14 lg:w-16 lg:h-16" />}
             description="Get leads from customers looking for your services."
             className="bg-white text-text lg:p-5 rounded-2xl"
           />
           <FeatureCard
             heading="Secure Payments"
-            icon={<BiRupee className="w-14 h-14 lg:w-20 lg:h-20" />}
+            icon={<BiRupee className="w-14 h-14 lg:w-16 lg:h-16" />}
             description="Get paid securely through our platform."
             className="bg-white text-text lg:p-5 rounded-2xl"
           />
           <FeatureCard
             heading="Proof of Appointment"
-            icon={<MessageSquareQuote className="w-14 h-14 lg:w-20 lg:h-20" />}
+            icon={<MessageSquareQuote className="w-14 h-14 lg:w-16 lg:h-16" />}
             description="Get proof of appointment to ensure your payment."
             className="bg-white text-text lg:p-5 rounded-2xl"
           />
@@ -185,7 +185,7 @@ function BecomePartner() {
       }
       className="lg:bg-[#0F1117] lg:text-white lg:py-10"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full lg:max-w-7xl">
         <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full relative">
           <Image
             alt="Hero"
@@ -310,32 +310,32 @@ function TheSafeWay() {
         <FeatureCard
           heading="Request Callback"
           description="Ask the service provider to call you back after providing your details."
-          icon={<BookIcon className="w-14 h-14 lg:w-20 lg:h-20" />}
+          icon={<BookIcon className="w-14 h-14 lg:w-16 lg:h-16" />}
         />
         <FeatureCard
           heading="Schedule Appointment"
           description="The partner will schedule an appointment with you."
-          icon={<Flower className="w-14 h-14 lg:w-20 lg:h-20" />}
+          icon={<Flower className="w-14 h-14 lg:w-16 lg:h-16" />}
         />
         <FeatureCard
           heading="Pay Advance"
           description="Pay the advance amount to confirm the appointment."
-          icon={<BiRupee className="w-14 h-14 lg:w-20 lg:h-20" />}
+          icon={<BiRupee className="w-14 h-14 lg:w-16 lg:h-16" />}
         />
         <FeatureCard
           heading="Get the Job Done"
           description="Share the completion OTP once the job is done."
-          icon={<MessageSquareQuote className="w-14 h-14 lg:w-20 lg:h-20" />}
+          icon={<MessageSquareQuote className="w-14 h-14 lg:w-16 lg:h-16" />}
         />
         <FeatureCard
           heading="Pay Remaining Amount"
           description="Settle the remaining amount after the job is done."
-          icon={<Percent className="w-14 h-14 lg:w-20 lg:h-20" />}
+          icon={<Percent className="w-14 h-14 lg:w-16 lg:h-16" />}
         />
         <FeatureCard
           heading="Review"
           description="Provide feedback for your experience anonymously."
-          icon={<BsShieldCheck className="w-14 h-14 lg:w-20 lg:h-20" />}
+          icon={<BsShieldCheck className="w-14 h-14 lg:w-16 lg:h-16" />}
         />
       </div>
     </HeaderWrapper>
@@ -365,7 +365,8 @@ function Pricing() {
         />
         <PricingCard
           title="Basic"
-          description="For those who want to try out the platform."
+          description="For those who want to use the platform occasionally."
+          capped={800}
           price={20}
           features={[
             "Everything in Free",
@@ -403,7 +404,7 @@ function PricingCard({
   price,
   features,
   className,
-  capped = 800,
+  capped,
 }: {
   title: string;
   description: string;
@@ -418,18 +419,21 @@ function PricingCard({
     >
       <div className="flex flex-col items-start justify-start h-full space-y-10">
         <div className="flex flex-col items-start justify-start space-y-5">
+          <p className="text-base font-medium">Charged to your Clients</p>
           <h3 className="text-3xl font-medium">{title}</h3>
           <p className="text-lg">{description}</p>
           <div className="flex flex-col items-start justify-start space-y-5">
             <p className="text-3xl font-medium w-full flex flex-row space-x-2 items-center">
               <span>{price}</span>
               <Percent size={20} />
-              <span className="text-lg font-normal">Commission</span>
+              <span className="text-lg font-normal">Advance</span>
             </p>
-            <p className="text-lg font-normal">
-              Capped at{" "}
-              <span className="text-success font-medium">₹{capped}</span>
-            </p>
+            {capped && (
+              <p className="text-lg font-normal">
+                Capped at{" "}
+                <span className="text-success font-medium">₹{capped}</span>
+              </p>
+            )}
           </div>
         </div>
 
