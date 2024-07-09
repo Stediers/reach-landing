@@ -104,7 +104,15 @@ function DesktopNav({ path }: { path: string }) {
         </NavigationMenu>
         <div className="grid grid-cols-2 gap-10">
           <Button asChild variant="success">
-            <Link href="/partner">Become a Partner</Link>
+            <Link
+              href="https://partner.reachgig.com/user/sign-in"
+              className="w-full"
+              passHref
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Become a Partner
+            </Link>
           </Button>
           <Button variant="outline" size="default" className="text-base">
             <Link href="/explore">Find a Partner</Link>
@@ -131,6 +139,17 @@ function MobileNav({ path }: { path: string }) {
         </div>
       </Link>
       <div className="xl:hidden flex items-center space-x-5 self-end">
+        <Button asChild variant="link">
+          <Link
+            href="https://partner.reachgig.com/user/sign-in"
+            className="w-full text-success"
+            passHref
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Join Us
+          </Link>
+        </Button>
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" className="w-fit">
