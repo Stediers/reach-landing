@@ -41,17 +41,6 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20">
-      <Hero>
-        <div className="flex flex-col items-center justify-center space-y-5 text-white">
-          <BookAudioIcon className="w-20 h-20 text-primary" />
-          <h1 className="lg:text-6xl text-4xl font-semibold text-center">
-            Learn with ReachGig
-          </h1>
-          <p className="lg:text-2xl text-lg text-center">
-            Get the latest news, updates and tips on ReachGig!
-          </p>
-        </div>
-      </Hero>
       <HeaderWrapper
         title={
           <span className="!leading-snug">

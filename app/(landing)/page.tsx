@@ -13,6 +13,7 @@ import {
   MessageSquareQuote,
   Percent,
   Search,
+  UserPlus,
 } from "lucide-react";
 import ImageComponent from "@components/ImageComponent";
 import ComponentWrapper from "@wrapper/ComponentWrapper";
@@ -32,6 +33,7 @@ import SwitchText from "@components/landing/SwitchText";
 import { NumberCircle } from "@components/landing/NumberCircle";
 import SearchInput from "@components/landing/Search";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
+import SubHeadingWrapper from "@wrapper/SubHeadingWrapper";
 
 export const metadata: Metadata = {
   title: "ReachGig",
@@ -65,7 +67,9 @@ export default function Main() {
       <Hero />
       <TheSafeWay />
       <YourOwnProfile />
-      <BecomePartner />
+      <div hidden className="lg:hidden block">
+        <BecomePartner />
+      </div>
       <Pricing />
       <BestPartners />
     </div>
@@ -90,7 +94,7 @@ function YourOwnProfile() {
           muted
           playsInline
           hidden
-          className="lg:w-[25rem] lg:block mr-10 shrink-0 lg:h-full w-full h-[30rem] overflow-hidden !bg-transparent hidden"
+          className="lg:w-[20rem] lg:block mr-10 shrink-0 lg:h-full w-full h-[30rem] overflow-hidden !bg-transparent hidden"
         >
           <source src="/videos/landing-video-1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -106,31 +110,66 @@ function YourOwnProfile() {
           <source src="/videos/landing-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="lg:grid grid-cols-1 lg:grid-cols-2 gap-10 w-full justify-between hidden">
-          <FeatureCard
-            heading="Personalized Profile"
-            icon={<BookIcon className="w-14 h-14 lg:w-16 lg:h-16" />}
-            description="Create a personalized profile that showcases your skills and experience."
-            className="bg-white text-text lg:p-5 rounded-2xl"
+        <div
+          className="lg:grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full lg:max-w-7xl hidden"
+          hidden
+        >
+          <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full relative">
+            <Image
+              alt="Hero"
+              src="/images/trustable-cards/card1.svg"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "100%", height: "auto" }} // optional
+            />
+            <Image
+              alt="Hero"
+              src="/images/trustable-cards/card2.svg"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "100%", height: "auto" }} // optional
+            />
+          </div>
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card4.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full lg:col-span-3"
+            style={{ width: "100%", height: "auto" }} // optional
           />
-          <FeatureCard
-            heading="Lead Generation"
-            icon={<Flower className="w-14 h-14 lg:w-16 lg:h-16" />}
-            description="Get leads from customers looking for your services."
-            className="bg-white text-text lg:p-5 rounded-2xl"
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card5.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full lg:max-h-full lg:col-span-3"
+            style={{ width: "100%", height: "auto" }} // optional
           />
-          <FeatureCard
-            heading="Secure Payments"
-            icon={<BiRupee className="w-14 h-14 lg:w-16 lg:h-16" />}
-            description="Get paid securely through our platform."
-            className="bg-white text-text lg:p-5 rounded-2xl"
-          />
-          <FeatureCard
-            heading="Proof of Appointment"
-            icon={<MessageSquareQuote className="w-14 h-14 lg:w-16 lg:h-16" />}
-            description="Get proof of appointment to ensure your payment."
-            className="bg-white text-text lg:p-5 rounded-2xl"
-          />
+          <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full">
+            <Image
+              alt="Hero"
+              src="/images/trustable-cards/card3.svg"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-full lg:max-h-full"
+              style={{ width: "100%", height: "auto" }} // optional
+            />
+            <Image
+              alt="Hero"
+              src="/images/trustable-cards/card6.svg"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-full"
+              style={{ width: "100%", height: "auto" }} // optional
+            />
+          </div>
         </div>
       </div>
     </HeaderWrapper>
