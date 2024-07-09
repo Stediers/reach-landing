@@ -1,3 +1,4 @@
+"use client";
 import Loading from "@components/Loading";
 import { Badge } from "@components/ui/badge";
 import { State } from "@data/enums";
@@ -98,7 +99,7 @@ export default function TextInput({
             value ? "pr-8" : ""
           } p-[0.65rem] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none ${errorText} ${
             disabled ? "bg-gray-200" : "bg-white"
-          } ${preIcon ? "pl-10" : "pl-3"}`}
+          } ${preIcon ? "pl-12" : "pl-3"}`}
           disabled={disabled}
           onKeyDown={onKeyDown}
           onFocus={(e) => e.target.select()}

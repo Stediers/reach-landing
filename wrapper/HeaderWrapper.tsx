@@ -1,31 +1,35 @@
-import { ReactNode } from "react";
-
 export default function HeaderWrapper({
-  children,
   title,
-  bgColor = "bg-white text-text",
+  children,
   className,
-  id,
-  showHeader = true,
+  underlineClassName = "bg-primary",
+  mobileAlign = "start",
+  desktopAlign = "start",
+  maxWidth = "max-w-[90rem]",
 }: {
-  children: ReactNode;
-  title: string;
-  bgColor?: string;
+  title: JSX.Element | string;
+  children: React.ReactNode;
   className?: string;
-  id?: string;
-  showHeader?: boolean;
+  underlineClassName?: string;
+  mobileAlign?: "center" | "start";
+  desktopAlign?: "center" | "start";
+  maxWidth?: string;
 }) {
   return (
-    <section id={id} className={`${className} py-16 w-full px-7 ${bgColor}`}>
-      {showHeader && (
-        <div className="flex flex-col items-center justify-center space-y-2 lg:space-y-4">
-          <h2 className="text-3xl lg:text-4xl font-medium text-center first-letter:capitalize">
-            {title}
-          </h2>
-          <div className="h-px w-[80%] bg-primary" />
-        </div>
-      )}
-      {children}
+    <section
+      className={`w-full flex flex-col lg:py-10 items-center ${className}`}
+    >
+      <div
+        className={`flex flex-col ${
+          mobileAlign === "start" ? "items-start" : "items-center"
+        } ${desktopAlign === "start" ? "lg:items-start" : "lg:items-center"}
+      justify-center space-y-7 lg:space-y-14 w-full px-5 lg:px-10 ${maxWidth} py-10`}
+      >
+        <h2 className="text-4xl lg:text-5xl font-medium leading-snug">
+          {title}
+        </h2>
+        {children}
+      </div>
     </section>
   );
 }

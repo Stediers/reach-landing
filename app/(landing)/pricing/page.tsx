@@ -10,6 +10,7 @@ import { Metadata } from "next";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
 import FeatureCard from "@components/FeatureCard";
 import { BsSafe } from "react-icons/bs";
+import { NumberCircle } from "@components/landing/NumberCircle";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -35,19 +36,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth lg:space-y-16 space-y-10 pb-20">
+    <div className="relative w-full flex flex-col items-center justify-center scroll-smooth lg:space-y-16 space-y-10 pb-20">
       <Hero />
       <Pricing />
       <HowItWorks />
       <WhatYouGet />
-    </div>
-  );
-}
-
-function NumberCircle({ number }: { number: number }) {
-  return (
-    <div className="w-12 h-12 lg:w-16 lg:h-16 border-success border-2 rounded-full flex items-center justify-center">
-      <p className="text-success font-medium text-xl lg:text-2xl">{number}</p>
     </div>
   );
 }

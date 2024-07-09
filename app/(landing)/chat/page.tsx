@@ -39,7 +39,7 @@ export default function Main() {
           <p className="text-white text-base">See what you get!</p>
         </div>
       </Hero>
-      <div className="grid gap-10 px-10 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[100rem]">
+      <div className="grid gap-10 px-10 lg:grid-cols-2 lg:px-20 justify-items-center max-w-[90rem]">
         <SideComponent
           title="Easy to Use"
           imageUrl="/images/fair-pricing.svg"

@@ -1,236 +1,461 @@
-import { FcConferenceCall, FcBullish } from "react-icons/fc";
-import { CiTrophy } from "react-icons/ci";
-import { MdOutlinePriceCheck } from "react-icons/md";
-import ImageComponent from "@components/ImageComponent";
-import { FaHandshake } from "react-icons/fa";
-import { Button } from "@components/ui/button";
-import Link from "next/link";
+import { ServiceCategory, State } from "@data/enums";
+import React from "react";
+import Image from "next/image";
 import { Metadata } from "next";
-import { BsShieldCheck } from "react-icons/bs";
-import ReachSVG from "@components/svg/ReachSVG";
-import HeaderWrapper from "@wrapper/HeaderWrapper";
-import FeatureCard from "@components/FeatureCard";
+import { BiRupee } from "react-icons/bi";
+import { Button } from "@components/ui/button";
+import {
+  ArrowDownCircle,
+  ArrowRightCircle,
+  BookIcon,
+  Check,
+  Flower,
+  MessageSquareQuote,
+  Percent,
+  Search,
+} from "lucide-react";
+import ImageComponent from "@components/ImageComponent";
+import ComponentWrapper from "@wrapper/ComponentWrapper";
 import SideComponent from "@components/SideComponent";
-import FreelancerWhatsapp from "@public/images/freelancer-whatsapp.png";
-import PhoneProfile from "@public/images/phone-profile.png";
-import "@styles/globals.css";
-import { MoveDownIcon, MoveRightIcon } from "lucide-react";
+import TextInput from "@components/input/TextInput";
+import Card from "@components/Card";
+import { serviceTypeDescriptions } from "@data/static";
+import ReachSVG from "@components/svg/ReachSVG";
+import Setting from "@components/Setting";
+import { BsShieldCheck } from "react-icons/bs";
+import Link from "next/link";
+import FeatureCard from "@components/FeatureCard";
+import { ProfileCard } from "@components/ProfileCard";
 import { AspectRatio } from "@components/ui/aspect-ratio";
-
-const iconStyle = "lg:w-24 lg:h-24 w-20 h-20";
+import { fetchServiceCategories } from "@api_functions/explore/fetch-service-categories";
+import SwitchText from "@components/landing/SwitchText";
+import { NumberCircle } from "@components/landing/NumberCircle";
+import SearchInput from "@components/landing/Search";
+import HeaderWrapper from "@wrapper/HeaderWrapper";
 
 export const metadata: Metadata = {
-  title: {
-    default: "ReachGig",
-    template: "%s on ReachGig",
-  },
+  title: "ReachGig",
   description:
-    "Find the best services and partners for your needs. Empowering the Gig Economy.",
-  // openGraph: {
-  //   title: "ReachGig",
-  //   description:
-  //     "Find the best services and partners for your needs. Empowering the Gig Economy.",
-  //   url: "https://reachgig.com",
-  //   type: "website",
-  //   images: [
-  //     {
-  //       url: "",
-  //       width: 800,
-  //       height: 600,
-  //       alt: "ReachGig",
-  //     },
-  //   ],
-  //   locale: "en_US",
-  // },
+    "A secure way to interact with service providers. Find the best services and partners for your needs. Empowering the Gig Economy.",
+  openGraph: {
+    title: "ReachGig",
+    description:
+      "A secure way to interact with service providers. Find the best services and partners for your needs. Empowering the Gig Economy.",
+    url: "https://reachgig.com",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "ReachGig",
+      },
+    ],
+    locale: "en_US",
+  },
 };
 
-export default function Page() {
+export default function Main() {
+  //   const response = await fetchServiceCategories();
+  //   if (response) {
+  //     console.log("response", response);
+  //   }
   return (
-    <div className="relative flex flex-col items-center justify-center scroll-smooth">
-      <Index />
-      <BecomeAPartner />
-      {/* <TransformationDesktop /> */}
-      <ByeByeScammers />
-      <What />
+    <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 py-5">
+      <Hero />
+      <TheSafeWay />
+      <YourOwnProfile />
+      <BecomePartner />
+      <Pricing />
+      <BestPartners />
     </div>
   );
 }
 
-function ByeByeScammers() {
-  return (
-    <section
-      className="flex flex-col items-center justify-center w-full lg:min-h-[70vh] min-h-[50vh] bg-success p-10 lg:px-0 lg:py-0 !text-center"
-      id="Index"
-    >
-      <div className="flex flex-col items-center justify-start w-full max-w-7xl space-y-5">
-        <BsShieldCheck className="lg:w-24 lg:h-24 w-20 h-20 text-white" />
-        <h3 className="lg:text-5xl text-3xl font-bold text-white">
-          Bye Bye Scammers
-        </h3>
-        <p className="text-lg text-center max-w-xl text-white">
-          We have a strict verification process to ensure that only genuine
-          service providers are listed on ReachGig.
-        </p>
-        <div className="flex flex-col items-center justify-center space-y-5 lg:space-y-0 lg:flex-row lg:space-x-5 pt-5">
-          <Button asChild variant="outline">
-            <Link href="/verification">How does it work?</Link>
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function BecomeAPartner() {
+function YourOwnProfile() {
   return (
     <HeaderWrapper
-      title="Grow with us"
-      className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10"
-      id="who-we-are-and-what-we-do"
+      title={
+        <span className="!leading-snug">
+          Become a <br />{" "}
+          <span className="text-primary font-semibold">Trustable</span> Partner
+        </span>
+      }
+      className="lg:bg-[#0F1117] lg:text-white lg:py-10 lg:rounded-t-2xl"
     >
-      <div className="grid gap-10 px-5 lg:grid-cols-2 xl:px-10 justify-items-center w-full">
-        <SideComponent
-          title="Your own Profile"
-          description="Get your own profile page to showcase your services and expertise."
-          imageUrl="/images/brand-yourself.svg"
-        />
-        <SideComponent
-          title="Less Ghosting"
-          description="Let your customer know what, how and when you offer your services before they reach out to you. This will help you get more genuine leads."
-          imageUrl="/images/ghost.svg"
-        />
-        <SideComponent
-          title="You decide the Price"
-          description="You decide the price for your services. No more haggling with customers."
-          imageUrl="/images/price.svg"
-        />
-        <SideComponent
-          title="Be Discovered"
-          description="We enable you and your services to be found on Google and other search engines. This enhances your online presence."
-          imageUrl="/images/discover.svg"
-        />
-        <SideComponent
-          title="Get Paid on Time"
-          description="Get paid for your services. No more chasing payments. We take care of it for you."
-          imageUrl="/images/paid.svg"
-        />
-        <SideComponent
-          title="Customer Reviews"
-          description="Get genuine reviews from your customers, helping you build your reputation and credibility."
-          imageUrl="/images/review.svg"
-        />
-        {/* <SideComponent
-          title="Join the Community"
-          description="Leverage our social media to connect with other experts in your field and grow your business."
-          imageUrl="/images/community.svg"
-        /> */}
-      </div>
-      <Button asChild variant="success" className="w-fit">
-        <Link href="https://partner.reachgig.com" className="w-fit">
-          Get Started
-        </Link>
-      </Button>
-    </HeaderWrapper>
-  );
-}
-
-function What() {
-  return (
-    <HeaderWrapper
-      title="What we Do"
-      className="items-center justify-center w-full flex flex-col space-y-16"
-      id="who-we-are-and-what-we-do"
-    >
-      <div className="lg:grid grid-cols-3 lg:gap-x-10 lg:gap-y-10 w-full lg:justify-items-center flex flex-col items-start justify-center space-y-10 lg:space-y-0">
-        <FeatureCard
-          icon={<CiTrophy className={`${iconStyle} text-yellow-500`} />}
-          heading="Level up"
-          description="Improve how your present your services to your customers."
-        />
-        <FeatureCard
-          icon={<FaHandshake className={`${iconStyle} text-green-500`} />}
-          heading="Effective Communication"
-          description="Lets bridge the gap between the service providers and the customers."
-        />
-        <FeatureCard
-          icon={
-            <MdOutlinePriceCheck className={`${iconStyle} text-blue-500`} />
-          }
-          heading="Price is Right"
-          description="Find the right price for your services and get paid on time."
-        />
-        <FeatureCard
-          icon={<FcConferenceCall className={iconStyle} />}
-          heading="Community"
-          description="Learn from other experts in your field and grow your business."
-        />
-        <FeatureCard
-          icon={<FcBullish className={iconStyle} />}
-          heading="Get the job done"
-          description="Quick and seamless process to get the job done with ease."
-        />
-      </div>
-    </HeaderWrapper>
-  );
-}
-
-function Index() {
-  return (
-    <section
-      className="flex flex-col items-center justify-center w-full lg:min-h-[50vh] xl:min-h-[75vh] relative"
-      id="Index"
-    >
-      <div className="flex xl:flex-row flex-col items-center xl:justify-between justify-start space-y-10 xl:space-y-0 w-full max-w-7xl px-5 py-10 xl:px-16">
-        <div className="flex flex-col xl:items-start items-center justify-center space-y-5">
-          <div className="flex flex-col items-center justify-center space-y-4 xl:space-y-5 xl:items-start">
-            <div className="flex">
-              <ReachSVG color="#f40e1e" className="w-40" />
-            </div>
-            <h1 className="lg:text-5xl text-3xl font-bold lg:text-left text-center">
-              <span className="text-primary leading-relaxed">
-                Brand Yourself
-              </span>{" "}
-              <br />
-              the right way
-            </h1>
-            <p className="text-lg text-center">Stand out to your clients</p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 pt-5">
-            <Button asChild variant="success">
-              <Link href="/onboarding-review">Start your Journey</Link>
-            </Button>
-            <Link href="/explore">
-              <Button variant="outline">Find Services</Button>
-            </Link>
-            {/* <Button asChild variant="outline">
-              <Link href={`${customerLink}`}>Find Services</Link>
-            </Button> */}
-          </div>
-        </div>
+      <div className="flex flex-col lg:flex-row items-start justify-center lg:justify-start space-y-20 lg:space-y-0 lg:space-x-20 w-full">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="!rounded-2xl lg:w-[20rem] lg:h-full w-full h-[30rem] overflow-hidden"
+          hidden
+          className="lg:w-[25rem] lg:block mr-10 shrink-0 lg:h-full w-full h-[30rem] overflow-hidden !bg-transparent hidden"
+        >
+          <source src="/videos/landing-video-1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          hidden
+          className="lg:hidden shrink-0 w-full h-[30rem] block"
         >
           <source src="/videos/landing-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* <ImageComponent
-          alt="phone-profile"
-          src={PhoneProfile}
-          className="lg:w-[20rem] h-[40rem] w-full !rounded-lg overflow-hidden"
-          priority
-          border={false}
-        /> */}
-        {/* <div className="w-full lg:absolute flex justify-center !object-cover items-center overflow-hidden relative">
-          <video autoPlay loop muted playsInline className="w-full h-full">
-            <source src="/videos/home-page.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div> */}
+        <div className="lg:grid grid-cols-1 lg:grid-cols-2 gap-10 w-full justify-between hidden">
+          <FeatureCard
+            heading="Personalized Profile"
+            icon={<BookIcon className="w-14 h-14 lg:w-20 lg:h-20" />}
+            description="Create a personalized profile that showcases your skills and experience."
+            className="bg-white text-text lg:p-5 rounded-2xl"
+          />
+          <FeatureCard
+            heading="Lead Generation"
+            icon={<Flower className="w-14 h-14 lg:w-20 lg:h-20" />}
+            description="Get leads from customers looking for your services."
+            className="bg-white text-text lg:p-5 rounded-2xl"
+          />
+          <FeatureCard
+            heading="Secure Payments"
+            icon={<BiRupee className="w-14 h-14 lg:w-20 lg:h-20" />}
+            description="Get paid securely through our platform."
+            className="bg-white text-text lg:p-5 rounded-2xl"
+          />
+          <FeatureCard
+            heading="Proof of Appointment"
+            icon={<MessageSquareQuote className="w-14 h-14 lg:w-20 lg:h-20" />}
+            description="Get proof of appointment to ensure your payment."
+            className="bg-white text-text lg:p-5 rounded-2xl"
+          />
+        </div>
       </div>
-    </section>
+    </HeaderWrapper>
+  );
+}
+
+function BestPartners() {
+  return (
+    <HeaderWrapper
+      title={
+        <span className="!leading-snug">
+          Our <br /> <span className="text-primary font-semibold">Best</span>{" "}
+          Partners
+        </span>
+      }
+      className="items-center justify-center w-full flex flex-col space-y-16"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 w-full">
+        <ProfileCard
+          description="I am a professional makeup artist with 3 years of experience. I have worked with clients from all over Tamil Nadu and have delivered high-quality makeup that has helped my clients look their best."
+          images={[
+            "https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg",
+          ]}
+          link="/partner/2c3dbba5-6eb1-4954-9d1d-65a6b2a0b8de"
+          name="Rithanya Makeover"
+          profession="Makeup Artist"
+          key={1}
+        />
+        <ProfileCard
+          description="I am the winner of the Mr. World competition and have been a professional Fitness Trainer for over a decade. I have trained over a 100 champions who have gone on to win titles on various stages."
+          images={[
+            "https://user4762.s3.ap-south-1.amazonaws.com/8A6B802E-B52C-405E-A939-E08D671F2F82.jpeg",
+          ]}
+          link="/service/b2c066bd-82f4-4225-b260-ef6f4cfcad47"
+          name="Mohan Subramaniam"
+          profession="Mr. World"
+          key={1}
+        />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function BecomePartner() {
+  return (
+    <HeaderWrapper
+      title={
+        <span className="!leading-snug">
+          Huge <br />{" "}
+          <span className="text-primary font-semibold">Opportunity</span>
+        </span>
+      }
+      className="lg:bg-[#0F1117] lg:text-white lg:py-10"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full">
+        <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full relative">
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card1.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }} // optional
+          />
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card2.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }} // optional
+          />
+        </div>
+        <Image
+          alt="Hero"
+          src="/images/trustable-cards/card4.svg"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="w-full h-full lg:col-span-3"
+          style={{ width: "100%", height: "auto" }} // optional
+        />
+        <Image
+          alt="Hero"
+          src="/images/trustable-cards/card5.svg"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="w-full h-full lg:max-h-full lg:col-span-3"
+          style={{ width: "100%", height: "auto" }} // optional
+        />
+        <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full">
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card3.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full lg:max-h-full"
+            style={{ width: "100%", height: "auto" }} // optional
+          />
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card6.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full"
+            style={{ width: "100%", height: "auto" }} // optional
+          />
+        </div>
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function Hero() {
+  return (
+    <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center lg:py-10 pt-5 pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[70vh] max-w-[90rem]">
+      <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full">
+        <ReachSVG className="w-32 lg:w-40" color="#f40e1e" />
+        <h1 className="text-4xl lg:text-5xl font-medium !leading-snug">
+          Find the most <br />
+          <span className="text-primary font-semibold">Reliable</span> <br />
+          <SwitchText
+            textArray={[
+              "Makeup Artists",
+              "Photographers",
+              "Mehendi Artists",
+              "Wedding Planners",
+            ]}
+          />
+        </h1>
+        <p className="lg:text-xl text-lg font-normal">
+          Safe advance payments, secure chat, and many more
+        </p>
+        <div className="max-w-md w-full">
+          <SearchInput />
+        </div>
+        <ul className="flex flex-col items-start justify-start space-y-5 lg:space-y-7 pt-3">
+          <li className="flex flex-row items-center justify-start space-x-5">
+            <BiRupee size={28} />
+            <p className="text-lg">Safe advance payments</p>
+          </li>
+          <li className="flex flex-row items-center justify-start space-x-5">
+            <BsShieldCheck size={28} />
+            <p className="text-lg">Verified partners</p>
+          </li>
+          <li className="flex flex-row items-center justify-start space-x-5">
+            <ArrowRightCircle size={28} />
+            <p className="text-lg">Best Reconcilation</p>
+          </li>
+        </ul>
+      </div>
+      <ImageComponent
+        src="/images/home1.svg"
+        alt="Hero"
+        className="w-full h-52 lg:h-96 max-w-lg"
+        border={false}
+      />
+    </div>
+  );
+}
+
+function TheSafeWay() {
+  return (
+    <HeaderWrapper
+      title={
+        <span className="!leading-snug text-white lg:text-text">
+          The
+          <br /> <span className="font-semibold lg:text-primary">Safe</span> Way
+        </span>
+      }
+      className="items-center rounded-t-lg py-5 bg-info lg:bg-white lg:py-20 min-h-[80vh] justify-center w-full flex flex-col space-y-16 relative"
+    >
+      <div className="lg:grid grid-cols-3 lg:gap-x-20 lg:gap-y-24 w-full lg:justify-items-start flex flex-col items-start justify-center space-y-14 lg:space-y-0 pt-5 lg:text-text text-white">
+        <FeatureCard
+          heading="Request Callback"
+          description="Ask the service provider to call you back after providing your details."
+          icon={<BookIcon className="w-14 h-14 lg:w-20 lg:h-20" />}
+        />
+        <FeatureCard
+          heading="Schedule Appointment"
+          description="The partner will schedule an appointment with you."
+          icon={<Flower className="w-14 h-14 lg:w-20 lg:h-20" />}
+        />
+        <FeatureCard
+          heading="Pay Advance"
+          description="Pay the advance amount to confirm the appointment."
+          icon={<BiRupee className="w-14 h-14 lg:w-20 lg:h-20" />}
+        />
+        <FeatureCard
+          heading="Get the Job Done"
+          description="Share the completion OTP once the job is done."
+          icon={<MessageSquareQuote className="w-14 h-14 lg:w-20 lg:h-20" />}
+        />
+        <FeatureCard
+          heading="Pay Remaining Amount"
+          description="Settle the remaining amount after the job is done."
+          icon={<Percent className="w-14 h-14 lg:w-20 lg:h-20" />}
+        />
+        <FeatureCard
+          heading="Review"
+          description="Provide feedback for your experience anonymously."
+          icon={<BsShieldCheck className="w-14 h-14 lg:w-20 lg:h-20" />}
+        />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function Pricing() {
+  return (
+    <HeaderWrapper
+      title={
+        <span className="!leading-snug">
+          Our <br /> <span className="text-primary font-semibold">Pricing</span>
+        </span>
+      }
+      className="lg:bg-[#0F1117] lg:text-white lg:py-10"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full">
+        <PricingCard
+          title="Free"
+          description="For those who want to try out the platform."
+          price={0}
+          features={[
+            "Personalized Profile",
+            "Lead Generation",
+            "Maximum of 5 services",
+          ]}
+        />
+        <PricingCard
+          title="Basic"
+          description="For those who want to try out the platform."
+          price={20}
+          features={[
+            "Everything in Free",
+            "Secure Payments",
+            "Proof of Appointment",
+            "Automated Appointment Flows",
+            "Dispute Resolution Team",
+            "Free Personalized Profile",
+            "Maximum of 10 services",
+          ]}
+        />
+        <PricingCard
+          title="Pro"
+          description="For those who want to use the platform regularly."
+          price={30}
+          features={[
+            "Everything in Basic",
+            "Invoice Generation",
+            "Unlimited Services",
+            "Priority Support",
+            "Brand building assistance",
+            "Free Marketing",
+            "Free SEO",
+          ]}
+          capped={1500}
+        />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function PricingCard({
+  title,
+  description,
+  price,
+  features,
+  className,
+  capped = 800,
+}: {
+  title: string;
+  description: string;
+  price: number;
+  features: string[];
+  className?: string;
+  capped?: number;
+}) {
+  return (
+    <Card
+      className={`w-full ${className} lg:!p-10 !p-5 !justify-between !space-y-10`}
+    >
+      <div className="flex flex-col items-start justify-start h-full space-y-10">
+        <div className="flex flex-col items-start justify-start space-y-5">
+          <h3 className="text-3xl font-medium">{title}</h3>
+          <p className="text-lg">{description}</p>
+          <div className="flex flex-col items-start justify-start space-y-5">
+            <p className="text-3xl font-medium w-full flex flex-row space-x-2 items-center">
+              <span>{price}</span>
+              <Percent size={20} />
+              <span className="text-lg font-normal">Commission</span>
+            </p>
+            <p className="text-lg font-normal">
+              Capped at{" "}
+              <span className="text-success font-medium">₹{capped}</span>
+            </p>
+          </div>
+        </div>
+
+        <ul className="flex flex-col items-start justify-start space-y-5">
+          {features.map((feature) => (
+            <li
+              className="flex flex-row items-center justify-start space-x-2"
+              key={feature}
+            >
+              <Check size={24} className="text-success" />
+              <p>{feature}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <Link
+        href="https://partner.reachgig.com"
+        className="w-full"
+        passHref
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button variant="success" className="!w-full">
+          Get Started with {title}
+        </Button>
+      </Link>
+    </Card>
   );
 }

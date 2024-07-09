@@ -30,7 +30,7 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const path = usePathname();
   return (
-    <div className="py-4 px-5 border-b sticky top-0 z-10 bg-white">
+    <div className="py-4 px-5 sticky flex justify-center top-0 z-10 bg-white border-b w-full">
       <MobileNav path={path} />
       <DesktopNav path={path} />
     </div>
@@ -39,7 +39,7 @@ export default function Navbar() {
 
 function DesktopNav({ path }: { path: string }) {
   return (
-    <div className="xl:flex justify-start space-x-10 w-full items-center hidden">
+    <div className="xl:flex justify-start space-x-10 w-full items-center hidden max-w-[90rem] px-5 lg:px-10">
       <Link
         className="flex items-center space-x-4 shrink-0 hover:cursor-pointer"
         href="/"
@@ -55,7 +55,7 @@ function DesktopNav({ path }: { path: string }) {
       <div className="flex justify-between items-center space-x-5 w-full">
         <NavigationMenu orientation="vertical">
           <NavigationMenuList>
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <NavigationMenuTrigger>Compliance</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 grid-cols-2 w-[600px]">
@@ -70,8 +70,8 @@ function DesktopNav({ path }: { path: string }) {
                   ))}
                 </ul>
               </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
+            </NavigationMenuItem> */}
+            {/* <NavigationMenuItem>
               <NavigationMenuTrigger>How does it work?</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 grid-cols-2 w-[600px]">
@@ -86,7 +86,7 @@ function DesktopNav({ path }: { path: string }) {
                   ))}
                 </ul>
               </NavigationMenuContent>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
             {menus.map((menu) => (
               <NavigationMenuItem key={menu.title}>
                 <Link href={menu.path} passHref legacyBehavior>
@@ -102,9 +102,9 @@ function DesktopNav({ path }: { path: string }) {
             ))}
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-10">
           <Button asChild variant="success">
-            <Link href="/onboarding-review">Get your own Portfolio</Link>
+            <Link href="/partner">Become a Partner</Link>
           </Button>
           <Button variant="outline" size="default" className="text-base">
             <Link href="/explore">Find a Partner</Link>
@@ -117,7 +117,7 @@ function DesktopNav({ path }: { path: string }) {
 
 function MobileNav({ path }: { path: string }) {
   return (
-    <div className="flex justify-between space-x-5 w-full items-center xl:hidden">
+    <div className="flex justify-between space-x-5 w-full items-center xl:hidden max-w-[90rem]">
       <Link
         className="flex items-center space-x-4 shrink-0 hover:cursor-pointer"
         href="/"
@@ -154,11 +154,11 @@ function MobileNav({ path }: { path: string }) {
                   </Link>
                 </SheetClose>
               ))}
-              {legal.map((component) => (
+              {/* {legal.map((component) => (
                 <SheetClose key={component.title} asChild>
                   <Link href={component.href}>{component.title}</Link>
                 </SheetClose>
-              ))}
+              ))} */}
               <SheetClose key="Explore" asChild>
                 <Link href="/explore">Explore</Link>
               </SheetClose>

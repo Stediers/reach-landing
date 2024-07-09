@@ -10,7 +10,7 @@ export default function Footer() {
     <footer className="bg-foreground !text-white w-full">
       <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-10 sm:px-6 lg:px-8 lg:pt-12 flex flex-col justify-start items-center space-y-20">
         <div className="space-y-3 max-w-lg text-center">
-          <Logo wings="w-[10rem]" text="ReachGig" />
+          <Logo text="ReachGig" />
           {/* <p className="text-gray leading-7">
             {`NO.514/8, Pethampalayam Road Mekkur, Perundurai, Erode, Erode -
             638052, Tamil Nadu`}

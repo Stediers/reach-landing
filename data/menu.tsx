@@ -1,4 +1,4 @@
-import { Search, Phone } from "lucide-react";
+import { Search, Phone, SearchIcon } from "lucide-react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { FcHome, FcBusinessman, FcCalendar, FcBriefcase } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
@@ -20,22 +20,10 @@ export type SubMenu = {
 
 export const menus: Menu[] = [
   {
-    title: "Pricing",
-    subtitle: "View our pricing",
-    icon: <FcCalendar className="text-3xl" />,
-    path: "/pricing",
-  },
-  {
     title: "Blogs",
     subtitle: "Read our blogs",
     icon: <FcBriefcase className="text-3xl" />,
     path: "/learn",
-  },
-  {
-    title: "Successful Freelancers",
-    subtitle: "View our successful freelancers",
-    icon: <FcHome className="text-3xl" />,
-    path: "/successful-freelancers",
   },
 ];
 

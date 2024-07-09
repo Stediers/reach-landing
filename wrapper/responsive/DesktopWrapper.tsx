@@ -20,7 +20,7 @@ export default function DesktopWrapper({
       className={`hidden flex-1 ${hide ? "hidden" : "flex"}
        lg:flex w-full flex-col items-start justify-start space-y-5 ${
          padding ? "py-6 px-10" : ""
-       } ${maxWidth ? "max-w-7xl mx-auto" : ""}`}
+       } ${maxWidth ? "max-w-[90rem] mx-auto" : ""}`}
       id="desktop-wrapper"
     >
       {title && <UnderlinedHeader title={title} align="items-start" />}

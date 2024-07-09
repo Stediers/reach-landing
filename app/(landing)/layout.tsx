@@ -50,7 +50,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <div
       className={`${cn(
         fontSans.className
-      )} text-text min-h-screen flex !flex-col w-full bg-white`}
+      )} text-text min-h-screen flex !flex-col w-full bg-white items-center justify-center`}
     >
       <Navbar />
       {children}

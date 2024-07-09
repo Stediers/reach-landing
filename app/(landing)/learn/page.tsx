@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { BiRupee } from "react-icons/bi";
 import { Button } from "@components/ui/button";
-import { BookIcon } from "lucide-react";
+import { BookAudioIcon, BookIcon } from "lucide-react";
 import ImageComponent from "@components/ImageComponent";
 import ComponentWrapper from "@wrapper/ComponentWrapper";
 import Hero from "@components/Hero";
@@ -12,6 +12,7 @@ import { Badge } from "@components/ui/badge";
 import { BlogTag } from "@wrapper/BlogWrapper";
 import Link from "next/link";
 import VideoCarousel from "@components/VideoCarousel";
+import HeaderWrapper from "@wrapper/HeaderWrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -39,11 +40,26 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="scroll-smooth pb-20 pt-10 w-full space-y-10">
-      <div className="relative flex flex-col items-center justify-center mx-auto space-y-5 lg:space-y-10 lg:px-10 px-5">
-        <h1 className="lg:text-4xl text-2xl font-medium w-full">
-          Our Podcasts
-        </h1>
+    <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20">
+      <Hero>
+        <div className="flex flex-col items-center justify-center space-y-5 text-white">
+          <BookAudioIcon className="w-20 h-20 text-primary" />
+          <h1 className="lg:text-6xl text-4xl font-semibold text-center">
+            Learn with ReachGig
+          </h1>
+          <p className="lg:text-2xl text-lg text-center">
+            Get the latest news, updates and tips on ReachGig!
+          </p>
+        </div>
+      </Hero>
+      <HeaderWrapper
+        title={
+          <span className="!leading-snug">
+            Our <br />{" "}
+            <span className="text-primary font-semibold">Podcasts</span>{" "}
+          </span>
+        }
+      >
         <VideoCarousel
           videos={[
             "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
@@ -51,12 +67,16 @@ export default function Page() {
           ]}
           basis="lg:basis-1/2"
         />
-      </div>
-      <div className="relative flex flex-col items-center justify-center mx-auto">
-        <h2 className="lg:text-4xl text-2xl font-medium w-full lg:px-10 px-5">
-          Learn with ReachGig
-        </h2>
-        <div className="grid gap-20 lg:px-10 px-5 lg:grid-cols-3 justify-items-center lg:pt-10 pt-5 2xl:grid-cols-4">
+      </HeaderWrapper>
+      <HeaderWrapper
+        title={
+          <span className="!leading-snug">
+            Learn <br />{" "}
+            <span className="text-primary font-semibold">From</span> Us
+          </span>
+        }
+      >
+        <div className="grid gap-20 lg:grid-cols-3 justify-items-center 2xl:grid-cols-4">
           {/* NEW BLOGS HERE */}
           <BlogCard
             title="Staying Motivated and Overcoming Freelance Burnout"
@@ -127,7 +147,7 @@ export default function Page() {
             tags={[BlogCategory.TIPS]}
           />
         </div>
-      </div>
+      </HeaderWrapper>
     </div>
   );
 }
@@ -135,7 +155,7 @@ export default function Page() {
 function SemiNav() {
   return (
     <div className="flex flex-col items-center justify-center space-y-5 border-y w-full py-5 sticky top-20 bg-foreground z-10 px-5">
-      <div className="flex flex-row items-start justify-start w-full space-x-5 flex-grow max-w-[100rem] overflow-x-scroll hide-scrollbar">
+      <div className="flex flex-row items-start justify-start w-full space-x-5 flex-grow max-w-[90rem] overflow-x-scroll hide-scrollbar">
         {Object.values(BlogCategory).map((category) => (
           <Button
             variant="info"

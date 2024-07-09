@@ -98,7 +98,7 @@ export default async function Page({
   const gig = response && response!!.gig;
   const callback = response && response!!.callback;
   return response && service && gig && callback ? (
-    <div className="min-h-screen w-screen flex justify-center items-start max-w-7xl">
+    <div className="min-h-screen w-screen flex justify-center items-start max-w-[90rem]">
       <div
         className="flex flex-col items-center justify-start w-full min-h-full pt-5"
         hidden

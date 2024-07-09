@@ -56,7 +56,7 @@ function Index() {
   const partnerLink = process.env.NEXT_PUBLIC_PARTNER_LINK + "/user/sign-in";
   return (
     <section
-      className="flex flex-col items-center justify-center w-full lg:min-h-[40vh] xl:min-h-[45vh] relative max-w-7xl"
+      className="flex flex-col items-center justify-center w-full lg:min-h-[40vh] xl:min-h-[45vh] relative max-w-[90rem]"
       id="Index"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:gap-20 gap-5 xl:items-center w-full px-5 py-5 lg:py-10 xl:px-16">

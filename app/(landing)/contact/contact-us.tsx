@@ -170,8 +170,6 @@ function FAQ() {
     <HeaderWrapper
       title="FAQ's"
       className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10"
-      bgColor="bg-white text-text"
-      id="faqs"
     >
       <div className="grid grid-cols-1 lg:grid-cols-1 justify-items-center gap-y-10 gap-x-10 w-full sm:hidden">
         {faqs.map((faq, index) => (
