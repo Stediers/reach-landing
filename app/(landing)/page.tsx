@@ -111,7 +111,7 @@ function YourOwnProfile() {
           Your browser does not support the video tag.
         </video>
         <div
-          className="lg:grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full lg:max-w-7xl hidden"
+          className="lg:grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full hidden"
           hidden
         >
           <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full relative">
