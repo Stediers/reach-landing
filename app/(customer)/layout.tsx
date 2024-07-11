@@ -20,6 +20,7 @@ import RadioInput from "@components/input/RadioInput";
 import TextInput from "@components/input/TextInput";
 import { showSnackBar } from "@components/notifications/Snackbar";
 import MobileLogin from "@components/sign-in/MobileNumber";
+import { Badge } from "@components/ui/badge";
 import { Button } from "@components/ui/button";
 import {
   Carousel,
@@ -134,16 +135,13 @@ export default function ConsoleLayout({ children }: RootLayoutProps) {
   }, [filter, searchState, selectedCategory]);
 
   return (
-    <div
-      className="w-full flex flex-col justify-start items-center relative !z-50 !hide-scrollbar"
-      vaul-drawer-wrapper=""
-    >
+    <div className="w-full flex flex-col justify-start items-center relative !z-50 !hide-scrollbar">
       <Link
         href={{
           query: {
             verified: filter.verified,
             sort: JSON.stringify(filter.sort),
-            state: filter.state?.name,
+            state: filter.state?.name ?? "Tamil Nadu",
             online: filter.online,
             customerGender: filter.customerGender,
             partnerGender: filter.partnerGender,
@@ -193,7 +191,6 @@ function MobileServiceTypeDropdown({
   const indianStates = StateType.getStatesOfCountry(
     Country.getCountryByCode("IN")?.isoCode
   );
-  const router = useRouter();
   const [state, setState] = useState<IState | null>(filter.state);
   const [optionsToShow, setOptionsToShow] = useState<string[]>(
     indianStates
@@ -261,7 +258,7 @@ function MobileServiceTypeDropdown({
             </div>
           ) : (
             <div className="flex flex-row items-center justify-between space-x-3 w-full">
-              <p className="text-base">Everywhere</p>
+              <p className="text-base">Set Location</p>
               <LocateIcon className="w-6 h-6 shrink-0" />
             </div>
           )}
@@ -299,7 +296,7 @@ function MobileServiceTypeDropdown({
                   updateLocationFilter({ state: null, setFilter });
                 }}
               >
-                <p>Everywhere</p>
+                <p>Set Location</p>
                 {!state ? (
                   <AiFillCheckCircle className="text-success w-6 h-6" />
                 ) : (
@@ -363,137 +360,139 @@ function MobileServiceTypeDropdown({
   );
 }
 
-function DesktopServiceTypeDropdown({
-  filter,
-  setFilter,
-}: {
-  filter: WordSearchServiceRequest["filter"];
-  setFilter: React.Dispatch<
-    React.SetStateAction<WordSearchServiceRequest["filter"]>
-  >;
-}) {
-  const indianStates = StateType.getStatesOfCountry(
-    Country.getCountryByCode("IN")?.isoCode
-  );
-  const [optionsToShow, setOptionsToShow] = useState<string[]>(
-    indianStates
-      .map((state) => state.name)
-      .sort((a, b) => {
-        if (filter.state) {
-          if (a === filter.state.name) return -1;
-          if (b === filter.state.name) return 1;
-        }
-        return 0;
-      })
-  );
-  const [text, setText] = useState(filter.state ? filter.state.name : "");
-  useEffect(() => {
-    if (text.length > 0) {
-      //find the first three matches and set them to optionsToShow
-      var match = indianStates.filter((option) =>
-        option.name.toLowerCase().startsWith(text.toLowerCase())
-      );
-      if (match.length > 0) {
-        setOptionsToShow(match.slice(0, 3).map((state) => state.name));
-      } else {
-        const closestMatch = closest(
-          text,
-          indianStates.map((state) => state.name)
-        );
-        if (!closestMatch) return setOptionsToShow([]);
-        const distanceMatch = distance(text, closestMatch);
-        if (distanceMatch > 3) return setOptionsToShow([]);
-        const closestMatchIndex = indianStates.findIndex(
-          (state) => state.name === closestMatch
-        );
-        const closestMatchOptions = indianStates
-          .slice(closestMatchIndex, closestMatchIndex + 3)
-          .map((state) => state.name);
-        if (closestMatchOptions.length === 0) return setOptionsToShow([]);
-        setOptionsToShow(closestMatchOptions);
-      }
-    } else {
-      setOptionsToShow(
-        indianStates
-          .map((state) => state.name)
-          //if state is already selected, set first element to that state
-          .sort((a, b) => {
-            if (filter.state) {
-              if (a === filter.state.name) return -1;
-              if (b === filter.state.name) return 1;
-            }
-            return 0;
-          })
-      );
-    }
-  }, [text]);
-  return (
-    <CustomDialog
-      title="Where are you located?"
-      maxWidth="!max-w-2xl"
-      triggerJSX={
-        <Button variant="outline" className="w-full gap-x-3">
-          <LocateIcon className="w-5 h-5 shrink-0" />
-          {filter.state ? `${filter.state.name.slice(0, 10)}...` : "Everywhere"}
-        </Button>
-      }
-      closeId="close-location-desktop"
-    >
-      <TextInput
-        value={text}
-        onChange={(value) => {
-          setText(value);
-        }}
-        placeholder="Search for a state"
-        title="State"
-      />
-      {text.length === 0 ? (
-        <Card
-          className="text-base flex !flex-row !space-y-0 !justify-between space-x-5 text-center w-full hover:cursor-pointer"
-          onClick={() => {
-            updateLocationFilter({ state: null, setFilter });
-            const close = document.getElementById("close-location-desktop");
-            close?.click();
-          }}
-        >
-          <p>Everywhere</p>
-        </Card>
-      ) : null}
-      {optionsToShow.length === 0 ? (
-        <Card className="text-base text-center">
-          <p>No results found</p>
-        </Card>
-      ) : (
-        <div className="grid grid-cols-2 gap-2 gap-y-5 w-full max-w-full max-h-[30vh] overflow-y-scroll">
-          {optionsToShow.map((value, index) => (
-            <Card
-              className="text-base flex !flex-row !space-y-0 !justify-between space-x-5 text-center w-full"
-              key={index}
-              onClick={() => {
-                const selectedState = indianStates.find(
-                  (item) => item.name === value
-                );
-                if (selectedState) {
-                  updateLocationFilter({ state: selectedState, setFilter });
-                }
-                const close = document.getElementById("close-location-desktop");
-                close?.click();
-              }}
-            >
-              <p>{value.length > 7 ? `${value.slice(0, 7)}...` : value}</p>
-              {filter.state &&
-              filter.state.name.toLowerCase() === value.toLowerCase() ? (
-                <AiFillCheckCircle className="text-success w-6 h-6" />
-              ) : (
-                <AiFillCheckCircle className="text-textsubtle w-6 h-6" />
-              )}
-            </Card>
-          ))}
-        </div>
-      )}
-    </CustomDialog>
-  );
-}
+// function DesktopServiceTypeDropdown({
+//   filter,
+//   setFilter,
+// }: {
+//   filter: WordSearchServiceRequest["filter"];
+//   setFilter: React.Dispatch<
+//     React.SetStateAction<WordSearchServiceRequest["filter"]>
+//   >;
+// }) {
+//   const indianStates = StateType.getStatesOfCountry(
+//     Country.getCountryByCode("IN")?.isoCode
+//   );
+//   const [optionsToShow, setOptionsToShow] = useState<string[]>(
+//     indianStates
+//       .map((state) => state.name)
+//       .sort((a, b) => {
+//         if (filter.state) {
+//           if (a === filter.state.name) return -1;
+//           if (b === filter.state.name) return 1;
+//         }
+//         return 0;
+//       })
+//   );
+//   const [text, setText] = useState(filter.state ? filter.state.name : "");
+//   useEffect(() => {
+//     if (text.length > 0) {
+//       //find the first three matches and set them to optionsToShow
+//       var match = indianStates.filter((option) =>
+//         option.name.toLowerCase().startsWith(text.toLowerCase())
+//       );
+//       if (match.length > 0) {
+//         setOptionsToShow(match.slice(0, 3).map((state) => state.name));
+//       } else {
+//         const closestMatch = closest(
+//           text,
+//           indianStates.map((state) => state.name)
+//         );
+//         if (!closestMatch) return setOptionsToShow([]);
+//         const distanceMatch = distance(text, closestMatch);
+//         if (distanceMatch > 3) return setOptionsToShow([]);
+//         const closestMatchIndex = indianStates.findIndex(
+//           (state) => state.name === closestMatch
+//         );
+//         const closestMatchOptions = indianStates
+//           .slice(closestMatchIndex, closestMatchIndex + 3)
+//           .map((state) => state.name);
+//         if (closestMatchOptions.length === 0) return setOptionsToShow([]);
+//         setOptionsToShow(closestMatchOptions);
+//       }
+//     } else {
+//       setOptionsToShow(
+//         indianStates
+//           .map((state) => state.name)
+//           //if state is already selected, set first element to that state
+//           .sort((a, b) => {
+//             if (filter.state) {
+//               if (a === filter.state.name) return -1;
+//               if (b === filter.state.name) return 1;
+//             }
+//             return 0;
+//           })
+//       );
+//     }
+//   }, [text]);
+//   return (
+//     <CustomDialog
+//       title="Where are you located?"
+//       maxWidth="!max-w-2xl"
+//       triggerJSX={
+//         <Button variant="outline" className="w-full max-w-xs gap-x-3">
+//           <LocateIcon className="w-5 h-5 shrink-0" />
+//           {filter.state
+//             ? `${filter.state.name.slice(0, 10)}...`
+//             : "Set Location"}
+//         </Button>
+//       }
+//       closeId="close-location-desktop"
+//     >
+//       <TextInput
+//         value={text}
+//         onChange={(value) => {
+//           setText(value);
+//         }}
+//         placeholder="Search for a state"
+//         title="State"
+//       />
+//       {text.length === 0 ? (
+//         <Card
+//           className="text-base flex !flex-row !space-y-0 !justify-between space-x-5 text-center w-full hover:cursor-pointer"
+//           onClick={() => {
+//             updateLocationFilter({ state: null, setFilter });
+//             const close = document.getElementById("close-location-desktop");
+//             close?.click();
+//           }}
+//         >
+//           <p>Search Everywhere</p>
+//         </Card>
+//       ) : null}
+//       {optionsToShow.length === 0 ? (
+//         <Card className="text-base text-center">
+//           <p>No results found</p>
+//         </Card>
+//       ) : (
+//         <div className="grid grid-cols-2 gap-2 gap-y-5 w-full max-w-full max-h-[30vh] overflow-y-scroll">
+//           {optionsToShow.map((value, index) => (
+//             <Card
+//               className="text-base flex !flex-row !space-y-0 !justify-between space-x-5 text-center w-full"
+//               key={index}
+//               onClick={() => {
+//                 const selectedState = indianStates.find(
+//                   (item) => item.name === value
+//                 );
+//                 if (selectedState) {
+//                   updateLocationFilter({ state: selectedState, setFilter });
+//                 }
+//                 const close = document.getElementById("close-location-desktop");
+//                 close?.click();
+//               }}
+//             >
+//               <p>{value.length > 15 ? `${value.slice(0, 15)}...` : value}</p>
+//               {filter.state &&
+//               filter.state.name.toLowerCase() === value.toLowerCase() ? (
+//                 <AiFillCheckCircle className="text-success w-6 h-6" />
+//               ) : (
+//                 <AiFillCheckCircle className="text-textsubtle w-6 h-6" />
+//               )}
+//             </Card>
+//           ))}
+//         </div>
+//       )}
+//     </CustomDialog>
+//   );
+// }
 
 function DesktopFilter({
   filter,
@@ -510,17 +509,21 @@ function DesktopFilter({
 }) {
   return (
     <div
-      className="lg:grid grid-cols-6 w-full sticky top-0 gap-x-5 bg-white z-20 p-3 border-b hidden"
+      className="lg:flex justify-center w-full sticky top-0 gap-x-5 bg-white z-20 p-3 border-b hidden"
       hidden
     >
-      <div className="col-span-2 flex flex-row space-x-5 items-center justify-center">
-        <div className="flex flex-row space-x-5 items-center justify-center">
-          <DesktopServiceTypeDropdown filter={filter} setFilter={setFilter} />
-          <DesktopMoreFiltersDropdown filter={filter} setFilter={setFilter} />
+      <div className="w-full max-w-[85rem] flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center justify-start space-x-5 w-full">
+          {/* <div className="w-full max-w-[11rem]">
+            <DesktopServiceTypeDropdown filter={filter} setFilter={setFilter} />
+          </div> */}
           <SearchServiceDesktop
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
+        </div>
+        <div className="grid grid-cols-1 gap-x-5">
+          <DesktopMoreFiltersDropdown filter={filter} setFilter={setFilter} />
         </div>
       </div>
     </div>
@@ -536,27 +539,67 @@ function SearchServiceDesktop({
 }) {
   const [search, setSearch] = useState(searchQuery);
   return (
-    <CustomDialog
-      title="Search for a service"
-      description="Find the service you are looking for"
-      triggerJSX={
-        <Button variant="outline" className="w-full gap-x-3">
-          <Search className="w-5 h-5 shrink-0" />
-          <p className="text-base">Search</p>
-        </Button>
-      }
-      footerJSX={
-        <DialogClose asChild>
-          <Button
-            variant="success"
-            className="w-full"
-            onClick={() => setSearchQuery(search)}
-          >
-            Search
-          </Button>
-        </DialogClose>
-      }
-    >
+    // <CustomDialog
+    //   title="Search for a service"
+    //   description="Find the service you are looking for"
+    //   triggerJSX={
+    //     <Button variant="outline" className="w-full gap-x-3">
+    //       <Search className="w-5 h-5 shrink-0" />
+    //       <p className="text-base">Search</p>
+    //     </Button>
+    //   }
+    //   footerJSX={
+    //     <DialogClose asChild>
+    //       <Button
+    //         variant="success"
+    //         className="w-full"
+    //         onClick={() => setSearchQuery(search)}
+    //       >
+    //         Search
+    //       </Button>
+    //     </DialogClose>
+    //   }
+    // >
+    //   <TextInput
+    //     value={search}
+    //     onChange={(value) => setSearch(value)}
+    //     placeholder="Search for a service"
+    //     onKeyDown={(e) => {
+    //       if (e.key === "Enter") {
+    //         setSearchQuery(search);
+    //       }
+    //     }}
+    //   />
+
+    //   <LineHeader title="Tips" />
+    //   <ul className="w-full space-y-5">
+    //     <li className="w-full flex flex-col space-y-1">
+    //       <p className="text-base font-medium">Use Keywords</p>
+    //       <p className="text-sm text-gray-500">
+    //         Use keywords to search for a service instead of a sentence. For
+    //         example, &quot;plumber&quot; instead of &quot;I need a plumber&quot;
+    //       </p>
+    //     </li>
+    //     <li className="w-full flex flex-col space-y-1">
+    //       <p className="text-base font-medium">Dont use Location</p>
+    //       <p className="text-sm text-gray-500">
+    //         Use the location filter to find services near you, please refrain
+    //         from searching for a location because it doesn&apos;t work yet.
+    //       </p>
+    //     </li>
+    //     <li className="w-full flex flex-col space-y-1">
+    //       <p className="text-base font-medium">
+    //         Don&apos;t Search for Partners
+    //       </p>
+    //       <p className="text-sm text-gray-500">
+    //         If you want to find a partner, use the &quot;Find a Partner&quot;
+    //         page instead of searching for a service. This will help you find the
+    //         right person for you.
+    //       </p>
+    //     </li>
+    //   </ul>
+    // </CustomDialog>
+    <div className="w-full max-w-lg">
       <TextInput
         value={search}
         onChange={(value) => setSearch(value)}
@@ -566,112 +609,11 @@ function SearchServiceDesktop({
             setSearchQuery(search);
           }
         }}
+        preIcon={<Search className="w-5 h-5" />}
+        icon={<Badge>Search</Badge>}
+        onClick={() => setSearchQuery(search)}
       />
-
-      <LineHeader title="Tips" />
-      <ul className="w-full space-y-5">
-        <li className="w-full flex flex-col space-y-1">
-          <p className="text-base font-medium">Use Keywords</p>
-          <p className="text-sm text-gray-500">
-            Use keywords to search for a service instead of a sentence. For
-            example, &quot;plumber&quot; instead of &quot;I need a plumber&quot;
-          </p>
-        </li>
-        <li className="w-full flex flex-col space-y-1">
-          <p className="text-base font-medium">Dont use Location</p>
-          <p className="text-sm text-gray-500">
-            Use the location filter to find services near you, please refrain
-            from searching for a location because it doesn&apos;t work yet.
-          </p>
-        </li>
-        <li className="w-full flex flex-col space-y-1">
-          <p className="text-base font-medium">
-            Don&apos;t Search for Partners
-          </p>
-          <p className="text-sm text-gray-500">
-            If you want to find a partner, use the &quot;Find a Partner&quot;
-            page instead of searching for a service. This will help you find the
-            right person for you.
-          </p>
-        </li>
-      </ul>
-    </CustomDialog>
-  );
-}
-
-function SearchServiceMobile({
-  searchQuery,
-  setSearchQuery,
-}: {
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-}) {
-  const [search, setSearch] = useState(searchQuery);
-  return (
-    <CustomSheet
-      title="Search"
-      canClose
-      description="Find the service you are looking for"
-      triggerJSX={
-        <Button
-          className="w-full !border-0 !rounded-none !border-b"
-          variant="outline"
-        >
-          <Search className="w-5 h-5" />
-        </Button>
-      }
-      footerJSX={
-        <SheetClose asChild>
-          <Button
-            variant="success"
-            className="w-full"
-            onClick={() => setSearchQuery(search)}
-          >
-            Search
-          </Button>
-        </SheetClose>
-      }
-    >
-      <div className="w-full space-y-5 flex flex-col">
-        <TextInput
-          value={search}
-          onChange={(value) => setSearch(value)}
-          placeholder="Search for a service"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setSearchQuery(search);
-            }
-          }}
-        />
-      </div>
-      <LineHeader title="Tips" />
-      <ul className="w-full space-y-5">
-        <li className="w-full flex flex-col space-y-1">
-          <p className="text-base font-medium">Use Keywords</p>
-          <p className="text-sm text-gray-500">
-            Use keywords to search for a service instead of a sentence. For
-            example, &quot;plumber&quot; instead of &quot;I need a plumber&quot;
-          </p>
-        </li>
-        <li className="w-full flex flex-col space-y-1">
-          <p className="text-base font-medium">Dont use Location</p>
-          <p className="text-sm text-gray-500">
-            Use the location filter to find services near you, please refrain
-            from searching for a location because it doesn&apos;t work yet.
-          </p>
-        </li>
-        <li className="w-full flex flex-col space-y-1">
-          <p className="text-base font-medium">
-            Don&apos;t Search for Partners
-          </p>
-          <p className="text-sm text-gray-500">
-            If you want to find a partner, use the &quot;Find a Partner&quot;
-            page instead of searching for a service. This will help you find the
-            right person for you.
-          </p>
-        </li>
-      </ul>
-    </CustomSheet>
+    </div>
   );
 }
 
@@ -754,7 +696,7 @@ function NavBar({
   const [search, setSearch] = useState(searchQuery);
   return (
     <div className="sticky top-0 z-50 bg-white border-b flex w-full items-center justify-center lg:px-10 px-5 py-3 dark:border-gray-700">
-      <div className="grid grid-cols-2 w-full">
+      <div className="grid grid-cols-2 w-full !max-w-[85rem]">
         <Link className="flex flex-col w-full" href={"/"}>
           <p className="text-xl font-medium">ReachGig</p>
           <p className="text-sm text-gray-500 tracking-wide">

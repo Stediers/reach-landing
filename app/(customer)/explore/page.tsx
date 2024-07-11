@@ -257,13 +257,10 @@ function Render({
         </div>
       }
     >
-      <div
-        className="lg:grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 hidden w-full"
-        hidden
-      >
+      <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full max-w-[85rem]">
         {search.length > 0 && (
           <div className="flex flex-col items-start justify-center w-full col-span-full">
-            <p className="text-2xl font-medium">
+            <p className="lg:text-2xl text-xl font-medium">
               Search results for &quot;{search}&quot;
             </p>
           </div>
@@ -274,26 +271,6 @@ function Render({
               key={res.service.id}
               service={res.service}
               location={res.partner.state + ", " + res.partner.city}
-            />
-          ))}
-      </div>
-      <div
-        className="lg:hidden grid grid-cols-1 gap-x-14 gap-y-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full"
-        hidden
-      >
-        {search.length > 0 && (
-          <div className="flex flex-col items-start justify-center w-full col-span-full">
-            <p className="text-lg font-medium">
-              Search results for &quot;{search}&quot;
-            </p>
-          </div>
-        )}
-        {response.length > 0 &&
-          response.map((res) => (
-            <ServiceCardMobile
-              key={res.service.id}
-              service={res.service}
-              partner={res.partner}
             />
           ))}
       </div>

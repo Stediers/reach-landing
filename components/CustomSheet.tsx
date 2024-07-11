@@ -41,17 +41,19 @@ export function CustomSheet({
       </SheetTrigger>
       <SheetContent className="flex flex-col items-start justify-between w-full space-y-5 !p-0 overflow-y-scroll hide-scrollbar">
         <div className="flex flex-col items-start justify-start w-full space-y-0">
-          <SheetHeader className="w-full flex flex-col !items-start justify-start space-y-3 border-b bg-white p-5">
-            <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2">
-              {title}
-            </SheetTitle>
-            {description && (
-              <SheetDescription className="text-base text-left">
-                {description}
-              </SheetDescription>
-            )}
+          <SheetHeader className="w-full flex flex-row !items-start justify-start space-x-5 border-b bg-white p-5">
+            <div className="flex flex-col space-y-2  items-start justify-start w-full">
+              <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2 text-left">
+                {title}
+              </SheetTitle>
+              {description && (
+                <SheetDescription className="text-base text-left">
+                  {description}
+                </SheetDescription>
+              )}
+            </div>
             {canClose && (
-              <SheetClose>
+              <SheetClose className="shrink-0">
                 <MdClose className="w-6 h-6" />
               </SheetClose>
             )}

@@ -88,7 +88,7 @@ export function ServiceCardDesktop({
               rel="noopener"
               target="_blank"
             >
-              View Service
+              View In Detail
             </Link>
           </Button>
           <RequestCallback serviceId={service.id} />
@@ -297,7 +297,7 @@ export function ServiceTrigger({
                 src={image}
                 objectPosition="top"
                 alt={service.title}
-                className="rounded-lg w-full lg:h-[300px] h-[250px]"
+                className="rounded-2xl w-full lg:h-[350px] h-[350px]"
                 popup={false}
                 priority={index === 0}
                 quality={75}
@@ -316,31 +316,13 @@ export function ServiceTrigger({
         ) : null}
       </Carousel>
       <div className="flex flex-row items-start justify-between w-full">
-        <div className="flex flex-row items-start justify-between w-[80%] overflow-ellipsis">
+        <div className="flex flex-row items-start justify-between w-full overflow-ellipsis">
           <div className="flex flex-col items-start justify-center space-y-1">
             <p className="text-lg font-medium first-letter:capitalize">
               {service.title.length > 20
                 ? service.title.slice(0, 20) + "..."
                 : service.title}
             </p>
-            <div className="flex flex-row items-center justify-start space-x-1 flex-wrap w-full">
-              <p className="text-sm text-info">
-                {service.serviceType === ServiceType.ONLINE
-                  ? "Online"
-                  : "Offline"}
-              </p>
-              <p className="text-sm text-info">|</p>
-              <p className="text-sm text-info">{service.experience}</p>
-              <p className="text-sm text-info">|</p>
-              <p className="text-sm text-info">
-                {service.preferredGender === PreferredGender.FEMALE
-                  ? "Female"
-                  : service.preferredGender === PreferredGender.MALE
-                  ? "Male"
-                  : "All"}{" "}
-                Audiences
-              </p>
-            </div>
             <div className="flex flex-row items-center justify-start space-x-1">
               <p className="line-through text-sm text-gray-500 font-medium">
                 {priceString({
@@ -352,97 +334,43 @@ export function ServiceTrigger({
                 {showPrice(service.price)}
               </p>
             </div>
+            <div className="flex flex-row items-center justify-start space-x-1 flex-wrap w-full">
+              <p className="text-sm text-info">
+                {service.serviceType === ServiceType.ONLINE
+                  ? "Online"
+                  : "Offline"}
+              </p>
+              <p className="text-sm text-info">|</p>
+              <p className="text-sm text-info">
+                {service.experience} of experience
+              </p>
+              {service.preferredGender !== PreferredGender.UNISEX && (
+                <p className="text-sm text-info">|</p>
+              )}
+              {service.preferredGender !== PreferredGender.UNISEX && (
+                <p className="text-sm text-info">
+                  {service.preferredGender === PreferredGender.FEMALE
+                    ? "Female"
+                    : service.preferredGender === PreferredGender.MALE
+                    ? "Male"
+                    : "All"}{" "}
+                  Audiences
+                </p>
+              )}
+            </div>
           </div>
           {service.rating ? (
             <div className="flex flex-row items-center justify-center space-x-1">
-              <Star size={16} />
-              <p className="text-sm font-medium">{service.rating}</p>
+              <Star size={20} />
+              <p className="text-base font-medium">{service.rating}</p>
             </div>
-          ) : null}
+          ) : (
+            <div className="flex flex-row items-center justify-center space-x-1">
+              <Star size={20} />
+              <p className="text-base font-medium">New</p>
+            </div>
+          )}
         </div>
-        {partner ? (
-          <div className="w-10 h-10 z-40" onClick={(e) => e.stopPropagation()}>
-            <CustomDrawer
-              footerJSX={
-                <div className="grid grid-cols-2 gap-x-2 w-full">
-                  <Button variant="info">
-                    <Link
-                      href={`/partner/${partner.gigId}`}
-                      passHref
-                      rel="noopener"
-                      target="_blank"
-                    >
-                      Learn More
-                    </Link>
-                  </Button>
-                  <DialogClose asChild>
-                    <Button variant="close">Close</Button>
-                  </DialogClose>
-                </div>
-              }
-              triggerJSX={
-                <Avatar className="border border-gray-500 w-10 h-10 rounded-full">
-                  <AvatarImage
-                    src={partner?.imageUrl}
-                    alt={partner?.firstName}
-                    className="object-cover w-full h-full rounded-full"
-                  />
-                  <AvatarFallback>{partner?.firstName[0]}</AvatarFallback>
-                </Avatar>
-              }
-              title="Partner Details"
-              description="View partner details"
-            >
-              <div className="flex flex-col items-start justify-center space-y-5 w-full hover:cursor-pointer">
-                <Avatar className="border border-gray-500 w-44 h-44 rounded-lg">
-                  <AvatarImage
-                    src={partner?.imageUrl}
-                    alt={partner?.firstName}
-                    className="object-cover w-full h-full rounded-lg"
-                  />
-                  <AvatarFallback>{partner?.firstName[0]}</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col items-start justify-center space-y-3">
-                  <div className="flex flex-col items-start justify-center space-y-1">
-                    <p className="text-lg font-medium first-letter:capitalize">
-                      {partner?.firstName} {partner?.lastName}
-                    </p>
-                    <p className="text-base text-primary font-medium">
-                      {partner?.designation}
-                    </p>
-                  </div>
-                  <div className="flex flex-row items-center justify-start space-x-2">
-                    <p className="text-base font-medium">
-                      {partner?.gender.charAt(0).toUpperCase() +
-                        partner.gender.slice(1)}
-                    </p>
-                    {partner?.rating && partner.rating > 0 ? (
-                      <Badge variant="success">
-                        <p className="text-sm font-medium">{partner?.rating}</p>
-                      </Badge>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="flex flex-col items-start justify-center space-y-1">
-                  <p className="text-base font-medium text-textsubtle">
-                    Languages Spoken
-                  </p>
-                  <p className="text-base font-medium">
-                    {partner?.languages.join(", ")}
-                  </p>
-                </div>
-                <div className="flex flex-col items-start justify-center space-y-1">
-                  <p className="text-base font-medium text-textsubtle">
-                    Location
-                  </p>
-                  <p className="text-base font-medium">
-                    {partner?.city}, {partner?.state}
-                  </p>
-                </div>
-              </div>
-            </CustomDrawer>
-          </div>
-        ) : null}
       </div>
     </div>
   );

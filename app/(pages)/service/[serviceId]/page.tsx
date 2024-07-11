@@ -98,7 +98,7 @@ export default async function Page({
   const gig = response && response!!.gig;
   const callback = response && response!!.callback;
   return response && service && gig && callback ? (
-    <div className="min-h-screen w-screen flex justify-center items-start max-w-[90rem]">
+    <div className="min-h-screen w-full flex justify-center items-start max-w-[85rem]">
       <div
         className="flex flex-col items-center justify-start w-full min-h-full pt-5"
         hidden
@@ -136,7 +136,7 @@ export default async function Page({
                 <h1 className="text-xl lg:text-2xl font-medium text-left first-letter:capitalize w-full">
                   {service.title}
                 </h1>
-                <div className="w-full lg:pb-5 pt-5">
+                <div className="w-full lg:pb-5 pt-5 max-w-md">
                   <PriceComponent price={service.price} />
                 </div>
                 <div className="hidden w-full lg:flex flex-col gap-y-5" hidden>
@@ -157,7 +157,6 @@ export default async function Page({
                 images={service.imageUrls}
                 showImagePreview
                 imageHeight="h-48 lg:h-[23rem]"
-                autoPlay
               />
             </div>
             <div className="flex flex-col items-start justify-start w-full gap-y-5 lg:hidden">
@@ -372,17 +371,17 @@ function MajorDetails({
           subtitle="This service is provided online"
           icon={<AiFillVideoCamera className="text-3xl text-info" />}
         />
-      ) : service.serviceType === ServiceType.OFFLINE ? (
+      ) : service.serviceType === ServiceType.OFFLINE && !service.address ? (
         <Setting
           title="Offline"
           subtitle={location}
           icon={<MdLocationCity className="text-3xl text-info" />}
         />
-      ) : service.serviceType === ServiceType.HOME && service.address ? (
+      ) : service.serviceType === ServiceType.OFFLINE && service.address ? (
         <Setting
-          title="Home Service"
-          subtitle={service.address.city + ", " + service.address.state}
-          icon={<AiFillHome className="text-3xl text-info" />}
+          title={service.address.name}
+          subtitle={service.address.state + ", " + service.address.city}
+          icon={<MdLocationCity className="text-3xl text-info" />}
         />
       ) : null}
       {callback.requested > 0 ? (
@@ -414,27 +413,29 @@ function MajorDetails({
       <Setting
         title="Experience"
         subtitle={`I have ${service.experience} of experience`}
-        icon={<GiBowTieRibbon className="text-3xl" />}
+        icon={<GiBowTieRibbon className="text-3xl text-info" />}
       />
-      <Setting
-        title="Preferred Gender"
-        subtitle={
-          service.preferredGender === PreferredGender.MALE
-            ? "Male Audiences Only"
-            : service.preferredGender === PreferredGender.FEMALE
-            ? "Female Audiences Only"
-            : "All Audiences"
-        }
-        icon={
-          service.preferredGender === PreferredGender.MALE ? (
-            <IoIosMale className="text-3xl text-blue-500" />
-          ) : service.preferredGender === PreferredGender.FEMALE ? (
-            <IoIosFemale className="text-3xl text-pink-500" />
-          ) : (
-            <IoIosTransgender className="text-3xl text-purple-500" />
-          )
-        }
-      />
+      {service.preferredGender === PreferredGender.UNISEX ? null : (
+        <Setting
+          title="Preferred Gender"
+          subtitle={
+            service.preferredGender === PreferredGender.MALE
+              ? "Male Audiences Only"
+              : service.preferredGender === PreferredGender.FEMALE
+              ? "Female Audiences Only"
+              : "All Audiences"
+          }
+          icon={
+            service.preferredGender === PreferredGender.MALE ? (
+              <IoIosMale className="text-3xl text-blue-500" />
+            ) : service.preferredGender === PreferredGender.FEMALE ? (
+              <IoIosFemale className="text-3xl text-pink-500" />
+            ) : (
+              <IoIosTransgender className="text-3xl text-purple-500" />
+            )
+          }
+        />
+      )}
     </div>
   );
 }

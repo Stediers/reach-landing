@@ -111,7 +111,7 @@ function YourOwnProfile() {
           Your browser does not support the video tag.
         </video>
         <div
-          className="lg:grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full hidden"
+          className="lg:grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full hidden h-full"
           hidden
         >
           <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full relative">
@@ -291,9 +291,9 @@ function Hero() {
     <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center lg:py-10 pt-5 pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[70vh] max-w-[90rem]">
       <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full">
         <ReachSVG className="w-32 lg:w-40" color="#f40e1e" />
-        <h1 className="text-4xl lg:text-5xl font-medium !leading-snug">
+        <h1 className="text-3xl lg:text-5xl font-medium  !leading-snug">
           Find the most <br />
-          <span className="text-primary font-semibold">Reliable</span> <br />
+          Reliable <br />
           <SwitchText
             textArray={[
               "Makeup Artists",
@@ -394,18 +394,21 @@ function Pricing() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full">
         <PricingCard
           title="Free"
-          description="For those who want to try out the platform."
+          description="For budding individuals who want to get started."
           price={0}
+          commision={0}
           features={[
             "Personalized Profile",
             "Lead Generation",
             "Maximum of 5 services",
           ]}
+          tag="Everyone get a chance"
         />
         <PricingCard
           title="Basic"
-          description="For those who want to use the platform occasionally."
+          description="For individuals and small businesses."
           capped={800}
+          commision={20}
           price={20}
           features={[
             "Everything in Free",
@@ -413,24 +416,25 @@ function Pricing() {
             "Proof of Appointment",
             "Automated Appointment Flows",
             "Dispute Resolution Team",
-            "Free Personalized Profile",
             "Maximum of 10 services",
           ]}
+          tag="Collected from your clients"
         />
         <PricingCard
-          title="Pro"
-          description="For those who want to use the platform regularly."
-          price={30}
+          title="Enterprise"
+          description="For large scale businesses who want to use the platform regularly."
+          price={1499}
           features={[
             "Everything in Basic",
             "Invoice Generation",
             "Unlimited Services",
-            "Priority Support",
+            "Unlimited Businesses",
             "Brand building assistance",
-            "Free Marketing",
-            "Free SEO",
+            "Dedicated Account Manager",
+            "Customized Solutions",
           ]}
           capped={1500}
+          tag="Invest in your business"
         />
       </div>
     </HeaderWrapper>
@@ -440,17 +444,21 @@ function Pricing() {
 function PricingCard({
   title,
   description,
+  commision,
   price,
   features,
   className,
   capped,
+  tag,
 }: {
   title: string;
   description: string;
-  price: number;
+  commision?: number;
   features: string[];
   className?: string;
   capped?: number;
+  tag: string;
+  price: number;
 }) {
   return (
     <Card
@@ -458,22 +466,29 @@ function PricingCard({
     >
       <div className="flex flex-col items-start justify-start h-full space-y-10">
         <div className="flex flex-col items-start justify-start space-y-5">
-          <p className="text-base font-medium">Charged to your Clients</p>
+          <p className="text-base font-medium">{tag}</p>
           <h3 className="text-3xl font-medium">{title}</h3>
           <p className="text-lg">{description}</p>
-          <div className="flex flex-col items-start justify-start space-y-5">
-            <p className="text-3xl font-medium w-full flex flex-row space-x-2 items-center">
-              <span>{price}</span>
-              <Percent size={20} />
-              <span className="text-lg font-normal">Advance</span>
-            </p>
-            {capped && (
-              <p className="text-lg font-normal">
-                Capped at{" "}
-                <span className="text-success font-medium">₹{capped}</span>
+          {commision != undefined ? (
+            <div className="flex flex-col items-start justify-start space-y-5">
+              <p className="text-3xl font-medium w-full flex flex-row space-x-2 items-center">
+                <span>{commision}</span>
+                <Percent size={20} />
+                <span className="text-lg font-normal">Advance</span>
               </p>
-            )}
-          </div>
+              {capped && (
+                <p className="text-lg font-normal">
+                  Capped at{" "}
+                  <span className="text-success font-medium">₹{capped}</span>
+                </p>
+              )}
+            </div>
+          ) : (
+            <p className="text-3xl font-medium w-full flex flex-row space-x-2 items-center">
+              <span>₹ {price}</span>
+              <span className="text-lg font-normal">/ month</span>
+            </p>
+          )}
         </div>
 
         <ul className="flex flex-col items-start justify-start space-y-5">

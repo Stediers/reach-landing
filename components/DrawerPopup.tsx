@@ -40,6 +40,7 @@ import {
   SheetDescription,
 } from "./ui/sheet";
 import BoxRating from "./BoxRating";
+import Link from "next/link";
 
 export function ServicePopupMobile({
   service,
@@ -205,16 +206,18 @@ export function ServicePopupDesktop({
                   {service.experience} of Experience
                 </p>
               </Badge>
-              <Badge variant="hardOutline">
-                <p className="text-sm font-medium">
-                  {service.preferredGender === PreferredGender.FEMALE
-                    ? "Female"
-                    : service.preferredGender === PreferredGender.MALE
-                    ? "Male"
-                    : "All"}{" "}
-                  Audiences
-                </p>
-              </Badge>
+              {service.preferredGender !== PreferredGender.UNISEX ? (
+                <Badge variant="hardOutline">
+                  <p className="text-sm font-medium">
+                    {service.preferredGender === PreferredGender.FEMALE
+                      ? "Female"
+                      : service.preferredGender === PreferredGender.MALE
+                      ? "Male"
+                      : "All"}{" "}
+                    Audiences
+                  </p>
+                </Badge>
+              ) : null}
               <Badge variant="hardOutline">
                 <p className="text-sm font-medium">
                   Provided{" "}
@@ -226,6 +229,19 @@ export function ServicePopupDesktop({
                 <Badge variant="hardOutline">
                   <p className="text-sm font-medium">{location}</p>
                 </Badge>
+              ) : null}
+              {service.address ? (
+                <Link
+                  href={`https://www.google.com/maps/search/${service.address.name} ${service.address.city} ${service.address.state}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Badge variant="hardOutline">
+                    <p className="text-sm font-medium">
+                      {service.address.name}
+                    </p>
+                  </Badge>
+                </Link>
               ) : null}
               {service.rating && service.rating > 0 ? (
                 <BoxRating rating={service.rating} />

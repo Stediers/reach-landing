@@ -202,10 +202,10 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
           <CustomDrawer
             triggerJSX={
               <Button variant="info" id="open">
-                Enquire Now
+                Request a Call
               </Button>
             }
-            title="Enquire Now"
+            title="Request a Call"
             description="Let the partner know you are interested in their service. They will get back to you shortly."
             footerJSX={
               <div className="flex flex-col space-y-2 w-full">
@@ -234,7 +234,7 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
                     }
                   }}
                 >
-                  <p className="text-md font-medium">Enquire Now</p>
+                  <p className="text-md font-medium">Request a Call</p>
                 </Button>
                 <DrawerClose className="w-full" id="close-drawer">
                   <Button variant="outline">
@@ -264,7 +264,7 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
           <CustomDrawer
             triggerJSX={
               <Button variant="info" id="open">
-                Enquire Now
+                Request a Call
               </Button>
             }
             title="Login Required"
@@ -287,7 +287,7 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
         )
       ) : (
         <CustomDrawer
-          triggerJSX={<Button variant="info">Enquire Now</Button>}
+          triggerJSX={<Button variant="info">Request a Call</Button>}
           title="Login Required"
           description="This feature is only available to logged in users."
           footerJSX={<></>}
@@ -441,10 +441,10 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
           <CustomDialog
             triggerJSX={
               <Button variant="info" id="open">
-                Enquire Now
+                Request a Call
               </Button>
             }
-            title="Enquire Now"
+            title="Request a Call"
             description="Let the partner know you are interested in their service. They will get back to you shortly."
             footerJSX={
               <div className="flex flex-col space-y-2 w-full">
@@ -473,7 +473,7 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
                     }
                   }}
                 >
-                  <p className="text-md font-medium">Enquire Now</p>
+                  <p className="text-md font-medium">Request a Call</p>
                 </Button>
               </div>
             }
@@ -496,7 +496,7 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
           </CustomDialog>
         ) : (
           // <CustomDialog
-          //   triggerJSX={<Button variant="info">Enquire Now</Button>}
+          //   triggerJSX={<Button variant="info">Request a Call</Button>}
           //   title="Login Required"
           //   description="This feature is only available to logged in users."
           // >
@@ -513,12 +513,12 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
             onVerifyOTP={() => {
               // window.location.reload();
             }}
-            triggerJSX={<Button variant="info">Enquire Now</Button>}
+            triggerJSX={<Button variant="info">Request a Call</Button>}
           />
         )
       ) : (
         <CustomDialog
-          triggerJSX={<Button variant="info">Enquire Now</Button>}
+          triggerJSX={<Button variant="info">Request a Call</Button>}
           title="Login Required"
           description="This feature is only available to logged in users."
           footerJSX={<></>}
