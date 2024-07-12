@@ -865,7 +865,7 @@ function NavBar({
                   </Link>
                 </SheetClose>
               </div>
-              <LineHeader title="Tips" />
+              <LineHeader title="Tips" className="py-5" />
               <ul className="w-full space-y-5">
                 <li className="w-full flex flex-col space-y-1">
                   <p className="text-base font-medium">Use Keywords</p>

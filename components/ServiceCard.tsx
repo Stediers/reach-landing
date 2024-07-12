@@ -364,12 +364,7 @@ export function ServiceTrigger({
               <Star size={20} />
               <p className="text-base font-medium">{service.rating}</p>
             </div>
-          ) : (
-            <div className="flex flex-row items-center justify-center space-x-1">
-              <Star size={20} />
-              <p className="text-base font-medium">New</p>
-            </div>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
