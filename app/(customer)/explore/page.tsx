@@ -257,7 +257,7 @@ function Render({
         </div>
       }
     >
-      <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full max-w-[85rem]">
+      <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-[85rem]">
         {search.length > 0 && (
           <div className="flex flex-col items-start justify-center w-full col-span-full">
             <p className="lg:text-2xl text-xl font-medium">
