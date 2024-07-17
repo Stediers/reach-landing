@@ -5,6 +5,7 @@ import { showSnackBar } from "@components/notifications/Snackbar";
 import { ApiExecutionStatus, ApiResult, Base64 } from "@data/types";
 import devLog from "@helper_functions/devLog";
 import { openInNewTab } from "@helper_functions/newTab";
+import { AUTH_API_URL, CUSTOMER_API_URL } from "@data/api";
 
 export async function fetchAPIProtected<T>({
   url,
@@ -25,7 +26,7 @@ export async function fetchAPIProtected<T>({
     const token = getCookie("user-token");
     if (token != null) {
       const res = await fetch(
-        `${baseUrl ? baseUrl : process.env.NEXT_PUBLIC_BASE_API_URL}/${url}`,
+        `${baseUrl ? baseUrl : CUSTOMER_API_URL}/${url}`,
         {
           method: RequestMethod[method],
           headers: {
@@ -105,16 +106,13 @@ export async function fetchAPIPublic<T>({
         status: false,
       };
     }
-    const res = await fetch(
-      `${baseUrl ? baseUrl : process.env.NEXT_PUBLIC_AUTH_API_URL}/${url}`,
-      {
-        method: RequestMethod[method],
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      }
-    );
+    const res = await fetch(`${baseUrl ? baseUrl : AUTH_API_URL}/${url}`, {
+      method: RequestMethod[method],
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
     const data: ApiResult<T> = await res.json();
     return handleErrors
       ? await handleApiError<T>(res, data, snackbar)

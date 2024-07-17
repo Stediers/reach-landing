@@ -16,13 +16,17 @@ import Mobile from "@src/console/appointments/[appointmentId]/Mobile";
 import Desktop from "@src/console/appointments/[appointmentId]/Desktop";
 import ConsoleWrapper from "@wrapper/ConsoleWrapper";
 import { useEffect, useState } from "react";
-import { fetchAppointment } from "@api_functions/appointments/fetch-appointment";
+import {
+  FetchAppointmentResponseAPI,
+  fetchAppointment,
+} from "@api_functions/appointments/fetch-appointment";
 import {
   RaiseDisputeRequest,
   raiseDispute,
 } from "@api_functions/appointments/raise-dispute";
 import { rateAppointment } from "@api_functions/appointments/rate-appointment";
 import { showSnackBar } from "@components/notifications/Snackbar";
+import { fetchAddressByUserId } from "@api_functions/address/fetch-address-by-userId";
 
 export default function Page({
   params,
@@ -30,7 +34,7 @@ export default function Page({
   params: { appointmentId: string };
 }) {
   const [pageState, setPageState] = useState<State>(State.LOADING);
-  const [response, setResponse] = useState<FetchAppointmentResponse | null>(
+  const [response, setResponse] = useState<FetchAppointmentResponseAPI | null>(
     null
   );
   const [partnerFeedback, setPartnerFeedback] = useState<Feedback>({
@@ -39,7 +43,7 @@ export default function Page({
     review: "",
   });
 
-  const [address, setAddress] = useState<LocationAttributes | null>(null);
+  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
   useEffect(() => {
     setPageState(State.LOADING);
@@ -47,11 +51,11 @@ export default function Page({
       if (res) {
         console.log(res);
         setResponse(res);
-        if (res.completed && res.completed.partnerFeedback) {
-          setPartnerFeedback(res.completed.partnerFeedback);
-        }
-        if (res.scheduled.address) {
-          setAddress(res.scheduled.address);
+        if (
+          res.appointment.completed &&
+          res.appointment.completed.partnerFeedback
+        ) {
+          setPartnerFeedback(res.appointment.completed.partnerFeedback);
         }
       }
       setPageState(State.SUCCESS);
@@ -92,7 +96,7 @@ export default function Page({
       desktopJSX={
         response && (
           <Desktop
-            appointment={response}
+            appointment={response.appointment}
             partnerFeedback={partnerFeedback}
             setPartnerFeedback={setPartnerFeedback}
             raiseDisputeRequest={raiseDisputeRequest}
@@ -104,13 +108,16 @@ export default function Page({
                 partnerFeedback,
               })
             }
+            userAddresses={response.userAddresses}
+            selectedAddress={selectedAddress}
+            setSelectedAddress={setSelectedAddress}
           />
         )
       }
       mobileJSX={
         response && (
           <Mobile
-            appointment={response}
+            appointment={response.appointment}
             partnerFeedback={partnerFeedback}
             setPartnerFeedback={setPartnerFeedback}
             raiseDisputeRequest={raiseDisputeRequest}
@@ -122,8 +129,9 @@ export default function Page({
                 partnerFeedback,
               })
             }
-            address={address}
-            setAddress={setAddress}
+            userAddresses={response.userAddresses}
+            selectedAddress={selectedAddress}
+            setSelectedAddress={setSelectedAddress}
           />
         )
       }

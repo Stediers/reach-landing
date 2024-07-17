@@ -1,3 +1,4 @@
+import { attachAddressAppointment } from "@api_functions/appointments/attach-address-appointment";
 import { RaiseDisputeRequest } from "@api_functions/appointments/raise-dispute";
 import AppointmentCard from "@components/AppointmentCard";
 import { BookingBillInvoice } from "@components/Bill";
@@ -9,17 +10,25 @@ import Setting from "@components/Setting";
 import { SubUnderlinedHeader } from "@components/UnderlinedHeader";
 import RatingInput from "@components/input/RatingInput";
 import TextArea from "@components/input/TextArea";
+import UpdateAddressDrawer from "@components/manage-appointment/UpdateAddress";
 import { showSnackBar } from "@components/notifications/Snackbar";
 import { Button } from "@components/ui/button";
 import { DialogClose } from "@components/ui/dialog";
 import { DrawerClose } from "@components/ui/drawer";
-import { AppointmentStatus, DisputeStatus, State } from "@data/enums";
+import {
+  AppointmentStatus,
+  DisputeStatus,
+  ServiceType,
+  State,
+} from "@data/enums";
 import {
   FetchAppointmentResponse,
   CustomerFeedback,
   Price,
   Feedback,
   RoutePayment,
+  Address,
+  LocationAttributes,
 } from "@data/types";
 import { payWindow } from "@helper_functions/payment";
 import { priceString } from "@helper_functions/priceString";
@@ -41,6 +50,9 @@ export default function Desktop({
   setRaiseDisputeRequest,
   raiseDispute,
   rateAppointment,
+  userAddresses,
+  selectedAddress,
+  setSelectedAddress,
 }: {
   partnerFeedback: Feedback;
   setPartnerFeedback: Dispatch<SetStateAction<Feedback>>;
@@ -49,6 +61,9 @@ export default function Desktop({
   setRaiseDisputeRequest: Dispatch<SetStateAction<RaiseDisputeRequest>>;
   raiseDispute: () => Promise<void>;
   rateAppointment: () => Promise<void>;
+  userAddresses: Address[];
+  selectedAddress: Address | null;
+  setSelectedAddress: Dispatch<SetStateAction<Address | null>>;
 }) {
   return (
     <DesktopWrapper
@@ -87,6 +102,21 @@ export default function Desktop({
       </div>
       <SubUnderlinedHeader title="Actions" />
       <div className="grid grid-cols-3 gap-2 w-full">
+        {appointment.service.serviceType === ServiceType.OFFLINE && (
+          <UpdateAddressDrawer
+            address={selectedAddress}
+            setAddress={setSelectedAddress}
+            appointmentId={appointment.id}
+            userAddresses={userAddresses}
+            onSubmit={async (value) => {
+              await attachAddressAppointment({
+                addressId: value,
+                appointmentId: appointment.id,
+              });
+              window.location.reload();
+            }}
+          />
+        )}
         <RatingDrawer
           partnerFeedback={partnerFeedback}
           setPartnerFeedback={setPartnerFeedback}

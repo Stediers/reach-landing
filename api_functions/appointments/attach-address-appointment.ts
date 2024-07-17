@@ -5,7 +5,7 @@ import { LocationAttributes } from "@data/types";
 
 interface AttachAddressAppointmentRequest {
   appointmentId: string;
-  address: LocationAttributes;
+  addressId: string;
 }
 
 export async function attachAddressAppointment(

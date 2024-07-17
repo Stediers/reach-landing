@@ -27,7 +27,7 @@ export default function Checkout({
       var options = {
         key_id: process.env.RAZORPAY_KEY_ID, //Enter the Key ID generated from the Dashboard
         one_click_checkout: true,
-        name: "Acme Corp", //your business name
+        name: "ReachGig",
         order_id: orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1; mandatory
         show_coupons: true, // default true; false if coupon widget should be hidden
         handler: function (response: any) {

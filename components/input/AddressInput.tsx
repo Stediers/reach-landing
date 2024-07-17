@@ -17,10 +17,12 @@ export default function AddressInput({
   location,
   onChange,
   title,
+  placeholder,
 }: {
   location: LocationAttributes | null;
   onChange: (value: LocationAttributes) => void;
   title?: string;
+  placeholder?: string;
 }) {
   const indiaCode = Country.getCountryByCode("IN");
   const states = StateType.getStatesOfCountry("IN");
@@ -56,7 +58,7 @@ export default function AddressInput({
         setAutocompleteService(autocompleteService);
       })
       .catch((err) => {
-        devLog(err);
+        console.log(err);
         setPageState(State.ERROR);
       });
   }, []);
@@ -72,53 +74,20 @@ export default function AddressInput({
     if (!location) {
       return;
     }
-    if (location.state.length === 0) {
-      return;
-    }
     const state = states.find((state) => state.name === location.state);
     if (!state) {
+      setCanChangeState(true);
       return;
     }
     const cities = City.getCitiesOfState(
       indiaCode?.isoCode as string,
       state.isoCode
     );
+    const city = cities.find((city) => city.name === location.city);
+    if (!city) {
+      setCanChangeCity(true);
+    }
     setCities(cities);
-  }, [location]);
-
-  useEffect(() => {
-    if (!location) {
-      // devLog("No location");
-      return;
-    }
-    if (location.city.length === 0) {
-      // devLog("No city");
-      return;
-    }
-    if (location.state.length === 0) {
-      // devLog("No state");
-      return;
-    }
-    if (location.country.length === 0) {
-      // devLog("No country");
-      return;
-    }
-    if (location.postalCode.length === 0) {
-      // devLog("No postal code");
-      return;
-    }
-    if (!location.lat || location.lat <= 0) {
-      // devLog("No lat");
-      return;
-    } else if (!location.lng || location.lng <= 0) {
-      // devLog("No lng");
-      return;
-    }
-    if (location.addressLine2.length === 0) {
-      // devLog("No formatted address");
-      return;
-    }
-    // devLog("can save address");
   }, [location]);
 
   const [locationQuery, setLocationQuery] = useState(
@@ -132,7 +101,7 @@ export default function AddressInput({
       text="Map is loading, please wait..."
     >
       <TextInput
-        placeholder={title || "Eg. Bollineni Hillside"}
+        placeholder={placeholder || "Search for your address"}
         value={locationQuery}
         onChange={(value) => {
           setLocationQuery(value);
@@ -150,12 +119,13 @@ export default function AddressInput({
               if (status !== "OK" || !predictions) {
                 return;
               }
-              setPredictions(predictions);
+              //filter out null prediction and predictions without state
+              setPredictions(predictions.filter((prediction) => prediction));
             }
           );
         }}
         id="pac-input"
-        title="Search for your location"
+        title={title || "Search for your address"}
       />
       {locationQuery.length > 0 && predictions.length > 0 && (
         <div className="flex flex-col space-y-2 relative w-full">
@@ -165,8 +135,6 @@ export default function AddressInput({
             onChange={onChange}
             setPredictions={setPredictions}
             geocoder={geocoder}
-            setCanChangeState={setCanChangeState}
-            setCanChangeCity={setCanChangeCity}
             setCanChangePostalCode={setCanChangePostalCode}
           />
         </div>
@@ -175,7 +143,7 @@ export default function AddressInput({
         <div className="grid grid-cols-2 gap-4 w-full">
           <div className="col-span-2 lg:col-span-2">
             <TextInput
-              title="Primary Details"
+              title="Address Line 1"
               errorText={
                 location
                   ? location.addressLine1.length === 0
@@ -186,21 +154,6 @@ export default function AddressInput({
               placeholder="Eg. Flat 404, Floor 4 OR 404, 4 etc.."
               value={location ? location.addressLine1 : ""}
               onChange={(value) => {
-                // setLocation((prev) => ({
-                //   addressLine1: value,
-                //   addressLine2: prev ? prev.addressLine2 : "",
-                //   city: prev ? prev.city : "",
-                //   state: prev ? prev.state : "",
-                //   country: prev ? prev.country : "",
-                //   lat: prev ? prev.lat : 0,
-                //   lng: prev ? prev.lng : 0,
-                //   postalCode: prev ? prev.postalCode : "",
-                //   landmark:
-                //     prev && prev.landmark && prev.landmark.length > 0
-                //       ? prev.landmark
-                //       : null,
-                //   addressType: prev ? prev.addressType : AddressType.APARTMENT,
-                // }));
                 onChange({
                   addressLine1: value,
                   addressLine2: location.addressLine2,
@@ -217,7 +170,7 @@ export default function AddressInput({
             />
           </div>
           <TextInputWithDropdown
-            value=""
+            value={location.state}
             title="State"
             disabled={!canChangeState}
             resetAfterSelect={false}
@@ -233,21 +186,6 @@ export default function AddressInput({
                 state.isoCode
               );
               setCities(cities);
-              // setLocation((prev) => ({
-              //   addressLine1: prev ? prev.addressLine1 : "",
-              //   addressLine2: prev ? prev.addressLine2 : "",
-              //   city: prev ? prev.city : "",
-              //   state: value,
-              //   country: prev ? prev.country : "",
-              //   lat: prev ? prev.lat : 0,
-              //   lng: prev ? prev.lng : 0,
-              //   addressType: prev ? prev.addressType : AddressType.APARTMENT,
-              //   landmark:
-              //     prev && prev.landmark && prev.landmark.length > 0
-              //       ? prev.landmark
-              //       : null,
-              //   postalCode: prev ? prev.postalCode : "",
-              // }));
               onChange({
                 addressLine1: location.addressLine1,
                 addressLine2: location.addressLine2,
@@ -263,28 +201,13 @@ export default function AddressInput({
             }}
           />
           <TextInputWithDropdown
-            value=""
+            value={location.city}
             title="City"
             disabled={!canChangeCity}
             resetAfterSelect={false}
             placeholder="Eg. Chennai"
             options={cities.map((city) => city.name)}
             onSelect={(value) => {
-              // setLocation((prev) => ({
-              //   addressLine1: prev ? prev.addressLine1 : "",
-              //   addressLine2: prev ? prev.addressLine2 : "",
-              //   city: value,
-              //   state: prev ? prev.state : "",
-              //   country: prev ? prev.country : "",
-              //   lat: prev ? prev.lat : 0,
-              //   lng: prev ? prev.lng : 0,
-              //   addressType: prev ? prev.addressType : AddressType.APARTMENT,
-              //   landmark:
-              //     prev && prev.landmark && prev.landmark.length > 0
-              //       ? prev.landmark
-              //       : null,
-              //   postalCode: prev ? prev.postalCode : "",
-              // }));
               onChange({
                 addressLine1: location.addressLine1,
                 addressLine2: location.addressLine2,
@@ -317,21 +240,6 @@ export default function AddressInput({
                 : "Postal code cannot be empty"
             }
             onChange={(value) => {
-              // setLocation((prev) => ({
-              //   addressLine1: prev ? prev.addressLine1 : "",
-              //   addressLine2: prev ? prev.addressLine2 : "",
-              //   city: prev ? prev.city : "",
-              //   state: prev ? prev.state : "",
-              //   country: prev ? prev.country : "",
-              //   lat: prev ? prev.lat : 0,
-              //   lng: prev ? prev.lng : 0,
-              //   addressType: prev ? prev.addressType : AddressType.APARTMENT,
-              //   landmark:
-              //     prev && prev.landmark && prev.landmark.length > 0
-              //       ? prev.landmark
-              //       : null,
-              //   postalCode: value,
-              // }));
               onChange({
                 addressLine1: location.addressLine1,
                 addressLine2: location.addressLine2,
@@ -355,9 +263,15 @@ export default function AddressInput({
 export function AddressNameInput({
   addressName,
   onChange,
+  title = "Name",
+  showSuggestions = true,
+  placeholder = "Name your address",
 }: {
   addressName: string;
   onChange: (value: string) => void;
+  title?: string;
+  showSuggestions?: boolean;
+  placeholder?: string;
 }) {
   return (
     <div className="flex flex-col items-start justify-center space-y-3 w-full">
@@ -368,8 +282,8 @@ export function AddressNameInput({
         className="w-full flex flex-col items-start justify-start space-y-2"
       >
         <TextInput
-          title="Name"
-          placeholder="Name your address"
+          title={title}
+          placeholder={placeholder}
           value={addressName}
           onChange={(value) =>
             // setAddressName(value.charAt(0).toUpperCase() + value.slice(1))
@@ -385,31 +299,33 @@ export function AddressNameInput({
               : ""
           }
         />
-        <div className="flex flex-row items-center justify-start space-x-3 w-full">
-          {Object.values(AddressName).map((name, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="flex flex-row items-center justify-start space-x-1"
-              onClick={() => {
-                // setAddressName(name.charAt(0).toUpperCase() + name.slice(1));
-                onChange(name.charAt(0).toUpperCase() + name.slice(1));
-              }}
-            >
-              <Chip
-                title={name.charAt(0).toUpperCase() + name.slice(1)}
-                className={`hover:cursor-pointer ${
-                  addressName === name.charAt(0).toUpperCase() + name.slice(1)
-                    ? "bg-info text-white"
-                    : "border-text border"
-                }`}
-                titleClassName="text-sm"
-              />
-            </motion.div>
-          ))}
-        </div>
+        {!showSuggestions ? null : (
+          <div className="flex flex-row items-center justify-start space-x-3 w-full">
+            {Object.values(AddressName).map((name, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="flex flex-row items-center justify-start space-x-1"
+                onClick={() => {
+                  // setAddressName(name.charAt(0).toUpperCase() + name.slice(1));
+                  onChange(name.charAt(0).toUpperCase() + name.slice(1));
+                }}
+              >
+                <Chip
+                  title={name.charAt(0).toUpperCase() + name.slice(1)}
+                  className={`hover:cursor-pointer ${
+                    addressName === name.charAt(0).toUpperCase() + name.slice(1)
+                      ? "bg-info text-white"
+                      : "border-text border"
+                  }`}
+                  titleClassName="text-sm"
+                />
+              </motion.div>
+            ))}
+          </div>
+        )}
       </motion.div>
     </div>
   );
@@ -421,8 +337,6 @@ function Predictions({
   onChange,
   setPredictions,
   geocoder,
-  setCanChangeState,
-  setCanChangeCity,
   setCanChangePostalCode,
 }: {
   predictions: google.maps.places.AutocompletePrediction[];
@@ -432,8 +346,6 @@ function Predictions({
     React.SetStateAction<google.maps.places.AutocompletePrediction[]>
   >;
   geocoder: google.maps.Geocoder | null;
-  setCanChangeState: React.Dispatch<React.SetStateAction<boolean>>;
-  setCanChangeCity: React.Dispatch<React.SetStateAction<boolean>>;
   setCanChangePostalCode: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
@@ -481,7 +393,7 @@ function Predictions({
                     (component) => component.types[0] === "locality"
                   )?.long_name as string;
 
-                  devLog(city);
+                  console.log(city);
 
                   const state = addressComponents.find(
                     (component) =>
@@ -499,13 +411,13 @@ function Predictions({
                   const lat = result.geometry?.location.lat() ?? 0;
                   const lng = result.geometry?.location.lng() ?? 0;
 
-                  if (!city || city.length === 0) {
-                    setCanChangeCity(true);
-                  }
+                  // if (!city || city.length === 0) {
+                  //   setCanChangeCity(true);
+                  // }
 
-                  if (!state || state.length === 0) {
-                    setCanChangeState(true);
-                  }
+                  // if (!state || state.length === 0) {
+                  //   setCanChangeState(true);
+                  // }
 
                   if (!postalCode || postalCode.length === 0) {
                     setCanChangePostalCode(true);

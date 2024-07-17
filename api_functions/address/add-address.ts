@@ -9,8 +9,10 @@ export interface AddAddressRequest {
   locationName: string;
 }
 
-export async function addAddress(request: AddAddressRequest): Promise<boolean> {
-  const response = await fetchAPIProtected({
+export async function addAddress(
+  request: AddAddressRequest
+): Promise<string | null> {
+  const response = await fetchAPIProtected<string>({
     url: `add-address`,
     method: RequestMethod.POST,
     body: request,
@@ -22,5 +24,5 @@ export async function addAddress(request: AddAddressRequest): Promise<boolean> {
       keys: [`fetch-address-by-userId`],
     });
   }
-  return response.status;
+  return response.data;
 }

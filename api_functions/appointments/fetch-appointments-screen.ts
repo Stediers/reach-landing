@@ -7,7 +7,7 @@ export async function fetchAppointmentsScreen(): Promise<
   FetchAppointmentResponse[] | null
 > {
   const response = await fetchAPIProtected<FetchAppointmentResponse[]>({
-    method: RequestMethod.GET,
+    method: RequestMethod.POST,
     url: "fetch-appointments-screen",
     baseUrl: APPOINTMENT_API_URL,
   });
