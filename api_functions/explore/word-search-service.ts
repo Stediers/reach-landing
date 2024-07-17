@@ -1,4 +1,5 @@
 import { fetchAPIPublic } from "@api_functions/internal/base-functions";
+import { EXPLORE_API_URL } from "@data/api";
 import {
   Gender,
   PreferredGender,
@@ -43,7 +44,7 @@ export async function wordSearchService(
     method: RequestMethod.POST,
     url: "word-search-service",
     body: request,
-    baseUrl: process.env.NEXT_PUBLIC_UTILITY_API_URL,
+    baseUrl: EXPLORE_API_URL,
   });
 
   return response.data;

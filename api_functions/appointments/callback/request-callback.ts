@@ -1,4 +1,5 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
+import { APPOINTMENT_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { Callback } from "@data/types";
 
@@ -19,6 +20,7 @@ export async function requestCallback(
     url: "request-callback",
     body: request,
     snackbar: true,
+    baseUrl: APPOINTMENT_API_URL,
   });
 
   return res.data;

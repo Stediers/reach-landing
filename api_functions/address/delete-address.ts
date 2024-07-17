@@ -1,13 +1,14 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
 import { deleteItemsFromLocalStorage } from "@api_functions/internal/local-storage";
 import { RequestMethod } from "@data/enums";
+import { ADDRESS_API_URL } from "@data/api";
 
 export async function deleteAddress(addressId: string) {
   const response = await fetchAPIProtected({
     url: `delete-address?addressId=${addressId}`,
     method: RequestMethod.DELETE,
     snackbar: true,
-    baseUrl: process.env.NEXT_PUBLIC_UTILITY_API_URL,
+    baseUrl: ADDRESS_API_URL,
   });
   if (response.status) {
     deleteItemsFromLocalStorage({

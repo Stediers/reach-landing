@@ -1,4 +1,5 @@
 import { fetchAPIPublic } from "@api_functions/internal/base-functions";
+import { ANALYTICS_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 
 export type TrackProfileRequest = {
@@ -18,7 +19,7 @@ export async function trackProfile(
   const res = await fetchAPIPublic<string>({
     method: RequestMethod.POST,
     url: "track-profile",
-    baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL,
+    baseUrl: ANALYTICS_API_URL,
     body: data,
     handleErrors: false,
   });

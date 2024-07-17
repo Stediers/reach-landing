@@ -18,7 +18,7 @@ import TextInput from "./input/TextInput";
 import OtpInput from "react-otp-input";
 import { DrawerClose } from "./ui/drawer";
 import { CustomDialog, ProfileDialog } from "./DialogPopup";
-import { requestCallback } from "@api_functions/callback/request-callback";
+import { requestCallback } from "@api_functions/appointments/callback/request-callback";
 import {
   Country as CountryType,
   ICity,
@@ -34,7 +34,7 @@ import { Callback } from "@data/types";
 import {
   FetchCallbackByServiceIdResponse,
   fetchCallbackByServiceId,
-} from "@api_functions/callback/fetch-callback-by-serviceId";
+} from "@api_functions/appointments/callback/fetch-callback-by-serviceId";
 import { openInNewTab } from "@helper_functions/newTab";
 import Chip from "./Chip";
 import PriceComponent from "./price/MobilePrice";

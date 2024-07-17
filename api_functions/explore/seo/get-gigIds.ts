@@ -1,3 +1,4 @@
+import { EXPLORE_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { ApiResult } from "@data/types";
 
@@ -7,15 +8,12 @@ export type FetchGigIdsResponse = {
 
 export async function fetchGigIds(): Promise<FetchGigIdsResponse | null> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_UTILITY_API_URL}/get-gigIds`,
-      {
-        method: RequestMethod[RequestMethod.GET],
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${EXPLORE_API_URL}/get-gigIds`, {
+      method: RequestMethod[RequestMethod.GET],
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data: ApiResult<FetchGigIdsResponse> = await response.json();
     if (response.status === 200) {
       if (data.errorMessage) {

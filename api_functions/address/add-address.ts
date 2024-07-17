@@ -1,5 +1,6 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
 import { deleteItemsFromLocalStorage } from "@api_functions/internal/local-storage";
+import { ADDRESS_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { LatLng, LocationAttributes } from "@data/types";
 
@@ -14,7 +15,7 @@ export async function addAddress(request: AddAddressRequest): Promise<boolean> {
     method: RequestMethod.POST,
     body: request,
     snackbar: true,
-    baseUrl: process.env.NEXT_PUBLIC_UTILITY_API_URL,
+    baseUrl: ADDRESS_API_URL,
   });
   if (response.status) {
     deleteItemsFromLocalStorage({

@@ -1,4 +1,5 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
+import { AUTH_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 
 export async function checkTokenHealth({
@@ -10,7 +11,7 @@ export async function checkTokenHealth({
     const response = await fetchAPIProtected<boolean>({
       method: RequestMethod.GET,
       url: `check-token-health`,
-      baseUrl: process.env.NEXT_PUBLIC_AUTH_API_URL,
+      baseUrl: AUTH_API_URL,
       handleErrors,
     });
     return response.data;

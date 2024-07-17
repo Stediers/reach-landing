@@ -1,5 +1,5 @@
-import { fetchGigIds } from "@api_functions/seo/get-gigIds";
-import { fetchServiceIds } from "@api_functions/seo/get-serviceIds";
+import { fetchGigIds } from "@api_functions/explore/seo/get-gigIds";
+import { fetchServiceIds } from "@api_functions/explore/seo/get-serviceIds";
 import { MetadataRoute } from "next";
 
 // const URL = "http://localhost:3000";

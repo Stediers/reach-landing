@@ -1,4 +1,5 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
+import { APPOINTMENT_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { FetchAppointmentResponse } from "@data/types";
 
@@ -8,6 +9,7 @@ export async function fetchAppointmentsScreen(): Promise<
   const response = await fetchAPIProtected<FetchAppointmentResponse[]>({
     method: RequestMethod.GET,
     url: "fetch-appointments-screen",
+    baseUrl: APPOINTMENT_API_URL,
   });
 
   return response.data;

@@ -1,4 +1,4 @@
-import { RaiseDisputeRequest } from "@api_functions/disputes/raise-dispute";
+import { RaiseDisputeRequest } from "@api_functions/appointments/raise-dispute";
 import AppointmentCard from "@components/AppointmentCard";
 import { BookingBillInvoice } from "@components/Bill";
 import Card from "@components/Card";

@@ -1,4 +1,5 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
+import { APPOINTMENT_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { Callback } from "@data/types";
 
@@ -7,7 +8,7 @@ export async function fetchCallbacks(): Promise<Callback[] | null> {
     method: RequestMethod.POST,
     url: "fetch-callbacks",
     snackbar: true,
-    baseUrl: process.env.NEXT_PUBLIC_UTILITY_API_URL,
+    baseUrl: APPOINTMENT_API_URL,
     body: {},
   });
 

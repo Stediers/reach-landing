@@ -1,4 +1,5 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
+import { APPOINTMENT_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { Callback } from "@data/types";
 
@@ -17,6 +18,7 @@ export async function fetchCallbackByServiceId({
     method: RequestMethod.GET,
     url: "fetch-callback-by-serviceId?serviceId=" + serviceId,
     handleErrors: false,
+    baseUrl: APPOINTMENT_API_URL,
   });
 
   return {

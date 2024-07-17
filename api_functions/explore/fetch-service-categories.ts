@@ -2,6 +2,7 @@ import {
   fetchAPIProtected,
   fetchAPIPublic,
 } from "@api_functions/internal/base-functions";
+import { EXPLORE_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { Category } from "@data/types";
 
@@ -45,7 +46,7 @@ export async function fetchServiceCategories(): Promise<
 > {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_UTILITY_API_URL}/fetch-service-categories`,
+      `${EXPLORE_API_URL}/fetch-service-categories`,
       {
         next: {
           revalidate: 60,

@@ -2,6 +2,7 @@ import { fetchAPIProtected } from "@api_functions/internal/base-functions";
 import { deleteItemsFromLocalStorage } from "@api_functions/internal/local-storage";
 import { RequestMethod } from "@data/enums";
 import { LocationAttributes } from "@data/types";
+import { ADDRESS_API_URL } from "@data/api";
 
 type UpdateAddressRequest = {
   addressId: string;
@@ -17,7 +18,7 @@ export async function updateAddress(
     method: RequestMethod.POST,
     body: request,
     snackbar: true,
-    baseUrl: process.env.NEXT_PUBLIC_UTILITY_API_URL,
+    baseUrl: ADDRESS_API_URL,
   });
 
   if (res.status) {

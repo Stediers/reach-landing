@@ -20,7 +20,7 @@ import { fetchAppointment } from "@api_functions/appointments/fetch-appointment"
 import {
   RaiseDisputeRequest,
   raiseDispute,
-} from "@api_functions/disputes/raise-dispute";
+} from "@api_functions/appointments/raise-dispute";
 import { rateAppointment } from "@api_functions/appointments/rate-appointment";
 import { showSnackBar } from "@components/notifications/Snackbar";
 

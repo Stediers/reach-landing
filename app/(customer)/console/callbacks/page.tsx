@@ -1,5 +1,5 @@
 "use client";
-import { fetchCallbacks } from "@api_functions/callback/fetch-callbacks";
+import { fetchCallbacks } from "@api_functions/appointments/callback/fetch-callbacks";
 import { CallbackStatus, State } from "@data/enums";
 import { Callback } from "@data/types";
 import Desktop from "@src/console/callback/index/Desktop";

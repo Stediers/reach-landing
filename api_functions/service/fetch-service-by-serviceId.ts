@@ -1,3 +1,4 @@
+import { SERVICE_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import {
   ApiResult,
@@ -19,7 +20,7 @@ export async function fetchServiceByServiceId(
 ): Promise<FetchServiceByServiceIdResponse | null> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API_URL}/fetch-service-by-serviceId?serviceId=${serviceId}`,
+      `${SERVICE_API_URL}/fetch-service-by-serviceId?serviceId=${serviceId}`,
       {
         next: {
           revalidate: 60,

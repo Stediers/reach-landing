@@ -1,4 +1,5 @@
 import { fetchAPIPublic } from "@api_functions/internal/base-functions";
+import { AUTH_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 
 export type VerifyOtpResponse = {
@@ -18,6 +19,7 @@ export async function verifyOTP(
       mobileNumber: mobileNumber,
     },
     snackbar: true,
+    baseUrl: AUTH_API_URL,
   });
   return response.data;
 }

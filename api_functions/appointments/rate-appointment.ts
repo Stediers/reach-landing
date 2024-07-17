@@ -1,4 +1,5 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
+import { APPOINTMENT_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { Feedback } from "@data/types";
 
@@ -15,6 +16,7 @@ export async function rateAppointment(
     url: "rate-appointment",
     body: request,
     snackbar: true,
+    baseUrl: APPOINTMENT_API_URL,
   });
 
   return res.status;

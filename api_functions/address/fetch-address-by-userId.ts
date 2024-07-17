@@ -1,6 +1,7 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
 import { RequestMethod } from "@data/enums";
 import { Address, validateAddress } from "@data/types";
+import { ADDRESS_API_URL } from "@data/api";
 
 export async function fetchAddressByUserId(
   handleErrors?: boolean
@@ -8,7 +9,7 @@ export async function fetchAddressByUserId(
   const response = await fetchAPIProtected<Address[]>({
     url: `fetch-address-by-userId`,
     method: RequestMethod.GET,
-    baseUrl: process.env.NEXT_PUBLIC_UTILITY_API_URL,
+    baseUrl: ADDRESS_API_URL,
     handleErrors: handleErrors,
   });
 
