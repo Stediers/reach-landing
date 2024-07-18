@@ -935,22 +935,24 @@ function SelectState({
     (state) => state.name.toLowerCase().includes(search.toLowerCase())
   );
   useEffect(() => {
-    getStateFromLocation().then((res) => {
-      if (res) {
-        const state =
-          StateType.getStatesOfCountry("IN").find(
-            (state) => state.name === res
-          ) ?? null;
-        setFilter({
-          ...filter,
-          state: state,
-        });
-        const close = document.getElementById(res);
-        if (close) {
-          close.click();
+    if (!filter.state) {
+      getStateFromLocation().then((res) => {
+        if (res) {
+          const state =
+            StateType.getStatesOfCountry("IN").find(
+              (state) => state.name === res
+            ) ?? null;
+          setFilter({
+            ...filter,
+            state: state,
+          });
+          const close = document.getElementById(res);
+          if (close) {
+            close.click();
+          }
         }
-      }
-    });
+      });
+    }
   }, []);
   return (
     <div className="w-fit">
