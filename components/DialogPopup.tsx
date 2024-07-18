@@ -377,7 +377,7 @@ function ListWrapper({
 //               placeholder={response?.user.name}
 //             />
 //             <Button
-//               onclick={_editProfile}
+//               asyncOnClick={_editProfile}
 //               variant="success"
 //               disabled={verifyForm()}
 //             >

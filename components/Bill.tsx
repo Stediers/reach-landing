@@ -217,7 +217,7 @@ export function BookingBillInvoiceDrawer({
                 <Button
                   variant="success"
                   className="w-full"
-                  onclick={async () => {
+                  asyncOnClick={async () => {
                     if (!onConfirm) return;
                     await onConfirm();
                   }}

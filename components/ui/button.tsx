@@ -51,7 +51,7 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   buttonstate?: State;
-  onclick?: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+  asyncOnClick?: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -78,9 +78,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
         onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
-          if (props.onclick) {
+          if (props.asyncOnClick) {
             setButtonState(State.LOADING);
-            await props.onclick(e);
+            await props.asyncOnClick(e);
             setButtonState(State.SUCCESS);
           } else {
             props.onClick?.(e);

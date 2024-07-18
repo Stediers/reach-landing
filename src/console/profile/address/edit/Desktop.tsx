@@ -68,7 +68,7 @@ export default function Desktop({
                 : true
             }
             variant="success"
-            onclick={async () => {
+            asyncOnClick={async () => {
               await editAddress();
             }}
           >

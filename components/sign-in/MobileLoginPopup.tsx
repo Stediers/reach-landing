@@ -43,7 +43,7 @@ export default function MobileLoginPopup({
             variant="default"
             disabled={!verifyMobileNumber(mobileNumber, country.maxLength)}
             className="!w-full"
-            onclick={async () => {
+            asyncOnClick={async () => {
               const response = await sendOTPWrapper({
                 mobileNumber,
                 country,

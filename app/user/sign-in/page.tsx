@@ -152,7 +152,7 @@ function MobileNumberInputMobile({
       />
       <Button
         disabled={!verifyMobileNumber(mobileNumber, country.maxLength)}
-        onclick={async () => {
+        asyncOnClick={async () => {
           const response = await sendOTP(country.code + mobileNumber);
           if (response) {
             setShowOTP(true);

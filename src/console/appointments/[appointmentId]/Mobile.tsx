@@ -291,7 +291,7 @@ function RatingDrawer({
               partnerFeedback.serviceQualityRating === 0 ||
               partnerFeedback.userBehaviourRating === 0
             }
-            onclick={async () => {
+            asyncOnClick={async () => {
               await rateAppointment();
             }}
           >
@@ -413,7 +413,10 @@ function RaiseDispute({
       description="Are you sure you want to raise a dispute?"
       footerJSX={
         <div className="grid grid-cols-2 gap-2 w-full">
-          <Button variant="error" onclick={async () => await raiseDispute()}>
+          <Button
+            variant="error"
+            asyncOnClick={async () => await raiseDispute()}
+          >
             Raise Dispute
           </Button>
           <DrawerClose id="close-drawer" className="w-full">

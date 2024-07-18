@@ -40,7 +40,7 @@ export default function Mobile({
       />
       <Button
         variant="success"
-        onclick={async () => {
+        asyncOnClick={async () => {
           await addAddress();
         }}
         disabled={formValidation.name && formValidation.location ? false : true}

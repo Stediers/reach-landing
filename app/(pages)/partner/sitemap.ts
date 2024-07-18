@@ -13,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${URL}/partner/${gigId}`,
       lastModified: new Date().toISOString(),
       changeFrequency: "daily",
+      priority: 0.7,
     }));
   } catch (error) {
     console.log(error);

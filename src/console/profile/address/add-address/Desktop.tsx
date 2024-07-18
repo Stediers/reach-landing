@@ -80,7 +80,7 @@ export default function Desktop({
         </p>
         <Button
           variant="success"
-          onclick={async () => {
+          asyncOnClick={async () => {
             await addAddress();
           }}
           disabled={

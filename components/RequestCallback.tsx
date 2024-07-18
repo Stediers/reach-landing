@@ -212,7 +212,7 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
                 <Button
                   variant="success"
                   disabled={message.length === 0 || !state || !city}
-                  onclick={async () => {
+                  asyncOnClick={async () => {
                     if (!state || !city) return;
                     const res = await requestCallback({
                       message: message,
@@ -451,7 +451,7 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
                 <Button
                   variant="success"
                   disabled={message.length === 0}
-                  onclick={async () => {
+                  asyncOnClick={async () => {
                     if (!state || !city) return;
                     const res = await requestCallback({
                       message: message,

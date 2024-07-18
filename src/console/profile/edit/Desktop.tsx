@@ -52,7 +52,11 @@ export default function Desktop({
           text="Save"
           disabled={verifyForm()}
         /> */}
-        <Button variant="success" onclick={editProfile} disabled={verifyForm()}>
+        <Button
+          variant="success"
+          asyncOnClick={editProfile}
+          disabled={verifyForm()}
+        >
           Save
         </Button>
       </div>

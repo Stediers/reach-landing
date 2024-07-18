@@ -38,7 +38,11 @@ export default function Mobile({
         title="Name"
         placeholder={response.user.name}
       />
-      <Button onclick={editProfile} variant="success" disabled={verifyForm()}>
+      <Button
+        asyncOnClick={editProfile}
+        variant="success"
+        disabled={verifyForm()}
+      >
         Save
       </Button>
     </MobileWrapper>

@@ -64,7 +64,7 @@ export default function Mobile({
             : true
         }
         variant="success"
-        onclick={async () => {
+        asyncOnClick={async () => {
           await editAddress();
         }}
       >

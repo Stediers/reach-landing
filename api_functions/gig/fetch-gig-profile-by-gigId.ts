@@ -1,3 +1,4 @@
+import { CUSTOMER_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import {
   ApiResult,
@@ -18,7 +19,7 @@ export async function fetchPartnerByPartnerId(
 ): Promise<FetchPartnerByPartnerIdResponse | null> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API_URL}/fetch-gig-profile-by-gigId?gigId=${gigId}`,
+      `${CUSTOMER_API_URL}/fetch-gig-profile-by-gigId?gigId=${gigId}`,
       {
         method: RequestMethod[RequestMethod.GET],
         headers: {

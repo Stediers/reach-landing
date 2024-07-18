@@ -57,7 +57,7 @@ export default function UpdateAddressDrawer({
                 ? !_verifyLocation({ location, addressName })
                 : true
             }
-            onclick={async () => {
+            asyncOnClick={async () => {
               if (type === "existing") {
                 if (!address) {
                   return;
