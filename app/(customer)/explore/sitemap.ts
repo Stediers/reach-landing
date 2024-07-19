@@ -15,20 +15,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [];
   }
 
-  //   return states.map((state) => ({
-  //   url: `${URL}?state=${state.name}`,
-  //   lastModified: new Date().toISOString(),
-  //   changeFrequency: "daily",
-  //   priority: 0.7,
-  // }));
+  return stateNames.map((state) => ({
+    url: `${URL}?state=${state.toLowerCase().replaceAll(/[^a-zA-Z0-9]/g, "")}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: "daily",
+    priority: 0.7,
+  }));
 
   //create an array with every possible combination of state and popular search
-  return stateNames.flatMap((state) =>
-    popularSearches.map((search) => ({
-      url: `${URL}?state=${state}&search=${search}`,
-      lastModified: new Date().toISOString(),
-      changeFrequency: "daily",
-      priority: 0.7,
-    }))
-  );
+  // return stateNames.flatMap((state) =>
+  //   popularSearches.map((search) => ({
+  //     url: `${URL}?state=${state}&search=${search}`,
+  //     lastModified: new Date().toISOString(),
+  //     changeFrequency: "daily",
+  //     priority: 0.7,
+  //   }))
+  // );
 }
