@@ -23,7 +23,7 @@ export default function SwitchText({ textArray }: { textArray: string[] }) {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: -20, opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="font-medium text-primary"
+        className="font-semibold text-primary"
       >
         {textArray.find((_, i) => i === index) || "Make your own path"}
       </motion.span>

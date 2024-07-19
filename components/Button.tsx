@@ -5,7 +5,7 @@ import Loading from "@components/Loading";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function Button({
+export default function LinkButton({
   buttonState = State.SUCCESS,
   buttonTextClassName = "text-base",
   className,

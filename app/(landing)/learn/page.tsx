@@ -41,6 +41,22 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20">
+      <Hero>
+        <div className="flex flex-col items-center justify-center space-y-5 text-white">
+          <ImageComponent
+            src="/images/india-the-land-of-gig-economy.svg"
+            alt="Blog"
+            className="w-full max-w-xs h-[300px] object-cover"
+            border={false}
+          />
+          <h1 className="text-4xl font-bold text-center">
+            Welcome to the ReachGig Blog!
+          </h1>
+          <p className="text-lg text-center">
+            Stay up-to-date with the latest news, updates, and tips on ReachGig!
+          </p>
+        </div>
+      </Hero>
       <HeaderWrapper
         title={
           <span className="!leading-snug">
@@ -191,9 +207,9 @@ function BlogCard({
         <h2 className="lg:text-2xl text-xl font-medium text-left tracking-tight w-full hover:cursor-pointer hover:underline underline-offset-4 group-hover:underline">
           {title}
         </h2>
-        <p className="text-base text-left w-full">
+        <h3 className="text-base text-left w-full">
           {description.substring(0, 150)}...
-        </p>
+        </h3>
         <Button variant="info" asChild size="sm">
           Read More
         </Button>

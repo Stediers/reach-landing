@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   title: "Efficiency Hacks for Stellar Service & Maximum Income",
   description:
     "Struggling to juggle freelance deadlines? Unleash your inner efficiency machine! This guide unlocks essential hacks for stellar client service, project management, workflow automation, and boosted income.  Maximize your freelance potential today! ",
+  keywords:
+    "freelance, efficiency, freelance tips, freelance hacks, freelance income, freelance service, freelance workflow, freelance project management",
 };
 
 export default function Page() {

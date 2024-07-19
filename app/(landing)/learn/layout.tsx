@@ -23,6 +23,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://reachgig.com",
   },
+  keywords:
+    "freelance, finance, freelance tips, freelance finance, freelance taxes, freelance financial management, freelance financial tips, freelance financial advice",
   description:
     "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
   openGraph: {
@@ -46,16 +48,14 @@ export const metadata: Metadata = {
   robots: "index, follow",
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function BlogLayout({ children }: RootLayoutProps) {
   return (
     <div
       className={`${cn(
         fontSans.className
       )} text-text min-h-screen flex !flex-col w-full bg-white items-center justify-center`}
     >
-      <Navbar />
       {children}
-      <Footer />
     </div>
   );
 }

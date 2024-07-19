@@ -86,7 +86,7 @@ export default function Appointment({
                   Call Partner
                 </Button>
                 <Button variant="info" asChild>
-                  <Link href={`/partner/${appointment.partner.gigId}`}>
+                  <Link href={`/partner/@${appointment.partner.handle}`}>
                     View Profile
                   </Link>
                 </Button>

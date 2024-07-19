@@ -1,19 +1,19 @@
-import { fetchGigIds } from "@api_functions/explore/seo/get-gigIds";
-import { fetchServiceIds } from "@api_functions/explore/seo/get-serviceIds";
+import { fetchGigHandles } from "@api_functions/explore/seo/get-gig-handles";
 import { MetadataRoute } from "next";
 
-// const URL = "http://localhost:3000";
-const URL = "https://customer.reachgig.com";
+const URL = "https://reachgig.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
-    const data = await fetchGigIds();
-    const gigIds = data ? data.gigIds : [];
-    return gigIds.map((gigId) => ({
-      url: `${URL}/partner/${gigId}`,
+    const data = await fetchGigHandles();
+    //filter out duplicates
+    const gigHandles = data
+      ? data.filter((item, index) => data.indexOf(item) === index)
+      : [];
+    return gigHandles.map((handle) => ({
+      url: `${URL}/partner/@${handle}`,
       lastModified: new Date().toISOString(),
       changeFrequency: "daily",
-      priority: 0.7,
     }));
   } catch (error) {
     console.log(error);

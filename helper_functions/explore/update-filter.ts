@@ -3,6 +3,7 @@ import { PreferredGender, Gender, SortType } from "@data/enums";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { Country, IState, State as StateType } from "country-state-city";
 import { getStateFromCity } from "./get-state";
+import { closest } from "fastest-levenshtein";
 
 export function updateFilter({
   searchParams,
@@ -31,11 +32,45 @@ export function updateFilter({
     state = getStateFromCity(city);
   } else {
     const states = StateType.getStatesOfCountry("IN");
-    state =
-      states.find((item) => {
-        const state = item.name.toLowerCase().replace(/[^a-zA-Z ]/g, "");
-        return state.localeCompare(state) === 0;
-      }) ?? null;
+    // state =
+    //   states.find((item) => {
+    //     const state = item.name.toLowerCase().replace(/[^a-zA-Z ]/g, "");
+    //     return state.includes(searchParams.get("state")?.toLowerCase() ?? "");
+    //   }) ?? null;
+    // console.log("found state", state);
+    // const closestMatch = closest(e.target.value, options);
+    // if (!closestMatch) return setOptionsToShow([]);
+    // const distanceMatch = distance(e.target.value, closestMatch);
+    // if (distanceMatch > 3) return setOptionsToShow([]);
+    // const closestMatchIndex = options.indexOf(closestMatch);
+    // const closestMatchOptions = options.slice(
+    //   closestMatchIndex,
+    //   closestMatchIndex + 3
+    // );
+    // if (closestMatchOptions.length === 0)
+    //   return setOptionsToShow([]);
+    // setOptionsToShow(closestMatchOptions);
+    const stateName = searchParams.get("state")?.toLowerCase() ?? "";
+    if (stateName) {
+      state =
+        states.find((item) => {
+          const state = item.name.toLowerCase().replace(/[^a-zA-Z ]/g, "");
+          const closestMatch = closest(
+            stateName,
+            states.map((item) =>
+              item.name.toLowerCase().replace(/[^a-zA-Z ]/g, "")
+            )
+          );
+        }) ?? null;
+
+      if (!state) {
+        state =
+          states.find((item) => {
+            const state = item.name.toLowerCase().replace(/[^a-zA-Z ]/g, "");
+            return state.includes(stateName);
+          }) ?? null;
+      }
+    }
   }
 
   const online = searchParams.get("online") === "false" ? false : true;

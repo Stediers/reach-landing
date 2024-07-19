@@ -3,18 +3,8 @@ import {
   fetchPartnerByPartnerId,
 } from "@api_functions/gig/fetch-gig-profile-by-gigId";
 import Logo from "@components/Logo";
-import {
-  Gender,
-  PreferredGender,
-  PricingType,
-  ServiceCategory,
-  ServiceType,
-} from "@data/enums";
-import {
-  AiFillCheckCircle,
-  AiFillCloseCircle,
-  AiFillStar,
-} from "react-icons/ai";
+import { Gender, PricingType } from "@data/enums";
+import { AiFillStar } from "react-icons/ai";
 import {
   BsArrowLeftShort,
   BsFillSpeakerFill,
@@ -22,14 +12,10 @@ import {
   BsGenderMale,
   BsGenderTrans,
 } from "react-icons/bs";
-import { MdEventAvailable, MdEventBusy } from "react-icons/md";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import LineHeader from "@components/LineHeader";
 import { CallSetting } from "@components/Contact";
-import TrackProfileComponent from "@components/track/track-profile";
-import ImageComponent from "@components/ImageComponent";
 import { Metadata } from "next";
 import {
   ServiceCardDesktop,
@@ -37,23 +23,11 @@ import {
   ServiceTriggerDesktopProfile,
   ServiceTriggerMobileProfile,
 } from "@components/ServiceCard";
-import UnderlinedHeader from "@components/UnderlinedHeader";
 import { Badge } from "@components/ui/badge";
 import { AspectRatio } from "@components/ui/aspect-ratio";
 import { Button } from "@components/ui/button";
-import Setting from "@components/Setting";
 import Card from "@components/Card";
-import { ServicePopupDesktop } from "@components/DrawerPopup";
-import { RequestCallback } from "@components/RequestCallback";
-import { FetchServiceResponse } from "@data/types";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@components/ui/carousel";
-import { priceString, showPrice } from "@helper_functions/priceString";
+import { priceString } from "@helper_functions/priceString";
 import { Star } from "lucide-react";
 import { BiCarousel } from "react-icons/bi";
 import PartnerPrompt from "@components/PartnerPrompt";
@@ -120,8 +94,8 @@ export default async function Page({
 
   function Mobile() {
     return response ? (
-      <div className="flex flex-col items-center justify-start w-full min-h-full pt-5 relative">
-        <div className="w-full flex flex-row items-center justify-start space-x-5 px-5">
+      <div className="flex flex-col items-center justify-start w-full min-h-full pt-5 relative px-5 ">
+        <div className="w-full flex flex-row items-center justify-start space-x-5">
           {backLink && (
             <Link
               className="flex flex-row items-center justify-start space-x-5"
@@ -146,7 +120,7 @@ export default async function Page({
 
 function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
   return (
-    <div className="flex flex-col items-center justify-between w-full py-5 px-5 space-y-10">
+    <div className="flex flex-col items-center justify-between w-full py-5 space-y-10">
       <Logo text="ReachGig" textStyle="text-2xl font-medium" />
       <div className="grid lg:grid-cols-2 gap-x-36 gap-y-10 w-full max-w-5xl min-h-[50vh] self-center">
         <div className="flex flex-col items-center justify-center lg:space-y-10 space-y-5 w-full">
@@ -163,46 +137,9 @@ function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
                 response.partner.lastName.slice(1)}
             </span>
           </h1>
-          <p className="lg:text-2xl text-base font-medium capitalize text-primary">
+          <h2 className="lg:text-2xl text-base font-medium capitalize text-primary">
             {response.partner.designation.toUpperCase()}
-          </p>
-          {/* <div className="grid grid-cols-3 gap-2 justify-items-center w-full  max-w-lg">
-            <IconWrapper
-              icon={
-                <AiFillStar className="text-yellow-500 w-8 h-8 lg:w-[2rem] lg:h-[2rem]" />
-              }
-              title={
-                response.partner.rating
-                  ? response.partner.rating.toFixed(1)
-                  : "N/A"
-              }
-            />
-            <IconWrapper
-              icon={
-                response.partner.gender === Gender.MALE ? (
-                  <BsGenderMale className="text-blue-500 text-3xl lg:w-[2rem] lg:h-[2rem]" />
-                ) : response.partner.gender === Gender.FEMALE ? (
-                  <BsGenderFemale className="text-pink-500 text-3xl lg:w-[2rem] lg:h-[2rem]" />
-                ) : (
-                  <BsGenderTrans className="text-purple-500 text-3xl lg:w-[2rem] lg:h-[2rem]" />
-                )
-              }
-              title={
-                response.partner.gender.charAt(0).toUpperCase() +
-                response.partner.gender.slice(1)
-              }
-            />
-            <IconWrapper
-              icon={
-                response.partner.available ? (
-                  <MdEventAvailable className="text-success text-3xl lg:w-[2rem] lg:h-[2rem]" />
-                ) : (
-                  <MdEventBusy className="text-danger text-3xl lg:w-[2rem] lg:h-[2rem]" />
-                )
-              }
-              title={response.partner.available ? "Available" : "Not Available"}
-            />
-          </div> */}
+          </h2>
           {response.partner.exposeMobileNumber ? (
             <CallSetting mobileNumber={response.partner.mobileNumber} />
           ) : null}
@@ -224,17 +161,17 @@ function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
 
 function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
   return (
-    <div className="flex flex-col items-start justify-start space-y-5 w-full lg:px-20 lg:py-32 px-5 py-0">
+    <div className="flex flex-col items-start justify-start space-y-5 w-full lg:px-20 lg:py-32 py-0">
       <div className="grid lg:grid-cols-2 gap-x-36 lg:gap-y-10 space-y-5 w-full self-center">
         <div className="flex flex-col items-start justify-start space-y-5 w-full">
-          <h2 className="lg:text-5xl text-3xl font-medium !leading-normal">
+          <p className="lg:text-5xl text-3xl font-medium !leading-normal">
             A Quick <br />
             <span className="text-primary">Introduction</span>
-          </h2>
-          <p className="lg:text-2xl text-lg font-normal !leading-normal">
+          </p>
+          <h3 className="lg:text-2xl text-lg font-normal !leading-normal">
             Client satisfaction is my top priority. Whether you need a
             professional service or a casual chat, I am here to help you.
-          </p>
+          </h3>
         </div>
         <div
           className="lg:flex flex-col items-start justify-start space-y-10 w-full hidden"
@@ -308,23 +245,6 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
             />
           ) : null}
           {response.partner.isVerified ? (
-            // <div className="flex flex-col items-start justify-start space-y-3 w-full">
-            //   <div className="flex flex-row items-center justify-start space-x-2">
-            //     <p className="lg:text-4xl text-2xl font-medium">
-            //       {response.partner.isVerified ? "Verified" : "Not Verified"}
-            //     </p>
-            //     {response.partner.isVerified ? (
-            //       <AiFillCheckCircle className="text-success w-5 h-5 lg:w-[2rem] lg:h-[2rem]" />
-            //     ) : (
-            //       <AiFillCloseCircle className="text-white w-5 h-5 lg:w-[2rem] lg:h-[2rem]" />
-            //     )}
-            //   </div>
-            //   <p className="lg:text-2xl text-xl">
-            //     {response.partner.isVerified
-            //       ? "I am a verified partner"
-            //       : "I am not a verified partner"}
-            //   </p>
-            // </div>
             <SmallSetting
               title="Verified"
               description={
@@ -346,7 +266,7 @@ function MyServices({
   response: FetchPartnerByPartnerIdResponse;
 }) {
   return (
-    <div className="flex flex-col items-start justify-start w-full lg:min-h-screen lg:p-20 lg:py-16 lg:space-y-20 space-y-10 py-12 px-5 bg-white text-text">
+    <div className="flex flex-col items-start justify-start w-full lg:min-h-screen lg:p-20 lg:py-16 lg:space-y-20 space-y-10 py-12 bg-white text-text">
       <h2 className="lg:text-5xl text-3xl font-medium !leading-normal">
         My
         <br />
@@ -362,7 +282,7 @@ function MyServices({
           </p>
         </div>
       ) : null}
-      <div className="lg:grid grid-cols-3 gap-14 w-full hidden pt-10" hidden>
+      <div className="grid lg:grid-cols-3 lg:gap-14 gap-10 w-full">
         {response.services
           .sort((a, b) => b.price.bookingBill.total - a.price.bookingBill.total)
           .map((service) => (
@@ -375,15 +295,6 @@ function MyServices({
               location={response.partner.city + ", " + response.partner.state}
             />
           ))}
-      </div>
-      <div className="lg:hidden grid grid-cols-1 gap-10 w-full">
-        {response.services.map((service) => (
-          <ServiceCardMobile
-            key={service.id}
-            service={service}
-            serviceTrigger={<ServiceTriggerMobileProfile service={service} />}
-          />
-        ))}
       </div>
     </div>
   );

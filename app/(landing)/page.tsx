@@ -34,11 +34,13 @@ import { NumberCircle } from "@components/landing/NumberCircle";
 import SearchInput from "@components/landing/Search";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
 import SubHeadingWrapper from "@wrapper/SubHeadingWrapper";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
-  title: "ReachGig",
   description:
     "A secure way to interact with service providers. Find the best services and partners for your needs. Empowering the Gig Economy.",
+  keywords:
+    "Makeup Artists, Photographers, Mehendi Artists, Wedding Planners, Service Providers, Gig Economy, Service Categories, Tamil Nadu, India",
   openGraph: {
     title: "ReachGig",
     description:
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "",
+        url: "https://reachgig.com/images/home1.svg",
         width: 800,
         height: 600,
         alt: "ReachGig",
@@ -329,6 +331,7 @@ function Hero() {
         alt="Hero"
         className="w-full h-52 lg:h-96 max-w-lg"
         border={false}
+        priority={true}
       />
     </div>
   );

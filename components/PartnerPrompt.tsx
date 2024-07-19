@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Button from "./Button";
 import { CustomDrawer } from "./DrawerPopup";
 import {
   Drawer,
@@ -13,6 +12,10 @@ import {
   DrawerTrigger,
 } from "./ui/drawer";
 import { Separator } from "./ui/separator";
+import { CustomSheet } from "./CustomSheet";
+import { SheetClose } from "./ui/sheet";
+import LinkButton from "./Button";
+import { Button } from "./ui/button";
 
 export default function PartnerPrompt() {
   const [isDiv1OnTop, setIsDiv1OnTop] = useState(false);
@@ -59,7 +62,7 @@ export default function PartnerPrompt() {
           isDiv1OnTop ? "bg-black text-white" : "bg-white"
         } transition-all duration-300 ease-in-out`}
       >
-        <Drawer closeThreshold={0.5} shouldScaleBackground>
+        {/* <Drawer closeThreshold={0.5} shouldScaleBackground>
           <DrawerTrigger asChild>
             <p className="text-base text-center">
               Are you a freelancer as well?
@@ -121,7 +124,58 @@ export default function PartnerPrompt() {
               </DrawerFooter>
             </div>
           </DrawerContent>
-        </Drawer>
+        </Drawer> */}
+        <CustomSheet
+          title="Get your own profile!"
+          description="It costs nothing to create your profile. Get started in 3 easy steps."
+          triggerJSX={
+            <p className="text-base text-center hover:cursor-pointer">
+              Are you a freelancer as well?
+              <br />
+              <span className="text-primary underline underline-offset-4">
+                Click here
+              </span>
+            </p>
+          }
+          footerJSX={
+            <div className="grid grid-cols-2 gap-5 w-full">
+              <LinkButton
+                text="Get started"
+                className="w-full bg-success text-white"
+                link="https://partner.reachgig.com/user/sign-in"
+                newTab
+              />
+              <SheetClose asChild>
+                <Button variant="close">Close</Button>
+              </SheetClose>
+            </div>
+          }
+        >
+          <div className="flex flex-col items-start justify-start space-y-5">
+            <StepDetails
+              number={1}
+              title="Login with your mobile number"
+              description="We will send you a one-time password to verify your number. This is to ensure that you are a real person."
+            />
+            <Separator orientation="horizontal" />
+            <StepDetails
+              number={2}
+              title={
+                <>
+                  Let us and your clients{" "}
+                  <span className="text-info">know</span> more about you
+                </>
+              }
+              description="Tell us about your skills, experience, and the services you offer."
+            />
+            <Separator orientation="horizontal" />
+            <StepDetails
+              number={3}
+              title="All set!"
+              description="You are now ready to start getting hired by clients. Be your own Boss!"
+            />
+          </div>
+        </CustomSheet>
       </div>
     </div>
   );
@@ -153,8 +207,8 @@ function StepDetails({
 
 function NumberCircle({ number }: { number: number }) {
   return (
-    <div className="w-7 h-7 shrink-0 lg:w-8 lg:h-8 border-success border-2 rounded-full flex items-center justify-center">
-      <p className="text-success font-medium text-xs lg:text-base">{number}</p>
+    <div className="w-8 h-8 shrink-0 lg:w-8 lg:h-8 border-success border-2 rounded-full flex items-center justify-center">
+      <p className="text-success font-medium text-sm lg:text-base">{number}</p>
     </div>
   );
 }

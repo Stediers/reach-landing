@@ -121,7 +121,7 @@ export default async function Page({
             <Logo text="ReachGig" textStyle="text-2xl font-medium" />
             <Link
               className="text-base font-medium text-center text-textsubtle"
-              href={`/partner/${gig.gigId}`}
+              href={`/partner/@${gig.handle}`}
               target="_blank"
             >
               partners with{" "}
@@ -303,7 +303,7 @@ function ProfileCard({
         <Button variant="default" className="!w-full !bg-info" asChild>
           <Link
             href={{
-              pathname: `/partner/${gig.gigId}`,
+              pathname: `/partner/@${gig.handle}`,
               query: {
                 whatsapp: searchParams.whatsapp,
                 backLink: `/service/${serviceId}${

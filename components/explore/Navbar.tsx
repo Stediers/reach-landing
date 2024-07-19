@@ -54,21 +54,25 @@ import { FcDown } from "react-icons/fc";
 import { AiFillCheckCircle, AiOutlineMenu } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { debounce } from "lodash";
+import { debounce, set } from "lodash";
 import { updateFilter } from "@helper_functions/explore/update-filter";
 import {
   detectLocation,
   getStateFromLocation,
 } from "@helper_functions/explore/detectLocation";
+import LoadingWrapper from "@wrapper/LoadingWrapper";
+import { Skeleton } from "@components/ui/skeleton";
 
 function updateFilterRouter({
   filter,
   router,
   currentPath,
+  setPageNavState,
 }: {
   filter: WordSearchServiceRequest;
   router: AppRouterInstance;
   currentPath: string;
+  setPageNavState: React.Dispatch<React.SetStateAction<State>>;
 }) {
   const createLink = currentPath.split("?")[0] + "?";
   const searchParams = new URLSearchParams();
@@ -83,6 +87,7 @@ function updateFilterRouter({
   );
   searchParams.set("online", filter.filter.online.toString());
   searchParams.set("verified", filter.filter.verified.toString());
+  setPageNavState(State.SUCCESS);
   router.replace(createLink + searchParams.toString());
   // router.push(createLink + searchParams.toString());
   // router.prefetch(createLink + searchParams.toString());
@@ -96,18 +101,26 @@ export function NavBar() {
   const currentPath = usePathname();
   const router = useRouter();
 
-  const [filter, setFilter] = useState<WordSearchServiceRequest["filter"]>(
-    updateFilter({
-      searchParams,
-      city: null,
-    })
-  );
+  const [filter, setFilter] = useState<WordSearchServiceRequest["filter"]>({
+    customerGender: PreferredGender.UNISEX,
+    online: false,
+    partnerGender: null,
+    sort: {
+      range: SortType.HIGH_TO_LOW,
+      type: "rating",
+    },
+    state: null,
+    verified: false,
+  });
 
   const searchQuery = searchParams.get("search") ?? "";
 
   const [searchState, setSearchState] = useState<string>(searchQuery);
 
+  const [pageNavState, setPageNavState] = useState<State>(State.LOADING);
+
   useEffect(() => {
+    setPageNavState(State.LOADING);
     console.log("searchState: ", searchState);
     debouncedUpdateFilterRouter({
       filter: {
@@ -121,8 +134,13 @@ export function NavBar() {
       },
       router: router,
       currentPath: currentPath,
+      setPageNavState,
     });
   }, [searchState, filter]);
+
+  useEffect(() => {
+    setFilter(updateFilter({ searchParams, city: null }));
+  }, []);
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
   const [pageState, setPageState] = useState<State>(State.LOADING);
   useEffect(() => {
@@ -141,12 +159,13 @@ export function NavBar() {
     <div className="sticky top-0 z-50 bg-white flex flex-col w-full items-center justify-center dark:border-gray-700">
       <div className="flex flex-row items-center border-b justify-center w-full lg:px-10 px-5 py-3">
         <div className="lg:grid flex grid-cols-2 w-full justify-between lg:!max-w-[85rem]">
-          <Link className="flex flex-col" href={"/"}>
-            <p className="text-xl font-medium">ReachGig</p>
-            <p className="text-sm text-gray-500 tracking-wide">
+          <Link className="flex flex-col w-fit" href={"/explore"}>
+            <h1 className="text-xl font-medium">ReachGig</h1>
+            <h2 className="text-sm text-gray-500 tracking-wide">
               Be your own Boss.
-            </p>
+            </h2>
           </Link>
+
           <DesktopProfile
             path={currentPath}
             pageState={pageState}
@@ -159,12 +178,25 @@ export function NavBar() {
           />
         </div>
       </div>
-      <Filter
-        filter={filter}
-        setFilter={setFilter}
-        searchQuery={searchState}
-        setSearchQuery={setSearchState}
-      />
+      {currentPath === "/explore" && (
+        <LoadingWrapper
+          pageState={pageNavState}
+          loadingJSX={
+            <div className="flex gap-x-5 bg-white z-20 p-3 border justify-start w-full lg:!max-w-[85rem] overflow-x-scroll">
+              {Array.from({ length: 5 }).map((_, index) => (
+                <Skeleton className="w-40 h-10 shrink-0" key={index} />
+              ))}
+            </div>
+          }
+        >
+          <Filter
+            filter={filter}
+            setFilter={setFilter}
+            searchQuery={searchState}
+            setSearchQuery={setSearchState}
+          />
+        </LoadingWrapper>
+      )}
     </div>
   );
 }
@@ -179,7 +211,7 @@ function DesktopProfile({
   pageState: State;
 }) {
   return (
-    <div className="lg:flex hidden" hidden>
+    <div className="lg:flex hidden justify-end" hidden>
       {response ? (
         <div className="flex flex-row items-center justify-end w-full space-x-10">
           {consoleMenus.map((menu) => (
@@ -241,7 +273,7 @@ function DesktopProfile({
             <p className="text-base font-medium">Explore</p>
           </Link>
           <Avatar className="rounded-md !h-10 !w-10 border hover:cursor-pointer flex justify-center">
-            <Loading className="w-4 h-4" />
+            <Loading className="w-4 h-4" type="circle" />
           </Avatar>
         </div>
       ) : (
@@ -365,24 +397,28 @@ function MobileProfile({
           <div className="flex flex-col items-start justify-start w-full space-y-10">
             {response ? (
               consoleMenus.map((menu) => (
-                <Link
-                  href={menu.path}
-                  className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
-                  key={menu.path}
-                >
-                  <div className="flex items-center space-x-5 cursor-pointer hover:text-primary">
-                    <div className="w-[20%]">{menu.icon}</div>
-                    <p className="text-base font-medium w-full">{menu.title}</p>
-                  </div>
-                  {checkHere({ path: path || "", menuPath: menu.path }) && (
-                    <Badge
-                      title="New"
-                      className="rounded-md text-xs bg-indigo-500"
-                    >
-                      Here
-                    </Badge>
-                  )}
-                </Link>
+                <SheetClose asChild key={menu.path}>
+                  <Link
+                    href={menu.path}
+                    className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
+                    key={menu.path}
+                  >
+                    <div className="flex items-center space-x-5 cursor-pointer hover:text-primary">
+                      <div className="w-[20%]">{menu.icon}</div>
+                      <p className="text-base font-medium w-full">
+                        {menu.title}
+                      </p>
+                    </div>
+                    {checkHere({ path: path || "", menuPath: menu.path }) && (
+                      <Badge
+                        title="New"
+                        className="rounded-md text-xs bg-indigo-500"
+                      >
+                        Here
+                      </Badge>
+                    )}
+                  </Link>
+                </SheetClose>
               ))
             ) : (
               <div className="px-1 w-full">
@@ -416,7 +452,7 @@ function MobileProfile({
         </CustomSheet>
       ) : pageState === State.LOADING ? (
         <Avatar className="rounded-md !h-10 !w-10 border hover:cursor-pointer flex justify-center">
-          <Loading className="w-4 h-4" />
+          <Loading className="w-4 h-4" type="circle" />
         </Avatar>
       ) : (
         <CustomSheet

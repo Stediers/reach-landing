@@ -80,7 +80,7 @@ export default function ImageComponent({
           onError={() => {
             setIsError(true);
           }}
-          onLoadingComplete={() => {
+          onLoad={() => {
             setIsLoaded(true);
           }}
           onLoadStart={() => {
