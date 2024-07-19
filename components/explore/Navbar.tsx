@@ -597,11 +597,7 @@ function Filter({
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
-            <SelectState
-              state={filter.state ? filter.state.name : null}
-              setFilter={setFilter}
-              filter={filter}
-            />
+            <SelectState setFilter={setFilter} filter={filter} />
             <Online filter={filter} setFilter={setFilter} />
             {/* <Verified filter={filter} setFilter={setFilter} /> */}
             <SortTypeDropdown filter={filter} setFilter={setFilter} />
@@ -956,11 +952,9 @@ function SearchServiceMobile({
 }
 
 function SelectState({
-  state,
   setFilter,
   filter,
 }: {
-  state: string | null;
   setFilter: React.Dispatch<
     React.SetStateAction<WordSearchServiceRequest["filter"]>
   >;
@@ -978,13 +972,15 @@ function SelectState({
             StateType.getStatesOfCountry("IN").find(
               (state) => state.name === res
             ) ?? null;
-          setFilter({
-            ...filter,
-            state: state,
-          });
-          const close = document.getElementById(res);
-          if (close) {
-            close.click();
+          if (state) {
+            setFilter({
+              ...filter,
+              state: state,
+            });
+            const close = document.getElementById(res);
+            if (close) {
+              close.click();
+            }
           }
         }
       });
