@@ -174,7 +174,7 @@ export default async function Page({
       key={key}
     >
       <Render
-        search={searchParams.search}
+        search={searchParams.search ?? ""}
         searchParams={searchParams}
         key={key}
       />

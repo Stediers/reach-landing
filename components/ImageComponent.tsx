@@ -11,7 +11,7 @@ export default function ImageComponent({
   src,
   className = "w-[120px] h-[120px] shrink-0",
   alt,
-  priority = false,
+  priority,
   border = true,
   popup = true,
   whileHover,

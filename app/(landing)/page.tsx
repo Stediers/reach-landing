@@ -331,7 +331,7 @@ function Hero() {
         alt="Hero"
         className="w-full h-52 lg:h-96 max-w-lg"
         border={false}
-        priority={true}
+        lazy="eager"
       />
     </div>
   );
