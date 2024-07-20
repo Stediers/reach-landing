@@ -20,9 +20,6 @@ export const metadata: Metadata = {
     default: "ReachGig",
     template: "%s | ReachGig",
   },
-  alternates: {
-    canonical: "https://reachgig.com",
-  },
   description:
     "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
   openGraph: {

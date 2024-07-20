@@ -2,7 +2,7 @@ import { fetchServiceIds } from "@api_functions/explore/seo/get-serviceIds";
 import { MetadataRoute } from "next";
 
 // const URL = "http://localhost:3000";
-const URL = "https://customer.reachgig.com";
+const URL = "https://reachgig.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {

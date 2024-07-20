@@ -31,7 +31,6 @@ export const metadata: Metadata = {
     title: "ReachGig",
   },
   manifest: "/manifest.json",
-  metadataBase: new URL("https://customer.reachgig.com"),
   applicationName: "ReachGig",
 };
 
