@@ -331,7 +331,7 @@ export function ServiceTrigger({
               </p>
               <p className="text-lg font-medium">{showPrice(service.price)}</p>
             </div>
-            <div className="flex flex-row items-center justify-start space-x-2 flex-wrap w-full">
+            <div className="flex flex-row items-center justify-start gap-x-2 gap-y-3 flex-wrap w-full">
               <Badge variant="info">
                 {service.serviceType === ServiceType.ONLINE
                   ? "Online"
