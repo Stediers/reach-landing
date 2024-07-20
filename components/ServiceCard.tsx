@@ -299,8 +299,6 @@ export function ServiceTrigger({
                 alt={service.title}
                 className="rounded-2xl w-full lg:h-[350px] h-[350px]"
                 popup={false}
-                priority={index === 0}
-                quality={75}
                 lazy={index === 0 ? "eager" : "lazy"}
               />
             </CarouselItem>
