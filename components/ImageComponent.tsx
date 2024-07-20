@@ -20,6 +20,7 @@ export default function ImageComponent({
   unoptimized = false,
   quality = 100,
   objectFit = "cover",
+  lazy = "lazy",
 }: {
   src: string | StaticImageData;
   className?: string;
@@ -42,6 +43,7 @@ export default function ImageComponent({
   unoptimized?: boolean;
   quality?: number;
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
+  lazy?: "eager" | "lazy";
 }) {
   const [isLoaded, setIsLoaded] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -90,6 +92,7 @@ export default function ImageComponent({
           unoptimized={unoptimized}
           priority={priority}
           quality={quality}
+          loading={lazy}
         />
       )}
     </motion.div>
