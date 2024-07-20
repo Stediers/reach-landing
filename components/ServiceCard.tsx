@@ -329,32 +329,29 @@ export function ServiceTrigger({
                   priceType: "paisa",
                 })}
               </p>
-              <p className="text-base font-medium">
-                {showPrice(service.price)}
-              </p>
+              <p className="text-lg font-medium">{showPrice(service.price)}</p>
             </div>
-            <div className="flex flex-row items-center justify-start space-x-1 flex-wrap w-full">
-              <p className="text-sm text-info">
+            <div className="flex flex-row items-center justify-start space-x-2 flex-wrap w-full">
+              <Badge variant="info">
                 {service.serviceType === ServiceType.ONLINE
                   ? "Online"
                   : "Offline"}
-              </p>
-              <p className="text-sm text-info">|</p>
-              <p className="text-sm text-info">
+              </Badge>
+              {/* <p className="text-sm text-info">
                 {service.experience} of experience
-              </p>
+              </p> */}
+              <Badge variant="infoOutline">
+                {service.experience} of experience
+              </Badge>
               {service.preferredGender !== PreferredGender.UNISEX && (
-                <p className="text-sm text-info">|</p>
-              )}
-              {service.preferredGender !== PreferredGender.UNISEX && (
-                <p className="text-sm text-info">
+                <Badge>
                   {service.preferredGender === PreferredGender.FEMALE
-                    ? "Female"
+                    ? "Women"
                     : service.preferredGender === PreferredGender.MALE
-                    ? "Male"
+                    ? "Men"
                     : "All"}{" "}
-                  Audiences
-                </p>
+                  Only
+                </Badge>
               )}
             </div>
           </div>
@@ -373,7 +370,7 @@ export function ServiceTrigger({
 export function ServiceCardSkeleton() {
   return (
     <div className="flex flex-col items-start justify-center space-y-3 w-full hover:cursor-pointer px-5 lg:px-0">
-      <Skeleton className="rounded-lg w-full h-[300px]" />
+      <Skeleton className="rounded-lg w-full h-[350px]" />
       <div className="flex flex-col items-start justify-center space-y-1">
         <Skeleton className="text-lg font-medium first-letter:capitalize" />
         <Skeleton className="text-sm text-info" />

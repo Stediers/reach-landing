@@ -77,19 +77,19 @@ function updateFilterRouter({
   const createLink = currentPath.split("?")[0] + "?";
   const searchParams = new URLSearchParams();
   searchParams.set("search", filter.query);
-  searchParams.set("customerGender", filter.filter.customerGender);
-  searchParams.set("partnerGender", filter.filter.partnerGender ?? "");
-  searchParams.set("range", filter.filter.sort.range);
-  searchParams.set("sort", filter.filter.sort.type);
   searchParams.set(
     "state",
     filter.filter.state ? filter.filter.state.name : ""
   );
+  searchParams.set("customerGender", filter.filter.customerGender);
+  searchParams.set("partnerGender", filter.filter.partnerGender ?? "");
+  searchParams.set("range", filter.filter.sort.range);
+  searchParams.set("sort", filter.filter.sort.type);
   searchParams.set("online", filter.filter.online.toString());
   searchParams.set("verified", filter.filter.verified.toString());
   setPageNavState(State.SUCCESS);
-  router.replace(createLink + searchParams.toString());
-  // router.push(createLink + searchParams.toString());
+  // router.replace(createLink + searchParams.toString());
+  router.push(createLink + searchParams.toString());
   // router.prefetch(createLink + searchParams.toString());
 }
 
@@ -158,7 +158,7 @@ export function NavBar() {
   return (
     <div className="sticky top-0 z-50 bg-white flex flex-col w-full items-center justify-center dark:border-gray-700">
       <div className="flex flex-row items-center border-b justify-center w-full lg:px-10 px-5 py-3">
-        <div className="lg:grid flex grid-cols-2 w-full justify-between lg:!max-w-[85rem]">
+        <div className="lg:grid flex grid-cols-2 w-full justify-between">
           <Link className="flex flex-col w-fit" href={"/explore"}>
             <h1 className="text-xl font-medium">ReachGig</h1>
             <h2 className="text-sm text-gray-500 tracking-wide">
@@ -182,7 +182,7 @@ export function NavBar() {
         <LoadingWrapper
           pageState={pageNavState}
           loadingJSX={
-            <div className="flex gap-x-5 bg-white z-20 p-3 border justify-start w-full lg:!max-w-[85rem] overflow-x-scroll">
+            <div className="flex gap-x-5 z-20 p-3 border justify-start w-full overflow-x-scroll">
               {Array.from({ length: 5 }).map((_, index) => (
                 <Skeleton className="w-40 h-10 shrink-0" key={index} />
               ))}
@@ -583,10 +583,10 @@ function Filter({
 }) {
   return (
     <div
-      className="flex justify-center w-full gap-x-5 bg-white z-20 p-3 border-b"
+      className="flex justify-center w-full gap-x-5 bg-white z-20 p-3 px-5 lg:px-10 border-b"
       hidden
     >
-      <div className="w-full max-w-[85rem] flex flex-row items-center justify-between">
+      <div className="w-full flex flex-row items-center justify-between">
         <div className="flex lg:flex-row flex-col items-center justify-start lg:space-x-5 gap-y-5 w-full">
           <SearchServiceDesktop
             searchQuery={searchQuery}
