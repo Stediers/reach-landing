@@ -301,7 +301,7 @@ export function ServiceTrigger({
                 popup={false}
                 priority={index === 0}
                 quality={75}
-                lazy="lazy"
+                lazy={index === 0 ? "eager" : "lazy"}
               />
             </CarouselItem>
           ))}
