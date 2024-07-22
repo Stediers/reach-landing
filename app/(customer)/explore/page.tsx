@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { unstable_noStore } from "next/cache";
 import { Render } from "@components/explore/Render";
 import { ServiceCardSkeleton } from "@components/ServiceCard";
-import PaginatedResults from "@components/explore/PaginatedResults";
 
 type Props = {
   params: { id: string };

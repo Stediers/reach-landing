@@ -2,9 +2,7 @@ import {
   WordSearchServiceResponse,
   wordSearchService,
 } from "@api_functions/explore/word-search-service";
-import { ServiceTrigger } from "@components/ServiceCard";
 import { Gender, PreferredGender, SortType } from "@data/enums";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import PaginatedResults from "./PaginatedResults";
 

@@ -48,7 +48,6 @@ import { getStateFromLocation } from "@helper_functions/explore/detectLocation";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import { Skeleton } from "@components/ui/skeleton";
 import useDidMountEffect from "@helper_functions/use-did-mount-effetc";
-import { showSnackBar } from "@components/notifications/Snackbar";
 
 function updateFilterRouter({
   filter,
@@ -75,13 +74,6 @@ function updateFilterRouter({
   router.replace(createLink + searchParams.toString());
   // router.push(createLink + searchParams.toString());
   // router.prefetch(createLink + searchParams.toString());
-
-  const link = createLink + searchParams.toString();
-
-  showSnackBar({
-    message: "Redirecting to " + link,
-    state: State.SUCCESS,
-  });
 
   // window.history.pushState({}, "", link);
 
@@ -148,9 +140,6 @@ export function NavBar() {
 
   return (
     <div className="sticky top-0 z-50 bg-white flex flex-col w-full items-center justify-center dark:border-gray-700">
-      <Link hidden className="w-full hidden" href="/explore" id="explore-link">
-        Explore
-      </Link>
       <div className="flex flex-row items-center border-b justify-center w-full lg:px-10 px-5 py-3">
         <div className="lg:grid flex grid-cols-2 w-full justify-between">
           <Link className="flex flex-col w-fit" href={"/explore"}>

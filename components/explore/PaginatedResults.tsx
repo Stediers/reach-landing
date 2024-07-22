@@ -4,7 +4,6 @@ import {
   wordSearchService,
 } from "@api_functions/explore/word-search-service";
 import { ServiceTrigger } from "@components/ServiceCard";
-import { showSnackBar } from "@components/notifications/Snackbar";
 import { Gender, PreferredGender, SortType, State } from "@data/enums";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import Link from "next/link";
@@ -36,10 +35,6 @@ export default function PaginatedResults({
   const [nextPage, setNextPage] = useState<number>(2);
 
   const fetch = async () => {
-    showSnackBar({
-      message: "Loading more results...",
-      state: State.LOADING,
-    });
     setPageState(State.LOADING);
     const res = await wordSearchService({
       query: searchParams.search ?? "",
