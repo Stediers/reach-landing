@@ -39,8 +39,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <>
       <html lang="en" suppressHydrationWarning>
         <head />
-        <GoogleAnalyticsTracking />
-        <FacebookPixel />
+        {/* <GoogleAnalyticsTracking />
+        <FacebookPixel /> */}
         <body
           className={`${cn(
             fontSans.className
@@ -48,8 +48,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           {children}
 
-          <Analytics />
-          <SpeedInsights />
+          {/* <Analytics />
+          <SpeedInsights /> */}
         </body>
       </html>
     </>

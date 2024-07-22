@@ -4,11 +4,7 @@ import { FetchPartnerResponse, FetchServiceResponse } from "@data/types";
 import { priceString, showPrice } from "@helper_functions/priceString";
 import { Star } from "lucide-react";
 import { BiCarousel } from "react-icons/bi";
-import {
-  ServicePopupMobile,
-  ServicePopupDesktop,
-  CustomDrawer,
-} from "./DrawerPopup";
+import { ServicePopupMobile, ServicePopupDesktop } from "./DrawerPopup";
 import ImageComponent from "./ImageComponent";
 import { RequestCallback } from "./RequestCallback";
 import {
@@ -22,12 +18,9 @@ import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { CustomDialog } from "./DialogPopup";
 import { Badge } from "./ui/badge";
-import BoxRating from "./BoxRating";
-import { DialogClose } from "@radix-ui/react-dialog";
 import { DrawerClose } from "./ui/drawer";
+import Image from "next/image";
 
 export function ServiceCardMobile({
   service,
@@ -276,9 +269,11 @@ export function ServiceTriggerMobileProfile({
 export function ServiceTrigger({
   service,
   partner,
+  eager,
 }: {
   service: FetchServiceResponse;
   partner?: FetchPartnerResponse;
+  eager?: boolean;
 }): JSX.Element {
   return (
     <div className="flex flex-col items-start justify-center space-y-3 w-full hover:cursor-pointer">
@@ -299,8 +294,15 @@ export function ServiceTrigger({
                 alt={service.title}
                 className="rounded-2xl w-full lg:h-[350px] h-[350px]"
                 popup={false}
-                lazy={index === 0 ? "eager" : "lazy"}
+                lazy={eager ? "eager" : "lazy"}
               />
+              {/* <Image
+                src={image}
+                alt={service.title}
+                width={350}
+                height={350}
+                className="w-full border rounded-2xl"
+              /> */}
             </CarouselItem>
           ))}
         </CarouselContent>

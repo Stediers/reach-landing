@@ -19,7 +19,7 @@ import { ICity, IState } from "country-state-city";
 export type WordSearchServiceRequest = {
   query: string;
   filter: {
-    state: IState | null;
+    state: string | null;
     verified: boolean;
     online: boolean;
     sort: {
@@ -34,8 +34,8 @@ export type WordSearchServiceRequest = {
 };
 
 export type WordSearchServiceResponse = {
-  service: FetchServiceResponse;
-  partner: FetchPartnerResponse;
+  data: { service: FetchServiceResponse; partner: FetchPartnerResponse }[];
+  nextPage: boolean;
 };
 
 // export async function fetchPartnerByPartnerId(
@@ -70,7 +70,7 @@ export type WordSearchServiceResponse = {
 
 export async function wordSearchService(
   request: WordSearchServiceRequest
-): Promise<WordSearchServiceResponse[] | null> {
+): Promise<WordSearchServiceResponse | null> {
   try {
     const response = await fetch(`${EXPLORE_API_URL}/word-search-service`, {
       method: RequestMethod[RequestMethod.POST],
@@ -79,7 +79,7 @@ export async function wordSearchService(
       },
       body: JSON.stringify(request),
     });
-    const data: ApiResult<WordSearchServiceResponse[]> = await response.json();
+    const data: ApiResult<WordSearchServiceResponse> = await response.json();
     if (response.status === 200) {
       if (data.errorMessage) {
         return null;

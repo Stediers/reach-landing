@@ -132,7 +132,7 @@ export default async function Image({
           <p tw="text-4xl font-semibold">{gigName}</p>
         </div>
         <div tw="flex flex-row items-center justify-between w-full">
-          <p tw="text-lg font-medium">www.reachgig.com</p>
+          <p tw="text-lg font-medium">reachgig.com</p>
         </div>
       </div>
     ),

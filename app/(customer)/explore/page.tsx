@@ -1,11 +1,11 @@
 import { wordSearchService } from "@api_functions/explore/word-search-service";
 import { Gender, PreferredGender, SortType } from "@data/enums";
-import { getStateFromStateName } from "@helper_functions/explore/get-state";
 import { ResolvingMetadata, Metadata } from "next";
 import { Suspense } from "react";
 import { unstable_noStore } from "next/cache";
 import { Render } from "@components/explore/Render";
 import { ServiceCardSkeleton } from "@components/ServiceCard";
+import PaginatedResults from "@components/explore/PaginatedResults";
 
 type Props = {
   params: { id: string };
@@ -34,9 +34,7 @@ export async function generateMetadata(
   const explore = await wordSearchService({
     query: searchParams.search ?? "",
     filter: {
-      state: searchParams.state
-        ? getStateFromStateName(searchParams.state)
-        : null,
+      state: searchParams.state ?? null,
       verified: searchParams.verified === "false" ? false : true,
       online: searchParams.online === "false" ? false : true,
       sort: {
@@ -70,23 +68,29 @@ export async function generateMetadata(
 
   if (searchParams.search) {
     return {
-      title: `${explore.length} results found in ${searchParams.search}`,
+      title: `${explore.data.length} results found in ${searchParams.search}`,
       description: `Find the best ${searchParams.search} in your area. Compare prices, reviews, and book safe appointments with trusted vendors.`,
       openGraph: {
-        title: `${explore.length} results found in ${searchParams.search}`,
+        title: `${explore.data.length} results found in ${searchParams.search}`,
         description: `Find the best ${
           searchParams.search.length > 0 ? searchParams.search : "services"
         }
           in your area. Compare prices, reviews, and book safe appointments with trusted vendors.`,
         images: [
           {
-            url: explore.length > 0 ? explore[0].service.imageUrls[0] : "",
+            url:
+              explore.data.length > 0
+                ? explore.data[0].service.imageUrls[0]
+                : "",
             width: 800,
             height: 600,
             alt: searchParams.search,
           },
           {
-            url: explore.length > 0 ? explore[0].service.imageUrls[1] : "",
+            url:
+              explore.data.length > 0
+                ? explore.data[0].service.imageUrls[1]
+                : "",
             width: 1800,
             height: 1600,
             alt: searchParams.search,
@@ -98,20 +102,26 @@ export async function generateMetadata(
     };
   } else {
     return {
-      title: `${explore.length} results found just for you`,
+      title: `${explore.data.length} results found just for you`,
       description: `Find the best services in your area. Compare prices, reviews, and book safe appointments with trusted vendors.`,
       openGraph: {
-        title: `${explore.length} results found just for you`,
+        title: `${explore.data.length} results found just for you`,
         description: `Find the best services in your area. Compare prices, reviews, and book safe appointments with trusted vendors.`,
         images: [
           {
-            url: explore.length > 0 ? explore[0].service.imageUrls[0] : "",
+            url:
+              explore.data.length > 0
+                ? explore.data[0].service.imageUrls[0]
+                : "",
             width: 800,
             height: 600,
             alt: searchParams.search,
           },
           {
-            url: explore.length > 0 ? explore[0].service.imageUrls[1] : "",
+            url:
+              explore.data.length > 0
+                ? explore.data[0].service.imageUrls[1]
+                : "",
             width: 1800,
             height: 1600,
             alt: searchParams.search,
@@ -163,21 +173,23 @@ export default async function Page({
     searchParams.partnerGender;
 
   return (
-    <Suspense
-      fallback={
-        <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 w-full p-5">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <ServiceCardSkeleton key={i} />
-          ))}
-        </div>
-      }
-      key={key}
-    >
-      <Render
-        search={searchParams.search ?? ""}
-        searchParams={searchParams}
+    <div className="flex flex-col w-full space-y-10">
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 w-full">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <ServiceCardSkeleton key={i} />
+            ))}
+          </div>
+        }
         key={key}
-      />
-    </Suspense>
+      >
+        <Render
+          search={searchParams.search ?? ""}
+          searchParams={searchParams}
+          key={key}
+        />
+      </Suspense>
+    </div>
   );
 }

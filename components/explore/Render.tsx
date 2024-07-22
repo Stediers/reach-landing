@@ -2,10 +2,11 @@ import {
   WordSearchServiceResponse,
   wordSearchService,
 } from "@api_functions/explore/word-search-service";
-import { ServiceCardDesktop } from "@components/ServiceCard";
+import { ServiceTrigger } from "@components/ServiceCard";
 import { Gender, PreferredGender, SortType } from "@data/enums";
-import { getStateFromStateName } from "@helper_functions/explore/get-state";
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import PaginatedResults from "./PaginatedResults";
 
 export async function Render({
   search,
@@ -24,13 +25,11 @@ export async function Render({
     search: string;
   };
 }) {
-  let response: WordSearchServiceResponse[] | null = null;
-  response = await wordSearchService({
+  let response: WordSearchServiceResponse["data"] | null = null;
+  const resAPI = await wordSearchService({
     query: searchParams.search ?? "",
     filter: {
-      state: searchParams.state
-        ? getStateFromStateName(searchParams.state)
-        : null,
+      state: searchParams.state ?? null,
       verified: searchParams.verified === "false" ? false : true,
       online: searchParams.online === "false" ? false : true,
       sort: {
@@ -55,9 +54,11 @@ export async function Render({
     },
   });
 
+  if (resAPI) response = resAPI.data;
+
   if (!response) redirect("/404");
   return (
-    <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full p-5 lg:px-10">
+    <div className="flex flex-col w-full space-y-10 lg:px-10 px-5 py-5">
       {search.length > 0 && (
         <div className="flex flex-col items-start justify-center w-full col-span-full">
           <p className="lg:text-2xl text-xl font-medium">
@@ -65,18 +66,12 @@ export async function Render({
           </p>
         </div>
       )}
-      {response.length > 0 ? (
-        response.map((res) => (
-          <ServiceCardDesktop
-            key={res.service.id}
-            service={res.service}
-            location={res.partner.state + ", " + res.partner.city}
-          />
-        ))
-      ) : (
-        <p className="text-lg font-medium text-center col-span-full">
-          No results found
-        </p>
+      {resAPI && (
+        <PaginatedResults
+          search={searchParams.search ?? ""}
+          searchParams={searchParams}
+          responseData={resAPI}
+        />
       )}
     </div>
   );

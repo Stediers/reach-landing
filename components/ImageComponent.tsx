@@ -18,7 +18,7 @@ export default function ImageComponent({
   onClick,
   objectPosition = "top",
   unoptimized = false,
-  quality = 100,
+  quality,
   objectFit = "cover",
   lazy = "lazy",
 }: {
@@ -72,7 +72,7 @@ export default function ImageComponent({
           alt={alt}
           sizes="100%"
           fill
-          className="shrink-0"
+          // className="shrink-0"
           style={{ objectFit: "cover", objectPosition }}
           onClick={() => {
             onClick && onClick();

@@ -7,32 +7,21 @@ import { Button } from "@components/ui/button";
 import { CustomSheet } from "@components/CustomSheet";
 import LineHeader from "@components/LineHeader";
 import Loading from "@components/Loading";
-import LoginPerks from "@components/LoginPerks";
 import Setting from "@components/Setting";
 import MobileLogin from "@components/sign-in/MobileNumber";
 import { DialogClose } from "@components/ui/dialog";
 import { SheetClose } from "@components/ui/sheet";
-import {
-  Gender,
-  PreferredGender,
-  ServiceCategory,
-  SortType,
-  State,
-} from "@data/enums";
+import { Gender, PreferredGender, SortType, State } from "@data/enums";
 import { consoleMenus, userMenus } from "@data/menu";
 import checkHere from "@helper_functions/check-path-nav";
 import { eraseCookie } from "@helper_functions/cookie";
 import {
-  AlignJustify,
   IndianRupee,
   LocateIcon,
   LogOutIcon,
   Search,
   ShieldAlert,
   ShieldCheck,
-  SortAscIcon,
-  SortDesc,
-  SortDescIcon,
   Star,
   VideoIcon,
   VideoOffIcon,
@@ -42,9 +31,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { WordSearchServiceRequest } from "@api_functions/explore/word-search-service";
 import TextInput from "@components/input/TextInput";
-import { City, Country, IState, State as StateType } from "country-state-city";
+import { State as StateType } from "country-state-city";
 import { Badge } from "@components/ui/badge";
-import CustomDropdown from "@components/Dropdown";
 import {
   BsGenderAmbiguous,
   BsGenderFemale,
@@ -54,14 +42,13 @@ import { FcDown } from "react-icons/fc";
 import { AiFillCheckCircle, AiOutlineMenu } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { debounce, set } from "lodash";
+import { debounce } from "lodash";
 import { updateFilter } from "@helper_functions/explore/update-filter";
-import {
-  detectLocation,
-  getStateFromLocation,
-} from "@helper_functions/explore/detectLocation";
+import { getStateFromLocation } from "@helper_functions/explore/detectLocation";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import { Skeleton } from "@components/ui/skeleton";
+import useDidMountEffect from "@helper_functions/use-did-mount-effetc";
+import { showSnackBar } from "@components/notifications/Snackbar";
 
 function updateFilterRouter({
   filter,
@@ -77,10 +64,7 @@ function updateFilterRouter({
   const createLink = currentPath.split("?")[0] + "?";
   const searchParams = new URLSearchParams();
   searchParams.set("search", filter.query);
-  searchParams.set(
-    "state",
-    filter.filter.state ? filter.filter.state.name : ""
-  );
+  searchParams.set("state", filter.filter.state ? filter.filter.state : "");
   searchParams.set("customerGender", filter.filter.customerGender);
   searchParams.set("partnerGender", filter.filter.partnerGender ?? "");
   searchParams.set("range", filter.filter.sort.range);
@@ -88,9 +72,24 @@ function updateFilterRouter({
   searchParams.set("online", filter.filter.online.toString());
   searchParams.set("verified", filter.filter.verified.toString());
   setPageNavState(State.SUCCESS);
-  // router.replace(createLink + searchParams.toString());
-  router.push(createLink + searchParams.toString());
+  router.replace(createLink + searchParams.toString());
+  // router.push(createLink + searchParams.toString());
   // router.prefetch(createLink + searchParams.toString());
+
+  const link = createLink + searchParams.toString();
+
+  showSnackBar({
+    message: "Redirecting to " + link,
+    state: State.SUCCESS,
+  });
+
+  // window.history.pushState({}, "", link);
+
+  // const linkButton = document.getElementById("explore-link");
+  // if (linkButton) {
+  //   linkButton.setAttribute("href", link);
+  //   linkButton.click();
+  // }
 }
 
 const debouncedUpdateFilterRouter = debounce(updateFilterRouter, 500);
@@ -101,25 +100,17 @@ export function NavBar() {
   const currentPath = usePathname();
   const router = useRouter();
 
-  const [filter, setFilter] = useState<WordSearchServiceRequest["filter"]>({
-    customerGender: PreferredGender.UNISEX,
-    online: false,
-    partnerGender: null,
-    sort: {
-      range: SortType.HIGH_TO_LOW,
-      type: "rating",
-    },
-    state: null,
-    verified: false,
-  });
+  const [filter, setFilter] = useState<WordSearchServiceRequest["filter"]>(
+    updateFilter({ searchParams })
+  );
 
   const searchQuery = searchParams.get("search") ?? "";
 
   const [searchState, setSearchState] = useState<string>(searchQuery);
 
-  const [pageNavState, setPageNavState] = useState<State>(State.LOADING);
+  const [pageNavState, setPageNavState] = useState<State>(State.SUCCESS);
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     setPageNavState(State.LOADING);
     console.log("searchState: ", searchState);
     debouncedUpdateFilterRouter({
@@ -138,9 +129,9 @@ export function NavBar() {
     });
   }, [searchState, filter]);
 
-  useEffect(() => {
-    setFilter(updateFilter({ searchParams, city: null }));
-  }, []);
+  // useEffect(() => {
+  //   setFilter(updateFilter({ searchParams }));
+  // }, []);
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
   const [pageState, setPageState] = useState<State>(State.LOADING);
   useEffect(() => {
@@ -157,6 +148,9 @@ export function NavBar() {
 
   return (
     <div className="sticky top-0 z-50 bg-white flex flex-col w-full items-center justify-center dark:border-gray-700">
+      <Link hidden className="w-full hidden" href="/explore" id="explore-link">
+        Explore
+      </Link>
       <div className="flex flex-row items-center border-b justify-center w-full lg:px-10 px-5 py-3">
         <div className="lg:grid flex grid-cols-2 w-full justify-between">
           <Link className="flex flex-col w-fit" href={"/explore"}>
@@ -975,7 +969,7 @@ function SelectState({
           if (state) {
             setFilter({
               ...filter,
-              state: state,
+              state: state.name,
             });
             const close = document.getElementById(res);
             if (close) {
@@ -993,7 +987,7 @@ function SelectState({
         description="Select your state"
         triggerJSX={
           <Button variant="outline">
-            {filter.state ? `${filter.state.name}` : "India"}
+            {filter.state ? `${filter.state}` : "India"}
             <span className="ml-3">
               <LocateIcon className="w-5 h-5" />
             </span>
@@ -1016,13 +1010,15 @@ function SelectState({
                   ) ?? null;
                 setFilter({
                   ...filter,
-                  state: state,
+                  state: state ? state.name : null,
                 });
                 setSearch(res);
                 const close = document.getElementById(res);
                 if (close) {
                   close.click();
                 }
+              } else {
+                alert("Could not detect location");
               }
             }}
             variant="info"
@@ -1050,7 +1046,7 @@ function SelectState({
                   onClick={() => {
                     setFilter({
                       ...filter,
-                      state: state,
+                      state: state.name,
                     });
                     setSearch(state.name);
                   }}

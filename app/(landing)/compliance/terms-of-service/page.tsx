@@ -69,11 +69,11 @@ export default function Main() {
             We operate the website&nbsp;
             <Link
               rel="noreferrer"
-              href="http://www.reachgig.com"
+              href="http://reachgig.com"
               target="_blank"
               className={link}
             >
-              http&#58;//www.reachgig.com
+              http&#58;//reachgig.com
             </Link>
             &nbsp; &#40;the &#39;<span className={textHighlight}>Site</span>
             &#39;&#41;&#44; the mobile application Reach &#40;the &#39;

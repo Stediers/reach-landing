@@ -22,6 +22,7 @@ export default function LoadingWrapper({
       <p className={loadingTextClassName}>{text}</p>
     </div>
   ),
+  id,
 }: PropsWithChildren<{
   pageState: State;
   className?: string;
@@ -30,9 +31,10 @@ export default function LoadingWrapper({
   loadingTextClassName?: string;
   loadingSVGClassName?: string;
   loadingJSX?: JSX.Element;
+  id?: string;
 }>) {
   return (
-    <div className="flex flex-col w-full space-y-3">
+    <div className="flex flex-col w-full space-y-3" id={id}>
       {pageState === State.LOADING ? loadingJSX : null}
       {pageState === State.ERROR ? (
         <div className="flex justify-center items-center h-screen">
