@@ -53,7 +53,7 @@ export function RequestCallback({ serviceId }: { serviceId: string }) {
   );
 }
 
-function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
+export function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
   const [buttonState, setButtonState] = useState(State.LOADING);
   const [response, setResponse] =
     useState<FetchCallbackByServiceIdResponse | null>(null);
@@ -193,7 +193,7 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
             </div>
           </CustomSheet>
         ) : response.loggedIn ? (
-          <CustomDrawer
+          <CustomSheet
             triggerJSX={
               <Button variant="info" id="open">
                 Request a Call
@@ -253,7 +253,7 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
                 title="Ask me anything"
               />
             </div>
-          </CustomDrawer>
+          </CustomSheet>
         ) : (
           <CustomDrawer
             triggerJSX={
@@ -427,6 +427,9 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
           </Card>
         ) : response.loggedIn ? (
           <Card className="!p-10 !items-start shadow-lg">
+            <p className="text-center text-xl font-medium">
+              Request a call from the partner
+            </p>
             <SelectStateAndCity
               city={city ? city.name : ""}
               state={state ? state.name : ""}

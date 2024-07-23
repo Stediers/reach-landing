@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 import { BiCarousel } from "react-icons/bi";
 import { ServicePopupMobile, ServicePopupDesktop } from "./DrawerPopup";
 import ImageComponent from "./ImageComponent";
-import { RequestCallback } from "./RequestCallback";
+import { RequestCallback, RequestCallbackMobile } from "./RequestCallback";
 import {
   Carousel,
   CarouselContent,
@@ -84,7 +84,7 @@ export function ServiceCardDesktop({
               View In Detail
             </Link>
           </Button>
-          <RequestCallback serviceId={service.id} />
+          <RequestCallbackMobile serviceId={service.id} />
         </div>
       }
       triggerJSX={serviceTrigger}
