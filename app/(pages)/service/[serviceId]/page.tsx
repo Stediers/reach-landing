@@ -14,7 +14,9 @@ import {
   AiOutlineClose,
   AiOutlineInfoCircle,
 } from "react-icons/ai";
-import UnderlinedHeader from "@components/UnderlinedHeader";
+import UnderlinedHeader, {
+  SubUnderlinedHeader,
+} from "@components/UnderlinedHeader";
 import { Button } from "@components/ui/button";
 import { Badge } from "@components/ui/badge";
 import { FetchPartnerResponse, FetchServiceResponse, Price } from "@data/types";
@@ -35,6 +37,7 @@ import { RequestCallback } from "@components/RequestCallback";
 import { User } from "lucide-react";
 import { CustomDialog } from "@components/DialogPopup";
 import { AddOnMobile } from "@components/AddOn";
+import CustomImageGridLayout from "@components/CustomImageGridLayout";
 
 const getFullName = (firstName: string, lastName: string) => {
   return (
@@ -60,6 +63,32 @@ export const generateMetadata = async ({
       title: {
         absolute: `${response!!.service.title} | ReachGig`,
       },
+      openGraph: {
+        title: `${response!!.service.title} | ReachGig`,
+        description: `${response!!.service.whatsIncluded.join(", ")}`,
+        images: [
+          {
+            url:
+              response.service.imageUrls.length > 0
+                ? response.service.imageUrls[0]
+                : "",
+            width: 800,
+            height: 600,
+            alt: response.service.title,
+          },
+          {
+            url:
+              response.service.imageUrls.length > 1
+                ? response.service.imageUrls[1]
+                : "",
+            width: 1800,
+            height: 1600,
+            alt: response.service.title,
+          },
+        ],
+        type: "website",
+        url: `https://reachgig.com/service/${serviceId}`,
+      },
       description: `${response!!.service.whatsIncluded.join(", ")}`,
     };
   }
@@ -78,9 +107,7 @@ export default async function Page({
   };
 }) {
   const serviceId = params.serviceId;
-  const backLink = searchParams.backLink
-    ? decodeURIComponent(searchParams.backLink)
-    : null;
+  const backLink = searchParams.backLink;
 
   const event = searchParams.whatsapp
     ? "whatsapp"
@@ -97,80 +124,46 @@ export default async function Page({
   const service = response && response!!.service;
   const gig = response && response!!.gig;
   const callback = response && response!!.callback;
-  return response && service && gig && callback ? (
-    <div className="min-h-screen w-full flex justify-center items-start max-w-[85rem]">
-      <div
-        className="flex flex-col items-center justify-start w-full min-h-full pt-5"
-        hidden
-      >
-        <div className="w-full flex flex-row items-center justify-start space-x-5 px-5">
-          {backLink && (
-            <Link
-              className="flex flex-row items-center justify-start space-x-5"
-              href={backLink}
-            >
-              <BsArrowLeftShort className="text-4xl cursor-pointer self-start" />
-            </Link>
-          )}
-        </div>
-        {event !== "preview" && (
-          <TrackServiceComponent serviceId={serviceId} event={event} />
-        )}
-        <div className="flex flex-col items-center justify-start w-full space-y-5 px-5 relative">
-          <div className="flex flex-col items-center justify-center w-full space-y-2 pb-3">
-            <Logo text="ReachGig" textStyle="text-2xl font-medium" />
-            <Link
-              className="text-base font-medium text-center text-textsubtle"
-              href={`/partner/@${gig.handle}`}
-              target="_blank"
-            >
-              partners with{" "}
-              <span className="text-primary">
-                {getFullName(gig.firstName, gig.lastName)}
-              </span>{" "}
+
+  return (
+    <div className="w-full flex flex-col items-start justify-center max-w-[85rem] lg:px-10 lg:pt-10 relative">
+      <div className="flex lg:hidden w-full" hidden>
+        <ImageCarousel
+          images={service.imageUrls}
+          imageHeight="h-64 lg:h-[30rem]"
+          itemBasis="lg:basis-1/4"
+          border={false}
+          className="lg:rounded-lg bg-black overflow-hidden"
+        />
+      </div>
+      <div className="hidden lg:flex w-full">
+        <CustomImageGridLayout imageUrls={service.imageUrls} />
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-5 justify-items-center items-start">
+        <div className="flex flex-col items-start justify-start w-full space-y-2 py-5 lg:px-0">
+          <div className="flex flex-col items-start justify-start w-full space-y-2 px-5 lg:px-0">
+            <h1 className="text-2xl font-medium text-left first-letter:capitalize w-full max-w-[60%]">
+              {service.title}
+            </h1>
+            <Link href={`/partner/@${gig.handle}`} shallow>
+              <h2 className="text-lg text-left first-letter:capitalize w-full text-primary underline underline-offset-4">
+                {gig.firstName + " " + gig.lastName}
+              </h2>
             </Link>
           </div>
-          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-x-16 gap-x-0 lg:gap-y-20 lg:pt-8 justify-items-center lg:pb-20">
-            <div className="flex flex-col items-start justify-start lg:justify-between w-full space-y-2">
-              <div className="flex flex-col items-start justify-start w-full space-y-2">
-                <h1 className="text-xl lg:text-2xl font-medium text-left first-letter:capitalize w-full">
-                  {service.title}
-                </h1>
-                <div className="w-full lg:pb-5 pt-5 max-w-md">
-                  <PriceComponent price={service.price} />
-                </div>
-                <div className="hidden w-full lg:flex flex-col gap-y-5" hidden>
-                  <MajorDetails
-                    service={service}
-                    location={gig.city + ", " + gig.state}
-                    callback={callback}
-                  />
-                  <RequestCallback serviceId={serviceId} />
-                </div>
-              </div>
-            </div>
-            <div
-              className="flex flex-col gap-y-5 w-full col-span-2 lg:col-span-1 lg:sticky lg:top-20"
-              hidden
-            >
-              <ImageCarousel
-                images={service.imageUrls}
-                showImagePreview
-                imageHeight="h-48 lg:h-[23rem]"
-              />
-            </div>
-            <div className="flex flex-col items-start justify-start w-full gap-y-5 lg:hidden">
-              <LineHeader title="Essentials" />
+          <div className="w-full grid grid-cols-1 items-start justify-start gap-y-5 px-5 lg:px-0 pt-5 lg:gap-x-10">
+            <div className="flex flex-col items-start justify-start w-full space-y-5 max-w-lg">
+              <PriceComponent price={service.price} />
               <MajorDetails
                 service={service}
                 location={gig.city + ", " + gig.state}
                 callback={callback}
               />
             </div>
-            <div className="block lg:hidden w-full col-span-2">
-              <LineHeader title="About the service" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col lg:justify-start items-start md:gap-x-10 lg:gap-x-10 lg:gap-y-20 gap-y-10 w-full lg:-mt-10">
+          </div>
+          <div className="w-full flex flex-col items-start justify-start space-y-5 px-5 lg:px-0 pt-5">
+            <LineHeader title="About the service" className="lg:hidden" />
+            <div className="grid grid-cols-1 w-full gap-5 lg:gap-y-10">
               {service.whatsIncluded && service.whatsIncluded.length > 0 && (
                 <ListWrapper
                   list={service.whatsIncluded}
@@ -197,46 +190,26 @@ export default async function Page({
               )}
             </div>
           </div>
-          <div className="sticky bottom-0 w-full lg:hidden bg-white py-3 !border-none !outline-none">
-            <RequestCallback serviceId={serviceId} />
-          </div>
-          {service.addOns.length > 0 ? (
-            <div className="flex flex-col w items-start justify-start w-full gap-y-5 lg:pt-0 lg:pb-10">
-              <UnderlinedHeader
-                title="Add Ons"
-                align="items-start"
-                className="hidden lg:block"
-              />
-              <LineHeader title="Add Ons" className="lg:hidden" />
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-5 pt-5">
-                {service.addOns.map((addOn, index) => (
-                  <AddOnMobile key={index} addOn={addOn} />
-                ))}
-              </div>
-            </div>
-          ) : null}
-          <div className="flex flex-col items-start justify-start w-full gap-y-5 lg:pt-0 lg:pb-10">
-            <div className="max-w-lg w-full">
-              <UnderlinedHeader
-                title="Know more about me"
-                align="items-start"
-                className="hidden lg:block"
-              />
-              <LineHeader title="Your Partner" className="lg:hidden" />
-              <ProfileCard
-                gig={gig}
-                searchParams={searchParams}
-                backLink={backLink ?? ""}
-                serviceId={serviceId}
-              />
-            </div>
-          </div>
+        </div>
+        <div className="lg:sticky lg:top-20 hidden lg:flex flex-col gap-y-5 w-full pt-10 ">
+          <RequestCallback serviceId={serviceId} />
         </div>
       </div>
+      <div className="sticky bottom-0 py-5 bg-white lg:hidden flex flex-col gap-y-5 w-full px-5">
+        <RequestCallback serviceId={serviceId} />
+      </div>
+      <div className="w-full flex flex-col items-start justify-start space-y-5 pt-5 col-span-2 max-w-lg lg:px-0 px-5">
+        <UnderlinedHeader title="Know more about me" align="items-start" />
+        <ProfileCard
+          gig={gig}
+          searchParams={searchParams}
+          backLink={backLink ?? ""}
+          serviceId={serviceId}
+        />
+      </div>
     </div>
-  ) : null;
+  );
 }
-
 function ProfileCard({
   gig,
   searchParams,
@@ -364,7 +337,7 @@ function MajorDetails({
   };
 }) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-5 justify-items-center">
+    <div className="grid grid-cols-1 w-full gap-5 justify-items-center max-w-lg">
       {service.serviceType === ServiceType.ONLINE ? (
         <Setting
           title="Online"
@@ -436,6 +409,13 @@ function MajorDetails({
           }
         />
       )}
+      {service.rating ? (
+        <Setting
+          title="Rating"
+          subtitle={service.rating > 0 ? service.rating.toFixed(1) : "New"}
+          icon={<AiFillStar className="text-3xl text-yellow-500" />}
+        />
+      ) : null}
     </div>
   );
 }

@@ -41,18 +41,12 @@ import PriceComponent from "./price/MobilePrice";
 import MobileLogin from "./sign-in/MobileNumber";
 import LoginPerks from "./LoginPerks";
 import MobileLoginPopup from "./sign-in/MobileLoginPopup";
+import Card from "./Card";
+import { Skeleton } from "./ui/skeleton";
+import { CustomSheet } from "./CustomSheet";
 
 export function RequestCallback({ serviceId }: { serviceId: string }) {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.innerWidth < 768) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  }, []);
-  return isMobile ? (
+  return window.innerWidth < 768 ? (
     <RequestCallbackMobile serviceId={serviceId} />
   ) : (
     <RequestCallbackDesktop serviceId={serviceId} />
@@ -91,7 +85,7 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
     >
       {response ? (
         response.callback ? (
-          <CustomDrawer
+          <CustomSheet
             triggerJSX={
               <Button variant="success" id="open">
                 Callback Details
@@ -195,9 +189,9 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
                   {response.callback.message}
                 </p>
               </div>
+              <PriceComponent price={response.callback.service.price} />
             </div>
-            <PriceComponent price={response.callback.service.price} />
-          </CustomDrawer>
+          </CustomSheet>
         ) : response.loggedIn ? (
           <CustomDrawer
             triggerJSX={
@@ -275,31 +269,83 @@ function RequestCallbackMobile({ serviceId }: { serviceId: string }) {
               </DrawerClose>
             }
           >
-            <MobileLogin
-              onVerifyOTP={() => {
-                const close = document.getElementById("close-drawer");
-                if (close) {
-                  close.click();
+            <SelectStateAndCity
+              city={city ? city.name : ""}
+              state={state ? state.name : ""}
+              onCityChange={(city) => setCity(city)}
+              onStateChange={(state) => setState(state)}
+              selectCity={true}
+            />
+            <TextArea
+              onChange={(value) => setMessage(value)}
+              value={message}
+              placeholder="Enter your message here..."
+              title="Ask me anything"
+            />
+            <MobileLoginPopup
+              triggerJSX={
+                <Button
+                  variant="info"
+                  disabled={message.length === 0 || !state || !city}
+                >
+                  Request
+                </Button>
+              }
+              onVerifyOTP={(loggedIn) => {
+                if (loggedIn) {
+                  setButtonState(State.LOADING);
+                  requestCallback({
+                    location: {
+                      city: city ? city.name : "",
+                      state: state ? state.name : "",
+                    },
+                    message: message,
+                    serviceId: serviceId,
+                  }).then((res) => {
+                    if (res) {
+                      setResponse({
+                        loggedIn: true,
+                        callback: res,
+                      });
+                    } else {
+                      window.location.reload();
+                    }
+                    setButtonState(State.SUCCESS);
+                  });
                 }
               }}
             />
           </CustomDrawer>
         )
       ) : (
-        <CustomDrawer
-          triggerJSX={<Button variant="info">Request a Call</Button>}
-          title="Login Required"
-          description="This feature is only available to logged in users."
-          footerJSX={<></>}
-        >
-          <div className="flex flex-col space-y-5 w-full">
-            <MobileLogin
-              onVerifyOTP={() => {
-                const close = document.getElementById("close-drawer");
-              }}
-            />
-          </div>
-        </CustomDrawer>
+        <MobileLoginPopup
+          onVerifyOTP={(loggedIn) => {
+            if (loggedIn) {
+              setButtonState(State.LOADING);
+              requestCallback({
+                location: {
+                  city: city ? city.name : "",
+                  state: state ? state.name : "",
+                },
+                message: message,
+                serviceId: serviceId,
+              }).then((res) => {
+                if (res) {
+                  setResponse({
+                    loggedIn: true,
+                    callback: res,
+                  });
+                }
+                setButtonState(State.SUCCESS);
+              });
+            }
+          }}
+          triggerJSX={
+            <Button variant="info" id="open">
+              Request a Call
+            </Button>
+          }
+        />
       )}
     </LoadingWrapper>
   );
@@ -329,155 +375,100 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
       pageState={buttonState}
       showLogo={false}
       loadingJSX={
-        <Button buttonstate={buttonState} variant="info">
-          <p className="text-md font-medium">Please wait...</p>
-        </Button>
+        <Card className="!p-10 !items-start shadow-lg">
+          <p className="text-center text-xl font-medium">Please wait...</p>
+          <Skeleton className="w-full h-10" />
+          <Skeleton className="w-full h-10" />
+          <Skeleton className="w-full h-40" />
+          <Button buttonstate={buttonState} variant="info" className="w-full">
+            <p className="text-md font-medium">Please wait...</p>
+          </Button>
+        </Card>
       }
     >
       {response ? (
         response.callback ? (
-          <CustomDialog
-            triggerJSX={
-              <Button variant="success" id="open">
-                Callback Details
-              </Button>
-            }
-            title="Callback Requested"
-            description="Your callback request has been successfully sent to the partner. They will get back to you shortly."
-            footerJSX={
-              <Button
-                variant="success"
-                onClick={() => {
-                  openInNewTab(
-                    `tel:${response.callback!!.partner.mobileNumber}`
-                  );
-                }}
-              >
-                Call Partner
-              </Button>
-            }
-          >
-            <div className="flex flex-col space-y-5 w-full">
-              <div className="flex flex-col space-y-2 w-full">
-                <div className="flex flex-row justify-between items-start w-full space-x-4">
-                  <p className="text-lg font-medium first-letter:capitalize break-words">
-                    {response.callback.service.title}
-                  </p>
-                  <div className="flex flex-row justify-start space-x-3 items-center shrink-0">
-                    {response.callback.status === CallbackStatus.PENDING ? (
-                      <Chip
-                        title="Pending"
-                        className={`text-white bg-info text-xs`}
-                      />
-                    ) : response.callback.status === CallbackStatus.SUCCESS ? (
-                      <Chip
-                        title="Success"
-                        className={`text-white bg-success text-xs`}
-                      />
-                    ) : response.callback.status === CallbackStatus.FAILED ? (
-                      <Chip
-                        title="Rejected"
-                        className={`text-white bg-error text-xs`}
-                      />
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col space-y-1 w-full">
-                <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
-                  Your Partner
-                </p>
-                <ProfileDialog
-                  available={response.callback.partner.available}
-                  gender={response.callback.partner.gender}
-                  imageUrl={response.callback.partner.imageUrl}
-                  name={
-                    response.callback.partner.firstName +
-                    " " +
-                    response.callback.partner.lastName
-                  }
-                  rating={response.callback.partner.rating}
-                  footerJSX={
-                    <Button
-                      variant="success"
-                      onClick={() => {
-                        console.log("Call Partner");
-                      }}
-                    >
-                      Call Partner
-                    </Button>
-                  }
-                  triggerJSX={
-                    <p className="text-base font-medium first-letter:capitalize underline underline-offset-4 text-info">
-                      {response.callback.partner.firstName}{" "}
-                      {response.callback.partner.lastName}
-                    </p>
-                  }
-                />
-              </div>
-
-              <div className="flex flex-col space-y-1 w-full">
-                <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
-                  Location
-                </p>
-                <p className="text-base font-medium first-letter:capitalize">
-                  {response.callback.location.city},{" "}
-                  {response.callback.location.state}
-                </p>
-              </div>
-
-              <div className="flex flex-col space-y-1 w-full">
-                <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
-                  Message
-                </p>
-                <p className="text-base font-medium first-letter:capitalize">
-                  {response.callback.message}
-                </p>
-              </div>
+          <Card className="!p-10 !items-start shadow-lg">
+            <p className="text-center text-xl font-medium">
+              Callback Requested
+            </p>
+            {response.callback.status === CallbackStatus.PENDING ? (
+              <Chip title="Pending" className={`text-white bg-info text-xs`} />
+            ) : response.callback.status === CallbackStatus.SUCCESS ? (
+              <Chip
+                title="Success"
+                className={`text-white bg-success text-xs`}
+              />
+            ) : response.callback.status === CallbackStatus.FAILED ? (
+              <Chip
+                title="Rejected"
+                className={`text-white bg-error text-xs`}
+              />
+            ) : null}
+            <div className="flex flex-col space-y-1 w-full">
+              <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
+                Location
+              </p>
+              <p className="text-base font-medium first-letter:capitalize">
+                {response.callback.location.city},{" "}
+                {response.callback.location.state}
+              </p>
             </div>
-            <PriceComponent price={response.callback.service.price} />
-          </CustomDialog>
+
+            <div className="flex flex-col space-y-1 w-full">
+              <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
+                Message
+              </p>
+              <p className="text-base font-medium first-letter:capitalize">
+                {response.callback.message}
+              </p>
+            </div>
+            <Button variant="info">Call Partner</Button>
+          </Card>
         ) : response.loggedIn ? (
-          <CustomDialog
-            triggerJSX={
-              <Button variant="info" id="open">
-                Request a Call
-              </Button>
-            }
-            title="Request a Call"
-            description="Let the partner know you are interested in their service. They will get back to you shortly."
-            footerJSX={
-              <div className="flex flex-col space-y-2 w-full">
-                <Button
-                  variant="success"
-                  disabled={message.length === 0}
-                  asyncOnClick={async () => {
-                    if (!state || !city) return;
-                    const res = await requestCallback({
-                      message: message,
-                      serviceId: serviceId,
-                      location: {
-                        city: city.name,
-                        state: state.name,
-                      },
-                    });
-                    if (res) {
-                      setResponse({
-                        loggedIn: true,
-                        callback: res,
-                      });
-                    }
-                    const closeDoc = document.getElementById("close-drawer");
-                    if (closeDoc) {
-                      closeDoc.click();
-                    }
-                  }}
-                >
-                  <p className="text-md font-medium">Request a Call</p>
-                </Button>
-              </div>
-            }
-          >
+          <Card className="!p-10 !items-start shadow-lg">
+            <SelectStateAndCity
+              city={city ? city.name : ""}
+              state={state ? state.name : ""}
+              onCityChange={(city) => setCity(city)}
+              onStateChange={(state) => setState(state)}
+              selectCity={true}
+            />
+            <TextArea
+              onChange={(value) => setMessage(value)}
+              value={message}
+              placeholder="Enter your message here..."
+              title="Ask me anything"
+            />
+            <Button
+              variant="info"
+              disabled={message.length === 0 || !state || !city}
+              asyncOnClick={async () => {
+                if (!state || !city) return;
+                const res = await requestCallback({
+                  message: message,
+                  serviceId: serviceId,
+                  location: {
+                    city: city.name,
+                    state: state.name,
+                  },
+                });
+                if (res) {
+                  setResponse({
+                    loggedIn: true,
+                    callback: res,
+                  });
+                }
+              }}
+            >
+              Request a Call
+            </Button>
+          </Card>
+        ) : (
+          <Card className="!p-10 !items-start shadow-lg">
+            <p className="text-center text-xl font-medium">
+              Request a call from the partner
+            </p>
             <div className="flex flex-col space-y-5 w-full">
               <SelectStateAndCity
                 city={city ? city.name : ""}
@@ -490,31 +481,41 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
                 onChange={(value) => setMessage(value)}
                 value={message}
                 placeholder="Enter your message here..."
-                title="Ask me anything"
+                title="What would you like to ask?"
               />
             </div>
-          </CustomDialog>
-        ) : (
-          // <CustomDialog
-          //   triggerJSX={<Button variant="info">Request a Call</Button>}
-          //   title="Login Required"
-          //   description="This feature is only available to logged in users."
-          // >
-          //   <MobileLogin
-          //     onVerifyOTP={() => {
-          //       const close = document.getElementById("close-drawer");
-          //       if (close) {
-          //         close.click();
-          //       }
-          //     }}
-          //   />
-          // </CustomDialog>
-          <MobileLoginPopup
-            onVerifyOTP={() => {
-              // window.location.reload();
-            }}
-            triggerJSX={<Button variant="info">Request a Call</Button>}
-          />
+            <MobileLoginPopup
+              triggerJSX={
+                <Button
+                  variant="info"
+                  disabled={message.length === 0 || !state || !city}
+                >
+                  Request a Call
+                </Button>
+              }
+              onVerifyOTP={(loggedIn) => {
+                if (loggedIn) {
+                  setButtonState(State.LOADING);
+                  requestCallback({
+                    location: {
+                      city: city ? city.name : "",
+                      state: state ? state.name : "",
+                    },
+                    message: message,
+                    serviceId: serviceId,
+                  }).then((res) => {
+                    if (res) {
+                      setResponse({
+                        loggedIn: true,
+                        callback: res,
+                      });
+                    }
+                    setButtonState(State.SUCCESS);
+                  });
+                }
+              }}
+            />
+          </Card>
         )
       ) : (
         <CustomDialog
@@ -538,139 +539,5 @@ function RequestCallbackDesktop({ serviceId }: { serviceId: string }) {
         </CustomDialog>
       )}
     </LoadingWrapper>
-  );
-}
-
-function MobileNumberInput({
-  setShowOTP,
-  mobileNumber,
-  setMobileNumber,
-  country,
-  setCountry,
-  setSendOTPButtonState,
-  sendOTPButtonState,
-}: {
-  setShowOTP: Dispatch<SetStateAction<boolean>>;
-  mobileNumber: string;
-  setMobileNumber: Dispatch<SetStateAction<string>>;
-  country: Country;
-  setCountry: Dispatch<SetStateAction<Country>>;
-  setSendOTPButtonState: Dispatch<SetStateAction<State>>;
-  sendOTPButtonState: State;
-}) {
-  return (
-    <div className="space-y-4 w-full flex flex-col items-center">
-      <TextInput
-        type="tel"
-        placeholder="Ex: 9876543210"
-        title="Mobile Number"
-        onChange={(value) => setMobileNumber(value)}
-        value={mobileNumber}
-        autoFocus={true}
-        errorText={
-          isValidPhoneNumber(country.code + mobileNumber)
-            ? ""
-            : "Invalid mobile number"
-        }
-        maxLength={country.maxLength}
-        onKeyDown={async (e) => {
-          if (mobileNumber.length == country.maxLength) {
-            if (e.key == "Enter") {
-              setSendOTPButtonState(State.LOADING);
-              const response = await sendOTP(country.code + mobileNumber);
-              if (response) {
-                setShowOTP(true);
-              }
-              setSendOTPButtonState(State.SUCCESS);
-            }
-          } else return;
-        }}
-      />
-    </div>
-  );
-}
-
-function verifyMobileNumber(mobileNumber: string, maxLength: number) {
-  if (mobileNumber.length != maxLength) {
-    return false;
-  } else if (!mobileNumber.match(/^[0-9]+$/)) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function VerifyOTP({
-  mobileNumber,
-  country,
-  setIsLoggedIn,
-  id,
-}: {
-  mobileNumber: string;
-  country: Country;
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-  id: string;
-}) {
-  const [OTP, setOTP] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  return !loading ? (
-    <div className="flex flex-col items-center w-full space-y-4">
-      <p className="text-center text-base font-normal">
-        Enter the OTP sent to <br />
-        <span className="font-medium text-md">
-          {country.code} {mobileNumber}
-        </span>
-      </p>
-      <OtpInput
-        containerStyle={{
-          width: "100%",
-          display: "flex",
-          gap: "0.5rem",
-          justifyContent: "center",
-        }}
-        value={OTP.join("")}
-        onChange={async (value) => {
-          if (isNaN(Number(value))) return;
-          setOTP(value.split(""));
-          if (value.length == 4) {
-            setLoading(true);
-            const response = await verifyOTP(
-              country.code + mobileNumber,
-              value
-            );
-            if (response) {
-              localStorage.setItem("mobileNumber", mobileNumber);
-              setCookie("user-token", response.token, 30);
-              const closeDoc = document.getElementById(id);
-              if (closeDoc) {
-                setIsLoggedIn(true);
-                closeDoc.click();
-                setTimeout(() => {
-                  const openDoc = document.getElementById("open");
-                  if (openDoc) {
-                    openDoc.click();
-                  }
-                }, 1000);
-              }
-              return;
-            } else {
-              setLoading(false);
-              setOTP([]);
-            }
-          }
-        }}
-        numInputs={4}
-        inputType="number"
-        renderSeparator={<span>-</span>}
-        renderInput={(props) => (
-          <input
-            {...props}
-            className="!text-base border-[1px] border-text rounded-md !w-10 h-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none"
-          />
-        )}
-      />
-    </div>
-  ) : (
-    <p className="text-center pt-3 text-[#a0a0a0]">Verifying OTP...</p>
   );
 }

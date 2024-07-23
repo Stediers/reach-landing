@@ -44,7 +44,7 @@ export async function verifyOTPOnChange({
   setOTP: Dispatch<SetStateAction<string[]>>;
   router: AppRouterInstance;
   redirectUrl: string | null;
-  onVerifyOTP: () => void;
+  onVerifyOTP: (verified: boolean) => void;
 }) {
   if (isNaN(Number(value))) return;
   setOTP(value.split(""));
@@ -57,10 +57,15 @@ export async function verifyOTPOnChange({
       if (redirectUrl) {
         router.push(redirectUrl);
       } else {
-        onVerifyOTP();
+        const clodeMobilePopup = document.getElementById("mobile-login-popup");
+        if (clodeMobilePopup) {
+          clodeMobilePopup.click();
+        }
+        onVerifyOTP(true);
       }
       return;
     } else {
+      onVerifyOTP(false);
       setLoading(false);
       setOTP([]);
     }

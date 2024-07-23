@@ -9,6 +9,7 @@ import LoadingWrapper from "@wrapper/LoadingWrapper";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Render } from "./Render";
 
 export default function PaginatedResults({
   search,
@@ -118,7 +119,7 @@ export default function PaginatedResults({
               </Link>
             ))
           : null}
-        {response.nextPage ? (
+        {response.nextPage && response.data.length > 0 ? (
           <LoadingWrapper
             showLogo={false}
             text="loading more results..."

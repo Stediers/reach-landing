@@ -294,15 +294,7 @@ export function ServiceTrigger({
                 alt={service.title}
                 className="rounded-2xl w-full lg:h-[350px] h-[350px]"
                 popup={false}
-                lazy={eager ? "eager" : "lazy"}
               />
-              {/* <Image
-                src={image}
-                alt={service.title}
-                width={350}
-                height={350}
-                className="w-full border rounded-2xl"
-              /> */}
             </CarouselItem>
           ))}
         </CarouselContent>

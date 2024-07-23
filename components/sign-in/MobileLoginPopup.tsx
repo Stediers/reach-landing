@@ -22,7 +22,7 @@ export default function MobileLoginPopup({
   },
   triggerJSX = <Button variant="default">Sign in</Button>,
 }: {
-  onVerifyOTP?: () => void;
+  onVerifyOTP?: (verified: boolean) => void;
   triggerJSX?: JSX.Element;
 }) {
   const query = useSearchParams();
@@ -37,6 +37,7 @@ export default function MobileLoginPopup({
       triggerJSX={triggerJSX}
       description="Enter your mobile number to sign in"
       maxWidth="max-w-md"
+      closeId="mobile-login-popup"
       footerJSX={
         showOTP ? null : (
           <Button
@@ -147,7 +148,7 @@ function VerifyOTP({
   setShowOTP: Dispatch<SetStateAction<boolean>>;
   country: Country;
   redirectUrl: string | null;
-  onVerifyOTP: () => void;
+  onVerifyOTP: (verified: boolean) => void;
 }) {
   const [OTP, setOTP] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -170,7 +171,7 @@ function VerifyOTP({
           justifyContent: "start",
         }}
         value={OTP.join("")}
-        onChange={async (value) =>
+        onChange={async (value) => {
           verifyOTPOnChange({
             mobileNumber,
             country,
@@ -180,8 +181,8 @@ function VerifyOTP({
             router,
             redirectUrl,
             onVerifyOTP,
-          })
-        }
+          });
+        }}
         numInputs={4}
         inputType="number"
         renderSeparator={<span>-</span>}

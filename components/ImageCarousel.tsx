@@ -17,12 +17,19 @@ export default function ImageCarousel({
   showImagePreview = false,
   previewImageHeight = "w-10 lg:w-12 h-10 lg:h-12",
   autoPlay = false,
+  itemBasis = "w-1/3",
+  border = true,
+  className = "",
 }: {
   images: string[];
   imageHeight?: string;
   showImagePreview?: boolean;
   previewImageHeight?: string;
   autoPlay?: boolean;
+  itemBasis?: string;
+  border?: boolean;
+  bgCol?: string;
+  className?: string;
 }) {
   const [showButtons, setShowButtons] = useState(false);
   const [api, setApi] = useState<CarouselApi>();
@@ -51,7 +58,9 @@ export default function ImageCarousel({
   }, [api]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center space-y-2">
+    <div
+      className={`w-full flex flex-col items-center justify-center space-y-2 ${className}`}
+    >
       <Carousel
         onMouseLeave={() => {
           setShowButtons(false);
@@ -65,15 +74,21 @@ export default function ImageCarousel({
           loop: true,
         }}
       >
-        <CarouselContent className="-ml-4">
+        <CarouselContent className="">
           {images.length > 0 ? (
             images.map((image, index) => (
-              <CarouselItem key={index} className="" id={index.toString()}>
+              <CarouselItem
+                key={index}
+                className={itemBasis}
+                id={index.toString()}
+              >
                 <div className={`w-full ${imageHeight} relative rounded-lg`}>
                   <Image
                     src={image}
                     alt="Image"
-                    className="rounded-md object-contain border"
+                    className={`rounded-md object-contain ${
+                      border ? "border" : ""
+                    }`}
                     fill
                   />
                 </div>

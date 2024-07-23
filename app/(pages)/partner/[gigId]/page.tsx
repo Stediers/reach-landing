@@ -19,9 +19,7 @@ import { CallSetting } from "@components/Contact";
 import { Metadata } from "next";
 import {
   ServiceCardDesktop,
-  ServiceCardMobile,
   ServiceTriggerDesktopProfile,
-  ServiceTriggerMobileProfile,
 } from "@components/ServiceCard";
 import { Badge } from "@components/ui/badge";
 import { AspectRatio } from "@components/ui/aspect-ratio";
@@ -29,7 +27,6 @@ import { Button } from "@components/ui/button";
 import Card from "@components/Card";
 import { priceString } from "@helper_functions/priceString";
 import { Star } from "lucide-react";
-import { BiCarousel } from "react-icons/bi";
 import PartnerPrompt from "@components/PartnerPrompt";
 import PriceComponent from "@components/price/MobilePrice";
 import { calculateTotalPrice } from "@helper_functions/calculate-bill";
@@ -50,6 +47,20 @@ export const generateMetadata = async ({
     return {
       title: `${response.partner.firstName} ${response.partner.lastName}`,
       description: `Profile of ${response.partner.firstName} ${response.partner.lastName} on ReachGig. I am ${response.partner.designation} currently working in ${response.partner.city}, ${response.partner.state}. `,
+      openGraph: {
+        title: `${response.partner.firstName} ${response.partner.lastName}`,
+        description: `Profile of ${response.partner.firstName} ${response.partner.lastName} on ReachGig. I am ${response.partner.designation} currently working in ${response.partner.city}, ${response.partner.state}. `,
+        images: [
+          {
+            url: response.partner.imageUrl,
+            width: 800,
+            height: 600,
+            alt: `${response.partner.firstName} ${response.partner.lastName}`,
+          },
+        ],
+        url: `https://reachgig.com/partner/@${response.partner.handle}`,
+        type: "website",
+      },
     };
   }
 };
@@ -94,8 +105,8 @@ export default async function Page({
 
   function Mobile() {
     return response ? (
-      <div className="flex flex-col items-center justify-start w-full min-h-full pt-5 relative px-5 ">
-        <div className="w-full flex flex-row items-center justify-start space-x-5">
+      <div className="flex flex-col items-center justify-start w-full min-h-full pt-5 relative">
+        <div className="w-full flex flex-row items-center justify-start space-x-5 px-5">
           {backLink && (
             <Link
               className="flex flex-row items-center justify-start space-x-5"
@@ -105,12 +116,14 @@ export default async function Page({
             </Link>
           )}
         </div>
-        <HeroPage response={response} />
-        <AboutMe response={response} />
-        <MyServices response={response} />
-        {response.packages.length > 0 ? (
-          <MyPackages response={response} />
-        ) : null}
+        <div className="flex flex-col items-center justify-start w-full space-y-5 px-5">
+          <HeroPage response={response} />
+          <AboutMe response={response} />
+          <MyServices response={response} />
+          {response.packages.length > 0 ? (
+            <MyPackages response={response} />
+          ) : null}
+        </div>
         <ContactMe response={response} />
         <PartnerPrompt />
       </div>

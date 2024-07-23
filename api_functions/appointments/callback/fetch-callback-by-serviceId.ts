@@ -15,7 +15,7 @@ export async function fetchCallbackByServiceId({
 }): Promise<FetchCallbackByServiceIdResponse | null> {
   console.log("serviceId", serviceId);
   const res = await fetchAPIProtected<Callback>({
-    method: RequestMethod.GET,
+    method: RequestMethod.POST,
     url: "fetch-callback-by-serviceId?serviceId=" + serviceId,
     handleErrors: false,
     baseUrl: APPOINTMENT_API_URL,

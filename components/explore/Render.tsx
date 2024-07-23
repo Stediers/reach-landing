@@ -9,6 +9,7 @@ import PaginatedResults from "./PaginatedResults";
 export async function Render({
   search,
   searchParams,
+  padding = true,
 }: {
   search: string;
   searchParams: {
@@ -22,8 +23,9 @@ export async function Render({
     range: string;
     search: string;
   };
+  padding?: boolean;
 }) {
-  let response: WordSearchServiceResponse["data"] | null = null;
+  console.log("fetching data");
   const resAPI = await wordSearchService({
     query: searchParams.search ?? "",
     filter: {
@@ -51,12 +53,14 @@ export async function Render({
       page: 1,
     },
   });
-
-  if (resAPI) response = resAPI.data;
-
-  if (!response) redirect("/404");
+  if (!resAPI) redirect("/404");
+  console.log("resAPI", resAPI);
   return (
-    <div className="flex flex-col w-full space-y-10 lg:px-10 px-5 py-5">
+    <div
+      className={`flex flex-col w-full space-y-10 py-5 ${
+        padding ? "px-5 lg:px-10" : ""
+      }`}
+    >
       {search.length > 0 && (
         <div className="flex flex-col items-start justify-center w-full col-span-full">
           <p className="lg:text-2xl text-xl font-medium">
@@ -64,12 +68,21 @@ export async function Render({
           </p>
         </div>
       )}
-      {resAPI && (
+      {resAPI && resAPI.data.length > 0 ? (
         <PaginatedResults
           search={searchParams.search ?? ""}
           searchParams={searchParams}
           responseData={resAPI}
         />
+      ) : (
+        <div className="col-span-4 space-y-10 w-full flex flex-col items-start justify-center">
+          <div className="flex flex-col items-start justify-center space-y-3">
+            <h1 className="text-xl font-medium">No results found</h1>
+            <p className="text-gray-500">
+              Explore more services or try a different search term
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -20,7 +20,7 @@ export default function ImageComponent({
   unoptimized = false,
   quality,
   objectFit = "cover",
-  lazy = "lazy",
+  lazy,
 }: {
   src: string | StaticImageData;
   className?: string;

@@ -175,7 +175,7 @@ export default async function Page({
     <div className="flex flex-col w-full space-y-10">
       <Suspense
         fallback={
-          <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 w-full">
+          <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 w-full lg:px-10">
             {Array.from({ length: 10 }).map((_, i) => (
               <ServiceCardSkeleton key={i} />
             ))}
