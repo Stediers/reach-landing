@@ -14,9 +14,12 @@ export default function checkHere({
     return true;
   } else if (path.startsWith("/my-payments") && menuPath === "/my-payments") {
     return true;
-  } else if (path === "/" && menuPath === "/explore") {
+  } else if (
+    path.startsWith("/explore/partner") &&
+    menuPath === "/explore/partner"
+  ) {
     return true;
-  } else if (path.startsWith("/explore") && menuPath === "/explore") {
+  } else if (path === "/explore" && menuPath === "/explore") {
     return true;
   } else if (
     path.startsWith("/console/appointments") &&

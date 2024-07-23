@@ -1,4 +1,10 @@
-import { Search, Phone, SearchIcon } from "lucide-react";
+import {
+  Search,
+  Phone,
+  SearchIcon,
+  SearchSlashIcon,
+  SearchCodeIcon,
+} from "lucide-react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { FcHome, FcBusinessman, FcCalendar, FcBriefcase } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
@@ -45,6 +51,12 @@ export const consoleMenus: Menu[] = [
     subtitle: "Manage your appointments",
     icon: <FcBusinessman className="text-3xl" />,
     path: "/console/appointments",
+  },
+  {
+    title: "Find Partner",
+    subtitle: "Find your specific partner",
+    icon: <SearchCodeIcon className="w-7 h-7 shrink-0" />,
+    path: "/explore/partner",
   },
 ];
 

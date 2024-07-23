@@ -73,7 +73,7 @@ export default function ImageComponent({
           sizes="100%"
           fill
           // className="shrink-0"
-          style={{ objectFit: "cover", objectPosition }}
+          style={{ objectFit: objectFit, objectPosition }}
           onClick={() => {
             onClick && onClick();
             if (!popup) return;

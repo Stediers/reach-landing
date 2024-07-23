@@ -15,6 +15,7 @@ export default function TextInputWithDropdown({
   value,
   resetAfterSelect = true,
   onFocusSelect,
+  preIcon,
 }: {
   title: string;
   placeholder?: string;
@@ -28,6 +29,7 @@ export default function TextInputWithDropdown({
   value: string;
   resetAfterSelect?: boolean;
   onFocusSelect?: boolean;
+  preIcon?: JSX.Element;
 }) {
   const [optionsToShow, setOptionsToShow] = useState<string[]>([]);
   const [text, setText] = useState(value);
