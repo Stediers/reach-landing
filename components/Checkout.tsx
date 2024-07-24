@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 
 export default function Checkout({
@@ -8,20 +8,15 @@ export default function Checkout({
   name,
   mobileNumber,
   disabled,
-  triggerJSX = (
-    <Button variant="success" id="rzp-button1" disabled={disabled}>
-      Pay Now
-    </Button>
-  ),
   onCompletePayment,
 }: {
-  triggerJSX?: JSX.Element;
   orderId: string;
   name: string;
   mobileNumber: string;
   disabled: boolean;
   onCompletePayment?: (response: any) => Promise<void>;
 }) {
+  const [rzp1, setRzp1] = useState<any>(null);
   useEffect(() => {
     if (typeof window !== "undefined") {
       var options = {
@@ -41,9 +36,14 @@ export default function Checkout({
         notes: {
           address: "Razorpay Corporate Office",
         },
+        modal: {
+          backdropclose: true,
+        },
       };
       //@ts-ignore
       const rzp1 = new window.Razorpay(options);
+
+      console.log("ola", rzp1);
 
       rzp1.on("payment.failed", function (response: any) {
         alert(response.error.code);
@@ -55,15 +55,20 @@ export default function Checkout({
         alert(response.error.metadata.payment_id);
       });
 
-      const button = document.getElementById("rzp-button1");
-      if (button) {
-        button.onclick = function (e) {
-          rzp1.open();
-          e.preventDefault();
-        };
-      }
+      setRzp1(rzp1);
     }
   }, []);
 
-  return <>{triggerJSX}</>;
+  return (
+    <Button
+      variant="success"
+      id="rzp-button1"
+      disabled={disabled && !rzp1}
+      asyncOnClick={async () => {
+        rzp1.open();
+      }}
+    >
+      Pay Now
+    </Button>
+  );
 }
