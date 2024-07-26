@@ -142,117 +142,36 @@ export function ServiceTriggerDesktopProfile({
               ? service.title.slice(0, 20) + "..."
               : service.title}
           </p>
-          <div className="flex flex-row items-center justify-start space-x-1 text-lg">
-            <p className="text-info">
-              {service.serviceType === ServiceType.ONLINE
-                ? "Online"
-                : "Offline"}
-            </p>
-            <p className=" text-info">|</p>
-            <p className=" text-info">{service.experience}</p>
-            <p className=" text-info">|</p>
-            <p className=" text-info">
-              {service.preferredGender === PreferredGender.FEMALE
-                ? "Female"
-                : service.preferredGender === PreferredGender.MALE
-                ? "Male"
-                : "All"}{" "}
-              Audiences
-            </p>
-          </div>
           <div className="flex flex-row items-center justify-start space-x-1">
-            <p className="line-through text-base text-gray-500 font-medium">
-              {priceString({
-                price: service.price.price,
-                priceType: "paisa",
-              })}
-            </p>
+            {service.price.discount ? (
+              <p className="line-through text-base text-gray-500 font-medium">
+                {priceString({
+                  price: service.price.price,
+                  priceType: "paisa",
+                })}
+              </p>
+            ) : null}
             <p className="text-lg font-medium">{showPrice(service.price)}</p>
           </div>
-        </div>
-        {service.rating ? (
-          <div className="flex flex-row items-center justify-center space-x-1">
-            <Star size={16} />
-            <p className="text-sm font-medium">{service.rating}</p>
-          </div>
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
-export function ServiceTriggerMobileProfile({
-  service,
-}: {
-  service: FetchServiceResponse;
-}): JSX.Element {
-  return (
-    <div className="flex flex-col items-start justify-center space-y-3 w-full hover:cursor-pointer">
-      <Carousel className="w-full group relative">
-        {service.imageUrls.length > 1 ? (
-          <div className="absolute bottom-2 w-full rounded-lg z-10 lg:hidden flex justify-center">
-            <div className="bg-black p-1 rounded-lg">
-              <BiCarousel className="text-white text-2xl" />
-            </div>
-          </div>
-        ) : null}
-        <CarouselContent>
-          {service.imageUrls.map((image, index) => (
-            <CarouselItem key={index}>
-              <ImageComponent
-                src={image}
-                objectPosition="top"
-                alt={service.title}
-                className="rounded-lg w-full lg:h-[300px] h-[250px]"
-                popup={false}
-                priority={index === 0}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        {service.imageUrls.length > 1 ? (
-          <div
-            className="group-hover:flex hidden flex-row items-start justify-between w-full bg-red-100 z-20"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <CarouselNext className="right-5 hover:cursor-pointer" />
-            <CarouselPrevious className="left-5 hover:cursor-pointer" />
-          </div>
-        ) : null}
-      </Carousel>
-      <div className="flex flex-row items-start justify-between w-full">
-        <div className="flex flex-col items-start justify-center space-y-1">
-          <p className="text-xl font-medium first-letter:capitalize">
-            {service.title.length > 20
-              ? service.title.slice(0, 20) + "..."
-              : service.title}
-          </p>
-          <div className="text-base flex flex-row items-center justify-start space-x-1">
-            <p className="text-info">
+          <div className="flex flex-row items-center justify-start gap-x-2 gap-y-3 flex-wrap w-full">
+            <Badge variant="info">
               {service.serviceType === ServiceType.ONLINE
                 ? "Online"
-                : "Offline"}
-            </p>
-            <p className="text-info">|</p>
-            <p className="text-info">{service.experience}</p>
-            <p className="text-info">|</p>
-            <p className="text-info">
-              {service.preferredGender === PreferredGender.FEMALE
-                ? "Female"
-                : service.preferredGender === PreferredGender.MALE
-                ? "Male"
-                : "All"}{" "}
-              Audiences
-            </p>
-          </div>
-          <div className="flex flex-row items-center justify-start space-x-1">
-            <p className="line-through text-sm text-gray-500 font-medium">
-              {priceString({
-                price: service.price.price,
-                priceType: "paisa",
-              })}
-            </p>
-            <p className="font-medium">{showPrice(service.price)}</p>
+                : service.address
+                ? "In Studio"
+                : "Your Place"}
+            </Badge>
+            <Badge variant="infoOutline">{service.experience}</Badge>
+            {service.preferredGender !== PreferredGender.UNISEX && (
+              <Badge>
+                {service.preferredGender === PreferredGender.FEMALE
+                  ? "Women"
+                  : service.preferredGender === PreferredGender.MALE
+                  ? "Men"
+                  : "All"}{" "}
+                Only
+              </Badge>
+            )}
           </div>
         </div>
         {service.rating ? (
@@ -329,7 +248,9 @@ export function ServiceTrigger({
               <Badge variant="info">
                 {service.serviceType === ServiceType.ONLINE
                   ? "Online"
-                  : "Offline"}
+                  : service.address
+                  ? "In Studio"
+                  : "Your Place"}
               </Badge>
               {/* <p className="text-sm text-info">
                 {service.experience} of experience

@@ -4,6 +4,7 @@ import ImageComponent from "./ImageComponent";
 import { Button } from "./ui/button";
 import { SheetClose } from "./ui/sheet";
 import { Images } from "lucide-react";
+import ImageCarousel from "./ImageCarousel";
 
 export default function CustomImageGridLayout({
   imageUrls,
@@ -13,7 +14,7 @@ export default function CustomImageGridLayout({
   const firstImage = imageUrls[0];
   const nextThreeImages = imageUrls.slice(1, 4);
   const remainingImages = imageUrls.slice(5);
-  return (
+  return imageUrls.length > 4 ? (
     <div className="grid grid-cols-2 grid-rows-1 w-full h-[60vh] gap-5 rounded-2xl overflow-hidden">
       <ImageComponent
         src={firstImage}
@@ -30,7 +31,7 @@ export default function CustomImageGridLayout({
             alt={`image-${index}`}
           />
         ))}
-        {remainingImages.length > 1 ? (
+        {remainingImages.length > 0 ? (
           <CustomDialog
             title="More Images"
             description="View more images"
@@ -59,14 +60,25 @@ export default function CustomImageGridLayout({
               ))}
             </div>
           </CustomDialog>
-        ) : (
-          <ImageComponent
-            src={remainingImages[0]}
-            className="w-full h-full"
-            alt="remainingImage"
-          />
-        )}
+        ) : null}
       </div>
+    </div>
+  ) : imageUrls.length === 1 ? (
+    <ImageComponent
+      src={firstImage}
+      className="w-full h-[60vh]"
+      alt="firstImage"
+      objectFit="contain"
+      objectPosition="left"
+    />
+  ) : (
+    <div className="h-[60vh] w-full flex items-center justify-center border p-2 rounded-2xl">
+      <ImageCarousel
+        images={imageUrls}
+        imageHeight="h-[58vh]"
+        itemBasis="basis-1/2"
+        border={true}
+      />
     </div>
   );
 }

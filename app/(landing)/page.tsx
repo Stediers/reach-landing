@@ -305,24 +305,24 @@ function Hero() {
             ]}
           />
         </h1>
-        <p className="lg:text-xl text-lg font-normal">
+        <h2 className="lg:text-xl text-lg font-normal">
           Safe advance payments, secure chat, and many more
-        </p>
+        </h2>
         <div className="max-w-md w-full">
           <SearchInput />
         </div>
         <ul className="flex flex-col items-start justify-start space-y-5 lg:space-y-7 pt-3">
           <li className="flex flex-row items-center justify-start space-x-5">
-            <BiRupee size={28} />
-            <p className="text-lg">Safe advance payments</p>
+            <NumberCircle number={1} />
+            <p className="text-lg">Request Callback</p>
           </li>
           <li className="flex flex-row items-center justify-start space-x-5">
-            <BsShieldCheck size={28} />
-            <p className="text-lg">Verified partners</p>
+            <NumberCircle number={2} />
+            <p className="text-lg">Discuss Requirements</p>
           </li>
           <li className="flex flex-row items-center justify-start space-x-5">
-            <ArrowRightCircle size={28} />
-            <p className="text-lg">Best Reconcilation</p>
+            <NumberCircle number={3} />
+            <p className="text-lg">Pay Secure Advance</p>
           </li>
         </ul>
       </div>
@@ -397,17 +397,20 @@ function Pricing() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full">
         <PricingCard
           title="Free"
-          description="For budding individuals who want to get started."
+          description="The complete reachgig experience for free."
           price={0}
           commision={0}
           features={[
             "Personalized Profile",
             "Lead Generation",
             "Maximum of 5 services",
+            "Proof of Appointment",
+            "Automated Appointment Flows",
+            "Dispute Resolution Team",
           ]}
-          tag="Everyone get a chance"
+          tag="No upfront costs"
         />
-        <PricingCard
+        {/* <PricingCard
           title="Basic"
           description="For individuals and small businesses."
           capped={800}
@@ -422,13 +425,13 @@ function Pricing() {
             "Maximum of 10 services",
           ]}
           tag="Collected from your clients"
-        />
+        /> */}
         <PricingCard
           title="Enterprise"
           description="For large scale businesses who want to use the platform regularly."
           price={1499}
           features={[
-            "Everything in Basic",
+            "Everything in Free",
             "Invoice Generation",
             "Unlimited Services",
             "Unlimited Businesses",
