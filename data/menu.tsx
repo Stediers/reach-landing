@@ -4,6 +4,7 @@ import {
   SearchIcon,
   SearchSlashIcon,
   SearchCodeIcon,
+  BookIcon,
 } from "lucide-react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { FcHome, FcBusinessman, FcCalendar, FcBriefcase } from "react-icons/fc";
@@ -39,6 +40,12 @@ export const consoleMenus: Menu[] = [
     subtitle: "Search for services",
     icon: <Search className="w-6 h-6 shrink-0" />,
     path: "/explore",
+  },
+  {
+    title: "Blogs",
+    subtitle: "Read our blogs",
+    icon: <BookIcon className="w-6 h-6 shrink-0" />,
+    path: "/learn",
   },
   {
     title: "Callbacks",

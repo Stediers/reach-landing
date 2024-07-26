@@ -39,20 +39,24 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const podcastVideos = [
+    "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
+    "https://www.youtube.com/embed/hb7DSyWHjZw?si=CwkgK4nSBQ1dlzNp",
+  ];
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20">
       <Hero>
-        <div className="flex flex-col items-center justify-center space-y-5 text-white">
+        <div className="flex flex-col items-center justify-center space-y-5 text-white px-10">
           <ImageComponent
             src="/images/india-the-land-of-gig-economy.svg"
             alt="Blog"
-            className="w-full max-w-xs h-[300px] object-cover"
+            className="w-full max-w-xs lg:h-[300px] object-cover rounded-full h-[200px]"
             border={false}
           />
-          <h1 className="text-4xl font-bold text-center">
+          <h1 className="lg:text-4xl text-2xl font-semibold text-center">
             Welcome to the ReachGig Blog!
           </h1>
-          <p className="text-lg text-center">
+          <p className="lg:text-lg text-base text-center">
             Stay up-to-date with the latest news, updates, and tips on ReachGig!
           </p>
         </div>
@@ -65,13 +69,27 @@ export default function Page() {
           </span>
         }
       >
-        <VideoCarousel
+        {/* <VideoCarousel
           videos={[
             "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
             "https://www.youtube.com/embed/hb7DSyWHjZw?si=CwkgK4nSBQ1dlzNp",
+            "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
+            "https://www.youtube.com/embed/hb7DSyWHjZw?si=CwkgK4nSBQ1dlzNp",
           ]}
-          basis="lg:basis-1/2"
-        />
+          itemBasis="lg:basis-1/2"
+        /> */}
+        <div className="grid gap-10 lg:grid-cols-2 w-full">
+          {podcastVideos.map((video) => (
+            <iframe
+              src={video}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-[200px] lg:h-[400px] rounded-lg"
+              key={video}
+            ></iframe>
+          ))}
+        </div>
       </HeaderWrapper>
       <HeaderWrapper
         title={

@@ -126,7 +126,7 @@ export default async function Page({
   const callback = response && response!!.callback;
 
   return (
-    <div className="w-full flex flex-col items-start justify-center max-w-[85rem] lg:px-10 lg:pt-10 relative">
+    <div className="w-full flex flex-col items-start justify-center max-w-[85rem] lg:px-10 lg:py-10 relative">
       <div className="flex lg:hidden w-full" hidden>
         <ImageCarousel
           images={service.imageUrls}
@@ -142,11 +142,11 @@ export default async function Page({
       <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-5 justify-items-center items-start">
         <div className="flex flex-col items-start justify-start w-full space-y-2 py-5 lg:px-0">
           <div className="flex flex-col items-start justify-start w-full space-y-2 px-5 lg:px-0">
-            <h1 className="text-2xl font-medium text-left first-letter:capitalize w-full max-w-[60%]">
+            <h1 className="lg:text-2xl text-xl font-medium text-left first-letter:capitalize w-full max-w-[60%]">
               {service.title}
             </h1>
             <Link href={`/partner/@${gig.handle}`} shallow>
-              <h2 className="text-lg text-left first-letter:capitalize w-full text-primary underline underline-offset-4">
+              <h2 className="lg:text-lg text-base text-left first-letter:capitalize w-full text-primary underline underline-offset-4">
                 {gig.firstName + " " + gig.lastName}
               </h2>
             </Link>

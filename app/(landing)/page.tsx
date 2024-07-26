@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   description:
     "A secure way to interact with service providers. Find the best services and partners for your needs. Empowering the Gig Economy.",
   keywords:
-    "Makeup Artists, Photographers, Mehendi Artists, Wedding Planners, Service Providers, Gig Economy, Service Categories, Tamil Nadu, India",
+    "Makeup Artists, Photographers, Mehandi Artists, Wedding Planners, Service Providers, Gig Economy, Service Categories, Tamil Nadu, India",
   openGraph: {
     title: "ReachGig",
     description:
@@ -300,7 +300,7 @@ function Hero() {
             textArray={[
               "Makeup Artists",
               "Photographers",
-              "Mehendi Artists",
+              "Mehandi Artists",
               "Wedding Planners",
             ]}
           />
@@ -394,7 +394,7 @@ function Pricing() {
       }
       className="lg:bg-[#0F1117] lg:text-white lg:py-10"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
         <PricingCard
           title="Free"
           description="The complete reachgig experience for free."
@@ -427,8 +427,8 @@ function Pricing() {
           tag="Collected from your clients"
         /> */}
         <PricingCard
-          title="Enterprise"
-          description="For large scale businesses who want to use the platform regularly."
+          title="Pro"
+          description="To become a pro in your industry."
           price={1499}
           features={[
             "Everything in Free",
@@ -464,7 +464,7 @@ function PricingCard({
   className?: string;
   capped?: number;
   tag: string;
-  price: number;
+  price: number | string;
 }) {
   return (
     <Card

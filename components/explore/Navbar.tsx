@@ -48,6 +48,10 @@ import { getStateFromLocation } from "@helper_functions/explore/detectLocation";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import { Skeleton } from "@components/ui/skeleton";
 import useDidMountEffect from "@helper_functions/use-did-mount-effetc";
+import {
+  getItemsFromLocalStorage,
+  setItemsToLocalStorage,
+} from "@helper_functions/local-storage";
 
 function updateFilterRouter({
   filter,
@@ -564,6 +568,11 @@ function Filter({
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }) {
+  let recentSearches =
+    getItemsFromLocalStorage<string[]>({ key: "recent-searches" }) || [];
+  recentSearches = recentSearches.filter(
+    (item, index) => recentSearches.indexOf(item) === index
+  );
   return (
     <div
       className="flex justify-center w-full gap-x-5 bg-white z-20 p-3 px-5 lg:px-10 border-b"
@@ -574,11 +583,13 @@ function Filter({
           <SearchServiceDesktop
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
+            recentSearches={recentSearches}
           />
           <div className="lg:max-w-[70%] w-full flex flex-row items-center justify-start gap-x-5 overflow-x-scroll hide-scrollbar">
             <SearchServiceMobile
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
+              recentSearches={recentSearches}
             />
             <SelectState setFilter={setFilter} filter={filter} />
             <Online filter={filter} setFilter={setFilter} />
@@ -826,9 +837,11 @@ function SortTypeDropdown({
 function SearchServiceDesktop({
   searchQuery,
   setSearchQuery,
+  recentSearches,
 }: {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  recentSearches: string[];
 }) {
   const [search, setSearch] = useState(searchQuery);
   return (
@@ -853,9 +866,11 @@ function SearchServiceDesktop({
 function SearchServiceMobile({
   searchQuery,
   setSearchQuery,
+  recentSearches,
 }: {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  recentSearches: string[];
 }) {
   const [search, setSearch] = useState(searchQuery);
   return (
@@ -906,6 +921,10 @@ function SearchServiceMobile({
             icon={<Badge>Search</Badge>}
             onClick={() => {
               setSearchQuery(search);
+              setItemsToLocalStorage({
+                key: "recent-searches",
+                item: [search, ...recentSearches.filter((i) => i !== search)],
+              });
               const close = document.getElementById("close-search");
               if (close) {
                 close.click();
@@ -914,20 +933,56 @@ function SearchServiceMobile({
           />
           <LineHeader title="Popular Searches" />
           <div className="grid grid-cols-2 gap-5 w-full">
-            {["Plumber", "Electrician", "Carpenter", "Painter"].map((item) => (
-              <SheetClose asChild key={item}>
-                <Button
-                  onClick={() => {
-                    setSearch(item);
-                    setSearchQuery(item);
-                  }}
-                  variant="outline"
-                >
-                  {item}
-                </Button>
-              </SheetClose>
-            ))}
+            {["Makeup", "Mehandi", "Photography", "Facial", "Haircut"].map(
+              (item) => (
+                <SheetClose asChild key={item}>
+                  <Button
+                    onClick={() => {
+                      setSearch(item);
+                      setSearchQuery(item);
+                      setItemsToLocalStorage({
+                        key: "recent-searches",
+                        item: [
+                          item,
+                          ...recentSearches.filter((i) => i !== item),
+                        ],
+                      });
+                    }}
+                    variant="outline"
+                  >
+                    {item}
+                  </Button>
+                </SheetClose>
+              )
+            )}
           </div>
+          <LineHeader title="Recent Searches" />
+          {recentSearches.length === 0 ? (
+            <p className="text-sm text-gray-500">No recent searches</p>
+          ) : (
+            <div className="grid grid-cols-2 gap-5 w-full">
+              {recentSearches.map((item) => (
+                <SheetClose asChild key={item}>
+                  <Button
+                    onClick={() => {
+                      setSearch(item);
+                      setSearchQuery(item);
+                      setItemsToLocalStorage({
+                        key: "recent-searches",
+                        item: [
+                          item,
+                          ...recentSearches.filter((i) => i !== item),
+                        ],
+                      });
+                    }}
+                    variant="outline"
+                  >
+                    {item}
+                  </Button>
+                </SheetClose>
+              ))}
+            </div>
+          )}
         </div>
       </CustomSheet>
     </div>

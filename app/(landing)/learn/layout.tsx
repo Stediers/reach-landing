@@ -2,8 +2,6 @@ import { Poppins } from "next/font/google";
 import { cn } from "@lib/utils";
 import "@styles/globals.css";
 import { Metadata } from "next";
-import Navbar from "@components/Navbar";
-import Footer from "@components/footer/Footer";
 
 const fontSans = Poppins({
   subsets: ["latin"],

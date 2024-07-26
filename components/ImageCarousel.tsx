@@ -20,6 +20,7 @@ export default function ImageCarousel({
   itemBasis = "w-1/3",
   border = true,
   className = "",
+  showArrow = true,
 }: {
   images: string[];
   imageHeight?: string;
@@ -30,6 +31,7 @@ export default function ImageCarousel({
   border?: boolean;
   bgCol?: string;
   className?: string;
+  showArrow?: boolean;
 }) {
   const [showButtons, setShowButtons] = useState(false);
   const [api, setApi] = useState<CarouselApi>();
@@ -107,8 +109,24 @@ export default function ImageCarousel({
         </CarouselContent>
         {showButtons && images.length > 1 ? (
           <>
-            <CarouselNext className="right-5 disabled:pointer-events-none hover:cursor-pointer" />
-            <CarouselPrevious className="left-5 disabled:pointer-events-none hover:cursor-pointer" />
+            <CarouselNext
+              className={`right-5 disabled:pointer-events-none ${
+                showArrow ? "hover:cursor-pointer" : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+            />
+            <CarouselPrevious
+              className={`left-5 disabled:pointer-events-none ${
+                showArrow ? "hover:cursor-pointer" : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+            />
           </>
         ) : null}
       </Carousel>

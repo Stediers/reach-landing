@@ -77,7 +77,7 @@ export default function CustomImageGridLayout({
         images={imageUrls}
         imageHeight="h-[58vh]"
         itemBasis="basis-1/2"
-        border={true}
+        border={false}
       />
     </div>
   );

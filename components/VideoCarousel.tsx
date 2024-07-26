@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import ImageComponent from "./ImageComponent";
 import {
   Carousel,
   CarouselApi,
@@ -8,24 +9,23 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+import Image from "next/image";
 
 export default function VideoCarousel({
   videos,
-  videosHeight = "h-[35rem]",
-  showImagePreview = false,
-  previewImageHeight = "w-10 lg:w-12 h-10 lg:h-12",
-  basis,
+  imageHeight = "h-48 lg:h-[40rem] w-full",
+  autoPlay = false,
+  itemBasis = "w-1/3",
+  className = "",
 }: {
   videos: string[];
-  videosHeight?: string;
-  showImagePreview?: boolean;
-  previewImageHeight?: string;
-  basis?: string;
+  imageHeight?: string;
+  autoPlay?: boolean;
+  itemBasis?: string;
+  className?: string;
 }) {
   const [showButtons, setShowButtons] = useState(false);
   const [api, setApi] = useState<CarouselApi>();
-
-  const [current, setCurrent] = useState<number>(0);
 
   useEffect(() => {
     if (!api) {
@@ -33,16 +33,25 @@ export default function VideoCarousel({
       return;
     } else {
       console.log("api found");
-      api.on("slidesInView", (e) => {
-        setCurrent(e.selectedScrollSnap);
-      });
+      // api.on("slidesInView", (e) => {
+      //   setCurrent(e.selectedScrollSnap);
+      // });
+    }
+    if (autoPlay) {
+      const interval = setInterval(() => {
+        api.scrollNext();
+      }, 5000);
+
+      return () => {
+        clearInterval(interval);
+      };
     }
   }, [api]);
 
-  console.log("images", videos);
-
   return (
-    <div className="w-full overflow-hidden flex flex-col items-center justify-center space-y-2">
+    <div
+      className={`w-full flex flex-col items-center justify-center space-y-2 ${className}`}
+    >
       <Carousel
         onMouseLeave={() => {
           setShowButtons(false);
@@ -50,27 +59,31 @@ export default function VideoCarousel({
         onMouseEnter={() => {
           setShowButtons(true);
         }}
-        className="w-full overflow-hidden rounded-lg"
+        className="w-full"
         setApi={setApi}
         opts={{
           loop: true,
         }}
       >
         <CarouselContent>
-          {videos.map((video, index) => (
-            <CarouselItem id="0" className={`max-w-10 ${basis}`} key={index}>
-              <div className={`w-full ${videosHeight} relative rounded-lg`}>
-                <iframe
-                  src={video}
-                  className="w-full h-[60vh] lg:rounded-xl rounded-lg"
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </CarouselItem>
-          ))}
+          {videos.length > 0
+            ? videos.map((image, index) => (
+                <CarouselItem
+                  key={index}
+                  className={itemBasis}
+                  id={index.toString()}
+                >
+                  <div className={`w-full ${imageHeight} relative rounded-lg`}>
+                    <iframe
+                      src={image}
+                      className={`w-full ${imageHeight} rounded-lg`}
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </CarouselItem>
+              ))
+            : null}
         </CarouselContent>
         {showButtons && videos.length > 1 ? (
           <>
@@ -79,26 +92,6 @@ export default function VideoCarousel({
           </>
         ) : null}
       </Carousel>
-      {/* {showImagePreview ? (
-        <div className="flex flex-row items-center justify-start w-full overflow-x-scroll hide-scrollbar space-x-2">
-          {videos.map((image, index) => (
-            <ImageComponent
-              src={image}
-              alt={`Service Image ${index}`}
-              className={`${previewImageHeight} shrink-0 object-cover rounded-md hover:cursor-pointer ${
-                current === index ? "border-2 border-primary" : ""
-              }`}
-              key={index}
-              popup={false}
-              onClick={() => {
-                if (api) {
-                  api.scrollTo(index);
-                }
-              }}
-            />
-          ))}
-        </div>
-      ) : null} */}
     </div>
   );
 }
