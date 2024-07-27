@@ -159,7 +159,7 @@ async function _partnerSearch({
 
 function SearchSkeleton() {
   return (
-    <div className="flex flex-row items-start justify-start w-full space-x-3 hover:lg:outline rounded-lg lg:p-3">
+    <div className="flex flex-row items-start justify-start w-full space-x-3 rounded-lg lg:p-3">
       <Skeleton className="w-14 h-14 rounded-full shrink-0" />
       <div className="flex flex-col items-start space-y-2 justify-start w-full">
         <Skeleton className="w-20 h-5" />
