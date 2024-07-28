@@ -36,7 +36,7 @@ export const menus: Menu[] = [
 
 export const consoleMenus: Menu[] = [
   {
-    title: "Explore",
+    title: "Browse",
     subtitle: "Search for services",
     icon: <Search className="w-6 h-6 shrink-0" />,
     path: "/explore",
@@ -48,19 +48,7 @@ export const consoleMenus: Menu[] = [
     path: "/learn",
   },
   {
-    title: "Callbacks",
-    subtitle: "Request a callback",
-    icon: <Phone className="w-5 h-5 shrink-0" />,
-    path: "/console/callbacks",
-  },
-  {
-    title: "Appointments",
-    subtitle: "Manage your appointments",
-    icon: <FcBusinessman className="text-3xl" />,
-    path: "/console/appointments",
-  },
-  {
-    title: "Find Partner",
+    title: "Search Partner",
     subtitle: "Find your specific partner",
     icon: <SearchCodeIcon className="w-7 h-7 shrink-0" />,
     path: "/explore/partner",
@@ -79,6 +67,18 @@ export const userMenus: Menu[] = [
     subtitle: "Manage your addresses",
     icon: <HiLocationMarker className="text-3xl shrink-0" />,
     path: "/console/profile/address",
+  },
+  {
+    title: "My Callbacks",
+    subtitle: "Request a callback",
+    icon: <Phone className="w-5 h-5 shrink-0" />,
+    path: "/console/callbacks",
+  },
+  {
+    title: "My Appointments",
+    subtitle: "Manage your appointments",
+    icon: <FcBusinessman className="text-3xl" />,
+    path: "/console/appointments",
   },
 ];
 

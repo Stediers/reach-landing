@@ -16,25 +16,16 @@ import {
   UserPlus,
 } from "lucide-react";
 import ImageComponent from "@components/ImageComponent";
-import ComponentWrapper from "@wrapper/ComponentWrapper";
-import SideComponent from "@components/SideComponent";
-import TextInput from "@components/input/TextInput";
 import Card from "@components/Card";
-import { serviceTypeDescriptions } from "@data/static";
 import ReachSVG from "@components/svg/ReachSVG";
-import Setting from "@components/Setting";
 import { BsShieldCheck } from "react-icons/bs";
 import Link from "next/link";
 import FeatureCard from "@components/FeatureCard";
 import { ProfileCard } from "@components/ProfileCard";
-import { AspectRatio } from "@components/ui/aspect-ratio";
-import { fetchServiceCategories } from "@api_functions/explore/fetch-service-categories";
 import SwitchText from "@components/landing/SwitchText";
 import { NumberCircle } from "@components/landing/NumberCircle";
 import SearchInput from "@components/landing/Search";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
-import SubHeadingWrapper from "@wrapper/SubHeadingWrapper";
-import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
   description:
@@ -107,7 +98,7 @@ function YourOwnProfile() {
           muted
           playsInline
           hidden
-          className="lg:hidden shrink-0 w-full h-[30rem] block"
+          className="lg:hidden shrink-0 w-fit h-[30rem] bg-red-100 block"
         >
           <source src="/videos/landing-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -309,27 +300,18 @@ function Hero() {
           Safe advance payments, secure chat, and many more
         </h2>
         <div className="max-w-md w-full">
-          <SearchInput />
+          {/* <SearchInput /> */}
+          <Link href="/explore" passHref>
+            <Button variant="success" className="!w-full">
+              Explore Now
+            </Button>
+          </Link>
         </div>
-        <ul className="flex flex-col items-start justify-start space-y-5 lg:space-y-7 pt-3">
-          <li className="flex flex-row items-center justify-start space-x-5">
-            <NumberCircle number={1} />
-            <p className="text-lg">Request Callback</p>
-          </li>
-          <li className="flex flex-row items-center justify-start space-x-5">
-            <NumberCircle number={2} />
-            <p className="text-lg">Discuss Requirements</p>
-          </li>
-          <li className="flex flex-row items-center justify-start space-x-5">
-            <NumberCircle number={3} />
-            <p className="text-lg">Pay Secure Advance</p>
-          </li>
-        </ul>
       </div>
       <ImageComponent
-        src="/images/home1.svg"
+        src="/images/home1.png"
         alt="Hero"
-        className="w-full h-52 lg:h-96 max-w-lg"
+        className="w-full h-96 lg:h-96 max-w-lg"
         border={false}
         lazy="eager"
       />

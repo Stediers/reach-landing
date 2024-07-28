@@ -14,12 +14,13 @@ export default function LoadingWrapper({
   loadingJSX = (
     <div className="flex flex-col space-y-2 flex-1 justify-center items-center">
       {showLogo && <Logo />}
-      <Loading
-        className={loadingSVGClassName}
-        color="bg-primary"
-        type="pulse"
-      />
+      <Loading className={loadingSVGClassName} />
       <p className={loadingTextClassName}>{text}</p>
+    </div>
+  ),
+  errorJSX = (
+    <div className="flex justify-center items-center">
+      <div className="text-2xl font-medium">Error</div>
     </div>
   ),
   id,
@@ -31,16 +32,13 @@ export default function LoadingWrapper({
   loadingTextClassName?: string;
   loadingSVGClassName?: string;
   loadingJSX?: JSX.Element;
+  errorJSX?: JSX.Element;
   id?: string;
 }>) {
   return (
     <div className="flex flex-col w-full space-y-3" id={id}>
       {pageState === State.LOADING ? loadingJSX : null}
-      {pageState === State.ERROR ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="text-2xl font-medium">Error</div>
-        </div>
-      ) : null}
+      {pageState === State.ERROR ? errorJSX : null}
       {pageState === State.SUCCESS ? (
         <div className={`${className}`}>{children}</div>
       ) : null}

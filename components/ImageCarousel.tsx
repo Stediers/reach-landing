@@ -113,19 +113,11 @@ export default function ImageCarousel({
               className={`right-5 disabled:pointer-events-none ${
                 showArrow ? "hover:cursor-pointer" : ""
               }`}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
             />
             <CarouselPrevious
               className={`left-5 disabled:pointer-events-none ${
                 showArrow ? "hover:cursor-pointer" : ""
               }`}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
             />
           </>
         ) : null}

@@ -45,14 +45,6 @@ export default function Main() {
   return (
     <div className="relative w-full flex flex-col items-start justify-center scroll-smooth pb-20 py-5 px-5 lg:px-10 space-y-10">
       <div className="flex flex-col items-start justify-center w-full col-span-full space-y-5 max-w-lg">
-        <ImageComponent
-          src="/images/search-partner.png"
-          alt="Explore"
-          className="w-full h-60 lg:w-full lg:h-80 rounded-lg"
-          objectFit="cover"
-          border={false}
-          objectPosition="center"
-        />
         <h1 className="text-2xl font-medium max-w-md">
           Find Partner by their name or handle
         </h1>
@@ -64,24 +56,6 @@ export default function Main() {
           placeholder="Search for a service"
           preIcon={<Search size={20} />}
         />
-        {/* <RadioInput
-          title="Gender"
-          options={[
-            {
-              title: "Male",
-              icon: <BsGenderMale className="text-2xl" />,
-              onClick: () => setRequest({ ...request, gender: Gender.MALE }),
-              selected: request.gender === Gender.MALE,
-            },
-            {
-              title: "Female",
-              icon: <BsGenderFemale className="text-2xl" />,
-              onClick: () => setRequest({ ...request, gender: Gender.FEMALE }),
-              selected: request.gender === Gender.FEMALE,
-            },
-          ]}
-          cols="grid-cols-2"
-        /> */}
       </div>
       <LoadingWrapper
         pageState={pageState}

@@ -36,9 +36,22 @@ export default function CustomImageGridLayout({
             title="More Images"
             description="View more images"
             triggerJSX={
-              <div className="w-full h-full flex flex-col space-y-5 items-center justify-center bg-gray-300 bg-opacity-50">
-                <Images size={48} />
-                <p className="text-lg font-medium">+{remainingImages.length}</p>
+              // <div className="w-full h-full flex flex-col space-y-5 items-center justify-center bg-gray-300 bg-opacity-50">
+              //   <Images size={48} />
+              //   <p className="text-lg font-medium">+{remainingImages.length}</p>
+              // </div>
+              <div className="relative w-full h-full flex flex-col space-y-5 items-center justify-center bg-gray-300 bg-opacity-50">
+                <ImageComponent
+                  src={remainingImages[0]}
+                  className="w-full h-full blur-sm"
+                  alt="firstImage"
+                />
+                <div className="w-full h-full flex flex-col space-y-5 items-center justify-center absolute top-0 left-0">
+                  <Images size={48} />
+                  <p className="text-lg font-medium">
+                    +{remainingImages.length} more
+                  </p>
+                </div>
               </div>
             }
             footerJSX={

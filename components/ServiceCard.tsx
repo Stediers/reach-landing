@@ -189,14 +189,19 @@ export function ServiceTrigger({
   service,
   partner,
   eager,
+  link,
 }: {
   service: FetchServiceResponse;
   partner?: FetchPartnerResponse;
   eager?: boolean;
+  link?: string;
 }): JSX.Element {
   return (
-    <div className="flex flex-col items-start justify-center space-y-3 w-full hover:cursor-pointer">
-      <Carousel className="w-full group relative">
+    <div className="flex flex-col items-start justify-center space-y-3 w-full">
+      <Carousel
+        className="w-full group relative"
+        onClick={(e) => e.stopPropagation()}
+      >
         {service.imageUrls.length > 1 ? (
           <div className="absolute bottom-2 w-full rounded-lg z-10 lg:hidden flex justify-center">
             <div className="bg-black p-1 rounded-lg">
@@ -228,13 +233,23 @@ export function ServiceTrigger({
         ) : null}
       </Carousel>
       <div className="flex flex-row items-start justify-between w-full">
-        <div className="flex flex-row items-start justify-between w-full overflow-ellipsis">
+        <div className="flex flex-row items-start justify-between w-full overflow-ellipsis ">
           <div className="flex flex-col items-start justify-center space-y-1">
-            <p className="text-lg font-medium first-letter:capitalize">
-              {service.title.length > 20
-                ? service.title.slice(0, 20) + "..."
-                : service.title}
-            </p>
+            {link ? (
+              <Link href={link} passHref>
+                <p className="text-lg hover:cursor-pointer font-medium first-letter:capitalize hover:underline hover:underline-offset-4">
+                  {service.title.length > 30
+                    ? service.title.slice(0, 30) + "..."
+                    : service.title}
+                </p>
+              </Link>
+            ) : (
+              <p className="text-lg font-medium first-letter:capitalize">
+                {service.title.length > 20
+                  ? service.title.slice(0, 20) + "..."
+                  : service.title}
+              </p>
+            )}
             <div className="flex flex-row items-center justify-start space-x-1">
               <p className="line-through text-sm text-gray-500 font-medium">
                 {priceString({

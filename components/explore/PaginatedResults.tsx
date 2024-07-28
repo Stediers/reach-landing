@@ -104,19 +104,13 @@ export default function PaginatedResults({
       <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full">
         {response && response.data.length > 0
           ? response.data.map((res, index) => (
-              <Link
-                href={`/service/${res.service.id}?backLink=${backLink}`}
+              <ServiceTrigger
+                service={res.service}
                 key={res.service.id}
-                className="w-full"
-                shallow={true}
-              >
-                <ServiceTrigger
-                  service={res.service}
-                  key={res.service.id}
-                  partner={res.partner}
-                  eager={index === 0}
-                />
-              </Link>
+                partner={res.partner}
+                eager={index === 0}
+                link={`/service/${res.service.id}?backLink=${backLink}`}
+              />
             ))
           : null}
         {response.nextPage && response.data.length > 0 ? (
@@ -128,6 +122,17 @@ export default function PaginatedResults({
             loadingSVGClassName="w-6 h-6"
             id={"next-page-" + nextPage}
           />
+        ) : response.data.length === 0 ? (
+          <div className="col-span-full space-y-10 w-full flex flex-col items-start justify-center">
+            <div className="flex flex-col items-start justify-center space-y-3">
+              <p className="lg:text-2xl text-xl font-medium">
+                No results found for &quot;{search}&quot;
+              </p>
+              <p className="text-lg font-medium">
+                Try searching for something else
+              </p>
+            </div>
+          </div>
         ) : null}
       </div>
     </div>

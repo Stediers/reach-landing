@@ -52,6 +52,8 @@ import {
   getItemsFromLocalStorage,
   setItemsToLocalStorage,
 } from "@helper_functions/local-storage";
+import MobileLoginPopup from "@components/sign-in/MobileLoginPopup";
+import LoginPerks from "@components/LoginPerks";
 
 function updateFilterRouter({
   filter,
@@ -143,7 +145,7 @@ export function NavBar() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-50 bg-white flex flex-col w-full items-center justify-center dark:border-gray-700">
+    <div className="sticky top-0 !z-50 bg-white flex flex-col w-full items-center justify-center dark:border-gray-700">
       <div className="flex flex-row items-center border-b justify-center w-full lg:px-10 px-5 py-3">
         <div className="lg:grid flex grid-cols-2 w-full justify-between">
           <Link className="flex flex-col w-fit" href={"/explore"}>
@@ -199,21 +201,21 @@ function DesktopProfile({
 }) {
   return (
     <div className="lg:flex hidden justify-end" hidden>
-      {response ? (
-        <div className="flex flex-row items-center justify-end w-full space-x-10">
-          {consoleMenus.map((menu) => (
-            <Link
-              className={`h-10 w-fit gap-x-3 flex items-center ${
-                checkHere({ menuPath: menu.path, path })
-                  ? "text-primary"
-                  : "text-textsubtle"
-              }`}
-              href={menu.path}
-              key={menu.path}
-            >
-              <p className="text-base font-medium">{menu.title}</p>
-            </Link>
-          ))}
+      <div className="flex flex-row items-center justify-end w-full space-x-10">
+        {consoleMenus.map((menu) => (
+          <Link
+            className={`h-10 w-fit gap-x-3 flex items-center ${
+              checkHere({ menuPath: menu.path, path })
+                ? "text-primary"
+                : "text-textsubtle"
+            }`}
+            href={menu.path}
+            key={menu.path}
+          >
+            <p className="text-base font-medium">{menu.title}</p>
+          </Link>
+        ))}
+        {response ? (
           <div className="w-fit">
             <CustomSheet
               title="Where to?"
@@ -242,114 +244,22 @@ function DesktopProfile({
               <UserMenuDesktop response={response} />
             </CustomSheet>
           </div>
-        </div>
-      ) : pageState === State.LOADING ? (
-        <div
-          className="lg:flex items-center gap-x-10 w-full justify-end hidden"
-          hidden
-        >
-          <Link
-            className={`h-10 w-fit gap-x-3 flex items-center ${
-              checkHere({ menuPath: "/explore", path })
-                ? "text-primary"
-                : "text-textsubtle"
-            }`}
-            href="/explore"
-            key="/explore"
-          >
-            <p className="text-base font-medium">Explore</p>
-          </Link>
-          <Avatar className="rounded-md !h-10 !w-10 border hover:cursor-pointer flex justify-center">
-            <Loading className="w-4 h-4" type="circle" />
-          </Avatar>
-        </div>
-      ) : (
-        <div className="w-fit gap-x-3">
-          <CustomSheet
-            title="Sign in"
-            canClose
-            description="Sign in to unlock more features"
-            triggerJSX={
-              <Button variant="outline" className="w-fit">
-                Sign In
-              </Button>
-            }
-            footerJSX={
-              <p className="text-sm text-gray-400 w-full text-center">
-                © 2023 ReachGig. All rights reserved.
-              </p>
-            }
-          >
-            {response ? (
-              <div className="flex flex-col items-start justify-start w-full space-y-5">
-                <div className="grid grid-cols-1 gap-4 w-full">
-                  {consoleMenus.map((menu) => (
-                    <SheetClose asChild key={menu.path}>
-                      <Link
-                        className={`flex flex-row items-center justify-between w-full space-x-5 ${
-                          checkHere({
-                            menuPath: menu.path,
-                            path,
-                          })
-                            ? "text-primary"
-                            : ""
-                        }`}
-                        href={menu.path}
-                      >
-                        <div className="flex flex-row items-center justify-start w-full space-x-5">
-                          {menu.icon}
-                          <p className="text-lg tracking-wide font-medium">
-                            {menu.title}
-                          </p>
-                        </div>
-                      </Link>
-                    </SheetClose>
-                  ))}
-                </div>
-                <LineHeader title="Account" />
-                <div className="grid grid-cols-2 gap-4 w-full">
-                  {userMenus.map((menu) => (
-                    <SheetClose asChild key={menu.path}>
-                      <Button
-                        className="w-full"
-                        key={menu.path}
-                        asChild
-                        variant="close"
-                      >
-                        <Link
-                          className={`h-10 w-fit gap-x-3 flex items-center  ${
-                            checkHere({
-                              menuPath: menu.path,
-                              path,
-                            })
-                              ? "text-primary"
-                              : ""
-                          }`}
-                          href={menu.path}
-                        >
-                          {menu.icon}
-                          <p className="text-base tracking-wide">
-                            {menu.title}
-                          </p>
-                        </Link>
-                      </Button>
-                    </SheetClose>
-                  ))}
-                </div>
-                <LineHeader title="Critical" />
-                <Button className="w-full space-x-5" variant="error">
-                  <Link href="/user/sign-in">Logout</Link>
-                  <LogOutIcon className="w-4 h-4" />
+        ) : pageState === State.LOADING ? (
+          <Button variant="outline" className="w-fit">
+            Loading...
+          </Button>
+        ) : (
+          <div className="w-fit">
+            <MobileLoginPopup
+              triggerJSX={
+                <Button variant="outline" className="w-fit">
+                  Login
                 </Button>
-              </div>
-            ) : (
-              <div className="px-1 w-full">
-                <MobileLogin />
-              </div>
-            )}
-          </CustomSheet>
-        </div>
-      )}
+              }
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -365,26 +275,71 @@ function MobileProfile({
 }) {
   return (
     <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
-      {response ? (
-        <CustomSheet
-          title="Where to?"
-          description="Navigate to your profile"
-          triggerJSX={
-            <Button variant="outline" size="icon">
-              <AiOutlineMenu className="h-[1.2rem] w-[1.2rem]" />
-            </Button>
-          }
-          footerJSX={
+      <CustomSheet
+        title="Where to?"
+        description="Navigate to your profile"
+        triggerJSX={
+          <Button variant="outline" size="icon">
+            <AiOutlineMenu className="h-[1.2rem] w-[1.2rem]" />
+          </Button>
+        }
+        footerJSX={
+          <div className="flex flex-col items-start justify-start w-full space-y-5">
+            <SheetClose asChild>
+              <Button
+                variant="close"
+                onClick={() => {
+                  console.log("Close");
+                }}
+              >
+                Close
+              </Button>
+            </SheetClose>
             <p className="text-sm text-gray-400 w-full text-center">
               © 2023 ReachGig. All rights reserved.
             </p>
-          }
-          maxWidth="w-[80%]"
-        >
-          <div className="flex flex-col items-start justify-start w-full space-y-10">
+          </div>
+        }
+      >
+        <div className="flex flex-col items-start justify-start w-full space-y-10">
+          {consoleMenus.map((menu) => (
+            <SheetClose asChild key={menu.path}>
+              <Link
+                href={menu.path}
+                className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
+                key={menu.path}
+              >
+                <div className="flex items-center space-x-5 cursor-pointer hover:text-primary">
+                  <div className="w-[20%]">{menu.icon}</div>
+                  <p className="text-base font-medium w-full">{menu.title}</p>
+                </div>
+                {checkHere({ path: path || "", menuPath: menu.path }) && (
+                  <Badge
+                    title="New"
+                    className="rounded-md text-xs bg-indigo-500"
+                  >
+                    Here
+                  </Badge>
+                )}
+              </Link>
+            </SheetClose>
+          ))}
+          <LoadingWrapper
+            pageState={pageState}
+            showLogo={false}
+            loadingTextClassName="text-md font-medium"
+            loadingSVGClassName="w-6 h-6"
+            errorJSX={
+              <div className="px-1 w-full flex flex-col space-y-3">
+                <LineHeader title="Login" />
+                <MobileLogin />
+                <LoginPerks />
+              </div>
+            }
+          >
             {response ? (
-              consoleMenus.map((menu) => (
-                <SheetClose asChild key={menu.path}>
+              <div className="grid grid-cols-1 gap-10 w-full">
+                {userMenus.map((menu) => (
                   <Link
                     href={menu.path}
                     className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
@@ -405,118 +360,16 @@ function MobileProfile({
                       </Badge>
                     )}
                   </Link>
-                </SheetClose>
-              ))
+                ))}
+              </div>
             ) : (
               <div className="px-1 w-full">
                 <MobileLogin />
               </div>
             )}
-            <LineHeader title="Account" />
-            <div className="grid grid-cols-1 gap-10 w-full">
-              {userMenus.map((menu) => (
-                <Link
-                  href={menu.path}
-                  className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
-                  key={menu.path}
-                >
-                  <div className="flex items-center space-x-5 cursor-pointer hover:text-primary">
-                    <div className="w-[20%]">{menu.icon}</div>
-                    <p className="text-base font-medium w-full">{menu.title}</p>
-                  </div>
-                  {checkHere({ path: path || "", menuPath: menu.path }) && (
-                    <Badge
-                      title="New"
-                      className="rounded-md text-xs bg-indigo-500"
-                    >
-                      Here
-                    </Badge>
-                  )}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </CustomSheet>
-      ) : pageState === State.LOADING ? (
-        <Avatar className="rounded-md !h-10 !w-10 border hover:cursor-pointer flex justify-center">
-          <Loading className="w-4 h-4" type="circle" />
-        </Avatar>
-      ) : (
-        <CustomSheet
-          title="Sign in"
-          canClose
-          description="Sign in to unlock more features"
-          triggerJSX={
-            <Button variant="outline" className="w-fit">
-              Sign In
-            </Button>
-          }
-          footerJSX={
-            <p className="text-sm text-gray-400 w-full text-center">
-              © 2023 ReachGig. All rights reserved.
-            </p>
-          }
-        >
-          {response ? (
-            <div className="flex flex-col items-start justify-start w-full space-y-5">
-              <div className="grid grid-cols-1 gap-4 w-full">
-                {consoleMenus.map((menu) => (
-                  <SheetClose asChild key={menu.path}>
-                    <Link
-                      className={`flex flex-row items-center justify-between w-full space-x-5 ${
-                        checkHere({
-                          menuPath: menu.path,
-                          path: "",
-                        })
-                          ? "text-primary"
-                          : "text-textsubtle"
-                      }`}
-                      href={menu.path}
-                    >
-                      <div className="flex flex-row items-center justify-start w-full space-x-5">
-                        {menu.icon}
-                        <p className="text-lg tracking-wide font-medium">
-                          {menu.title}
-                        </p>
-                      </div>
-                    </Link>
-                  </SheetClose>
-                ))}
-              </div>
-              <LineHeader title="Account" />
-              <div className="grid grid-cols-2 gap-4 w-full">
-                {userMenus.map((menu) => (
-                  <SheetClose asChild key={menu.path}>
-                    <Link
-                      className={`h-10 w-fit gap-x-3 flex items-center ${
-                        checkHere({
-                          menuPath: menu.path,
-                          path: "",
-                        })
-                          ? "text-primary"
-                          : "text-textsubtle"
-                      }`}
-                      href={menu.path}
-                    >
-                      {menu.icon}
-                      <p className="text-base tracking-wide">{menu.title}</p>
-                    </Link>
-                  </SheetClose>
-                ))}
-              </div>
-              <LineHeader title="Critical" />
-              <Button className="w-full space-x-5" variant="error">
-                <Link href="/user/sign-in">Logout</Link>
-                <LogOutIcon className="w-4 h-4" />
-              </Button>
-            </div>
-          ) : (
-            <div className="px-1 w-full">
-              <MobileLogin />
-            </div>
-          )}
-        </CustomSheet>
-      )}
+          </LoadingWrapper>
+        </div>
+      </CustomSheet>
     </div>
   );
 }
