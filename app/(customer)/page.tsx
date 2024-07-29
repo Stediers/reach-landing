@@ -60,7 +60,7 @@ export default function Main() {
       <Hero />
       <TheSafeWay />
       <YourOwnProfile />
-      <div hidden className="lg:hidden block">
+      <div hidden className="lg:hidden flex items-start w-full">
         <BecomePartner />
       </div>
       <Pricing />
@@ -87,9 +87,9 @@ function YourOwnProfile() {
           muted
           playsInline
           hidden
-          className="lg:w-[20rem] lg:block mr-10 shrink-0 lg:h-full w-full h-[30rem] overflow-hidden !bg-transparent hidden"
+          className="lg:w-1/4 lg:block mr-10 shrink-0 lg:h-full w-full h-[30rem] overflow-hidden !bg-transparent hidden"
         >
-          <source src="/videos/landing-video-1.mp4" type="video/mp4" />
+          <source src="/videos/landing-video-black.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <video
@@ -98,9 +98,9 @@ function YourOwnProfile() {
           muted
           playsInline
           hidden
-          className="lg:hidden shrink-0 w-fit h-[30rem] bg-red-100 block"
+          className="lg:hidden shrink-0 w-2/3 bg-white h-full block"
         >
-          <source src="/videos/landing-video.mp4" type="video/mp4" />
+          <source src="/videos/landing-video-white.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div
@@ -281,7 +281,7 @@ function BecomePartner() {
 
 function Hero() {
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center lg:py-10 pt-5 pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[70vh] max-w-[90rem]">
+    <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center lg:py-10 pt-5 pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[70vh] ">
       <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full">
         <ReachSVG className="w-32 lg:w-40" color="#f40e1e" />
         <h1 className="text-3xl lg:text-5xl font-medium  !leading-snug">

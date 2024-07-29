@@ -127,7 +127,7 @@ export function ServiceTriggerDesktopProfile({
         </CarouselContent>
         {service.imageUrls.length > 1 ? (
           <div
-            className="group-hover:flex hidden flex-row items-start justify-between w-full bg-red-100 z-20"
+            className="group-hover:flex hidden flex-row items-start justify-between w-full  z-20"
             onClick={(e) => e.stopPropagation()}
           >
             <CarouselNext className="right-5 hover:cursor-pointer" />
@@ -224,7 +224,7 @@ export function ServiceTrigger({
         </CarouselContent>
         {service.imageUrls.length > 1 ? (
           <div
-            className="group-hover:flex hidden flex-row items-start justify-between w-full bg-red-100 z-20"
+            className="group-hover:flex hidden flex-row items-start justify-between w-full  z-20"
             onClick={(e) => e.stopPropagation()}
           >
             <CarouselNext className="right-5 hover:cursor-pointer" />

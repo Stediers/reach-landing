@@ -5,7 +5,7 @@ export default function HeaderWrapper({
   underlineClassName = "bg-primary",
   mobileAlign = "start",
   desktopAlign = "start",
-  maxWidth = "max-w-[90rem]",
+  maxWidth = "",
 }: {
   title: JSX.Element | string;
   children: React.ReactNode;
