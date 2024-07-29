@@ -25,7 +25,6 @@ import {
   Star,
   IndianRupee,
   Search,
-  Badge,
   LocateIcon,
 } from "lucide-react";
 import { AiFillCheckCircle } from "react-icons/ai";
@@ -45,6 +44,7 @@ import { useRouter } from "next-nprogress-bar";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@components/ui/button";
+import { Badge } from "@components/ui/badge";
 
 type RootLayoutProps = {
   children: React.ReactNode;
