@@ -34,6 +34,7 @@ export default function Main() {
   const heading1 = "text-lg text-center sm:text-left md:text-xl";
   const heading2 = "text-md md:text-lg md:my-2";
   const list = "list-disc pl-5 space-y-2 mt-5";
+  const subList = "list-decimal pl-5 space-y-2";
   const link = "text-primary hover:underline";
   const link2 = "text-info hover:underline";
   const textHighlight = "font-medium";
@@ -55,13 +56,13 @@ export default function Main() {
         </div>
         <div>
           <div data-custom-class="body_text">
-            We are Reachgig Corporation Private Limited &#40; &#39;
-            <span className={textHighlight}>Company</span>&#39;&#44; &#39;
+            We are Reachgig Corporation Private Limited &#40; &#44;
+            <span className={textHighlight}>Company</span>&#44;&#44; &#44;
             <span className={textHighlight}>we</span>
-            &#39;&#44; &#39;
+            &#44;&#44; &#44;
             <span className={textHighlight}>us</span>
-            &#39;&#44; or &#39;<span className={textHighlight}>our</span>
-            &#39;&#41; &#44; a company registered in India.
+            &#44;&#44; or &#44;<span className={textHighlight}>our</span>
+            &#44;&#41; &#44; a company registered in India.
           </div>
         </div>
         <div className={section}>
@@ -69,20 +70,20 @@ export default function Main() {
             We operate the website&nbsp;
             <Link
               rel="noreferrer"
-              href="http://reachgig.com"
+              href="https://reachgig.com"
               target="_blank"
               className={link}
             >
-              http&#58;//reachgig.com
+              https&#58;//reachgig.com
             </Link>
-            &nbsp; &#40;the &#39;<span className={textHighlight}>Site</span>
-            &#39;&#41;&#44; the mobile application Reach &#40;the &#39;
-            <span className={textHighlight}>App</span>&#39;&#41;&#44; as well as
+            &nbsp; &#40;the &#44;<span className={textHighlight}>Site</span>
+            &#44;&#41;&#44; the mobile application Reach &#40;the &#44;
+            <span className={textHighlight}>App</span>&#44;&#41;&#44; as well as
             any other related products and services that refer or link to these
-            legal terms &#40;the &#39;
-            <span className={textHighlight}>Legal Terms</span>&#39;&#41;
-            &#40;collectively&#44; the &#39;
-            <span className={textHighlight}>Services</span>&#39;&#41;.
+            legal terms &#40;the &#44;
+            <span className={textHighlight}>Legal Terms</span>&#44;&#41;
+            &#40;collectively&#44; the &#44;
+            <span className={textHighlight}>Services</span>&#44;&#41;.
           </div>
           <div data-custom-class="body_text">
             We provide a platform for service providers to advertise themselves
@@ -257,13 +258,18 @@ export default function Main() {
             </Link>
           </div>
           <div>
+            <Link href="#referral" className={link2}>
+              27. FREELANCER REFERRAL PROGRAM
+            </Link>
+          </div>
+          <div>
             <Link href="#misc" className={link2}>
-              27. MISCELLANEOUS
+              28. MISCELLANEOUS
             </Link>
           </div>
           <div>
             <Link href="#contact" className={link2}>
-              28. CONTACT US
+              29. CONTACT US
             </Link>
           </div>
         </div>
@@ -299,9 +305,9 @@ export default function Main() {
               databases&#44; functionality&#44; software&#44; website
               designs&#44; audio&#44; video&#44; text&#44; photographs&#44; and
               graphics in the Services &#40;collectively&#44; the
-              &#39;Content&#39; &#41;&#44; as well as the trademarks&#44;
+              &#44;Content&#44; &#41;&#44; as well as the trademarks&#44;
               service marks&#44; and logos contained therein &#40;the
-              &#39;Marks&#39;&#41;.
+              &#44;Marks&#44;&#41;.
             </div>
             <div data-custom-class="body_text">
               Our Content and Marks are protected by copyright and trademark
@@ -311,18 +317,18 @@ export default function Main() {
             </div>
             <div data-custom-class="body_text">
               The Content and Marks are provided in or through the Services
-              &#39;AS IS&#39; for your personal&#44; non-commercial use only.
+              &#44;AS IS&#44; for your personal&#44; non-commercial use only.
             </div>
             <div className={heading2}>
               <span className={textHighlight}>Your use of our Services</span>
             </div>
             <div data-custom-class="body_text">
               Subject to your compliance with these Legal Terms&#44; including
-              the &#39;
+              the &#44;
               <Link href="#prohibited" className={link}>
                 PROHIBITED ACTIVITIES
               </Link>
-              &#39; section below&#44; we grant you a non-exclusive&#44;
+              &#44; section below&#44; we grant you a non-exclusive&#44;
               non-transferable&#44; revocable licence to&#58;
             </div>
             <ul>
@@ -372,11 +378,11 @@ export default function Main() {
               </span>
             </div>
             <div data-custom-class="body_text">
-              Please review this section and the &#39;
+              Please review this section and the &#44;
               <Link href="#prohibited" className={link}>
                 PROHIBITED ACTIVITIES
               </Link>
-              &#39; section carefully prior to using our Services to understand
+              &#44; section carefully prior to using our Services to understand
               the &#40;Link&#41; rights you give us and &#40;b&#41; obligations
               you have when you post or upload any content through the Services.
             </div>
@@ -384,7 +390,7 @@ export default function Main() {
               <span className={textHighlight}>Submissions&#58;</span> By
               directly sending us any question&#44; comment&#44; suggestion&#44;
               idea&#44; feedback&#44; or other information about the Services
-              &#40; &#39;Submissions&#39;&#41;&#44; you agree to assign to us
+              &#40; &#44;Submissions&#44;&#41;&#44; you agree to assign to us
               all intellectual property rights in such Submission. You agree
               that we shall own this Submission and be entitled to its
               unrestricted use and dissemination for any lawful purpose&#44;
@@ -402,7 +408,7 @@ export default function Main() {
               writings&#44; video&#44; audio&#44; photographs&#44; music&#44;
               graphics&#44; comments&#44; reviews&#44; rating suggestions&#44;
               personal information&#44; or other material
-              &#40;&#39;Contributions&#39;&#41;. Any Submission that is publicly
+              &#40;&#44;Contributions&#44;&#41;. Any Submission that is publicly
               posted shall also be treated as Link Contribution.
             </div>
             <div data-custom-class="body_text">
@@ -449,11 +455,11 @@ export default function Main() {
             </div>
             <ul>
               <li data-custom-class="body_text">
-                confirm that you have read and agree with our &#39;
+                confirm that you have read and agree with our &#44;
                 <Link href="#prohibited" className={link}>
                   PROHIBITED ACTIVITIES
                 </Link>
-                &#39; and will not post&#44; send&#44; publish&#44; upload&#44;
+                &#44; and will not post&#44; send&#44; publish&#44; upload&#44;
                 or transmit through the Services any Submission nor post any
                 Contribution that is illegal&#44; harassing&#44; hateful&#44;
                 harmful&#44; defamatory&#44; obscene&#44; bullying&#44;
@@ -482,7 +488,7 @@ export default function Main() {
               Contributions and you expressly agree to reimburse us for any and
               all losses that we may suffer because of your breach of
               &#40;Link&#41; this section&#44; &#40;b&#41; any third
-              party&rsquo;s intellectual property rights&#44; or &#40;c&#41;
+              party&quot;s intellectual property rights&#44; or &#40;c&#41;
               applicable law.
             </div>
             <div data-custom-class="body_text">
@@ -503,11 +509,11 @@ export default function Main() {
               We respect the intellectual property rights of others. If you
               believe that any material available on or through the Services
               infringes upon any copyright you own or control&#44; please
-              immediately refer to the &#39;
+              immediately refer to the &#44;
               <Link href="#copyrightno" className={link}>
                 COPYRIGHT INFRINGEMENTS&nbsp;
               </Link>
-              &#39; section below.
+              &#44; section below.
             </div>
           </div>
         </div>
@@ -618,7 +624,7 @@ export default function Main() {
           </div>
           <div data-custom-class="body_text">
             We use Google Maps API for locating and verifying addresses. By
-            using our platform you are also bound by Google&#39;s{" "}
+            using our platform you are also bound by Google&#44;s{" "}
             <Link
               rel="noopener noreferrer"
               target="_blank"
@@ -693,7 +699,7 @@ export default function Main() {
                 viruses&#44; Trojan horses&#44; or other material&#44; including
                 excessive use of capital letters and spamming &#40;continuous
                 posting of repetitive text&#41;&#44; that interferes with any
-                party&rsquo;s uninterrupted use and enjoyment of the Services or
+                party&quot;s uninterrupted use and enjoyment of the Services or
                 modifies&#44; impairs&#44; disrupts&#44; alters&#44; or
                 interferes with the use&#44; features&#44; functions&#44;
                 operation&#44; or maintenance of the Services.
@@ -717,10 +723,10 @@ export default function Main() {
                 any material that acts as a passive or active information
                 collection or transmission mechanism&#44; including without
                 limitation&#44; clear graphics interchange formats &#40;
-                &#39;gifs&#39; &#41;&#44; 1&times;1 pixels&#44; web bugs&#44;
+                &#44;gifs&#44; &#41;&#44; 1&times;1 pixels&#44; web bugs&#44;
                 cookies&#44; or other similar devices &#40;sometimes referred to
-                as &#39;spyware&#39; or &#39;passive collection mechanisms&#39;
-                or &#39;pcms&#39; &#41;.
+                as &#44;spyware&#44; or &#44;passive collection mechanisms&#44;
+                or &#44;pcms&#44; &#41;.
               </li>
               <li data-custom-class="body_text">
                 Interfere with&#44; disrupt&#44; or create an undue burden on
@@ -738,7 +744,7 @@ export default function Main() {
                 of the Services.
               </li>
               <li data-custom-class="body_text">
-                Copy or adapt the Services&#39; software&#44; including but not
+                Copy or adapt the Services&#44; software&#44; including but not
                 limited to Flash&#44; PHP&#44; HTML&#44; JavaScript&#44; or
                 other code.
               </li>
@@ -804,7 +810,7 @@ export default function Main() {
             materials to us or on the Services&#44; including but not limited to
             text&#44; writings&#44; video&#44; audio&#44; photographs&#44;
             graphics&#44; comments&#44; suggestions&#44; or personal information
-            or other material &#40;collectively&#44; &#39;Contributions&#39;
+            or other material &#40;collectively&#44; &#44;Contributions&#44;
             &#41;. Contributions may be viewable by other users of the Services
             and through third-party websites. As such&#44; any Contributions you
             transmit may be treated as non-confidential and non-proprietary.
@@ -1036,13 +1042,13 @@ export default function Main() {
           </div>
           <div data-custom-class="body_text">
             The following terms apply when you use the App obtained from either
-            the Apple Store or Google Play &#40;each an &#39;App
-            Distributor&#39; &#41; to access the Services&#58; &#40;1&#41; the
+            the Apple Store or Google Play &#40;each an &#44;App
+            Distributor&#44; &#41; to access the Services&#58; &#40;1&#41; the
             licence granted to you for our App is limited to a non-transferable
             licence to use the application on a device that utilises the Apple
             iOS or Android operating systems&#44; as applicable&#44; and in
             accordance with the usage rules set forth in the applicable App
-            Distributor&rsquo;s terms of service; &#40;2&#41; we are responsible
+            Distributor&quot;s terms of service; &#40;2&#41; we are responsible
             for providing any maintenance and support services with respect to
             the App as specified in the terms and conditions of this mobile
             application licence contained in these Legal Terms or as otherwise
@@ -1058,7 +1064,7 @@ export default function Main() {
             whatsoever with respect to the App; &#40;4&#41; you represent and
             warrant that &#40;i&#41; you are not located in a country that is
             subject to a US government embargo&#44; or that has been designated
-            by the US government as a &#39;terrorist supporting&#39; country and
+            by the US government as a &#44;terrorist supporting&#44; country and
             &#40;ii&#41; you are not listed on any US government list of
             prohibited or restricted parties; &#40;5&#41; you must comply with
             applicable third-party terms of agreement when using the App&#44;
@@ -1085,8 +1091,8 @@ export default function Main() {
             <div data-custom-class="body_text">
               As part of the functionality of the Services&#44; you may a your
               account with online accounts you have with third-party service
-              providers &#40;each such account&#44; a &#39;Third-Party
-              Account&#39;&#41; by either&#58; &#40;1&#41; providing your
+              providers &#40;each such account&#44; a &#44;Third-Party
+              Account&#44;&#41; by either&#58; &#40;1&#41; providing your
               Third-Party Account login information through the Services; or
               &#40;2&#41; allowing us to access your Third-Party Account&#44; as
               is permitted under the applicable terms and conditions that govern
@@ -1101,8 +1107,8 @@ export default function Main() {
               to any Third-Party Accounts&#44; you understand that &#40;1&#41;
               we may access&#44; make available&#44; and store &#40;if
               applicable&#41; any content that you have provided to and stored
-              in your Third-Party Account &#40;the &#39;Social Network
-              Content&#39;&#41; so that it is available on and through the
+              in your Third-Party Account &#40;the &#44;Social Network
+              Content&#44;&#41; so that it is available on and through the
               Services via your account&#44; including without limitation any
               friend lists and &#40;2&#41; we may submit to and receive from
               your Third-Party Account additional information to the extent you
@@ -1148,12 +1154,12 @@ export default function Main() {
           </div>
           <div data-custom-class="body_text">
             The Services may contain &#40;or you may be sent via the Site or App
-            &#41; links to other websites &#40;&#39;Third-Party Websites&#39;
+            &#41; links to other websites &#40;&#44;Third-Party Websites&#44;
             &#41; as well as articles&#44; photographs&#44; text&#44;
             graphics&#44; pictures&#44; designs&#44; music&#44; sound&#44;
             video&#44; information&#44; applications&#44; software&#44; and
             other content or items belonging to or originating from third
-            parties &#40;&#39;Third-Party Content&#39;&#41;. Such Third-Party
+            parties &#40;&#44;Third-Party Content&#44;&#41;. Such Third-Party
             Websites and Third-Party Content are not investigated&#44;
             monitored&#44; or checked for accuracy&#44; appropriateness&#44; or
             completeness by us&#44; and we are not responsible for any
@@ -1242,7 +1248,7 @@ export default function Main() {
             believe that any material available on or through the Services
             infringes upon any copyright you own or control&#44; please
             immediately notify us using the contact information provided below
-            &#40;a &#39;Notification&#39;&#41;. a copy of your Notification will
+            &#40;a &#44;Notification&#44;&#41;. a copy of your Notification will
             be sent to the person who posted or stored the material addressed in
             the Notification. Please be advised that pursuant to applicable law
             you may be held liable for damages if you make material
@@ -1343,9 +1349,9 @@ export default function Main() {
           <div data-custom-class="body_text">
             To expedite resolution and control the cost of any dispute&#44;
             controversy&#44; or claim related to these Legal Terms &#40;each a
-            &#39;Dispute&#39; and collectively&#44; the &#39;Disputes&#39;&#41;
-            brought by either you or us &#40;individually&#44; a &#39;Party&#39;
-            and collectively&#44; the &#39;Parties&#39;&#41;&#44; the Parties
+            &#44;Dispute&#44; and collectively&#44; the &#44;Disputes&#44;&#41;
+            brought by either you or us &#40;individually&#44; a &#44;Party&#44;
+            and collectively&#44; the &#44;Parties&#44;&#41;&#44; the Parties
             agree to first attempt to negotiate any Dispute &#40;except those
             Disputes expressly provided below&#41; informally for at least forty
             five &#40;45&#41; days before initiating arbitration. Such informal
@@ -1436,7 +1442,7 @@ export default function Main() {
             LIMITATION&#44; THE IMPLIED WARRANTIES OF MERCHANTABILITY&#44;
             FITNESS FOR a PARTICULAR PURPOSE&#44; AND NON-INFRINGEMENT. WE MAKE
             NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS
-            OF THE SERVICES&#39; CONTENT OR THE CONTENT OF ANY WEBSITES OR
+            OF THE SERVICES&#44; CONTENT OR THE CONTENT OF ANY WEBSITES OR
             MOBILE APPLICATIONS LINKED TO THE SERVICES AND WE WILL ASSUME NO
             LIABILITY OR RESPONSIBILITY FOR ANY &#40;1&#41; ERRORS&#44;
             MISTAKES&#44; OR INACCURACIES OF CONTENT AND MATERIALS&#44;
@@ -1502,7 +1508,7 @@ export default function Main() {
             respective officers&#44; agents&#44; partners&#44; and
             employees&#44; from and against any loss&#44; damage&#44;
             liability&#44; claim&#44; or demand&#44; including reasonable
-            attorneys&rsquo; fees and expenses&#44; made by any third party due
+            attorneys&quot; fees and expenses&#44; made by any third party due
             to or arising out of&#58; &#40;1&#41; your Contributions;
             &#40;2&#41; use of the Services; &#40;3&#41; breach of these Legal
             Terms; &#40;4&#41; any breach of your representations and warranties
@@ -1565,10 +1571,101 @@ export default function Main() {
             electronic means.
           </div>
         </div>
-        <div id="misc" className={section}>
+        <div id="referral" className={section}>
           <div className={heading1}>
             <span className={textHighlight}>
               <span className={textHighlight}>27.</span>
+              &nbsp; FREELANCER REFERRAL PROGRAM
+            </span>
+          </div>
+          <div className={heading2}>
+            <span className={textHighlight}>Overview</span>
+          </div>
+          <div data-custom-class="body_text">
+            ReachGig offers a Freelancer Referral Program (&quot;Program&quot;)
+            that allows Freelancers to earn rewards for referring new
+            Freelancers (&quot;Referred Freelancers&quot;) to the Platform.
+          </div>
+          <div className={heading2}>
+            <span className={textHighlight}>Eligibility</span>
+          </div>
+          <div data-custom-class="body_text">
+            All Freelancers with an active account on the Platform are eligible
+            to participate in the Program.
+          </div>
+          <div className={heading2}>
+            <span className={textHighlight}>Referral Process</span>
+          </div>
+          <div data-custom-class="body_text">
+            <ul className={list}>
+              <li>
+                Freelancers can participate in the Program by using their unique
+                handle/ referral link provided by the Platform.
+              </li>
+              <li>
+                To qualify for a referral reward&#44; the Referred Freelancers
+                must&#58;
+                <ul className={subList}>
+                  <li>
+                    Create a new account on the Platform using the provided
+                    referral link or handle of the referrer.
+                  </li>
+                  <li>
+                    Create and provide their services to Clients through the
+                    Platform and earn a minimum amount (as determined by
+                    ReachGig).
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div className={heading2}>
+            <span className={textHighlight}>Referral Reward</span>
+          </div>
+          <div data-custom-class="body_text">
+            Upon a Referred Freelancer meeting the qualifying criteria&#44; the
+            referring Freelancer will be eligible for a one-time reward of 10%
+            of ReachGig&apos;s commission on the Referred Freelancer&apos;s
+            completed service.
+          </div>
+          <div className={heading2}>
+            <span className={textHighlight}>Discretion and Termination</span>
+          </div>
+          <div data-custom-class="body_text">
+            ReachGig reserves the right to&#44; at its sole discretion&#58;
+            <ul className={list}>
+              <li>
+                Terminate the Program in its entirety at any time&#44; with or
+                without notice.
+              </li>
+              <li>
+                Terminate a Freelancer&apos;s participation in the Program for
+                any reason&#44; including violation of these Terms and Services
+                or suspicion of fraudulent activity.
+              </li>
+              <li>
+                Withhold a referral reward if it deems the referral to be
+                unworthy due to&#44; but not limited to&#44; the Referred
+                Freelancer not meeting quality standards or engaging in
+                prohibited activities on the Platform.
+              </li>
+            </ul>
+          </div>
+          <div className={heading2}>
+            <span className={textHighlight}>Verification and Abuse</span>
+          </div>
+          <div data-custom-class="body_text">
+            ReachGig reserves the right to verify the legitimacy of all
+            referrals. Any attempt to manipulate the referral system through
+            fake accounts&#44; self-referrals&#44; or other fraudulent
+            activities will result in disqualification from the Program and may
+            lead to account suspension.
+          </div>
+        </div>
+        <div id="misc" className={section}>
+          <div className={heading1}>
+            <span className={textHighlight}>
+              <span className={textHighlight}>28.</span>
               &nbsp; MISCELLANEOUS
             </span>
           </div>
@@ -1599,7 +1696,7 @@ export default function Main() {
         <div id="contact" className={section}>
           <div className={heading1}>
             <span className={textHighlight}>
-              <span className={textHighlight}>28.</span>
+              <span className={textHighlight}>29.</span>
               &nbsp; CONTACT US
             </span>
           </div>
