@@ -309,15 +309,15 @@ function Hero() {
           <h1 className="text-3xl lg:text-5xl font-medium  !leading-snug">
             Empowering <br />
             the best <br />
-            {/* <SwitchText
-            textArray={[
-              "Makeup Artists",
-              "Photographers",
-              "Mehandi Artists",
-              "Wedding Planners",
-            ]}
-          /> */}
-            <Carousel
+            <SwitchText
+              textArray={[
+                "Makeup Artists",
+                "Photographers",
+                "Mehandi Artists",
+                "Wedding Planners",
+              ]}
+            />
+            {/* <Carousel
               className="w-full max-w-lg"
               autoplay={true}
               autoplayInterval={5000}
@@ -358,7 +358,7 @@ function Hero() {
                   <span className="font-semibold text-primary">DJs</span>
                 </CarouselItem>
               </CarouselContent>
-            </Carousel>
+            </Carousel> */}
           </h1>
 
           <div className="max-w-md w-full grid grid-cols-2 gap-5 pt-3">
