@@ -20,7 +20,7 @@ export default function HeaderWrapper({
       className={`w-full flex flex-col lg:py-10 items-center ${className}`}
     >
       <div
-        className={`flex flex-col ${
+        className={`flex flex-col max-w-7xl ${
           mobileAlign === "start" ? "items-start" : "items-center"
         } ${desktopAlign === "start" ? "lg:items-start" : "lg:items-center"}
       justify-center space-y-7 lg:space-y-14 w-full px-5 lg:px-10 ${maxWidth} py-10`}

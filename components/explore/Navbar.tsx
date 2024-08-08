@@ -40,11 +40,16 @@ export function NavBar() {
     });
   }, []);
   const currentPath = usePathname();
+  const excludedPaths = ["/explore"];
   return (
-    <div className="sticky top-0 !z-50 bg-white flex flex-col w-full items-center justify-center dark:border-gray-700">
-      <div className="flex flex-row items-center border-b justify-center w-full lg:px-10 px-5 py-3">
-        <div className="lg:grid flex grid-cols-2 w-full justify-between">
-          <Link className="flex flex-col w-fit" href={"/"}>
+    <div className="sticky top-0 !z-50 bg-white border-b flex flex-col w-full items-center justify-center dark:border-gray-700 shadow-sm">
+      <div
+        className={`flex flex-row items-center
+        ${!excludedPaths.includes(currentPath) ? "max-w-7xl" : "w-full"} 
+        justify-center w-full lg:px-10 px-5 py-3 transition-all duration-300`}
+      >
+        <div className="flex grid-cols-2 w-full justify-between">
+          <Link className="flex flex-col w-fit shrink-0" href={"/"}>
             <h1 className="text-xl font-medium">ReachGig</h1>
             <h2 className="text-sm text-gray-500 tracking-wide">
               Be your own Boss.
@@ -78,7 +83,7 @@ function DesktopProfile({
 }) {
   const partnerURL = process.env.NEXT_PUBLIC_PARTNER_LINK;
   return (
-    <div className="lg:flex hidden justify-end" hidden>
+    <div className="lg:flex hidden justify-end w-full" hidden>
       <div className="flex flex-row items-center justify-end w-full space-x-10">
         {partnerURL && (
           <Link

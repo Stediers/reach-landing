@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { BiRupee } from "react-icons/bi";
 import { Button } from "@components/ui/button";
+import Autoplay from "embla-carousel-autoplay";
 import {
   ArrowDownCircle,
   ArrowRightCircle,
@@ -13,6 +14,9 @@ import {
   MessageSquareQuote,
   Percent,
   Search,
+  SearchCheckIcon,
+  ShieldCheckIcon,
+  ShieldCloseIcon,
   UserPlus,
 } from "lucide-react";
 import ImageComponent from "@components/ImageComponent";
@@ -26,6 +30,16 @@ import SwitchText from "@components/landing/SwitchText";
 import { NumberCircle } from "@components/landing/NumberCircle";
 import SearchInput from "@components/landing/Search";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
+import ImageCarousel from "@components/ImageCarousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@components/ui/carousel";
+import { CardContent } from "@components/ui/card";
+import { AspectRatio } from "@components/ui/aspect-ratio";
 
 export const metadata: Metadata = {
   description:
@@ -56,7 +70,7 @@ export default function Main() {
   //     console.log("response", response);
   //   }
   return (
-    <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 py-5">
+    <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 pt-5 lg:pt-0">
       <Hero />
       <TheSafeWay />
       <YourOwnProfile />
@@ -281,40 +295,94 @@ function BecomePartner() {
 
 function Hero() {
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center lg:py-10 pt-5 pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[70vh] ">
-      <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full">
-        <ReachSVG className="w-32 lg:w-40" color="#f40e1e" />
-        <h1 className="text-3xl lg:text-5xl font-medium  !leading-snug">
-          Find the most <br />
-          Reliable <br />
-          <SwitchText
+    <div className="lg:min-h-[75vh] w-full flex flex-col items-center justify-center space-y-5 relative">
+      <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[75vh] max-w-7xl">
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-0 hidden lg:block">
+          <ImageComponent
+            src="/images/landing-background.png"
+            alt="Landing Background"
+            className="w-full h-full object-cover z-0"
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full z-10">
+          <ReachSVG className="w-32 lg:w-40" color="#f40e1e" />
+          <h1 className="text-3xl lg:text-5xl font-medium  !leading-snug">
+            Empowering <br />
+            the best <br />
+            {/* <SwitchText
             textArray={[
               "Makeup Artists",
               "Photographers",
               "Mehandi Artists",
               "Wedding Planners",
             ]}
-          />
-        </h1>
-        <h2 className="lg:text-xl text-lg font-normal">
-          Safe advance payments, secure chat, and many more
-        </h2>
-        <div className="max-w-md w-full">
-          {/* <SearchInput /> */}
-          <Link href="/explore" passHref>
-            <Button variant="success" className="!w-full">
-              Explore Now
-            </Button>
-          </Link>
+          /> */}
+            <Carousel
+              className="w-full max-w-lg"
+              autoplay={true}
+              autoplayInterval={5000}
+              opts={{ loop: true }}
+            >
+              <CarouselContent>
+                <CarouselItem>
+                  <span className="font-semibold text-primary">
+                    Makeup Artists
+                  </span>
+                </CarouselItem>
+                <CarouselItem>
+                  <span className="font-semibold text-primary">
+                    Photographers
+                  </span>
+                </CarouselItem>
+                <CarouselItem>
+                  <span className="font-semibold text-primary">
+                    Mehandi Artists
+                  </span>
+                </CarouselItem>
+                <CarouselItem>
+                  <span className="font-semibold text-primary">
+                    Wedding Planners
+                  </span>
+                </CarouselItem>
+                <CarouselItem>
+                  <span className="font-semibold text-primary">
+                    Fitness Trainers
+                  </span>
+                </CarouselItem>
+                <CarouselItem>
+                  <span className="font-semibold text-primary">
+                    Yoga Trainers
+                  </span>
+                </CarouselItem>
+                <CarouselItem>
+                  <span className="font-semibold text-primary">DJs</span>
+                </CarouselItem>
+              </CarouselContent>
+            </Carousel>
+          </h1>
+
+          <div className="max-w-md w-full grid grid-cols-2 gap-5 pt-3">
+            {/* <SearchInput /> */}
+            <Link href="/explore" passHref>
+              <Button variant="info" className="!w-full">
+                Hire Now
+              </Button>
+            </Link>
+            <Link href="/partner" passHref>
+              <Button variant="successOutline" className="!w-full">
+                Join Us
+              </Button>
+            </Link>
+          </div>
         </div>
+        <ImageComponent
+          src="/images/home1.png"
+          alt="Landing Image 1"
+          className="w-full h-80 lg:h-[30rem] lg:w-1/2 object-cover"
+          popup={false}
+          border={false}
+        />
       </div>
-      <ImageComponent
-        src="/images/home1.png"
-        alt="Hero"
-        className="w-full h-96 lg:h-96 max-w-lg"
-        border={false}
-        lazy="eager"
-      />
     </div>
   );
 }
