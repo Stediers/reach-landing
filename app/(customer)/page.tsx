@@ -291,7 +291,7 @@ function BecomePartner() {
 }
 
 function Hero() {
-  const partnerUrl = process.env.NEXT_PUBLIC_PARTNER_URL || "";
+  const partnerUrl = process.env.NEXT_PUBLIC_PARTNER_LINK || "";
   return (
     <div className="lg:min-h-[75vh] w-full flex flex-col items-center justify-center space-y-5 relative">
       <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[75vh] max-w-7xl">
