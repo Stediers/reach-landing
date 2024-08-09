@@ -297,13 +297,6 @@ function Hero() {
   return (
     <div className="lg:min-h-[75vh] w-full flex flex-col items-center justify-center space-y-5 relative">
       <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[75vh] max-w-7xl">
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-0 hidden lg:block">
-          <ImageComponent
-            src="/images/landing-background.png"
-            alt="Landing Background"
-            className="w-full h-full object-cover z-0"
-          />
-        </div>
         <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full z-10">
           <ReachSVG className="w-32 lg:w-40" color="#f40e1e" />
           <h1 className="text-3xl lg:text-5xl font-medium  !leading-snug">
@@ -378,10 +371,16 @@ function Hero() {
         <ImageComponent
           src="/images/home1.png"
           alt="Landing Image 1"
-          className="w-full h-80 lg:h-[30rem] lg:w-1/2 object-cover"
+          className="w-full h-full aspect-square lg:h-[30rem] lg:w-1/2 object-cover"
           popup={false}
           border={false}
         />
+      </div>
+      <div className="w-full flex items-center justify-center py-5">
+        Trusted by&nbsp;
+        <span className="text-primary font-semibold">
+          1000+ Customers and Partners
+        </span>
       </div>
     </div>
   );
