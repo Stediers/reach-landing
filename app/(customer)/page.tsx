@@ -40,6 +40,7 @@ import {
 } from "@components/ui/carousel";
 import { CardContent } from "@components/ui/card";
 import { AspectRatio } from "@components/ui/aspect-ratio";
+import { serviceTypeDescriptions } from "@data/static";
 
 export const metadata: Metadata = {
   description:
@@ -65,10 +66,6 @@ export const metadata: Metadata = {
 };
 
 export default function Main() {
-  //   const response = await fetchServiceCategories();
-  //   if (response) {
-  //     console.log("response", response);
-  //   }
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 pt-5 lg:pt-0">
       <Hero />
@@ -294,6 +291,7 @@ function BecomePartner() {
 }
 
 function Hero() {
+  const partnerUrl = process.env.NEXT_PUBLIC_PARTNER_URL || "";
   return (
     <div className="lg:min-h-[75vh] w-full flex flex-col items-center justify-center space-y-5 relative">
       <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[75vh] max-w-7xl">
@@ -301,14 +299,12 @@ function Hero() {
           <ReachSVG className="w-32 lg:w-40" color="#f40e1e" />
           <h1 className="text-3xl lg:text-5xl font-medium  !leading-snug">
             Empowering <br />
-            the best <br />
+            the best in <br />
             <SwitchText
-              textArray={[
-                "Makeup Artists",
-                "Photographers",
-                "Mehandi Artists",
-                "Wedding Planners",
-              ]}
+              textArray={Object.keys(serviceTypeDescriptions).map(
+                //@ts-ignore
+                (key) => serviceTypeDescriptions[key].title
+              )}
             />
             {/* <Carousel
               className="w-full max-w-lg"
@@ -361,7 +357,7 @@ function Hero() {
                 Hire Now
               </Button>
             </Link>
-            <Link href="/partner" passHref>
+            <Link href={`${partnerUrl}/user/sign-in`} passHref>
               <Button variant="successOutline" className="!w-full">
                 Join Us
               </Button>
@@ -374,11 +370,12 @@ function Hero() {
           className="w-full h-full aspect-square lg:h-[30rem] lg:w-1/2 object-cover"
           popup={false}
           border={false}
+          objectFit="contain"
         />
       </div>
-      <div className="w-full flex items-center justify-center py-5">
+      <div className="w-full flex items-center justify-center py-5 lg:bg-primary lg:text-white lg:text-xl">
         Trusted by&nbsp;
-        <span className="text-primary font-semibold">
+        <span className="lg:text-white text-primary font-semibold">
           1000+ Customers and Partners
         </span>
       </div>
