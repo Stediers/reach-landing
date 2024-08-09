@@ -15,7 +15,7 @@ import {
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { CallSetting } from "@components/Contact";
+import { CallSetting, WhatsAppSetting } from "@components/contact/Contact";
 import { Metadata } from "next";
 import {
   ServiceCardDesktop,
@@ -26,10 +26,13 @@ import { AspectRatio } from "@components/ui/aspect-ratio";
 import { Button } from "@components/ui/button";
 import Card from "@components/Card";
 import { priceString } from "@helper_functions/priceString";
-import { Star } from "lucide-react";
+import { PhoneCall, PhoneCallIcon, Star } from "lucide-react";
 import PartnerPrompt from "@components/PartnerPrompt";
 import PriceComponent from "@components/price/MobilePrice";
 import { calculateTotalPrice } from "@helper_functions/calculate-bill";
+import { CustomDrawer } from "@components/DrawerPopup";
+import { DrawerClose } from "@components/ui/drawer";
+import StickyContact from "@components/contact/StickyContact";
 
 export const generateMetadata = async ({
   params,
@@ -125,7 +128,34 @@ export default async function Page({
           ) : null}
         </div>
         <ContactMe response={response} />
-        <PartnerPrompt />
+        {/* <PartnerPrompt /> */}
+        <StickyContact
+          triggerJSX={<Button variant="default">Contact Me</Button>}
+          dontShowIds={["contact-me", "hero"]}
+        >
+          <div className="flex flex-col items-start justify-start space-y-5">
+            <CustomDrawer
+              title="Contact Me"
+              description="Reach me via"
+              footerJSX={
+                <DrawerClose asChild>
+                  <Button variant="close">Close</Button>
+                </DrawerClose>
+              }
+              triggerJSX={
+                <Button variant="default">
+                  Contact Me
+                  <PhoneCallIcon className="w-5 h-5 ml-2" />
+                </Button>
+              }
+            >
+              <div className="grid lg:grid-cols-2 gap-5 w-full">
+                <CallSetting mobileNumber={response.partner.mobileNumber} />
+                <WhatsAppSetting mobileNumber={response.partner.mobileNumber} />
+              </div>
+            </CustomDrawer>
+          </div>
+        </StickyContact>
       </div>
     ) : null;
   }
@@ -133,7 +163,10 @@ export default async function Page({
 
 function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
   return (
-    <div className="flex flex-col items-center justify-between w-full py-5 space-y-10">
+    <div
+      className="flex flex-col items-center justify-between w-full py-5 space-y-10"
+      id="hero"
+    >
       <Logo text="ReachGig" textStyle="text-2xl font-medium" />
       <div className="grid lg:grid-cols-2 gap-x-36 gap-y-10 w-full max-w-5xl min-h-[50vh] self-center">
         <div className="flex flex-col items-center justify-center lg:space-y-10 space-y-5 w-full">
@@ -154,7 +187,21 @@ function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
             {response.partner.designation.toUpperCase()}
           </h2>
           {response.partner.exposeMobileNumber ? (
-            <CallSetting mobileNumber={response.partner.mobileNumber} />
+            <CustomDrawer
+              title="Contact Me"
+              description="Reach me via"
+              footerJSX={
+                <DrawerClose asChild>
+                  <Button variant="close">Close</Button>
+                </DrawerClose>
+              }
+              triggerJSX={<Button variant="default">Contact Me</Button>}
+            >
+              <div className="grid lg:grid-cols-2 gap-5 w-full">
+                <CallSetting mobileNumber={response.partner.mobileNumber} />
+                <WhatsAppSetting mobileNumber={response.partner.mobileNumber} />
+              </div>
+            </CustomDrawer>
           ) : null}
         </div>
         <AspectRatio ratio={1}>
