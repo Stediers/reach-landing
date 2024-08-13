@@ -47,22 +47,6 @@ export default function Page() {
   ];
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20">
-      {/* <Hero>
-        <div className="flex flex-col items-center justify-center space-y-5 text-white px-10">
-          <ImageComponent
-            src="/images/india-the-land-of-gig-economy.svg"
-            alt="Blog"
-            className="w-full max-w-xs lg:h-[300px] object-cover rounded-full h-[200px]"
-            border={false}
-          />
-          <h1 className="lg:text-4xl text-2xl font-semibold text-center">
-            Welcome to the ReachGig Blog!
-          </h1>
-          <p className="lg:text-lg text-base text-center">
-            Stay up-to-date with the latest news, updates, and tips on ReachGig!
-          </p>
-        </div>
-      </Hero> */}
       <HeaderWrapper
         paddingTopRemove={true}
         title={

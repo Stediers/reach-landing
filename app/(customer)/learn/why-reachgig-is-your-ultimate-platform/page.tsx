@@ -27,7 +27,7 @@ export default function Page() {
         }}
         tags={[BlogCategory.TIPS]}
         title="Why ReachGig Is Your Ultimate Platform"
-        imageUrl="/images/why-reachgig-is-your-ultimate-platform.png"
+        imageUrl="/images/why-reachgig-is-your-ultimate-platform.webp"
         link="/how-to-get-the-best-services"
         authors={[
           {

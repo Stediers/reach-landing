@@ -379,7 +379,7 @@ function Hero() {
           {[1, 2, 3, 4].map((index) => (
             <CarouselItem key={index}>
               <ImageComponent
-                src={`/images/landing-profiles/${index}.png`}
+                src={`/images/landing-profiles/${index}.webp`}
                 alt={`Landing Image ${index}`}
                 className="w-full h-full aspect-square object-cover"
                 popup={false}
