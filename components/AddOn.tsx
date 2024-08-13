@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BiRightArrowAlt, BiRupee } from "react-icons/bi";
 import Card from "./Card";
 import { AddOn } from "@data/types";
-import ImageCarousel from "./ImageCarousel";
+import ImageCarousel from "./carousel/ImageCarousel";
 
 export function AddOnMobile({ addOn }: { addOn: AddOn }) {
   return (

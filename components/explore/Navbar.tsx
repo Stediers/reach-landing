@@ -50,10 +50,10 @@ export function NavBar() {
       >
         <div className="flex grid-cols-2 w-full justify-between">
           <Link className="flex flex-col w-fit shrink-0" href={"/"}>
-            <h1 className="text-xl font-medium">ReachGig</h1>
-            <h2 className="text-sm text-gray-500 tracking-wide">
+            <p className="text-xl font-medium">ReachGig</p>
+            <p className="text-sm text-gray-500 tracking-wide">
               Be your own Boss.
-            </h2>
+            </p>
           </Link>
 
           <DesktopProfile

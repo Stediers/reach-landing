@@ -17,6 +17,7 @@ import {
   SearchCheckIcon,
   ShieldCheckIcon,
   ShieldCloseIcon,
+  Star,
   UserPlus,
 } from "lucide-react";
 import ImageComponent from "@components/ImageComponent";
@@ -30,7 +31,6 @@ import SwitchText from "@components/landing/SwitchText";
 import { NumberCircle } from "@components/landing/NumberCircle";
 import SearchInput from "@components/landing/Search";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
-import ImageCarousel from "@components/ImageCarousel";
 import {
   Carousel,
   CarouselContent,
@@ -41,6 +41,7 @@ import {
 import { CardContent } from "@components/ui/card";
 import { AspectRatio } from "@components/ui/aspect-ratio";
 import { serviceTypeDescriptions } from "@data/static";
+import RawCarousel from "@components/carousel/RawCarousel";
 
 export const metadata: Metadata = {
   description:
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
 
 export default function Main() {
   return (
-    <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 pt-5 lg:pt-0">
+    <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
       <TheSafeWay />
       <YourOwnProfile />
@@ -293,64 +294,53 @@ function BecomePartner() {
 function Hero() {
   const partnerUrl = process.env.NEXT_PUBLIC_PARTNER_LINK || "";
   return (
-    <div className="lg:min-h-[75vh] w-full flex flex-col items-center justify-center space-y-5 relative">
-      <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center pb-10 space-y-5 w-full px-5 lg:px-10 lg:min-h-[75vh] max-w-7xl">
+    <div className="w-full flex flex-col items-center justify-center space-y-5 relative lg:pt-10 xl:min-h-[80vh] lg:min-h-[50vh] bg-[#F8F7F1] pt-10">
+      <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center pb-10 space-y-5 w-full px-5 lg:px-10 max-w-7xl lg:space-x-20">
         <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full z-10">
-          <ReachSVG className="w-32 lg:w-40" color="#f40e1e" />
-          <h1 className="text-3xl lg:text-5xl font-medium  !leading-snug">
-            Empowering <br />
-            the best in <br />
-            <SwitchText
+          <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full max-w-lg">
+            {/* <div
+              className="rounded-3xl bg-white w-full border overflow-hidden flex items-center justify-start lg:hidden mb-5"
+              hidden
+            >
+              <ImageComponent
+                src="https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg"
+                alt="ReachGig Logo"
+                className="w-24 h-24 lg:w-32 lg:h-32"
+                popup={false}
+                border={false}
+                objectFit="contain"
+              />
+              <div className="flex flex-col items-start justify-center space-y-2 p-5">
+                <p className="text-lg lg:text-2xl font-semibold lg:font-bold">
+                  Rithanya Makeover
+                </p>
+                <p className="text-base lg:text-lg font-normal lg:font-medium">
+                  Makeup Artist
+                </p>
+              </div>
+            </div> */}
+
+            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-medium lg:font-semibold !leading-tight xl:!leading-[4.7rem]">
+              <span className="font-medium">Stand out</span>
+              <br />
+              <span className="font-semibold">and become</span>
+              <br />
+              {/* <SwitchText
               textArray={Object.keys(serviceTypeDescriptions).map(
                 //@ts-ignore
                 (key) => serviceTypeDescriptions[key].title
               )}
-            />
-            {/* <Carousel
-              className="w-full max-w-lg"
-              autoplay={true}
-              autoplayInterval={5000}
-              opts={{ loop: true }}
-            >
-              <CarouselContent>
-                <CarouselItem>
-                  <span className="font-semibold text-primary">
-                    Makeup Artists
-                  </span>
-                </CarouselItem>
-                <CarouselItem>
-                  <span className="font-semibold text-primary">
-                    Photographers
-                  </span>
-                </CarouselItem>
-                <CarouselItem>
-                  <span className="font-semibold text-primary">
-                    Mehandi Artists
-                  </span>
-                </CarouselItem>
-                <CarouselItem>
-                  <span className="font-semibold text-primary">
-                    Wedding Planners
-                  </span>
-                </CarouselItem>
-                <CarouselItem>
-                  <span className="font-semibold text-primary">
-                    Fitness Trainers
-                  </span>
-                </CarouselItem>
-                <CarouselItem>
-                  <span className="font-semibold text-primary">
-                    Yoga Trainers
-                  </span>
-                </CarouselItem>
-                <CarouselItem>
-                  <span className="font-semibold text-primary">DJs</span>
-                </CarouselItem>
-              </CarouselContent>
-            </Carousel> */}
-          </h1>
+            /> */}
+              <SwitchText
+                textArray={["Trustable", "Reliable", "Professional"]}
+              />
+            </h1>
+            <h2 className="text-lg xl:text-xl font-normal xl:leading-relaxed">
+              Advocating safe and secure interactions with service providers.
+            </h2>
+          </div>
 
-          <div className="max-w-md w-full grid grid-cols-2 gap-5 pt-3">
+          <div className="max-w-md w-full grid lg:grid-cols-2 gap-5 pt-3">
             {/* <SearchInput /> */}
             <Link href="/explore" passHref>
               <Button variant="info" className="!w-full">
@@ -364,21 +354,48 @@ function Hero() {
             </Link>
           </div>
         </div>
-        <ImageComponent
+        {/* <ImageComponent
           src="/images/home1.png"
           alt="Landing Image 1"
           className="w-full h-full aspect-square lg:h-[30rem] lg:w-1/2 object-cover"
           popup={false}
           border={false}
           objectFit="contain"
-        />
+        /> */}
+        {/* <ImageCarousel
+          bgCol="bg-black"
+          images={[
+            "/images/landing-profiles/1.png",
+            "/images/landing-profiles/2.png",
+            "/images/landing-profiles/3.png",
+            "/images/landing-profiles/4.png",
+          ]}
+          autoPlay={true}
+          imageHeight="h-[15rem] xl:h-[25rem]"
+          border={false}
+          showArrows={false}
+        /> */}
+        <RawCarousel autoPlay={true} showArrows={false}>
+          {[1, 2, 3, 4].map((index) => (
+            <CarouselItem key={index}>
+              <ImageComponent
+                src={`/images/landing-profiles/${index}.png`}
+                alt={`Landing Image ${index}`}
+                className="w-full h-full aspect-square object-cover"
+                popup={false}
+                border={false}
+                objectFit="contain"
+              />
+            </CarouselItem>
+          ))}
+        </RawCarousel>
       </div>
-      <div className="w-full flex items-center justify-center py-5 lg:bg-primary lg:text-white lg:text-xl">
+      {/* <div className="w-full flex items-center justify-center py-5 lg:bg-primary lg:text-white lg:text-xl">
         Trusted by&nbsp;
         <span className="lg:text-white text-primary font-semibold">
           1000+ Customers and Partners
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -387,14 +404,14 @@ function TheSafeWay() {
   return (
     <HeaderWrapper
       title={
-        <span className="!leading-snug text-white lg:text-text">
+        <span className="!leading-snug lg:text-text">
           The
-          <br /> <span className="font-semibold lg:text-primary">Safe</span> Way
+          <br /> <span className="font-semibold text-primary">Safe</span> Way
         </span>
       }
-      className="items-center rounded-t-lg py-5 bg-info lg:bg-white lg:py-20 min-h-[80vh] justify-center w-full flex flex-col space-y-16 relative"
+      className="items-center rounded-t-lg py-5 lg:py-20 min-h-[80vh] justify-center w-full flex flex-col space-y-16 relative"
     >
-      <div className="lg:grid grid-cols-3 lg:gap-x-20 lg:gap-y-24 w-full lg:justify-items-start flex flex-col items-start justify-center space-y-14 lg:space-y-0 pt-5 lg:text-text text-white">
+      <div className="lg:grid grid-cols-3 lg:gap-x-20 lg:gap-y-24 w-full lg:justify-items-start flex flex-col items-start justify-center space-y-14 lg:space-y-0 pt-5">
         <FeatureCard
           heading="Request Callback"
           description="Ask the service provider to call you back after providing your details."

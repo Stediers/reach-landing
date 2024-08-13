@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import ImageComponent from "./ImageComponent";
+import ImageComponent from "../ImageComponent";
 import {
   Carousel,
   CarouselApi,
@@ -8,7 +8,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "./ui/carousel";
+} from "../ui/carousel";
 import Image from "next/image";
 
 export default function ImageCarousel({
@@ -19,8 +19,9 @@ export default function ImageCarousel({
   autoPlay = false,
   itemBasis = "w-1/3",
   border = true,
+  bgCol = "bg-white",
   className = "",
-  showArrow = true,
+  showArrows = true,
 }: {
   images: string[];
   imageHeight?: string;
@@ -31,9 +32,9 @@ export default function ImageCarousel({
   border?: boolean;
   bgCol?: string;
   className?: string;
-  showArrow?: boolean;
+  showArrows?: boolean;
 }) {
-  const [showButtons, setShowButtons] = useState(false);
+  const [showButtons, setShowButtons] = useState(showArrows);
   const [api, setApi] = useState<CarouselApi>();
 
   const [current, setCurrent] = useState<number>(0);
@@ -65,10 +66,10 @@ export default function ImageCarousel({
     >
       <Carousel
         onMouseLeave={() => {
-          setShowButtons(false);
+          showArrows && setShowButtons(false);
         }}
         onMouseEnter={() => {
-          setShowButtons(true);
+          showArrows && setShowButtons(true);
         }}
         className="w-full"
         setApi={setApi}
@@ -110,14 +111,12 @@ export default function ImageCarousel({
         {showButtons && images.length > 1 ? (
           <>
             <CarouselNext
-              className={`right-5 disabled:pointer-events-none ${
-                showArrow ? "hover:cursor-pointer" : ""
+              className={`right-5 disabled:pointer-events-none hover:cursor-pointer"
               }`}
             />
             <CarouselPrevious
-              className={`left-5 disabled:pointer-events-none ${
-                showArrow ? "hover:cursor-pointer" : ""
-              }`}
+              className={`left-5 disabled:pointer-events-none hover:cursor-pointer
+              `}
             />
           </>
         ) : null}
@@ -142,6 +141,62 @@ export default function ImageCarousel({
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+export function RawCarousel({
+  children,
+  showArrows = true,
+  autoPlay = false,
+}: {
+  children: React.ReactNode;
+  showArrows?: boolean;
+  autoPlay?: boolean;
+}) {
+  const [api, setApi] = useState<CarouselApi>();
+
+  useEffect(() => {
+    if (!api) {
+      console.log("api not found");
+      return;
+    } else {
+      console.log("api found");
+    }
+    if (autoPlay) {
+      const interval = setInterval(() => {
+        api.scrollNext();
+      }, 5000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [api]);
+
+  return (
+    <div className="w-full flex flex-col items-center justify-center space-y-2">
+      <Carousel
+        className="w-full"
+        setApi={setApi}
+        opts={{
+          loop: true,
+        }}
+      >
+        <CarouselContent className="">{children}</CarouselContent>
+        {showArrows ? (
+          <>
+            <CarouselNext
+              className={`right-5 disabled:pointer-events-none hover:cursor-pointer"
+              }`}
+            />
+            <CarouselPrevious
+              className={`left-5 disabled:pointer-events-none hover:cursor-pointer
+              `}
+            />
+          </>
+        ) : null}
+      </Carousel>
     </div>
   );
 }

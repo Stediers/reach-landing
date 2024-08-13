@@ -4,7 +4,7 @@ import ImageComponent from "./ImageComponent";
 import { Button } from "./ui/button";
 import { SheetClose } from "./ui/sheet";
 import { Images } from "lucide-react";
-import ImageCarousel from "./ImageCarousel";
+import ImageCarousel from "./carousel/ImageCarousel";
 
 export default function CustomImageGridLayout({
   imageUrls,

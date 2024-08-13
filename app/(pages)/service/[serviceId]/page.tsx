@@ -30,7 +30,7 @@ import ImageComponent from "@components/ImageComponent";
 import { BsArrowLeftShort, BsShieldCheck, BsShieldSlash } from "react-icons/bs";
 import Link from "next/link";
 import { Metadata } from "next";
-import ImageCarousel from "@components/ImageCarousel";
+import ImageCarousel from "@components/carousel/ImageCarousel";
 import IconWrapper from "@components/IconWrapper";
 import { MdLocationCity } from "react-icons/md";
 import { RequestCallback } from "@components/RequestCallback";
