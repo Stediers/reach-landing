@@ -29,6 +29,8 @@ const buttonVariants = cva(
           "bg-success text-white hover:bg-success/90 hover:text-success-foreground",
         dark: "bg-black text-white hover:bg-dark/90 hover:text-dark-foreground",
         info: "bg-info text-white hover:bg-info/90 hover:text-info-foreground",
+        infoOutline:
+          "border border-info text-info hover:bg-info/90 hover:text-info-foreground",
         error:
           "bg-error text-white hover:bg-error/90 hover:text-error-foreground",
         successOutline: "border border-success text-success",

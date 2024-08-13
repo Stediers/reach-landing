@@ -6,6 +6,7 @@ export default function HeaderWrapper({
   mobileAlign = "start",
   desktopAlign = "start",
   maxWidth = "",
+  paddingTopRemove = false,
 }: {
   title: JSX.Element | string;
   children: React.ReactNode;
@@ -14,10 +15,13 @@ export default function HeaderWrapper({
   mobileAlign?: "center" | "start";
   desktopAlign?: "center" | "start";
   maxWidth?: string;
+  paddingTopRemove?: boolean;
 }) {
   return (
     <section
-      className={`w-full flex flex-col lg:py-10 items-center ${className}`}
+      className={`w-full flex flex-col lg:py-10 ${
+        paddingTopRemove ? "lg:pt-0" : "pt-10"
+      } items-center ${className}`}
     >
       <div
         className={`flex flex-col max-w-7xl ${

@@ -43,6 +43,13 @@ export default function StickyContact({
       });
     };
   }, [dontShowIds]);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setIsMobile(true);
+    }
+  }, []);
   return (
     <AnimatePresence mode="wait">
       {visible ? (

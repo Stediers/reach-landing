@@ -13,6 +13,8 @@ import { BlogTag } from "@wrapper/BlogWrapper";
 import Link from "next/link";
 import VideoCarousel from "@components/VideoCarousel";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
+import RawCarousel from "@components/carousel/RawCarousel";
+import { CarouselItem } from "@components/ui/carousel";
 
 export const metadata: Metadata = {
   title: {
@@ -41,11 +43,11 @@ export const metadata: Metadata = {
 export default function Page() {
   const podcastVideos = [
     "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
-    "https://www.youtube.com/embed/hb7DSyWHjZw?si=CwkgK4nSBQ1dlzNp",
+    "https://www.youtube.com/embed/DojCGh-PNKc?si=ZLyrNDhZ8AQqaF7q",
   ];
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20">
-      <Hero>
+      {/* <Hero>
         <div className="flex flex-col items-center justify-center space-y-5 text-white px-10">
           <ImageComponent
             src="/images/india-the-land-of-gig-economy.svg"
@@ -60,8 +62,9 @@ export default function Page() {
             Stay up-to-date with the latest news, updates, and tips on ReachGig!
           </p>
         </div>
-      </Hero>
+      </Hero> */}
       <HeaderWrapper
+        paddingTopRemove={true}
         title={
           <span className="!leading-snug">
             Our <br />{" "}
@@ -78,18 +81,21 @@ export default function Page() {
           ]}
           itemBasis="lg:basis-1/2"
         /> */}
-        <div className="grid gap-10 lg:grid-cols-2 w-full">
+        <RawCarousel showArrows={true} autoPlay={true}>
           {podcastVideos.map((video) => (
-            <iframe
-              src={video}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-[200px] lg:h-[400px] rounded-lg"
-              key={video}
-            ></iframe>
+            <CarouselItem className="lg:basis-1/2" key={video}>
+              <iframe
+                src={video}
+                title="YouTube video player"
+                className="w-full h-[200px] lg:h-[400px] rounded-lg"
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </CarouselItem>
           ))}
-        </div>
+        </RawCarousel>
       </HeaderWrapper>
       <HeaderWrapper
         title={

@@ -149,7 +149,6 @@ export default function ConsoleLayout({ children }: RootLayoutProps) {
         )}
       </div>
       {children}
-      <Footer />
     </div>
   );
 }

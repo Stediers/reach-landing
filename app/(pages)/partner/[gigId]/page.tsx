@@ -33,6 +33,7 @@ import { calculateTotalPrice } from "@helper_functions/calculate-bill";
 import { CustomDrawer } from "@components/DrawerPopup";
 import { DrawerClose } from "@components/ui/drawer";
 import StickyContact from "@components/contact/StickyContact";
+import { CustomDialog } from "@components/DialogPopup";
 
 export const generateMetadata = async ({
   params,
@@ -133,28 +134,22 @@ export default async function Page({
           triggerJSX={<Button variant="default">Contact Me</Button>}
           dontShowIds={["contact-me", "hero"]}
         >
-          <div className="flex flex-col items-start justify-start space-y-5">
-            <CustomDrawer
-              title="Contact Me"
-              description="Reach me via"
-              footerJSX={
-                <DrawerClose asChild>
-                  <Button variant="close">Close</Button>
-                </DrawerClose>
-              }
-              triggerJSX={
-                <Button variant="default">
-                  Contact Me
-                  <PhoneCallIcon className="w-5 h-5 ml-2" />
-                </Button>
-              }
-            >
-              <div className="grid lg:grid-cols-2 gap-5 w-full">
-                <CallSetting mobileNumber={response.partner.mobileNumber} />
-                <WhatsAppSetting mobileNumber={response.partner.mobileNumber} />
-              </div>
-            </CustomDrawer>
-          </div>
+          <CustomDialog
+            title="Contact Me"
+            description="Reach me via"
+            maxWidth="max-w-md"
+            triggerJSX={
+              <Button variant="default">
+                Contact Me
+                <PhoneCallIcon className="w-5 h-5 ml-2" />
+              </Button>
+            }
+          >
+            <div className="grid gap-5 w-full">
+              <CallSetting mobileNumber={response.partner.mobileNumber} />
+              <WhatsAppSetting mobileNumber={response.partner.mobileNumber} />
+            </div>
+          </CustomDialog>
         </StickyContact>
       </div>
     ) : null;

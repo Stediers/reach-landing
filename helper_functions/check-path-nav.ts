@@ -21,6 +21,8 @@ export default function checkHere({
     return true;
   } else if (path === "/explore" && menuPath === "/explore") {
     return true;
+  } else if (path.startsWith("/learn") && menuPath === "/learn") {
+    return true;
   } else if (
     path.startsWith("/console/appointments") &&
     menuPath === "/console/appointments"

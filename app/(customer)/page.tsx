@@ -344,11 +344,11 @@ function Hero() {
             {/* <SearchInput /> */}
             <Link href={`${partnerUrl}/user/sign-in`} passHref>
               <Button variant="success" className="!w-full">
-                Join Us
+                Start for Free
               </Button>
             </Link>
             <Link href="/explore" passHref>
-              <Button variant="successOutline" className="!w-full">
+              <Button variant="close" className="!w-full">
                 Looking for a freelancer?
               </Button>
             </Link>
