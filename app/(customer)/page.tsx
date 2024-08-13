@@ -342,14 +342,14 @@ function Hero() {
 
           <div className="max-w-md w-full grid lg:grid-cols-2 gap-5 pt-3">
             {/* <SearchInput /> */}
-            <Link href="/explore" passHref>
-              <Button variant="info" className="!w-full">
-                Hire Now
+            <Link href={`${partnerUrl}/user/sign-in`} passHref>
+              <Button variant="success" className="!w-full">
+                Join Us
               </Button>
             </Link>
-            <Link href={`${partnerUrl}/user/sign-in`} passHref>
+            <Link href="/explore" passHref>
               <Button variant="successOutline" className="!w-full">
-                Join Us
+                Looking for a freelancer?
               </Button>
             </Link>
           </div>
