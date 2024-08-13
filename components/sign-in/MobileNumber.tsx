@@ -71,7 +71,7 @@ function MobileNumberInput({
         title="Mobile Number"
         onChange={(value) => setMobileNumber(value)}
         value={mobileNumber}
-        autoFocus={true}
+        autoFocus={false}
         errorText={
           isValidPhoneNumber(country.code + mobileNumber)
             ? ""
