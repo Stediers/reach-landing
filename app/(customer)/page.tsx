@@ -337,7 +337,7 @@ function Hero() {
               {/* <SwitchText
                 textArray={["Trustable", "Reliable", "Professional"]}
               /> */}
-              <span className="font-semibold">Trustable</span>
+              <span className="font-semibold text-primary">Trustable</span>
             </h1>
             <h2 className="text-lg xl:text-xl font-normal xl:leading-relaxed">
               Advocating safe and secure interactions with service providers.
