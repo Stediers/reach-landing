@@ -38,36 +38,43 @@ export function NavBar() {
         setPageState(State.ERROR);
       }
     });
-
-    const home = document.getElementById("home");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            console.log("Home is here");
-            setOnHome(true);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    if (home) {
-      observer.observe(home);
-    }
-    return () => {
-      if (home) {
-        observer.unobserve(home);
-      }
-    };
   }, []);
   const currentPath = usePathname();
   const [onHome, setOnHome] = useState(false);
   const excludedPaths = ["/explore"];
+
+  useEffect(() => {
+    const home = document.getElementById("home");
+    //onscroll event listener
+    const scrollHandler = () => {
+      if (home) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setOnHome(true);
+              } else {
+                setOnHome(false);
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+        observer.observe(home);
+        if (home.getBoundingClientRect().top < 0) {
+          setOnHome(false);
+        } else {
+          setOnHome(true);
+        }
+      }
+    };
+    window.addEventListener("scroll", scrollHandler);
+  }, []);
   return (
     <div
       className={`sticky top-0 !z-50 ${
         onHome ? "!bg-[#F8F7F1]" : "bg-white  border-b shadow-sm"
-      } flex flex-col w-full items-center justify-center dark:border-gray-700`}
+      } flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
     >
       <div
         className={`flex flex-row items-center
