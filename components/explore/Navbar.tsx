@@ -38,11 +38,37 @@ export function NavBar() {
         setPageState(State.ERROR);
       }
     });
+
+    const home = document.getElementById("home");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            console.log("Home is here");
+            setOnHome(true);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    if (home) {
+      observer.observe(home);
+    }
+    return () => {
+      if (home) {
+        observer.unobserve(home);
+      }
+    };
   }, []);
   const currentPath = usePathname();
+  const [onHome, setOnHome] = useState(false);
   const excludedPaths = ["/explore"];
   return (
-    <div className="sticky top-0 !z-50 bg-white border-b flex flex-col w-full items-center justify-center dark:border-gray-700 shadow-sm">
+    <div
+      className={`sticky top-0 !z-50 ${
+        onHome ? "!bg-[#F8F7F1]" : "bg-white  border-b shadow-sm"
+      } flex flex-col w-full items-center justify-center dark:border-gray-700`}
+    >
       <div
         className={`flex flex-row items-center
         ${!excludedPaths.includes(currentPath) ? "max-w-7xl" : "w-full"} 

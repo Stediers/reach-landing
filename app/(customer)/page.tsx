@@ -294,7 +294,10 @@ function BecomePartner() {
 function Hero() {
   const partnerUrl = process.env.NEXT_PUBLIC_PARTNER_LINK || "";
   return (
-    <div className="w-full flex flex-col items-center justify-center space-y-5 relative lg:pt-10 xl:min-h-[80vh] lg:min-h-[50vh] bg-[#F8F7F1] pt-10">
+    <div
+      className="w-full flex flex-col items-center justify-center space-y-5 relative lg:pt-10 xl:min-h-[80vh] lg:min-h-[50vh] bg-[#F8F7F1] pt-10"
+      id="home"
+    >
       <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center pb-10 space-y-5 w-full px-5 lg:px-10 max-w-7xl lg:space-x-20">
         <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full z-10">
           <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full max-w-lg">
