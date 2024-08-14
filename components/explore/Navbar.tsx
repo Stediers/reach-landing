@@ -42,20 +42,13 @@ export function NavBar() {
   const currentPath = usePathname();
   const [onHome, setOnHome] = useState(false);
   const excludedPaths = ["/explore"];
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setOnHome(true);
-        } else {
-          setOnHome(false);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-  const scrollHandler = ({ home }: { home: HTMLElement }) => {
+  const scrollHandler = ({
+    home,
+    observer,
+  }: {
+    home: HTMLElement;
+    observer: IntersectionObserver;
+  }) => {
     if (home) {
       observer.observe(home);
       if (home.getBoundingClientRect().top < 0) {
@@ -67,17 +60,30 @@ export function NavBar() {
   };
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setOnHome(true);
+          } else {
+            setOnHome(false);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
     const home = document.getElementById("home");
+    if (!home) return;
+    observer.observe(home);
     //onscroll event listener
     if (!home) {
-      console.log("Ola");
       setOnHome(false);
       return;
     }
     window.addEventListener("scroll", () => {
-      scrollHandler({ home });
+      scrollHandler({ home, observer });
     });
-  }, [scrollHandler, setOnHome, observer, currentPath, excludedPaths, onHome]);
+  }, [scrollHandler, setOnHome, currentPath, excludedPaths, onHome]);
   return (
     <div
       className={`sticky top-0 !z-50 ${
