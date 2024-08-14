@@ -334,9 +334,10 @@ function Hero() {
                 (key) => serviceTypeDescriptions[key].title
               )}
             /> */}
-              <SwitchText
+              {/* <SwitchText
                 textArray={["Trustable", "Reliable", "Professional"]}
-              />
+              /> */}
+              <span className="font-semibold">Trustable</span>
             </h1>
             <h2 className="text-lg xl:text-xl font-normal xl:leading-relaxed">
               Advocating safe and secure interactions with service providers.
