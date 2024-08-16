@@ -89,7 +89,7 @@ export default function Page() {
           </span>
         }
       >
-        <div className="grid gap-20 lg:grid-cols-3 justify-items-center 2xl:grid-cols-4">
+        <div className="grid gap-20 lg:grid-cols-3 justify-items-center">
           {/* NEW BLOGS HERE */}
           <BlogCard
             title="Staying Motivated and Overcoming Freelance Burnout"
