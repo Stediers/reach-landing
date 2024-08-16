@@ -17,19 +17,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { CallSetting, WhatsAppSetting } from "@components/contact/Contact";
 import { Metadata } from "next";
-import {
-  ServiceCardDesktop,
-  ServiceTriggerDesktopProfile,
-} from "@components/ServiceCard";
-import { Badge } from "@components/ui/badge";
+import { ServiceCardDesktop } from "@components/ServiceCard";
 import { AspectRatio } from "@components/ui/aspect-ratio";
 import { Button } from "@components/ui/button";
 import Card from "@components/Card";
-import { priceString } from "@helper_functions/priceString";
-import { PhoneCall, PhoneCallIcon, Star } from "lucide-react";
-import PartnerPrompt from "@components/PartnerPrompt";
-import PriceComponent from "@components/price/MobilePrice";
-import { calculateTotalPrice } from "@helper_functions/calculate-bill";
+import { MessageCircleCode, PhoneCallIcon, Star } from "lucide-react";
 import { CustomDrawer } from "@components/DrawerPopup";
 import { DrawerClose } from "@components/ui/drawer";
 import StickyContact from "@components/contact/StickyContact";
@@ -124,9 +116,9 @@ export default async function Page({
           <HeroPage response={response} />
           <AboutMe response={response} />
           <MyServices response={response} />
-          {response.packages.length > 0 ? (
+          {/* {response.packages.length > 0 ? (
             <MyPackages response={response} />
-          ) : null}
+          ) : null} */}
         </div>
         <ContactMe response={response} />
         {/* <PartnerPrompt /> */}
@@ -168,7 +160,7 @@ function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
           <p className="lg:text-2xl text-lg font-normal">
             Hi there! My name is
           </p>
-          <h1 className="flex lg:text-5xl text-4xl flex-col items-center justify-center lg:space-y-5 space-y-3 w-full">
+          <h1 className="flex lg:text-5xl text-3xl flex-col items-center justify-center lg:space-y-5 space-y-3 w-full">
             <span className="font-medium text-center">
               {response.partner.firstName.charAt(0).toUpperCase() +
                 response.partner.firstName.slice(1)}
@@ -178,8 +170,8 @@ function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
                 response.partner.lastName.slice(1)}
             </span>
           </h1>
-          <h2 className="lg:text-2xl text-base font-medium capitalize text-primary">
-            {response.partner.designation.toUpperCase()}
+          <h2 className="lg:text-2xl text-base font-medium">
+            I am a {response.partner.designation}
           </h2>
           {response.partner.exposeMobileNumber ? (
             <CustomDrawer
@@ -240,7 +232,7 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
                   language.charAt(0).toUpperCase() + language.slice(1)
               )
               .join(", ")}
-            icon={<BsFillSpeakerFill className="w-14 h-14" />}
+            icon={<MessageCircleCode className="w-14 h-14" />}
           />
           <LargeSetting
             title="My Gender"
@@ -344,9 +336,6 @@ function MyServices({
             <ServiceCardDesktop
               key={service.id}
               service={service}
-              serviceTrigger={
-                <ServiceTriggerDesktopProfile service={service} />
-              }
               location={response.partner.city + ", " + response.partner.state}
             />
           ))}
@@ -355,69 +344,69 @@ function MyServices({
   );
 }
 
-function MyPackages({
-  response,
-}: {
-  response: FetchPartnerByPartnerIdResponse;
-}) {
-  return (
-    <div className="flex flex-col items-start justify-start w-full lg:min-h-screen lg:p-20 lg:py-16 lg:space-y-20 space-y-10 py-12 px-5 bg-white text-text">
-      <h2 className="lg:text-5xl text-3xl font-medium !leading-normal">
-        My
-        <br />
-        <span className="text-primary">Packages</span>
-      </h2>
-      <div className="grid lg:grid-cols-3 gap-14 w-full">
-        {response.packages.map((packageItem) => (
-          <Card
-            className="flex flex-col items-start justify-start w-full space-y-5"
-            key={packageItem.id}
-          >
-            <div className="flex flex-col items-start justify-start space-y-3 w-full">
-              <div className="flex flex-row items-center justify-between space-x-2 w-full">
-                <p className="lg:text-3xl text-xl font-medium">
-                  {packageItem.title}
-                </p>
-                <Badge>{packageItem.services.length + " in One"}</Badge>
-              </div>
-              <p className="lg:text-xl text-base">
-                {packageItem.description.length > 100
-                  ? packageItem.description.slice(0, 100) + "..."
-                  : packageItem.description}
-              </p>
-              <ul className="flex flex-col items-start justify-start space-y-2 w-full">
-                {packageItem.services.map((service) => (
-                  <li
-                    key={service.id}
-                    className="flex flex-row items-start justify-between w-full"
-                  >
-                    <p className="lg:text-lg text-base font-medium">
-                      {service.title}
-                    </p>
-                    <p className="lg:text-lg text-base">
-                      {priceString({
-                        price: calculateTotalPrice({
-                          discount: service.price.discount?.value ?? 0,
-                          price: service.price.price,
-                        }),
-                      })}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <PriceComponent
-              price={{
-                ...packageItem.price,
-                pricingType: PricingType.SESSION,
-              }}
-            />
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-}
+// function MyPackages({
+//   response,
+// }: {
+//   response: FetchPartnerByPartnerIdResponse;
+// }) {
+//   return (
+//     <div className="flex flex-col items-start justify-start w-full lg:min-h-screen lg:p-20 lg:py-16 lg:space-y-20 space-y-10 py-12 bg-white text-text">
+//       <h2 className="lg:text-5xl text-3xl font-medium !leading-normal">
+//         My
+//         <br />
+//         <span className="text-primary">Packages</span>
+//       </h2>
+//       <div className="grid lg:grid-cols-3 gap-14 w-full justify-items-start bg-red-100">
+//         {response.packages.map((packageItem) => (
+//           <Card
+//             className="flex flex-col items-start justify-start w-full space-y-5 lg:!p-10 !p-0 border-none lg:border"
+//             key={packageItem.id}
+//           >
+//             <div className="flex flex-col items-start justify-start space-y-3 w-full">
+//               <div className="flex flex-row items-center justify-between space-x-2 w-full">
+//                 <p className="lg:text-xl text-xl font-medium">
+//                   {packageItem.title}
+//                 </p>
+//                 <Badge>{packageItem.services.length + " in One"}</Badge>
+//               </div>
+//               <p className="lg:text-xl text-base">
+//                 {packageItem.description.length > 100
+//                   ? packageItem.description.slice(0, 100) + "..."
+//                   : packageItem.description}
+//               </p>
+//               <ul className="flex flex-col items-start justify-start space-y-2 w-full">
+//                 {packageItem.services.map((service) => (
+//                   <li
+//                     key={service.id}
+//                     className="flex flex-row items-start justify-between w-full"
+//                   >
+//                     <p className="lg:text-lg text-base font-medium">
+//                       {service.title}
+//                     </p>
+//                     <p className="lg:text-lg text-base">
+//                       {priceString({
+//                         price: calculateTotalPrice({
+//                           discount: service.price.discount?.value ?? 0,
+//                           price: service.price.price,
+//                         }),
+//                       })}
+//                     </p>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//             <PriceComponent
+//               price={{
+//                 ...packageItem.price,
+//                 pricingType: PricingType.SESSION,
+//               }}
+//             />
+//           </Card>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
 
 function ContactMe({
   response,

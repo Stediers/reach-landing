@@ -38,6 +38,7 @@ import { User } from "lucide-react";
 import { CustomDialog } from "@components/DialogPopup";
 import { AddOnMobile } from "@components/AddOn";
 import CustomImageGridLayout from "@components/CustomImageGridLayout";
+import { ContactMeDrawer, ContactMeSheet } from "@components/contact/Contact";
 
 const getFullName = (firstName: string, lastName: string) => {
   return (
@@ -142,7 +143,7 @@ export default async function Page({
       <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-5 justify-items-center items-start">
         <div className="flex flex-col items-start justify-start w-full space-y-2 py-5 lg:px-0">
           <div className="flex flex-col items-start justify-start w-full space-y-2 px-5 lg:px-0">
-            <h1 className="lg:text-2xl text-xl font-medium text-left first-letter:capitalize w-full max-w-[60%]">
+            <h1 className="lg:text-2xl text-xl font-medium text-left first-letter:capitalize w-full lg:max-w-[60%]">
               {service.title}
             </h1>
             <Link href={`/partner/@${gig.handle}`} shallow>
@@ -191,12 +192,12 @@ export default async function Page({
             </div>
           </div>
         </div>
-        <div className="lg:sticky lg:top-20 hidden lg:flex flex-col gap-y-5 w-full pt-10 ">
-          <RequestCallback serviceId={serviceId} />
+        <div className="lg:sticky lg:top-20 max-w-lg hidden lg:flex flex-col gap-y-5 w-full pt-10 ">
+          <RequestCallback serviceId={serviceId} type="desktop" />
         </div>
       </div>
       <div className="sticky bottom-0 py-5 bg-white lg:hidden flex flex-col gap-y-5 w-full px-5">
-        <RequestCallback serviceId={serviceId} />
+        <RequestCallback serviceId={serviceId} type="mobile" />
       </div>
       <div className="w-full flex flex-col items-start justify-start space-y-5 pt-5 col-span-2 max-w-lg lg:px-0 px-5">
         <UnderlinedHeader title="Know more about me" align="items-start" />
@@ -223,28 +224,28 @@ function ProfileCard({
 }) {
   return (
     <div className="w-full flex flex-col items-start justify-start space-y-5 lg:p-10 rounded-md lg:rounded-lg pb-5 lg:border mt-5 lg:mt-10">
-      <div className="flex flex-col items-center justify-center w-full space-y-5">
+      <div className="flex flex-col items-center lg:items-start justify-center w-full space-y-5">
         <ImageComponent
           popup={false}
           src={gig.imageUrl}
           alt={getFullName(gig.firstName, gig.lastName)}
           className="rounded-lg p-1 w-40 h-40 lg:w-40 lg:h-40"
         />
-        <div className="flex flex-row items-center justify-center w-full gap-x-3 flex-wrap">
+        <div className="flex flex-row items-center lg:justify-start justify-center w-full gap-x-3 flex-wrap">
           {gig.languages.map((language, index) => (
             <Badge key={index} variant="infoOutline">
               {language.charAt(0).toUpperCase() + language.slice(1)}
             </Badge>
           ))}
         </div>
-        <div className="flex flex-col items-center justify-center w-full space-y-1">
+        <div className="flex flex-col lg:items-start items-center justify-center w-full space-y-1">
           <p className="text-xl font-medium">
             {getFullName(gig.firstName, gig.lastName)}
           </p>
           <p className="text-base text-center">{gig.designation}</p>
         </div>
       </div>
-      <div className="grid grid-cols-3 w-full gap-x-10 justify-items-center items-start max-h-[4rem] pt-5">
+      <div className="grid grid-cols-3 w-full gap-x-10 justify-items-center items-start max-h-[4rem] pt-5 lg:hidden">
         <IconWrapper
           icon={<AiFillStar className="text-3xl text-yellow-500" />}
           title={gig.rating ? Number(gig.rating).toFixed(1) : "N/A"}
@@ -272,7 +273,8 @@ function ProfileCard({
           title={gig.gender.charAt(0).toUpperCase() + gig.gender.slice(1)}
         />
       </div>
-      <div className="lg:grid grid-cols-1 w-full gap-5 justify-items-center items-start pt-5">
+      <div className="grid grid-cols-2 w-full gap-5 justify-items-center items-start pt-5">
+        <ContactMeSheet mobileNumber={gig.mobileNumber} />
         <Button variant="default" className="!w-full !bg-info" asChild>
           <Link
             href={{

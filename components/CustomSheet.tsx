@@ -43,7 +43,7 @@ export function CustomSheet({
       >
         <div className="flex flex-col items-start justify-start w-full space-y-0">
           <SheetHeader className="w-full flex flex-col !items-start justify-start space-y-1 border-b bg-white p-5 sticky top-0 z-50">
-            <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2">
+            <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2 !text-left">
               {title}
             </SheetTitle>
             {description && (

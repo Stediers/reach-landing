@@ -9,6 +9,13 @@ import { useState } from "react";
 import Loading from "../Loading";
 import { openInNewTab } from "@helper_functions/newTab";
 import { Button } from "../ui/button";
+import { FetchPartnerByPartnerIdResponse } from "@api_functions/gig/fetch-gig-profile-by-gigId";
+import Link from "next/link";
+import { Star } from "lucide-react";
+import { CustomDrawer } from "@components/DrawerPopup";
+import { DrawerClose } from "@components/ui/drawer";
+import { CustomSheet } from "@components/CustomSheet";
+import { SheetClose } from "@components/ui/sheet";
 
 export function CallSetting({ mobileNumber }: { mobileNumber: string }) {
   return (
@@ -32,5 +39,45 @@ export function WhatsAppSetting({ mobileNumber }: { mobileNumber: string }) {
         openInNewTab(`https://wa.me/${mobileNumber}`);
       }}
     />
+  );
+}
+
+export function ContactMeDrawer({ mobileNumber }: { mobileNumber: string }) {
+  return (
+    <CustomDrawer
+      title="Contact Me"
+      description="Reach me via"
+      footerJSX={
+        <DrawerClose asChild>
+          <Button variant="close">Close</Button>
+        </DrawerClose>
+      }
+      triggerJSX={<Button variant="default">Contact Me</Button>}
+    >
+      <div className="grid lg:grid-cols-2 gap-5 w-full">
+        <CallSetting mobileNumber={mobileNumber} />
+        <WhatsAppSetting mobileNumber={mobileNumber} />
+      </div>
+    </CustomDrawer>
+  );
+}
+
+export function ContactMeSheet({ mobileNumber }: { mobileNumber: string }) {
+  return (
+    <CustomSheet
+      title="Contact Me"
+      description="Reach me via"
+      triggerJSX={<Button variant="default">Contact Me</Button>}
+      footerJSX={
+        <SheetClose asChild>
+          <Button variant="close">Close</Button>
+        </SheetClose>
+      }
+    >
+      <div className="grid lg:grid-cols-1 gap-5 w-full">
+        <CallSetting mobileNumber={mobileNumber} />
+        <WhatsAppSetting mobileNumber={mobileNumber} />
+      </div>
+    </CustomSheet>
   );
 }

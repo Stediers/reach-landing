@@ -60,29 +60,28 @@ export function NavBar() {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setOnHome(true);
-          } else {
-            setOnHome(false);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
     const home = document.getElementById("home");
-    if (!home) return;
-    observer.observe(home);
-    //onscroll event listener
     if (!home) {
       setOnHome(false);
       return;
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setOnHome(true);
+            } else {
+              setOnHome(false);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      observer.observe(home);
+      window.addEventListener("scroll", () => {
+        scrollHandler({ home, observer });
+      });
     }
-    window.addEventListener("scroll", () => {
-      scrollHandler({ home, observer });
-    });
   }, [scrollHandler, setOnHome, currentPath, excludedPaths, onHome]);
   return (
     <div

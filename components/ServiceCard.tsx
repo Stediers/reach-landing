@@ -84,7 +84,7 @@ export function ServiceCardDesktop({
               View In Detail
             </Link>
           </Button>
-          <RequestCallbackMobile serviceId={service.id} />
+          <RequestCallback serviceId={service.id} type="mobile" />
         </div>
       }
       triggerJSX={serviceTrigger}
@@ -197,7 +197,7 @@ export function ServiceTrigger({
   link?: string;
 }): JSX.Element {
   return (
-    <div className="flex flex-col items-start justify-center space-y-3 w-full">
+    <div className="flex flex-col items-start justify-center space-y-3 w-full hover:cursor-pointer hover:scale-105 transition-all duration-150">
       <Carousel
         className="w-full group relative"
         onClick={(e) => e.stopPropagation()}

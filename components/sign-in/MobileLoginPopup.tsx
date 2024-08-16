@@ -36,7 +36,7 @@ export default function MobileLoginPopup({
       title="Sign in"
       triggerJSX={triggerJSX}
       description="Enter your mobile number to sign in"
-      maxWidth="max-w-md"
+      maxWidth="max-w-xl"
       closeId="mobile-login-popup"
       footerJSX={
         showOTP ? null : (
