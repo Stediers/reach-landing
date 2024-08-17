@@ -45,6 +45,13 @@ import { AspectRatio } from "@components/ui/aspect-ratio";
 import { serviceTypeDescriptions } from "@data/static";
 import RawCarousel from "@components/carousel/RawCarousel";
 import TextInput from "@components/input/TextInput";
+import { Badge } from "@components/ui/badge";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@components/ui/accordion";
 
 export const metadata: Metadata = {
   description:
@@ -74,14 +81,14 @@ export default function Main() {
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
       <Steps />
-      <ElevateYourBrand />
-      {/* <TheSafeWay />
       <YourOwnProfile />
-      <div hidden className="lg:hidden flex items-start w-full">
+      <div className="lg:hidden">
         <BecomePartner />
-      </div> */}
+      </div>
+      <ElevateYourBrand />
       <UpYourCareer />
       <Pricing />
+      <FrequentlyAskedQuestions />
       {/* <BestPartners /> */}
     </div>
   );
@@ -96,7 +103,7 @@ function ElevateYourBrand() {
           <span className="text-primary font-semibold">Impact</span>
         </span>
       }
-      className="items-center rounded-t-lg justify-center w-full flex flex-col space-y-16 bg-[#0F1117] text-white"
+      className="items-center justify-center w-full flex flex-col space-y-16 bg-[#0F1117] text-white"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
         <ProfileCard
@@ -130,8 +137,8 @@ function UpYourCareer() {
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          No
-          <br /> <span className="text-primary font-semibold">Scams</span> Here
+          Let&apos;s
+          <br /> <span className="text-primary font-semibold">Stop</span> Scams
         </span>
       }
       className="items-center justify-center w-full flex flex-col space-y-16"
@@ -167,6 +174,79 @@ function UpYourCareer() {
           description="We have partners for every budget. Find the right one for you."
           icon={<BiRupee className="w-14 h-14 lg:w-16 lg:h-16" />}
         />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function BecomePartner() {
+  return (
+    <HeaderWrapper
+      title={
+        <span className="!leading-snug">
+          Huge <br />{" "}
+          <span className="text-primary font-semibold">Opportunity</span>
+        </span>
+      }
+      className="bg-[#0F1117] text-white lg:py-10"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full lg:max-w-7xl">
+        <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full relative">
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card1.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }} // optional
+          />
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card2.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }} // optional
+          />
+        </div>
+        <Image
+          alt="Hero"
+          src="/images/trustable-cards/card4.svg"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="w-full h-full lg:col-span-3"
+          style={{ width: "100%", height: "auto" }} // optional
+        />
+        <Image
+          alt="Hero"
+          src="/images/trustable-cards/card5.svg"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="w-full h-full lg:max-h-full lg:col-span-3"
+          style={{ width: "100%", height: "auto" }} // optional
+        />
+        <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full">
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card3.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full lg:max-h-full"
+            style={{ width: "100%", height: "auto" }} // optional
+          />
+          <Image
+            alt="Hero"
+            src="/images/trustable-cards/card6.svg"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full"
+            style={{ width: "100%", height: "auto" }} // optional
+          />
+        </div>
       </div>
     </HeaderWrapper>
   );
@@ -224,11 +304,11 @@ function YourOwnProfile() {
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          Become a <br />{" "}
-          <span className="text-primary font-semibold">Trustable</span> Partner
+          Get your <br />{" "}
+          <span className="text-primary font-semibold">Own</span> Website
         </span>
       }
-      className="lg:bg-[#0F1117] lg:text-white lg:py-10 lg:rounded-t-2xl"
+      className="bg-[#0F1117] text-white rounded-t-2xl"
     >
       <div className="flex flex-col lg:flex-row items-start justify-center lg:justify-start space-y-20 lg:space-y-0 lg:space-x-20 w-full">
         <video
@@ -237,20 +317,9 @@ function YourOwnProfile() {
           muted
           playsInline
           hidden
-          className="lg:w-1/4 lg:block mr-10 shrink-0 lg:h-full w-full h-[30rem] overflow-hidden !bg-transparent hidden"
+          className="lg:w-1/4 mr-10 shrink-0 lg:h-full w-2/3 flex h-[30rem] overflow-hidden !bg-transparent"
         >
           <source src="/videos/landing-video-black.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          hidden
-          className="lg:hidden shrink-0 w-2/3 bg-white h-full block"
-        >
-          <source src="/videos/landing-video-white.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div
@@ -313,116 +382,6 @@ function YourOwnProfile() {
               style={{ width: "100%", height: "auto" }} // optional
             />
           </div>
-        </div>
-      </div>
-    </HeaderWrapper>
-  );
-}
-
-function BestPartners() {
-  return (
-    <HeaderWrapper
-      title={
-        <span className="!leading-snug">
-          Our <br /> <span className="text-primary font-semibold">Best</span>{" "}
-          Partners
-        </span>
-      }
-      className="items-center justify-center w-full flex flex-col space-y-16"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 w-full">
-        <ProfileCard
-          description="I am a professional makeup artist with 3 years of experience. I have worked with clients from all over Tamil Nadu and have delivered high-quality makeup that has helped my clients look their best."
-          images={[
-            "https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg",
-          ]}
-          link="/partner/2c3dbba5-6eb1-4954-9d1d-65a6b2a0b8de"
-          name="Rithanya Makeover"
-          profession="Makeup Artist"
-          key={1}
-        />
-        <ProfileCard
-          description="I am the winner of the Mr. World competition and have been a professional Fitness Trainer for over a decade. I have trained over a 100 champions who have gone on to win titles on various stages."
-          images={[
-            "https://user4762.s3.ap-south-1.amazonaws.com/8A6B802E-B52C-405E-A939-E08D671F2F82.jpeg",
-          ]}
-          link="/service/b2c066bd-82f4-4225-b260-ef6f4cfcad47"
-          name="Mohan Subramaniam"
-          profession="Mr. World"
-          key={1}
-        />
-      </div>
-    </HeaderWrapper>
-  );
-}
-
-function BecomePartner() {
-  return (
-    <HeaderWrapper
-      title={
-        <span className="!leading-snug">
-          Huge <br />{" "}
-          <span className="text-primary font-semibold">Opportunity</span>
-        </span>
-      }
-      className="lg:bg-[#0F1117] lg:text-white lg:py-10"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-7 gap-5 lg:gap-10 justify-items-start items-start w-full lg:max-w-7xl">
-        <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full relative">
-          <Image
-            alt="Hero"
-            src="/images/trustable-cards/card1.svg"
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "100%", height: "auto" }} // optional
-          />
-          <Image
-            alt="Hero"
-            src="/images/trustable-cards/card2.svg"
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "100%", height: "auto" }} // optional
-          />
-        </div>
-        <Image
-          alt="Hero"
-          src="/images/trustable-cards/card4.svg"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-full h-full lg:col-span-3"
-          style={{ width: "100%", height: "auto" }} // optional
-        />
-        <Image
-          alt="Hero"
-          src="/images/trustable-cards/card5.svg"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-full h-full lg:max-h-full lg:col-span-3"
-          style={{ width: "100%", height: "auto" }} // optional
-        />
-        <div className="grid grid-cols-2 gap-2 lg:gap-10 lg:col-span-4 w-full">
-          <Image
-            alt="Hero"
-            src="/images/trustable-cards/card3.svg"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-full h-full lg:max-h-full"
-            style={{ width: "100%", height: "auto" }} // optional
-          />
-          <Image
-            alt="Hero"
-            src="/images/trustable-cards/card6.svg"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-full h-full"
-            style={{ width: "100%", height: "auto" }} // optional
-          />
         </div>
       </div>
     </HeaderWrapper>
@@ -542,62 +501,16 @@ function Hero() {
   );
 }
 
-function TheSafeWay() {
-  return (
-    <HeaderWrapper
-      title={
-        <span className="!leading-snug lg:text-text">
-          The
-          <br /> <span className="font-semibold text-primary">Safe</span> Way
-        </span>
-      }
-      className="items-center rounded-t-lg py-5 lg:py-20 min-h-[80vh] justify-center w-full flex flex-col space-y-16 relative"
-    >
-      <div className="lg:grid grid-cols-3 lg:gap-x-20 lg:gap-y-24 w-full lg:justify-items-start flex flex-col items-start justify-center space-y-14 lg:space-y-0 pt-5">
-        <FeatureCard
-          heading="Request Callback"
-          description="Ask the service provider to call you back after providing your details."
-          icon={<BookIcon className="w-14 h-14 lg:w-16 lg:h-16" />}
-        />
-        <FeatureCard
-          heading="Schedule Appointment"
-          description="The partner will schedule an appointment with you."
-          icon={<Flower className="w-14 h-14 lg:w-16 lg:h-16" />}
-        />
-        <FeatureCard
-          heading="Pay Advance"
-          description="Pay the advance amount to confirm the appointment."
-          icon={<BiRupee className="w-14 h-14 lg:w-16 lg:h-16" />}
-        />
-        <FeatureCard
-          heading="Get the Job Done"
-          description="Share the completion OTP once the job is done."
-          icon={<MessageSquareQuote className="w-14 h-14 lg:w-16 lg:h-16" />}
-        />
-        <FeatureCard
-          heading="Pay Remaining Amount"
-          description="Settle the remaining amount after the job is done."
-          icon={<Percent className="w-14 h-14 lg:w-16 lg:h-16" />}
-        />
-        <FeatureCard
-          heading="Review"
-          description="Provide feedback for your experience anonymously."
-          icon={<BsShieldCheck className="w-14 h-14 lg:w-16 lg:h-16" />}
-        />
-      </div>
-    </HeaderWrapper>
-  );
-}
-
 function Pricing() {
   return (
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          The <br /> <span className="text-primary font-semibold">Right</span>
+          The <br /> <span className="font-semibold">Right</span>
           {"  "}Price
         </span>
       }
+      className="bg-[#5755ca] text-white items-center justify-center w-full flex flex-col space-y-16"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
         <PricingCard
@@ -673,11 +586,11 @@ function PricingCard({
 }) {
   return (
     <Card
-      className={`w-full ${className} lg:!p-10 !p-5 !justify-between !space-y-10`}
+      className={`w-full ${className} lg:!p-10 !p-5 !justify-between !space-y-10 bg-white text-black`}
     >
       <div className="flex flex-col items-start justify-start h-full space-y-10">
         <div className="flex flex-col items-start justify-start space-y-5">
-          <p className="text-base font-medium">{tag}</p>
+          <Badge className="bg-[#5755ca] text-white">{tag}</Badge>
           <h3 className="text-3xl font-medium">{title}</h3>
           <p className="text-lg">{description}</p>
           {commision != undefined ? (
@@ -726,5 +639,72 @@ function PricingCard({
         </Button>
       </Link>
     </Card>
+  );
+}
+
+function FrequentlyAskedQuestions() {
+  return (
+    <section className={`w-full flex flex-col lg:py-10 items-center`}>
+      <div
+        className={`flex flex-col max-w-7xl justify-center space-y-7 lg:space-y-20 w-full px-5 lg:px-10  py-10`}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
+          <div className="flex flex-col items-start justify-start space-y-5">
+            <h2 className="text-4xl lg:text-5xl font-semibold !leading-snug">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg">Can&apos;t find what you are looking for?</p>
+            <Link href="/contact" passHref>
+              <Button variant="infoOutline">Contact Support</Button>
+            </Link>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            <FAQCard
+              question="Do I need to pay to become a partner?"
+              answer="Absolutely not! You can become a partner for free. You also get your own website for free."
+            />
+            <FAQCard
+              question="Do I pay a commission for the services I provide?"
+              answer="No, you do not pay a commission for the services you provide. But your clients pay a small advance fee for using our safe and secure payment gateway."
+            />
+            <FAQCard
+              question="How many services can I provide?"
+              answer="You can provide a maximum of 5 services for free. If you want to provide more services, you can upgrade to our Pro plan."
+            />
+            <FAQCard
+              question="How do I get paid?"
+              answer="You get paid directly by your clients. We do not take any commission from the services you provide."
+            />
+            <FAQCard
+              question="How do I get more clients?"
+              answer="You can get more clients by providing high-quality services and by asking your clients to leave a review on your profile."
+            />
+          </Accordion>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQCard({
+  question,
+  answer,
+  item,
+}: {
+  question: string;
+  answer: string;
+  item?: string;
+}) {
+  return (
+    <AccordionItem value={question} className="w-full">
+      <AccordionTrigger>
+        <div className="flex flex-row items-center justify-start space-x-5">
+          <p className="lg:text-xl text-lg text-left font-medium">{question}</p>
+        </div>
+      </AccordionTrigger>
+      <AccordionContent>
+        <p className="text-lg">{answer}</p>
+      </AccordionContent>
+    </AccordionItem>
   );
 }

@@ -4,6 +4,7 @@ import ImageComponent from "./ImageComponent";
 import { GoMoveToBottom } from "react-icons/go";
 import { Link2Icon } from "lucide-react";
 import { BiLinkAlt } from "react-icons/bi";
+import { Badge } from "./ui/badge";
 
 export function ProfileCard({
   images,
@@ -32,7 +33,7 @@ export function ProfileCard({
       />
       <div className="flex flex-col items-start justify-start space-y-5 max-w-lg">
         <div className="flex flex-col items-start justify-center space-y-2">
-          <p className="text-base font-medium text-white">{profession}</p>
+          <Badge>{profession}</Badge>
           <Link
             href={link}
             target="_blank"
