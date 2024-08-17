@@ -1,5 +1,5 @@
 import { ServiceCategory, State } from "@data/enums";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Metadata } from "next";
 import { BiRupee } from "react-icons/bi";
@@ -10,7 +10,9 @@ import {
   ArrowRightCircle,
   BookIcon,
   Check,
+  FeatherIcon,
   Flower,
+  HandshakeIcon,
   MessageSquareQuote,
   Percent,
   Search,
@@ -23,7 +25,7 @@ import {
 import ImageComponent from "@components/ImageComponent";
 import Card from "@components/Card";
 import ReachSVG from "@components/svg/ReachSVG";
-import { BsShieldCheck } from "react-icons/bs";
+import { BsLightningCharge, BsShieldCheck } from "react-icons/bs";
 import Link from "next/link";
 import FeatureCard from "@components/FeatureCard";
 import { ProfileCard } from "@components/ProfileCard";
@@ -42,6 +44,7 @@ import { CardContent } from "@components/ui/card";
 import { AspectRatio } from "@components/ui/aspect-ratio";
 import { serviceTypeDescriptions } from "@data/static";
 import RawCarousel from "@components/carousel/RawCarousel";
+import TextInput from "@components/input/TextInput";
 
 export const metadata: Metadata = {
   description:
@@ -70,14 +73,149 @@ export default function Main() {
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
-      <TheSafeWay />
+      <Steps />
+      <ElevateYourBrand />
+      {/* <TheSafeWay />
       <YourOwnProfile />
       <div hidden className="lg:hidden flex items-start w-full">
         <BecomePartner />
-      </div>
+      </div> */}
+      <UpYourCareer />
       <Pricing />
-      <BestPartners />
+      {/* <BestPartners /> */}
     </div>
+  );
+}
+
+function ElevateYourBrand() {
+  return (
+    <HeaderWrapper
+      title={
+        <span className="!leading-snug">
+          Make <br /> an{" "}
+          <span className="text-primary font-semibold">Impact</span>
+        </span>
+      }
+      className="items-center rounded-t-lg justify-center w-full flex flex-col space-y-16 bg-[#0F1117] text-white"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
+        <ProfileCard
+          description="I am a professional makeup artist with 3 years of experience. I have worked with clients from all over Tamil Nadu and have delivered high-quality makeup that has helped my clients look their best."
+          images={[
+            "https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg",
+          ]}
+          link="/partner/@Rithanyeahmakeover"
+          name="Rithanya Makeover"
+          profession="Makeup Artist"
+          key={1}
+          className="shrink-0"
+        />
+        <ProfileCard
+          description="I have been a professional beautician for over a decade and have worked with clients from all over Tamil Nadu. I have helped my clients look their best for various occasions."
+          images={[
+            "https://user4762.s3.ap-south-1.amazonaws.com/1000470803.jpeg",
+          ]}
+          link="/partner/@lathaa"
+          name="Latha Anand"
+          profession="Beautician"
+          key={1}
+        />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function UpYourCareer() {
+  return (
+    <HeaderWrapper
+      title={
+        <span className="!leading-snug">
+          No
+          <br /> <span className="text-primary font-semibold">Scams</span> Here
+        </span>
+      }
+      className="items-center justify-center w-full flex flex-col space-y-16"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full">
+        <FeatureCard
+          heading="Identity Verification"
+          description="We ensure that all our partners are verified and trustworthy."
+          icon={<ShieldCheckIcon className="w-14 h-14 lg:w-16 lg:h-16" />}
+        />
+        <FeatureCard
+          heading="Skill Verification"
+          description="We ensure that all our partners are skilled and experienced."
+          icon={<Star className="w-14 h-14 lg:w-16 lg:h-16" />}
+        />
+        <FeatureCard
+          heading="Secure Payments"
+          description="Your payments are secure and protected by automated systems. "
+          icon={<HandshakeIcon className="w-14 h-14 lg:w-16 lg:h-16" />}
+        />
+        <FeatureCard
+          heading="No Hidden Costs"
+          description="Hidden costs are a thing of the past. We ensure transparency."
+          icon={<FeatherIcon className="w-14 h-14 lg:w-16 lg:h-16" />}
+        />
+        <FeatureCard
+          heading="Quick Response"
+          description="Our partners are quick to respond to your queries and requests."
+          icon={<BsLightningCharge className="w-14 h-14 lg:w-16 lg:h-16" />}
+        />
+        <FeatureCard
+          heading="Your Budget"
+          description="We have partners for every budget. Find the right one for you."
+          icon={<BiRupee className="w-14 h-14 lg:w-16 lg:h-16" />}
+        />
+      </div>
+    </HeaderWrapper>
+  );
+}
+
+function Steps() {
+  return (
+    <HeaderWrapper
+      title={
+        <span className="!leading-snug">
+          Easy <br /> <span className="text-primary font-semibold">For</span>{" "}
+          Everyone
+        </span>
+      }
+      className="items-center justify-center w-full flex flex-col space-y-16"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full">
+        <FeatureCard
+          heading="Request Callback"
+          description="Ask the service provider to call you back after providing your details."
+          icon={<NumberCircle number={1} size="lg" color="text" />}
+        />
+        <FeatureCard
+          heading="Schedule Appointment"
+          description="The partner will schedule an appointment with you."
+          icon={<NumberCircle number={2} size="lg" color="text" />}
+        />
+        <FeatureCard
+          heading="Pay Advance"
+          description="Pay the advance amount to confirm the appointment."
+          icon={<NumberCircle number={3} size="lg" color="text" />}
+        />
+        <FeatureCard
+          heading="Get the Job Done"
+          description="Share the completion OTP once the job is done."
+          icon={<NumberCircle number={4} size="lg" color="text" />}
+        />
+        <FeatureCard
+          heading="Pay Remaining Amount"
+          description="Settle the remaining amount after the job is done."
+          icon={<NumberCircle number={5} size="lg" color="text" />}
+        />
+        <FeatureCard
+          heading="Review"
+          description="Provide feedback for your experience anonymously."
+          icon={<NumberCircle number={6} size="lg" color="text" />}
+        />
+      </div>
+    </HeaderWrapper>
   );
 }
 
@@ -456,10 +594,10 @@ function Pricing() {
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          Our <br /> <span className="text-primary font-semibold">Pricing</span>
+          The <br /> <span className="text-primary font-semibold">Right</span>
+          {"  "}Price
         </span>
       }
-      className="lg:bg-[#0F1117] lg:text-white lg:py-10"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
         <PricingCard
