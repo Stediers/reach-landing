@@ -16,6 +16,7 @@ export default function Mobile({
     <MobileWrapper
       className="flex flex-col space-y-5 items-center justify-start"
       header="Manage Address"
+      backLink="/console/profile"
     >
       <ListWrapper>
         <div className="flex flex-col space-y-5 w-full">

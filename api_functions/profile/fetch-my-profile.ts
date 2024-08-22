@@ -1,5 +1,6 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
 import { RequestMethod } from "@data/enums";
+import { FetchPartnerResponse } from "@data/types";
 
 export type FetchMyProfileResponse = {
   user: {

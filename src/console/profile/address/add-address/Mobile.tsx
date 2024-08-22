@@ -29,6 +29,7 @@ export default function Mobile({
     <MobileWrapper
       className="flex flex-col items-center justify-start space-y-5"
       header="Add Address"
+      backLink="/console/profile/address"
     >
       <AddressNameInput
         addressName={name}

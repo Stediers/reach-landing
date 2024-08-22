@@ -11,18 +11,16 @@ export default function Desktop({
   response,
   name,
   setName,
-  imageFile,
-  setImageFile,
-  saveButtonState,
+  imageUrl,
+  setImageUrl,
   editProfile,
   verifyForm,
 }: {
   response: FetchMyProfileResponse;
   name: string;
   setName: Dispatch<SetStateAction<string>>;
-  imageFile: File | null;
-  setImageFile: Dispatch<SetStateAction<File | null>>;
-  saveButtonState: State;
+  imageUrl: string | null;
+  setImageUrl: Dispatch<SetStateAction<string | null>>;
   editProfile: () => Promise<void>;
   verifyForm: () => boolean;
 }) {
@@ -30,13 +28,14 @@ export default function Desktop({
     <DesktopWrapper
       title="Edit Profile"
       className="py-5 space-y-10 items-start w-full flex flex-col"
-      maxWidth={false}
+      backLink="/console/profile"
     >
       <div className="flex flex-col space-y-5 w-1/2 max-w-xl items-start ">
         <div className="flex">
           <ProfilePictureInput
-            profilePicture={imageFile}
-            setProfilePicture={setImageFile}
+            title="Profile Picture"
+            url={imageUrl}
+            onChange={(url) => setImageUrl(url)}
           />
         </div>
         <TextInput

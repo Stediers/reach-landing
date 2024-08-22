@@ -40,6 +40,7 @@ export default function Mobile({
     <MobileWrapper
       className="flex flex-col items-center space-y-5"
       header="Edit Address"
+      backLink="/console/profile/address"
     >
       <LineHeader title="Old Location" />
       {oldLocation ? <LocationCardWithName address={oldLocation} /> : null}

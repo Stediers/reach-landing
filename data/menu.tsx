@@ -6,7 +6,7 @@ import {
   SearchCodeIcon,
   BookIcon,
 } from "lucide-react";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineUser } from "react-icons/ai";
 import { FcHome, FcBusinessman, FcCalendar, FcBriefcase } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
 
@@ -57,10 +57,10 @@ export const consoleMenus: Menu[] = [
 
 export const userMenus: Menu[] = [
   {
-    title: "Edit Profile",
+    title: "My Profile",
     subtitle: "Manage your profile",
-    icon: <AiOutlineEdit className="text-2xl shrink-0" />,
-    path: "/console/profile/edit",
+    icon: <AiOutlineUser className="text-2xl shrink-0" />,
+    path: "/console/profile/",
   },
   {
     title: "Address",

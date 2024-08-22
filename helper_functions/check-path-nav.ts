@@ -28,6 +28,16 @@ export default function checkHere({
     menuPath === "/console/appointments"
   ) {
     return true;
+  } else if (
+    path.startsWith("/console/profile") &&
+    menuPath === "/console/profile"
+  ) {
+    return true;
+  } else if (
+    path.startsWith("/console/profile/address") &&
+    menuPath === "/console/profile/address"
+  ) {
+    return true;
   } else {
     return false;
   }

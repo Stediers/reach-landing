@@ -15,7 +15,10 @@ export default function Mobile({
   pending: Callback[];
 }) {
   return (
-    <MobileWrapper className="flex flex-col gap-4">
+    <MobileWrapper
+      className="flex flex-col items-start space-y-5 w-full"
+      header="Callbacks"
+    >
       {success.length > 0 ? (
         success.map((item) => (
           <CallbackComponentMobile

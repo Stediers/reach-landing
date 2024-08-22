@@ -10,16 +10,16 @@ export default function Mobile({
   response,
   name,
   setName,
-  imageFile,
-  setImageFile,
+  imageUrl,
+  setImageUrl,
   editProfile,
   verifyForm,
 }: {
   response: FetchMyProfileResponse;
   name: string;
   setName: Dispatch<SetStateAction<string>>;
-  imageFile: File | null;
-  setImageFile: Dispatch<SetStateAction<File | null>>;
+  imageUrl: string | null;
+  setImageUrl: Dispatch<SetStateAction<string | null>>;
   editProfile: () => Promise<void>;
   verifyForm: () => boolean;
 }) {
@@ -27,10 +27,12 @@ export default function Mobile({
     <MobileWrapper
       header="Edit Profile"
       className="flex flex-col items-center justify-start space-y-5 w-full"
+      backLink="/console/profile"
     >
       <ProfilePictureInput
-        profilePicture={imageFile}
-        setProfilePicture={setImageFile}
+        title="Profile Picture"
+        url={imageUrl}
+        onChange={(url) => setImageUrl(url)}
       />
       <TextInput
         onChange={(value) => setName(value)}

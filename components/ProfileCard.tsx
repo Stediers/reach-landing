@@ -1,10 +1,91 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import ImageComponent from "./ImageComponent";
-import { GoMoveToBottom } from "react-icons/go";
-import { Link2Icon } from "lucide-react";
-import { BiLinkAlt } from "react-icons/bi";
+import { GoMoveToBottom, GoStarFill } from "react-icons/go";
+import { Link2Icon, Star } from "lucide-react";
+import { BiLinkAlt, BiPhoneCall } from "react-icons/bi";
 import { Badge } from "./ui/badge";
+import { IndianLanguages, State } from "@data/enums";
+import Card from "./Card";
+import Chip from "./Chip";
+import {
+  AiOutlineUser,
+  AiOutlineWhatsApp,
+  AiFillInstagram,
+  AiFillCopy,
+} from "react-icons/ai";
+import QRCode from "react-qr-code";
+import { CustomSheet } from "./CustomSheet";
+import Rating from "./Rating";
+import Setting from "./Setting";
+import { showCustomJSXPopup } from "./notifications/Popup";
+import { showSnackBar } from "./notifications/Snackbar";
+import { SheetClose } from "./ui/sheet";
+import IconWrapper from "./IconWrapper";
+import { FcRatings } from "react-icons/fc";
+import BoxRating from "./BoxRating";
+
+export default function CustomerProfileCard({
+  mobileNumber,
+  imageUrl,
+  rating,
+  name,
+  fluentLanguages,
+  className,
+}: {
+  name: string;
+  mobileNumber: string;
+  imageUrl: string | null;
+  rating: number | null;
+  fluentLanguages: IndianLanguages[];
+  className?: string;
+}) {
+  const baseUrl = process.env.NEXT_PUBLIC_CUSTOMER_LINK;
+  return (
+    <Card className={`p-5 bg-white ${className}`}>
+      <div className="flex flex-col items-center justify-start space-y-5">
+        {imageUrl != null ? (
+          <ImageComponent
+            src={imageUrl}
+            className="rounded-md w-[10rem] h-[10rem]"
+            alt="Profile Picture"
+          />
+        ) : (
+          <div className="flex items-center justify-center bg-background rounded-full p-2 shrink-0">
+            <AiOutlineUser className="text-6xl " />
+          </div>
+        )}
+        <div className="flex flex-col items-center justify-start space-y-1 w-full">
+          <p className="text-lg font-medium w-full text-center">{name}</p>
+          <p className="text-sm text-gray-500 w-full text-center">
+            {mobileNumber}
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-row items-center justify-center space-x-5">
+        {rating != null ? (
+          Array(5)
+            .fill(0)
+            .map((_, i) => {
+              return (
+                <GoStarFill
+                  key={i}
+                  className={`h-6 w-6 ${
+                    i < rating ? "text-primary" : "text-gray-300"
+                  }`}
+                />
+              );
+            })
+        ) : (
+          <p className="text-sm text-gray-500">No rating yet</p>
+        )}
+      </div>
+      <Link href={`/console/profile/edit`} passHref className="w-full">
+        <Button variant="dark">Edit</Button>
+      </Link>
+    </Card>
+  );
+}
 
 export function ProfileCard({
   images,

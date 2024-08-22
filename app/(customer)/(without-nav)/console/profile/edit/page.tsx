@@ -1,5 +1,5 @@
 "use client";
-import { S3BucketName, State } from "@data/enums";
+import { State } from "@data/enums";
 import ConsoleWrapper from "@wrapper/ConsoleWrapper";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -9,34 +9,27 @@ import {
   fetchMyProfile,
 } from "@api_functions/profile/fetch-my-profile";
 import Mobile from "@src/console/profile/edit/Mobile";
-import Desktop from "@src/console/profile/edit/Desktop";
-import uploadFileS3 from "@api_functions/utility/upload-file-to-S3";
 import { showSnackBar } from "@components/notifications/Snackbar";
-import { createBlobfromUrl } from "@api_functions/utility/create-blob-from-url";
+import Desktop from "@src/console/profile/edit/Desktop";
 
 export default function Main() {
   const [pageState, setPageState] = useState(State.LOADING);
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
   const [name, setName] = useState<string>("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const router = useRouter();
+  const [saveButtonState, setSaveButtonState] = useState<State>(State.SUCCESS);
   useEffect(() => {
+    setPageState(State.LOADING);
     fetchMyProfile().then((response) => {
+      setResponse(response);
       if (response) {
-        setResponse(response);
-        if (response.user.imageUrl) {
-          createBlobfromUrl({
-            name: "profile-picture",
-            url: response.user.imageUrl,
-          }).then((blob) => {
-            setImageFile(blob);
-          });
-        }
+        setName(response.user.name);
+        setImageUrl(response.user.imageUrl);
       }
       setPageState(State.SUCCESS);
     });
   }, []);
-  const [saveButtonState, setSaveButtonState] = useState<State>(State.SUCCESS);
   return (
     <ConsoleWrapper
       title="Edit Profile"
@@ -47,8 +40,8 @@ export default function Main() {
             response={response}
             name={name}
             setName={setName}
-            imageFile={imageFile}
-            setImageFile={setImageFile}
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
             editProfile={_editProfile}
             verifyForm={verifyForm}
           />
@@ -60,9 +53,8 @@ export default function Main() {
             response={response}
             name={name}
             setName={setName}
-            imageFile={imageFile}
-            setImageFile={setImageFile}
-            saveButtonState={saveButtonState}
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
             editProfile={_editProfile}
             verifyForm={verifyForm}
           />
@@ -73,7 +65,7 @@ export default function Main() {
 
   function verifyForm(): boolean {
     //set disabled to true if any of the fields are empty
-    if (name.length < 5 || imageFile === null) {
+    if (name.length < 5) {
       return true;
     }
     return false;
@@ -81,24 +73,20 @@ export default function Main() {
 
   async function _editProfile() {
     setSaveButtonState(State.LOADING);
-    if (imageFile) {
-      const imageUrl = await uploadFileS3({
-        bucketName: S3BucketName.USER,
-        file: imageFile,
-        //create it under the folder gig/userId/profilePicture
-        fileName: `customer/${localStorage.getItem(
-          "mobileNumber"
-        )}/profilePicture`,
+    if (!imageUrl) {
+      showSnackBar({
+        message: "Please upload a profile picture",
+        state: State.ERROR,
       });
-      if (imageUrl) {
-        const response = await updateProfile({
-          name: name,
-          profilePicture: imageUrl,
-        });
-        if (response) {
-          router.push("/");
-        }
-      }
+      setSaveButtonState(State.ERROR);
+      return;
+    }
+    const response = await updateProfile({
+      name: name,
+      profilePicture: imageUrl,
+    });
+    if (response) {
+      router.push("/console/profile");
     } else {
       showSnackBar({
         message: "Please upload a profile picture",

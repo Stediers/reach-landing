@@ -1,15 +1,7 @@
-import { Poppins } from "next/font/google";
-import { cn } from "@lib/utils";
-import "@styles/globals.css";
+import { NavBar } from "@components/explore/Navbar";
 import { Metadata } from "next";
-import Navbar from "@components/Navbar";
+import React from "react";
 import Footer from "@components/footer/Footer";
-
-const fontSans = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -19,6 +11,7 @@ export const metadata: Metadata = {
   title: {
     default: "ReachGig",
     template: "%s | ReachGig",
+    absolute: "ReachGig",
   },
   description:
     "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
@@ -43,14 +36,12 @@ export const metadata: Metadata = {
   robots: "index, follow",
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function ConsoleLayout({ children }: RootLayoutProps) {
   return (
-    <div
-      className={`${cn(
-        fontSans.className
-      )} text-text min-h-screen flex !flex-col w-full bg-white items-center justify-center`}
-    >
-      <Navbar />
+    <div className="w-full flex flex-col justify-start items-center relative !z-50 !hide-scrollbar">
+      <div className="w-full flex flex-col justify-start items-center space-y-5  sticky top-0 z-50">
+        <NavBar />
+      </div>
       {children}
       <Footer />
     </div>

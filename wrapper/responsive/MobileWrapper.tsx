@@ -1,10 +1,16 @@
 "use client";
 import { showYesNoPopup } from "@components/notifications/Popup";
+import { Badge } from "@components/ui/badge";
+import { Button } from "@components/ui/button";
 import { motion } from "framer-motion";
+import { ArrowBigLeftDash, ArrowLeft, ChevronLeft } from "lucide-react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { PropsWithChildren } from "react";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { BiLeftArrowAlt } from "react-icons/bi";
 import { BsArrowLeftShort } from "react-icons/bs";
 
 export default function MobileWrapper({
@@ -13,30 +19,27 @@ export default function MobileWrapper({
   header,
   backLink,
   padding = true,
-  headerTopPadding = true,
-  headerBottomPadding = true,
+  warnBeforeLeaving,
 }: PropsWithChildren<{
   className: string;
   header?: string;
   backLink?: string;
   padding?: boolean;
-  headerTopPadding?: boolean;
-  headerBottomPadding?: boolean;
+  warnBeforeLeaving?: boolean;
 }>) {
   return (
     <div
-      className={`max-w-lg min-h-full lg:hidden w-full flex flex-col space-y-3 items-center py-5 ${
+      className={`max-w-lg min-h-full lg:hidden w-full flex flex-col pb-5 space-y-3 items-center ${
         padding == true ? "px-5" : ""
       } justify-start`}
       id="mobile-wrapper"
-      hidden
     >
       {header ? (
         <HeaderComponent
           title={header}
           backLink={backLink}
-          topPadding={headerTopPadding}
-          bottomPadding={headerBottomPadding}
+          warnBeforeLeaving={warnBeforeLeaving}
+          showLineHeader={backLink ? false : true}
         />
       ) : null}
       <div className={`w-full flex-1`}>
@@ -51,15 +54,13 @@ function HeaderComponent({
   backLink,
   className,
   warnBeforeLeaving,
-  topPadding,
-  bottomPadding,
+  showLineHeader,
 }: {
   title: string;
   backLink?: string;
   className?: string;
   warnBeforeLeaving?: boolean;
-  topPadding?: boolean;
-  bottomPadding?: boolean;
+  showLineHeader?: boolean;
 }) {
   const query = useSearchParams();
   const backLinkFromQuery = query && query.get("backLink");
@@ -67,12 +68,10 @@ function HeaderComponent({
   const router = useRouter();
   return (
     <div
-      className={`self-center flex flex-col items-center justify-center space-y-2 w-full max-w-lg uppercase ${
-        bottomPadding ? "pb-5" : ""
-      }`}
+      className={`self-center flex flex-row items-center justify-start space-x-3 pt-5 w-full max-w-lg pb-5 ${className}`}
     >
       {link && link.length > 0 && (
-        <motion.div className="w-full" whileTap={{ x: -5 }}>
+        <motion.div whileTap={{ x: -5 }}>
           <div
             onClick={() => {
               if (warnBeforeLeaving) {
@@ -91,16 +90,21 @@ function HeaderComponent({
               }
             }}
           >
-            <BsArrowLeftShort className="text-4xl cursor-pointer self-start" />
+            <BiLeftArrowAlt className="w-6 h-6 cursor-pointer self-start" />
           </div>
         </motion.div>
       )}
-      <div className="w-fit flex flex-col items-center space-y-1">
-        <h1 className="text-2xl font-medium text-center first-letter:capitalize">
+      <div className="w-fit flex flex-col items-start space-y-2">
+        <h1 className="text-xl font-medium text-center first-letter:capitalize">
           {title}
         </h1>
-        <div className="h-px w-[80%] bg-primary" />
+        {showLineHeader && <div className="w-full h-0.5 bg-primary" />}
       </div>
+      {/* {link && link.length > 0 && (
+        <Link href={link} passHref>
+          <Badge variant="outline">Back</Badge>
+        </Link>
+      )} */}
     </div>
   );
 }

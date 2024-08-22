@@ -31,7 +31,7 @@
     "pages/console/profile/manage-addresses/edit",
     "src/console/profile/manage-address/edit",
     ".next/types/**/*.ts",
-    "app/(customer)/explore/[location]/loading.tsx"
+    "app/(landing)/explore/[location]/loading.tsx"
   ],
   "exclude": ["node_modules"]
 }

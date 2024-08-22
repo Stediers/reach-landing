@@ -45,7 +45,7 @@ export default function Main() {
   return (
     <div className="relative w-full flex flex-col items-start justify-center scroll-smooth pb-20 py-5 px-5 lg:px-10 space-y-10 max-w-7xl">
       <div className="flex flex-col items-start justify-center w-full col-span-full space-y-5 max-w-lg">
-        <h1 className="text-2xl font-medium max-w-md">
+        <h1 className="text-xl font-medium max-w-md">
           Find Partner by their name or handle
         </h1>
         <TextInput
@@ -105,9 +105,8 @@ export default function Main() {
           </div>
         ) : (
           <div className="flex flex-col items-start justify-center space-y-3">
-            <h1 className="text-xl font-medium">Find your Ideal Partner</h1>
             <p className="text-gray-500">
-              Search for a partner by their name or handle
+              Search for a service provider by their name or handle
             </p>
           </div>
         )}

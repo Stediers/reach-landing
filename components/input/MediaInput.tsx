@@ -8,40 +8,49 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import ImageComponent from "@components/ImageComponent";
-import { State } from "@data/enums";
+import { S3BucketName, State } from "@data/enums";
 import PopupWrapper from "@wrapper/PopupWrapper";
 import AvatarEditor from "react-avatar-editor";
 import { showSnackBar } from "@components/notifications/Snackbar";
 import path from "path";
 import RangeInput from "./RangeInput";
 import { Button } from "@components/ui/button";
+import { createBlobfromUrl } from "@api_functions/utility/create-blob-from-url";
+import uploadFileS3 from "@api_functions/utility/upload-file-to-S3";
+import { Edit, Upload } from "lucide-react";
+import { CustomDialog } from "@components/DialogPopup";
+import LoadingWrapper from "@wrapper/LoadingWrapper";
 
 export function ProfilePictureInput({
-  profilePicture,
-  setProfilePicture,
+  onChange,
+  previewClassName = "w-[10rem] h-[10rem] lg:w-[12rem] lg:h-[12rem]",
+  previewTextClassName = "text-sm font-medium text-textsubtle",
+  url,
+  title = "Profile Picture",
 }: {
-  profilePicture: File | null;
-  setProfilePicture: Dispatch<SetStateAction<File | null>>;
+  onChange: (image: string) => void;
+  previewClassName?: string;
+  previewTextClassName?: string;
+  url: string | null;
+  title?: string;
 }) {
-  const [showModal, setShowModal] = useState(false);
-  const [editButtonState, setEditButtonState] = useState(State.SUCCESS);
-  const [uploadButtonState, setUploadButtonState] = useState(State.SUCCESS);
+  const [state, setState] = useState(State.IDLE);
+  const [profilePicture, setProfilePicture] = useState<File | null>(null);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    if (uploadButtonState === State.LOADING) {
-      setTimeout(() => {
-        setUploadButtonState(State.SUCCESS);
-      }, 1000);
+    setState(State.LOADING);
+    if (!url) {
+      setState(State.SUCCESS);
+      return;
     }
-  }, [uploadButtonState]);
+    createBlobfromUrl({ url: url }).then((blob) => {
+      setProfilePicture(blob);
+      setState(State.SUCCESS);
+      onChange(url);
+    });
+  }, []);
 
-  useEffect(() => {
-    if (editButtonState === State.LOADING) {
-      setTimeout(() => {
-        setEditButtonState(State.SUCCESS);
-      }, 1000);
-    }
-  }, [editButtonState]);
   return (
     <div className="flex flex-row items-start justify-start w-full space-x-5">
       <div className="flex flex-col items-center justify-center">
@@ -51,124 +60,117 @@ export function ProfilePictureInput({
           accept="image/jpeg, image/png, image/jpg, image/heic"
           onClick={(e) => {
             e.currentTarget.value = "";
-            setUploadButtonState(State.LOADING);
           }}
           onChange={async (e) => {
             if (e.target.files == null || e.target.files[0] == null) {
-              setProfilePicture(null);
-              setShowModal(false);
-              setEditButtonState(State.SUCCESS);
-              setUploadButtonState(State.SUCCESS);
+              e.target.value = "";
               return;
-            }
-            setUploadButtonState(State.LOADING);
-            var file = e.target.files[0];
-            if (file) {
-              if (!verifyImage(file)) {
-                setUploadButtonState(State.SUCCESS);
+            } else {
+              let file = e.target.files[0];
+              setState(State.LOADING);
+              if (verifyImage(file)) {
+                if (file.type === "image/heic") {
+                  file = await convertHeictoPng(file);
+                }
+                setProfilePicture(file);
+              } else {
                 e.target.value = "";
                 return;
               }
-              if (file.type === "image/heic") {
-                file = await convertHeictoPng(file);
+              const imageEditingModal =
+                document.getElementById("profileImageXXX");
+              if (imageEditingModal) {
+                imageEditingModal.click();
+              } else {
+                const res = await uploadFileS3({
+                  bucketName: S3BucketName.USER,
+                  file: file,
+                  fileName: file.name.split(".")[0],
+                });
+                if (res) {
+                  onChange(res);
+                  setProfilePicture(file);
+                  setState(State.SUCCESS);
+                }
               }
-              setProfilePicture(file);
-              setShowModal(true);
-            } else {
-              setProfilePicture(null);
-              setShowModal(false);
-              setEditButtonState(State.SUCCESS);
+              setState(State.SUCCESS);
             }
-            setUploadButtonState(State.SUCCESS);
           }}
           className="hidden"
           id="profile-pic"
           multiple={false}
         />
-        {profilePicture && showModal ? (
-          <ImageEditingModal
-            image={profilePicture}
-            setImage={setProfilePicture}
-            setShowModal={setShowModal}
-            borderRadius={10}
-          />
-        ) : null}
         <div className="flex flex-col items-center justify-center space-y-5 w-full">
           <label
             htmlFor={!profilePicture ? "profile-pic" : ""}
             className="flex flex-col items-center justify-center space-y-2 w-full"
           >
-            {profilePicture ? (
+            {state === State.LOADING ? (
+              <div
+                className={`flex flex-row items-center justify-center space-x-2 relative ${previewClassName} border`}
+              >
+                <div className="animate-spin w-5 h-5 border-t-2 border-b-2 border-text rounded-full"></div>
+              </div>
+            ) : !profilePicture && !url ? (
+              <div className="flex flex-row items-center justify-center space-x-2 relative">
+                <AiOutlineUser
+                  className={`${previewClassName} p-2 border border-text rounded-md z-10 bg-white`}
+                />
+              </div>
+            ) : url ? (
+              <div className="flex flex-row items-center justify-center space-x-2 relative">
+                <ImageComponent
+                  src={url}
+                  alt="Profile Picture"
+                  className={`${previewClassName} rounded-md overflow-hidden border`}
+                  popup={false}
+                />
+              </div>
+            ) : profilePicture ? (
               <div className="flex flex-row items-center justify-center space-x-2 relative">
                 <ImageComponent
                   src={URL.createObjectURL(profilePicture)}
                   alt="Profile Picture"
-                  className={`w-[10rem] h-[10rem] rounded-md overflow-hidden border`}
+                  className={`${previewClassName} rounded-md overflow-hidden border`}
+                  popup={false}
                 />
               </div>
             ) : (
               <div className="flex flex-row items-center justify-center space-x-2 relative">
                 <AiOutlineUser
-                  className={`w-[10rem] h-[10rem] p-2  border border-text rounded-md z-10 bg-white`}
+                  className={`${previewClassName} p-2 border border-text rounded-md z-10 bg-white`}
                 />
               </div>
             )}
           </label>
         </div>
       </div>
-      <div className="flex flex-col space-y-3 w-full justify-between min-h-full">
-        <div className="flex flex-col space-y-1 w-full">
-          {profilePicture ? (
-            <div className="flex flex-col space-y-3 w-full">
-              <p className="text-base font-medium text-textsubtle">
-                Size: {(profilePicture.size / 1000).toFixed(2)} KB
-              </p>
-              <p className="text-base font-medium text-textsubtle">
-                Type:{" "}
-                {profilePicture.type.toUpperCase() ||
-                  profilePicture.name.split(".")[1].toUpperCase() ||
-                  "N/A"}
-              </p>
-            </div>
-          ) : (
-            <p className="text-sm font-medium text-textsubtle">
-              Please upload a profile picture of yourself. This will help your
-              customers identify you.
-            </p>
-          )}
-        </div>
-        {profilePicture ? (
+      <div className="flex flex-col space-y-3 w-full justify-between h-[10rem]">
+        <div className="grid grid-cols-2 gap-4 w-full">
           <Button
-            variant="info"
+            variant="outline"
             onClick={() => {
-              if (profilePicture) {
-                setEditButtonState(State.LOADING);
-                setShowModal(true);
+              const profilePic = document.getElementById("profile-pic");
+              if (profilePic) {
+                profilePic.click();
               }
             }}
-            disabled={profilePicture === null}
-            buttonstate={editButtonState}
+            type="button"
           >
-            <div className="flex flex-row items-center justify-center space-x-2">
-              <AiOutlineEdit />
-              <p>Edit</p>
-            </div>
+            <Upload className="w-5 h-5 shrink-0" />
           </Button>
-        ) : (
-          <Button
-            variant="info"
-            onClick={() => {
-              setUploadButtonState(State.LOADING);
-              document.getElementById("profile-pic")?.click();
-            }}
-            buttonstate={uploadButtonState}
-          >
-            <div className="flex flex-row items-center justify-center space-x-2">
-              <AiOutlineCloudUpload />
-              <p>Upload</p>
-            </div>
-          </Button>
-        )}
+          <ImageEditingModal
+            image={profilePicture}
+            onChange={onChange}
+            setImage={setProfilePicture}
+            scale={scale}
+            setScale={setScale}
+            setState={setState}
+            state={state}
+            borderRadius={10}
+            key="profileImage"
+          />
+        </div>
       </div>
     </div>
   );
@@ -177,75 +179,118 @@ export function ProfilePictureInput({
 export function ImageEditingModal({
   image,
   setImage,
-  setShowModal,
   borderRadius = 250,
+  scale,
+  setScale,
+  state,
+  setState,
+  onChange,
 }: {
-  image: File;
+  image: File | null;
   setImage: React.Dispatch<React.SetStateAction<File | null>>;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  scale: number;
+  setScale: React.Dispatch<React.SetStateAction<number>>;
   borderRadius?: number;
+  state: State;
+  setState: Dispatch<SetStateAction<State>>;
+  onChange: (image: string) => void;
 }) {
   const editor = useRef<AvatarEditor>(null);
-  const [scale, setScale] = useState(1);
-  return (
-    <PopupWrapper
-      onClose={() => {
-        setShowModal(false);
-      }}
-    >
-      <div className="flex flex-col items-center justify-center space-y-5 w-full">
-        <AvatarEditor
-          image={URL.createObjectURL(image)}
-          width={250}
-          height={250}
-          border={50}
-          color={[255, 255, 255, 0.6]} // RGBA
-          scale={scale}
-          rotate={0}
-          ref={editor}
-          borderRadius={borderRadius}
-        />
-        <RangeInput
-          value={scale}
-          max={2}
-          min={1}
-          step={0.01}
-          onChange={setScale}
-          title="Zoom"
-        />
-        <div className="flex flex-row items-center justify-center space-x-2 w-full">
-          <Button
-            variant="close"
-            onClick={() => {
-              setShowModal(false);
-              setImage(null);
-            }}
-          >
-            Remove
-          </Button>
-          <Button
-            variant="success"
-            onClick={async () => {
-              setShowModal(false);
-              if (editor.current) {
-                const canvas = editor.current.getImageScaledToCanvas();
+  return image === null ? null : (
+    <CustomDialog
+      title="Edit Image"
+      description="Make changes to your image"
+      triggerJSX={
+        <Button variant="outline" id="profileImage" type="button">
+          <Edit className="w-5 h-5" />
+        </Button>
+      }
+      closeId="profileImage"
+      footerJSX={
+        <Button
+          variant="success"
+          asyncOnClick={async () => {
+            if (!image) return;
+            if (editor.current) {
+              const canvas = editor.current.getImageScaledToCanvas();
+              const blob = await new Promise<Blob | null>((resolve) => {
                 canvas.toBlob((blob) => {
-                  setImage(new File([blob!], image.name, { type: image.type }));
+                  resolve(blob);
                 });
-              } else {
+              });
+
+              if (!blob) {
                 setImage(null);
                 showSnackBar({
                   message: "Something went wrong",
                   state: State.ERROR,
                 });
+                return;
+              } else {
+                const url = await uploadFileS3({
+                  bucketName: S3BucketName.USER,
+                  file: new File([blob], image.name, {
+                    type: image.type,
+                  }),
+                  fileName: image.name.split(".")[0],
+                });
+                if (!url) {
+                  showSnackBar({
+                    message: "Could not upload image",
+                    state: State.ERROR,
+                  });
+                  return;
+                }
+                onChange(url);
+                const close = document.getElementById("profileImage");
+                if (close) {
+                  close.click();
+                }
               }
-            }}
-          >
-            Save
-          </Button>
+            } else {
+              setImage(null);
+              showSnackBar({
+                message: "Something went wrong",
+                state: State.ERROR,
+              });
+            }
+          }}
+        >
+          Save
+        </Button>
+      }
+    >
+      <LoadingWrapper
+        pageState={state}
+        loadingJSX={<div>Loading...</div>}
+        errorJSX={<div>Error...</div>}
+      >
+        <div className="flex flex-col items-center justify-center space-y-5 w-full">
+          {image && (
+            <AvatarEditor
+              image={image}
+              width={250}
+              height={250}
+              border={50}
+              color={[0, 0, 0, 0.6]} // RGBA
+              scale={scale}
+              rotate={0}
+              ref={editor}
+              borderRadius={borderRadius}
+              disableHiDPIScaling={false}
+            />
+          )}
+          <RangeInput
+            value={scale}
+            max={2}
+            min={1}
+            step={0.01}
+            onChange={setScale}
+            title="Zoom"
+          />
         </div>
-      </div>
-    </PopupWrapper>
+      </LoadingWrapper>
+    </CustomDialog>
   );
 }
 

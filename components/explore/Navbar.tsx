@@ -24,6 +24,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import MobileLoginPopup from "@components/sign-in/MobileLoginPopup";
 import LoginPerks from "@components/LoginPerks";
+import { Skeleton } from "@components/ui/skeleton";
 
 export function NavBar() {
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
@@ -213,7 +214,7 @@ function MobileProfile({
   const partnerURL = process.env.NEXT_PUBLIC_PARTNER_LINK;
   return (
     <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
-      {partnerURL && (
+      {partnerURL && path === "/" && (
         <Link
           href={`${partnerURL}/user/sign-in`}
           className="w-full text-success font-medium"
@@ -256,8 +257,8 @@ function MobileProfile({
                   className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
                   key={menu.path}
                 >
-                  <div className="flex items-center space-x-5 cursor-pointer hover:text-primary">
-                    <div className="w-[20%]">{menu.icon}</div>
+                  <div className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full">
+                    <div className="w-[10%]">{menu.icon}</div>
                     <p className="text-base font-medium w-full">{menu.title}</p>
                   </div>
                   {checkHere({ path: path || "", menuPath: menu.path }) && (
@@ -283,30 +284,42 @@ function MobileProfile({
                   <LoginPerks />
                 </div>
               }
+              loadingJSX={
+                <div className="px-1 w-full flex flex-col space-y-3">
+                  <Skeleton className="w-full h-10" />
+                  <Skeleton className="w-full h-10" />
+                  <Skeleton className="w-full h-10" />
+                </div>
+              }
             >
               {response ? (
                 <div className="grid grid-cols-1 gap-10 w-full">
                   {userMenus.map((menu) => (
-                    <Link
-                      href={menu.path}
-                      className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
-                      key={menu.path}
-                    >
-                      <div className="flex items-center space-x-5 cursor-pointer hover:text-primary">
-                        <div className="w-[20%]">{menu.icon}</div>
-                        <p className="text-base font-medium w-full">
-                          {menu.title}
-                        </p>
-                      </div>
-                      {checkHere({ path: path || "", menuPath: menu.path }) && (
-                        <Badge
-                          title="New"
-                          className="rounded-md text-xs bg-indigo-500"
-                        >
-                          Here
-                        </Badge>
-                      )}
-                    </Link>
+                    <SheetClose asChild key={menu.path}>
+                      <Link
+                        href={menu.path}
+                        className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
+                        key={menu.path}
+                      >
+                        <div className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full">
+                          <div className="w-[10%]">{menu.icon}</div>
+                          <p className="text-base font-medium w-full">
+                            {menu.title}
+                          </p>
+                        </div>
+                        {checkHere({
+                          path: path || "",
+                          menuPath: menu.path,
+                        }) && (
+                          <Badge
+                            title="New"
+                            className="rounded-md text-xs bg-indigo-500"
+                          >
+                            Here
+                          </Badge>
+                        )}
+                      </Link>
+                    </SheetClose>
                   ))}
                 </div>
               ) : (
