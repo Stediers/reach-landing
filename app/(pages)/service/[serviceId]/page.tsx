@@ -39,6 +39,7 @@ import { CustomDialog } from "@components/DialogPopup";
 import { AddOnMobile } from "@components/AddOn";
 import CustomImageGridLayout from "@components/CustomImageGridLayout";
 import { ContactMeDrawer, ContactMeSheet } from "@components/contact/Contact";
+import Card from "@components/Card";
 
 const getFullName = (firstName: string, lastName: string) => {
   return (
@@ -199,7 +200,7 @@ export default async function Page({
       <div className="sticky bottom-0 py-5 bg-white lg:hidden flex flex-col gap-y-5 w-full px-5">
         <RequestCallback serviceId={serviceId} type="mobile" />
       </div>
-      <div className="w-full flex flex-col items-start justify-start space-y-5 pt-5 col-span-2 max-w-lg lg:px-0 px-5">
+      <div className="w-full flex flex-col items-start justify-start space-y-5 pt-5 col-span-2 max-w-lg lg:px-0 px-5 mb-5">
         <UnderlinedHeader title="Know more about me" align="items-start" />
         <ProfileCard
           gig={gig}
@@ -223,55 +224,57 @@ function ProfileCard({
   serviceId: string;
 }) {
   return (
-    <div className="w-full flex flex-col items-start justify-start space-y-5 lg:p-10 rounded-md lg:rounded-lg pb-5 lg:border mt-5 lg:mt-10">
-      <div className="flex flex-col items-center lg:items-start justify-center w-full space-y-5">
+    <Card className="w-full flex flex-col items-start justify-start space-y-5 lg:p-10 rounded-md lg:rounded-lg pb-5 lg:border mt-5 lg:mt-10">
+      <div className="flex flex-col lg:flex-row gap-x-5 items-center lg:items-start justify-center w-full gap-y-5">
         <ImageComponent
           popup={false}
           src={gig.imageUrl}
           alt={getFullName(gig.firstName, gig.lastName)}
-          className="rounded-lg p-1 w-40 h-40 lg:w-40 lg:h-40"
+          className="rounded-lg p-1 w-40 h-40 lg:w-40 lg:h-40 shrink-0"
         />
-        <div className="flex flex-row items-center lg:justify-start justify-center w-full gap-x-3 flex-wrap">
+        {/* <div className="flex flex-row items-center lg:justify-start justify-center w-full gap-x-3 flex-wrap">
           {gig.languages.map((language, index) => (
             <Badge key={index} variant="infoOutline">
               {language.charAt(0).toUpperCase() + language.slice(1)}
             </Badge>
           ))}
-        </div>
+        </div> */}
         <div className="flex flex-col lg:items-start items-center justify-center w-full space-y-1">
           <p className="text-xl font-medium">
             {getFullName(gig.firstName, gig.lastName)}
           </p>
           <p className="text-base text-center">{gig.designation}</p>
+          <div className="grid grid-cols-3 w-full gap-x-10 justify-items-center items-start max-h-[4rem] pt-5">
+            <IconWrapper
+              icon={
+                <AiFillStar className="text-3xl text-yellow-500 lg:text-2xl" />
+              }
+              title={gig.rating ? Number(gig.rating).toFixed(1) : "N/A"}
+            />
+            <IconWrapper
+              icon={
+                gig.isVerified ? (
+                  <BsShieldCheck className="text-3xl text-success lg:text-2xl" />
+                ) : (
+                  <BsShieldSlash className="text-3xl text-error lg:text-2xl" />
+                )
+              }
+              title={gig.isVerified ? "Verified" : "Pending"}
+            />
+            <IconWrapper
+              icon={
+                gig.gender === Gender.MALE ? (
+                  <IoIosMale className="text-blue-500 text-3xl lg:text-2xl" />
+                ) : gig.gender === Gender.FEMALE ? (
+                  <IoIosFemale className="text-pink-500 text-3xl lg:text-2xl" />
+                ) : (
+                  <IoIosTransgender className="text-3xl text-purple-500 lg:text-2xl" />
+                )
+              }
+              title={gig.gender.charAt(0).toUpperCase() + gig.gender.slice(1)}
+            />
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-3 w-full gap-x-10 justify-items-center items-start max-h-[4rem] pt-5 lg:hidden">
-        <IconWrapper
-          icon={<AiFillStar className="text-3xl text-yellow-500" />}
-          title={gig.rating ? Number(gig.rating).toFixed(1) : "N/A"}
-        />
-        <IconWrapper
-          icon={
-            gig.isVerified ? (
-              <BsShieldCheck className="text-3xl text-success" />
-            ) : (
-              <BsShieldSlash className="text-3xl text-error" />
-            )
-          }
-          title={gig.isVerified ? "Verified" : "Pending"}
-        />
-        <IconWrapper
-          icon={
-            gig.gender === Gender.MALE ? (
-              <IoIosMale className="text-blue-500 text-3xl" />
-            ) : gig.gender === Gender.FEMALE ? (
-              <IoIosFemale className="text-pink-500 text-3xl" />
-            ) : (
-              <IoIosTransgender className="text-3xl text-purple-500" />
-            )
-          }
-          title={gig.gender.charAt(0).toUpperCase() + gig.gender.slice(1)}
-        />
       </div>
       <div className="grid grid-cols-2 w-full gap-5 justify-items-center items-start pt-5">
         <ContactMeSheet mobileNumber={gig.mobileNumber} />
@@ -291,7 +294,7 @@ function ProfileCard({
           </Link>
         </Button>
       </div>
-    </div>
+    </Card>
   );
 }
 

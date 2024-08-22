@@ -255,18 +255,22 @@ export function ServicePopupDesktop({
               title="What's Included"
               icon={<AiOutlineCheck className="text-success text-2xl" />}
             />
-            <ListWrapper
-              list={service.whatsNotIncluded}
-              title="What's Not Included"
-              icon={<AiOutlineClose className="text-error text-2xl" />}
-            />
-            <ListWrapper
-              list={service.requirements}
-              title="Requirements"
-              icon={
-                <AiFillExclamationCircle className="text-danger text-2xl" />
-              }
-            />
+            {service.whatsNotIncluded.length > 0 && (
+              <ListWrapper
+                list={service.whatsNotIncluded}
+                title="What's Not Included"
+                icon={<AiOutlineClose className="text-error text-2xl" />}
+              />
+            )}
+            {service.requirements.length > 0 && (
+              <ListWrapper
+                list={service.requirements}
+                title="Requirements"
+                icon={
+                  <AiFillExclamationCircle className="text-danger text-2xl" />
+                }
+              />
+            )}
           </div>
         </div>
         <SheetFooter className="w-full sticky bottom-5">

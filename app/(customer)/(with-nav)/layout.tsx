@@ -38,11 +38,11 @@ export const metadata: Metadata = {
 
 export default function ConsoleLayout({ children }: RootLayoutProps) {
   return (
-    <div className="w-full flex flex-col justify-start items-center relative !z-50 !hide-scrollbar">
+    <div className="w-full flex flex-1 flex-col justify-start items-center relative !z-50 !hide-scrollbar">
       <div className="w-full flex flex-col justify-start items-center space-y-5  sticky top-0 z-50">
         <NavBar />
       </div>
-      <div className="max-w-7xl w-full flex flex-col justify-start items-center space-y-5">
+      <div className="max-w-7xl min-h-full w-full flex flex-1 flex-col justify-start items-center space-y-5">
         {children}
       </div>
     </div>
