@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   },
   description:
     "Blog posts on ReachGig. Get the latest news, updates and tips on ReachGig!",
+  alternates: {
+    canonical: "https://reachgig.com/learn",
+  },
   openGraph: {
     title: "Blogs on ReachGig",
     description: "Get the latest news, updates and tips on ReachGig!",
