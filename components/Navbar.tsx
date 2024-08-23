@@ -109,7 +109,7 @@ function DesktopNav({ path }: { path: string }) {
               className="w-full"
               passHref
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
             >
               Become a Partner
             </Link>
@@ -145,7 +145,7 @@ function MobileNav({ path }: { path: string }) {
             className="w-full text-success"
             passHref
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
           >
             Join Us
           </Link>

@@ -748,7 +748,7 @@ export default function PrivacyPolicy() {
           </div>
           <div>
             Refer to our{" "}
-            <Link href={"/data-retention-policy"} className={link}>
+            <Link href={"/compliance/data-retention-policy"} className={link}>
               Data Retention Policy
             </Link>{" "}
             for more details&#46;

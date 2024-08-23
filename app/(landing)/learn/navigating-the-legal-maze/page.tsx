@@ -114,10 +114,7 @@ export default function Page() {
           />
           <BlogText>
             <span className="font-medium">Empower your freelance journey:</span>{" "}
-            With ReachGig, you can{" "}
-            <Link href={"/bookings"} className="text-info">
-              effortlessly clarify your offerings&nbsp;
-            </Link>
+            With ReachGig, you can effortlessly clarify your offerings&nbsp;
             clients for success. By clearly outlining your services, you&apos;ll
             build trust and avoid misunderstandings. And, if any questions
             arise, our dedicated team is here to support you every step of the

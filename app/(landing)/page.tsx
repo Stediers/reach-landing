@@ -632,7 +632,7 @@ function PricingCard({
         className="w-full"
         passHref
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener noreferrer nofollow"
       >
         <Button variant="success" className="!w-full">
           Get Started with {title}

@@ -41,7 +41,12 @@ export const generateMetadata = async ({
     };
   } else {
     return {
-      title: `${response.partner.firstName} ${response.partner.lastName}`,
+      title: {
+        absolute: `${response.partner.firstName} ${response.partner.lastName}`,
+      },
+      alternates: {
+        canonical: `https://reachgig.com/partner/@${response.partner.handle}`,
+      },
       description: `Profile of ${response.partner.firstName} ${response.partner.lastName} on ReachGig. I am ${response.partner.designation} currently working in ${response.partner.city}, ${response.partner.state}. `,
       openGraph: {
         title: `${response.partner.firstName} ${response.partner.lastName}`,

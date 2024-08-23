@@ -144,6 +144,7 @@ export default function PartnerPrompt() {
                 className="w-full bg-success text-white"
                 link="https://partner.reachgig.com/user/sign-in"
                 newTab
+                rel="noopener noreferrer nofollow"
               />
               <SheetClose asChild>
                 <Button variant="close">Close</Button>

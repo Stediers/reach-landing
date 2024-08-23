@@ -275,18 +275,6 @@ export default function RefundPolicy() {
           <div className={heading1}>
             <span className={textHighlight}>9. FAQs</span>
           </div>
-
-          <p>
-            Users can refer to the FAQs on our website at{" "}
-            <Link
-              className={link}
-              href="https://reachgig.com/faqs"
-              target="_blank"
-            >
-              reachgig.com/faqs
-            </Link>{" "}
-            for additional information.
-          </p>
         </div>
       </div>
     </div>

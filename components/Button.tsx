@@ -16,6 +16,7 @@ export default function LinkButton({
   icon,
   loadingColor = "white",
   newTab = false,
+  rel,
 }: {
   buttonState?: State;
   buttonTextClassName?: string;
@@ -27,6 +28,7 @@ export default function LinkButton({
   icon?: JSX.Element;
   loadingColor?: string;
   newTab?: boolean;
+  rel?: string;
 }) {
   const [loading, setLoading] = useState(false);
   if (link) {
@@ -34,7 +36,7 @@ export default function LinkButton({
       <Link
         href={link}
         passHref
-        rel={newTab ? "noopener noreferrer" : ""}
+        rel={rel}
         target={newTab ? "_blank" : ""}
         className={`w-full ${
           disabled ? "cursor-not-allowed pointer-events-none" : ""

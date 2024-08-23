@@ -65,6 +65,9 @@ export const generateMetadata = async ({
       title: {
         absolute: `${response!!.service.title} | ReachGig`,
       },
+      alternates: {
+        canonical: `https://reachgig.com/service/${serviceId}`,
+      },
       openGraph: {
         title: `${response!!.service.title} | ReachGig`,
         description: `${response!!.service.whatsIncluded.join(", ")}`,
