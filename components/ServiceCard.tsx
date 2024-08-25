@@ -251,12 +251,14 @@ export function ServiceTrigger({
               </p>
             )}
             <div className="flex flex-row items-center justify-start space-x-1">
-              <p className="line-through text-sm text-gray-500 font-medium">
-                {priceString({
-                  price: service.price.price,
-                  priceType: "paisa",
-                })}
-              </p>
+              {service.price.discount ? (
+                <p className="line-through text-sm text-gray-500 font-medium">
+                  {priceString({
+                    price: service.price.price,
+                    priceType: "paisa",
+                  })}
+                </p>
+              ) : null}
               <p className="text-lg font-medium">{showPrice(service.price)}</p>
             </div>
             <div className="flex flex-row items-center justify-start gap-x-2 gap-y-3 flex-wrap w-full">
