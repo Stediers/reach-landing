@@ -33,7 +33,7 @@ export default function Page() {
     <HeaderWrapper
       title={
         <span className="!leading-snug text-white">
-          Reach Out <br /> <span className="text-info font-semibold">to</span>{" "}
+          Reach Out <br /> <span className="text-white font-semibold">to</span>{" "}
           Us
         </span>
       }
