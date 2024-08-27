@@ -45,6 +45,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@components/ui/button";
 import { Badge } from "@components/ui/badge";
+import RadioInput from "@components/input/RadioInput";
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -132,7 +133,7 @@ export default function ConsoleLayout({ children }: RootLayoutProps) {
           <LoadingWrapper
             pageState={pageNavState}
             loadingJSX={
-              <div className="flex gap-x-5 z-20 p-3 border justify-start w-full overflow-x-scroll">
+              <div className="flex gap-x-5 z-20 p-3 border justify-start w-full overflow-x-scroll bg-white">
                 {Array.from({ length: 5 }).map((_, index) => (
                   <Skeleton className="w-40 h-10 shrink-0" key={index} />
                 ))}
@@ -217,81 +218,111 @@ function GenderDropdown({
         description="Select your partner's gender"
         triggerJSX={
           <Button variant="outline">
-            {filter.partnerGender
-              ? filter.partnerGender === Gender.MALE
-                ? "Male"
-                : "Female"
-              : "Select"}
+            Gender
             <span className="ml-3">
-              <FcDown className="w-5 h-5" />
+              <BsGenderAmbiguous className="w-5 h-5" />
             </span>
           </Button>
         }
         footerJSX={
-          <p className="text-sm text-gray-400 w-full text-center">
-            © 2023 ReachGig. All rights reserved.
-          </p>
+          <div className="flex flex-col items-start justify-start w-full space-y-5">
+            <SheetClose asChild>
+              <Button variant="outline">Close</Button>
+            </SheetClose>
+          </div>
         }
       >
         <div className="flex flex-col items-start justify-start w-full space-y-5">
-          <SheetClose asChild>
-            <Setting
-              title="Male"
-              subtitle="Click to see"
-              icon={
-                filter.partnerGender && filter.partnerGender === Gender.MALE ? (
+          <RadioInput
+            options={[
+              {
+                title: "Female",
+                onClick: () => {
+                  setFilter({
+                    ...filter,
+                    customerGender: PreferredGender.FEMALE,
+                  });
+                },
+                icon:
+                  filter.customerGender &&
+                  filter.customerGender === PreferredGender.FEMALE ? (
+                    <AiFillCheckCircle className="w-6 h-6" />
+                  ) : (
+                    <BsGenderFemale className="w-6 h-6" />
+                  ),
+              },
+              {
+                title: "Male",
+                icon:
+                  filter.customerGender &&
+                  filter.customerGender === PreferredGender.MALE ? (
+                    <AiFillCheckCircle className="w-6 h-6" />
+                  ) : (
+                    <BsGenderMale className="w-6 h-6" />
+                  ),
+                onClick: () => {
+                  setFilter({
+                    ...filter,
+                    customerGender: PreferredGender.MALE,
+                  });
+                },
+              },
+            ]}
+            cols="grid-cols-2"
+            title="Your Gender"
+          />
+          <RadioInput
+            options={[
+              {
+                title: "Female",
+                onClick: () => {
+                  setFilter({
+                    ...filter,
+                    partnerGender: Gender.FEMALE,
+                  });
+                },
+                icon:
+                  filter.partnerGender &&
+                  filter.partnerGender === Gender.FEMALE ? (
+                    <AiFillCheckCircle className="w-6 h-6" />
+                  ) : (
+                    <BsGenderFemale className="w-6 h-6" />
+                  ),
+              },
+              {
+                title: "Male",
+                icon:
+                  filter.partnerGender &&
+                  filter.partnerGender === Gender.MALE ? (
+                    <AiFillCheckCircle className="w-6 h-6" />
+                  ) : (
+                    <BsGenderMale className="w-6 h-6" />
+                  ),
+                onClick: () => {
+                  setFilter({
+                    ...filter,
+                    partnerGender: Gender.MALE,
+                  });
+                },
+              },
+              {
+                title: "No Preference",
+                icon: !filter.partnerGender ? (
                   <AiFillCheckCircle className="w-6 h-6" />
                 ) : (
                   <BsGenderMale className="w-6 h-6" />
-                )
-              }
-              onClick={() => {
-                setFilter({
-                  ...filter,
-                  partnerGender: Gender.MALE,
-                });
-              }}
-            />
-          </SheetClose>
-          <SheetClose asChild>
-            <Setting
-              title="Female"
-              subtitle="Click to see"
-              icon={
-                filter.partnerGender &&
-                filter.partnerGender === Gender.FEMALE ? (
-                  <AiFillCheckCircle className="w-6 h-6" />
-                ) : (
-                  <BsGenderFemale className="w-6 h-6" />
-                )
-              }
-              onClick={() => {
-                setFilter({
-                  ...filter,
-                  partnerGender: Gender.FEMALE,
-                });
-              }}
-            />
-          </SheetClose>
-          <SheetClose asChild>
-            <Setting
-              title="No Preference"
-              subtitle="Click to see"
-              icon={
-                !filter.partnerGender ? (
-                  <AiFillCheckCircle className="w-6 h-6" />
-                ) : (
-                  <BsGenderAmbiguous className="w-6 h-6" />
-                )
-              }
-              onClick={() => {
-                setFilter({
-                  ...filter,
-                  partnerGender: null,
-                });
-              }}
-            />
-          </SheetClose>
+                ),
+                onClick: () => {
+                  setFilter({
+                    ...filter,
+                    partnerGender: null,
+                  });
+                },
+              },
+            ]}
+            cols="grid-cols-2"
+            title="Partner Gender"
+          />
         </div>
       </CustomSheet>
     </div>
