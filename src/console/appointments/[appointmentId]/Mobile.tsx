@@ -481,7 +481,7 @@ function CheckPayment({
             orderId={customerPayment?.orderId || ""}
             onCompletePayment={async (response) => window.location.reload()}
           />
-          <DrawerClose id="close-drawer" className="w-full">
+          <DrawerClose id="close-checkout" className="w-full">
             <Button variant="outline">Close</Button>
           </DrawerClose>
         </div>
