@@ -26,6 +26,7 @@ import { cn } from "@lib/utils";
 import { learn, legal, menus } from "@data/menu";
 import UnderlinedHeader from "./UnderlinedHeader";
 import { usePathname } from "next/navigation";
+import { CustomerRoutes } from "@data/enums";
 
 export default function Navbar() {
   const path = usePathname();
@@ -115,7 +116,7 @@ function DesktopNav({ path }: { path: string }) {
             </Link>
           </Button>
           <Button variant="outline" size="default" className="text-base">
-            <Link href="/explore">Find a Partner</Link>
+            <Link href={CustomerRoutes.EXPLORE}>Find a Partner</Link>
           </Button>
         </div>
       </div>
@@ -179,7 +180,7 @@ function MobileNav({ path }: { path: string }) {
                 </SheetClose>
               ))} */}
               <SheetClose key="Explore" asChild>
-                <Link href="/explore">Explore</Link>
+                <Link href={CustomerRoutes.EXPLORE}>Explore</Link>
               </SheetClose>
             </div>
           </SheetContent>

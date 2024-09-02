@@ -17,6 +17,7 @@ import { DialogClose } from "@components/ui/dialog";
 import { DrawerClose } from "@components/ui/drawer";
 import {
   AppointmentStatus,
+  CustomerRoutes,
   DisputeStatus,
   ServiceType,
   State,
@@ -69,6 +70,7 @@ export default function Desktop({
     <DesktopWrapper
       className="flex flex-col items-start space-y-5 w-full"
       title="View Appointment"
+      backLink={CustomerRoutes.APPOINTMENTS}
     >
       <div className="grid grid-cols-3 gap-x-10 w-full">
         <AppointmentCard status={appointment.status} id={appointment.id} />

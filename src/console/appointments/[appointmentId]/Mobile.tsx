@@ -8,6 +8,7 @@ import { CustomSheet } from "@components/CustomSheet";
 import {
   CustomDrawer,
   ProfilePopup,
+  ServicePopupDesktop,
   ServicePopupMobile,
 } from "@components/DrawerPopup";
 import LineHeader from "@components/LineHeader";
@@ -23,6 +24,7 @@ import { DrawerClose } from "@components/ui/drawer";
 import { SheetClose } from "@components/ui/sheet";
 import {
   AppointmentStatus,
+  CustomerRoutes,
   DisputeStatus,
   PaymentStatus,
   ServiceType,
@@ -77,7 +79,7 @@ export default function Mobile({
     <MobileWrapper
       className="flex items-center flex-col justify-start space-y-5"
       header="View Appointment"
-      backLink="/console/appointments"
+      backLink={CustomerRoutes.APPOINTMENTS}
     >
       <AppointmentCard status={appointment.status} id={appointment.id} />
       <LineHeader title="Appointment Details" />
@@ -165,7 +167,12 @@ export default function Mobile({
       )}
       <LineHeader title="Major Details" />
       {appointment.otp ? <OTP otp={appointment.otp} /> : null}
-      <ServicePopupMobile
+      <ServicePopupDesktop
+        location={
+          appointment.scheduled.address
+            ? appointment.scheduled.address.city
+            : appointment.partner.city
+        }
         service={appointment.service}
         triggerJSX={
           <Setting

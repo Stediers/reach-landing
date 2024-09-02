@@ -97,7 +97,10 @@ export default function Desktop({
     : [];
 
   return (
-    <DesktopWrapper className="flex flex-col items-start space-y-5 w-full">
+    <DesktopWrapper
+      className="flex flex-col items-start space-y-5 w-full"
+      title="Appointments"
+    >
       {response.length == 0 ? (
         <div className="flex flex-col items-start justify-center space-y-3 w-full pt-20">
           <p className=" text-center font-medium text-lg">
@@ -114,7 +117,7 @@ export default function Desktop({
           </SubHeadingWrapper>
         ) : null}
         {completedAppointments.length > 0 ? (
-          <SubHeadingWrapper title="Payment Pending">
+          <SubHeadingWrapper title="Completed">
             {completedAppointments.map((appointment) => (
               <Appointment appointment={appointment} key={appointment.id} />
             ))}

@@ -1,4 +1,4 @@
-import { ServiceCategory, State } from "@data/enums";
+import { CustomerRoutes, ServiceCategory, State } from "@data/enums";
 import React, { useState } from "react";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -111,7 +111,7 @@ function ElevateYourBrand() {
           images={[
             "https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg",
           ]}
-          link="/partner/@Rithanyeahmakeover"
+          link="/@Rithanyeahmakeover"
           name="Rithanya Makeover"
           profession="Makeup Artist"
           key={1}
@@ -122,7 +122,7 @@ function ElevateYourBrand() {
           images={[
             "https://user4762.s3.ap-south-1.amazonaws.com/1000470803.jpeg",
           ]}
-          link="/partner/@lathaa"
+          link="/@lathaa"
           name="Latha Anand"
           profession="Beautician"
           key={1}
@@ -448,8 +448,8 @@ function Hero() {
                 Start for Free
               </Button>
             </Link>
-            <Link href="/explore" passHref>
-              <Button variant="close" className="!w-full">
+            <Link href={CustomerRoutes.EXPLORE} passHref>
+              <Button variant="close" className="!w-full bg-white">
                 Looking for a freelancer?
               </Button>
             </Link>

@@ -1,6 +1,7 @@
 "use client";
 import TextInput from "@components/input/TextInput";
 import { Badge } from "@components/ui/badge";
+import { CustomerRoutes } from "@data/enums";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,11 +20,11 @@ export default function SearchInput() {
         setSearch(value);
       }}
       onClick={() => {
-        router.push(`/explore?search=${search}`);
+        router.push(`${CustomerRoutes.EXPLORE}?search=${search}`);
       }}
       onKeyDown={(e) => {
         if (e.key === "Enter") {
-          router.push(`/explore?search=${search}`);
+          router.push(`${CustomerRoutes.EXPLORE}?search=${search}`);
         }
       }}
     />

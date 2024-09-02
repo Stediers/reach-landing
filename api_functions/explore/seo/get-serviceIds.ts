@@ -3,7 +3,10 @@ import { RequestMethod } from "@data/enums";
 import { ApiResult } from "@data/types";
 
 export type FetchServiceIdsResponse = {
-  serviceIds: string[];
+  serviceIds: {
+    id: string;
+    partnerHandle: string;
+  }[];
 };
 
 export async function fetchServiceIds(): Promise<FetchServiceIdsResponse | null> {

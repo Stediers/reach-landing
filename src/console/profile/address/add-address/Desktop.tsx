@@ -4,7 +4,7 @@ import { LocationCardWithName } from "@components/LocationCard";
 import AddressInput, { AddressNameInput } from "@components/input/AddressInput";
 import { showSnackBar } from "@components/notifications/Snackbar";
 import { Button } from "@components/ui/button";
-import { State } from "@data/enums";
+import { CustomerRoutes, State } from "@data/enums";
 import { LocationAttributes } from "@data/types";
 import { Loader } from "@googlemaps/js-api-loader";
 import DesktopWrapper from "@wrapper/responsive/DesktopWrapper";
@@ -59,6 +59,8 @@ export default function Desktop({
     <DesktopWrapper
       className="flex flex-col items-start justify-start space-y-10 w-full"
       title="Add Address"
+      description="Add a new address below and click save to add the address."
+      backLink={CustomerRoutes.EDIT_ADDRESS}
     >
       <div className="flex flex-col items-start justify-start space-y-5 w-full">
         <AddressNameInput

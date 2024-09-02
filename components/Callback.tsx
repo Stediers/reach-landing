@@ -1,4 +1,4 @@
-import { CallbackStatus } from "@data/enums";
+import { CallbackStatus, CustomerRoutes } from "@data/enums";
 import {
   Callback,
   FetchCustomerResponse,
@@ -96,22 +96,25 @@ export function CallbackComponentDesktop({
         </div>
       </div>
       <PriceComponent price={callback.service.price} />
-      {/* {callback.appointmentId ? (
+      {callback.appointmentId ? (
         <Button
-          variant="success"
+          variant="default"
           onClick={() => {
             console.log("View Appointment");
           }}
-          asChild
         >
-          <Link href={`/appointments/${callback.appointmentId}`}>
+          <Link
+            href={CustomerRoutes.MANAGE_APPOINTMENT.replace(
+              "[appointmentId]",
+              callback.appointmentId
+            )}
+          >
             View Appointment
           </Link>
         </Button>
       ) : (
         footerJSX
-      )} */}
-      {footerJSX}
+      )}
     </Card>
   );
 }
@@ -200,21 +203,25 @@ export function CallbackComponentMobile({
         </div>
       </div>
       <PriceComponent price={callback.service.price} />
-      {/* {callback.appointmentId ? (
+      {callback.appointmentId ? (
         <Button
-          variant="success"
+          variant="default"
           onClick={() => {
             console.log("View Appointment");
           }}
         >
-          <Link href={`/appointments/${callback.appointmentId}`}>
+          <Link
+            href={CustomerRoutes.MANAGE_APPOINTMENT.replace(
+              "[appointmentId]",
+              callback.appointmentId
+            )}
+          >
             View Appointment
           </Link>
         </Button>
       ) : (
         footerJSX
-      )} */}
-      {footerJSX}
+      )}
     </Card>
   );
 }

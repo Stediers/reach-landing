@@ -9,7 +9,7 @@ export default function Card({
 }) {
   return (
     <div
-      className={`p-3 w-full border-[1px] overflow-hidden border-gray rounded-lg flex flex-col space-y-6 ${className} ${
+      className={`p-3 lg:p-4 w-full border-[1px] overflow-hidden border-gray rounded-lg flex flex-col space-y-6 ${className} ${
         onClick ? "cursor-pointer" : ""
       }`}
       onClick={onClick}

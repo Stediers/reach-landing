@@ -1,4 +1,4 @@
-import { AppointmentStatus } from "@data/enums";
+import { AppointmentStatus, CustomerRoutes } from "@data/enums";
 import { FetchAppointmentResponse } from "@data/types";
 import Link from "next/link";
 import Card from "./Card";
@@ -44,12 +44,12 @@ export default function Appointment({
               ) : appointment.status === AppointmentStatus.SCHEDULED ? (
                 <Chip
                   title="Scheduled"
-                  className={`text-white bg-error text-xs`}
+                  className={`text-white bg-primary text-xs`}
                 />
               ) : appointment.status === AppointmentStatus.REFUNDED ? (
                 <Chip
                   title="Refunded"
-                  className={`text-white bg-error text-xs`}
+                  className={`text-white bg-info text-xs`}
                 />
               ) : appointment.status === AppointmentStatus.EXPIRED ? (
                 <Chip
@@ -86,7 +86,12 @@ export default function Appointment({
                   Call Partner
                 </Button>
                 <Button variant="info" asChild>
-                  <Link href={`/partner/@${appointment.partner.handle}`}>
+                  <Link
+                    href={`${CustomerRoutes.PARTNER.replace(
+                      "[partnerHandle]",
+                      appointment.partner.handle!!
+                    )}?backLink=${window.location.pathname}`}
+                  >
                     View Profile
                   </Link>
                 </Button>
@@ -116,7 +121,12 @@ export default function Appointment({
       <PriceComponent price={appointment.price} />
       <div className="flex flex-row justify-between items-center w-full space-x-2">
         <Button variant="default" asChild>
-          <Link href={`/console/appointments/${appointment.id}`}>
+          <Link
+            href={CustomerRoutes.MANAGE_APPOINTMENT.replace(
+              "[appointmentId]",
+              appointment.id
+            )}
+          >
             View Details
           </Link>
         </Button>

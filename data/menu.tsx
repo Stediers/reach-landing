@@ -1,14 +1,8 @@
-import {
-  Search,
-  Phone,
-  SearchIcon,
-  SearchSlashIcon,
-  SearchCodeIcon,
-  BookIcon,
-} from "lucide-react";
+import { Search, Phone, SearchCodeIcon, BookIcon } from "lucide-react";
 import { AiOutlineEdit, AiOutlineUser } from "react-icons/ai";
 import { FcHome, FcBusinessman, FcCalendar, FcBriefcase } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
+import { CustomerRoutes } from "./enums";
 
 export type Menu = {
   title: string;
@@ -39,46 +33,40 @@ export const consoleMenus: Menu[] = [
     title: "Browse",
     subtitle: "Search for services",
     icon: <Search className="w-6 h-6 shrink-0" />,
-    path: "/explore",
+    path: CustomerRoutes.EXPLORE,
   },
   {
     title: "Blogs",
     subtitle: "Read our blogs",
     icon: <BookIcon className="w-6 h-6 shrink-0" />,
-    path: "/learn",
+    path: CustomerRoutes.LEARN,
   },
   {
     title: "Search Partner",
     subtitle: "Find your specific partner",
     icon: <SearchCodeIcon className="w-7 h-7 shrink-0" />,
-    path: "/explore/partner",
+    path: CustomerRoutes.SEARCH_PARTNER,
   },
 ];
 
 export const userMenus: Menu[] = [
   {
-    title: "My Profile",
-    subtitle: "Manage your profile",
-    icon: <AiOutlineUser className="text-2xl shrink-0" />,
-    path: "/console/profile/",
-  },
-  {
     title: "Address",
     subtitle: "Manage your addresses",
     icon: <HiLocationMarker className="text-3xl shrink-0" />,
-    path: "/console/profile/address",
+    path: CustomerRoutes.EDIT_ADDRESS,
   },
   {
     title: "My Callbacks",
     subtitle: "Request a callback",
     icon: <Phone className="w-5 h-5 shrink-0" />,
-    path: "/console/callbacks",
+    path: CustomerRoutes.CALLBACKS,
   },
   {
     title: "My Appointments",
     subtitle: "Manage your appointments",
     icon: <FcBusinessman className="text-3xl" />,
-    path: "/console/appointments",
+    path: CustomerRoutes.APPOINTMENTS,
   },
 ];
 

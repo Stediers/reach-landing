@@ -5,7 +5,12 @@ import "swiper/css/pagination";
 import { redirect } from "next/navigation";
 
 import PriceComponent from "@components/price/MobilePrice";
-import { Gender, PreferredGender, ServiceType } from "@data/enums";
+import {
+  CustomerRoutes,
+  Gender,
+  PreferredGender,
+  ServiceType,
+} from "@data/enums";
 import {
   AiFillHome,
   AiFillStar,
@@ -66,7 +71,10 @@ export const generateMetadata = async ({
         absolute: `${response!!.service.title} | ReachGig`,
       },
       alternates: {
-        canonical: `https://reachgig.com/service/${serviceId}`,
+        canonical: `https://reachgig.com/${CustomerRoutes.SERVICE.replace(
+          "[serviceId]",
+          serviceId
+        ).replace("[partnerHandle]", response!!.gig.handle!!)}`,
       },
       openGraph: {
         title: `${response!!.service.title} | ReachGig`,
@@ -92,7 +100,10 @@ export const generateMetadata = async ({
           },
         ],
         type: "website",
-        url: `https://reachgig.com/service/${serviceId}`,
+        url: `https://reachgig.com/${CustomerRoutes.SERVICE.replace(
+          "[serviceId]",
+          serviceId
+        ).replace("[partnerHandle]", response!!.gig.handle!!)}`,
       },
       description: `${response!!.service.whatsIncluded.join(", ")}`,
     };
@@ -150,7 +161,17 @@ export default async function Page({
             <h1 className="lg:text-2xl text-xl font-medium text-left first-letter:capitalize w-full lg:max-w-[60%]">
               {service.title}
             </h1>
-            <Link href={`/partner/@${gig.handle}`} shallow>
+            <Link
+              href={`${CustomerRoutes.PARTNER.replace(
+                "[partnerHandle]",
+                gig.handle!!
+              )}?backLink=${CustomerRoutes.SERVICE.replace(
+                "[serviceId]",
+                serviceId
+              ).replace("[partnerHandle]", gig.handle!!)}${
+                backLink ? `?backLink=${backLink}` : ""
+              }`}
+            >
               <h2 className="lg:text-lg text-base text-left first-letter:capitalize w-full text-primary underline underline-offset-4">
                 {gig.firstName + " " + gig.lastName}
               </h2>
@@ -284,10 +305,16 @@ function ProfileCard({
         <Button variant="default" className="!w-full !bg-info" asChild>
           <Link
             href={{
-              pathname: `/partner/@${gig.handle}`,
+              pathname: CustomerRoutes.PARTNER.replace(
+                "[partnerHandle]",
+                gig.handle!!
+              ),
               query: {
                 whatsapp: searchParams.whatsapp,
-                backLink: `/service/${serviceId}${
+                backLink: `${CustomerRoutes.SERVICE.replace(
+                  "[serviceId]",
+                  serviceId
+                ).replace("[partnerHandle]", gig.handle!!)}${
                   backLink ? `?backLink=${backLink}` : ""
                 }`,
               },

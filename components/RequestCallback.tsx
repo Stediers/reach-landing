@@ -1,6 +1,6 @@
 "use client";
 
-import { CallbackStatus, State } from "@data/enums";
+import { CallbackStatus, CustomerRoutes, State } from "@data/enums";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button } from "./ui/button";
@@ -106,6 +106,7 @@ export function RequestCallback({
       setRequest={setRequest}
       setResponse={setResponse}
       setButtonState={setButtonState}
+      handle={response?.callback?.partner.handle ?? ""}
     />
   ) : (
     <RequestCallbackDesktop
@@ -116,6 +117,7 @@ export function RequestCallback({
       setRequest={setRequest}
       setResponse={setResponse}
       setButtonState={setButtonState}
+      handle={response?.callback?.partner.handle ?? ""}
     />
   );
 }
@@ -128,6 +130,7 @@ export function RequestCallbackDesktop({
   buttonState,
   setResponse,
   setButtonState,
+  handle,
 }: {
   serviceId: string;
   response: FetchCallbackByServiceIdResponse | null;
@@ -138,6 +141,7 @@ export function RequestCallbackDesktop({
     SetStateAction<FetchCallbackByServiceIdResponse | null>
   >;
   setButtonState: Dispatch<SetStateAction<State>>;
+  handle: string;
 }) {
   return (
     <LoadingWrapper
@@ -296,7 +300,12 @@ export function RequestCallbackDesktop({
               className="w-full h-60"
             />
             <Button variant="success" asChild onClick={() => {}}>
-              <Link href={`/user/sign-in?redirectUrl=/service/${serviceId}`}>
+              <Link
+                href={`/user/sign-in?redirectUrl=${CustomerRoutes.SERVICE.replace(
+                  "[serviceId]",
+                  serviceId
+                ).replace("[partnerHandle]", handle)}`}
+              >
                 <p className="text-md font-medium">Login</p>
               </Link>
             </Button>
@@ -315,6 +324,7 @@ export function RequestCallbackMobile({
   buttonState,
   setResponse,
   setButtonState,
+  handle,
 }: {
   serviceId: string;
   response: FetchCallbackByServiceIdResponse | null;
@@ -325,6 +335,7 @@ export function RequestCallbackMobile({
     SetStateAction<FetchCallbackByServiceIdResponse | null>
   >;
   setButtonState: Dispatch<SetStateAction<State>>;
+  handle: string;
 }) {
   return (
     <LoadingWrapper
@@ -522,7 +533,12 @@ export function RequestCallbackMobile({
               className="w-full h-60"
             />
             <Button variant="success" asChild onClick={() => {}}>
-              <Link href={`/user/sign-in?redirectUrl=/service/${serviceId}`}>
+              <Link
+                href={`/user/sign-in?redirectUrl=${CustomerRoutes.SERVICE.replace(
+                  "[serviceId]",
+                  serviceId
+                ).replace("[partnerHandle]", handle)}`}
+              >
                 <p className="text-md font-medium">Login</p>
               </Link>
             </Button>

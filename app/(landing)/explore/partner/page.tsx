@@ -7,7 +7,7 @@ import ImageComponent from "@components/ImageComponent";
 import RadioInput from "@components/input/RadioInput";
 import TextInput from "@components/input/TextInput";
 import { Skeleton } from "@components/ui/skeleton";
-import { Gender, State } from "@data/enums";
+import { CustomerRoutes, Gender, State } from "@data/enums";
 import { FetchPartnerResponse } from "@data/types";
 import useDidMountEffect from "@helper_functions/use-did-mount-effetc";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
@@ -72,7 +72,10 @@ export default function Main() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full px-1 lg:gap-5 gap-y-10">
             {response.map((res) => (
               <Link
-                href={`/partner/@${res.handle}?backLink=${currentPath}`}
+                href={`${CustomerRoutes.PARTNER.replace(
+                  "[partnerHandle]",
+                  res.handle!!
+                )}?backLink=${currentPath}`}
                 key={res.userId}
                 shallow={true}
                 className="hover:lg:outline rounded-lg lg:p-3"

@@ -1,5 +1,5 @@
 "use client";
-import { ServiceType, PreferredGender } from "@data/enums";
+import { ServiceType, PreferredGender, CustomerRoutes } from "@data/enums";
 import { FetchPartnerResponse, FetchServiceResponse } from "@data/types";
 import { priceString, showPrice } from "@helper_functions/priceString";
 import { Star } from "lucide-react";
@@ -29,7 +29,7 @@ export function ServiceCardMobile({
 }: {
   service: FetchServiceResponse;
   serviceTrigger?: JSX.Element;
-  partner?: FetchPartnerResponse;
+  partner: FetchPartnerResponse;
 }): JSX.Element {
   return (
     <ServicePopupMobile
@@ -40,7 +40,10 @@ export function ServiceCardMobile({
           <div className="grid grid-cols-2 gap-x-2 w-full">
             <Button variant="success">
               <Link
-                href={`/service/${service.id}`}
+                href={CustomerRoutes.SERVICE.replace(
+                  "[serviceId]",
+                  service.id.toString()
+                ).replace("[partnerHandle]", partner.handle!!)}
                 passHref
                 rel="noopener"
                 target="_blank"
@@ -64,10 +67,12 @@ export function ServiceCardDesktop({
   service,
   location,
   serviceTrigger = <ServiceTrigger service={service} />,
+  handle,
 }: {
   service: FetchServiceResponse;
   serviceTrigger?: JSX.Element;
   location: string;
+  handle: string;
 }): JSX.Element {
   return (
     <ServicePopupDesktop
@@ -76,7 +81,10 @@ export function ServiceCardDesktop({
         <div className="grid grid-cols-2 gap-x-2 w-full">
           <Button variant="success">
             <Link
-              href={`/service/${service.id}`}
+              href={CustomerRoutes.SERVICE.replace(
+                "[serviceId]",
+                service.id.toString()
+              ).replace("[partnerHandle]", handle)}
               passHref
               rel="noopener"
               target="_blank"

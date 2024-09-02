@@ -15,7 +15,10 @@ export default function Desktop({
   pending: Callback[];
 }) {
   return (
-    <DesktopWrapper className="flex flex-col w-full space-y-5">
+    <DesktopWrapper
+      className="flex flex-col w-full space-y-5"
+      title="Callbacks"
+    >
       <SubHeadingWrapper title="Success">
         {success.length > 0 ? (
           success.map((item) => (

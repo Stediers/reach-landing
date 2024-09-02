@@ -1,4 +1,5 @@
 import { fetchGigHandles } from "@api_functions/explore/seo/get-gig-handles";
+import { CustomerRoutes } from "@data/enums";
 import { MetadataRoute } from "next";
 
 const URL = "https://reachgig.com";
@@ -11,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ? data.filter((item, index) => data.indexOf(item) === index)
       : [];
     return gigHandles.map((handle) => ({
-      url: `${URL}/partner/@${handle}`,
+      url: CustomerRoutes.PARTNER.replace("[partnerHandle]", handle),
       lastModified: new Date().toISOString(),
       changeFrequency: "daily",
     }));

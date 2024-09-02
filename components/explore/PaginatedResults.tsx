@@ -4,7 +4,13 @@ import {
   wordSearchService,
 } from "@api_functions/explore/word-search-service";
 import { ServiceTrigger } from "@components/ServiceCard";
-import { Gender, PreferredGender, SortType, State } from "@data/enums";
+import {
+  CustomerRoutes,
+  Gender,
+  PreferredGender,
+  SortType,
+  State,
+} from "@data/enums";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -97,7 +103,7 @@ export default function PaginatedResults({
     return () => observer.disconnect();
   }, [nextPage]);
 
-  const backLink = `/explore?search=${search}&category=${searchParams.category}&customerGender=${searchParams.customerGender}&partnerGender=${searchParams.partnerGender}&sort=${searchParams.sort}&state=${searchParams.state}&online=${searchParams.online}&verified=${searchParams.verified}&range=${searchParams.range}`;
+  const backLink = `${CustomerRoutes.EXPLORE}?search=${search}&category=${searchParams.category}&customerGender=${searchParams.customerGender}&partnerGender=${searchParams.partnerGender}&sort=${searchParams.sort}&state=${searchParams.state}&online=${searchParams.online}&verified=${searchParams.verified}&range=${searchParams.range}`;
 
   return (
     <div className="flex flex-col w-full space-y-10">
@@ -109,7 +115,10 @@ export default function PaginatedResults({
                 key={res.service.id}
                 partner={res.partner}
                 eager={index === 0}
-                link={`/service/${res.service.id}?backLink=${backLink}`}
+                link={CustomerRoutes.SERVICE.replace(
+                  "[serviceId]",
+                  res.service.id
+                ).replace("[partnerHandle]", res.partner.handle!!)}
               />
             ))
           : null}

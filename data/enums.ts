@@ -312,3 +312,31 @@ export enum Currency {
   CHF = "CHF",
   INR = "INR",
 }
+
+export enum CustomerRoutes {
+  //landing
+  LEARN = "/learn",
+  EXPLORE = "/explore",
+  COMPLIANCE = "/compliance",
+  COMPLIANCE_CHAT_GUIDELINES = "/compliance/chat-guidelines",
+  COMPLIANCE_DATA_RETENTION_POLICY = "/compliance/data-retention-policy",
+  COMPLIANCE_PRIVACY_POLICY = "/compliance/privacy-policy",
+  COMPLIANCE_TERMS_OF_SERVICE = "/compliance/terms-of-service",
+  COMPLIANCE_REFUND_POLICY = "/compliance/refund-policy",
+  COMPLIANCE_TERMS_AND_CONDITIONS_FOR_APPOINTMENTS = "/compliance/terms-and-conditions-for-appointments",
+  VERIFICATION = "/verification",
+  SEARCH_PARTNER = "/explore/partner",
+  //console
+  APPOINTMENTS = "/console/appointments",
+  MANAGE_APPOINTMENT = "/console/appointments/[appointmentId]",
+  VIEW_APP = "/console/appointments/[appointmentId]",
+  PROFILE = "/console/profile",
+  EDIT_ADDRESS = "/console/profile/address",
+  EDIT_PROFILE = "/console/profile/edit",
+  RATING = "/console/profile/rating",
+  VERIFY = "/console/profile/verify",
+  CALLBACKS = "/console/callbacks",
+  //pages
+  PARTNER = "/@[partnerHandle]",
+  SERVICE = "/@[partnerHandle]/service/[serviceId]",
+}

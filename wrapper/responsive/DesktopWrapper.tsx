@@ -27,52 +27,58 @@ export default function DesktopWrapper({
   const router = useRouter();
   return (
     <div
-      className={`hidden flex-1 lg:flex w-full flex-col items-start justify-start`}
+      className={`hidden flex-1 lg:flex w-full flex-col items-start justify-start pb-10`}
       id="desktop-wrapper"
     >
       {title && (
         <div
-          className={`flex flex-row items-center justify-start space-x-2 bg-white py-4 px-5 w-full sticky top-0 z-50`}
+          className={`flex flex-row items-center justify-start py-10 space-x-2 w-full`}
         >
-          <div className="flex flex-row items-center justify-start space-x-2">
-            {link && link.length > 0 && (
-              <motion.div className="w-full" whileTap={{ x: -5 }}>
-                <div
-                  onClick={() => {
-                    if (warnBeforeLeaving) {
-                      showYesNoPopup({
-                        title: "Are you sure?",
-                        message: "You will lose all unsaved changes",
-                      }).then((res) => {
-                        if (res) {
-                          router.push(link);
-                        } else {
-                          return;
-                        }
-                      });
-                    } else {
-                      router.push(link);
-                    }
-                  }}
-                >
-                  <BsArrowLeftShort className="text-4xl cursor-pointer self-start" />
-                </div>
-              </motion.div>
-            )}
-          </div>
-          <div className="flex flex-col items-start justify-start w-full space-y-1">
-            {title && <UnderlinedHeader title={title} align="items-start" />}
+          <div className="flex flex-col items-start justify-start w-full space-y-3">
+            <div className="flex flex-row items-center justify-start space-x-2 w-full">
+              {backLink && (
+                <motion.div whileTap={{ x: -5 }}>
+                  <div
+                    onClick={() => {
+                      if (warnBeforeLeaving) {
+                        showYesNoPopup({
+                          title: "Are you sure?",
+                          message: "You will lose all unsaved changes",
+                        }).then((res) => {
+                          if (res) {
+                            router.push(backLink);
+                          } else {
+                            return;
+                          }
+                        });
+                      } else {
+                        router.push(backLink);
+                      }
+                    }}
+                  >
+                    <BsArrowLeftShort className="text-4xl cursor-pointer self-start" />
+                  </div>
+                </motion.div>
+              )}
+              {title && backLink && (
+                <h1 className="text-2xl font-medium">{title}</h1>
+              )}
+              {title && !backLink && (
+                <UnderlinedHeader
+                  title={title}
+                  className="text-2xl font-medium"
+                />
+              )}
+            </div>
             {description ? (
-              <p className="text-sm lg:text-sm font-normal text-left text-textsubtle">
+              <p className="text-sm lg:text-lg font-normal text-left text-textsubtle">
                 {description}
               </p>
             ) : null}
           </div>
         </div>
       )}
-      <div className={`w-full ${padding ? "py-6 px-5" : ""} ${className}`}>
-        {children}
-      </div>
+      <div className={`w-full ${className}`}>{children}</div>
     </div>
   );
 }

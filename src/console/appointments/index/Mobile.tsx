@@ -149,6 +149,13 @@ export default function Mobile({
             ))}
           </AppointmentWrapper>
         ) : null}
+        {scheduledAppointments.length > 0 ? (
+          <AppointmentWrapper title="Scheduled">
+            {scheduledAppointments.map((appointment) => (
+              <Appointment appointment={appointment} key={appointment.id} />
+            ))}
+          </AppointmentWrapper>
+        ) : null}
         {completedAppointments.length > 0 ? (
           <AppointmentWrapper title="Completed">
             {completedAppointments.map((appointment) => (
@@ -159,13 +166,6 @@ export default function Mobile({
         {disputedAppointments.length > 0 ? (
           <AppointmentWrapper title="Confirmed">
             {disputedAppointments.map((appointment) => (
-              <Appointment appointment={appointment} key={appointment.id} />
-            ))}
-          </AppointmentWrapper>
-        ) : null}
-        {scheduledAppointments.length > 0 ? (
-          <AppointmentWrapper title="Requested">
-            {scheduledAppointments.map((appointment) => (
               <Appointment appointment={appointment} key={appointment.id} />
             ))}
           </AppointmentWrapper>

@@ -8,7 +8,7 @@ import Setting from "@components/Setting";
 import TextInput from "@components/input/TextInput";
 import { SheetClose } from "@components/ui/sheet";
 import { Skeleton } from "@components/ui/skeleton";
-import { Gender, PreferredGender, State } from "@data/enums";
+import { CustomerRoutes, Gender, PreferredGender, State } from "@data/enums";
 import { getStateFromLocation } from "@helper_functions/explore/detectLocation";
 import { State as StateType } from "country-state-city";
 import {
@@ -129,7 +129,7 @@ export default function ConsoleLayout({ children }: RootLayoutProps) {
   return (
     <div className="w-full flex flex-col justify-start items-center relative !hide-scrollbar">
       <div className="w-full flex flex-col justify-start items-center space-y-5  sticky top-[4.55rem] z-50">
-        {currentPath === "/explore" && (
+        {currentPath === CustomerRoutes.EXPLORE && (
           <LoadingWrapper
             pageState={pageNavState}
             loadingJSX={

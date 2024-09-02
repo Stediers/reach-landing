@@ -1,7 +1,9 @@
 import { LocationCardWithName } from "@components/LocationCard";
-import UnderlinedHeader from "@components/UnderlinedHeader";
+import UnderlinedHeader, {
+  SubUnderlinedHeader,
+} from "@components/UnderlinedHeader";
 import AddressInput, { AddressNameInput } from "@components/input/AddressInput";
-import { State } from "@data/enums";
+import { CustomerRoutes, State } from "@data/enums";
 import { Address, LocationAttributes } from "@data/types";
 import DesktopWrapper from "@wrapper/responsive/DesktopWrapper";
 import { updateAddress } from "@api_functions/address/update-address";
@@ -38,15 +40,19 @@ export default function Desktop({
 }) {
   return (
     <DesktopWrapper
-      className="grid grid-cols-2 justify-items-center items-start gap-10 w-full px-5"
+      className="grid grid-cols-2 justify-items-center items-start gap-10 w-full"
       title="Edit Address"
+      description="
+        Update the address details below and click save to update the address.
+      "
+      backLink={CustomerRoutes.EDIT_ADDRESS}
     >
       <div className="flex flex-col items-start justify-center space-y-10 w-full">
-        <UnderlinedHeader title="Old Location" />
+        <SubUnderlinedHeader title="Old Location" />
         {oldLocation ? <LocationCardWithName address={oldLocation} /> : null}
       </div>
       <div className="flex flex-col items-start justify-start space-y-10 w-full">
-        <UnderlinedHeader title="New Location" />
+        <SubUnderlinedHeader title="New Location" />
         <div className="flex flex-col items-center justify-center space-y-7 w-full">
           <AddressNameInput
             addressName={addressName}

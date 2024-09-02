@@ -10,7 +10,7 @@ import Setting from "@components/Setting";
 import MobileLogin from "@components/sign-in/MobileNumber";
 import { DialogClose } from "@components/ui/dialog";
 import { SheetClose } from "@components/ui/sheet";
-import { State } from "@data/enums";
+import { CustomerRoutes, State } from "@data/enums";
 import { consoleMenus, userMenus } from "@data/menu";
 import checkHere from "@helper_functions/check-path-nav";
 import { eraseCookie } from "@helper_functions/cookie";
@@ -26,7 +26,7 @@ import MobileLoginPopup from "@components/sign-in/MobileLoginPopup";
 import LoginPerks from "@components/LoginPerks";
 import { Skeleton } from "@components/ui/skeleton";
 
-export function NavBar() {
+export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
   const [pageState, setPageState] = useState<State>(State.LOADING);
   useEffect(() => {
@@ -84,7 +84,7 @@ export function NavBar() {
       });
     }
   }, [scrollHandler, setOnHome, currentPath, excludedPaths, onHome]);
-  return (
+  return showMobileNav ? (
     <div
       className={`sticky top-0 !z-50 ${
         onHome ? "!bg-[#F8F7F1]" : "bg-white  border-b shadow-sm"
@@ -94,6 +94,39 @@ export function NavBar() {
         className={`flex flex-row items-center
         ${!excludedPaths.includes(currentPath) ? "max-w-7xl" : "w-full"} 
         justify-center w-full lg:px-10 px-5 py-3 transition-all duration-300`}
+      >
+        <div className="flex grid-cols-2 w-full justify-between">
+          <Link className="flex flex-col w-fit shrink-0" href={"/"}>
+            <p className="text-xl font-medium">ReachGig</p>
+            <p className="text-sm text-gray-500 tracking-wide">
+              Be your own Boss.
+            </p>
+          </Link>
+
+          <DesktopProfile
+            path={currentPath}
+            pageState={pageState}
+            response={response}
+          />
+          <MobileProfile
+            pageState={pageState}
+            path={currentPath}
+            response={response}
+          />
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div
+      className={`hidden sticky top-0 !z-50 ${
+        onHome ? "!bg-[#F8F7F1]" : "bg-white  border-b shadow-sm"
+      } lg:flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
+      hidden
+    >
+      <div
+        className={`flex flex-row items-center
+    ${!excludedPaths.includes(currentPath) ? "max-w-7xl" : "w-full"} 
+    justify-center w-full lg:px-10 px-5 py-3 transition-all duration-300`}
       >
         <div className="flex grid-cols-2 w-full justify-between">
           <Link className="flex flex-col w-fit shrink-0" href={"/"}>
@@ -212,6 +245,7 @@ function MobileProfile({
   pageState: State;
 }) {
   const partnerURL = process.env.NEXT_PUBLIC_PARTNER_LINK;
+  const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
   return (
     <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
       {partnerURL && path === "/" && (
@@ -278,14 +312,69 @@ function MobileProfile({
               loadingTextClassName="text-md font-medium"
               loadingSVGClassName="w-6 h-6"
               errorJSX={
-                <div className="px-1 w-full flex flex-col space-y-3">
-                  <LineHeader title="Login" />
-                  <MobileLogin />
-                  <LoginPerks />
-                </div>
+                <CustomSheet
+                  title="Login"
+                  description="Login to avail all features"
+                  triggerJSX={
+                    <div className="grid grid-cols-1 gap-10 w-full">
+                      {userMenus.map((menu) => (
+                        <SheetClose asChild key={menu.path}>
+                          <div
+                            className="flex items-center w-full hover:text-primary space-x-2 justify-between bg-white rounded-md"
+                            key={menu.path}
+                            onClick={() => setSelectedRoute(menu.path)}
+                          >
+                            <div className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full">
+                              <div className="w-[10%]">{menu.icon}</div>
+                              <p className="text-base font-medium w-full">
+                                {menu.title}
+                              </p>
+                            </div>
+                            {checkHere({
+                              path: path || "",
+                              menuPath: menu.path,
+                            }) && (
+                              <Badge
+                                title="New"
+                                className="rounded-md text-xs bg-indigo-500"
+                              >
+                                Here
+                              </Badge>
+                            )}
+                          </div>
+                        </SheetClose>
+                      ))}
+                    </div>
+                  }
+                  footerJSX={
+                    <SheetClose asChild>
+                      <Button
+                        variant="link"
+                        className="w-full text-textsubtle"
+                        onClick={() => {
+                          console.log("Login");
+                        }}
+                        id="mobile-login"
+                      >
+                        Do this Later
+                      </Button>
+                    </SheetClose>
+                  }
+                >
+                  <MobileLogin
+                    onVerifyOTP={() => {
+                      const mobileLogin =
+                        document.getElementById("mobile-login");
+                      if (selectedRoute) {
+                        window.location.href = selectedRoute;
+                        if (mobileLogin) mobileLogin.click();
+                      }
+                    }}
+                  />
+                </CustomSheet>
               }
               loadingJSX={
-                <div className="px-1 w-full flex flex-col space-y-3">
+                <div className="grid grid-cols-1 gap-10 w-full">
                   <Skeleton className="w-full h-10" />
                   <Skeleton className="w-full h-10" />
                   <Skeleton className="w-full h-10" />
