@@ -112,7 +112,7 @@ function ElevateYourBrand({ response }: { response: FetchPartnerResponse[] }) {
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
         {response.map((partner) => (
-          <ProfileCard partner={partner} />
+          <ProfileCard partner={partner} key={partner.userId} />
         ))}
         {/* <ProfileCard
           description="I am a professional makeup artist with 3 years of experience. I have worked with clients from all over Tamil Nadu and have delivered high-quality makeup that has helped my clients look their best."
