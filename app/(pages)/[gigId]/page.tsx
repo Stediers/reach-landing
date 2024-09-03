@@ -223,8 +223,7 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
             <span className="text-primary">Introduction</span>
           </p>
           <h3 className="lg:text-2xl text-lg font-normal !leading-normal">
-            Client satisfaction is my top priority. Whether you need a
-            professional service or a casual chat, I am here to help you.
+            {response.partner.bio}
           </h3>
         </div>
         <div
