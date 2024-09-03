@@ -52,6 +52,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@components/ui/accordion";
+import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partners";
+import { FetchPartnerResponse } from "@data/types";
 
 export const metadata: Metadata = {
   description:
@@ -76,7 +78,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Main() {
+export default async function Main() {
+  const response = await fetchBestPartners();
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
@@ -85,7 +88,9 @@ export default function Main() {
       <div className="lg:hidden">
         <BecomePartner />
       </div>
-      <ElevateYourBrand />
+      {response && response.length > 0 && (
+        <ElevateYourBrand response={response} />
+      )}
       <UpYourCareer />
       <Pricing />
       <FrequentlyAskedQuestions />
@@ -94,7 +99,7 @@ export default function Main() {
   );
 }
 
-function ElevateYourBrand() {
+function ElevateYourBrand({ response }: { response: FetchPartnerResponse[] }) {
   return (
     <HeaderWrapper
       title={
@@ -106,7 +111,10 @@ function ElevateYourBrand() {
       className="items-center justify-center w-full flex flex-col space-y-16 bg-[#0F1117] text-white"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
-        <ProfileCard
+        {response.map((partner) => (
+          <ProfileCard partner={partner} />
+        ))}
+        {/* <ProfileCard
           description="I am a professional makeup artist with 3 years of experience. I have worked with clients from all over Tamil Nadu and have delivered high-quality makeup that has helped my clients look their best."
           images={[
             "https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg",
@@ -126,7 +134,7 @@ function ElevateYourBrand() {
           name="Latha Anand"
           profession="Beautician"
           key={1}
-        />
+        /> */}
       </div>
     </HeaderWrapper>
   );

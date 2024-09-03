@@ -557,6 +557,7 @@ export type FetchCustomerResponse = {
 };
 
 export type FetchPartnerResponse = {
+  bio: string;
   firstName: string;
   lastName: string;
   gender: Gender;
