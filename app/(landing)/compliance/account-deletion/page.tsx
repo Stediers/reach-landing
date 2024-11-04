@@ -43,7 +43,7 @@ export default function Main() {
           </span>
         </p>
         <p>
-          Step 2: Verify your identity by providing your mobile number and
+          Step 2: Verify your identity by providing your mobilenumber and
           clicking the link sent to your phone.
         </p>
         <p>Step 3: Confirm account deletion</p>
