@@ -158,6 +158,17 @@ export default function Footer() {
                     Cancellation and Refund Policy{" "}
                   </Link>
                 </li>
+
+                <li>
+                  <Link
+                    className="text-gray-200 transition hover:text-gray-200/75"
+                    href="/compliance/account-deletion"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Account Deletion
+                  </Link>
+                </li>
               </ul>
             </div>
 
