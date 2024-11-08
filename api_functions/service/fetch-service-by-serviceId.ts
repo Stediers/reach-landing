@@ -1,4 +1,4 @@
-import { SERVICE_API_URL } from "@data/api";
+import { CUSTOMER_API_URL, SERVICE_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import {
   ApiResult,
@@ -20,7 +20,7 @@ export async function fetchServiceByServiceId(
 ): Promise<FetchServiceByServiceIdResponse | null> {
   try {
     const response = await fetch(
-      `${SERVICE_API_URL}/fetch-service-by-serviceId?serviceId=${serviceId}`,
+      `${CUSTOMER_API_URL}/fetch-service-by-serviceId?serviceId=${serviceId}`,
       {
         next: {
           revalidate: 60,

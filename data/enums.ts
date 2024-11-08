@@ -337,6 +337,6 @@ export enum CustomerRoutes {
   VERIFY = "/console/profile/verify",
   CALLBACKS = "/console/callbacks",
   //pages
-  PARTNER = "/@[partnerHandle]",
-  SERVICE = "/@[partnerHandle]/service/[serviceId]",
+  PARTNER = "/[partnerHandle]",
+  SERVICE = "/[partnerHandle]/service/[serviceId]",
 }

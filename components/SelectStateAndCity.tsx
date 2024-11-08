@@ -157,8 +157,8 @@ export function SelectStateAndCityAPI({
         }}
         loading={searchState}
         value={search}
-        placeholder="Enter your city"
-        title="City"
+        placeholder="Ex. Chennai"
+        title="Which city are you in?"
       />
       {options.map((option) => (
         <Card

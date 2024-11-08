@@ -146,10 +146,10 @@ export default async function Page({
       <div className="flex lg:hidden w-full" hidden>
         <ImageCarousel
           images={service.imageUrls}
-          imageHeight="h-64 lg:h-[30rem]"
+          imageHeight="min-h-[30rem] lg:h-[30rem]"
           itemBasis="lg:basis-1/4"
           border={false}
-          className="lg:rounded-lg bg-black overflow-hidden"
+          className="lg:rounded-lg bg-white overflow-hidden"
         />
       </div>
       <div className="hidden lg:flex w-full">

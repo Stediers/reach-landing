@@ -1,4 +1,5 @@
 import { fetchAPIProtected } from "@api_functions/internal/base-functions";
+import { APPOINTMENT_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 
 export type RaiseDisputeRequest = {
@@ -14,7 +15,7 @@ export async function raiseDispute(
     url: "raise-dispute",
     body: request,
     snackbar: true,
-    baseUrl: process.env.NEXT_PUBLIC_UTILITY_API_URL,
+    baseUrl: APPOINTMENT_API_URL,
   });
 
   return res.status;

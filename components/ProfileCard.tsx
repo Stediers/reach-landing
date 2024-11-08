@@ -89,7 +89,7 @@ export default function CustomerProfileCard({
 }
 
 export function ProfileCard({ partner }: { partner: FetchPartnerResponse }) {
-  console.log("bio", partner.bio);
+  console.log("bio", partner.handle);
   return (
     <div className={`flex flex-col w-full items-start justify-start gap-y-5`}>
       <ImageComponent
@@ -102,7 +102,7 @@ export function ProfileCard({ partner }: { partner: FetchPartnerResponse }) {
         <div className="flex flex-col items-start justify-center space-y-2">
           <Badge>{partner.designation}</Badge>
           <Link
-            href={`/@${partner.handle}`}
+            href={`/${partner.handle}`}
             target="_blank"
             className="flex items-center justify-start space-x-5 hover:text-primary hover:underline"
           >

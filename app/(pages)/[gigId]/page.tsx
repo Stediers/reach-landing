@@ -44,7 +44,7 @@ export const generateMetadata = async ({
         absolute: `${response.partner.firstName} ${response.partner.lastName}`,
       },
       alternates: {
-        canonical: `https://reachgig.com/@${response.partner.handle}`,
+        canonical: `https://reachgig.com/${response.partner.handle}`,
       },
       description: `Profile of ${response.partner.firstName} ${response.partner.lastName} on ReachGig. I am ${response.partner.designation} currently working in ${response.partner.city}, ${response.partner.state}. `,
       openGraph: {
@@ -58,7 +58,7 @@ export const generateMetadata = async ({
             alt: `${response.partner.firstName} ${response.partner.lastName}`,
           },
         ],
-        url: `https://reachgig.com/@${response.partner.handle}`,
+        url: `https://reachgig.com/${response.partner.handle}`,
         type: "website",
       },
     };

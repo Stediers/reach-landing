@@ -58,7 +58,6 @@ export default function ConsoleLayout({ children }: RootLayoutProps) {
       <div className="max-w-7xl w-full flex flex-1 flex-col justify-start items-center space-y-5 lg:px-10">
         {children}
       </div>
-      <Footer />
     </div>
   );
 }

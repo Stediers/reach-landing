@@ -194,6 +194,16 @@ export default function Mobile({
         rating={appointment.partner.rating}
         gender={appointment.partner.gender}
         triggerJSX={<Setting title="Your Partner" subtitle="View Profile" />}
+        footerJSX={
+          <Button
+            variant="info"
+            onClick={() =>
+              window.open(`tel:${appointment.partner.mobileNumber}`)
+            }
+          >
+            Call Parner
+          </Button>
+        }
       />
       {appointment.status === AppointmentStatus.REFUNDED && <Refund />}
     </MobileWrapper>

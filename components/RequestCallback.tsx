@@ -422,7 +422,7 @@ export function RequestCallbackMobile({
         ) : (
           <CustomSheet
             title="Request a Callback"
-            description="Fill in the details below to request a callback from the partner."
+            description="This is how you can know if this partner is right for you. Request a callback and ask them anything."
             footerJSX={
               <div className="grid grid-cols-2 gap-5 w-full">
                 <SheetClose asChild>
@@ -513,8 +513,8 @@ export function RequestCallbackMobile({
               <TextArea
                 onChange={(value) => setRequest({ ...request, message: value })}
                 value={request.message}
-                placeholder="Enter your message here..."
-                title="Ask me anything"
+                title="Ask me anything..."
+                placeholder="Ex. Can we have a call at 5 PM?"
               />
             </div>
           </CustomSheet>
