@@ -150,6 +150,7 @@ export default async function Page({
           itemBasis="lg:basis-1/4"
           border={false}
           className="lg:rounded-lg bg-white overflow-hidden"
+          showImagePreview={true}
         />
       </div>
       <div className="hidden lg:flex w-full">

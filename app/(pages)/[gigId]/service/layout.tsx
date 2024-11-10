@@ -9,7 +9,9 @@ type RootLayoutProps = {
 export default function ConsoleLayout({ children }: RootLayoutProps) {
   return (
     <div className="flex flex-1 flex-col items-center md:space-y-0 space-y-0 bg-white !p-0 w-full">
-      <Navbar />
+      <div className="w-full">
+        <Navbar />
+      </div>
       {children}
       <Footer />
     </div>

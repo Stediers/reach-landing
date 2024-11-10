@@ -16,6 +16,7 @@ import { CustomSheet } from "./CustomSheet";
 import { SheetClose } from "./ui/sheet";
 import LinkButton from "./Button";
 import { Button } from "./ui/button";
+import AppDownload from "./DownloadApp";
 
 export default function PartnerPrompt() {
   const [isDiv1OnTop, setIsDiv1OnTop] = useState(false);
@@ -139,16 +140,9 @@ export default function PartnerPrompt() {
           }
           footerJSX={
             <div className="grid grid-cols-2 gap-5 w-full">
-              <LinkButton
-                text="Get started"
-                className="w-full bg-success text-white"
-                link="https://partner.reachgig.com/user/sign-in"
-                newTab
-                rel="noopener noreferrer nofollow"
+              <AppDownload
+                triggerJSX={<Button variant="success">Get started</Button>}
               />
-              <SheetClose asChild>
-                <Button variant="close">Close</Button>
-              </SheetClose>
             </div>
           }
         >

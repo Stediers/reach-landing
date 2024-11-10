@@ -71,7 +71,7 @@ export default function ImageCarousel({
         onMouseEnter={() => {
           showArrows && setShowButtons(true);
         }}
-        className="w-full"
+        className="w-full  bg-border"
         setApi={setApi}
         opts={{
           loop: true,
@@ -85,7 +85,9 @@ export default function ImageCarousel({
                 className={itemBasis}
                 id={index.toString()}
               >
-                <div className={`w-full ${imageHeight} relative`}>
+                <div
+                  className={`w-full ${imageHeight} relative bg-transparent`}
+                >
                   <Image
                     src={image}
                     alt="Image"

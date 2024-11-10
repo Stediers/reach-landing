@@ -25,6 +25,7 @@ import LoadingWrapper from "@wrapper/LoadingWrapper";
 import MobileLoginPopup from "@components/sign-in/MobileLoginPopup";
 import LoginPerks from "@components/LoginPerks";
 import { Skeleton } from "@components/ui/skeleton";
+import AppDownload from "@components/DownloadApp";
 
 export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
@@ -161,18 +162,16 @@ function DesktopProfile({
   response: FetchMyProfileResponse | null;
   pageState: State;
 }) {
-  const partnerURL = process.env.NEXT_PUBLIC_PARTNER_LINK;
   return (
     <div className="lg:flex hidden justify-end w-full" hidden>
       <div className="flex flex-row items-center justify-end w-full space-x-10">
-        {partnerURL && (
-          <Link
-            href={`${partnerURL}/user/sign-in`}
-            className="w-fit text-success font-medium hover:underline underline-offset-4"
-          >
-            Become a Partner
-          </Link>
-        )}
+        <AppDownload
+          triggerJSX={
+            <p className="text-success font-medium hover:underline underline-offset-4">
+              Become a Partner
+            </p>
+          }
+        />
         {consoleMenus.map((menu) => (
           <Link
             className={`h-10 w-fit gap-x-3 flex items-center ${
@@ -244,18 +243,16 @@ function MobileProfile({
   response: FetchMyProfileResponse | null;
   pageState: State;
 }) {
-  const partnerURL = process.env.NEXT_PUBLIC_PARTNER_LINK;
   const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
   return (
     <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
-      {partnerURL && path === "/" && (
-        <Link
-          href={`${partnerURL}/user/sign-in`}
-          className="w-full text-success font-medium"
-        >
-          Join Us
-        </Link>
-      )}
+      <AppDownload
+        triggerJSX={
+          <p className="text-success font-medium hover:underline underline-offset-4">
+            Join Us
+          </p>
+        }
+      />
       {response ? (
         <div className="w-fit">
           <Link

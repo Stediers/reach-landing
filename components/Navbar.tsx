@@ -27,6 +27,7 @@ import { learn, legal, menus } from "@data/menu";
 import UnderlinedHeader from "./UnderlinedHeader";
 import { usePathname } from "next/navigation";
 import { CustomerRoutes } from "@data/enums";
+import AppDownload from "./DownloadApp";
 
 export default function Navbar() {
   const path = usePathname();
@@ -104,17 +105,13 @@ function DesktopNav({ path }: { path: string }) {
           </NavigationMenuList>
         </NavigationMenu>
         <div className="grid grid-cols-2 gap-10">
-          <Button asChild variant="success">
-            <Link
-              href="https://partner.reachgig.com/user/sign-in"
-              className="w-full"
-              passHref
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-            >
-              Become a Partner
-            </Link>
-          </Button>
+          <AppDownload
+            triggerJSX={
+              <Button asChild variant="success">
+                Become a Partner
+              </Button>
+            }
+          />
           <Button variant="outline" size="default" className="text-base">
             <Link href={CustomerRoutes.EXPLORE}>Find a Partner</Link>
           </Button>
@@ -140,17 +137,13 @@ function MobileNav({ path }: { path: string }) {
         </div>
       </Link>
       <div className="xl:hidden flex items-center space-x-5 self-end">
-        <Button asChild variant="link">
-          <Link
-            href="https://partner.reachgig.com/user/sign-in"
-            className="w-full text-success"
-            passHref
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            Join Us
-          </Link>
-        </Button>
+        <AppDownload
+          triggerJSX={
+            <Button asChild variant="link">
+              Join Us
+            </Button>
+          }
+        />
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" className="w-fit">

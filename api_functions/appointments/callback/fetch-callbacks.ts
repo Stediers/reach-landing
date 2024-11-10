@@ -7,7 +7,6 @@ export async function fetchCallbacks(): Promise<Callback[] | null> {
   const res = await fetchAPIProtected<Callback[]>({
     method: RequestMethod.POST,
     url: "fetch-callbacks",
-    snackbar: true,
     baseUrl: APPOINTMENT_API_URL,
     body: {},
   });

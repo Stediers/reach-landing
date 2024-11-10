@@ -54,6 +54,7 @@ import {
 } from "@components/ui/accordion";
 import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partners";
 import { FetchPartnerResponse } from "@data/types";
+import AppDownload from "@components/DownloadApp";
 
 export const metadata: Metadata = {
   description:
@@ -397,7 +398,6 @@ function YourOwnProfile() {
 }
 
 function Hero() {
-  const partnerUrl = process.env.NEXT_PUBLIC_PARTNER_LINK || "";
   return (
     <div
       className="w-full flex flex-col items-center justify-center space-y-5 relative lg:pt-10 xl:min-h-[80vh] lg:min-h-[50vh] bg-[#F8F7F1] pt-10"
@@ -451,11 +451,14 @@ function Hero() {
 
           <div className="max-w-md w-full grid lg:grid-cols-2 gap-5 pt-3">
             {/* <SearchInput /> */}
-            <Link href={`${partnerUrl}/user/sign-in`} passHref>
-              <Button variant="success" className="!w-full">
-                Start for Free
-              </Button>
-            </Link>
+
+            <AppDownload
+              triggerJSX={
+                <Button variant="success" className="!w-full">
+                  Start for Free
+                </Button>
+              }
+            />
             <Link href={CustomerRoutes.EXPLORE} passHref>
               <Button variant="close" className="!w-full bg-white">
                 Looking for a freelancer?
@@ -635,17 +638,13 @@ function PricingCard({
           ))}
         </ul>
       </div>
-      <Link
-        href="https://partner.reachgig.com"
-        className="w-full"
-        passHref
-        target="_blank"
-        rel="noopener noreferrer nofollow"
-      >
-        <Button variant="success" className="!w-full">
-          Get Started with {title}
-        </Button>
-      </Link>
+      <AppDownload
+        triggerJSX={
+          <Button variant="success" className="!w-full">
+            Get Started with {title}
+          </Button>
+        }
+      />
     </Card>
   );
 }
