@@ -328,6 +328,7 @@ export enum CustomerRoutes {
   SEARCH_PARTNER = "/explore/partner",
   //console
   APPOINTMENTS = "/console/appointments",
+  REQUESTS = "/console/appointments/requests",
   MANAGE_APPOINTMENT = "/console/appointments/[appointmentId]",
   VIEW_APP = "/console/appointments/[appointmentId]",
   PROFILE = "/console/profile",
@@ -339,4 +340,11 @@ export enum CustomerRoutes {
   //pages
   PARTNER = "/[partnerHandle]",
   SERVICE = "/[partnerHandle]/service/[serviceId]",
+}
+
+export enum AppointmentRequestStatus {
+  PENDING = "PENDING",
+  ACCEPTED = "ACCEPTED",
+  REJECTED = "REJECTED",
+  EXPIRED = "EXPIRED",
 }

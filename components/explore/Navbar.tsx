@@ -14,7 +14,7 @@ import { CustomerRoutes, State } from "@data/enums";
 import { consoleMenus, userMenus } from "@data/menu";
 import checkHere from "@helper_functions/check-path-nav";
 import { eraseCookie } from "@helper_functions/cookie";
-import { LogOutIcon } from "lucide-react";
+import { Bell, LogOutIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -256,6 +256,23 @@ function MobileProfile({
           Join Us
         </Link>
       )}
+      {response ? (
+        <div className="w-fit">
+          <Link
+            href="/console/appointments/requests"
+            className="flex items-center w-full space-x-2 relative"
+          >
+            <Button variant="outline" size="icon">
+              <Bell className="h-[1.3rem] w-[1.3rem]" />
+            </Button>
+            {response.requests.length > 0 && (
+              <Badge title="New" className="absolute -top-2 -right-2">
+                {response.requests.length}
+              </Badge>
+            )}
+          </Link>
+        </div>
+      ) : null}
       <div className="w-fit">
         <CustomSheet
           title="Where to?"

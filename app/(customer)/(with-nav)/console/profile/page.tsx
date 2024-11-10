@@ -25,7 +25,7 @@ export default function Page() {
       mobileJSX={response && <Mobile response={response} />}
       desktopJSX={response && <Desktop response={response} />}
       title="Verification"
-      state={State.SUCCESS}
+      state={pageState}
     />
   );
 }

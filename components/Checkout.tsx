@@ -135,6 +135,7 @@ export default function Checkout({
       <Button
         // variant="success"
         id="rzp-button1"
+        variant="success"
         disabled={disabled && !rzp1}
         onClick={async (e) => {
           const closeCheckoutDrawer = document.getElementById("close-checkout");

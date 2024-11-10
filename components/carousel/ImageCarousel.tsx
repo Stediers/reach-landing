@@ -85,11 +85,11 @@ export default function ImageCarousel({
                 className={itemBasis}
                 id={index.toString()}
               >
-                <div className={`w-full ${imageHeight} relative rounded-lg`}>
+                <div className={`w-full ${imageHeight} relative`}>
                   <Image
                     src={image}
                     alt="Image"
-                    className={`rounded-md object-contain ${
+                    className={`rounded-md overflow-hidden object-contain  ${
                       border ? "border" : ""
                     }`}
                     fill

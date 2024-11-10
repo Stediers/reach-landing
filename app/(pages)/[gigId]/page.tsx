@@ -231,7 +231,7 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
           hidden
         >
           <LargeSetting
-            title="Languages"
+            title="I Speak In"
             description={response.partner.languages
               .map(
                 (language) =>
@@ -272,7 +272,7 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
         </div>
         <div className="flex flex-col items-start justify-start space-y-5 w-full lg:hidden">
           <SmallSetting
-            title="Languages"
+            title="I Speak In"
             description={response.partner.languages
               .map(
                 (language) =>

@@ -143,7 +143,7 @@ export default async function Page({
 
   return (
     <div className="w-full flex flex-col items-start justify-center max-w-[85rem] lg:px-10 lg:py-10 relative">
-      <div className="flex lg:hidden w-full" hidden>
+      <div className="flex lg:hidden w-full  px-5 pt-5" hidden>
         <ImageCarousel
           images={service.imageUrls}
           imageHeight="min-h-[30rem] lg:h-[30rem]"

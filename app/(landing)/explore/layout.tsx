@@ -506,7 +506,7 @@ function SearchServiceMobile({
     <div className="w-full max-w-lg lg:hidden">
       <CustomSheet
         title="What are you looking for?"
-        description="Eg. Plumber, Electrician, etc."
+        description="Eg. Bridal Makeup, Photography, etc."
         triggerJSX={
           <Button variant="outline">
             {search.length > 0 ? search : "Search"}

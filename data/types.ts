@@ -1,6 +1,7 @@
 import { type } from "os";
 import {
   AddressType,
+  AppointmentRequestStatus,
   AppointmentStatus,
   BookingStatus,
   CallbackStatus,
@@ -554,6 +555,25 @@ export type FetchCustomerResponse = {
   mobileNumber: string;
   imageUrl: string | null;
   rating: number | null;
+};
+
+export type Contact = {
+  id: string;
+  nickName: string;
+  mobileNumber: string;
+  description: string;
+  user: FetchCustomerResponse | null;
+};
+
+export type FetchAppointmentRequestResponse = {
+  contact: Contact;
+  service: FetchServiceResponse;
+  status: AppointmentRequestStatus;
+  price: Price;
+  id: string;
+  slot: Slot;
+  appointmentId: string | null;
+  partner: FetchPartnerResponse;
 };
 
 export type FetchPartnerResponse = {
