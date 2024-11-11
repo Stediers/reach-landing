@@ -64,7 +64,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const [buttonState, setButtonState] = React.useState<State>(
       props.buttonstate || State.SUCCESS
     );
-    console.log("buttonState", buttonState);
     React.useEffect(() => {
       if (props.buttonstate) setButtonState(props.buttonstate);
     }, [props.buttonstate]);

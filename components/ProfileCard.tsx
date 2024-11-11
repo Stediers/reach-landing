@@ -89,7 +89,6 @@ export default function CustomerProfileCard({
 }
 
 export function ProfileCard({ partner }: { partner: FetchPartnerResponse }) {
-  console.log("bio", partner.handle);
   return (
     <div className={`flex flex-col w-full items-start justify-start gap-y-5`}>
       <ImageComponent
@@ -106,7 +105,7 @@ export function ProfileCard({ partner }: { partner: FetchPartnerResponse }) {
             target="_blank"
             className="flex items-center justify-start space-x-5 hover:text-primary hover:underline"
           >
-            <h2 className="lg:text-4xl text-3xl font-medium line-clamp-1 first-letter:capitalize">
+            <h2 className="lg:text-4xl text-3xl font-medium line-clamp-2 first-letter:capitalize">
               <span className="first-letter:capitalize">
                 {partner.firstName.charAt(0).toUpperCase() +
                   partner.firstName.slice(1)}
@@ -120,7 +119,7 @@ export function ProfileCard({ partner }: { partner: FetchPartnerResponse }) {
           </Link>
         </div>
       </div>
-      <p className="text-lg text-left lg:!leading-10 leading-8">
+      <p className="text-lg text-left lg:!leading-10 leading-8 line-clamp-3">
         {partner.bio}
       </p>
     </div>

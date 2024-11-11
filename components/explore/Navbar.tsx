@@ -31,6 +31,35 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
   const [pageState, setPageState] = useState<State>(State.LOADING);
   useEffect(() => {
+    const scrollToHashElement = () => {
+      const hash = window.location.hash;
+      console.log("hash", hash);
+      if (!hash) return;
+
+      const elementId = hash.slice(1); // Remove the # symbol
+      const element = document.getElementById(elementId);
+
+      console.log("element", element);
+
+      if (element) {
+        // Add a small delay to ensure the element is rendered
+        setTimeout(() => {
+          const headerOffset = 100; // Adjust this value based on your header height
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }, 100);
+      }
+    };
+
+    scrollToHashElement();
+  }, []);
+  useEffect(() => {
     setPageState(State.LOADING);
     fetchMyProfile(false).then((response) => {
       if (response) {

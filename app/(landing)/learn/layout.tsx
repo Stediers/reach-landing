@@ -15,36 +15,37 @@ type RootLayoutProps = {
 
 export const metadata: Metadata = {
   title: {
-    default: "ReachGig",
-    template: "%s | ReachGig",
+    default: "ReachGig Blog",
+    template: "%s | ReachGig Blog",
   },
   alternates: {
-    canonical: "https://reachgig.com",
+    canonical: "https://reachgig.com/learn",
   },
   keywords:
-    "freelance, finance, freelance tips, freelance finance, freelance taxes, freelance financial management, freelance financial tips, freelance financial advice",
+    "freelance blog, gig economy tips, freelance advice, freelance learning, freelance education, freelance resources, gig worker tips, freelance career guidance",
   description:
-    "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
+    "Explore expert insights, practical tips, and comprehensive guides for freelancers and gig workers. Learn how to thrive in the gig economy with ReachGig's curated content.",
   openGraph: {
-    title: "ReachGig",
+    title: "ReachGig Blog",
     description:
-      "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
-    url: "https://reachgig.com",
+      "Explore expert insights, practical tips, and comprehensive guides for freelancers and gig workers. Learn how to thrive in the gig economy with ReachGig's curated content.",
+    url: "https://reachgig.com/learn",
     type: "website",
     images: [
       {
         url: "/public/512.png",
         width: 800,
         height: 600,
-        alt: "ReachGig",
+        alt: "ReachGig Blog",
       },
     ],
     locale: "en_US",
   },
   metadataBase: new URL("https://reachgig.com"),
-  applicationName: "ReachGig",
+  applicationName: "ReachGig Blog",
   robots: "index, follow",
 };
+// ... existing code ...
 
 export default function BlogLayout({ children }: RootLayoutProps) {
   return (

@@ -17,29 +17,38 @@ import RawCarousel from "@components/carousel/RawCarousel";
 import { CarouselItem } from "@components/ui/carousel";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Blogs",
-    template: "%s | ReachGig",
-  },
+  title: "Learn from Industry Experts",
   description:
-    "Blog posts on ReachGig. Get the latest news, updates and tips on ReachGig!",
+    "Discover expert insights, tips, and guides for freelancers and gig workers. Learn about financial management, legal compliance, work-life balance, and success strategies in the gig economy.",
   alternates: {
     canonical: "https://reachgig.com/learn",
   },
   openGraph: {
-    title: "Blogs on ReachGig",
-    description: "Get the latest news, updates and tips on ReachGig!",
+    title: "ReachGig Learning Hub - Expert Guides for Gig Workers",
+    description:
+      "Expert insights, tips and comprehensive guides to help you succeed in the gig economy. Learn about finances, legal compliance, work-life balance and more.",
     url: "https://reachgig.com/learn",
     type: "website",
     images: [
       {
-        url: "",
-        width: 800,
-        height: 600,
-        alt: "Booking",
+        url: "https://reachgig.com/images/og-learn.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ReachGig Learning Hub",
       },
     ],
     locale: "en_US",
+    siteName: "ReachGig",
+  },
+  keywords:
+    "freelance tips, gig economy, freelancer guides, work-life balance, financial management, legal compliance, freelance success, gig work india",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 

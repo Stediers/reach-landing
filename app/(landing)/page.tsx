@@ -1,5 +1,5 @@
 import { CustomerRoutes, ServiceCategory, State } from "@data/enums";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Metadata } from "next";
 import { BiRupee } from "react-icons/bi";
@@ -57,26 +57,77 @@ import { FetchPartnerResponse } from "@data/types";
 import AppDownload from "@components/DownloadApp";
 
 export const metadata: Metadata = {
+  title: {
+    default:
+      "ReachGig - Find & Hire Trusted Local Service Professionals in Tamil Nadu",
+    template: "%s - ReachGig",
+  },
   description:
-    "A secure way to interact with service providers. Find the best services and partners for your needs. Empowering the Gig Economy.",
-  keywords:
-    "Makeup Artists, Photographers, Mehandi Artists, Wedding Planners, Service Providers, Gig Economy, Service Categories, Tamil Nadu, India",
+    "Connect with verified local service providers for makeup, photography, wedding planning & more. Secure payments, verified professionals & trusted services across Tamil Nadu. Get started for free!",
+  keywords: [
+    "Local Service Providers",
+    "Verified Professionals",
+    "Makeup Artists Tamil Nadu",
+    "Wedding Photographers",
+    "Mehandi Artists",
+    "Wedding Planners",
+    "Secure Service Platform",
+    "Trusted Professionals",
+    "Service Provider Directory",
+    "Book Local Services",
+    "Professional Services Tamil Nadu",
+    "Verified Service Providers",
+  ].join(", "),
   openGraph: {
-    title: "ReachGig",
+    title: "ReachGig - Trusted Local Service Professionals in Tamil Nadu",
     description:
-      "A secure way to interact with service providers. Find the best services and partners for your needs. Empowering the Gig Economy.",
+      "Find and hire verified local service providers. Secure payments, identity verification & trusted professionals for makeup, photography, wedding planning & more.",
     url: "https://reachgig.com",
     type: "website",
     images: [
       {
         url: "https://reachgig.com/images/home1.svg",
-        width: 800,
-        height: 600,
-        alt: "ReachGig",
+        width: 1200,
+        height: 630,
+        alt: "ReachGig - Find Local Service Professionals",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
+    siteName: "ReachGig",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "ReachGig - Find Trusted Local Service Professionals",
+    description:
+      "Connect with verified local service providers. Secure payments & trusted professionals across Tamil Nadu.",
+    images: ["https://reachgig.com/images/home1.svg"],
+  },
+  // other: {
+  //   structured_data: JSON.stringify({
+  //     "@context": "https://schema.org",
+  //     "@type": "Organization",
+  //     name: "ReachGig",
+  //     url: "https://reachgig.com",
+  //     logo: "https://reachgig.com/images/logo.webp",
+  //     description:
+  //       "A trusted platform connecting verified service providers with customers in Tamil Nadu.",
+  //     address: {
+  //       "@type": "PostalAddress",
+  //       addressRegion: "Tamil Nadu",
+  //       addressCountry: "IN",
+  //     },
+  //     sameAs: [
+  //       "https://facebook.com/reachgig",
+  //       "https://twitter.com/reachgig",
+  //       "https://instagram.com/reachgig",
+  //     ],
+  //     aggregateRating: {
+  //       "@type": "AggregateRating",
+  //       ratingValue: "4.8",
+  //       reviewCount: "1000",
+  //     },
+  //   }),
+  // },
 };
 
 export default async function Main() {
@@ -111,31 +162,13 @@ function ElevateYourBrand({ response }: { response: FetchPartnerResponse[] }) {
       }
       className="items-center justify-center w-full flex flex-col space-y-16 bg-[#0F1117] text-white"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
+      <div
+        className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full"
+        id="inspiration"
+      >
         {response.map((partner) => (
           <ProfileCard partner={partner} key={partner.userId} />
         ))}
-        {/* <ProfileCard
-          description="I am a professional makeup artist with 3 years of experience. I have worked with clients from all over Tamil Nadu and have delivered high-quality makeup that has helped my clients look their best."
-          images={[
-            "https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg",
-          ]}
-          link="/@Rithanyeahmakeover"
-          name="Rithanya Makeover"
-          profession="Makeup Artist"
-          key={1}
-          className="shrink-0"
-        />
-        <ProfileCard
-          description="I have been a professional beautician for over a decade and have worked with clients from all over Tamil Nadu. I have helped my clients look their best for various occasions."
-          images={[
-            "https://user4762.s3.ap-south-1.amazonaws.com/1000470803.jpeg",
-          ]}
-          link="/@lathaa"
-          name="Latha Anand"
-          profession="Beautician"
-          key={1}
-        /> */}
       </div>
     </HeaderWrapper>
   );
@@ -492,11 +525,12 @@ function Hero() {
             <CarouselItem key={index}>
               <ImageComponent
                 src={`/images/landing-profiles/${index}.webp`}
-                alt={`Landing Image ${index}`}
+                alt={`Landing Profile ${index}`}
                 className="w-full h-full aspect-square object-cover"
                 popup={false}
                 border={false}
                 objectFit="contain"
+                priority={index === 1}
               />
             </CarouselItem>
           ))}
