@@ -377,7 +377,6 @@ function MobileProfile({
                 </div>
               </div>
             )}
-            <LineHeader title="Where to?" />
             {response && response.requests.length > 0 && (
               <SheetClose asChild>
                 <Link
