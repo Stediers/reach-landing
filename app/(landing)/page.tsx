@@ -4,11 +4,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { BiRupee } from "react-icons/bi";
 import { Button } from "@components/ui/button";
-import Autoplay from "embla-carousel-autoplay";
 import {
-  ArrowDownCircle,
-  ArrowRightCircle,
-  BookIcon,
   Check,
   FeatherIcon,
   Flower,
@@ -29,22 +25,10 @@ import { BsLightningCharge, BsShieldCheck } from "react-icons/bs";
 import Link from "next/link";
 import FeatureCard from "@components/FeatureCard";
 import { ProfileCard } from "@components/ProfileCard";
-import SwitchText from "@components/landing/SwitchText";
 import { NumberCircle } from "@components/landing/NumberCircle";
-import SearchInput from "@components/landing/Search";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@components/ui/carousel";
-import { CardContent } from "@components/ui/card";
-import { AspectRatio } from "@components/ui/aspect-ratio";
-import { serviceTypeDescriptions } from "@data/static";
+import { CarouselItem } from "@components/ui/carousel";
 import RawCarousel from "@components/carousel/RawCarousel";
-import TextInput from "@components/input/TextInput";
 import { Badge } from "@components/ui/badge";
 import {
   Accordion,

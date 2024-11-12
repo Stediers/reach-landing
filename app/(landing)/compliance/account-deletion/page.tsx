@@ -36,7 +36,7 @@ export default function Main() {
           <span
             className={link}
             onClick={() => {
-              openInNewTab("mailto:connect.reachgig@gmail.com");
+              openInNewTab("mailto:reachgig.connect@gmail.com");
             }}
           >
             here

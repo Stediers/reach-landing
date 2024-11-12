@@ -337,6 +337,7 @@ export enum CustomerRoutes {
   RATING = "/console/profile/rating",
   VERIFY = "/console/profile/verify",
   CALLBACKS = "/console/callbacks",
+  APPOINTMENT_REQUESTS = "/console/appointments/requests",
   //pages
   PARTNER = "/[partnerHandle]",
   SERVICE = "/[partnerHandle]/service/[serviceId]",

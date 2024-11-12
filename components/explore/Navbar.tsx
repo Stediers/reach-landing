@@ -284,7 +284,7 @@ function MobileProfile({
       />
       {response ? (
         <div className="w-fit">
-          <Link
+          {/* <Link
             href="/console/appointments/requests"
             className="flex items-center w-full space-x-2 relative"
           >
@@ -296,7 +296,7 @@ function MobileProfile({
                 {response.requests.length}
               </Badge>
             )}
-          </Link>
+          </Link> */}
         </div>
       ) : null}
       <div className="w-fit">
@@ -304,9 +304,28 @@ function MobileProfile({
           title="Where to?"
           description="Navigate to your profile"
           triggerJSX={
-            <Button variant="outline" size="icon">
-              <AiOutlineMenu className="h-[1.2rem] w-[1.2rem]" />
-            </Button>
+            response ? (
+              <div className="relative">
+                <Avatar className="rounded-md !h-10 !w-10 border hover:cursor-pointer">
+                  <AvatarImage
+                    src={
+                      response.user.imageUrl || "https://github.com/shadcn.png"
+                    }
+                    alt="Shad Mirza"
+                    className="object-cover rounded-md"
+                  />
+                </Avatar>
+                {response.requests.length > 0 && (
+                  <p className="absolute -top-3 -right-3 z-10 bg-red-500 text-white rounded-full text-xs px-2 aspect-square flex items-center justify-center">
+                    {response.requests.length}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <Button variant="outline" size="icon">
+                <AiOutlineMenu className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            )
           }
           footerJSX={
             <div className="flex flex-col items-start justify-start w-full space-y-5">
@@ -327,6 +346,56 @@ function MobileProfile({
           }
         >
           <div className="flex flex-col items-start justify-start w-full space-y-10">
+            {response && (
+              <div className="flex flex-col items-center justify-start w-full space-y-5">
+                <div className="flex flex-col items-center justify-center w-full space-y-3">
+                  <Avatar className="rounded-md !h-40 !w-40 border hover:cursor-pointer">
+                    <AvatarImage
+                      src={
+                        response.user.imageUrl ||
+                        "https://github.com/shadcn.png"
+                      }
+                      alt="Shad Mirza"
+                      className="object-cover rounded-md"
+                    />
+                  </Avatar>
+                  <div className="flex flex-col items-center justify-center w-full space-y-2">
+                    <p className="text-xl font-medium w-full text-center">
+                      {response.user.name}
+                    </p>
+                    <p className="text-sm text-gray-500 w-full text-center">
+                      {response.user.mobileNumber}
+                    </p>
+                  </div>
+                  <Link
+                    href={`/console/profile/edit`}
+                    passHref
+                    className="w-full"
+                  >
+                    <Button variant="dark">Edit</Button>
+                  </Link>
+                </div>
+              </div>
+            )}
+            <LineHeader title="Where to?" />
+            {response && response.requests.length > 0 && (
+              <SheetClose asChild>
+                <Link
+                  className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full"
+                  href={CustomerRoutes.APPOINTMENT_REQUESTS}
+                >
+                  <div className="w-[10%]">
+                    <Bell className="h-[1.3rem] w-[1.3rem]" />
+                  </div>
+                  <p className="text-base font-medium w-full">
+                    Appointment Requests
+                  </p>
+                  <Badge title="New" className="rounded-md text-xs bg-primary">
+                    {response.requests.length}
+                  </Badge>
+                </Link>
+              </SheetClose>
+            )}
             {consoleMenus.map((menu) => (
               <SheetClose asChild key={menu.path}>
                 <Link

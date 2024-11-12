@@ -17,8 +17,7 @@ export default function AppDownload({
 
   const handleDownload = () => {
     const iosAppUrl = "https://apps.apple.com/in/app/reachgig/id6737802010";
-    const androidAppUrl =
-      "https://play.google.com/store/apps/details?id=YOUR_APP_ID";
+    const androidAppUrl = "https://partner.reachgig.com";
     const deepLink = "your-app-scheme://"; // Your app's custom URL scheme
 
     if (isIOS) {
@@ -29,10 +28,7 @@ export default function AppDownload({
       }, 1000);
     } else {
       //new tab
-      showSnackBar({
-        message: "We do not support Android Devices yet.",
-        state: State.ERROR,
-      });
+      window.open(androidAppUrl, "_blank");
     }
   };
 
