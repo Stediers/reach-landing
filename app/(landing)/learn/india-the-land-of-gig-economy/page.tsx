@@ -11,9 +11,34 @@ import {
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "India: The Land of Gig Economy",
+  title: "India: The Land of Gig Economy | Understanding the Future of Work",
   description:
-    "The gig economy has been a hot topic in recent years, with many individuals turning to freelance work and short-term contracts rather than traditional corporate employment. India, with its booming start-up culture and vast pool of talent, has become a hub for the gig economy. However, behind the allure of flexible work and independence, there are also hidden realities and challenges that come with this new way of working. In this article, we will delve into the secrets behind India's gig economy, exploring the corporate landscape, the impact on workers, and the future trends shaping this evolving sector.",
+    "Explore India's booming gig economy: benefits, challenges, government policies, and future trends. Learn how technology and regulations are shaping flexible work in India.",
+  keywords:
+    "gig economy India, freelance work India, digital economy, flexible work, Indian startups, gig workers rights, freelance platforms India",
+  openGraph: {
+    title: "India: The Land of Gig Economy | Understanding the Future of Work",
+    description:
+      "Explore India's booming gig economy: benefits, challenges, government policies, and future trends. Learn how technology and regulations are shaping flexible work in India.",
+    type: "article",
+    publishedTime: "2024-03-02T00:00:00.000Z",
+    authors: ["Harshavardhan Jothi Kumar"],
+    images: [
+      {
+        url: "/images/india-the-land-of-gig-economy.svg",
+        width: 1200,
+        height: 630,
+        alt: "India Gig Economy Illustration",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "India: The Land of Gig Economy | Understanding the Future of Work",
+    description:
+      "Explore India's booming gig economy: benefits, challenges, government policies, and future trends. Learn how technology and regulations are shaping flexible work in India.",
+    images: ["/images/india-the-land-of-gig-economy.svg"],
+  },
 };
 
 export default function Page() {

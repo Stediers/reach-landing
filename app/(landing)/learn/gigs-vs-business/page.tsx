@@ -11,9 +11,35 @@ import {
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Exploring the World of Work: Owning a Business vs Doing Gigs",
+  title:
+    "Gigs vs Business Ownership: Which Path Is Right For You? | Complete Guide",
   description:
-    "In today's dynamic economy, individuals have more options than ever when it comes to earning a living. Two popular paths that many people consider are owning a business and doing gigs. Each option offers its own set of advantages and disadvantages, and understanding the differences can help you make an informed decision about your career path. #gigworker #business #businessman #businessowner #giglife",
+    "Compare the pros and cons of gig work versus business ownership. Learn about flexibility, income potential, risks, and benefits to make an informed career choice. Expert insights on modern work options.",
+  keywords:
+    "gig work, business ownership, freelancing, entrepreneurship, career choices, work flexibility, business risks, gig economy, self-employment, career guide",
+  openGraph: {
+    title: "Gigs vs Business Ownership: Which Path Is Right For You?",
+    description:
+      "Compare the pros and cons of gig work versus business ownership. Expert insights on flexibility, income potential, risks, and benefits.",
+    type: "article",
+    publishedTime: "2024-04-16T00:00:00.000Z",
+    authors: ["Deepakindresh NG"],
+    images: [
+      {
+        url: "/images/gigvb.svg",
+        width: 1200,
+        height: 630,
+        alt: "Gigs vs Business Ownership comparison",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gigs vs Business Ownership: Which Path Is Right For You?",
+    description:
+      "Compare the pros and cons of gig work versus business ownership. Expert insights on modern work options.",
+    images: ["/images/gigvb.svg"],
+  },
 };
 
 export default function Page() {

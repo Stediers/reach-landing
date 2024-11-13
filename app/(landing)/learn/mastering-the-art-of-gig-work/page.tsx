@@ -15,6 +15,30 @@ export const metadata: Metadata = {
     "Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions",
   description:
     "In today's gig economy, where flexibility and independence are highly valued, mastering the art of client transactions is key to success as a gig worker. Whether you're a makeup artist, gym trainer, or any other type of gig worker, adhering to best practices can elevate your professionalism and enhance client satisfaction.",
+  keywords:
+    "gig work, freelancing, client transactions, professional etiquette, pricing strategy, client communication, service provider tips, gig economy",
+  openGraph: {
+    title:
+      "Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions",
+    description:
+      "Learn essential tips for successful client transactions in the gig economy. Perfect for makeup artists, gym trainers, and all service providers.",
+    images: [
+      {
+        url: "/images/why-reachgig-is-your-ultimate-platform.png",
+        width: 1200,
+        height: 630,
+        alt: "Mastering the Art of Gig Work",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions",
+    description:
+      "Learn essential tips for successful client transactions in the gig economy. Perfect for makeup artists, gym trainers, and all service providers.",
+    images: ["/images/why-reachgig-is-your-ultimate-platform.png"],
+  },
 };
 
 export default function Page() {

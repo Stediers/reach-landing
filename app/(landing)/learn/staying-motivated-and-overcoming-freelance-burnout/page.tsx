@@ -9,9 +9,36 @@ import {
 } from "@wrapper/BlogWrapper";
 
 export const metadata: Metadata = {
-  title: "Staying Motivated and Overcoming Freelance Burnout",
+  title: "Staying Motivated and Overcoming Freelance Burnout | Freelance Guide",
   description:
     "Conquer freelance burnout and reignite your passion! Discover actionable tips to overcome stress, prevent overwhelm, and find work-life balance as a freelancer. Learn how to set boundaries, prioritize self-care, and create a sustainable freelance career.",
+  keywords:
+    "freelance burnout, freelancer motivation, work-life balance, freelance stress management, self-care for freelancers, freelance tips, preventing burnout, freelance career advice",
+  openGraph: {
+    title:
+      "Staying Motivated and Overcoming Freelance Burnout | Freelance Guide",
+    description:
+      "Learn proven strategies to overcome freelance burnout, maintain motivation, and create a sustainable freelance career with practical tips for work-life balance.",
+    type: "article",
+    publishedTime: "2024-05-07T00:00:00.000Z",
+    authors: ["Deepakindresh Narayana Gandhi"],
+    images: [
+      {
+        url: "/images/tired.svg",
+        width: 1200,
+        height: 630,
+        alt: "Freelance Burnout and Motivation Guide",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Staying Motivated and Overcoming Freelance Burnout | Freelance Guide",
+    description:
+      "Learn proven strategies to overcome freelance burnout, maintain motivation, and create a sustainable freelance career with practical tips for work-life balance.",
+    images: ["/images/tired.svg"],
+  },
 };
 
 export default function Page() {

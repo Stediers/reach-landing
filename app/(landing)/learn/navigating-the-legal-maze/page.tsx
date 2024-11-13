@@ -11,9 +11,28 @@ import {
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Navigating the Legal Maze: A Guide for Freelancers",
+  title:
+    "Freelancer Legal Guide: Contracts, Taxes & Legal Protection | ReachGig",
   description:
-    "In today's rapidly evolving landscape of work, the rise of freelancing and gig work has reshaped the traditional notions of employment. No longer confined to a nine-to-five office job, individuals are embracing the freedom and flexibility offered by freelancing, turning their passions and skills into lucrative careers.",
+    "Learn essential legal aspects of freelancing including contracts, taxes, IP rights, dispute resolution & insurance. Comprehensive guide for freelancers to protect their business.",
+  keywords:
+    "freelancer legal guide, freelance contracts, freelancer taxes, intellectual property rights, dispute resolution, freelance insurance, legal protection for freelancers",
+  openGraph: {
+    title:
+      "Freelancer Legal Guide: Contracts, Taxes & Legal Protection | ReachGig",
+    description:
+      "Learn essential legal aspects of freelancing including contracts, taxes, IP rights, dispute resolution & insurance. Comprehensive guide for freelancers to protect their business.",
+    type: "article",
+    publishedTime: "2024-03-03T00:00:00.000Z",
+    authors: ["Gauthum J"],
+    tags: ["Legal Guide", "Freelancing Tips", "Business Information"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Freelancer Legal Guide: Contracts, Taxes & Legal Protection",
+    description:
+      "Learn essential legal aspects of freelancing including contracts, taxes, IP rights, dispute resolution & insurance. Comprehensive guide for freelancers to protect their business.",
+  },
 };
 
 export default function Page() {

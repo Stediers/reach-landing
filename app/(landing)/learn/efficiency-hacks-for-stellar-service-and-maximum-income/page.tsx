@@ -8,11 +8,28 @@ import {
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Efficiency Hacks for Stellar Service & Maximum Income",
+  title:
+    "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",
   description:
-    "Struggling to juggle freelance deadlines? Unleash your inner efficiency machine! This guide unlocks essential hacks for stellar client service, project management, workflow automation, and boosted income.  Maximize your freelance potential today! ",
+    "Master proven freelance efficiency hacks to boost your income and deliver exceptional service. Learn project management, automation, and time-saving strategies for freelance success in 2024.",
   keywords:
-    "freelance, efficiency, freelance tips, freelance hacks, freelance income, freelance service, freelance workflow, freelance project management",
+    "freelance efficiency, time management tips, freelance productivity, project management tools, freelance automation, increase freelance income, freelance business optimization, freelance workflow",
+  openGraph: {
+    title:
+      "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",
+    description:
+      "Master proven freelance efficiency hacks to boost your income and deliver exceptional service. Learn project management, automation, and time-saving strategies for freelance success in 2024.",
+    type: "article",
+    authors: ["Gauthum J"],
+    publishedTime: "2024-03-27T00:00:00.000Z",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",
+    description:
+      "Master proven freelance efficiency hacks to boost your income and deliver exceptional service. Learn project management, automation, and time-saving strategies for freelance success in 2024.",
+  },
 };
 
 export default function Page() {

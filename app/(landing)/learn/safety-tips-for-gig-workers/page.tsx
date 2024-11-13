@@ -11,9 +11,32 @@ import {
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "10 Safety Tips for Gig Workers in the Modern Economy",
+  title: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
   description:
-    "Master Gig Worker Safety in 2024!  Empower yourself with 10 essential tips for delivery drivers, rideshare providers, & freelance professionals. Navigate the gig economy with confidence. #gigworker #safetytips #giglife",
+    "Learn crucial safety tips for gig workers: location sharing, cybersecurity, personal protection & legal rights. Expert guide for delivery drivers, rideshare & freelancers. Stay safe while maximizing earnings.",
+  keywords:
+    "gig worker safety, freelancer security, delivery driver safety tips, rideshare safety, personal protection, cybersecurity for gig workers, legal rights gig economy",
+  openGraph: {
+    title: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
+    description:
+      "Learn crucial safety tips for gig workers: location sharing, cybersecurity, personal protection & legal rights. Expert guide for delivery drivers, rideshare & freelancers.",
+    type: "article",
+    images: [
+      {
+        url: "/images/secure.svg",
+        width: 1200,
+        height: 630,
+        alt: "Safety Tips for Gig Workers",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
+    description:
+      "Learn crucial safety tips for gig workers: location sharing, cybersecurity, personal protection & legal rights. Expert guide for delivery drivers, rideshare & freelancers.",
+    images: ["/images/secure.svg"],
+  },
 };
 
 export default function Page() {

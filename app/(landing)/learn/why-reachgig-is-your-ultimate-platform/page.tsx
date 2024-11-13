@@ -10,9 +10,35 @@ import {
 } from "@wrapper/BlogWrapper";
 
 export const metadata: Metadata = {
-  title: "Why ReachGig Is Your Ultimate Platform",
+  title:
+    "Why ReachGig Is Your Ultimate Platform | The Best Gig Economy Platform",
   description:
-    "Welcome to ReachGig, your gateway to a world of opportunities tailored specifically for Gig professionals like yourself. You might be wondering, 'What sets ReachGig apart from the sea of corporate websites out there?' Allow us to shed some light on that.",
+    "Discover why ReachGig is the ultimate platform for gig professionals. Get free promotions, valuable insights, and connect with clients. Join our thriving gig economy community today!",
+  keywords:
+    "ReachGig, gig economy, freelance platform, gig professionals, freelance opportunities, gig work",
+  openGraph: {
+    title:
+      "Why ReachGig Is Your Ultimate Platform | The Best Gig Economy Platform",
+    description:
+      "Discover why ReachGig is the ultimate platform for gig professionals. Get free promotions, valuable insights, and connect with clients. Join our thriving gig economy community today!",
+    type: "article",
+    images: [
+      {
+        url: "/images/why-reachgig-is-your-ultimate-platform.webp",
+        width: 1200,
+        height: 630,
+        alt: "ReachGig Platform Overview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Why ReachGig Is Your Ultimate Platform | The Best Gig Economy Platform",
+    description:
+      "Discover why ReachGig is the ultimate platform for gig professionals. Get free promotions, valuable insights, and connect with clients.",
+    images: ["/images/why-reachgig-is-your-ultimate-platform.webp"],
+  },
 };
 
 export default function Page() {
