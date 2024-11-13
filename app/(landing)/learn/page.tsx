@@ -1,17 +1,10 @@
-import { BlogCategory, State } from "@data/enums";
+import { BlogCategory } from "@data/enums";
 import React from "react";
-import Image from "next/image";
 import { Metadata } from "next";
-import { BiRupee } from "react-icons/bi";
 import { Button } from "@components/ui/button";
-import { BookAudioIcon, BookIcon } from "lucide-react";
 import ImageComponent from "@components/ImageComponent";
-import ComponentWrapper from "@wrapper/ComponentWrapper";
-import Hero from "@components/Hero";
-import { Badge } from "@components/ui/badge";
 import { BlogTag } from "@wrapper/BlogWrapper";
 import Link from "next/link";
-import VideoCarousel from "@components/VideoCarousel";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
 import RawCarousel from "@components/carousel/RawCarousel";
 import { CarouselItem } from "@components/ui/carousel";
