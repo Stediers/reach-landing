@@ -85,26 +85,26 @@ export async function generateMetadata(
       openGraph: {
         title: `Find and Book ${searchTerm} ${serviceType}${state} | ReachGig`,
         description: `Compare prices and reviews for ${searchTerm} ${serviceType}${state}. Book safe appointments with trusted and verified vendors. 100% satisfaction guaranteed.`,
-        images: [
-          {
-            url:
-              explore.data.length > 0
-                ? explore.data[0].service.imageUrls[0]
-                : "",
-            width: 800,
-            height: 600,
-            alt: `Best ${searchTerm} ${serviceType}${state}`,
-          },
-          {
-            url:
-              explore.data.length > 0
-                ? explore.data[0].service.imageUrls[1]
-                : "",
-            width: 1800,
-            height: 1600,
-            alt: searchParams.search,
-          },
-        ],
+        // images: [
+        //   {
+        //     url:
+        //       explore.data.length > 0
+        //         ? explore.data[0].service.imageUrls[0]
+        //         : "",
+        //     width: 800,
+        //     height: 600,
+        //     alt: `Best ${searchTerm} ${serviceType}${state}`,
+        //   },
+        //   {
+        //     url:
+        //       explore.data.length > 0
+        //         ? explore.data[0].service.imageUrls[1]
+        //         : "",
+        //     width: 1800,
+        //     height: 1600,
+        //     alt: searchParams.search,
+        //   },
+        // ],
         type: "website",
         url: `https://reachgig.com/explore?search=${searchParams.search}&state=${searchParams.state}&verified=${searchParams.verified}&online=${searchParams.online}&sort=${searchParams.sort}&range=${searchParams.range}&customerGender=${searchParams.customerGender}&partnerGender=${searchParams.partnerGender}`,
       },
@@ -129,26 +129,26 @@ export async function generateMetadata(
       openGraph: {
         title: `Top-Rated ${serviceType}${state} | ReachGig`,
         description: `Find and book the best ${serviceType.toLowerCase()}${state}. Compare prices, read verified reviews, and book safe appointments with trusted service providers.`,
-        images: [
-          {
-            url:
-              explore.data.length > 0
-                ? explore.data[0].service.imageUrls[0]
-                : "",
-            width: 800,
-            height: 600,
-            alt: searchParams.search,
-          },
-          {
-            url:
-              explore.data.length > 0
-                ? explore.data[0].service.imageUrls[1]
-                : "",
-            width: 1800,
-            height: 1600,
-            alt: searchParams.search,
-          },
-        ],
+        // images: [
+        //   {
+        //     url:
+        //       explore.data.length > 0
+        //         ? explore.data[0].service.imageUrls[0]
+        //         : "",
+        //     width: 800,
+        //     height: 600,
+        //     alt: searchParams.search,
+        //   },
+        //   {
+        //     url:
+        //       explore.data.length > 0
+        //         ? explore.data[0].service.imageUrls[1]
+        //         : "",
+        //     width: 1800,
+        //     height: 1600,
+        //     alt: searchParams.search,
+        //   },
+        // ],
         type: "website",
         url: `https://reachgig.com/explore?state=${searchParams.state}&verified=${searchParams.verified}&online=${searchParams.online}&sort=${searchParams.sort}&range=${searchParams.range}&customerGender=${searchParams.customerGender}&partnerGender=${searchParams.partnerGender}`,
       },
