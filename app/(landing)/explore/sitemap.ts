@@ -5,30 +5,18 @@ const URL = "https://reachgig.com/explore";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const country = Country.getCountryByCode("IN");
-  let stateNames = [];
-  const popularSearches = ["Makeup", "Photography", "Catering", "Decoration"];
-  if (country) {
-    stateNames = StateType.getStatesOfCountry(country.isoCode).map((state) =>
-      state.name.replaceAll(/[^a-zA-Z0-9]/g, "")
-    );
-  } else {
-    return [];
-  }
+  if (!country) return [];
 
-  return stateNames.map((state) => ({
-    url: `${URL}?state=${state.toLowerCase().replaceAll(/[^a-zA-Z0-9]/g, "")}`,
+  const stateNames = StateType.getStatesOfCountry(country.isoCode).map(
+    (state) => state.name.toLowerCase().replace(/[^a-zA-Z0-9]/g, "-")
+  );
+
+  const baseUrls = stateNames.map((state) => ({
+    url: `${URL}?state=${state}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: "daily",
+    changeFrequency: "daily" as const,
     priority: 0.7,
   }));
 
-  //create an array with every possible combination of state and popular search
-  // return stateNames.flatMap((state) =>
-  //   popularSearches.map((search) => ({
-  //     url: `${URL}?state=${state}&search=${search}`,
-  //     lastModified: new Date().toISOString(),
-  //     changeFrequency: "daily",
-  //     priority: 0.7,
-  //   }))
-  // );
+  return [...baseUrls];
 }

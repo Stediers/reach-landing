@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { AiFillHome, AiFillVideoCamera } from "react-icons/ai";
 import { MdLocationPin } from "react-icons/md";
 import { ImageResponse } from "next/og";
-import { loadGoogleFont } from "@helper_functions/font";
+import { loadGoogleFont } from "@/helper_functions/font";
 
 // Route segment config
 export const runtime = "edge";
@@ -23,24 +23,11 @@ export default async function Image({
 }: {
   params: { serviceId: string };
 }) {
-  // const fontDataLogo = await loadGoogleFont("Poppins", "ReachGig");
-  // const fontMediumResponse = await fetch(
-  //   new URL("/public/poppins/Poppins-Medium.ttf", import.meta.url)
-  // );
-
-  // if (!fontMediumResponse.ok) {
-  //   throw new Error("failed to load font data");
-  // }
-
-  // const fontMedium = await fontMediumResponse.arrayBuffer();
-
-  // const fontSemiBold = await fetch(
-  //   new URL("/public/poppins/Poppins-SemiBold.ttf", import.meta.url)
-  // );
-
-  // if (!fontSemiBold.ok) {
-  //   throw new Error("failed to load font data");
-  // }
+  // Load the font
+  const poppins = await loadGoogleFont({
+    family: "Poppins",
+    weight: [400, 600, 700, 900],
+  });
 
   const serviceId = params.serviceId;
   const response = await fetchServiceByServiceId(serviceId);
@@ -78,20 +65,19 @@ export default async function Image({
     (
       <div
         style={{
+          background: "linear-gradient(to bottom right, #ffffff, #f8f8f8)",
+          width: "1200px",
+          height: "630px",
+          display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          padding: "3rem",
-          gap: "5rem",
-          display: "flex",
-          background: "white",
-          width: "1200px",
-          height: "630px",
+          padding: "48px",
           fontFamily: "Poppins",
-          overflow: "hidden",
         }}
       >
-        <div tw="flex flex-row items-start justify-between w-full">
+        {/* Header */}
+        <div tw="flex w-full justify-between items-center">
           <div tw={`flex flex-col items-center justify-center`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -125,20 +111,39 @@ export default async function Image({
             </div>
           </div>
         </div>
-        <div tw="flex flex-col items-start justify-start w-3/4">
-          <p tw={`text-6xl`} style={{ fontFamily: "Poppins", fontWeight: 900 }}>
+
+        {/* Main Content */}
+        <div tw="flex flex-col gap-4 w-4/5">
+          <p
+            tw="text-6xl leading-tight"
+            style={{
+              fontWeight: 900,
+              background: "linear-gradient(90deg, #f40e1e 0%, #ff4d4d 100%)",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
             {serviceTitle}
           </p>
-          <p tw="text-4xl font-semibold">{gigName}</p>
+          <p tw="text-4xl text-gray-700 font-semibold">{gigName}</p>
         </div>
-        <div tw="flex flex-row items-center justify-between w-full">
-          <p tw="text-lg font-medium">reachgig.com</p>
+
+        {/* Footer */}
+        <div tw="flex w-full justify-between items-center">
+          <p tw="text-xl font-medium text-gray-600">reachgig.com</p>
+          <p tw="text-lg text-gray-500">Professional Services Marketplace</p>
         </div>
       </div>
     ),
-    // ImageResponse options
     {
       ...size,
+      fonts: [
+        {
+          name: "Poppins",
+          data: poppins,
+          style: "normal",
+        },
+      ],
     }
   );
 }

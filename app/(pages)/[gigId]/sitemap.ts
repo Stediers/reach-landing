@@ -7,17 +7,17 @@ const URL = "https://reachgig.com";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const data = await fetchGigHandles();
-    //filter out duplicates
-    const gigHandles = data
-      ? data.filter((item, index) => data.indexOf(item) === index)
-      : [];
+    // Use Set to efficiently remove duplicates
+    const gigHandles = data ? Array.from(new Set(data)) : [];
+
     return gigHandles.map((handle) => ({
-      url: CustomerRoutes.PARTNER.replace("[partnerHandle]", handle),
+      url: `${URL}${CustomerRoutes.PARTNER.replace("[partnerHandle]", handle)}`,
       lastModified: new Date().toISOString(),
-      changeFrequency: "daily",
+      changeFrequency: "daily" as const,
+      priority: 0.8,
     }));
   } catch (error) {
-    console.log(error);
+    console.error(error); // Better error logging
     return [];
   }
 }

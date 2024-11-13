@@ -66,15 +66,25 @@ export async function generateMetadata(
   console.log("Explore: ", explore);
 
   if (searchParams.search) {
+    const searchTerm = searchParams.search.toLowerCase();
+    const state = searchParams.state ? ` in ${searchParams.state}` : "";
+    const serviceType =
+      searchParams.online === "true" ? "online services" : "local services";
+
     return {
-      title: `${explore.data.length} results found in ${searchParams.search}`,
-      description: `Find the best ${searchParams.search} in your area. Compare prices, reviews, and book safe appointments with trusted vendors.`,
+      title: `${explore.data.length} ${searchTerm} ${serviceType}${state} | ReachGig`,
+      description: `Compare and book trusted ${searchTerm} ${serviceType}${state}. ✓ Verified providers ✓ Real reviews ✓ Secure booking ✓ Best prices guaranteed.`,
+      keywords: `${searchTerm}, ${serviceType}, book ${searchTerm}, ${searchTerm} near me, trusted ${searchTerm}, professional ${searchTerm}${state}, ${
+        explore.data.length > 0
+          ? explore.data
+              .slice(0, 3)
+              .map((item) => item.service.title)
+              .join(", ")
+          : ""
+      }`,
       openGraph: {
-        title: `${explore.data.length} results found in ${searchParams.search}`,
-        description: `Find the best ${
-          searchParams.search.length > 0 ? searchParams.search : "services"
-        }
-          in your area. Compare prices, reviews, and book safe appointments with trusted vendors.`,
+        title: `Find and Book ${searchTerm} ${serviceType}${state} | ReachGig`,
+        description: `Compare prices and reviews for ${searchTerm} ${serviceType}${state}. Book safe appointments with trusted and verified vendors. 100% satisfaction guaranteed.`,
         images: [
           {
             url:
@@ -83,7 +93,7 @@ export async function generateMetadata(
                 : "",
             width: 800,
             height: 600,
-            alt: searchParams.search,
+            alt: `Best ${searchTerm} ${serviceType}${state}`,
           },
           {
             url:
@@ -100,12 +110,25 @@ export async function generateMetadata(
       },
     };
   } else {
+    const state = searchParams.state ? ` in ${searchParams.state}` : "";
+    const serviceType =
+      searchParams.online === "true" ? "Online Services" : "Local Services";
+
     return {
-      title: `${explore.data.length} results found just for you`,
-      description: `Find the best services in your area. Compare prices, reviews, and book safe appointments with trusted vendors.`,
+      title: `Book Trusted ${serviceType} service partners in ${state} | ReachGig`,
+      description: `Discover and book professional ${serviceType.toLowerCase()}${state}. ✓ Verified providers ✓ Real customer reviews ✓ Secure booking ✓ Competitive prices ✓ Safe appointments.`,
+      keywords: `book services${state}, professional services, trusted providers, local services, online services, service marketplace${
+        explore.data.length > 0
+          ? ", " +
+            explore.data
+              .slice(0, 3)
+              .map((item) => item.service.title)
+              .join(", ")
+          : ""
+      }`,
       openGraph: {
-        title: `${explore.data.length} results found just for you`,
-        description: `Find the best services in your area. Compare prices, reviews, and book safe appointments with trusted vendors.`,
+        title: `Top-Rated ${serviceType}${state} | ReachGig`,
+        description: `Find and book the best ${serviceType.toLowerCase()}${state}. Compare prices, read verified reviews, and book safe appointments with trusted service providers.`,
         images: [
           {
             url:

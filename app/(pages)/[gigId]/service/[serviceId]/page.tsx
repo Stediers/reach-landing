@@ -60,54 +60,82 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const serviceId = params.serviceId;
   const response = await fetchServiceByServiceId(serviceId);
+
   if (!response) {
     return {
       title: "Service Not Found",
       description: "The service you are looking for does not exist",
     };
-  } else {
-    return {
-      title: {
-        absolute: `${response!!.service.title} | ReachGig`,
-      },
-      alternates: {
-        canonical: `https://reachgig.com/${CustomerRoutes.SERVICE.replace(
-          "[serviceId]",
-          serviceId
-        ).replace("[partnerHandle]", response!!.gig.handle!!)}`,
-      },
-      openGraph: {
-        title: `${response!!.service.title} | ReachGig`,
-        description: `${response!!.service.whatsIncluded.join(", ")}`,
-        images: [
-          {
-            url:
-              response.service.imageUrls.length > 0
-                ? response.service.imageUrls[0]
-                : "",
-            width: 800,
-            height: 600,
-            alt: response.service.title,
-          },
-          {
-            url:
-              response.service.imageUrls.length > 1
-                ? response.service.imageUrls[1]
-                : "",
-            width: 1800,
-            height: 1600,
-            alt: response.service.title,
-          },
-        ],
-        type: "website",
-        url: `https://reachgig.com/${CustomerRoutes.SERVICE.replace(
-          "[serviceId]",
-          serviceId
-        ).replace("[partnerHandle]", response!!.gig.handle!!)}`,
-      },
-      description: `${response!!.service.whatsIncluded.join(", ")}`,
-    };
   }
+
+  const { service, gig } = response;
+  const location = `${gig.city}, ${gig.state}, India`;
+  const serviceTitle = `${service.title} in ${location} | ReachGig`;
+  const description = `Book ${service.title} by ${gig.firstName} ${
+    gig.lastName
+  } in ${location}. ${service.whatsIncluded.join(
+    ". "
+  )}. Best prices, verified professional with ${
+    service.experience
+  } experience.`;
+
+  return {
+    title: {
+      absolute: serviceTitle,
+    },
+    alternates: {
+      canonical: `https://reachgig.com/${CustomerRoutes.SERVICE.replace(
+        "[serviceId]",
+        serviceId
+      ).replace("[partnerHandle]", gig.handle!!)}`,
+    },
+    openGraph: {
+      title: serviceTitle,
+      description,
+      images: [
+        {
+          url: service.imageUrls[0] || "",
+          width: 800,
+          height: 600,
+          alt: `${service.title} in ${location}`,
+        },
+        {
+          url: service.imageUrls[1] || "",
+          width: 1800,
+          height: 1600,
+          alt: `${service.title} service by ${gig.firstName} ${gig.lastName}`,
+        },
+      ],
+      locale: "en_IN",
+      type: "website",
+      url: `https://reachgig.com/${CustomerRoutes.SERVICE.replace(
+        "[serviceId]",
+        serviceId
+      ).replace("[partnerHandle]", gig.handle!!)}`,
+      siteName: "ReachGig",
+    },
+    description,
+    keywords: [
+      service.title,
+      gig.city,
+      gig.state,
+      "India",
+      service.serviceType,
+      gig.firstName + " " + gig.lastName,
+      ...service.whatsIncluded,
+      "service provider",
+      "book online",
+      "professional service",
+    ].join(", "),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
+  };
 };
 
 export default async function Page({

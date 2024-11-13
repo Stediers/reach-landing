@@ -33,36 +33,92 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const gigId = params.gigId;
   const response = await fetchPartnerByPartnerId(gigId);
+
   if (!response) {
     return {
-      title: "Profile",
-      description: "Profile",
-    };
-  } else {
-    return {
-      title: {
-        absolute: `${response.partner.firstName} ${response.partner.lastName}`,
-      },
-      alternates: {
-        canonical: `https://reachgig.com/${response.partner.handle}`,
-      },
-      description: `Profile of ${response.partner.firstName} ${response.partner.lastName} on ReachGig. I am ${response.partner.designation} currently working in ${response.partner.city}, ${response.partner.state}. `,
-      openGraph: {
-        title: `${response.partner.firstName} ${response.partner.lastName}`,
-        description: `Profile of ${response.partner.firstName} ${response.partner.lastName} on ReachGig. I am ${response.partner.designation} currently working in ${response.partner.city}, ${response.partner.state}. `,
-        images: [
-          {
-            url: response.partner.imageUrl,
-            width: 800,
-            height: 600,
-            alt: `${response.partner.firstName} ${response.partner.lastName}`,
-          },
-        ],
-        url: `https://reachgig.com/${response.partner.handle}`,
-        type: "website",
-      },
+      title: "Professional Profile | ReachGig",
+      description:
+        "Find skilled professionals and service providers on ReachGig",
+      robots: "noindex, nofollow",
     };
   }
+
+  const name = `${response.partner.firstName} ${response.partner.lastName}`;
+  const location = `${response.partner.city}, ${response.partner.state}`;
+  const servicesList = response.services
+    .slice(0, 3)
+    .map((s) => s.title)
+    .join(", ");
+
+  const description = `Hire ${name}, an experienced ${
+    response.partner.designation
+  } based in ${location}. Professional offering ${
+    response.partner.serviceIds?.length || 0
+  } premium services including ${servicesList}. ✓ Verified Professional ${
+    response.partner.rating
+      ? `✓ ${response.partner.rating.toFixed(1)} Rating`
+      : ""
+  } ✓ Book now on ReachGig for quality service.`;
+
+  return {
+    title: {
+      absolute: `${name} - Professional ${response.partner.designation} in ${location} | ReachGig`,
+    },
+    description,
+    alternates: {
+      canonical: `https://reachgig.com/${response.partner.handle}`,
+    },
+    openGraph: {
+      title: `${name} - Top Rated ${response.partner.designation} in ${location}`,
+      description,
+      images: [
+        {
+          url: response.partner.imageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${name} - Professional ${response.partner.designation} in ${location}`,
+        },
+      ],
+      url: `https://reachgig.com/${response.partner.handle}`,
+      type: "profile",
+      siteName: "ReachGig",
+      locale: "en_US",
+      firstName: response.partner.firstName,
+      lastName: response.partner.lastName,
+      gender: response.partner.gender,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${name} - Expert ${response.partner.designation} | ReachGig`,
+      description,
+      images: [response.partner.imageUrl],
+      creator: "@ReachGig",
+    },
+    keywords: [
+      name.toLowerCase(),
+      response.partner.designation.toLowerCase(),
+      response.partner.city.toLowerCase(),
+      response.partner.state.toLowerCase(),
+      ...response.services.map((s) => s.title.toLowerCase()),
+      `hire ${response.partner.designation.toLowerCase()}`,
+      `${response.partner.designation.toLowerCase()} near me`,
+      `${response.partner.designation.toLowerCase()} in ${location.toLowerCase()}`,
+      "professional services",
+      "book services online",
+      "reachgig",
+    ],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-snippet": -1,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+      },
+    },
+  };
 };
 
 export default async function Page({

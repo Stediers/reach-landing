@@ -29,28 +29,61 @@ export default async function Image({ params }: { params: { gigId: string } }) {
           height: "100%",
           width: "100%",
           display: "flex",
-          backgroundColor: "white",
           flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          fontWeight: 600,
-          color: "white",
+          position: "relative",
+          backgroundColor: "#000", // Dark background for fallback
         }}
       >
         <img
           src={response.partner.imageUrl}
           alt={response.partner.firstName + " " + response.partner.lastName}
           style={{
-            width: "1200px",
-            height: "630px",
+            width: "100%",
+            height: "100%",
             objectFit: "cover",
             objectPosition: "center",
           }}
         />
+        {/* Overlay gradient for better text visibility */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "50%",
+            background: "linear-gradient(transparent, rgba(0,0,0,0.7))",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: 48,
+            left: 48,
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+          }}
+        >
+          <div style={{ fontSize: 48, fontWeight: 700, color: "white" }}>
+            {response.partner.firstName} {response.partner.lastName}
+          </div>
+        </div>
       </div>
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: "Inter",
+          data: await fetch(
+            new URL(
+              "https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+            )
+          ).then((res) => res.arrayBuffer()),
+          weight: 700,
+        },
+      ],
     }
   );
 }
