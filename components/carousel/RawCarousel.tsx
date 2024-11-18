@@ -12,10 +12,15 @@ export default function RawCarousel({
   children,
   showArrows = true,
   autoPlay = false,
+  onClick = () => {
+    //add hash to url
+    window.location.href = "/#inspiration";
+  },
 }: {
   children: React.ReactNode;
   showArrows?: boolean;
   autoPlay?: boolean;
+  onClick?: () => void;
 }) {
   const [api, setApi] = useState<CarouselApi>();
 
@@ -38,7 +43,10 @@ export default function RawCarousel({
   }, [api]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center space-y-2">
+    <div
+      className="w-full flex flex-col items-center justify-center space-y-2"
+      onClick={onClick}
+    >
       <Carousel
         className="w-full"
         setApi={setApi}

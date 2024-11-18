@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { showSnackBar } from "./notifications/Snackbar";
-import { State } from "@data/enums";
 
 export default function AppDownload({
   triggerJSX,
@@ -17,7 +15,8 @@ export default function AppDownload({
 
   const handleDownload = () => {
     const iosAppUrl = "https://apps.apple.com/in/app/reachgig/id6737802010";
-    const androidAppUrl = "https://partner.reachgig.com";
+    const androidAppUrl =
+      "https://play.google.com/store/apps/details?id=com.reachtech.partnerapp&pcampaignid=web_share";
     const deepLink = "your-app-scheme://"; // Your app's custom URL scheme
 
     if (isIOS) {

@@ -423,46 +423,16 @@ function Hero() {
       <div className="flex flex-col lg:flex-row lg:items-center items-start justify-center lg:justify-center pb-10 space-y-5 w-full px-5 lg:px-10 max-w-7xl lg:space-x-20">
         <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full z-10">
           <div className="flex flex-col items-start justify-center space-y-3 lg:space-y-5 w-full max-w-lg">
-            {/* <div
-              className="rounded-3xl bg-white w-full border overflow-hidden flex items-center justify-start lg:hidden mb-5"
-              hidden
-            >
-              <ImageComponent
-                src="https://user4762.s3.ap-south-1.amazonaws.com/gig/6382422787/0991A4DC-5FE3-4368-A080-463735EE8B21.jpeg.jpeg"
-                alt="ReachGig Logo"
-                className="w-24 h-24 lg:w-32 lg:h-32"
-                popup={false}
-                border={false}
-                objectFit="contain"
-              />
-              <div className="flex flex-col items-start justify-center space-y-2 p-5">
-                <p className="text-lg lg:text-2xl font-semibold lg:font-bold">
-                  Rithanya Makeover
-                </p>
-                <p className="text-base lg:text-lg font-normal lg:font-medium">
-                  Makeup Artist
-                </p>
-              </div>
-            </div> */}
-
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-medium lg:font-semibold !leading-tight xl:!leading-[4.7rem]">
-              <span className="font-medium">Stand out</span>
+              <span className="font-medium">Show off</span>
               <br />
-              <span className="font-semibold">and become</span>
+              <span className="font-semibold">who you are</span>
               <br />
-              {/* <SwitchText
-              textArray={Object.keys(serviceTypeDescriptions).map(
-                //@ts-ignore
-                (key) => serviceTypeDescriptions[key].title
-              )}
-            /> */}
-              {/* <SwitchText
-                textArray={["Trustable", "Reliable", "Professional"]}
-              /> */}
-              <span className="font-semibold text-primary">Trustable</span>
+              <span className="font-semibold text-primary">professionally</span>
             </h1>
             <h2 className="text-lg xl:text-xl font-normal xl:leading-relaxed">
-              Advocating safe and secure interactions with service providers.
+              Advocating for safe and secure interactions with service
+              providers.
             </h2>
           </div>
 
@@ -483,27 +453,6 @@ function Hero() {
             </Link>
           </div>
         </div>
-        {/* <ImageComponent
-          src="/images/home1.png"
-          alt="Landing Image 1"
-          className="w-full h-full aspect-square lg:h-[30rem] lg:w-1/2 object-cover"
-          popup={false}
-          border={false}
-          objectFit="contain"
-        /> */}
-        {/* <ImageCarousel
-          bgCol="bg-black"
-          images={[
-            "/images/landing-profiles/1.png",
-            "/images/landing-profiles/2.png",
-            "/images/landing-profiles/3.png",
-            "/images/landing-profiles/4.png",
-          ]}
-          autoPlay={true}
-          imageHeight="h-[15rem] xl:h-[25rem]"
-          border={false}
-          showArrows={false}
-        /> */}
         <RawCarousel autoPlay={true} showArrows={false}>
           {[1, 2, 3, 4].map((index) => (
             <CarouselItem key={index}>
