@@ -10,7 +10,10 @@ export default function AppDownload({
 
   useEffect(() => {
     // Detect iOS device
-    setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent));
+    //get the userAgent from the browser
+    console.log("navigator.userAgent", navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+    setIsIOS(isIOS);
   }, []);
 
   const handleDownload = () => {

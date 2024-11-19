@@ -6,7 +6,9 @@ export default function DownloadApp() {
   const router = useRouter();
   useEffect(() => {
     // Detect iOS device
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    //get the userAgent from the browser
+    console.log("navigator.userAgent", navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
     handleDownload(isIOS);
     router.push("/");
   }, []);
