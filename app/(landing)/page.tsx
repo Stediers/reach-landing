@@ -39,6 +39,7 @@ import {
 import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partners";
 import { FetchPartnerResponse } from "@data/types";
 import AppDownload from "@components/DownloadApp";
+import LinkButton from "@components/Button";
 
 export const metadata: Metadata = {
   title: {
@@ -444,6 +445,11 @@ function Hero() {
                 </Button>
               }
             />
+            {/* <LinkButton
+              link="/download"
+              className="!w-full"
+              text="Start for Free"
+            /> */}
             <Link href={CustomerRoutes.EXPLORE} passHref>
               <Button variant="close" className="!w-full bg-white">
                 Looking for a freelancer?

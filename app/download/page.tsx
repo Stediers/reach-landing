@@ -1,33 +1,7 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { redirect } from "next/navigation";
 
-export default function DownloadApp() {
-  const router = useRouter();
-  useEffect(() => {
-    // Detect iOS device
-    //get the userAgent from the browser
-    console.log("navigator.userAgent", navigator.userAgent);
-    const isIOS = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
-    handleDownload(isIOS);
-    router.push("/");
-  }, []);
-
-  const handleDownload = (isIOS: boolean) => {
-    const iosAppUrl = "https://apps.apple.com/in/app/reachgig/id6737802010";
-    const androidAppUrl =
-      "https://play.google.com/store/apps/details?id=com.reachtech.partnerapp&pcampaignid=web_share";
-
-    if (isIOS) {
-      //new tab
-      setTimeout(() => {
-        window.open(iosAppUrl);
-      }, 1000);
-    } else {
-      //new tab
-      window.open(androidAppUrl);
-    }
-  };
+export default async function DownloadAppRoute() {
+  redirect("/");
 
   return <div></div>;
 }
