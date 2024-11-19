@@ -21,11 +21,11 @@ export default function DownloadApp() {
     if (isIOS) {
       //new tab
       setTimeout(() => {
-        window.open(iosAppUrl, "_blank");
+        window.open(iosAppUrl);
       }, 1000);
     } else {
       //new tab
-      window.open(androidAppUrl, "_blank");
+      window.open(androidAppUrl);
     }
   };
 

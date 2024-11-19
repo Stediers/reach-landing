@@ -25,11 +25,12 @@ export default function AppDownload({
     if (isIOS) {
       //new tab
       setTimeout(() => {
-        window.open(iosAppUrl, "_blank");
+        //open the app store link replacing the current tab
+        window.open(iosAppUrl);
       }, 1000);
     } else {
       //new tab
-      window.open(androidAppUrl, "_blank");
+      window.open(androidAppUrl);
     }
   };
 
