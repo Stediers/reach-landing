@@ -437,8 +437,6 @@ function Hero() {
           </div>
 
           <div className="max-w-md w-full grid lg:grid-cols-2 gap-5 pt-3">
-            {/* <SearchInput /> */}
-
             <AppDownload
               triggerJSX={
                 <Button variant="success" className="!w-full">
@@ -469,12 +467,6 @@ function Hero() {
           ))}
         </RawCarousel>
       </div>
-      {/* <div className="w-full flex items-center justify-center py-5 lg:bg-primary lg:text-white lg:text-xl">
-        Trusted by&nbsp;
-        <span className="lg:text-white text-primary font-semibold">
-          1000+ Customers and Partners
-        </span>
-      </div> */}
     </div>
   );
 }
