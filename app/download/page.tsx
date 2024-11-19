@@ -15,10 +15,8 @@ export default function DownloadApp() {
     const iosAppUrl = "https://apps.apple.com/in/app/reachgig/id6737802010";
     const androidAppUrl =
       "https://play.google.com/store/apps/details?id=com.reachtech.partnerapp&pcampaignid=web_share";
-    const deepLink = "your-app-scheme://"; // Your app's custom URL scheme
 
     if (isIOS) {
-      window.location.href = deepLink;
       //new tab
       setTimeout(() => {
         window.open(iosAppUrl, "_blank");
