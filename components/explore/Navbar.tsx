@@ -5,7 +5,6 @@ import {
 } from "@api_functions/profile/fetch-my-profile";
 import { Button } from "@components/ui/button";
 import { CustomSheet } from "@components/CustomSheet";
-import LineHeader from "@components/LineHeader";
 import Setting from "@components/Setting";
 import MobileLogin from "@components/sign-in/MobileNumber";
 import { DialogClose } from "@components/ui/dialog";
@@ -23,7 +22,6 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import MobileLoginPopup from "@components/sign-in/MobileLoginPopup";
-import LoginPerks from "@components/LoginPerks";
 import { Skeleton } from "@components/ui/skeleton";
 import AppDownload from "@components/DownloadApp";
 
@@ -71,54 +69,10 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
     });
   }, []);
   const currentPath = usePathname();
-  const [onHome, setOnHome] = useState(false);
-  const excludedPaths = ["/explore"];
-  const scrollHandler = ({
-    home,
-    observer,
-  }: {
-    home: HTMLElement;
-    observer: IntersectionObserver;
-  }) => {
-    if (home) {
-      observer.observe(home);
-      if (home.getBoundingClientRect().top < 0) {
-        setOnHome(false);
-      } else {
-        setOnHome(true);
-      }
-    }
-  };
-
-  useEffect(() => {
-    const home = document.getElementById("home");
-    if (!home) {
-      setOnHome(false);
-      return;
-    } else {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setOnHome(true);
-            } else {
-              setOnHome(false);
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-      observer.observe(home);
-      window.addEventListener("scroll", () => {
-        scrollHandler({ home, observer });
-      });
-    }
-  }, [scrollHandler, setOnHome, currentPath, excludedPaths, onHome]);
+  const excludedPaths = ["/explore", "/"];
   return showMobileNav ? (
     <div
-      className={`sticky top-0 !z-50 ${
-        onHome ? "!bg-[#F8F7F1]" : "bg-white  border-b shadow-sm"
-      } flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
+      className={`sticky top-0 !z-50 bg-white  border-b flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
     >
       <div
         className={`flex flex-row items-center
@@ -148,9 +102,7 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
     </div>
   ) : (
     <div
-      className={`hidden sticky top-0 !z-50 ${
-        onHome ? "!bg-[#F8F7F1]" : "bg-white  border-b shadow-sm"
-      } lg:flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
+      className={`hidden sticky top-0 !z-50 bg-white  border-b shadow-sm lg:flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
       hidden
     >
       <div
@@ -275,13 +227,6 @@ function MobileProfile({
   const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
   return (
     <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
-      <AppDownload
-        triggerJSX={
-          <p className="text-success font-medium hover:underline underline-offset-4">
-            Join Us
-          </p>
-        }
-      />
       {response ? (
         <div className="w-fit">
           {/* <Link

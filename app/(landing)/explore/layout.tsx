@@ -39,7 +39,7 @@ import {
   fetchMyProfile,
 } from "@api_functions/profile/fetch-my-profile";
 import { updateFilter } from "@helper_functions/explore/update-filter";
-import useDidMountEffect from "@helper_functions/use-did-mount-effetc";
+import useDidMountEffect from "@helper_functions/use-did-mount-effect";
 import { useRouter } from "next-nprogress-bar";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useSearchParams, usePathname } from "next/navigation";
