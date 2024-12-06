@@ -193,22 +193,17 @@ function TheresMore() {
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
         <SocialMediaCard
-          src="/images/blogs.svg"
+          src="/appointments.webp"
           heading="Manage Appointments"
           description="With our in built calendar, notificatons and reminders you can manage your appointments easily and effectively."
         />
         <SocialMediaCard
-          src="/images/blogs.svg"
-          heading="Keep track of Clients"
-          description="You don't need a secondary phone to manage your clients. Keep track of all your clients in one place."
-        />
-        <SocialMediaCard
-          src="/images/blogs.svg"
+          src="/paid.avif"
           heading="Secure Payments"
           description="Get paid securely and easily with our integrated payment gateway"
         />
         <SocialMediaCard
-          src="/images/blogs.svg"
+          src="/invoice.avif"
           heading="Automated Invoices"
           description="Automatically generate invoices for your clients and keep track of your earnings."
         />
@@ -226,13 +221,13 @@ function TheresMore() {
     description: string;
   }) {
     return (
-      <Card className="flex flex-col items-center justify-start lg:!items-start space-y-6 lg:space-y-10 !rounded-3xl px-5 py-7 lg:px-10 lg:py-14 bg-white text-black">
+      <Card className="flex !bg-[#FAFAFA] flex-col items-center justify-start lg:!items-start space-y-6 lg:space-y-10 !rounded-3xl px-5 py-7 lg:px-10 lg:py-14 text-black">
         <Image
           alt="Hero"
-          src="/images/blogs.svg"
+          src={src}
           width={200}
           height={200}
-          className="lg:w-[15rem] lg:h-[15rem] w-[10rem] h-[10rem]"
+          className="w-full lg:h-[15rem] object-cover"
         />
         <div className="flex flex-col items-start justify-center lg:space-y-5 space-y-3 w-full">
           <h3 className="lg:text-2xl text-2xl font-medium w-full">{heading}</h3>
