@@ -11,6 +11,7 @@ export type FetchAllPartners = {
     imageUrl: string;
     handle: string;
     designation: string;
+    id: string;
   }[];
 };
 
