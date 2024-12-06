@@ -186,8 +186,7 @@ function TheresMore() {
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          Wait! <br />{" "}
-          <span className="text-primary font-semibold">There&apos;s More</span>
+          Wait! <br /> <span className="text-primary">There&apos;s More</span>
         </span>
       }
       mobileAlign="center"
@@ -233,7 +232,7 @@ function TheresMore() {
           src="/images/blogs.svg"
           width={200}
           height={200}
-          className="lg:w-[15rem] lg:h-[15rem] w-[20rem] h-[20rem]"
+          className="lg:w-[15rem] lg:h-[15rem] w-[10rem] h-[10rem]"
         />
         <div className="flex flex-col items-start justify-center lg:space-y-5 space-y-3 w-full">
           <h3 className="lg:text-2xl text-2xl font-medium w-full">{heading}</h3>
@@ -314,17 +313,22 @@ function Hero() {
     <div className="w-full flex flex-col items-center justify-center space-y-5 relative lg:pt-10 lg:min-h-[50vh] pt-8">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center items-center justify-center pb-10 space-y-5 w-full px-5 lg:px-10 max-w-7xl">
         <div className="flex flex-col lg:items-start items-center justify-center space-y-3 lg:space-y-5 w-full z-10 max-w-lg lg:max-w-none">
-          <Badge variant="successOutline">With Instagram Integration</Badge>
-          <h1 className="text-4xl lg:text-left lg:text-6xl xl:text-6xl font-semibold lg:font-semibold !leading-tight xl:!leading-[4.7rem] text-center">
+          <Badge variant="defaultOutline">With Instagram Integration</Badge>
+          <h1 className="text-4xl lg:text-left lg:text-6xl xl:text-6xl font-semibold lg:font-semibold !leading-normal xl:!leading-[4.7rem] text-center">
             <span className="font-medium">Get a</span>
             <br />
             <span className="font-medium">
-              <span className="text-primary">Free</span> website
+              <span className="bg-info px-3 rounded-lg text-white text-3xl lg:text-4xl xl:text-5xl">
+                Free
+              </span>{" "}
+              website
             </span>
             <br />
             <span className="font-medium">
-              for your
-              <span className="text-primary"> Business</span>
+              for your{" "}
+              <span className="bg-success px-3 rounded-lg text-white text-3xl lg:text-4xl xl:text-5xl">
+                Business
+              </span>
             </span>
           </h1>
           <h2 className="text-md lg:text-left xl:text-xl font-normal xl:leading-relaxed text-textsubtle text-center max-w-md">
@@ -340,7 +344,7 @@ function Hero() {
               triggerJSX={
                 <LinkButton
                   link="/download"
-                  className="bg-primary text-white py-3 px-5 !w-fit rounded-3xl text-md font-semibold"
+                  className="bg-black text-white py-3 px-5 !w-fit rounded-3xl text-md font-semibold"
                   text="Get Started - It's Free"
                 />
               }
@@ -560,7 +564,7 @@ function FrequentlyAskedQuestions() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
           <div className="flex flex-col items-start justify-start space-y-5">
-            <h2 className="text-4xl lg:text-5xl font-semibold !leading-snug">
+            <h2 className="text-4xl lg:text-5xl font-medium !leading-snug">
               Frequently Asked Questions
             </h2>
             <p className="text-lg">Can&apos;t find what you are looking for?</p>
