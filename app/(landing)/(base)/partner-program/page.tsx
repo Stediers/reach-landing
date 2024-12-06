@@ -137,7 +137,7 @@ function HowItWorks() {
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          Here's how <br />
+          Here&apos;s how <br />
           it works
         </span>
       }
@@ -187,7 +187,7 @@ function TheresMore() {
       title={
         <span className="!leading-snug">
           Wait! <br />{" "}
-          <span className="text-primary font-semibold">There's More</span>
+          <span className="text-primary font-semibold">There&apos;s More</span>
         </span>
       }
       mobileAlign="center"
@@ -236,7 +236,7 @@ function TheresMore() {
           className="lg:w-[15rem] lg:h-[15rem] w-[20rem] h-[20rem]"
         />
         <div className="flex flex-col items-start justify-center lg:space-y-5 space-y-3 w-full">
-          <h3 className="lg:text-2xl text-xl font-medium w-full">{heading}</h3>
+          <h3 className="lg:text-2xl text-2xl font-medium w-full">{heading}</h3>
           <p className="text-md lg:text-lg">{description}</p>
         </div>
       </Card>
@@ -329,7 +329,10 @@ function Hero() {
           </h1>
           <h2 className="text-md lg:text-left xl:text-xl font-normal xl:leading-relaxed text-textsubtle text-center max-w-md">
             No more
-            <span className="text-primary"> "DM me for details". </span>
+            <span className="text-primary">
+              {" "}
+              &quot;DM me for details&quot;.{" "}
+            </span>
             Get a free website for your business and start getting more clients.
           </h2>
           <div className="pt-3">
