@@ -11,7 +11,7 @@ export default function TabSwitcher() {
     >
       <div className="grid grid-cols-2 gap-2 w-fit bg-secondary p-3 lg:p-4 rounded-full">
         <Link
-          key="Find Talent"
+          key="Find People"
           href={"/"}
           className={`${
             path === "/" ? "text-white" : ""
@@ -25,10 +25,10 @@ export default function TabSwitcher() {
               style={{ borderRadius: 20 }}
             />
           )}
-          Find Talent
+          Find People
         </Link>
         <Link
-          key="Join Us"
+          key="Join as Partner"
           href={"/partner-program"}
           className={`${
             path === "/partner-program" ? "text-white" : "hover:scale-110"
@@ -42,7 +42,7 @@ export default function TabSwitcher() {
               style={{ borderRadius: 20 }}
             />
           )}
-          Join Us
+          Join as Partner
         </Link>
       </div>
     </div>
