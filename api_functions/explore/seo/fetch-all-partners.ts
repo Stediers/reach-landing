@@ -7,9 +7,10 @@ export type FetchAllPartners = {
   partners: {
     firstName: string;
     lastName: string;
-    imageUrl: string;
     bio: string;
-    id: string;
+    imageUrl: string;
+    handle: string;
+    designation: string;
   }[];
 };
 
