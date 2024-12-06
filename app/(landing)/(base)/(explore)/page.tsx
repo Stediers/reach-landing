@@ -4,7 +4,8 @@ import Card from "@components/Card";
 import Image from "next/image";
 import { fetchAllPartners } from "@api_functions/explore/seo/fetch-all-partners";
 import { Button } from "@components/ui/button";
-import { Designation } from "@data/enums";
+import { CustomerRoutes, Designation } from "@data/enums";
+import Link from "next/link";
 
 export default async function ExplorePage() {
   const res = await fetchAllPartners();
@@ -32,6 +33,7 @@ export default async function ExplorePage() {
                   name={profile.firstName + " " + profile.lastName}
                   designation={profile.bio}
                   image={profile.imageUrl}
+                  id={profile.id}
                 />
               ))}
             </div>
@@ -67,13 +69,18 @@ function Profile({
   name,
   designation,
   image,
+  id,
 }: {
   name: string;
   designation: string;
   image: string;
+  id: string;
 }) {
   return (
-    <div className="flex flex-col items-start justify-center space-y-3 min-w-[13rem] max-w-[13rem] lg:!min-w-[18rem] lg:max-w-[18rem] overflow-hidden">
+    <Link
+      className="flex flex-col items-start justify-center space-y-3 min-w-[13rem] max-w-[13rem] lg:!min-w-[18rem] lg:max-w-[18rem] overflow-hidden"
+      href={CustomerRoutes.PARTNER.replace("[partnerHandle]", id)}
+    >
       <Card className="flex flex-col items-start justify-center !space-y-3 transition-transform hover:shadow-md hover:cursor-pointer transform-gpu">
         <Image
           src={image}
@@ -87,6 +94,6 @@ function Profile({
           <p className="text-sm text-textsubtle line-clamp-2">{designation}</p>
         </div>
       </Card>
-    </div>
+    </Link>
   );
 }
