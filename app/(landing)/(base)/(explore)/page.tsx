@@ -8,7 +8,7 @@ import { CustomerRoutes, Designation } from "@data/enums";
 import Link from "next/link";
 import { Metadata } from "next";
 
-export const revalidate = 0;
+export const revalidate = 600; //10 minutes
 
 export const metadata: Metadata = {
   title: {
