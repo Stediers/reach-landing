@@ -6,7 +6,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://reachgig.com";
 
   // Main routes
-  const mainRoutes = ["", "/verification"];
+  const mainRoutes = ["", "/partner-program"];
 
   // Learn routes
   const learnRoutes = [
