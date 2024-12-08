@@ -6,8 +6,83 @@ import { fetchAllPartners } from "@api_functions/explore/seo/fetch-all-partners"
 import { Button } from "@components/ui/button";
 import { CustomerRoutes, Designation } from "@data/enums";
 import Link from "next/link";
+import { Metadata } from "next";
 
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: {
+    default:
+      "ReachGig - Find & Hire Trusted Local Service Professionals in Tamil Nadu",
+    template: "%s - ReachGig",
+  },
+  description:
+    "Connect with verified local service providers for makeup, photography, wedding planning & more. Secure payments, verified professionals & trusted services across Tamil Nadu. Get started for free!",
+  keywords: [
+    "Local Service Providers",
+    "Verified Professionals",
+    "Makeup Artists Tamil Nadu",
+    "Wedding Photographers",
+    "Mehandi Artists",
+    "Wedding Planners",
+    "Secure Service Platform",
+    "Trusted Professionals",
+    "Service Provider Directory",
+    "Book Local Services",
+    "Professional Services Tamil Nadu",
+    "Verified Service Providers",
+  ].join(", "),
+  openGraph: {
+    title: "ReachGig - Trusted Local Service Professionals in Tamil Nadu",
+    description:
+      "Find and hire verified local service providers. Secure payments, identity verification & trusted professionals for makeup, photography, wedding planning & more.",
+    url: "https://reachgig.com",
+    type: "website",
+    images: [
+      {
+        url: "https://reachgig.com/images/home1.svg",
+        width: 1200,
+        height: 630,
+        alt: "ReachGig - Find Local Service Professionals",
+      },
+    ],
+    locale: "en_IN",
+    siteName: "ReachGig",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ReachGig - Find Trusted Local Service Professionals",
+    description:
+      "Connect with verified local service providers. Secure payments & trusted professionals across Tamil Nadu.",
+    images: ["https://reachgig.com/images/home1.svg"],
+  },
+  // other: {
+  //   structured_data: JSON.stringify({
+  //     "@context": "https://schema.org",
+  //     "@type": "Organization",
+  //     name: "ReachGig",
+  //     url: "https://reachgig.com",
+  //     logo: "https://reachgig.com/images/logo.webp",
+  //     description:
+  //       "A trusted platform connecting verified service providers with customers in Tamil Nadu.",
+  //     address: {
+  //       "@type": "PostalAddress",
+  //       addressRegion: "Tamil Nadu",
+  //       addressCountry: "IN",
+  //     },
+  //     sameAs: [
+  //       "https://facebook.com/reachgig",
+  //       "https://twitter.com/reachgig",
+  //       "https://instagram.com/reachgig",
+  //     ],
+  //     aggregateRating: {
+  //       "@type": "AggregateRating",
+  //       ratingValue: "4.8",
+  //       reviewCount: "1000",
+  //     },
+  //   }),
+  // },
+};
 
 export default async function ExplorePage() {
   //dobnt cache this page
