@@ -3,7 +3,7 @@ import { RequestMethod } from "@data/enums";
 import { ApiResult, FetchPartnerResponse } from "@data/types";
 
 export type FetchAllPartners = {
-  designation: string;
+  group: string;
   partners: {
     firstName: string;
     lastName: string;

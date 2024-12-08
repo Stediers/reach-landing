@@ -207,6 +207,11 @@ function TheresMore() {
           heading="Automated Invoices"
           description="Automatically generate invoices for your clients and keep track of your earnings."
         />
+        <SocialMediaCard
+          src="/instagram.avif"
+          heading="Instagram Integration"
+          description="Integrate your Instagram account and showcase your previous work to your clients."
+        />
       </div>
     </HeaderWrapper>
   );
@@ -309,7 +314,7 @@ function Hero() {
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center items-center justify-center pb-10 space-y-5 w-full px-5 lg:px-10 max-w-7xl">
         <div className="flex flex-col lg:items-start items-center justify-center space-y-3 lg:space-y-5 w-full z-10 max-w-lg lg:max-w-none">
           <Badge variant="defaultOutline">With Instagram Integration</Badge>
-          <h1 className="text-4xl lg:text-left lg:text-6xl xl:text-6xl font-semibold lg:font-semibold !leading-normal xl:!leading-[4.7rem] text-center">
+          <h1 className="text-4xl lg:text-left lg:text-6xl xl:text-6xl font-semibold lg:font-semibold !leading-normal xl:!leading-[5.2rem] text-center">
             <span className="font-medium">Get a</span>
             <br />
             <span className="font-medium">

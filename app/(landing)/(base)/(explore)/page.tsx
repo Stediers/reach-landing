@@ -7,38 +7,42 @@ import { Button } from "@components/ui/button";
 import { CustomerRoutes, Designation } from "@data/enums";
 import Link from "next/link";
 
+export const revalidate = 0;
+
 export default async function ExplorePage() {
+  //dobnt cache this page
   const res = await fetchAllPartners();
   if (!res) return <ServiceCardSkeleton />;
   return (
     <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar py-5 space-y-5">
-      <PopularDesignations
-        designations={res.map((partner) => partner.designation)}
-      />
+      <PopularDesignations designations={res.map((partner) => partner.group)} />
       {res
         .sort((a, b) => b.partners.length - a.partners.length)
-        .map((partner, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-start justify-center space-y-1 w-full px-5 lg:px-10"
-          >
-            <h3 className="text-2xl lg:text-3xl font-medium leading-snug">
-              {partner.designation.charAt(0).toUpperCase() +
-                partner.designation.slice(1)}
-            </h3>
-            <div className="flex flex-row justify-start items-center space-x-5 lg:space-x-10 w-full py-5 overflow-x-scroll">
-              {partner.partners.map((profile) => (
-                <Profile
-                  key={profile.id}
-                  name={profile.firstName + " " + profile.lastName}
-                  designation={profile.bio}
-                  image={profile.imageUrl}
-                  id={profile.id}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
+        .map(
+          (partner, index) =>
+            partner.partners.length > 0 && (
+              <div
+                key={index}
+                className="flex flex-col items-start justify-center space-y-1 w-full px-5 lg:px-10"
+              >
+                <h3 className="text-xl lg:text-2xl font-medium leading-snug">
+                  {partner.group.charAt(0).toUpperCase() +
+                    partner.group.slice(1)}
+                </h3>
+                <div className="flex flex-row justify-start items-center space-x-5 lg:space-x-10 w-full py-5 overflow-x-scroll">
+                  {partner.partners.map((profile) => (
+                    <Profile
+                      key={profile.id}
+                      name={profile.firstName + " " + profile.lastName}
+                      designation={profile.bio}
+                      image={profile.imageUrl}
+                      id={profile.id}
+                    />
+                  ))}
+                </div>
+              </div>
+            )
+        )}
     </div>
   );
 }
