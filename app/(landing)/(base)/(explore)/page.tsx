@@ -111,7 +111,7 @@ export default async function ExplorePage() {
                       name={profile.firstName + " " + profile.lastName}
                       designation={profile.bio}
                       image={profile.imageUrl}
-                      id={profile.id}
+                      handle={profile.handle}
                     />
                   ))}
                 </div>
@@ -148,17 +148,19 @@ function Profile({
   name,
   designation,
   image,
-  id,
+  handle,
 }: {
   name: string;
   designation: string;
   image: string;
-  id: string;
+  handle: string;
 }) {
+  const link = CustomerRoutes.PARTNER.replace("[partnerHandle]", handle);
+  console.log(link);
   return (
     <Link
       className="flex flex-col items-start justify-center space-y-3 min-w-[13rem] max-w-[13rem] lg:!min-w-[18rem] lg:max-w-[18rem] overflow-hidden"
-      href={CustomerRoutes.PARTNER.replace("[partnerHandle]", id)}
+      href={CustomerRoutes.PARTNER.replace("[partnerHandle]", handle)}
     >
       <Card className="flex flex-col items-start justify-center !space-y-3 transition-transform hover:shadow-md hover:cursor-pointer transform-gpu">
         <Image
