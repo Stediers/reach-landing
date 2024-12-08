@@ -32,32 +32,16 @@ export default function Page() {
   return (
     <HeaderWrapper
       title={
-        <span className="!leading-snug text-white">
-          Reach Out <br /> <span className="text-white font-semibold">to</span>{" "}
-          Us
+        <span className="!leading-snug">
+          Reach Out <br /> to Us
         </span>
       }
-      className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10 bg-info"
+      className="items-center justify-center w-full flex flex-col lg:space-y-16 space-y-10"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-5 gap-x-5 w-full">
         <Card className="flex flex-col items-start justify-start space-y-5 lg:!p-10 bg-white">
           <div className="flex flex-row items-center justify-between space-x-5 w-full">
-            <h2 className="text-2xl font-semibold">Mail Us</h2>
-            <MailCheck className="h-8 w-8" />
-          </div>
-          <p className="text-lg">
-            Too lazy to call? No worries! Drop us an email and we&apos;ll get
-            back to you as soon as possible
-          </p>
-          <Link href="mailto:asdas" passHref>
-            <p className="text-lg text-info underline cursor-pointer">
-              reachgig.connect@gmail&#46;com
-            </p>
-          </Link>
-        </Card>
-        <Card className="flex flex-col items-start justify-start space-y-5 lg:!p-10 bg-white">
-          <div className="flex flex-row items-center justify-between space-x-5 w-full">
-            <h2 className="text-2xl font-semibold">Call Us</h2>
+            <h2 className="text-2xl font-medium">Call Us</h2>
             <PhoneCallIcon className="h-8 w-8" />
           </div>
           <p className="text-lg">
@@ -67,6 +51,21 @@ export default function Page() {
           <Link href="tel:+917550083900" passHref>
             <p className="text-lg text-info underline cursor-pointer">
               +91 7550083900
+            </p>
+          </Link>
+        </Card>
+        <Card className="flex flex-col items-start justify-start space-y-5 lg:!p-10">
+          <div className="flex flex-row items-center justify-between space-x-5 w-full">
+            <h2 className="text-2xl font-medium">Mail Us</h2>
+            <MailCheck className="h-8 w-8" />
+          </div>
+          <p className="text-lg">
+            Too lazy to call? No worries! Drop us an email and we&apos;ll get
+            back to you as soon as possible
+          </p>
+          <Link href="mailto:asdas" passHref>
+            <p className="text-lg text-info underline cursor-pointer">
+              reachgig.connect@gmail&#46;com
             </p>
           </Link>
         </Card>

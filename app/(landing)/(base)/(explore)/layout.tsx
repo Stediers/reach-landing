@@ -26,7 +26,7 @@ function Hero() {
             <span className="font-medium">India&apos;s</span>
             <br />
             <span className="bg-primary px-3 rounded-lg text-white text-3xl lg:text-4xl xl:text-5xl">
-              best experts
+              Best Experts
               <br />
             </span>
             at your service
