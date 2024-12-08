@@ -313,6 +313,36 @@ export enum Currency {
   INR = "INR",
 }
 
+export enum Designation {
+  Lawyer = "Lawyer",
+  Astrologer = "Astrologer",
+  Doctor = "Doctor",
+  Physiotherapist = "Physiotherapist",
+  Dentist = "Dentist",
+  Architect = "Architect",
+  InteriorDesigner = "Interior Designer",
+  FashionDesigner = "Fashion Designer",
+  Stylist = "Stylist",
+  HairStylist = "Hair Stylist",
+  Teacher = "Teacher",
+  MakeupArtist = "Makeup Artist",
+  EventPlanner = "Event Planner",
+  Photographer = "Photographer",
+  GraphicDesigner = "Graphic Designer",
+  Developer = "Developer",
+  ContentCreator = "Content Creator",
+  Chef = "Chef",
+  FitnessTrainer = "Fitness Trainer",
+  Influencer = "Influencer",
+  Model = "Model",
+  Musician = "Musician",
+  Writer = "Writer",
+  Artist = "Artist",
+  Consultant = "Consultant",
+  Tutor = "Tutor",
+  Coach = "Coach",
+}
+
 export enum CustomerRoutes {
   //landing
   LEARN = "/learn",

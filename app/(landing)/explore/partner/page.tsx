@@ -9,7 +9,7 @@ import TextInput from "@components/input/TextInput";
 import { Skeleton } from "@components/ui/skeleton";
 import { CustomerRoutes, Gender, State } from "@data/enums";
 import { FetchPartnerResponse } from "@data/types";
-import useDidMountEffect from "@helper_functions/use-did-mount-effetc";
+import useDidMountEffect from "@helper_functions/use-did-mount-effect";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import { debounce, set } from "lodash";
 import { Search } from "lucide-react";

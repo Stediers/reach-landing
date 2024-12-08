@@ -6,6 +6,7 @@ import { GoogleAnalyticsTracking } from "@scripts/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/react";
 import FacebookPixel from "@scripts/FacebookPixel";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import localFont from "next/font/local";
 
 const fontSans = Poppins({
   subsets: ["latin"],

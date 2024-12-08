@@ -25,9 +25,13 @@ export default function HeaderWrapper({
     >
       <div
         className={`flex flex-col max-w-7xl ${
-          mobileAlign === "start" ? "items-start" : "items-center"
-        } ${desktopAlign === "start" ? "lg:items-start" : "lg:items-center"}
-      justify-center space-y-7 lg:space-y-20 w-full px-5 lg:px-10 ${maxWidth} py-10`}
+          mobileAlign === "start" ? "items-start" : "items-center text-center"
+        } ${
+          desktopAlign === "start"
+            ? "lg:items-start lg:text-start"
+            : "lg:items-center lg:text-center"
+        }
+      justify-center space-y-12 lg:space-y-20 w-full px-5 lg:px-10 ${maxWidth} py-10`}
       >
         <h2 className="text-4xl lg:text-5xl font-medium leading-snug">
           {title}
