@@ -25,7 +25,7 @@ function Hero() {
           <h1 className="text-4xl lg:text-6xl xl:text-6xl font-medium !leading-normal xl:!leading-[5.2rem] text-center">
             <span className="font-medium">India&apos;s</span>
             <br />
-            <span className="bg-primary px-3 rounded-lg text-white text-3xl lg:text-4xl xl:text-5xl">
+            <span className="bg-primary px-3 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl">
               Best Experts
               <br />
             </span>
