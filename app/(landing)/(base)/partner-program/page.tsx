@@ -322,7 +322,7 @@ function Hero() {
             <span className="font-medium">Get a</span>
             <br />
             <span className="font-medium">
-              <span className="bg-info px-3 rounded-lg text-white text-3xl lg:text-4xl xl:text-5xl">
+              <span className="bg-info px-3 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl">
                 Free
               </span>{" "}
               website
@@ -330,7 +330,7 @@ function Hero() {
             <br />
             <span className="font-medium">
               for your{" "}
-              <span className="bg-success px-3 rounded-lg text-white text-3xl lg:text-4xl xl:text-5xl">
+              <span className="bg-success px-3 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl">
                 Business
               </span>
             </span>
@@ -428,7 +428,7 @@ function Pricing() {
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          The <br /> <span className="font-semibold">Right</span>
+          The <br /> <span className="font-medium">Right</span>
           {"  "}Price
         </span>
       }
