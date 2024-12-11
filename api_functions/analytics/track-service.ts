@@ -1,6 +1,6 @@
 import { fetchAPIPublic } from "@api_functions/internal/base-functions";
 import { ANALYTICS_API_URL } from "@data/api";
-import { RequestMethod } from "@data/enums";
+import { RequestMethod, TrackingSource } from "@data/enums";
 
 export type TrackServiceRequest = {
   ipAddress?: string;
@@ -9,8 +9,7 @@ export type TrackServiceRequest = {
   state: string;
   country: string;
   serviceId: string;
-  whatsapp: boolean;
-  search: boolean;
+  source: TrackingSource;
 };
 
 export async function trackService(

@@ -313,6 +313,15 @@ export enum Currency {
   INR = "INR",
 }
 
+export enum TrackingSource {
+  SEARCH = "search",
+  WHATSAPP = "whatsapp",
+  REFERRAL = "referral",
+  INSTAGRAM = "instagram",
+  FACEBOOK = "facebook",
+  GOOGLE = "google",
+}
+
 export enum Designation {
   Lawyer = "Lawyer",
   Astrologer = "Astrologer",

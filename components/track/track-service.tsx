@@ -4,6 +4,7 @@ import {
   trackService,
 } from "@api_functions/analytics/track-service";
 import { getItemsFromLocalStorage } from "@api_functions/internal/local-storage";
+import { TrackingSource } from "@data/enums";
 import devLog from "@helper_functions/devLog";
 import {
   getIpAddress,
@@ -14,12 +15,10 @@ import { useEffect } from "react";
 
 async function _trackService({
   serviceId,
-  search,
-  whatsApp,
+  source,
 }: {
   serviceId: string;
-  search: boolean;
-  whatsApp: boolean;
+  source: TrackingSource;
 }) {
   try {
     const guestId = getItemsFromLocalStorage<string>({ key: "guest-id" });
@@ -36,8 +35,7 @@ async function _trackService({
       state: cityStateCountry.state,
       country: cityStateCountry.country,
       guestId: guestId ? guestId : undefined,
-      search: search,
-      whatsapp: whatsApp,
+      source: source,
     };
     trackService(request);
   } catch (err) {
@@ -59,20 +57,17 @@ export default function TrackServiceComponent({
     if (event === "whatsapp") {
       _debounce({
         serviceId,
-        search: false,
-        whatsApp: true,
+        source: TrackingSource.WHATSAPP,
       });
     } else if (event === "search") {
       _debounce({
         serviceId,
-        search: true,
-        whatsApp: false,
+        source: TrackingSource.SEARCH,
       });
     } else {
       _debounce({
         serviceId,
-        search: false,
-        whatsApp: false,
+        source: TrackingSource.SEARCH,
       });
     }
   }, [serviceId, event]);

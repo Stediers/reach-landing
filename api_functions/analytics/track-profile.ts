@@ -1,6 +1,6 @@
 import { fetchAPIPublic } from "@api_functions/internal/base-functions";
 import { ANALYTICS_API_URL } from "@data/api";
-import { RequestMethod } from "@data/enums";
+import { RequestMethod, TrackingSource } from "@data/enums";
 
 export type TrackProfileRequest = {
   ipAddress?: string;
@@ -9,8 +9,7 @@ export type TrackProfileRequest = {
   state: string;
   country: string;
   profileId: string;
-  instagram: boolean;
-  whatsapp: boolean;
+  source: TrackingSource;
 };
 
 export async function trackProfile(

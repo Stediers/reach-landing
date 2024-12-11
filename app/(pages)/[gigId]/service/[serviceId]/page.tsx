@@ -157,8 +157,6 @@ export default async function Page({
     ? "whatsapp"
     : searchParams.search
     ? "search"
-    : searchParams.preview
-    ? "preview"
     : null;
   const response = await fetchServiceByServiceId(serviceId);
   if (!response) {
@@ -171,6 +169,7 @@ export default async function Page({
 
   return (
     <div className="w-full flex flex-col items-start justify-center max-w-[85rem] lg:px-10 lg:py-10 relative">
+      <TrackServiceComponent event={event} serviceId={serviceId} />
       <div className="flex lg:hidden w-full  px-5 pt-5" hidden>
         <ImageCarousel
           images={service.imageUrls}

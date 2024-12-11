@@ -25,6 +25,7 @@ import { CustomDrawer } from "@components/DrawerPopup";
 import { DrawerClose } from "@components/ui/drawer";
 import StickyContact from "@components/contact/StickyContact";
 import { CustomDialog } from "@components/DialogPopup";
+import TrackProfileComponent from "@components/track/track-profile";
 
 export const generateMetadata = async ({
   params,
@@ -163,6 +164,7 @@ export default async function Page({
   function Mobile() {
     return response ? (
       <div className="flex flex-col items-center justify-start w-full min-h-full pt-5 relative">
+        <TrackProfileComponent event={event} gigId={response.partner.gigId} />
         <div className="w-full flex flex-row items-center justify-start space-x-5 px-5">
           {backLink && (
             <Link

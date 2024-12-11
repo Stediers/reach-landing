@@ -4,6 +4,7 @@ import {
   trackProfile,
 } from "@api_functions/analytics/track-profile";
 import { getItemsFromLocalStorage } from "@api_functions/internal/local-storage";
+import { TrackingSource } from "@data/enums";
 import devLog from "@helper_functions/devLog";
 import {
   getIpAddress,
@@ -13,12 +14,10 @@ import debounce from "lodash/debounce";
 
 async function _trackProfile({
   gigId,
-  instgram,
-  whatsApp,
+  source,
 }: {
   gigId: string;
-  instgram: boolean;
-  whatsApp: boolean;
+  source: TrackingSource;
 }) {
   try {
     const guestId = getItemsFromLocalStorage<string>({ key: "guest-id" });
@@ -35,8 +34,7 @@ async function _trackProfile({
       city: cityStateCountry?.city,
       state: cityStateCountry?.state,
       country: cityStateCountry?.country,
-      instagram: instgram,
-      whatsapp: whatsApp,
+      source,
     };
     await trackProfile(request);
   } catch (e) {
@@ -51,25 +49,22 @@ export default function TrackProfileComponent({
   event,
 }: {
   gigId: string;
-  event: "instagram" | "whatsapp" | null;
+  event: string | null;
 }) {
   if (event === "instagram") {
     _debounce({
       gigId,
-      instgram: true,
-      whatsApp: false,
+      source: TrackingSource.INSTAGRAM,
     });
   } else if (event === "whatsapp") {
     _debounce({
       gigId,
-      instgram: false,
-      whatsApp: true,
+      source: TrackingSource.WHATSAPP,
     });
   } else {
     _debounce({
       gigId,
-      instgram: false,
-      whatsApp: false,
+      source: TrackingSource.SEARCH,
     });
   }
   return null;
