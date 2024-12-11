@@ -280,9 +280,9 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
             A Quick <br />
             <span className="text-primary">Introduction</span>
           </p>
-          <h3 className="lg:text-2xl text-lg font-normal !leading-normal">
+          {/* <h3 className="lg:text-2xl text-lg font-normal !leading-normal">
             {response.partner.bio}
-          </h3>
+          </h3> */}
         </div>
         <div
           className="lg:flex flex-col items-start justify-start space-y-10 w-full hidden"

@@ -88,13 +88,13 @@ export default function ImageCarousel({
                 <div
                   className={`w-full ${imageHeight} relative bg-transparent`}
                 >
-                  <Image
+                  <ImageComponent
                     src={image}
                     alt="Image"
-                    className={`rounded-md overflow-hidden object-contain  ${
+                    className={`rounded-md overflow-hidden object-contain  ${imageHeight} ${
                       border ? "border" : ""
                     }`}
-                    fill
+                    objectFit="contain"
                   />
                 </div>
               </CarouselItem>

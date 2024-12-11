@@ -173,7 +173,7 @@ export default async function Page({
       <div className="flex lg:hidden w-full  px-5 pt-5" hidden>
         <ImageCarousel
           images={service.imageUrls}
-          imageHeight="min-h-[30rem] lg:h-[30rem]"
+          imageHeight="min-h-[50vh] lg:h-[30vh]"
           itemBasis="lg:basis-1/4"
           border={false}
           className="lg:rounded-lg bg-white overflow-hidden"
@@ -216,7 +216,6 @@ export default async function Page({
             </div>
           </div>
           <div className="w-full flex flex-col items-start justify-start space-y-5 px-5 lg:px-0 pt-5">
-            <LineHeader title="About the service" className="lg:hidden" />
             <div className="grid grid-cols-1 w-full gap-5 lg:gap-y-10">
               {service.whatsIncluded && service.whatsIncluded.length > 0 && (
                 <ListWrapper
@@ -409,16 +408,23 @@ function MajorDetails({
         />
       ) : service.serviceType === ServiceType.OFFLINE && !service.address ? (
         <Setting
-          title="Offline"
+          title="At your location"
           subtitle={location}
           icon={<MdLocationCity className="text-3xl text-info" />}
         />
       ) : service.serviceType === ServiceType.OFFLINE && service.address ? (
-        <Setting
-          title={service.address.name}
-          subtitle={service.address.state + ", " + service.address.city}
-          icon={<MdLocationCity className="text-3xl text-info" />}
-        />
+        //open google maps in new tab
+        <Link
+          href={`https://www.google.com/maps/search/?api=1&query=${service.address.lat},${service.address.lng}`}
+          passHref
+          className="w-full"
+        >
+          <Setting
+            title="At thier location"
+            subtitle={service.address.state + ", " + service.address.city}
+            icon={<MdLocationCity className="text-3xl text-info" />}
+          />
+        </Link>
       ) : null}
       {callback.requested > 0 ? (
         <CustomDialog
