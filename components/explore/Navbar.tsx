@@ -14,11 +14,11 @@ import { consoleMenus, userMenus } from "@data/menu";
 import checkHere from "@helper_functions/check-path-nav";
 import { eraseCookie } from "@helper_functions/cookie";
 import { Bell, ChevronDownIcon, LogOutIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useParams, usePathname } from "next/navigation";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Badge } from "@components/ui/badge";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiFillCheckSquare, AiOutlineMenu } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import MobileLoginPopup from "@components/sign-in/MobileLoginPopup";
@@ -28,6 +28,12 @@ import { getCityStateCountry } from "@helper_functions/getIpAddress";
 import { GoLocation } from "react-icons/go";
 import { CustomDialog } from "@components/DialogPopup";
 import { BiDownArrow } from "react-icons/bi";
+import Loading from "@components/Loading";
+import {
+  fetchAvilableCities,
+  FetchAvilableCitiesResponse,
+} from "@api_functions/explore/fetch-available-cities";
+import Card from "@components/Card";
 
 export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
@@ -222,6 +228,7 @@ function MobileProfile({
       ) : null}
       <div className="w-fit">
         <CustomSheet
+          maxWidth="w-[80%]"
           title="Where to?"
           description="Navigate to your profile"
           triggerJSX={
@@ -492,16 +499,55 @@ function UserMenuDesktop({ response }: { response: FetchMyProfileResponse }) {
 
 function SelectCity() {
   const [city, setCity] = useState<string | null>(null);
+  const [state, setState] = useState<State>(State.LOADING);
+  const [cities, setCities] = useState<FetchAvilableCitiesResponse | null>(
+    null
+  );
+  const params = useParams();
   useEffect(() => {
-    const res = getCityStateCountry().then((res) => {
-      if (res) {
-        setCity(res.city);
-      } else {
-        setCity(null);
-      }
+    setState(State.LOADING);
+    const cityParam = params.city ? params.city.toString() : null;
+    const designationParam = params.designation
+      ? params.designation.toString()
+      : undefined;
+    Promise.all([
+      getCityStateCountry(cityParam).then((res) => {
+        if (res && res.city) {
+          setCity(res.city);
+        } else {
+          setCity(null);
+        }
+      }),
+      fetchAvilableCities(designationParam).then((res) => {
+        if (res) {
+          setCities(res);
+        } else {
+          setCities(null);
+        }
+      }),
+    ]).then(() => {
+      setState(State.SUCCESS);
     });
   }, []);
-  return (
+  const [designation, setDesignation] = useState<string | null>(null);
+  useEffect(() => {
+    console.log("params", params);
+    if (!params.city || typeof params.city !== "string") {
+      setCity(null);
+      return;
+    }
+    if (!params.designation || typeof params.designation !== "string") {
+      setDesignation(null);
+    } else {
+      setDesignation(params.designation);
+    }
+    setCity(params.city);
+  }, [params.designation, params.city]);
+  const path = designation
+    ? `/vendors/[city]/${designation}`
+    : `/vendors/[city]`;
+  console.log("path", path);
+  return state === State.SUCCESS ? (
     <CustomDialog
       title="Select City"
       triggerJSX={
@@ -509,8 +555,40 @@ function SelectCity() {
           <p className="text-base font-medium">{city || "Select City"}</p>
         </Button>
       }
+      closeId="close-city-select"
     >
-      <div className="grid grid-cols-1 gap-10 w-full">asdas</div>
+      <div className="grid grid-cols-2 gap-5 w-full">
+        {cities
+          ? cities.cities.map((cityData) => (
+              <Link
+                key={cityData.name}
+                href={path.replace("[city]", cityData.name.toLowerCase())}
+                onClick={() => {
+                  const doc = document.getElementById("close-city-select");
+                  if (doc) {
+                    doc.click();
+                  }
+                }}
+              >
+                <Card key={cityData.name}>
+                  <div className="flex flex-row items-center space-x-2 justify-between">
+                    <p className="font-medium">
+                      {cityData.name.charAt(0).toUpperCase() +
+                        cityData.name.slice(1)}
+                    </p>
+                    {city?.toLowerCase() === cityData.name.toLowerCase() && (
+                      <AiFillCheckSquare className="text-success text-xl" />
+                    )}
+                  </div>
+                </Card>
+              </Link>
+            ))
+          : null}
+      </div>
     </CustomDialog>
-  );
+  ) : state === State.LOADING ? (
+    <div className="relative inline-flex space-x-2">
+      <p className="text-sm font-light">Locating...</p>
+    </div>
+  ) : null;
 }

@@ -20,7 +20,7 @@ export default function UnderlinedHeader({
       >
         {title}
       </h3>
-      <div className="h-px w-[80%] bg-primary ml-1" />
+      <div className="h-px w-[80%] bg-primary" />
     </div>
   );
 }

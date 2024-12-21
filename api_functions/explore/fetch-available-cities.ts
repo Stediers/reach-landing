@@ -5,13 +5,18 @@ import { ApiResult } from "@data/types";
 export type FetchAvilableCitiesResponse = {
   cities: { name: string; count: number }[];
 };
-export async function fetchAvilableCities(): Promise<FetchAvilableCitiesResponse | null> {
+export async function fetchAvilableCities(
+  designation?: string
+): Promise<FetchAvilableCitiesResponse | null> {
   try {
     const response = await fetch(`${EXPLORE_API_URL}/fetch-available-cities`, {
-      method: RequestMethod[RequestMethod.GET],
+      method: RequestMethod[RequestMethod.POST],
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        designation,
+      }),
     });
     const data: ApiResult<FetchAvilableCitiesResponse> = await response.json();
     if (response.status === 200) {

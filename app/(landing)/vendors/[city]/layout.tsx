@@ -4,10 +4,5 @@ import SelectCity from "../SelectCity";
 export const revalidate = 0;
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <SelectCity cities={["New York", "San Francisco", "Los Angeles"]} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

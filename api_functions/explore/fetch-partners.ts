@@ -2,13 +2,29 @@ import { EXPLORE_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { ApiResult, FetchPartnerResponse } from "@data/types";
 
+export type FetchPartnersResponse = {
+  designation: string;
+  data: {
+    name: string;
+    handle: string;
+    designation: string;
+    id: string;
+    tagLine: string;
+    bio: string;
+    imageUrl: string;
+    rating: number | null;
+    languages: string[];
+    serviceImages: string[];
+  }[];
+};
+
 export async function fetchPartners({
   city,
   profession,
 }: {
   city?: string;
   profession?: string;
-}): Promise<FetchPartnerResponse[] | null> {
+}): Promise<FetchPartnersResponse | null> {
   try {
     const response = await fetch(`${EXPLORE_API_URL}/fetch-partners`, {
       method: RequestMethod[RequestMethod.POST],
@@ -20,7 +36,7 @@ export async function fetchPartners({
         profession,
       }),
     });
-    const data: ApiResult<FetchPartnerResponse[]> = await response.json();
+    const data: ApiResult<FetchPartnersResponse> = await response.json();
     if (response.status === 200) {
       if (data.errorMessage) {
         return null;
