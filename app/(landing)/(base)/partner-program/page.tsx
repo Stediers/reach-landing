@@ -1,35 +1,13 @@
-import { CustomerRoutes, ServiceCategory, State } from "@data/enums";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
-import { BiRupee } from "react-icons/bi";
 import { Button } from "@components/ui/button";
-import {
-  ArrowRight,
-  Check,
-  FeatherIcon,
-  Flower,
-  HandshakeIcon,
-  MessageSquareQuote,
-  Percent,
-  Search,
-  SearchCheckIcon,
-  ShieldCheckIcon,
-  ShieldCloseIcon,
-  Star,
-  UserPlus,
-} from "lucide-react";
-import ImageComponent from "@components/ImageComponent";
+import { Check, Percent } from "lucide-react";
 import Card from "@components/Card";
-import ReachSVG from "@components/svg/ReachSVG";
-import { BsInstagram, BsLightningCharge, BsShieldCheck } from "react-icons/bs";
 import Link from "next/link";
 import FeatureCard from "@components/FeatureCard";
-import { ProfileCard } from "@components/ProfileCard";
 import { NumberCircle } from "@components/landing/NumberCircle";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
-import { CarouselItem } from "@components/ui/carousel";
-import RawCarousel from "@components/carousel/RawCarousel";
 import { Badge } from "@components/ui/badge";
 import {
   Accordion,
@@ -41,15 +19,13 @@ import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partner
 import { FetchPartnerResponse } from "@data/types";
 import AppDownload from "@components/DownloadApp";
 import LinkButton from "@components/Button";
-import Logo from "@components/Logo";
 
 export const metadata: Metadata = {
   title: {
-    default: "ReachGig - Be your own Boss",
-    template: "%s - ReachGig",
+    absolute: "ReachGig - Be your own Boss",
   },
   description:
-    "Kickstart your career with a free website. Get discovered, get paid securely and find trustable clients easily.",
+    "Kickstart your career with a free website. Be discovered, get paid securely and find trustable clients easily.",
   keywords: [
     "freelancer",
     "freelance",
@@ -73,11 +49,11 @@ export const metadata: Metadata = {
     title: "ReachGig - Be your own Boss",
     description:
       "Kickstart your career with a free website. Get discovered, get paid securely and find trustable clients easily.",
-    url: "https://reachgig.com",
+    url: "https://reachgig.com/partner-program",
     type: "website",
     images: [
       {
-        url: "https://reachgig.com/images/home1.svg",
+        url: "https://reachgig.com/images/landing-profiles/home.webp",
         width: 1200,
         height: 630,
         alt: "ReachGig - Be your own Boss",
@@ -91,7 +67,7 @@ export const metadata: Metadata = {
     title: "ReachGig - Be your own Boss",
     description:
       "Kickstart your career with a free website. Get discovered, get paid securely and find trustable clients easily.",
-    images: ["https://reachgig.com/images/home1.svg"],
+    images: ["https://reachgig.com/images/landing-profiles/home.webp"],
   },
   // other: {
   //   structured_data: JSON.stringify({

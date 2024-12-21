@@ -26,12 +26,12 @@ export async function getCityStateCountry(): Promise<{
   country: string;
 }> {
   //use geolocation api
-  const city = getItemsFromLocalStorage<string>({ key: "city" });
-  const state = getItemsFromLocalStorage<string>({ key: "state" });
-  const country = getItemsFromLocalStorage<string>({ key: "country" });
-  if (city && state && country) {
-    return new Promise((resolve) => resolve({ city, state, country }));
-  }
+  // const city = getItemsFromLocalStorage<string>({ key: "city" });
+  // const state = getItemsFromLocalStorage<string>({ key: "state" });
+  // const country = getItemsFromLocalStorage<string>({ key: "country" });
+  // if (city && state && country) {
+  //   return new Promise((resolve) => resolve({ city, state, country }));
+  // }
   const loader = new Loader({
     apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
     version: "weekly",

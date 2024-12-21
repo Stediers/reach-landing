@@ -1,10 +1,9 @@
-import { Suspense } from "react";
 import { ServiceCardSkeleton } from "@components/ServiceCard";
 import Card from "@components/Card";
 import Image from "next/image";
 import { fetchAllPartners } from "@api_functions/explore/seo/fetch-all-partners";
 import { Button } from "@components/ui/button";
-import { CustomerRoutes, Designation } from "@data/enums";
+import { CustomerRoutes } from "@data/enums";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -12,12 +11,10 @@ export const revalidate = 600; //10 minutes
 
 export const metadata: Metadata = {
   title: {
-    default:
-      "ReachGig - Find & Hire Trusted Local Service Professionals in Tamil Nadu",
-    template: "%s - ReachGig",
+    absolute: "ReachGig",
   },
   description:
-    "Connect with verified local service providers for makeup, photography, wedding planning & more. Secure payments, verified professionals & trusted services across Tamil Nadu. Get started for free!",
+    "Safely connect with 100+ trusted freelancers. Explore detailed profiles, secure payments, and seamless communication with ReachGig.",
   keywords: [
     "Local Service Providers",
     "Verified Professionals",
@@ -33,14 +30,14 @@ export const metadata: Metadata = {
     "Verified Service Providers",
   ].join(", "),
   openGraph: {
-    title: "ReachGig - Trusted Local Service Professionals in Tamil Nadu",
+    title: "ReachGig",
     description:
       "Find and hire verified local service providers. Secure payments, identity verification & trusted professionals for makeup, photography, wedding planning & more.",
     url: "https://reachgig.com",
     type: "website",
     images: [
       {
-        url: "https://reachgig.com/images/home1.svg",
+        url: "https://reachgig.com/images/feedback.svg",
         width: 1200,
         height: 630,
         alt: "ReachGig - Find Local Service Professionals",
@@ -51,10 +48,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReachGig - Find Trusted Local Service Professionals",
+    title: "ReachGig - Find Trusted Service Professionals",
     description:
-      "Connect with verified local service providers. Secure payments & trusted professionals across Tamil Nadu.",
-    images: ["https://reachgig.com/images/home1.svg"],
+      "Find and hire verified local service providers. Secure payments, identity verification & trusted professionals for makeup, photography, wedding planning & more.",
+    images: ["https://reachgig.com/images/feedback.svg"],
   },
   // other: {
   //   structured_data: JSON.stringify({
@@ -109,7 +106,7 @@ export default async function ExplorePage() {
                     <Profile
                       key={profile.id}
                       name={profile.firstName + " " + profile.lastName}
-                      designation={profile.bio}
+                      designation={profile.tagLine}
                       image={profile.imageUrl}
                       handle={profile.handle}
                     />

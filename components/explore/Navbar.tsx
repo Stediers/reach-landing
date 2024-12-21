@@ -13,7 +13,7 @@ import { CustomerRoutes, State } from "@data/enums";
 import { consoleMenus, userMenus } from "@data/menu";
 import checkHere from "@helper_functions/check-path-nav";
 import { eraseCookie } from "@helper_functions/cookie";
-import { Bell, LogOutIcon } from "lucide-react";
+import { Bell, ChevronDownIcon, LogOutIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -24,6 +24,10 @@ import LoadingWrapper from "@wrapper/LoadingWrapper";
 import MobileLoginPopup from "@components/sign-in/MobileLoginPopup";
 import { Skeleton } from "@components/ui/skeleton";
 import AppDownload from "@components/DownloadApp";
+import { getCityStateCountry } from "@helper_functions/getIpAddress";
+import { GoLocation } from "react-icons/go";
+import { CustomDialog } from "@components/DialogPopup";
+import { BiDownArrow } from "react-icons/bi";
 
 export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
@@ -70,7 +74,7 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   }, []);
   const currentPath = usePathname();
   const excludedPaths = ["/explore", "/"];
-  return showMobileNav ? (
+  return (
     <div
       className={`sticky top-0 !z-50 bg-white  border-b flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
     >
@@ -92,42 +96,14 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
             pageState={pageState}
             response={response}
           />
-          <MobileProfile
-            pageState={pageState}
-            path={currentPath}
-            response={response}
-          />
-        </div>
-      </div>
-    </div>
-  ) : (
-    <div
-      className={`hidden sticky top-0 !z-50 bg-white  border-b shadow-sm lg:flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
-      hidden
-    >
-      <div
-        className={`flex flex-row items-center
-    ${!excludedPaths.includes(currentPath) ? "max-w-7xl" : "w-full"} 
-    justify-center w-full lg:px-10 px-5 py-3 transition-all duration-300`}
-      >
-        <div className="flex grid-cols-2 w-full justify-between">
-          <Link className="flex flex-col w-fit shrink-0" href={"/"}>
-            <p className="text-xl font-medium">ReachGig</p>
-            <p className="text-sm text-gray-500 tracking-wide">
-              Be your own Boss.
-            </p>
-          </Link>
-
-          <DesktopProfile
-            path={currentPath}
-            pageState={pageState}
-            response={response}
-          />
-          <MobileProfile
-            pageState={pageState}
-            path={currentPath}
-            response={response}
-          />
+          <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
+            <SelectCity />
+            <MobileProfile
+              pageState={pageState}
+              path={currentPath}
+              response={response}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -511,5 +487,30 @@ function UserMenuDesktop({ response }: { response: FetchMyProfileResponse }) {
         </Link>
       </DialogClose>
     </div>
+  );
+}
+
+function SelectCity() {
+  const [city, setCity] = useState<string | null>(null);
+  useEffect(() => {
+    const res = getCityStateCountry().then((res) => {
+      if (res) {
+        setCity(res.city);
+      } else {
+        setCity(null);
+      }
+    });
+  }, []);
+  return (
+    <CustomDialog
+      title="Select City"
+      triggerJSX={
+        <Button variant="outline" className="space-x-2">
+          <p className="text-base font-medium">{city || "Select City"}</p>
+        </Button>
+      }
+    >
+      <div className="grid grid-cols-1 gap-10 w-full">asdas</div>
+    </CustomDialog>
   );
 }

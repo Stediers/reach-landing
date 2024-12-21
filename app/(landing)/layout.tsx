@@ -2,8 +2,6 @@ import { NavBar } from "@components/explore/Navbar";
 import { Metadata } from "next";
 import React from "react";
 import Footer from "@components/footer/Footer";
-import Logo from "@components/Logo";
-import Image from "next/image";
 
 type RootLayoutProps = {
   children: React.ReactNode;

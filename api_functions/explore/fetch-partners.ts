@@ -2,29 +2,25 @@ import { EXPLORE_API_URL } from "@data/api";
 import { RequestMethod } from "@data/enums";
 import { ApiResult, FetchPartnerResponse } from "@data/types";
 
-export type FetchAllPartners = {
-  group: string;
-  partners: {
-    firstName: string;
-    lastName: string;
-    bio: string;
-    imageUrl: string;
-    handle: string;
-    designation: string;
-    id: string;
-    tagLine: string;
-  }[];
-};
-
-export async function fetchAllPartners(): Promise<FetchAllPartners[] | null> {
+export async function fetchPartners({
+  city,
+  profession,
+}: {
+  city?: string;
+  profession?: string;
+}): Promise<FetchPartnerResponse[] | null> {
   try {
-    const response = await fetch(`${EXPLORE_API_URL}/fetch-all-partners`, {
-      method: RequestMethod[RequestMethod.GET],
+    const response = await fetch(`${EXPLORE_API_URL}/fetch-partners`, {
+      method: RequestMethod[RequestMethod.POST],
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        city,
+        profession,
+      }),
     });
-    const data: ApiResult<FetchAllPartners[]> = await response.json();
+    const data: ApiResult<FetchPartnerResponse[]> = await response.json();
     if (response.status === 200) {
       if (data.errorMessage) {
         return null;
