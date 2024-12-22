@@ -26,14 +26,15 @@ async function _trackService({
     if (!guestId) {
       ipAddress = await getIpAddress();
     }
-    const cityStateCountry = await getCityStateCountry();
+    const cityStateCountry = await getCityStateCountry(null);
     devLog("cityStateCountry", cityStateCountry);
+    if (!cityStateCountry) return;
     const request: TrackServiceRequest = {
       serviceId,
       ipAddress: ipAddress ? ipAddress : undefined,
-      city: cityStateCountry.city,
-      state: cityStateCountry.state,
-      country: cityStateCountry.country,
+      city: cityStateCountry.city ? cityStateCountry.city : "Unknown",
+      state: cityStateCountry.state ? cityStateCountry.state : "Unknown",
+      country: cityStateCountry.country ? cityStateCountry.country : "Unknown",
       guestId: guestId ? guestId : undefined,
       source: source,
     };

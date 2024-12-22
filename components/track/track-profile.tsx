@@ -25,15 +25,16 @@ async function _trackProfile({
     if (!guestId) {
       ipAddress = await getIpAddress();
     }
-    const cityStateCountry = await getCityStateCountry();
+    const cityStateCountry = await getCityStateCountry(null);
     devLog("cityStateCountry", cityStateCountry);
+    if (!cityStateCountry) return;
     const request: TrackProfileRequest = {
       profileId: gigId,
       guestId: guestId ? guestId : undefined,
       ipAddress: ipAddress ? ipAddress : undefined,
-      city: cityStateCountry?.city,
-      state: cityStateCountry?.state,
-      country: cityStateCountry?.country,
+      city: cityStateCountry.city ? cityStateCountry.city : "Unknown",
+      state: cityStateCountry.state ? cityStateCountry.state : "Unknown",
+      country: cityStateCountry.country ? cityStateCountry.country : "Unknown",
       source,
     };
     await trackProfile(request);
