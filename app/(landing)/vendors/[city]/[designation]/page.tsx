@@ -20,9 +20,42 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import ImageComponent from "@components/ImageComponent";
 import Profile from "./Profile";
 import { redirect } from "next/navigation";
+import { ResolvingMetadata, Metadata } from "next";
 
 //revalidate every 10 minutes
-export const revalidate = 0;
+export const revalidate = 60;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { designation: string; city: string };
+}): Promise<Metadata> {
+  const res = await fetchPartners({
+    city: params.city,
+    profession: params.designation,
+  });
+  if (!res) {
+    return {
+      title: "Top 10 " + params.designation + " in " + params.city,
+    };
+  }
+  return {
+    title:
+      "Top 10 " + params.designation + " in " + params.city + " - ReachGig",
+    description: `Tired of searching for ${params.designation} in ${params.city}? ReachGig has got you covered. Explore top ${params.designation} in ${params.city} and find your dream freelancer today!`,
+    keywords: `${params.designation}, ${params.city}, Top 10 ${params.designation} in ${params.city}, ReachGig`,
+    alternates: {
+      canonical: `https://reachgig.com/vendors/${params.city}/${params.designation}`,
+    },
+    openGraph: {
+      title:
+        "Top 10 " + params.designation + " in " + params.city + " - ReachGig",
+      type: "website",
+      description: `Tired of searching for ${params.designation} in ${params.city}? ReachGig has got you covered. Explore top ${params.designation} in ${params.city} and find your dream freelancer today!`,
+      url: `https://reachgig.com/vendors/${params.city}/${params.designation}`,
+    },
+  };
+}
 
 export default async function Page({
   params,

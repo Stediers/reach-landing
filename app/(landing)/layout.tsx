@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   description:
     "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
   openGraph: {
+    siteName: "ReachGig",
+    locale: "en_IN",
     title: "ReachGig",
     description:
       "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
@@ -29,11 +31,22 @@ export const metadata: Metadata = {
         alt: "ReachGig",
       },
     ],
-    locale: "en_US",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
+    googleBot: "index, follow",
+  },
+  applicationName: "ReachGig",
+  appleWebApp: {
+    title: "ReachGig",
+    statusBarStyle: "default",
+    capable: true,
   },
   metadataBase: new URL("https://reachgig.com"),
-  applicationName: "ReachGig",
-  robots: "index, follow",
 };
 
 export default function ConsoleLayout({ children }: RootLayoutProps) {

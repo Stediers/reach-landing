@@ -22,19 +22,63 @@ export const generateMetadata = async ({
       .map((category) => category.profession.name);
     if (topCategories.length === 3) {
       return {
-        title: `${topCategories[0]}, ${topCategories[1]}, ${topCategories[2]} Freelancers in ${params.city} | ReachGig`,
+        title: `Find ${topCategories[0]}, ${topCategories[1]}, ${topCategories[2]} Freelancers in ${params.city} - Prices and Reviews`,
+        description: `One stop platform to hire the most trusted Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
+        keywords: `${topCategories[0]}, ${topCategories[1]}, ${topCategories[2]}, Freelancers, ${params.city}, ReachGig`,
+        alternates: {
+          canonical: `https://reachgig.com/vendors/${params.city}`,
+        },
+        openGraph: {
+          title: `Find ${topCategories[0]}, ${topCategories[1]}, ${topCategories[2]} Freelancers in ${params.city} - Prices and Reviews`,
+          type: "website",
+          description: `One stop platform to hire the most trusted Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
+          url: `https://reachgig.com/vendors/${params.city}`,
+        },
       };
     } else if (topCategories.length === 2) {
       return {
-        title: `${topCategories[0]}, ${topCategories[1]} Freelancers in ${params.city} | ReachGig`,
+        title: `${topCategories[0]}, ${topCategories[1]} Freelancers in ${params.city} - Prices and Reviews`,
+        description: `One stop platform to hire the most trusted Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
+        keywords: `${topCategories[0]}, ${topCategories[1]}, Freelancers, ${params.city}, ReachGig`,
+        alternates: {
+          canonical: `https://reachgig.com/vendors/${params.city}`,
+        },
+        openGraph: {
+          title: `Find ${topCategories[0]}, ${topCategories[1]}, ${topCategories[2]} Freelancers in ${params.city} - Prices and Reviews`,
+          type: "website",
+          description: `One stop platform to hire the most trusted Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
+          url: `https://reachgig.com/vendors/${params.city}`,
+        },
       };
     } else if (topCategories.length === 1) {
       return {
-        title: `${topCategories[0]} Freelancers in ${params.city} | ReachGig`,
+        title: `${topCategories[0]} Freelancers in ${params.city} - Prices and Reviews`,
+        description: `One stop platform to hire the most trusted Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
+        keywords: `${topCategories[0]}, Freelancers, ${params.city}, ReachGig`,
+        alternates: {
+          canonical: `https://reachgig.com/vendors/${params.city}`,
+        },
+        openGraph: {
+          title: `Find ${topCategories[0]}, ${topCategories[1]}, ${topCategories[2]} Freelancers in ${params.city} - Prices and Reviews`,
+          type: "website",
+          description: `One stop platform to hire the most trusted Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
+          url: `https://reachgig.com/vendors/${params.city}`,
+        },
       };
     } else
       return {
-        title: `${topCategories[0]} Freelancers in ${params.city} | ReachGig`,
+        title: `${topCategories[0]} Freelancers in ${params.city} - Prices and Reviews`,
+        description: `The lastest list of Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
+        keywords: `${topCategories[0]}, Freelancers, ${params.city}, ReachGig`,
+        alternates: {
+          canonical: `https://reachgig.com/vendors/${params.city}`,
+        },
+        openGraph: {
+          title: `Find ${topCategories[0]}, ${topCategories[1]}, ${topCategories[2]} Freelancers in ${params.city} - Prices and Reviews`,
+          type: "website",
+          description: `One stop platform to hire the most trusted Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
+          url: `https://reachgig.com/vendors/${params.city}`,
+        },
       };
   }
 };
