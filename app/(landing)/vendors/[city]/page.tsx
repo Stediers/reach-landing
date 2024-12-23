@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import UnderlinedHeader from "@components/UnderlinedHeader";
+import stringFormater from "@helper_functions/text/string-formater";
 
 export const generateMetadata = async ({
   params,
@@ -93,9 +94,9 @@ export default async function Page({
   console.log("city", city);
   const res = await fetchCategoriesByCity(city);
   if (!res) return <ServiceCardSkeleton />;
-  console.log("res", res);
+  console.log("res", res.data);
   return (
-    <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar py-5 space-y-5">
+    <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar space-y-5">
       <div className="flex flex-row items-center  justify-between w-full">
         {/* <h1 className="text-xl lg:text-2xl font-medium max-w-md">
           Explore Services in {city}
@@ -112,11 +113,11 @@ export default async function Page({
             .filter((value) => value.count > 0)
             .map((value) => (
               <ProfessionCard
-                key={value.profession.name}
-                name={value.profession.name}
+                key={stringFormater(value.profession.name)}
+                name={stringFormater(value.profession.name)}
                 des={value.profession.description}
-                count={value.count}
                 city={city}
+                link={value.profession.name}
               />
             ))}
         </div>
@@ -128,18 +129,18 @@ export default async function Page({
 function ProfessionCard({
   name,
   des,
-  count,
   city,
+  link,
 }: {
   name: string;
   des: string;
-  count: number;
   city: string;
+  link: string;
 }) {
   return (
     <Link
       className="flex flex-col items-start justify-center space-y-3 overflow-hidden"
-      href={`/vendors/${city}/${name}`}
+      href={`/vendors/${city}/${link}`}
     >
       <Card className="flex flex-col items-start justify-center !space-y-3 hover:cursor-pointer group">
         <div className="flex flex-col items-start justify-center space-y-2">

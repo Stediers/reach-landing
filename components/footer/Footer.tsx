@@ -198,13 +198,13 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div className="text-center sm:text-left break-all">
+            <div className="text-center sm:text-left break-all flex flex-col lg:items-start items-center">
               <p className="text-lg font-medium text-white">Contact Us</p>
 
-              <ul className="mt-8 space-y-4 text-base flex flex-col justify-center">
+              <ul className="mt-8 space-y-4 text-base flex flex-col justify-center items-center">
                 <li>
                   <Link
-                    className="flex items-center justify-center"
+                    className="flex items-center justify-center w-fit space-x-2"
                     href="mailto:reachgig.connect@gmail.com"
                   >
                     <svg
@@ -230,7 +230,7 @@ export default function Footer() {
 
                 <li>
                   <Link
-                    className="flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
+                    className="flex items-center justify-center w-fit space-x-2"
                     href="tel:+917550083900"
                   >
                     <svg
@@ -248,9 +248,7 @@ export default function Footer() {
                       />
                     </svg>
 
-                    <span className="flex-1 text-gray-200 underline underline-offset-4">
-                      Call Us
-                    </span>
+                    <span className="flex-1 text-gray-200">Call Us</span>
                   </Link>
                 </li>
               </ul>

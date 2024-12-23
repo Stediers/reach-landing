@@ -15,6 +15,10 @@ export type FetchPartnersResponse = {
     rating: number | null;
     languages: string[];
     serviceImages: string[];
+    averagePrice: {
+      low: number;
+      high: number;
+    };
   }[];
 };
 

@@ -380,6 +380,9 @@ export enum CustomerRoutes {
   //pages
   PARTNER = "/[partnerHandle]",
   SERVICE = "/[partnerHandle]/service/[serviceId]",
+  //vendors
+  VENDORS = "/vendors/[city]",
+  VENDORS_BY_DESIGNATION = "/vendors/[city]/[designation]",
 }
 
 export enum AppointmentRequestStatus {
