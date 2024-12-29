@@ -30,11 +30,12 @@ export const menus: Menu[] = [
 
 export const consoleMenus: Menu[] = [
   {
-    title: "Browse",
+    title: "Browse Services",
     subtitle: "Search for services",
     icon: <Search className="w-6 h-6 shrink-0" />,
     path: CustomerRoutes.EXPLORE,
   },
+
   {
     title: "Blogs",
     subtitle: "Read our blogs",

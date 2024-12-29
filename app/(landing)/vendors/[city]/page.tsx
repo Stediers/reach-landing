@@ -53,7 +53,7 @@ export const generateMetadata = async ({
       };
     } else if (topCategories.length === 1) {
       return {
-        title: `${topCategories[0]} Freelancers in ${params.city} - Prices and Reviews`,
+        title: `${topCategories[0]}s in ${params.city} - Prices and Reviews`,
         description: `One stop platform to hire the most trusted Freelancers in ${params.city} in reachgig. Have a safe and secure appointment by utilizing our integrated payment portals, authentic ratings, and secure communication channels.`,
         keywords: `${topCategories[0]}, Freelancers, ${params.city}, ReachGig`,
         alternates: {
@@ -98,10 +98,10 @@ export default async function Page({
   return (
     <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar space-y-5">
       <div className="flex flex-row items-center  justify-between w-full">
-        {/* <h1 className="text-xl lg:text-2xl font-medium max-w-md">
+        <h1 className="text-xl lg:text-2xl font-medium max-w-md">
           Explore Services in {city}
-        </h1> */}
-        <UnderlinedHeader title={`Explore Services in ${city}`} />
+        </h1>
+        {/* <UnderlinedHeader title={`Explore Services in ${city}`} /> */}
       </div>
       {res.data.every((value) => value.count === 0) ? (
         <div className="flex flex-col items-center justify-center space-y-3">
@@ -110,6 +110,7 @@ export default async function Page({
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
           {res.data
+            .sort((a, b) => b.count - a.count)
             .filter((value) => value.count > 0)
             .map((value) => (
               <ProfessionCard
@@ -117,7 +118,8 @@ export default async function Page({
                 name={stringFormater(value.profession.name)}
                 des={value.profession.description}
                 city={city}
-                link={value.profession.name}
+                link={value.profession.code}
+                count={value.count}
               />
             ))}
         </div>
@@ -131,11 +133,13 @@ function ProfessionCard({
   des,
   city,
   link,
+  count,
 }: {
   name: string;
   des: string;
   city: string;
   link: string;
+  count: number;
 }) {
   return (
     <Link

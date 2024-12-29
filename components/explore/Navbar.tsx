@@ -13,9 +13,9 @@ import { CustomerRoutes, State } from "@data/enums";
 import { consoleMenus, userMenus } from "@data/menu";
 import checkHere from "@helper_functions/check-path-nav";
 import { eraseCookie } from "@helper_functions/cookie";
-import { Bell, ChevronDownIcon, LogOutIcon } from "lucide-react";
+import { Bell, ChevronDownIcon, LogOutIcon, User2 } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 import { Badge } from "@components/ui/badge";
 import { AiFillCheckSquare, AiOutlineMenu } from "react-icons/ai";
@@ -34,6 +34,8 @@ import {
   FetchAvilableCitiesResponse,
 } from "@api_functions/explore/fetch-available-cities";
 import Card from "@components/Card";
+import { setItemsToLocalStorage } from "@api_functions/internal/local-storage";
+import { getItemsFromLocalStorage } from "@helper_functions/local-storage";
 
 export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
@@ -80,6 +82,7 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   }, []);
   const currentPath = usePathname();
   const excludedPaths = ["/explore", "/"];
+  const [city, setCity] = useState<string | null>(null);
   return (
     <div
       className={`sticky top-0 !z-50 bg-white  border-b flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
@@ -103,11 +106,12 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
             response={response}
           />
           <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
-            <SelectCity />
+            <SelectCity city={city} setCity={setCity} />
             <MobileProfile
               pageState={pageState}
               path={currentPath}
               response={response}
+              city={city}
             />
           </div>
         </div>
@@ -201,31 +205,17 @@ function MobileProfile({
   path,
   response,
   pageState,
+  city,
 }: {
   path: string;
   response: FetchMyProfileResponse | null;
   pageState: State;
+  city: string | null;
 }) {
   const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
   return (
     <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
-      {response ? (
-        <div className="w-fit">
-          {/* <Link
-            href="/console/appointments/requests"
-            className="flex items-center w-full space-x-2 relative"
-          >
-            <Button variant="outline" size="icon">
-              <Bell className="h-[1.3rem] w-[1.3rem]" />
-            </Button>
-            {response.requests.length > 0 && (
-              <Badge title="New" className="absolute -top-2 -right-2">
-                {response.requests.length}
-              </Badge>
-            )}
-          </Link> */}
-        </div>
-      ) : null}
+      {response ? <div className="w-fit"></div> : null}
       <div className="w-fit">
         <CustomSheet
           maxWidth="w-[80%]"
@@ -323,6 +313,32 @@ function MobileProfile({
                 </Link>
               </SheetClose>
             )}
+            <SheetClose asChild>
+              <Link
+                className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full"
+                href={CustomerRoutes.VENDORS.replace(
+                  "[city]",
+                  city || "chennai"
+                )}
+              >
+                <div className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full">
+                  <div className="w-[10%]">
+                    <User2 className="h-[1.3rem] w-[1.3rem]" />
+                  </div>
+                  <p className="text-base font-medium w-full">
+                    Explore Vendors
+                  </p>
+                </div>
+                {checkHere({ path: path || "", menuPath: "/vendors" }) && (
+                  <Badge
+                    title="New"
+                    className="rounded-md text-xs bg-indigo-500"
+                  >
+                    Here
+                  </Badge>
+                )}
+              </Link>
+            </SheetClose>
             {consoleMenus.map((menu) => (
               <SheetClose asChild key={menu.path}>
                 <Link
@@ -497,14 +513,20 @@ function UserMenuDesktop({ response }: { response: FetchMyProfileResponse }) {
   );
 }
 
-function SelectCity() {
-  const [city, setCity] = useState<string | null>(null);
+function SelectCity({
+  city,
+  setCity,
+}: {
+  city: string | null;
+  setCity: Dispatch<SetStateAction<string | null>>;
+}) {
   const [state, setState] = useState<State>(State.LOADING);
   const [cities, setCities] = useState<FetchAvilableCitiesResponse | null>(
     null
   );
   const params = useParams();
   useEffect(() => {
+    if (!params) return;
     setState(State.LOADING);
     const cityParam = params.city ? params.city.toString() : null;
     const designationParam = params.designation

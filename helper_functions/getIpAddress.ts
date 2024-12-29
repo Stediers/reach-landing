@@ -69,9 +69,9 @@ export async function getCityStateCountry(city: string | null): Promise<{
                 setItemsToLocalStorage({ key: "state", item: state });
                 setItemsToLocalStorage({ key: "country", item: country });
                 return resolve({
-                  city: city || "Unknown",
-                  state: state || "Unknown",
-                  country: country || "Unknown",
+                  city: (city || "Unknown").toLowerCase(),
+                  state: (state || "Unknown").toLowerCase(),
+                  country: (country || "Unknown").toLowerCase(),
                 });
               } else {
                 console.log("Geocoder failed due to: " + status);

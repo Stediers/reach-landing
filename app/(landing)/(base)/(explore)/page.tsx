@@ -9,18 +9,18 @@ import { Metadata } from "next";
 import { useEffect } from "react";
 import PopularDesignations from "./PopularDesignations";
 
-export const revalidate = 600; //10 minutes
+export const revalidate = 0; //10 minutes
 
 export const metadata: Metadata = {
   title: {
     absolute: "ReachGig",
   },
   description:
-    "Safely connect with 100+ trusted freelancers. Explore detailed profiles, secure payments, and seamless communication with ReachGig.",
+    "Reachig enables you tp safely connect with 100+ trusted freelancers by exploring detailed profiles offering secure payments portals and seamless communication channels.",
   keywords: [
     "Local Service Providers",
     "Verified Professionals",
-    "Makeup Artists Tamil Nadu",
+    "Makeup Artists",
     "Wedding Photographers",
     "Mehandi Artists",
     "Wedding Planners",
@@ -28,8 +28,9 @@ export const metadata: Metadata = {
     "Trusted Professionals",
     "Service Provider Directory",
     "Book Local Services",
-    "Professional Services Tamil Nadu",
+    "Professional Services",
     "Verified Service Providers",
+    "Tamil Nadu",
   ].join(", "),
   openGraph: {
     title: "ReachGig",

@@ -103,18 +103,6 @@ export default function Profile({
                 </div>
               </div>
             </div>
-            {/* <div
-              className="shadow-lg top-2 shrink-0 z-10 right-2 w-12 h-12 flex justify-center items-center rounded-full z-20 text-white cursor-pointer"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ImageComponent
-                src={partner.imageUrl}
-                objectPosition="center"
-                alt={partner.name}
-                className="rounded-full w-full h-full"
-                popup={true}
-              />
-            </div> */}
             <div className="flex flex-row items-center justify-center space-x-1">
               <BoxRating rating={rating} />
             </div>

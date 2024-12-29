@@ -48,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           const designations = designationsData ? designationsData.data : [];
 
           return designations.map((designation) => ({
-            url: `${baseUrl}/vendors/${city.name}/${designation.profession.name}`,
+            url: `${baseUrl}/vendors/${city.name}/${designation.profession.code}`,
             lastModified: new Date().toISOString(),
             changeFrequency: "daily" as const,
             priority: 0.8,
@@ -82,9 +82,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       })),
       // Dynamic gig routes
-      ...gigRoutes,
+      ...gigRoutes.map((route) => ({
+        url: route.url,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      })),
       // Dynamic vendor routes
-      ...vendorRoutes,
+      ...vendorRoutes.map((route) => ({
+        url: route.url,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      })),
     ];
   } catch (error) {
     console.error(error);

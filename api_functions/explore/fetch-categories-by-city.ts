@@ -7,6 +7,7 @@ export type FetchCategoriesByCityResponse = {
     profession: {
       name: string;
       description: string;
+      code: string;
     };
     count: number;
   }[];

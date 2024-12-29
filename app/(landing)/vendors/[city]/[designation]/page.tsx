@@ -14,6 +14,8 @@ import {
   BreadcrumbPage,
 } from "@components/ui/breadcrumb";
 import { CustomerRoutes } from "@data/enums";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 //revalidate every 10 minutes
 export const revalidate = 60;
@@ -64,16 +66,15 @@ export default async function Page({
   }
   return (
     <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar space-y-5">
-      <div className="flex flex-row items-center  justify-between w-full">
-        {/* <h1 className="text-xl lg:text-2xl font-medium max-w-md">
-          Explore <span className="text-primary">{res.designation}</span> in{" "}
-          {params.city}
-        </h1> */}
-        <UnderlinedHeader
-          title={`Top ${stringFormater(res.designation)} in ${stringFormater(
-            params.city
-          )}`}
-        />
+      <div className="flex flex-row items-center  justify-start space-x-3 w-full">
+        <Link
+          href={CustomerRoutes.VENDORS_BY_CITY.replace("[city]", params.city)}
+        >
+          <ArrowLeft className="h-6 w-6" />
+        </Link>
+        <h1 className="text-xl lg:text-2xl font-medium max-w-md">
+          Top {stringFormater(res.designation)} in {stringFormater(params.city)}
+        </h1>
       </div>
       {res.data.length === 0 ? (
         <div className="flex flex-col items-center justify-center space-y-3">

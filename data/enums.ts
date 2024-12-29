@@ -381,7 +381,8 @@ export enum CustomerRoutes {
   PARTNER = "/[partnerHandle]",
   SERVICE = "/[partnerHandle]/service/[serviceId]",
   //vendors
-  VENDORS = "/vendors/[city]",
+  VENDORS = "/vendors",
+  VENDORS_BY_CITY = "/vendors/[city]",
   VENDORS_BY_DESIGNATION = "/vendors/[city]/[designation]",
 }
 

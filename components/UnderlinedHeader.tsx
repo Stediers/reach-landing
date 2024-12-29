@@ -10,7 +10,7 @@ export default function UnderlinedHeader({
   return (
     <div className={`w-fit flex flex-col ${align} space-y-1`}>
       <h3
-        className={`text-xl lg:text-2xl font-medium first-letter:capitalize ${className} ${
+        className={`text-xl text-start lg:text-2xl font-medium first-letter:capitalize ${className} ${
           align === "items-start"
             ? "text-left"
             : align === "items-end"
