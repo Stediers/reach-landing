@@ -157,9 +157,9 @@ export default async function Page({
     ? "preview"
     : null;
 
-  const uniqueCategories = response.services
-    .map((service) => service.category)
-    .filter((value, index, self) => self.indexOf(value) === index);
+  // const uniqueCategories = response.services
+  //   .map((service) => service.category)
+  //   .filter((value, index, self) => self.indexOf(value) === index);
 
   return response ? <Mobile /> : null;
 

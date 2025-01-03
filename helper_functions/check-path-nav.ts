@@ -46,6 +46,11 @@ export default function checkHere({
     menuPath === CustomerRoutes.EDIT_ADDRESS
   ) {
     return true;
+  } else if (
+    path.startsWith(CustomerRoutes.VENDORS) &&
+    menuPath === "/vendors"
+  ) {
+    return true;
   } else {
     return false;
   }

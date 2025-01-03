@@ -106,7 +106,7 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
             response={response}
           />
           <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
-            <SelectCity city={city} setCity={setCity} />
+            {/* <SelectCity city={city} setCity={setCity} /> */}
             <MobileProfile
               pageState={pageState}
               path={currentPath}
@@ -316,7 +316,7 @@ function MobileProfile({
             <SheetClose asChild>
               <Link
                 className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full"
-                href={CustomerRoutes.VENDORS.replace(
+                href={CustomerRoutes.VENDORS_BY_CITY.replace(
                   "[city]",
                   city || "chennai"
                 )}
@@ -329,7 +329,10 @@ function MobileProfile({
                     Explore Vendors
                   </p>
                 </div>
-                {checkHere({ path: path || "", menuPath: "/vendors" }) && (
+                {checkHere({
+                  path: path || "",
+                  menuPath: "/vendors",
+                }) && (
                   <Badge
                     title="New"
                     className="rounded-md text-xs bg-indigo-500"

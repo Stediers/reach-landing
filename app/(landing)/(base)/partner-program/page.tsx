@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
 import { Button } from "@components/ui/button";
-import { Check, Percent } from "lucide-react";
+import { Check, Percent, Phone, StarsIcon } from "lucide-react";
 import Card from "@components/Card";
 import Link from "next/link";
 import FeatureCard from "@components/FeatureCard";
@@ -28,6 +28,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@components/ui/dialog";
+import { FaSuitcase } from "react-icons/fa";
+import { FcCallTransfer } from "react-icons/fc";
 
 export const revalidate = 60 * 60 * 24; // 24 hours
 
@@ -114,7 +116,7 @@ export default async function Main() {
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
       <People response={response} />
-      <HowItWorks />
+      <GiveClients />
       <TheresMore />
       <Pricing />
       <FrequentlyAskedQuestions />
@@ -123,13 +125,16 @@ export default async function Main() {
   );
 }
 
-function HowItWorks() {
+function GiveClients() {
   return (
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          Here&apos;s how <br />
-          it works
+          {/* Here&apos;s how <br />
+          it works */}
+          Give Clients
+          <br />
+          <span className="text-primary">what they want</span>
         </span>
       }
       mobileAlign="center"
@@ -138,34 +143,19 @@ function HowItWorks() {
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 gap-y-20 w-full">
         <FeatureCard
-          heading="Download the App"
-          description="Make the first impression with your own website."
-          icon={<NumberCircle number={1} size="lg" color="text" />}
+          heading="Your Services"
+          description="Mention what you offer with its price and duration."
+          icon={<FaSuitcase size={50} />}
         />
         <FeatureCard
-          heading="Create your Profile"
-          description="Mention the services you offer and get discovered."
-          icon={<NumberCircle number={2} size="lg" color="text" />}
+          heading="Easy Contact"
+          description="Give your clients an numerous ways to contact you."
+          icon={<Phone size={50} />}
         />
         <FeatureCard
-          heading="Add your services"
-          description="Paste your generated link on your social media."
-          icon={<NumberCircle number={3} size="lg" color="text" />}
-        />
-        <FeatureCard
-          heading="Let the world know"
-          description="Paste your generated link on all your social media."
-          icon={<NumberCircle number={4} size="lg" color="text" />}
-        />
-        <FeatureCard
-          heading="Start getting clients"
-          description="Get discovered by people looking for your services."
-          icon={<NumberCircle number={5} size="lg" color="text" />}
-        />
-        <FeatureCard
-          heading="Get paid"
-          description="Get paid securely and easily with our integrated payment gateway."
-          icon={<NumberCircle number={6} size="lg" color="text" />}
+          heading="Trustable Reviews"
+          description="Let your clients leave a review for your services."
+          icon={<StarsIcon size={50} />}
         />
       </div>
     </HeaderWrapper>
@@ -177,7 +167,8 @@ function TheresMore() {
     <HeaderWrapper
       title={
         <span className="!leading-snug">
-          Wait! <br /> <span className="text-primary">There&apos;s More</span>
+          Give Yourself <br />
+          <span className="font-medium text-primary">What You Deserve</span>
         </span>
       }
       mobileAlign="center"
@@ -306,19 +297,13 @@ function Hero() {
         <div className="flex flex-col lg:items-start items-center justify-center space-y-3 lg:space-y-5 w-full z-10 max-w-lg lg:max-w-none">
           <Badge variant="defaultOutline">With Instagram Integration</Badge>
           <h1 className="text-4xl lg:text-left lg:text-6xl xl:text-6xl font-semibold lg:font-semibold !leading-normal xl:!leading-[5.2rem] text-center">
-            <span className="font-medium">Get a</span>
+            <span className="font-medium">Grow your</span>
+            <br />
+            <span className="font-medium">Business with</span>
             <br />
             <span className="font-medium">
               <span className="bg-info px-3 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl">
-                Free
-              </span>{" "}
-              website
-            </span>
-            <br />
-            <span className="font-medium">
-              for your{" "}
-              <span className="bg-success px-3 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl">
-                Business
+                A Free&nbsp;Website
               </span>
             </span>
           </h1>
