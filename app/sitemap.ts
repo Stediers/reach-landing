@@ -1,3 +1,6 @@
+import { fetchAvilableCities } from "@api_functions/explore/fetch-available-cities";
+import { fetchCategoriesByCity } from "@api_functions/explore/fetch-categories-by-city";
+import fetchCities from "@api_functions/explore/fetch-cities";
 import { fetchGigHandles } from "@api_functions/explore/seo/get-gig-handles";
 import { CustomerRoutes } from "@data/enums";
 import { MetadataRoute } from "next";
@@ -24,8 +27,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     // Fetch dynamic gig handles
-    const data = await fetchGigHandles();
-    const gigHandles = data ? Array.from(new Set(data)) : [];
+    const gigData = await fetchGigHandles();
+    const gigHandles = gigData ? Array.from(new Set(gigData)) : [];
     const gigRoutes = gigHandles.map((handle) => ({
       url: `${baseUrl}${CustomerRoutes.PARTNER.replace(
         "[partnerHandle]",
@@ -35,6 +38,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily" as const,
       priority: 0.8,
     }));
+
+    const citiesData = await fetchAvilableCities();
+    const cities = citiesData ? citiesData : { cities: [] };
+    const vendorRoutes = (
+      await Promise.all(
+        cities.cities.map(async (city) => {
+          const designationsData = await fetchCategoriesByCity(city.name);
+          const designations = designationsData ? designationsData.data : [];
+
+          return designations.map((designation) => ({
+            url: `${baseUrl}/vendors/${city.name}/${designation.profession.code}`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: "daily" as const,
+            priority: 0.8,
+          }));
+        })
+      )
+    ).flat();
 
     return [
       // Home page with highest priority
@@ -61,7 +82,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       })),
       // Dynamic gig routes
-      ...gigRoutes,
+      ...gigRoutes.map((route) => ({
+        url: route.url,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      })),
+      // Dynamic vendor routes
+      ...vendorRoutes.map((route) => ({
+        url: route.url,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      })),
     ];
   } catch (error) {
     console.error(error);

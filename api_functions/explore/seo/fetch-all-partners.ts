@@ -12,6 +12,7 @@ export type FetchAllPartners = {
     handle: string;
     designation: string;
     id: string;
+    tagLine: string;
   }[];
 };
 

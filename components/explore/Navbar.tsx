@@ -13,17 +13,29 @@ import { CustomerRoutes, State } from "@data/enums";
 import { consoleMenus, userMenus } from "@data/menu";
 import checkHere from "@helper_functions/check-path-nav";
 import { eraseCookie } from "@helper_functions/cookie";
-import { Bell, LogOutIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { Bell, ChevronDownIcon, LogOutIcon, User2 } from "lucide-react";
+import { useParams, usePathname } from "next/navigation";
+import { useState, useEffect, useMemo, Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 import { Badge } from "@components/ui/badge";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiFillCheckSquare, AiOutlineMenu } from "react-icons/ai";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
 import MobileLoginPopup from "@components/sign-in/MobileLoginPopup";
 import { Skeleton } from "@components/ui/skeleton";
 import AppDownload from "@components/DownloadApp";
+import { getCityStateCountry } from "@helper_functions/getIpAddress";
+import { GoLocation } from "react-icons/go";
+import { CustomDialog } from "@components/DialogPopup";
+import { BiDownArrow } from "react-icons/bi";
+import Loading from "@components/Loading";
+import {
+  fetchAvilableCities,
+  FetchAvilableCitiesResponse,
+} from "@api_functions/explore/fetch-available-cities";
+import Card from "@components/Card";
+import { setItemsToLocalStorage } from "@api_functions/internal/local-storage";
+import { getItemsFromLocalStorage } from "@helper_functions/local-storage";
 
 export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   const [response, setResponse] = useState<FetchMyProfileResponse | null>(null);
@@ -70,7 +82,8 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
   }, []);
   const currentPath = usePathname();
   const excludedPaths = ["/explore", "/"];
-  return showMobileNav ? (
+  const [city, setCity] = useState<string | null>(null);
+  return (
     <div
       className={`sticky top-0 !z-50 bg-white  border-b flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
     >
@@ -92,42 +105,15 @@ export function NavBar({ showMobileNav }: { showMobileNav: boolean }) {
             pageState={pageState}
             response={response}
           />
-          <MobileProfile
-            pageState={pageState}
-            path={currentPath}
-            response={response}
-          />
-        </div>
-      </div>
-    </div>
-  ) : (
-    <div
-      className={`hidden sticky top-0 !z-50 bg-white  border-b shadow-sm lg:flex flex-col w-full items-center justify-center dark:border-gray-700 transition-all duration-300`}
-      hidden
-    >
-      <div
-        className={`flex flex-row items-center
-    ${!excludedPaths.includes(currentPath) ? "max-w-7xl" : "w-full"} 
-    justify-center w-full lg:px-10 px-5 py-3 transition-all duration-300`}
-      >
-        <div className="flex grid-cols-2 w-full justify-between">
-          <Link className="flex flex-col w-fit shrink-0" href={"/"}>
-            <p className="text-xl font-medium">ReachGig</p>
-            <p className="text-sm text-gray-500 tracking-wide">
-              Be your own Boss.
-            </p>
-          </Link>
-
-          <DesktopProfile
-            path={currentPath}
-            pageState={pageState}
-            response={response}
-          />
-          <MobileProfile
-            pageState={pageState}
-            path={currentPath}
-            response={response}
-          />
+          <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
+            <SelectCity city={city} setCity={setCity} />
+            <MobileProfile
+              pageState={pageState}
+              path={currentPath}
+              response={response}
+              city={city}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -219,33 +205,20 @@ function MobileProfile({
   path,
   response,
   pageState,
+  city,
 }: {
   path: string;
   response: FetchMyProfileResponse | null;
   pageState: State;
+  city: string | null;
 }) {
   const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
   return (
     <div className="lg:hidden flex flex-row items-center justify-end space-x-5 w-fit">
-      {response ? (
-        <div className="w-fit">
-          {/* <Link
-            href="/console/appointments/requests"
-            className="flex items-center w-full space-x-2 relative"
-          >
-            <Button variant="outline" size="icon">
-              <Bell className="h-[1.3rem] w-[1.3rem]" />
-            </Button>
-            {response.requests.length > 0 && (
-              <Badge title="New" className="absolute -top-2 -right-2">
-                {response.requests.length}
-              </Badge>
-            )}
-          </Link> */}
-        </div>
-      ) : null}
+      {response ? <div className="w-fit"></div> : null}
       <div className="w-fit">
         <CustomSheet
+          maxWidth="w-[80%]"
           title="Where to?"
           description="Navigate to your profile"
           triggerJSX={
@@ -340,6 +313,32 @@ function MobileProfile({
                 </Link>
               </SheetClose>
             )}
+            <SheetClose asChild>
+              <Link
+                className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full"
+                href={CustomerRoutes.VENDORS.replace(
+                  "[city]",
+                  city || "chennai"
+                )}
+              >
+                <div className="flex items-center justify-start space-x-5 cursor-pointer hover:text-primary w-full">
+                  <div className="w-[10%]">
+                    <User2 className="h-[1.3rem] w-[1.3rem]" />
+                  </div>
+                  <p className="text-base font-medium w-full">
+                    Explore Vendors
+                  </p>
+                </div>
+                {checkHere({ path: path || "", menuPath: "/vendors" }) && (
+                  <Badge
+                    title="New"
+                    className="rounded-md text-xs bg-indigo-500"
+                  >
+                    Here
+                  </Badge>
+                )}
+              </Link>
+            </SheetClose>
             {consoleMenus.map((menu) => (
               <SheetClose asChild key={menu.path}>
                 <Link
@@ -512,4 +511,106 @@ function UserMenuDesktop({ response }: { response: FetchMyProfileResponse }) {
       </DialogClose>
     </div>
   );
+}
+
+function SelectCity({
+  city,
+  setCity,
+}: {
+  city: string | null;
+  setCity: Dispatch<SetStateAction<string | null>>;
+}) {
+  const [state, setState] = useState<State>(State.LOADING);
+  const [cities, setCities] = useState<FetchAvilableCitiesResponse | null>(
+    null
+  );
+  const params = useParams();
+  useEffect(() => {
+    if (!params) return;
+    setState(State.LOADING);
+    const cityParam = params.city ? params.city.toString() : null;
+    const designationParam = params.designation
+      ? params.designation.toString()
+      : undefined;
+    Promise.all([
+      getCityStateCountry(cityParam).then((res) => {
+        if (res && res.city) {
+          setCity(res.city);
+        } else {
+          setCity(null);
+        }
+      }),
+      fetchAvilableCities(designationParam).then((res) => {
+        if (res) {
+          setCities(res);
+        } else {
+          setCities(null);
+        }
+      }),
+    ]).then(() => {
+      setState(State.SUCCESS);
+    });
+  }, []);
+  const [designation, setDesignation] = useState<string | null>(null);
+  useEffect(() => {
+    console.log("params", params);
+    if (!params.city || typeof params.city !== "string") {
+      setCity(null);
+      return;
+    }
+    if (!params.designation || typeof params.designation !== "string") {
+      setDesignation(null);
+    } else {
+      setDesignation(params.designation);
+    }
+    setCity(params.city);
+  }, [params.designation, params.city]);
+  const path = designation
+    ? `/vendors/[city]/${designation}`
+    : `/vendors/[city]`;
+  console.log("path", path);
+  return state === State.SUCCESS ? (
+    <CustomDialog
+      title="Select City"
+      triggerJSX={
+        <Button variant="outline" className="space-x-2">
+          <p className="text-base font-medium">{city || "Select City"}</p>
+        </Button>
+      }
+      closeId="close-city-select"
+    >
+      <div className="grid grid-cols-2 gap-5 w-full">
+        {cities
+          ? cities.cities.map((cityData) => (
+              <Link
+                key={cityData.name}
+                href={path.replace("[city]", cityData.name.toLowerCase())}
+                onClick={() => {
+                  const doc = document.getElementById("close-city-select");
+                  if (doc) {
+                    doc.click();
+                  }
+                }}
+              >
+                <Card key={cityData.name}>
+                  <div className="flex flex-row items-center space-x-2 justify-between">
+                    <p className="font-medium">
+                      {cityData.name.charAt(0).toUpperCase() +
+                        cityData.name.slice(1)}
+                    </p>
+                    {city?.toLowerCase() === cityData.name.toLowerCase() && (
+                      <AiFillCheckSquare className="text-success text-xl" />
+                    )}
+                  </div>
+                </Card>
+              </Link>
+            ))
+          : null}
+      </div>
+    </CustomDialog>
+  ) : state === State.LOADING ? (
+    <div className="relative inline-flex space-x-2">
+      <p className="text-sm font-light">Locating...</p>
+    </div>
+  ) : null;
 }

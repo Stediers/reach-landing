@@ -27,6 +27,8 @@ import StickyContact from "@components/contact/StickyContact";
 import { CustomDialog } from "@components/DialogPopup";
 import TrackProfileComponent from "@components/track/track-profile";
 
+export const revalidate = 60 * 60 * 24; // 24 hours
+
 export const generateMetadata = async ({
   params,
 }: {

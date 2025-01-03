@@ -1,35 +1,13 @@
-import { CustomerRoutes, ServiceCategory, State } from "@data/enums";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
-import { BiRupee } from "react-icons/bi";
 import { Button } from "@components/ui/button";
-import {
-  ArrowRight,
-  Check,
-  FeatherIcon,
-  Flower,
-  HandshakeIcon,
-  MessageSquareQuote,
-  Percent,
-  Search,
-  SearchCheckIcon,
-  ShieldCheckIcon,
-  ShieldCloseIcon,
-  Star,
-  UserPlus,
-} from "lucide-react";
-import ImageComponent from "@components/ImageComponent";
+import { Check, Percent } from "lucide-react";
 import Card from "@components/Card";
-import ReachSVG from "@components/svg/ReachSVG";
-import { BsInstagram, BsLightningCharge, BsShieldCheck } from "react-icons/bs";
 import Link from "next/link";
 import FeatureCard from "@components/FeatureCard";
-import { ProfileCard } from "@components/ProfileCard";
 import { NumberCircle } from "@components/landing/NumberCircle";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
-import { CarouselItem } from "@components/ui/carousel";
-import RawCarousel from "@components/carousel/RawCarousel";
 import { Badge } from "@components/ui/badge";
 import {
   Accordion,
@@ -41,15 +19,24 @@ import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partner
 import { FetchPartnerResponse } from "@data/types";
 import AppDownload from "@components/DownloadApp";
 import LinkButton from "@components/Button";
-import Logo from "@components/Logo";
+import getFullName from "@helper_functions/text/get-full-name";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@components/ui/dialog";
+
+export const revalidate = 60 * 60 * 24; // 24 hours
 
 export const metadata: Metadata = {
   title: {
-    default: "ReachGig - Be your own Boss",
-    template: "%s - ReachGig",
+    absolute: "ReachGig - Be your own Boss",
   },
   description:
-    "Kickstart your career with a free website. Get discovered, get paid securely and find trustable clients easily.",
+    "Kickstart your career with a free website. Be discovered, get paid securely and find trustable clients easily.",
   keywords: [
     "freelancer",
     "freelance",
@@ -73,11 +60,11 @@ export const metadata: Metadata = {
     title: "ReachGig - Be your own Boss",
     description:
       "Kickstart your career with a free website. Get discovered, get paid securely and find trustable clients easily.",
-    url: "https://reachgig.com",
+    url: "https://reachgig.com/partner-program",
     type: "website",
     images: [
       {
-        url: "https://reachgig.com/images/home1.svg",
+        url: "https://reachgig.com/images/landing-profiles/home.webp",
         width: 1200,
         height: 630,
         alt: "ReachGig - Be your own Boss",
@@ -91,7 +78,7 @@ export const metadata: Metadata = {
     title: "ReachGig - Be your own Boss",
     description:
       "Kickstart your career with a free website. Get discovered, get paid securely and find trustable clients easily.",
-    images: ["https://reachgig.com/images/home1.svg"],
+    images: ["https://reachgig.com/images/landing-profiles/home.webp"],
   },
   // other: {
   //   structured_data: JSON.stringify({
@@ -370,18 +357,17 @@ function Hero() {
 function People({ response }: { response: FetchPartnerResponse[] | null }) {
   return (
     <div className="px-5 lg:px-10 max-w-7xl w-full flex flex-col items-center justify-center space-y-8 lg:space-y-16 relative pt-10">
-      <p className="text-md lg:text-xl text-center w-full font-semibold text-textsubtle tracking-wide">
-        USED BY THESE AMAZING PEOPLE
-      </p>
+      <div className="flex flex-col items-center justify-center space-y-2 w-full">
+        <p className="text-md lg:text-xl text-center w-full font-semibold text-textsubtle tracking-wide">
+          USED BY THESE AMAZING PEOPLE
+        </p>
+        <p className="text-sm lg:text-base text-center w-full font-medium text-textsubtle tracking-wide">
+          Click on one of the profiles to see their website
+        </p>
+      </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 w-full">
         {response?.map((partner) => (
-          <Profile
-            key={partner.userId}
-            name={partner.firstName}
-            image={partner.imageUrl}
-            des={partner.designation}
-            link={`/${partner.handle}`}
-          />
+          <ProfilePopup data={partner} key={partner.handle} />
         ))}
       </div>
     </div>
@@ -391,18 +377,13 @@ function People({ response }: { response: FetchPartnerResponse[] | null }) {
     name,
     image,
     des,
-    link,
   }: {
     name: string;
     image: string;
     des: string;
-    link: string;
   }) {
     return (
-      <Link
-        className="flex flex-col items-center justify-center space-y-3 lg:space-y-5"
-        href={link}
-      >
+      <div className="flex flex-col items-center justify-center space-y-3 lg:space-y-5">
         <div className="w-40 h-40 lg:w-56 lg:h-56 rounded-lg overflow-hidden">
           <Image
             src={image}
@@ -413,12 +394,44 @@ function People({ response }: { response: FetchPartnerResponse[] | null }) {
           />
         </div>
         <div className="flex flex-col items-center justify-center space-y-0 lg:space-y-2">
-          <p className="text-lg lg:text-xl font-medium">{name}</p>
+          <p className="text-lg lg:text-xl font-medium text-center line-clamp-1">
+            {name}
+          </p>
           <p className="text-sm lg:text-lg font-normal text-textsubtle">
             {des}
           </p>
         </div>
-      </Link>
+      </div>
+    );
+  }
+
+  function ProfilePopup({ data }: { data: FetchPartnerResponse }) {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <div className="w-full hover:cursor-pointer">
+            <Profile
+              name={getFullName(data.firstName, data.lastName)}
+              image={data.imageUrl}
+              des={data.designation}
+            />
+          </div>
+        </DialogTrigger>
+        <DialogContent className={`!p-0 !m-0 !space-y-0 !gap-y-0  h-[90vh]`}>
+          <DialogHeader className="w-full flex flex-col items-start justify-start space-y-2 border-b p-5 h-[10vh]">
+            <DialogTitle className="font-medium text-xl first-letter:capitalize">
+              {getFullName(data.firstName, data.lastName)}
+            </DialogTitle>
+            <DialogDescription className="text-sm text-textsubtle">
+              {data.designation}
+            </DialogDescription>
+          </DialogHeader>
+          <iframe
+            src={`https://reachgig.com/${data.handle}`}
+            className="w-full h-[82vh]"
+          />
+        </DialogContent>
+      </Dialog>
     );
   }
 }
@@ -466,7 +479,7 @@ function Pricing() {
           ]}
           tag="Collected from your clients"
         /> */}
-        <PricingCard
+        {/* <PricingCard
           title="Pro"
           description="To become a pro in your industry."
           price={1499}
@@ -481,7 +494,7 @@ function Pricing() {
           ]}
           capped={1500}
           tag="Invest in your business"
-        />
+        /> */}
       </div>
     </HeaderWrapper>
   );
