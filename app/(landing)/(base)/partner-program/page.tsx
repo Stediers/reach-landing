@@ -19,6 +19,17 @@ import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partner
 import { FetchPartnerResponse } from "@data/types";
 import AppDownload from "@components/DownloadApp";
 import LinkButton from "@components/Button";
+import getFullName from "@helper_functions/text/get-full-name";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@components/ui/dialog";
+
+export const revalidate = 60 * 60 * 24; // 24 hours
 
 export const metadata: Metadata = {
   title: {
@@ -346,18 +357,17 @@ function Hero() {
 function People({ response }: { response: FetchPartnerResponse[] | null }) {
   return (
     <div className="px-5 lg:px-10 max-w-7xl w-full flex flex-col items-center justify-center space-y-8 lg:space-y-16 relative pt-10">
-      <p className="text-md lg:text-xl text-center w-full font-semibold text-textsubtle tracking-wide">
-        USED BY THESE AMAZING PEOPLE
-      </p>
+      <div className="flex flex-col items-center justify-center space-y-2 w-full">
+        <p className="text-md lg:text-xl text-center w-full font-semibold text-textsubtle tracking-wide">
+          USED BY THESE AMAZING PEOPLE
+        </p>
+        <p className="text-sm lg:text-base text-center w-full font-medium text-textsubtle tracking-wide">
+          Click on one of the profiles to see their website
+        </p>
+      </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 w-full">
         {response?.map((partner) => (
-          <Profile
-            key={partner.userId}
-            name={partner.firstName}
-            image={partner.imageUrl}
-            des={partner.designation}
-            link={`/${partner.handle}`}
-          />
+          <ProfilePopup data={partner} key={partner.handle} />
         ))}
       </div>
     </div>
@@ -367,18 +377,13 @@ function People({ response }: { response: FetchPartnerResponse[] | null }) {
     name,
     image,
     des,
-    link,
   }: {
     name: string;
     image: string;
     des: string;
-    link: string;
   }) {
     return (
-      <Link
-        className="flex flex-col items-center justify-center space-y-3 lg:space-y-5"
-        href={link}
-      >
+      <div className="flex flex-col items-center justify-center space-y-3 lg:space-y-5">
         <div className="w-40 h-40 lg:w-56 lg:h-56 rounded-lg overflow-hidden">
           <Image
             src={image}
@@ -389,12 +394,44 @@ function People({ response }: { response: FetchPartnerResponse[] | null }) {
           />
         </div>
         <div className="flex flex-col items-center justify-center space-y-0 lg:space-y-2">
-          <p className="text-lg lg:text-xl font-medium">{name}</p>
+          <p className="text-lg lg:text-xl font-medium text-center line-clamp-1">
+            {name}
+          </p>
           <p className="text-sm lg:text-lg font-normal text-textsubtle">
             {des}
           </p>
         </div>
-      </Link>
+      </div>
+    );
+  }
+
+  function ProfilePopup({ data }: { data: FetchPartnerResponse }) {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <div className="w-full hover:cursor-pointer">
+            <Profile
+              name={getFullName(data.firstName, data.lastName)}
+              image={data.imageUrl}
+              des={data.designation}
+            />
+          </div>
+        </DialogTrigger>
+        <DialogContent className={`!p-0 !m-0 !space-y-0 !gap-y-0  h-[90vh]`}>
+          <DialogHeader className="w-full flex flex-col items-start justify-start space-y-2 border-b p-5 h-[10vh]">
+            <DialogTitle className="font-medium text-xl first-letter:capitalize">
+              {getFullName(data.firstName, data.lastName)}
+            </DialogTitle>
+            <DialogDescription className="text-sm text-textsubtle">
+              {data.designation}
+            </DialogDescription>
+          </DialogHeader>
+          <iframe
+            src={`https://reachgig.com/${data.handle}`}
+            className="w-full h-[82vh]"
+          />
+        </DialogContent>
+      </Dialog>
     );
   }
 }
@@ -442,7 +479,7 @@ function Pricing() {
           ]}
           tag="Collected from your clients"
         /> */}
-        <PricingCard
+        {/* <PricingCard
           title="Pro"
           description="To become a pro in your industry."
           price={1499}
@@ -457,7 +494,7 @@ function Pricing() {
           ]}
           capped={1500}
           tag="Invest in your business"
-        />
+        /> */}
       </div>
     </HeaderWrapper>
   );

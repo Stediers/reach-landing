@@ -2,14 +2,12 @@ import { ServiceCardSkeleton } from "@components/ServiceCard";
 import Card from "@components/Card";
 import Image from "next/image";
 import { fetchAllPartners } from "@api_functions/explore/seo/fetch-all-partners";
-import { Button } from "@components/ui/button";
 import { CustomerRoutes } from "@data/enums";
 import Link from "next/link";
 import { Metadata } from "next";
-import { useEffect } from "react";
 import PopularDesignations from "./PopularDesignations";
 
-export const revalidate = 0; //10 minutes
+export const revalidate = 60 * 60 * 24 * 7; //once a week
 
 export const metadata: Metadata = {
   title: {

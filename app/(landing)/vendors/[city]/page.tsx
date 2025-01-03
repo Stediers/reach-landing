@@ -4,7 +4,6 @@ import { ServiceCardSkeleton } from "@components/ServiceCard";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import UnderlinedHeader from "@components/UnderlinedHeader";
 import stringFormater from "@helper_functions/text/string-formater";
 
 export const generateMetadata = async ({
