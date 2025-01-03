@@ -47,12 +47,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           const designationsData = await fetchCategoriesByCity(city.name);
           const designations = designationsData ? designationsData.data : [];
 
-          return designations.map((designation) => ({
-            url: `${baseUrl}/vendors/${city.name}/${designation.profession.code}`,
-            lastModified: new Date().toISOString(),
-            changeFrequency: "daily" as const,
-            priority: 0.8,
-          }));
+          return designations
+            .filter((designation) => designation.count > 0)
+            .map((designation) => ({
+              url: `${baseUrl}/vendors/${city.name}/${designation.profession.code}`,
+              lastModified: new Date().toISOString(),
+              changeFrequency: "daily" as const,
+              priority: 0.8,
+            }));
         })
       )
     ).flat();
