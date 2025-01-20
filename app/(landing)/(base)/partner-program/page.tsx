@@ -149,7 +149,7 @@ function GiveClients() {
         />
         <FeatureCard
           heading="Easy Contact"
-          description="Give your clients an numerous ways to contact you."
+          description="Give your clients numerous ways to contact you."
           icon={<Phone size={50} />}
         />
         <FeatureCard
