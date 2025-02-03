@@ -21,7 +21,7 @@ export default function TabSwitcher() {
           {path === "/" && (
             <motion.span
               layoutId="bubble"
-              className="absolute inset-0 z-10 bg-primary mix-blend-color-dodge rounded-full"
+              className="absolute inset-0 z-10 bg-black mix-blend-color-dodge rounded-full"
               style={{ borderRadius: 20 }}
             />
           )}
@@ -38,7 +38,7 @@ export default function TabSwitcher() {
           {path === "/partner-program" && (
             <motion.span
               layoutId="bubble"
-              className="absolute inset-0 z-10 bg-primary mix-blend-color-dodge rounded-full"
+              className="absolute inset-0 z-10 bg-black mix-blend-color-dodge rounded-full"
               style={{ borderRadius: 20 }}
             />
           )}

@@ -143,3 +143,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / var(--clone-factor)));
+  }
+}
+
+.animate-scroll {
+  --clone-factor: 2;
+  will-change: transform;
+}

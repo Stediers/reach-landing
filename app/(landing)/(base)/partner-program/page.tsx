@@ -2,11 +2,21 @@ import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
 import { Button } from "@components/ui/button";
-import { Check, Percent, Phone, StarsIcon } from "lucide-react";
+import {
+  Calendar,
+  Check,
+  Clock,
+  CreditCard,
+  MapPin,
+  MessageSquare,
+  Percent,
+  Phone,
+  StarsIcon,
+  User,
+} from "lucide-react";
 import Card from "@components/Card";
 import Link from "next/link";
 import FeatureCard from "@components/FeatureCard";
-import { NumberCircle } from "@components/landing/NumberCircle";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
 import { Badge } from "@components/ui/badge";
 import {
@@ -16,22 +26,11 @@ import {
   AccordionTrigger,
 } from "@components/ui/accordion";
 import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partners";
-import { FetchPartnerResponse } from "@data/types";
 import AppDownload from "@components/DownloadApp";
-import LinkButton from "@components/Button";
-import getFullName from "@helper_functions/text/get-full-name";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@components/ui/dialog";
 import { FaSuitcase } from "react-icons/fa";
-import { FcCallTransfer } from "react-icons/fc";
-
-export const revalidate = 60 * 60 * 24; // 24 hours
+import Hero from "./hero";
+import InfinitePartners from "./people";
+import { GiveClients } from "./give-clients";
 
 export const metadata: Metadata = {
   title: {
@@ -110,55 +109,20 @@ export const metadata: Metadata = {
   // },
 };
 
+export const revalidate = 60 * 60; // 1 hour
+
 export default async function Main() {
   const response = await fetchBestPartners();
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
-      <People response={response} />
+      <InfinitePartners response={response} />
       <GiveClients />
       <TheresMore />
       <Pricing />
       <FrequentlyAskedQuestions />
       {/* <BestPartners /> */}
     </div>
-  );
-}
-
-function GiveClients() {
-  return (
-    <HeaderWrapper
-      title={
-        <span className="!leading-snug">
-          {/* Here&apos;s how <br />
-          it works */}
-          Give Clients
-          <br />
-          <span className="text-primary">what they want</span>
-        </span>
-      }
-      mobileAlign="center"
-      desktopAlign="center"
-      className="items-center justify-center w-full flex flex-col space-y-16"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 gap-y-20 w-full">
-        <FeatureCard
-          heading="Your Services"
-          description="Mention what you offer with its price and duration."
-          icon={<FaSuitcase size={50} />}
-        />
-        <FeatureCard
-          heading="Easy Contact"
-          description="Give your clients numerous ways to contact you."
-          icon={<Phone size={50} />}
-        />
-        <FeatureCard
-          heading="Trustable Reviews"
-          description="Let your clients leave a review for your services."
-          icon={<StarsIcon size={50} />}
-        />
-      </div>
-    </HeaderWrapper>
   );
 }
 
@@ -289,137 +253,6 @@ function TheresMore() {
 //     </div>
 //   );
 // }
-
-function Hero() {
-  return (
-    <div className="w-full flex flex-col items-center justify-center space-y-5 relative lg:pt-10 lg:min-h-[50vh] pt-8">
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center items-center justify-center pb-10 space-y-5 w-full px-5 lg:px-10 max-w-7xl">
-        <div className="flex flex-col lg:items-start items-center justify-center space-y-3 lg:space-y-5 w-full z-10 max-w-lg lg:max-w-none">
-          <Badge variant="defaultOutline">With Instagram Integration</Badge>
-          <h1 className="text-4xl lg:text-left lg:text-6xl xl:text-6xl font-semibold lg:font-semibold !leading-normal xl:!leading-[5.2rem] text-center">
-            <span className="font-medium">Grow your</span>
-            <br />
-            <span className="font-medium">Business with</span>
-            <br />
-            <span className="font-medium">
-              <span className="bg-info px-3 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl">
-                A Free&nbsp;Website
-              </span>
-            </span>
-          </h1>
-          <h2 className="text-md lg:text-left xl:text-xl font-normal xl:leading-relaxed text-textsubtle text-center max-w-md">
-            No more
-            <span className="text-primary">
-              {" "}
-              &quot;DM me for details&quot;.{" "}
-            </span>
-            Get a free website for your business and start getting more clients.
-          </h2>
-          <div className="pt-3">
-            <AppDownload
-              triggerJSX={
-                <LinkButton
-                  link="/download"
-                  className="bg-black text-white py-3 px-5 !w-fit rounded-3xl text-md font-semibold"
-                  text="Get Started - It's Free"
-                />
-              }
-            />
-          </div>
-        </div>
-        <Image
-          alt="Hero"
-          src="/images/landing-profiles/home.webp"
-          className="w-full h-full pt-10 md:h-[30rem] md:w-[30rem] xl:h-[30rem] xl:w-[30rem]"
-          width={1000}
-          height={900}
-        />
-      </div>
-    </div>
-  );
-}
-
-function People({ response }: { response: FetchPartnerResponse[] | null }) {
-  return (
-    <div className="px-5 lg:px-10 max-w-7xl w-full flex flex-col items-center justify-center space-y-8 lg:space-y-16 relative pt-10">
-      <div className="flex flex-col items-center justify-center space-y-2 w-full">
-        <p className="text-md lg:text-xl text-center w-full font-semibold text-textsubtle tracking-wide">
-          USED BY THESE AMAZING PEOPLE
-        </p>
-        <p className="text-sm lg:text-base text-center w-full font-medium text-textsubtle tracking-wide">
-          Click on one of the profiles to see their website
-        </p>
-      </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 w-full">
-        {response?.map((partner) => (
-          <ProfilePopup data={partner} key={partner.handle} />
-        ))}
-      </div>
-    </div>
-  );
-
-  function Profile({
-    name,
-    image,
-    des,
-  }: {
-    name: string;
-    image: string;
-    des: string;
-  }) {
-    return (
-      <div className="flex flex-col items-center justify-center space-y-3 lg:space-y-5">
-        <div className="w-40 h-40 lg:w-56 lg:h-56 rounded-lg overflow-hidden">
-          <Image
-            src={image}
-            alt={name}
-            width={80}
-            height={80}
-            className="w-full h-full bg-black object-cover"
-          />
-        </div>
-        <div className="flex flex-col items-center justify-center space-y-0 lg:space-y-2">
-          <p className="text-lg lg:text-xl font-medium text-center line-clamp-1">
-            {name}
-          </p>
-          <p className="text-sm lg:text-lg font-normal text-textsubtle">
-            {des}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  function ProfilePopup({ data }: { data: FetchPartnerResponse }) {
-    return (
-      <Dialog>
-        <DialogTrigger asChild>
-          <div className="w-full hover:cursor-pointer">
-            <Profile
-              name={getFullName(data.firstName, data.lastName)}
-              image={data.imageUrl}
-              des={data.designation}
-            />
-          </div>
-        </DialogTrigger>
-        <DialogContent className={`!p-0 !m-0 !space-y-0 !gap-y-0  h-[90vh]`}>
-          <DialogHeader className="w-full flex flex-col items-start justify-start space-y-2 border-b p-5 h-[10vh]">
-            <DialogTitle className="font-medium text-xl first-letter:capitalize">
-              {getFullName(data.firstName, data.lastName)}
-            </DialogTitle>
-            <DialogDescription className="text-sm text-textsubtle">
-              {data.designation}
-            </DialogDescription>
-          </DialogHeader>
-          <iframe
-            src={`https://reachgig.com/${data.handle}`}
-            className="w-full h-[82vh]"
-          />
-        </DialogContent>
-      </Dialog>
-    );
-  }
-}
 
 function Pricing() {
   return (

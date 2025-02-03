@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import PopularDesignations from "./PopularDesignations";
 
-export const revalidate = 60 * 60 * 24 * 7; //once a week
+export const revalidate = 60 * 60; // 1 hour
 
 export const metadata: Metadata = {
   title: {
