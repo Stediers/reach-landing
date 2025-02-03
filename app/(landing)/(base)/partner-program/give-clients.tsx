@@ -1,15 +1,6 @@
 import FeatureCard from "@components/FeatureCard";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
-import {
-  Phone,
-  StarsIcon,
-  Calendar,
-  Clock,
-  MapPin,
-  CreditCard,
-  MessageSquare,
-  User,
-} from "lucide-react";
+import { Phone, StarsIcon, Calendar, Clock, CreditCard } from "lucide-react";
 import { FaSuitcase } from "react-icons/fa";
 
 export function GiveClients() {
