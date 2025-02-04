@@ -38,10 +38,8 @@ function FrequentlyAskedQuestions() {
   ];
 
   return (
-    <section className={`w-full flex flex-col lg:py-10 items-center`}>
-      <div
-        className={`flex flex-col max-w-7xl justify-center space-y-7 lg:space-y-20 w-full px-5 lg:px-10 py-10`}
-      >
+    <section className="w-full flex flex-col lg:py-10 items-center overflow-hidden">
+      <div className="flex flex-col max-w-7xl justify-center space-y-7 lg:space-y-20 w-full px-5 lg:px-10 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -52,8 +50,8 @@ function FrequentlyAskedQuestions() {
           >
             <motion.h2
               className="text-4xl lg:text-5xl font-medium !leading-snug"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.6, once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
@@ -107,8 +105,8 @@ function FAQCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ amount: 0.6, once: true }}
       transition={{
         duration: 0.5,
