@@ -41,6 +41,7 @@ import {
 } from "./ui/sheet";
 import BoxRating from "./BoxRating";
 import Link from "next/link";
+import * as motion from "motion/react-client";
 
 export function ServicePopupMobile({
   service,
@@ -181,108 +182,184 @@ export function ServicePopupDesktop({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <div className="w-full">{triggerJSX}</div>
+        <motion.div
+          className="w-full"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          {triggerJSX}
+        </motion.div>
       </SheetTrigger>
       <SheetContent className="flex flex-col items-start justify-between w-full space-y-5">
-        <div className="flex flex-col items-start justify-start w-full space-y-5 overflow-y-scroll">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-start justify-start w-full space-y-5 overflow-y-scroll"
+        >
           <SheetHeader className="w-full flex flex-col items-start justify-start space-y-5 border-b pb-5">
-            <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2">
-              {service.title}
-            </SheetTitle>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <SheetTitle className="text-xl font-medium first-letter:capitalize pr-2">
+                {service.title}
+              </SheetTitle>
+            </motion.div>
+
             <SheetDescription className="flex flex-row items-start justify-start gap-x-3 gap-y-3 flex-wrap w-full">
-              {service.rating !== null && service.rating > 0 ? (
-                <Badge
-                  variant="infoOutline"
-                  className="flex flex-row items-center space-x-1"
+              {/* Badges with staggered animation */}
+              {[
+                ...(service.rating !== null && service.rating > 0
+                  ? [
+                      {
+                        content: (
+                          <Badge
+                            variant="infoOutline"
+                            className="flex flex-row items-center space-x-1"
+                          >
+                            <p className="text-info text-sm font-medium">
+                              {service.rating.toFixed(1)}
+                            </p>
+                            <AiFillStar className="text-info !w-4 !h-4" />
+                          </Badge>
+                        ),
+                      },
+                    ]
+                  : []),
+                {
+                  content: (
+                    <Badge variant="hardOutline">
+                      <p className="text-sm font-medium">
+                        {service.experience} of Experience
+                      </p>
+                    </Badge>
+                  ),
+                },
+                ...(service.preferredGender !== PreferredGender.UNISEX
+                  ? [
+                      {
+                        content: (
+                          <Badge variant="hardOutline">
+                            <p className="text-sm font-medium">
+                              {service.preferredGender ===
+                              PreferredGender.FEMALE
+                                ? "Female"
+                                : service.preferredGender ===
+                                  PreferredGender.MALE
+                                ? "Male"
+                                : "All"}{" "}
+                              Audiences
+                            </p>
+                          </Badge>
+                        ),
+                      },
+                    ]
+                  : []),
+                {
+                  content: (
+                    <Badge variant="hardOutline">
+                      <p className="text-sm font-medium">
+                        Provided{" "}
+                        {service.serviceType.charAt(0).toUpperCase() +
+                          service.serviceType.slice(1)}
+                      </p>
+                    </Badge>
+                  ),
+                },
+              ].map((badge, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
                 >
-                  <p className="text-info text-sm font-medium">
-                    {service.rating.toFixed(1)}
-                  </p>
-                  <AiFillStar className="text-info !w-4 !h-4" />
-                </Badge>
-              ) : null}
-              <Badge variant="hardOutline">
-                <p className="text-sm font-medium">
-                  {service.experience} of Experience
-                </p>
-              </Badge>
-              {service.preferredGender !== PreferredGender.UNISEX ? (
-                <Badge variant="hardOutline">
-                  <p className="text-sm font-medium">
-                    {service.preferredGender === PreferredGender.FEMALE
-                      ? "Female"
-                      : service.preferredGender === PreferredGender.MALE
-                      ? "Male"
-                      : "All"}{" "}
-                    Audiences
-                  </p>
-                </Badge>
-              ) : null}
-              <Badge variant="hardOutline">
-                <p className="text-sm font-medium">
-                  Provided{" "}
-                  {service.serviceType.charAt(0).toUpperCase() +
-                    service.serviceType.slice(1)}
-                </p>
-              </Badge>
-              {service.serviceType === ServiceType.OFFLINE ? (
-                <Badge variant="hardOutline">
-                  <p className="text-sm font-medium">{location}</p>
-                </Badge>
-              ) : null}
-              {service.address ? (
-                <Link
-                  href={`https://www.google.com/maps/search/${service.address.name} ${service.address.city} ${service.address.state}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Badge variant="hardOutline">
-                    <p className="text-sm font-medium">
-                      {service.address.name}
-                    </p>
-                  </Badge>
-                </Link>
-              ) : null}
-              {service.rating && service.rating > 0 ? (
-                <BoxRating rating={service.rating} />
-              ) : null}
+                  {badge.content}
+                </motion.div>
+              ))}
             </SheetDescription>
           </SheetHeader>
-          <div className="flex flex-col items-start justify-start w-full space-y-10 overflow-y-scroll hide-scrollbar">
-            {price && <PriceComponent price={price} />}
-            <ListWrapper
-              list={service.whatsIncluded}
-              title="What's Included"
-              icon={<AiOutlineCheck className="text-success text-2xl" />}
-            />
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col items-start justify-start w-full space-y-10 overflow-y-scroll hide-scrollbar"
+          >
+            {price && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="w-full"
+              >
+                <PriceComponent price={price} />
+              </motion.div>
+            )}
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <ListWrapper
+                list={service.whatsIncluded}
+                title="What's Included"
+                icon={<AiOutlineCheck className="text-success text-2xl" />}
+              />
+            </motion.div>
+
             {service.whatsNotIncluded.length > 0 && (
-              <ListWrapper
-                list={service.whatsNotIncluded}
-                title="What's Not Included"
-                icon={<AiOutlineClose className="text-error text-2xl" />}
-              />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+              >
+                <ListWrapper
+                  list={service.whatsNotIncluded}
+                  title="What's Not Included"
+                  icon={<AiOutlineClose className="text-error text-2xl" />}
+                />
+              </motion.div>
             )}
+
             {service.requirements.length > 0 && (
-              <ListWrapper
-                list={service.requirements}
-                title="Requirements"
-                icon={
-                  <AiFillExclamationCircle className="text-danger text-2xl" />
-                }
-              />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                <ListWrapper
+                  list={service.requirements}
+                  title="Requirements"
+                  icon={
+                    <AiFillExclamationCircle className="text-danger text-2xl" />
+                  }
+                />
+              </motion.div>
             )}
-          </div>
-        </div>
-        <SheetFooter className="w-full sticky bottom-5">
-          <div className="flex flex-col items-start justify-start space-y-5 w-full">
-            {footerJSX}
-            <SheetTrigger asChild>
-              <Button className="w-full text-base" variant="outline">
-                Close
-              </Button>
-            </SheetTrigger>
-          </div>
-        </SheetFooter>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+          className="w-full sticky bottom-5"
+        >
+          <SheetFooter className="w-full">
+            <div className="flex flex-col items-start justify-start space-y-5 w-full">
+              {footerJSX}
+              <SheetTrigger asChild>
+                <Button className="w-full text-base" variant="outline">
+                  Close
+                </Button>
+              </SheetTrigger>
+            </div>
+          </SheetFooter>
+        </motion.div>
       </SheetContent>
     </Sheet>
   );
