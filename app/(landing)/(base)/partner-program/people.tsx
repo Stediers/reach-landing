@@ -79,7 +79,7 @@ const ProfileCard = ({ data }: { data: FetchPartnerResponse }) => {
                 {`${data.firstName} ${data.lastName}`}
               </p>
               <p className="text-sm lg:text-base font-normal text-textsubtle text-center">
-                {data.designation}
+                {data.professions[0]}
               </p>
             </div>
           </div>

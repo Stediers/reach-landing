@@ -577,9 +577,9 @@ export type FetchAppointmentRequestResponse = {
 };
 
 export type FetchPartnerResponse = {
-  bio: string;
   firstName: string;
   lastName: string;
+  professions: string[];
   gender: Gender;
   rating: number | null;
   city: string;
@@ -596,6 +596,11 @@ export type FetchPartnerResponse = {
   languages: string[];
   handle: string | null;
   exposeMobileNumber: boolean;
+  email: string | null;
+  instagramLink: string | null;
+  bio: string;
+  fcmToken: string | null;
+  tagLine: string;
 };
 
 export type RazorpayPayment = {

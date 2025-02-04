@@ -11,12 +11,14 @@ export const revalidate = 60 * 60; // 1 hour
 
 export const metadata: Metadata = {
   title: {
-    absolute: "ReachGig",
+    absolute:
+      "ReachGig - Find Trusted Local Service Professionals in Tamil Nadu",
+    template: "%s | ReachGig",
   },
   description:
-    "Reachig enables you tp safely connect with 100+ trusted freelancers by exploring detailed profiles offering secure payments portals and seamless communication channels.",
+    "Connect with 100+ verified service professionals in Tamil Nadu. Find trusted makeup artists, photographers, wedding planners & more. Secure payments & verified profiles guaranteed.",
   keywords: [
-    "Local Service Providers",
+    "Local Service Providers Tamil Nadu",
     "Verified Professionals",
     "Makeup Artists",
     "Wedding Photographers",
@@ -26,22 +28,25 @@ export const metadata: Metadata = {
     "Trusted Professionals",
     "Service Provider Directory",
     "Book Local Services",
-    "Professional Services",
+    "Professional Services Tamil Nadu",
     "Verified Service Providers",
-    "Tamil Nadu",
+    "Tamil Nadu Local Services",
   ].join(", "),
+  alternates: {
+    canonical: "https://reachgig.com/explore",
+  },
   openGraph: {
-    title: "ReachGig",
+    title: "ReachGig - Find Local Service Professionals in Tamil Nadu",
     description:
-      "Find and hire verified local service providers. Secure payments, identity verification & trusted professionals for makeup, photography, wedding planning & more.",
-    url: "https://reachgig.com",
+      "Connect with 100+ verified service professionals in Tamil Nadu. Find trusted makeup artists, photographers, wedding planners & more. Secure payments & identity verification.",
+    url: "https://reachgig.com/explore",
     type: "website",
     images: [
       {
-        url: "https://reachgig.com/images/feedback.svg",
+        url: "https://reachgig.com/images/og-image.jpg", // Updated to more SEO-friendly name
         width: 1200,
         height: 630,
-        alt: "ReachGig - Find Local Service Professionals",
+        alt: "ReachGig - Find Local Service Professionals in Tamil Nadu",
       },
     ],
     locale: "en_IN",
@@ -49,37 +54,50 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReachGig - Find Trusted Service Professionals",
+    title: "ReachGig - Find Local Service Professionals in Tamil Nadu",
     description:
-      "Find and hire verified local service providers. Secure payments, identity verification & trusted professionals for makeup, photography, wedding planning & more.",
-    images: ["https://reachgig.com/images/feedback.svg"],
+      "Connect with 100+ verified service professionals in Tamil Nadu. Find trusted makeup artists, photographers, wedding planners & more. Secure payments & identity verification.",
+    images: ["https://reachgig.com/images/og-image.jpg"],
+    site: "@reachgig",
+    creator: "@reachgig",
   },
-  // other: {
-  //   structured_data: JSON.stringify({
-  //     "@context": "https://schema.org",
-  //     "@type": "Organization",
-  //     name: "ReachGig",
-  //     url: "https://reachgig.com",
-  //     logo: "https://reachgig.com/images/logo.webp",
-  //     description:
-  //       "A trusted platform connecting verified service providers with customers in Tamil Nadu.",
-  //     address: {
-  //       "@type": "PostalAddress",
-  //       addressRegion: "Tamil Nadu",
-  //       addressCountry: "IN",
-  //     },
-  //     sameAs: [
-  //       "https://facebook.com/reachgig",
-  //       "https://twitter.com/reachgig",
-  //       "https://instagram.com/reachgig",
-  //     ],
-  //     aggregateRating: {
-  //       "@type": "AggregateRating",
-  //       ratingValue: "4.8",
-  //       reviewCount: "1000",
-  //     },
-  //   }),
-  // },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+// Structured data for better SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ReachGig",
+  url: "https://reachgig.com",
+  logo: "https://reachgig.com/images/logo.webp",
+  description:
+    "A trusted platform connecting verified service providers with customers in Tamil Nadu.",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "Tamil Nadu",
+    addressCountry: "IN",
+  },
+  sameAs: [
+    "https://facebook.com/reachgig",
+    "https://twitter.com/reachgig",
+    "https://instagram.com/reachgig",
+  ],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.8",
+    reviewCount: "1000",
+  },
 };
 
 export default async function ExplorePage({
@@ -89,63 +107,65 @@ export default async function ExplorePage({
     designation: string;
   };
 }) {
-  //dobnt cache this page
   const res = await fetchAllPartners();
   if (!res) return <ServiceCardSkeleton />;
 
   const selectedDesignation = searchParams.designation
-    ? searchParams.designation.replaceAll("%20", " ").replaceAll("-", "&")
+    ? decodeURIComponent(searchParams.designation).replace(/-/g, " & ")
     : "All";
 
-  console.log("searchParams", searchParams);
   const filteredDesignations =
     selectedDesignation === "All"
       ? res.sort((a, b) => b.partners.length - a.partners.length)
       : res
           .filter((partner) => partner.group === selectedDesignation)
           .sort((a, b) => b.partners.length - a.partners.length);
+
   return (
-    <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar py-5 space-y-5">
-      <PopularDesignations
-        designations={res.map((partner) => partner.group)}
-        selectedDesignation={selectedDesignation}
-      />
-      {filteredDesignations.length === 0 ? (
-        <div className="flex flex-col items-center justify-center space-y-3">
-          <h3 className="text-lg font-medium">
-            No Profiles Found for {selectedDesignation}
-          </h3>
-        </div>
-      ) : (
-        filteredDesignations
-          .sort((a, b) => b.partners.length - a.partners.length)
-          .map(
-            (partner, index) =>
-              partner.partners.length > 0 && (
-                <div
-                  key={index}
-                  className="flex flex-col items-start justify-center space-y-1 w-full px-5 lg:px-10"
-                >
-                  <h3 className="text-xl lg:text-2xl font-medium leading-snug">
-                    {partner.group.charAt(0).toUpperCase() +
-                      partner.group.slice(1)}
-                  </h3>
-                  <div className="flex flex-row justify-start items-center space-x-5 lg:space-x-10 w-full py-5 overflow-x-scroll">
-                    {partner.partners.map((profile) => (
-                      <Profile
-                        key={profile.id}
-                        name={profile.firstName + " " + profile.lastName}
-                        designation={profile.tagLine}
-                        image={profile.imageUrl}
-                        handle={profile.handle}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )
-          )
-      )}
-    </div>
+    <>
+      {/* <JsonLd data={structuredData} /> */}
+      <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar py-5 space-y-5">
+        <PopularDesignations
+          designations={res.map((partner) => partner.group)}
+          selectedDesignation={selectedDesignation}
+        />
+        {filteredDesignations.length === 0 ? (
+          <div className="flex flex-col items-center justify-center space-y-3">
+            <h2 className="text-lg font-medium">
+              No Profiles Found for {selectedDesignation}
+            </h2>
+          </div>
+        ) : (
+          filteredDesignations
+            .sort((a, b) => b.partners.length - a.partners.length)
+            .map(
+              (partner, index) =>
+                partner.partners.length > 0 && (
+                  <section
+                    key={index}
+                    className="flex flex-col items-start justify-center space-y-1 w-full px-5 lg:px-10"
+                  >
+                    <h2 className="text-xl lg:text-2xl font-medium leading-snug">
+                      {partner.group.charAt(0).toUpperCase() +
+                        partner.group.slice(1)}
+                    </h2>
+                    <div className="flex flex-row justify-start items-center space-x-5 lg:space-x-10 w-full py-5 overflow-x-scroll">
+                      {partner.partners.map((profile) => (
+                        <Profile
+                          key={profile.id}
+                          name={profile.firstName + " " + profile.lastName}
+                          designation={profile.tagLine}
+                          image={profile.imageUrl}
+                          handle={profile.handle}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                )
+            )
+        )}
+      </div>
+    </>
   );
 }
 
@@ -161,22 +181,24 @@ function Profile({
   handle: string;
 }) {
   const link = CustomerRoutes.PARTNER.replace("[partnerHandle]", handle);
-  console.log(link);
+
   return (
     <Link
       className="flex flex-col items-start justify-center space-y-3 min-w-[13rem] max-w-[13rem] lg:!min-w-[18rem] lg:max-w-[18rem] overflow-hidden"
-      href={CustomerRoutes.PARTNER.replace("[partnerHandle]", handle)}
+      href={link}
+      title={`View ${name}'s Profile - ${designation}`}
     >
       <Card className="flex flex-col items-start justify-center !space-y-3 transition-transform hover:shadow-md hover:cursor-pointer transform-gpu">
         <Image
           src={image}
-          alt={name}
+          alt={`${name} - ${designation}`}
           className="w-40 h-40 rounded-lg bg-red-100 object-cover"
           width={160}
           height={160}
+          loading="lazy"
         />
         <div className="flex flex-col items-start justify-center space-y-1">
-          <h4 className="text-lg font-medium line-clamp-1">{name}</h4>
+          <h3 className="text-lg font-medium line-clamp-1">{name}</h3>
           <p className="text-sm text-textsubtle line-clamp-2">{designation}</p>
         </div>
       </Card>
