@@ -61,7 +61,7 @@ export function GiveClients() {
       desktopAlign="center"
       className="items-center justify-center w-full flex flex-col space-y-16"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 gap-y-20 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 gap-y-20 w-full">
         {features.map((feature, index) => (
           <motion.div
             key={feature.heading}

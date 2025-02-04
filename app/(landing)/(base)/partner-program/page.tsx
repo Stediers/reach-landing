@@ -29,11 +29,11 @@ import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partner
 import AppDownload from "@components/DownloadApp";
 import { FaSuitcase } from "react-icons/fa";
 import Hero from "./hero";
-import InfinitePartners from "./people";
 import { GiveClients } from "./give-clients";
 import TheresMore from "./theres-more";
 import Pricing from "./pricing";
 import FrequentlyAskedQuestions from "./faq";
+import People from "./people";
 
 export const metadata: Metadata = {
   title: {
@@ -170,7 +170,7 @@ export default async function Main() {
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
-      <InfinitePartners response={response} />
+      <People response={response} />
       <GiveClients />
       <TheresMore />
       <Pricing />

@@ -151,15 +151,13 @@ function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div className="w-full h-full pt-10 md:h-[30rem] md:w-[30rem] xl:h-[30rem] xl:w-[30rem]">
-          <Image
-            alt="Hero"
-            src="/images/landing-profiles/home.webp"
-            className="w-full h-full pt-10 md:h-[30rem] md:w-[30rem] xl:h-[30rem] xl:w-[30rem]"
-            width={1000}
-            height={900}
-          />
-        </motion.div>
+        <Image
+          alt="Hero"
+          src="/images/landing-profiles/home.webp"
+          className="w-full h-full pt-10 md:h-[30rem] md:w-[30rem] xl:h-[30rem] xl:w-[30rem]"
+          width={1000}
+          height={900}
+        />
       </div>
     </motion.div>
   );
