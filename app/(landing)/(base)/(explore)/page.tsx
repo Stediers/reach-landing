@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import PopularDesignations from "./PopularDesignations";
 import * as motion from "motion/react-client";
+import { ArrowRightIcon } from "lucide-react";
 
 // ... (keeping all metadata)
 
@@ -68,7 +69,7 @@ export default async function ExplorePage({
                       {partner.group.charAt(0).toUpperCase() +
                         partner.group.slice(1)}
                     </h2>
-                    <div className="flex flex-row justify-start items-center space-x-5 lg:space-x-10 w-full py-5 overflow-x-scroll">
+                    <div className="flex flex-row justify-start items-center space-x-5 lg:space-x-10 w-full py-3 overflow-x-scroll">
                       {partner.partners.map((profile, profileIndex) => (
                         <Profile
                           key={profile.id}

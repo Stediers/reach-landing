@@ -272,7 +272,7 @@ function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="lg:text-2xl text-base font-medium"
+            className="lg:text-2xl text-base"
           >
             {response.partner.professions.join(" | ")}
           </motion.h2>
@@ -345,6 +345,16 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
             A Quick <br />
             <span className="text-primary">Introduction</span>
           </p>
+          {response.partner.bio.length > 0 ? (
+            <p className="lg:text-xl text-lg font-normal">
+              {response.partner.bio}
+            </p>
+          ) : (
+            <p className="lg:text-xl text-lg font-normal">
+              I am a professional {response.partner.designation} based in{" "}
+              {response.partner.city}, {response.partner.state}.
+            </p>
+          )}
         </motion.div>
 
         {/* Desktop Settings */}
@@ -392,6 +402,7 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
                 duration: 0.5,
                 delay: index * 0.1,
               }}
+              className="w-full"
             >
               <LargeSetting {...setting} />
             </motion.div>
@@ -442,6 +453,7 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
                 duration: 0.5,
                 delay: index * 0.1,
               }}
+              className="w-full"
             >
               <SmallSetting {...setting} />
             </motion.div>
@@ -532,7 +544,7 @@ function MyServices({
           </p>
         </motion.div>
       ) : (
-        <div className="grid lg:grid-cols-3 lg:gap-14 gap-10 w-full">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 lg:gap-14 gap-10 w-full">
           {response.services
             .sort(
               (a, b) => b.price.bookingBill.total - a.price.bookingBill.total

@@ -125,10 +125,10 @@ function Hero() {
           >
             <div className="flex flex-col space-y-3 bg-white">
               <div className="flex items-center gap-3">
-                <div className="flex items-center bg-yellow-50 px-3 py-2 rounded-md">
-                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  <span className="ml-2 font-semibold lg:text-lg text-base">
-                    4.8
+                <div className="flex items-center px-3 py-2 rounded-md bg-yellow-50">
+                  <Star className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-2" />
+                  <span className="text-sm lg:text-base font-medium">
+                    4.8 / 5
                   </span>
                 </div>
                 <div className="flex items-center bg-gray-50 px-3 py-2 rounded-md">
