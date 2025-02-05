@@ -1,33 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import { Metadata } from "next";
-import { Button } from "@components/ui/button";
-import {
-  Calendar,
-  Check,
-  Clock,
-  CreditCard,
-  MapPin,
-  MessageSquare,
-  Percent,
-  Phone,
-  StarsIcon,
-  User,
-} from "lucide-react";
-import Card from "@components/Card";
-import Link from "next/link";
-import FeatureCard from "@components/FeatureCard";
-import HeaderWrapper from "@wrapper/HeaderWrapper";
-import { Badge } from "@components/ui/badge";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@components/ui/accordion";
 import { fetchBestPartners } from "@api_functions/explore/seo/fetch-best-partners";
-import AppDownload from "@components/DownloadApp";
-import { FaSuitcase } from "react-icons/fa";
 import Hero from "./hero";
 import { GiveClients } from "./give-clients";
 import TheresMore from "./theres-more";
