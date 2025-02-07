@@ -101,7 +101,7 @@ function Hero() {
             </motion.span>
             <br />
             <motion.span variants={fadeInUp} className="font-medium">
-              <span className="bg-info px-3 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl">
+              <span className="bg-info px-3 py-2 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl">
                 A Free&nbsp;Website
               </span>
             </motion.span>

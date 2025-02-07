@@ -17,6 +17,33 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      // indieFlower: ["var(--font-indieflower)"],
+      gilroy: ["var(--font-gilroy)"],
+    },
+    fontWeight: {
+      thin: 200,
+      extralight: 300,
+      light: 400,
+      normal: 500,
+      medium: 600,
+      semibold: 700,
+      bold: 800,
+      extrabold: 900,
+    },
+    // fontSize: {
+    //   xs: "0.75rem",
+    //   sm: "0.875rem",
+    //   base: "1rem",
+    //   lg: "1.125rem",
+    //   xl: "1.25rem",
+    //   "2xl": "1.5rem",
+    //   "3xl": "1.875rem",
+    //   "4xl": "2.25rem",
+    //   "5xl": "3rem",
+    //   "6xl": "4rem",
+    //   "7xl": "5rem",
+    // },
     extend: {
       fontSize: {
         md: "1rem",
@@ -26,6 +53,8 @@ module.exports = {
         info: "#1174D6",
         danger: "#F5365C",
         success: "#25A76F",
+        //not pure black
+        black: "#1A1A1A",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -8,10 +8,51 @@ import FacebookPixel from "@scripts/FacebookPixel";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import localFont from "next/font/local";
 
-const fontSans = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
+// const fontSans = Poppins({
+//   subsets: ["latin"],
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+//   display: "swap",
+// });
+
+const Gilroy = localFont({
+  src: [
+    {
+      path: "../assets/fonts/gilroy/Gilroy-ExtraBold.ttf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/gilroy/Gilroy-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/gilroy/Gilroy-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/gilroy/Gilroy-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/gilroy/Gilroy-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/gilroy/Gilroy-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/gilroy/Gilroy-Thin.ttf",
+      weight: "200",
+      style: "normal",
+    },
+  ],
+  variable: "--font-gilroy",
 });
 
 type RootLayoutProps = {
@@ -44,7 +85,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <FacebookPixel />
         <body
           className={`${cn(
-            fontSans.className
+            Gilroy.className
           )} text-text min-h-[100svh] w-full flex !bg-background`}
         >
           {children}

@@ -1,13 +1,6 @@
-import { Poppins } from "next/font/google";
 import { cn } from "@lib/utils";
 import "@styles/globals.css";
 import { Metadata } from "next";
-
-const fontSans = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -48,13 +41,5 @@ export const metadata: Metadata = {
 // ... existing code ...
 
 export default function BlogLayout({ children }: RootLayoutProps) {
-  return (
-    <div
-      className={`${cn(
-        fontSans.className
-      )} text-text min-h-screen flex !flex-col w-full bg-white items-center justify-center`}
-    >
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }

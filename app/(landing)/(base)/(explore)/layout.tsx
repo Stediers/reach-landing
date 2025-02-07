@@ -95,7 +95,7 @@ function Hero() {
             </motion.span>
             <motion.span
               variants={fadeInUp}
-              className="bg-primary px-3 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl"
+              className="bg-primary px-3 py-2 rounded-lg text-white text-3xl lg:text-5xl xl:text-5xl"
             >
               Best Experts
             </motion.span>

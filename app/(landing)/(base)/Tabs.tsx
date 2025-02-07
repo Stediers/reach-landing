@@ -25,10 +25,10 @@ export default function TabSwitcher() {
               style={{ borderRadius: 20 }}
             />
           )}
-          Find People
+          Find Experts
         </Link>
         <Link
-          key="Join as Partner"
+          key="I am a Freelancer"
           href={"/partner-program"}
           className={`${
             path === "/partner-program" ? "text-white" : "hover:scale-110"
@@ -42,7 +42,7 @@ export default function TabSwitcher() {
               style={{ borderRadius: 20 }}
             />
           )}
-          Join as Partner
+          I am a Freelancer
         </Link>
       </div>
     </div>

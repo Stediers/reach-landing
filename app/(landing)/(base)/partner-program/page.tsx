@@ -7,6 +7,8 @@ import TheresMore from "./theres-more";
 import Pricing from "./pricing";
 import FrequentlyAskedQuestions from "./faq";
 import People from "./people";
+import KillingLeads from "./killing-leads";
+import FeaturesList from "./features";
 
 export const metadata: Metadata = {
   title: {
@@ -144,6 +146,8 @@ export default async function Main() {
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
       <People response={response} />
+      <KillingLeads />
+      {/* <FeaturesList /> */}
       <GiveClients />
       <TheresMore />
       <Pricing />
