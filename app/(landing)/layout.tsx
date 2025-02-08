@@ -48,6 +48,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://reachgig.com"),
 };
+//ola
 
 export default function ConsoleLayout({ children }: RootLayoutProps) {
   return (
