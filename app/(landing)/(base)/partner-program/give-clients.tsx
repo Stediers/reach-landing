@@ -3,39 +3,42 @@ import HeaderWrapper from "@wrapper/HeaderWrapper";
 import { Phone, StarsIcon, Calendar, Clock, CreditCard } from "lucide-react";
 import { FaSuitcase } from "react-icons/fa";
 import * as motion from "motion/react-client";
+import { GiSuitcase } from "@node_modules/react-icons/gi";
+import { FcDocument } from "@node_modules/react-icons/fc";
+import { HiDocument, HiOutlineDocument } from "@node_modules/react-icons/hi";
 
 export function GiveClients() {
   const features = [
     {
       heading: "Service Catalog",
       description: "Mention what you offer with its price and duration.",
-      icon: <FaSuitcase size={40} />,
+      icon: <HiOutlineDocument size={50} />,
     },
     {
       heading: "Easy Contact",
       description: "Give your clients numerous ways to contact you.",
-      icon: <Phone size={40} />,
+      icon: <Phone size={50} />,
     },
     {
       heading: "Trustable Reviews",
       description: "Let your clients leave a review for your services.",
-      icon: <StarsIcon size={40} />,
+      icon: <StarsIcon size={50} />,
     },
     {
       heading: "Online Booking",
       description:
         "Allow clients to schedule appointments directly through your website.",
-      icon: <Calendar size={40} />,
+      icon: <Calendar size={50} />,
     },
     {
       heading: "Real-time Availability",
       description: "Display your up-to-date schedule and availability slots.",
-      icon: <Clock size={40} />,
+      icon: <Clock size={50} />,
     },
     {
       heading: "Secure Payments",
       description: "Accept payments and deposits through various methods.",
-      icon: <CreditCard size={40} />,
+      icon: <CreditCard size={50} />,
     },
   ];
 
