@@ -9,6 +9,7 @@ import FrequentlyAskedQuestions from "./faq";
 import People from "./people";
 import KillingLeads from "./killing-leads";
 import FeaturesList from "./features";
+import PaymentHero from "./new-hero";
 
 export const metadata: Metadata = {
   title: {
@@ -145,12 +146,13 @@ export default async function Main() {
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
       <Hero />
+      {/* <PaymentHero /> */}
       <People response={response} />
-      <KillingLeads />
       {/* <FeaturesList /> */}
       <GiveClients />
+      <KillingLeads />
       <TheresMore />
-      <Pricing />
+      {/* <Pricing /> */}
       <FrequentlyAskedQuestions />
       {/* <BestPartners /> */}
     </div>

@@ -93,11 +93,11 @@ function Hero() {
             className="text-4xl lg:text-left lg:text-6xl xl:text-6xl font-semibold lg:font-semibold !leading-normal xl:!leading-[5.2rem] text-center"
           >
             <motion.span variants={fadeInUp} className="font-medium">
-              Grow your
+              Stop losing
             </motion.span>
             <br />
             <motion.span variants={fadeInUp} className="font-medium">
-              Business with
+              Leads with
             </motion.span>
             <br />
             <motion.span variants={fadeInUp} className="font-medium">
