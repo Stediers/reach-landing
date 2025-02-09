@@ -1,58 +1,65 @@
 import { fetchPartners } from "@api_functions/explore/fetch-partners";
-import UnderlinedHeader from "@components/UnderlinedHeader";
 import Profile from "./Profile";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import urlSpaceFixer from "@helper_functions/text/url-space-fixer";
 import stringFormater from "@helper_functions/text/string-formater";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@components/ui/breadcrumb";
 import { CustomerRoutes } from "@data/enums";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-//revalidate every 10 minutes
-export const revalidate = 60;
+// Revalidate more frequently for fresh content
+export const revalidate = 600; // 10 minutes
 
 export async function generateMetadata({
   params,
 }: {
   params: { designation: string; city: string };
 }): Promise<Metadata> {
+  const cityName = stringFormater(params.city);
   const res = await fetchPartners({
     city: params.city,
     profession: params.designation,
   });
+
   if (!res) {
+    const formattedDesignation = stringFormater(params.designation);
     return {
-      title: "Top 10 " + params.designation + " in " + params.city,
+      title: `Hire ${formattedDesignation} in ${cityName} | Expert Services`,
+      description: `Looking for professional ${formattedDesignation.toLowerCase()} services in ${cityName}? Find verified experts with reviews and competitive rates. Book securely today!`,
+      keywords: `${formattedDesignation.toLowerCase()}, ${cityName.toLowerCase()}, hire ${formattedDesignation.toLowerCase()}, professional services, local experts`,
     };
   }
-  const correctedDesignation = urlSpaceFixer(res.designation);
+
+  const correctedDesignation = stringFormater(urlSpaceFixer(res.designation));
+  const professionPlural = correctedDesignation.endsWith("s")
+    ? correctedDesignation
+    : `${correctedDesignation}s`;
+
   return {
-    title:
-      "Top 10 " + stringFormater(correctedDesignation) + " in " + params.city,
-    description: `Tired of searching for ${correctedDesignation} in ${params.city}? ReachGig has got you covered. Explore top ${correctedDesignation} and find your dream freelancer today!`,
-    keywords: `${correctedDesignation}, ${params.city}, Top 10 ${correctedDesignation} in ${params.city}, ReachGig`,
+    title: `Top ${professionPlural} in ${cityName} | Verified Professionals`,
+    description: `Find the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Get matched with experienced ${professionPlural.toLowerCase()} today!`,
+    keywords: `${correctedDesignation.toLowerCase()}, ${cityName.toLowerCase()}, top ${professionPlural.toLowerCase()}, hire ${correctedDesignation.toLowerCase()}, professional ${correctedDesignation.toLowerCase()}, local services`,
     alternates: {
-      canonical: `https://reachgig.com/vendors/${params.city}/${params.designation}`,
+      canonical: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${params.designation.toLowerCase()}`,
     },
     openGraph: {
-      title: "Top 10 " + correctedDesignation + " in " + params.city,
+      title: `Top ${professionPlural} in ${cityName} | ReachGig`,
       type: "website",
-      description: `Tired of searching for ${correctedDesignation} in ${params.city}? ReachGig has got you covered. Explore top ${correctedDesignation} in ${params.city} and find your dream freelancer today!`,
-      url: `https://reachgig.com/vendors/${params.city}/${correctedDesignation}`,
+      description: `Find and hire the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Start your search now!`,
+      url: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${params.designation.toLowerCase()}`,
+      siteName: "ReachGig",
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Top ${professionPlural} in ${cityName} | ReachGig`,
+      description: `Find and hire the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely.`,
     },
   };
 }
 
-export default async function Page({
+export default async function ProfessionalsListingPage({
   params,
 }: {
   params: { designation: string; city: string };
@@ -61,32 +68,59 @@ export default async function Page({
     city: params.city,
     profession: params.designation,
   });
+
   if (!res) {
     redirect("/not-found");
   }
+
+  const cityName = stringFormater(params.city);
+  const professionName = stringFormater(res.designation);
+
   return (
-    <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar space-y-5">
-      <div className="flex flex-row items-center  justify-start space-x-3 w-full">
+    <main className="w-full max-w-7xl mx-auto">
+      <nav className="mb-8" aria-label="Back to city services">
         <Link
-          href={CustomerRoutes.VENDORS_BY_CITY.replace("[city]", params.city)}
+          href={CustomerRoutes.VENDORS_BY_CITY.replace(
+            "[city]",
+            params.city.toLowerCase()
+          )}
+          className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
         >
-          <ArrowLeft className="h-6 w-6" />
+          <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+          <span>Back to all services</span>
         </Link>
-        <h1 className="text-xl lg:text-2xl font-medium max-w-md">
-          Top {stringFormater(res.designation)} in {stringFormater(params.city)}
+      </nav>
+
+      <header className="mb-10">
+        <h1 className="text-2xl lg:text-3xl font-semibold text-gray-900">
+          Top {professionName} in {cityName}
         </h1>
-      </div>
+        <p className="mt-2 text-gray-600">
+          Find and book the best {professionName.toLowerCase()} services in{" "}
+          {cityName}
+        </p>
+      </header>
+
       {res.data.length === 0 ? (
-        <div className="flex flex-col items-center justify-center space-y-3">
-          <h3 className="text-lg font-medium">No Profiles Found</h3>
-        </div>
+        <section className="text-center py-12">
+          <h2 className="text-xl font-medium text-gray-700">
+            No {professionName} Available
+          </h2>
+          <p className="mt-4 text-gray-600">
+            We're currently expanding our network in {cityName}. Please check
+            back soon or explore other services.
+          </p>
+        </section>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
+        <section
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          aria-label={`${professionName} profiles in ${cityName}`}
+        >
           {res.data.map((profile) => (
             <Profile key={profile.handle} partner={profile} />
           ))}
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 }
