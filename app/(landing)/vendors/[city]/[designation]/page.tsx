@@ -107,8 +107,8 @@ export default async function ProfessionalsListingPage({
             No {professionName} Available
           </h2>
           <p className="mt-4 text-gray-600">
-            We're currently expanding our network in {cityName}. Please check
-            back soon or explore other services.
+            We&apos;re currently expanding our network in {cityName}. Please
+            check back soon or explore other services.
           </p>
         </section>
       ) : (

@@ -116,8 +116,8 @@ export default async function FreelancerCategoryPage({
             No Services Currently Available in {cityName}
           </h2>
           <p className="mt-4 text-gray-600">
-            Check back soon as we're constantly adding new professionals to our
-            platform.
+            Check back soon as we&apos;re constantly adding new professionals to
+            our platform.
           </p>
         </section>
       ) : (
