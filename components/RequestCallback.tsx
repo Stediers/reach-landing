@@ -33,7 +33,7 @@ import { SelectStateAndCityAPI } from "./SelectStateAndCity";
 import { showSnackBar } from "./notifications/Snackbar";
 import Link from "next/link";
 import ImageComponent from "./ImageComponent";
-import { Callback } from "@data/types";
+import { AddOn, Callback } from "@data/types";
 import {
   FetchCallbackByServiceIdResponse,
   fetchCallbackByServiceId,
@@ -53,13 +53,18 @@ import Loading from "./Loading";
 import { debounce } from "lodash";
 import { SheetClose } from "./ui/sheet";
 import UnderlinedHeader, { SubUnderlinedHeader } from "./UnderlinedHeader";
+import Setting from "./Setting";
+import { priceString } from "@helper_functions/priceString";
+import { CheckIcon } from "lucide-react";
 
 export function RequestCallback({
   serviceId,
   type = "both",
+  addOns,
 }: {
   serviceId: string;
   type?: "mobile" | "desktop" | "both";
+  addOns: AddOn[];
 }) {
   const [buttonState, setButtonState] = useState(State.LOADING);
   const [response, setResponse] =
@@ -72,6 +77,7 @@ export function RequestCallback({
     },
     message: "",
     serviceId: serviceId,
+    addonIds: [],
   });
 
   useEffect(() => {
@@ -107,6 +113,7 @@ export function RequestCallback({
       setResponse={setResponse}
       setButtonState={setButtonState}
       handle={response?.callback?.partner.handle ?? ""}
+      addOns={addOns}
     />
   ) : (
     <RequestCallbackDesktop
@@ -325,6 +332,7 @@ export function RequestCallbackMobile({
   setResponse,
   setButtonState,
   handle,
+  addOns,
 }: {
   serviceId: string;
   response: FetchCallbackByServiceIdResponse | null;
@@ -336,6 +344,7 @@ export function RequestCallbackMobile({
   >;
   setButtonState: Dispatch<SetStateAction<State>>;
   handle: string;
+  addOns: AddOn[];
 }) {
   return (
     <LoadingWrapper
@@ -415,6 +424,18 @@ export function RequestCallbackMobile({
                   <p className="text-base font-medium first-letter:capitalize">
                     {response.callback.message}
                   </p>
+                </div>
+                <div className="flex flex-col space-y-1 w-full">
+                  <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
+                    Addons
+                  </p>
+                  <div className="flex flex-col space-y-1 w-full">
+                    {response.callback.addOns.map((addOn) => (
+                      <p className="text-base font-medium first-letter:capitalize">
+                        {addOn.title}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -516,6 +537,50 @@ export function RequestCallbackMobile({
                 title="Ask me anything..."
                 placeholder="Ex. Can we have a call at 5 PM?"
               />
+              <div className="flex flex-col space-y-4 w-full">
+                <p className="text-lg font-medium first-letter:capitalize">
+                  Interested in any addons?
+                </p>
+                {addOns.map((addOn) => (
+                  // <Card className="text-base font-medium first-letter:capitalize">
+                  //   <div className="flex flex-col space-y-1 w-full">
+                  //     <p className="text-base font-medium first-letter:capitalize">
+                  //       {addOn.title}
+                  //     </p>
+                  //     <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
+                  //       {addOn.description}
+                  //     </p>
+                  //     <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
+                  //       {addOn.price}
+                  //     </p>
+                  //   </div>
+                  // </Card>
+                  <Setting
+                    title={addOn.title}
+                    subtitle={addOn.description}
+                    onClick={() => {
+                      setRequest({
+                        ...request,
+                        addonIds: request.addonIds.includes(addOn.id!!)
+                          ? request.addonIds.filter((id) => id !== addOn.id)
+                          : [...request.addonIds, addOn.id!!],
+                      });
+                    }}
+                    icon={
+                      request.addonIds.includes(addOn.id!!) ? (
+                        <CheckIcon size={24} />
+                      ) : (
+                        <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
+                          {priceString({
+                            price: addOn.price,
+                            priceType: "paisa",
+                          })}
+                        </p>
+                      )
+                    }
+                  />
+                ))}
+              </div>
             </div>
           </CustomSheet>
         )

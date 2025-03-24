@@ -546,7 +546,9 @@ export type Callback = {
     city: string;
     state: string;
   };
+  price: Price;
   appointmentId: string | null;
+  addOns: AddOn[];
 };
 
 export type FetchCustomerResponse = {

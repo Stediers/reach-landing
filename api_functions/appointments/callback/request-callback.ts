@@ -10,6 +10,7 @@ export type RequestCallbackRequest = {
     city: string;
     state: string;
   };
+  addonIds: string[];
 };
 
 export async function requestCallback(

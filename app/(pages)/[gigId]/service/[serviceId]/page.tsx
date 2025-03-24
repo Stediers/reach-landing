@@ -245,11 +245,19 @@ export default async function Page({
           </div>
         </div>
         <div className="lg:sticky lg:top-20 max-w-lg hidden lg:flex flex-col gap-y-5 w-full pt-10 ">
-          <RequestCallback serviceId={serviceId} type="desktop" />
+          <RequestCallback
+            serviceId={serviceId}
+            type="desktop"
+            addOns={service.addOns}
+          />
         </div>
       </div>
       <div className="sticky bottom-0 py-5 bg-white lg:hidden flex flex-col gap-y-5 w-full px-5">
-        <RequestCallback serviceId={serviceId} type="mobile" />
+        <RequestCallback
+          serviceId={serviceId}
+          type="mobile"
+          addOns={service.addOns}
+        />
       </div>
       <div className="w-full flex flex-col items-start justify-start space-y-5 pt-5 col-span-2 max-w-lg lg:px-0 px-5 mb-5">
         <UnderlinedHeader title="Know more about me" align="items-start" />
