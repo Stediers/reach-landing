@@ -6,7 +6,6 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: false,
   images: {
     unoptimized: true,
-    loader: "imgix",
     // remotePatterns: [
     //   "business-card-templates4762.s3.ap-south-1.amazonaws.com",
     //   "appointment-files4762.s3.ap-south-1.amazonaws.com",
