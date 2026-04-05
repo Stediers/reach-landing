@@ -1,3 +1,4 @@
+import React from "react";
 import { BookingBill, Price } from "@data/types";
 import { priceString, showPrice } from "@helper_functions/priceString";
 import { Button } from "./ui/button";
@@ -117,7 +118,7 @@ export function AppointmentBillInvoiceDrawer({
   triggerJsx,
 }: {
   price: Price;
-  triggerJsx: JSX.Element;
+  triggerJsx: React.JSX.Element;
 }) {
   return (
     <Drawer closeThreshold={0.5}>
@@ -147,7 +148,7 @@ export function AppointmentBillInvoiceDialog({
   triggerJsx,
 }: {
   price: Price;
-  triggerJsx: JSX.Element;
+  triggerJsx: React.JSX.Element;
 }) {
   return (
     <Dialog>
@@ -182,7 +183,7 @@ export function BookingBillInvoiceDrawer({
   showPaymentLink = true,
 }: {
   bill: BookingBill;
-  triggerJsx: JSX.Element;
+  triggerJsx: React.JSX.Element;
   onConfirm?: () => Promise<void>;
   confirmText?: string;
   cancelText?: string;

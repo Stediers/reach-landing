@@ -17,11 +17,6 @@ import localFont from "next/font/local";
 const Gilroy = localFont({
   src: [
     {
-      path: "../assets/fonts/gilroy/Gilroy-ExtraBold.ttf",
-      weight: "800",
-      style: "normal",
-    },
-    {
       path: "../assets/fonts/gilroy/Gilroy-Bold.ttf",
       weight: "700",
       style: "normal",
@@ -46,12 +41,8 @@ const Gilroy = localFont({
       weight: "300",
       style: "normal",
     },
-    {
-      path: "../assets/fonts/gilroy/Gilroy-Thin.ttf",
-      weight: "200",
-      style: "normal",
-    },
   ],
+  display: "swap",
   variable: "--font-gilroy",
 });
 
@@ -60,6 +51,7 @@ type RootLayoutProps = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://reachgig.com"),
   title: {
     default: "ReachGig",
     template: "%s | ReachGig",
@@ -76,10 +68,16 @@ export const metadata: Metadata = {
   applicationName: "ReachGig",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
         <head />
         <GoogleAnalyticsTracking />
         <FacebookPixel />

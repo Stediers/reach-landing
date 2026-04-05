@@ -6,8 +6,12 @@ import ImageComponent from "@components/ImageComponent";
 import { BlogTag } from "@wrapper/BlogWrapper";
 import Link from "next/link";
 import HeaderWrapper from "@wrapper/HeaderWrapper";
-import RawCarousel from "@components/carousel/RawCarousel";
-import { CarouselItem } from "@components/ui/carousel";
+import {
+  fetchYouTubeVideos,
+  fetchYouTubeShorts,
+} from "@api_functions/youtube/fetch-youtube-videos";
+import YouTubeGrid from "@components/youtube/YouTubeGrid";
+import YouTubeShorts from "@components/youtube/YouTubeShorts";
 
 export const metadata: Metadata = {
   title: "Learn from Industry Experts",
@@ -15,6 +19,9 @@ export const metadata: Metadata = {
     "Discover expert insights, tips, and guides for freelancers and gig workers. Learn about financial management, legal compliance, work-life balance, and success strategies in the gig economy.",
   alternates: {
     canonical: "https://reachgig.com/learn",
+    types: {
+      "application/rss+xml": "https://reachgig.com/feed.xml",
+    },
   },
   openGraph: {
     title: "ReachGig Learning Hub - Expert Guides for Gig Workers",
@@ -30,7 +37,7 @@ export const metadata: Metadata = {
         alt: "ReachGig Learning Hub",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
     siteName: "ReachGig",
   },
   keywords:
@@ -45,13 +52,37 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  const podcastVideos = [
-    "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
-    "https://www.youtube.com/embed/DojCGh-PNKc?si=ZLyrNDhZ8AQqaF7q",
-  ];
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://reachgig.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Learn",
+      item: "https://reachgig.com/learn",
+    },
+  ],
+};
+
+export default async function Page() {
+  const [videos, shorts] = await Promise.all([
+    fetchYouTubeVideos(),
+    fetchYouTubeShorts(),
+  ]);
+
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <HeaderWrapper
         paddingTopRemove={true}
         title={
@@ -61,30 +92,17 @@ export default function Page() {
           </span>
         }
       >
-        {/* <VideoCarousel
-          videos={[
-            "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
-            "https://www.youtube.com/embed/hb7DSyWHjZw?si=CwkgK4nSBQ1dlzNp",
-            "https://www.youtube.com/embed/9E-5_16Nsws?si=txsp9Ka9P4KcUIol",
-            "https://www.youtube.com/embed/hb7DSyWHjZw?si=CwkgK4nSBQ1dlzNp",
-          ]}
-          itemBasis="lg:basis-1/2"
-        /> */}
-        <RawCarousel showArrows={true} autoPlay={true}>
-          {podcastVideos.map((video) => (
-            <CarouselItem className="lg:basis-1/2" key={video}>
-              <iframe
-                src={video}
-                title="YouTube video player"
-                className="w-full h-[200px] lg:h-[400px] rounded-lg"
-                frameBorder={0}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-            </CarouselItem>
-          ))}
-        </RawCarousel>
+        <YouTubeGrid videos={videos} />
+      </HeaderWrapper>
+      <HeaderWrapper
+        title={
+          <span className="!leading-snug">
+            Quick <br />{" "}
+            <span className="text-primary font-semibold">Clips</span>
+          </span>
+        }
+      >
+        <YouTubeShorts shorts={shorts} />
       </HeaderWrapper>
       <HeaderWrapper
         title={
@@ -96,6 +114,48 @@ export default function Page() {
       >
         <div className="grid gap-20 lg:grid-cols-3 justify-items-center">
           {/* NEW BLOGS HERE */}
+          <BlogCard
+            title="How to Choose the Right Wedding Photographer in India"
+            description="Planning your wedding and looking for the perfect photographer? This complete guide covers everything from photography styles and portfolio evaluation to pricing ranges and red flags to watch out for. Make your special day unforgettable with the right choice."
+            imageUrl="/images/booking.svg"
+            link="/learn/how-to-choose-wedding-photographer-india"
+            tags={[BlogCategory.TIPS]}
+          />
+          <BlogCard
+            title="Makeup Artist Price Guide India 2025 — How Much Does Bridal Makeup Cost?"
+            description="Wondering how much a makeup artist charges in India? This comprehensive price guide breaks down bridal makeup costs by city, compares HD vs airbrush makeup, reveals hidden costs, and helps you get the best value for your money."
+            imageUrl="/images/grooming-service.svg"
+            link="/learn/makeup-artist-price-guide-india"
+            tags={[BlogCategory.INFORMATION]}
+          />
+          <BlogCard
+            title="Top Mehndi Design Trends for Indian Weddings in 2025"
+            description="From minimalist elegance to portrait mehndi, discover the hottest bridal mehndi trends of 2025. Learn about traditional vs modern styles, pricing expectations, and tips for darker, longer-lasting mehndi for your special day."
+            imageUrl="/images/discover.svg"
+            link="/learn/mehndi-design-trends-indian-weddings"
+            tags={[BlogCategory.TIPS]}
+          />
+          <BlogCard
+            title="How to Hire a DJ for Your Event in India — Complete Guide"
+            description="Throwing a wedding, sangeet, or corporate event? Learn how to choose the right DJ, what equipment to expect, typical pricing across Indian cities, and key questions to ask before you book. Make your event unforgettable."
+            imageUrl="/images/community.svg"
+            link="/learn/how-to-hire-dj-for-event"
+            tags={[BlogCategory.TIPS]}
+          />
+          <BlogCard
+            title="Freelancer vs Agency: Which Should You Hire?"
+            description="Not sure whether to hire a freelancer or an agency for your next project? This honest comparison breaks down costs, quality, communication, and flexibility to help you make the right choice for your specific needs."
+            imageUrl="/images/negotiate.svg"
+            link="/learn/freelancer-vs-agency-which-to-hire"
+            tags={[BlogCategory.INFORMATION]}
+          />
+          <BlogCard
+            title="Top Questions to Ask Before Booking a Service Provider"
+            description="Don't book a service provider without asking these essential questions first. From pricing transparency to cancellation policies, this guide ensures you make informed hiring decisions and avoid costly mistakes."
+            imageUrl="/images/review.svg"
+            link="/learn/questions-to-ask-before-booking-service-provider"
+            tags={[BlogCategory.TIPS]}
+          />
           <BlogCard
             title="Staying Motivated and Overcoming Freelance Burnout"
             description="As freelancers, we're often depicted as living the dream - setting our own schedules, working from anywhere, and pursuing our passions on our own terms. However, the reality is that freelancing comes with its own set of challenges, one of the most prevalent being burnout. The relentless hustle, unpredictable income, and constant pressure to perform can take a toll on our mental and physical well-being, leading to feelings of exhaustion, disillusionment, and overwhelm. In this blog post, we'll explore the phenomenon of freelance burnout, its causes, and most importantly, how to overcome it and stay motivated in the long run."

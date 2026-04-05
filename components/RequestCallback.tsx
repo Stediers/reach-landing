@@ -2,136 +2,51 @@
 
 import { CallbackStatus, CustomerRoutes, State } from "@data/enums";
 import LoadingWrapper from "@wrapper/LoadingWrapper";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useMemo,
+} from "react";
 import { Button } from "./ui/button";
 import { CustomDrawer } from "./DrawerPopup";
 import TextArea from "./input/TextArea";
-import { sendOTP } from "@api_functions/auth/send-otp";
-import { verifyOTP } from "@api_functions/auth/verify-otp";
-import { setCookie } from "@api_functions/internal/cookie";
-import { Country, countries } from "@data/countries";
-import { isValidPhoneNumber } from "libphonenumber-js";
-import { useRouter } from "next-nprogress-bar";
-import { useSearchParams } from "next/navigation";
-import Logo from "./Logo";
-import TextInput from "./input/TextInput";
-import OtpInput from "react-otp-input";
-import { DrawerClose } from "./ui/drawer";
-import { CustomDialog, ProfileDialog } from "./DialogPopup";
 import {
-  RequestCallbackRequest,
   requestCallback,
+  RequestCallbackRequest,
 } from "@api_functions/appointments/callback/request-callback";
 import {
-  Country as CountryType,
-  ICity,
-  City,
-  IState,
-  State as StateType,
-} from "country-state-city";
+  fetchCallbackByServiceId,
+  FetchCallbackByServiceIdResponse,
+} from "@api_functions/appointments/callback/fetch-callback-by-serviceId";
+import { useRouter } from "next-nprogress-bar";
+import { useSearchParams } from "next/navigation";
+import TextInput from "./input/TextInput";
+import { DrawerClose } from "./ui/drawer";
+import { CustomDialog } from "./DialogPopup";
 import { SelectStateAndCityAPI } from "./SelectStateAndCity";
 import { showSnackBar } from "./notifications/Snackbar";
 import Link from "next/link";
 import ImageComponent from "./ImageComponent";
 import { Callback } from "@data/types";
-import {
-  FetchCallbackByServiceIdResponse,
-  fetchCallbackByServiceId,
-} from "@api_functions/appointments/callback/fetch-callback-by-serviceId";
-import { openInNewTab } from "@helper_functions/newTab";
 import Chip from "./Chip";
-import PriceComponent from "./price/MobilePrice";
-import MobileLogin from "./sign-in/MobileNumber";
-import LoginPerks from "./LoginPerks";
 import MobileLoginPopup from "./sign-in/MobileLoginPopup";
 import Card from "./Card";
 import { Skeleton } from "./ui/skeleton";
 import { CustomSheet } from "./CustomSheet";
-import TextInputWithDropdown from "./input/TextInputWithDropdown";
-import { fetchCity } from "@api_functions/location/get-city";
-import Loading from "./Loading";
-import { debounce } from "lodash";
 import { SheetClose } from "./ui/sheet";
-import UnderlinedHeader, { SubUnderlinedHeader } from "./UnderlinedHeader";
+import { SubUnderlinedHeader } from "./UnderlinedHeader";
 
-export function RequestCallback({
+// Initial request state
+const createInitialRequest = (serviceId: string) => ({
+  location: { city: "", state: "" },
+  message: "",
   serviceId,
-  type = "both",
-}: {
-  serviceId: string;
-  type?: "mobile" | "desktop" | "both";
-}) {
-  const [buttonState, setButtonState] = useState(State.LOADING);
-  const [response, setResponse] =
-    useState<FetchCallbackByServiceIdResponse | null>(null);
+});
 
-  const [request, setRequest] = useState<RequestCallbackRequest>({
-    location: {
-      city: "",
-      state: "",
-    },
-    message: "",
-    serviceId: serviceId,
-  });
-
-  useEffect(() => {
-    console.log("serviceId", serviceId);
-    setButtonState(State.LOADING);
-    fetchCallbackByServiceId({ serviceId }).then((response) => {
-      setButtonState(State.SUCCESS);
-      if (response) {
-        setResponse(response);
-      }
-    });
-  }, []);
-
-  const [isMobile, setIsMobile] = useState(type === "mobile");
-
-  useEffect(() => {
-    if (type !== "both") return;
-    //check if mobile
-    if (typeof window === "undefined") return;
-    if (window.innerWidth < 768) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  }, []);
-  return isMobile ? (
-    <RequestCallbackMobile
-      serviceId={serviceId}
-      response={response}
-      request={request}
-      buttonState={buttonState}
-      setRequest={setRequest}
-      setResponse={setResponse}
-      setButtonState={setButtonState}
-      handle={response?.callback?.partner.handle ?? ""}
-    />
-  ) : (
-    <RequestCallbackDesktop
-      serviceId={serviceId}
-      response={response}
-      request={request}
-      buttonState={buttonState}
-      setRequest={setRequest}
-      setResponse={setResponse}
-      setButtonState={setButtonState}
-      handle={response?.callback?.partner.handle ?? ""}
-    />
-  );
-}
-
-export function RequestCallbackDesktop({
-  serviceId,
-  response,
-  request,
-  setRequest,
-  buttonState,
-  setResponse,
-  setButtonState,
-  handle,
-}: {
+// Shared component props interface
+interface RequestCallbackProps {
   serviceId: string;
   response: FetchCallbackByServiceIdResponse | null;
   request: RequestCallbackRequest;
@@ -142,22 +57,211 @@ export function RequestCallbackDesktop({
   >;
   setButtonState: Dispatch<SetStateAction<State>>;
   handle: string;
+}
+
+// Status chip component
+const StatusChip = ({ status }: { status: CallbackStatus }) => {
+  switch (status) {
+    case CallbackStatus.PENDING:
+      return <Chip title="Pending" className="text-white bg-info text-xs" />;
+    case CallbackStatus.SUCCESS:
+      return <Chip title="Success" className="text-white bg-success text-xs" />;
+    case CallbackStatus.FAILED:
+      return <Chip title="Rejected" className="text-white bg-error text-xs" />;
+    default:
+      return null;
+  }
+};
+
+// Common validation logic
+const validateRequest = (request: RequestCallbackRequest) => {
+  if (request.message.length === 0) {
+    showSnackBar({
+      message: "Message is required",
+      state: State.ERROR,
+    });
+    return false;
+  } else if (request.location.city.length === 0) {
+    showSnackBar({
+      message: "City is required",
+      state: State.ERROR,
+    });
+    return false;
+  } else if (request.location.state.length === 0) {
+    showSnackBar({
+      message: "State is required",
+      state: State.ERROR,
+    });
+    return false;
+  }
+  return true;
+};
+
+// Loading skeleton
+const LoadingSkeleton = () => (
+  <Card className="!p-10 !items-start shadow-lg">
+    <p className="text-center text-xl font-medium">Please wait...</p>
+    <Skeleton className="w-full h-10" />
+    <Skeleton className="w-full h-10" />
+    <Skeleton className="w-full h-40" />
+    <Button buttonstate={State.LOADING} variant="info" className="w-full">
+      <p className="text-md font-medium">Please wait...</p>
+    </Button>
+  </Card>
+);
+
+// Login required component
+const LoginRequired = ({
+  serviceId,
+  handle,
+}: {
+  serviceId: string;
+  handle: string;
+}) => {
+  const redirectUrl = CustomerRoutes.SERVICE.replace(
+    "[serviceId]",
+    serviceId
+  ).replace("[partnerHandle]", handle);
+
+  return (
+    <div className="flex flex-col space-y-5 w-full">
+      <ImageComponent
+        alt="Login"
+        src="/images/login.svg"
+        className="w-full h-60"
+      />
+      <Button variant="success" asChild onClick={() => {}}>
+        <Link href={`/user/sign-in?redirectUrl=${redirectUrl}`}>
+          <p className="text-md font-medium">Login</p>
+        </Link>
+      </Button>
+    </div>
+  );
+};
+
+// Main RequestCallback component
+export function RequestCallback({
+  serviceId,
+  type = "both",
+}: {
+  serviceId: string;
+  type?: "mobile" | "desktop" | "both";
 }) {
+  const [buttonState, setButtonState] = useState(State.LOADING);
+  const [response, setResponse] =
+    useState<FetchCallbackByServiceIdResponse | null>(null);
+  const [request, setRequest] = useState<RequestCallbackRequest>(
+    createInitialRequest(serviceId)
+  );
+  const [isMobile, setIsMobile] = useState(type === "mobile");
+
+  // Load callback data
+  useEffect(() => {
+    const loadCallbackData = async () => {
+      setButtonState(State.LOADING);
+      try {
+        const result = await fetchCallbackByServiceId({ serviceId });
+        if (result) {
+          setResponse(result);
+        }
+        setButtonState(State.SUCCESS);
+      } catch (error) {
+        console.error("Error fetching callback data:", error);
+        setButtonState(State.ERROR);
+      }
+    };
+
+    loadCallbackData();
+  }, [serviceId]);
+
+  // Check device type
+  useEffect(() => {
+    if (type !== "both") return;
+    if (typeof window === "undefined") return;
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [type]);
+
+  const handle = response?.callback?.partner.handle ?? "";
+
+  return isMobile ? (
+    <RequestCallbackMobile
+      serviceId={serviceId}
+      response={response}
+      request={request}
+      buttonState={buttonState}
+      setRequest={setRequest}
+      setResponse={setResponse}
+      setButtonState={setButtonState}
+      handle={handle}
+    />
+  ) : (
+    <RequestCallbackDesktop
+      serviceId={serviceId}
+      response={response}
+      request={request}
+      buttonState={buttonState}
+      setRequest={setRequest}
+      setResponse={setResponse}
+      setButtonState={setButtonState}
+      handle={handle}
+    />
+  );
+}
+
+// Desktop version
+export function RequestCallbackDesktop({
+  serviceId,
+  response,
+  request,
+  setRequest,
+  buttonState,
+  setResponse,
+  setButtonState,
+  handle,
+}: RequestCallbackProps) {
+  const isFormValid = useMemo(
+    () =>
+      request.message.length > 0 &&
+      request.location.city.length > 0 &&
+      request.location.state.length > 0,
+    [request]
+  );
+
+  const handleRequestCallback = async () => {
+    if (!validateRequest(request)) return;
+
+    try {
+      const res = await requestCallback(request);
+      if (res) {
+        setResponse({
+          loggedIn: true,
+          callback: res,
+        });
+      }
+    } catch (error) {
+      console.error("Error requesting callback:", error);
+      showSnackBar({
+        message: "Failed to request callback",
+        state: State.ERROR,
+      });
+    }
+  };
+
   return (
     <LoadingWrapper
       pageState={buttonState}
       showLogo={false}
-      loadingJSX={
-        <Card className="!p-10 !items-start shadow-lg">
-          <p className="text-center text-xl font-medium">Please wait...</p>
-          <Skeleton className="w-full h-10" />
-          <Skeleton className="w-full h-10" />
-          <Skeleton className="w-full h-40" />
-          <Button buttonstate={buttonState} variant="info" className="w-full">
-            <p className="text-md font-medium">Please wait...</p>
-          </Button>
-        </Card>
-      }
+      loadingJSX={<LoadingSkeleton />}
     >
       {response ? (
         response.callback ? (
@@ -165,19 +269,7 @@ export function RequestCallbackDesktop({
             <p className="text-center text-xl font-medium">
               Callback Requested
             </p>
-            {response.callback.status === CallbackStatus.PENDING ? (
-              <Chip title="Pending" className={`text-white bg-info text-xs`} />
-            ) : response.callback.status === CallbackStatus.SUCCESS ? (
-              <Chip
-                title="Success"
-                className={`text-white bg-success text-xs`}
-              />
-            ) : response.callback.status === CallbackStatus.FAILED ? (
-              <Chip
-                title="Rejected"
-                className={`text-white bg-error text-xs`}
-              />
-            ) : null}
+            <StatusChip status={response.callback.status} />
             <div className="flex flex-col space-y-1 w-full">
               <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
                 Location
@@ -196,7 +288,17 @@ export function RequestCallbackDesktop({
                 {response.callback.message}
               </p>
             </div>
-            <Button variant="info">Call Partner</Button>
+            <Button
+              variant="info"
+              onClick={() =>
+                window.open(
+                  `tel:${response.callback?.partner.mobileNumber}`,
+                  "_self"
+                )
+              }
+            >
+              Call Partner
+            </Button>
           </Card>
         ) : (
           <Card className="!p-10 !items-start shadow-lg">
@@ -218,68 +320,34 @@ export function RequestCallbackDesktop({
             {response.loggedIn ? (
               <Button
                 variant="info"
-                disabled={
-                  request.message.length === 0 ||
-                  request.location.city.length === 0 ||
-                  request.location.state.length === 0
-                }
-                asyncOnClick={async () => {
-                  if (request.message.length === 0) {
-                    showSnackBar({
-                      message: "Message is required",
-                      state: State.ERROR,
-                    });
-                    return;
-                  } else if (request.location.city.length === 0) {
-                    showSnackBar({
-                      message: "City is required",
-                      state: State.ERROR,
-                    });
-                    return;
-                  } else if (request.location.state.length === 0) {
-                    showSnackBar({
-                      message: "State is required",
-                      state: State.ERROR,
-                    });
-                    return;
-                  }
-                  const res = await requestCallback(request);
-                  if (res) {
-                    setResponse({
-                      loggedIn: true,
-                      callback: res,
-                    });
-                  }
-                }}
+                disabled={!isFormValid}
+                asyncOnClick={handleRequestCallback}
               >
                 Request a Call
               </Button>
             ) : (
               <MobileLoginPopup
                 triggerJSX={
-                  <Button
-                    variant="info"
-                    disabled={
-                      request.message.length === 0 ||
-                      request.location.city.length === 0 ||
-                      request.location.state.length === 0
-                    }
-                  >
+                  <Button variant="info" disabled={!isFormValid}>
                     Request a Call
                   </Button>
                 }
                 onVerifyOTP={(loggedIn) => {
                   if (loggedIn) {
                     setButtonState(State.LOADING);
-                    requestCallback(request).then((res) => {
-                      if (res) {
-                        setResponse({
-                          loggedIn: true,
-                          callback: res,
-                        });
-                      }
-                      setButtonState(State.SUCCESS);
-                    });
+                    requestCallback(request)
+                      .then((res) => {
+                        if (res) {
+                          setResponse({
+                            loggedIn: true,
+                            callback: res,
+                          });
+                        }
+                        setButtonState(State.SUCCESS);
+                      })
+                      .catch(() => {
+                        setButtonState(State.ERROR);
+                      });
                   }
                 }}
               />
@@ -293,29 +361,14 @@ export function RequestCallbackDesktop({
           description="This feature is only available to logged in users."
           footerJSX={<></>}
         >
-          <div className="flex flex-col space-y-5 w-full">
-            <ImageComponent
-              alt="Login"
-              src="/images/login.svg"
-              className="w-full h-60"
-            />
-            <Button variant="success" asChild onClick={() => {}}>
-              <Link
-                href={`/user/sign-in?redirectUrl=${CustomerRoutes.SERVICE.replace(
-                  "[serviceId]",
-                  serviceId
-                ).replace("[partnerHandle]", handle)}`}
-              >
-                <p className="text-md font-medium">Login</p>
-              </Link>
-            </Button>
-          </div>
+          <LoginRequired serviceId={serviceId} handle={handle} />
         </CustomDialog>
       )}
     </LoadingWrapper>
   );
 }
 
+// Mobile version
 export function RequestCallbackMobile({
   serviceId,
   response,
@@ -325,18 +378,35 @@ export function RequestCallbackMobile({
   setResponse,
   setButtonState,
   handle,
-}: {
-  serviceId: string;
-  response: FetchCallbackByServiceIdResponse | null;
-  request: RequestCallbackRequest;
-  setRequest: Dispatch<SetStateAction<RequestCallbackRequest>>;
-  buttonState: State;
-  setResponse: Dispatch<
-    SetStateAction<FetchCallbackByServiceIdResponse | null>
-  >;
-  setButtonState: Dispatch<SetStateAction<State>>;
-  handle: string;
-}) {
+}: RequestCallbackProps) {
+  const isFormValid = useMemo(
+    () =>
+      request.message.length > 0 &&
+      request.location.city.length > 0 &&
+      request.location.state.length > 0,
+    [request]
+  );
+
+  const handleRequestCallback = async () => {
+    if (!validateRequest(request)) return;
+
+    try {
+      const res = await requestCallback(request);
+      if (res) {
+        setResponse({
+          loggedIn: true,
+          callback: res,
+        });
+      }
+    } catch (error) {
+      console.error("Error requesting callback:", error);
+      showSnackBar({
+        message: "Failed to request callback",
+        state: State.ERROR,
+      });
+    }
+  };
+
   return (
     <LoadingWrapper
       pageState={buttonState}
@@ -366,7 +436,7 @@ export function RequestCallbackMobile({
                   variant="info"
                   onClick={() =>
                     window.open(
-                      `tel:${response.callback!!.partner.mobileNumber}`,
+                      `tel:${response.callback?.partner.mobileNumber}`,
                       "_self"
                     )
                   }
@@ -382,22 +452,7 @@ export function RequestCallbackMobile({
                 Status
               </p>
               <div className="flex flex-col !items-start w-full space-y-5">
-                {response.callback.status === CallbackStatus.PENDING ? (
-                  <Chip
-                    title="Pending"
-                    className={`text-white bg-info text-xs`}
-                  />
-                ) : response.callback.status === CallbackStatus.SUCCESS ? (
-                  <Chip
-                    title="Success"
-                    className={`text-white bg-success text-xs`}
-                  />
-                ) : response.callback.status === CallbackStatus.FAILED ? (
-                  <Chip
-                    title="Rejected"
-                    className={`text-white bg-error text-xs`}
-                  />
-                ) : null}
+                <StatusChip status={response.callback.status} />
                 <div className="flex flex-col space-y-1 w-full">
                   <p className="text-sm font-medium first-letter:capitalize text-textsubtle">
                     Location
@@ -431,68 +486,34 @@ export function RequestCallbackMobile({
                 {response.loggedIn ? (
                   <Button
                     variant="info"
-                    disabled={
-                      request.message.length === 0 ||
-                      request.location.city.length === 0 ||
-                      request.location.state.length === 0
-                    }
-                    asyncOnClick={async () => {
-                      if (request.message.length === 0) {
-                        showSnackBar({
-                          message: "Message is required",
-                          state: State.ERROR,
-                        });
-                        return;
-                      } else if (request.location.city.length === 0) {
-                        showSnackBar({
-                          message: "City is required",
-                          state: State.ERROR,
-                        });
-                        return;
-                      } else if (request.location.state.length === 0) {
-                        showSnackBar({
-                          message: "State is required",
-                          state: State.ERROR,
-                        });
-                        return;
-                      }
-                      const res = await requestCallback(request);
-                      if (res) {
-                        setResponse({
-                          loggedIn: true,
-                          callback: res,
-                        });
-                      }
-                    }}
+                    disabled={!isFormValid}
+                    asyncOnClick={handleRequestCallback}
                   >
                     Request a Call
                   </Button>
                 ) : (
                   <MobileLoginPopup
                     triggerJSX={
-                      <Button
-                        variant="info"
-                        disabled={
-                          request.message.length === 0 ||
-                          request.location.city.length === 0 ||
-                          request.location.state.length === 0
-                        }
-                      >
+                      <Button variant="info" disabled={!isFormValid}>
                         Request a Call
                       </Button>
                     }
                     onVerifyOTP={(loggedIn) => {
                       if (loggedIn) {
                         setButtonState(State.LOADING);
-                        requestCallback(request).then((res) => {
-                          if (res) {
-                            setResponse({
-                              loggedIn: true,
-                              callback: res,
-                            });
-                          }
-                          setButtonState(State.SUCCESS);
-                        });
+                        requestCallback(request)
+                          .then((res) => {
+                            if (res) {
+                              setResponse({
+                                loggedIn: true,
+                                callback: res,
+                              });
+                            }
+                            setButtonState(State.SUCCESS);
+                          })
+                          .catch(() => {
+                            setButtonState(State.ERROR);
+                          });
                       }
                     }}
                   />
@@ -526,23 +547,7 @@ export function RequestCallbackMobile({
           description="This feature is only available to logged in users."
           footerJSX={<></>}
         >
-          <div className="flex flex-col space-y-5 w-full">
-            <ImageComponent
-              alt="Login"
-              src="/images/login.svg"
-              className="w-full h-60"
-            />
-            <Button variant="success" asChild onClick={() => {}}>
-              <Link
-                href={`/user/sign-in?redirectUrl=${CustomerRoutes.SERVICE.replace(
-                  "[serviceId]",
-                  serviceId
-                ).replace("[partnerHandle]", handle)}`}
-              >
-                <p className="text-md font-medium">Login</p>
-              </Link>
-            </Button>
-          </div>
+          <LoginRequired serviceId={serviceId} handle={handle} />
         </CustomDrawer>
       )}
     </LoadingWrapper>

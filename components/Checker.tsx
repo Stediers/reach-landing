@@ -1,3 +1,4 @@
+import React from "react";
 import { AiFillCheckSquare, AiFillCloseSquare } from "react-icons/ai";
 import { BsCheck } from "react-icons/bs";
 import { IoIosClose } from "react-icons/io";
@@ -10,7 +11,7 @@ export default function Checker({
   text: string;
   checked: boolean;
   id: string;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <div
       className="flex items-center space-x-2"

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         alt: "Booking",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
 };
 

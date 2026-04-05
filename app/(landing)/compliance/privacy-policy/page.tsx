@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         alt: "Privacy Policy",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
 };
 

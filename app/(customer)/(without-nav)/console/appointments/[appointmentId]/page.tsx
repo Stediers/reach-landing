@@ -15,7 +15,7 @@ import {
 import Mobile from "@src/console/appointments/[appointmentId]/Mobile";
 import Desktop from "@src/console/appointments/[appointmentId]/Desktop";
 import ConsoleWrapper from "@wrapper/ConsoleWrapper";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
   FetchAppointmentResponseAPI,
   fetchAppointment,
@@ -28,11 +28,10 @@ import { rateAppointment } from "@api_functions/appointments/rate-appointment";
 import { showSnackBar } from "@components/notifications/Snackbar";
 import { fetchAddressByUserId } from "@api_functions/address/fetch-address-by-userId";
 
-export default function Page({
-  params,
-}: {
-  params: { appointmentId: string };
+export default function Page(props: {
+  params: Promise<{ appointmentId: string }>;
 }) {
+  const params = use(props.params);
   const [pageState, setPageState] = useState<State>(State.LOADING);
   const [response, setResponse] = useState<FetchAppointmentResponseAPI | null>(
     null

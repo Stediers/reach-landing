@@ -11,11 +11,10 @@ import Link from "next/link";
 // Revalidate more frequently for fresh content
 export const revalidate = 600; // 10 minutes
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { designation: string; city: string };
+export async function generateMetadata(props: {
+  params: Promise<{ designation: string; city: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const cityName = stringFormater(params.city);
   const res = await fetchPartners({
     city: params.city,
@@ -49,7 +48,7 @@ export async function generateMetadata({
       description: `Find and hire the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Start your search now!`,
       url: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${params.designation.toLowerCase()}`,
       siteName: "ReachGig",
-      locale: "en_US",
+      locale: "en_IN",
     },
     twitter: {
       card: "summary_large_image",
@@ -59,11 +58,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProfessionalsListingPage({
-  params,
-}: {
-  params: { designation: string; city: string };
+export default async function ProfessionalsListingPage(props: {
+  params: Promise<{ designation: string; city: string }>;
 }) {
+  const params = await props.params;
   const res = await fetchPartners({
     city: params.city,
     profession: params.designation,
@@ -76,8 +74,76 @@ export default async function ProfessionalsListingPage({
   const cityName = stringFormater(params.city);
   const professionName = stringFormater(res.designation);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://reachgig.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Vendors",
+        item: "https://reachgig.com/vendors",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: cityName,
+        item: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: professionName,
+        item: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${params.designation.toLowerCase()}`,
+      },
+    ],
+  };
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `Top ${professionName} in ${cityName}`,
+    description: `Find and book the best ${professionName.toLowerCase()} services in ${cityName}`,
+    numberOfItems: res.data.length,
+    itemListElement: res.data.slice(0, 10).map((profile, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Person",
+        name: profile.name,
+        jobTitle: profile.designation,
+        image: profile.imageUrl,
+        url: `https://reachgig.com${CustomerRoutes.PARTNER.replace("[partnerHandle]", profile.handle)}`,
+        ...(profile.rating
+          ? {
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: profile.rating.toFixed(1),
+                bestRating: "5",
+                worstRating: "1",
+              },
+            }
+          : {}),
+      },
+    })),
+  };
+
   return (
     <main className="w-full max-w-7xl mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
       <nav className="mb-8" aria-label="Back to city services">
         <Link
           href={CustomerRoutes.VENDORS_BY_CITY.replace(
@@ -116,9 +182,11 @@ export default async function ProfessionalsListingPage({
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           aria-label={`${professionName} profiles in ${cityName}`}
         >
-          {res.data.map((profile) => (
-            <Profile key={profile.handle} partner={profile} />
-          ))}
+          {res.data
+            .filter((profile) => profile.serviceImages.length > 0)
+            .map((profile) => (
+              <Profile key={profile.handle} partner={profile} />
+            ))}
         </section>
       )}
     </main>

@@ -2,10 +2,42 @@ import UnderlinedHeader from "@components/UnderlinedHeader";
 import { showYesNoPopup } from "@components/notifications/Popup";
 import { motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, Suspense } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
 
 export default function DesktopWrapper({
+  className,
+  children,
+  padding = true,
+  title,
+  description,
+  backLink,
+  warnBeforeLeaving,
+}: PropsWithChildren<{
+  className: string;
+  padding?: boolean;
+  title?: string;
+  description?: string;
+  backLink?: string;
+  warnBeforeLeaving?: boolean;
+}>) {
+  return (
+    <Suspense>
+      <DesktopWrapperInner
+        className={className}
+        padding={padding}
+        title={title}
+        description={description}
+        backLink={backLink}
+        warnBeforeLeaving={warnBeforeLeaving}
+      >
+        {children}
+      </DesktopWrapperInner>
+    </Suspense>
+  );
+}
+
+function DesktopWrapperInner({
   className,
   children,
   padding = true,

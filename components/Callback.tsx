@@ -1,3 +1,4 @@
+import React from "react";
 import { CallbackStatus, CustomerRoutes } from "@data/enums";
 import {
   Callback,
@@ -18,7 +19,7 @@ export function CallbackComponentDesktop({
   partner,
 }: {
   callback: Callback;
-  footerJSX?: JSX.Element;
+  footerJSX?: React.JSX.Element;
   partner: FetchPartnerResponse;
 }) {
   return (
@@ -125,7 +126,7 @@ export function CallbackComponentMobile({
   partner,
 }: {
   callback: Callback;
-  footerJSX?: JSX.Element;
+  footerJSX?: React.JSX.Element;
   partner: FetchPartnerResponse;
 }) {
   return (

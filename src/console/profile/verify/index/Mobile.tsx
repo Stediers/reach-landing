@@ -1,3 +1,4 @@
+import React from "react";
 import Setting from "@components/Setting";
 import MobileWrapper from "@wrapper/responsive/MobileWrapper";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
@@ -80,7 +81,7 @@ function SettingDrawer({
 }: {
   title: string;
   isVerified: boolean;
-  footerJSX: JSX.Element;
+  footerJSX: React.JSX.Element;
 }) {
   return (
     <Drawer closeThreshold={0.5}>

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         alt: "Terms of Use",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
 };
 

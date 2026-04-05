@@ -11,11 +11,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.log(data);
     const serviceIds = data ? data.serviceIds : [];
     return serviceIds.map((serviceId) => ({
-      url: CustomerRoutes.SERVICE.replace("[serviceId]", serviceId.id).replace(
-        "partnerHandle",
+      url: `${URL}${CustomerRoutes.SERVICE.replace("[serviceId]", serviceId.id).replace(
+        "[partnerHandle]",
         serviceId.partnerHandle
-      ),
-
+      )}`,
       lastModified: new Date().toISOString(),
       changeFrequency: "daily",
     }));

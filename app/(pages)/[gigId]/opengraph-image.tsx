@@ -2,9 +2,6 @@ import { fetchPartnerByPartnerId } from "@api_functions/gig/fetch-gig-profile-by
 import { redirect } from "next/navigation";
 import { ImageResponse } from "next/og";
 
-// Route segment config
-export const runtime = "edge";
-
 // Image metadata
 export const alt = "Partner";
 export const size = {
@@ -15,7 +12,8 @@ export const size = {
 export const contentType = "image/png";
 
 // Image generation
-export default async function Image({ params }: { params: { gigId: string } }) {
+export default async function Image(props: { params: Promise<{ gigId: string }> }) {
+  const params = await props.params;
   const gigId = params.gigId;
   const response = await fetchPartnerByPartnerId(gigId);
   if (!response) {

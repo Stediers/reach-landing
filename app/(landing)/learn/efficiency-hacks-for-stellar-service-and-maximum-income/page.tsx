@@ -32,9 +32,62 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",
+  description:
+    "Master proven freelance efficiency hacks to boost your income and deliver exceptional service. Learn project management, automation, and time-saving strategies for freelance success in 2024.",
+  author: {
+    "@type": "Person",
+    name: "Gauthum J",
+  },
+  datePublished: "2024-03-27",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://reachgig.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Learn",
+      item: "https://reachgig.com/learn",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",
+      item: "https://reachgig.com/learn/efficiency-hacks-for-stellar-service-and-maximum-income",
+    },
+  ],
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <BlogWrapper
         readTime={5}
         date={{

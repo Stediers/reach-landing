@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -7,7 +8,7 @@ export default function StickyContact({
   children,
   dontShowIds = [],
 }: {
-  triggerJSX: JSX.Element;
+  triggerJSX: React.JSX.Element;
   children: React.ReactNode;
   dontShowIds?: string[];
 }) {

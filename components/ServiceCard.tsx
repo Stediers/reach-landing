@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { ServiceType, PreferredGender, CustomerRoutes } from "@data/enums";
 import { FetchPartnerResponse, FetchServiceResponse } from "@data/types";
 import { priceString, showPrice } from "@helper_functions/priceString";
@@ -28,9 +29,9 @@ export function ServiceCardMobile({
   serviceTrigger = <ServiceTrigger service={service} partner={partner} />,
 }: {
   service: FetchServiceResponse;
-  serviceTrigger?: JSX.Element;
+  serviceTrigger?: React.JSX.Element;
   partner: FetchPartnerResponse;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <ServicePopupMobile
       price={service.price}
@@ -70,10 +71,10 @@ export function ServiceCardDesktop({
   handle,
 }: {
   service: FetchServiceResponse;
-  serviceTrigger?: JSX.Element;
+  serviceTrigger?: React.JSX.Element;
   location: string;
   handle: string;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <ServicePopupDesktop
       location={location}
@@ -106,7 +107,7 @@ export function ServiceTriggerDesktopProfile({
   service,
 }: {
   service: FetchServiceResponse;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <div className="flex flex-col items-start justify-center space-y-3 w-full hover:cursor-pointer">
       <Carousel className="w-full group relative">
@@ -203,13 +204,10 @@ export function ServiceTrigger({
   partner?: FetchPartnerResponse;
   eager?: boolean;
   link?: string;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <div className="flex flex-col items-start justify-center space-y-3 w-full hover:cursor-pointer transition-all duration-150">
-      <Carousel
-        className="w-full group relative"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <Carousel className="w-full group relative">
         {service.imageUrls.length > 1 ? (
           <div className="absolute bottom-2 w-full rounded-lg z-10 lg:hidden flex justify-center">
             <div className="bg-black p-1 rounded-lg">

@@ -2,6 +2,7 @@ import { fetchAvilableCities } from "@api_functions/explore/fetch-available-citi
 import { fetchCategoriesByCity } from "@api_functions/explore/fetch-categories-by-city";
 import fetchCities from "@api_functions/explore/fetch-cities";
 import { fetchGigHandles } from "@api_functions/explore/seo/get-gig-handles";
+import { fetchSeededHandles } from "@api_functions/explore/seo/fetch-seeded-handles";
 import { CustomerRoutes } from "@data/enums";
 import { MetadataRoute } from "next";
 
@@ -9,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://reachgig.com";
 
   // Main routes
-  const mainRoutes = ["", "/partner-program"];
+  const mainRoutes = ["", "/partner-program", "/contact", "/vendors"];
 
   // Learn routes
   const learnRoutes = [
@@ -23,6 +24,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/learn/india-the-land-of-gig-economy",
     "/learn/mastering-the-art-of-gig-work",
     "/learn/navigating-the-legal-maze",
+    "/learn/how-to-choose-wedding-photographer-india",
+    "/learn/makeup-artist-price-guide-india",
+    "/learn/mehndi-design-trends-indian-weddings",
+    "/learn/how-to-hire-dj-for-event",
+    "/learn/freelancer-vs-agency-which-to-hire",
+    "/learn/questions-to-ask-before-booking-service-provider",
   ];
 
   try {
@@ -39,8 +46,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }));
 
+    // Fetch seeded (unclaimed) profile handles
+    const seededHandles = await fetchSeededHandles();
+    const seededRoutes = seededHandles.map((handle) => ({
+      url: `${baseUrl}/${handle}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }));
+
     const citiesData = await fetchAvilableCities();
     const cities = citiesData ? citiesData : { cities: [] };
+    const vendorCityRoutes = cities.cities.map((city) => ({
+      url: `${baseUrl}/vendors/${city.name}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "daily" as const,
+      priority: 0.8,
+    }));
+
     const vendorRoutes = (
       await Promise.all(
         cities.cities.map(async (city) => {
@@ -85,6 +108,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })),
       // Dynamic gig routes
       ...gigRoutes.map((route) => ({
+        url: route.url,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      })),
+      // Seeded profile routes
+      ...seededRoutes.map((route) => ({
+        url: route.url,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+      })),
+      // Vendor city hub routes
+      ...vendorCityRoutes.map((route) => ({
         url: route.url,
         lastModified: new Date().toISOString(),
         changeFrequency: "daily" as const,

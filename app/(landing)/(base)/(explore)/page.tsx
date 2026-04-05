@@ -9,15 +9,38 @@ import PopularDesignations from "./PopularDesignations";
 import * as motion from "motion/react-client";
 import { ArrowRightIcon } from "lucide-react";
 
-// ... (keeping all metadata)
+export const metadata: Metadata = {
+  title: "Browse Freelancers & Service Providers in India | ReachGig",
+  description:
+    "Explore verified freelancers across India — photographers, makeup artists, mehndi designers, DJs, fitness trainers & more. Compare profiles, read reviews, and book instantly on ReachGig.",
+  keywords:
+    "freelancers India, hire freelancers, photographers near me, makeup artists, mehndi designers, DJs, service providers, book online, ReachGig",
+  alternates: {
+    canonical: "https://reachgig.com",
+  },
+  openGraph: {
+    title: "Browse Freelancers & Service Providers | ReachGig",
+    description:
+      "Explore verified freelancers across India. Compare profiles, read reviews, and book instantly.",
+    url: "https://reachgig.com",
+    type: "website",
+    siteName: "ReachGig",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Browse Freelancers & Service Providers | ReachGig",
+    description:
+      "Explore verified freelancers across India. Compare profiles, read reviews, and book instantly.",
+  },
+};
 
-export default async function ExplorePage({
-  searchParams,
-}: {
-  searchParams: {
+export default async function ExplorePage(props: {
+  searchParams: Promise<{
     designation: string;
-  };
+  }>;
 }) {
+  const searchParams = await props.searchParams;
   const res = await fetchAllPartners();
   if (!res) return <ServiceCardSkeleton />;
 
@@ -35,6 +58,7 @@ export default async function ExplorePage({
   return (
     <>
       <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar py-5 space-y-5">
+        <h1 className="sr-only">Browse Freelancers & Service Providers in India</h1>
         <PopularDesignations
           designations={res.map((partner) => partner.group)}
           selectedDesignation={selectedDesignation}
@@ -69,7 +93,7 @@ export default async function ExplorePage({
                       {partner.group.charAt(0).toUpperCase() +
                         partner.group.slice(1)}
                     </h2>
-                    <div className="flex flex-row justify-start items-center space-x-5 lg:space-x-10 w-full py-3 overflow-x-scroll">
+                    <div className="flex flex-row justify-start items-center space-x-4 lg:space-x-5 w-full py-3 overflow-x-scroll">
                       {partner.partners.map((profile, profileIndex) => (
                         <Profile
                           key={profile.id}
@@ -107,11 +131,12 @@ function Profile({
 
   return (
     <Link
-      className="flex flex-col items-start justify-center space-y-3 min-w-[13rem] max-w-[13rem] lg:!min-w-[18rem] lg:max-w-[18rem] overflow-hidden"
+      className="flex flex-col items-start justify-center space-y-3 w-[13rem] lg:w-[18rem] shrink-0 overflow-hidden"
       href={link}
       title={`View ${name}'s Profile - ${designation}`}
     >
       <motion.div
+        className="w-full"
         initial={{
           opacity: 0,
           y: 20,
@@ -129,14 +154,15 @@ function Profile({
           bounce: 0.2,
         }}
       >
-        <Card className="flex flex-col items-start justify-center !space-y-3 transition-all duration-300 hover:shadow-md hover:cursor-pointer transform-gpu">
+        <Card className="flex flex-col items-start justify-center !space-y-3 transition-all duration-300 hover:shadow-md hover:cursor-pointer transform-gpu w-full">
           <Image
             src={image}
             alt={`${name} - ${designation}`}
-            className="w-40 h-40 rounded-lg bg-red-100 object-cover"
-            width={160}
-            height={160}
-            loading="lazy"
+            className="w-full h-44 lg:h-56 rounded-lg bg-red-100 object-cover"
+            width={288}
+            height={288}
+            loading={index === 0 ? "eager" : "lazy"}
+            priority={index === 0}
           />
           <div className="flex flex-col items-start justify-center space-y-1">
             <h3 className="text-lg font-medium line-clamp-1">{name}</h3>

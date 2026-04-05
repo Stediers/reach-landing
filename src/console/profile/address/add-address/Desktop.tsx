@@ -8,7 +8,6 @@ import { CustomerRoutes, State } from "@data/enums";
 import { LocationAttributes } from "@data/types";
 import { Loader } from "@googlemaps/js-api-loader";
 import DesktopWrapper from "@wrapper/responsive/DesktopWrapper";
-import router from "next/router";
 import { useEffect } from "react";
 
 export default function Desktop({

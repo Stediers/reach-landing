@@ -2,6 +2,10 @@ import {
   FetchPartnerByPartnerIdResponse,
   fetchPartnerByPartnerId,
 } from "@api_functions/gig/fetch-gig-profile-by-gigId";
+import {
+  SeededProfileResponse,
+  fetchSeededProfile,
+} from "@api_functions/explore/seo/fetch-seeded-profile";
 import Logo from "@components/Logo";
 import { CustomerRoutes, Gender } from "@data/enums";
 import { AiFillStar } from "react-icons/ai";
@@ -27,18 +31,62 @@ import StickyContact from "@components/contact/StickyContact";
 import { CustomDialog } from "@components/DialogPopup";
 import TrackProfileComponent from "@components/track/track-profile";
 import * as motion from "motion/react-client";
+import Calendar from "@components/input/Calendar";
 
 export const revalidate = 60; // 1 minute
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { gigId: string };
+export const generateMetadata = async (props: {
+  params: Promise<{ gigId: string }>;
 }): Promise<Metadata> => {
+  const params = await props.params;
   const gigId = params.gigId;
   const response = await fetchPartnerByPartnerId(gigId);
 
   if (!response) {
+    // Try seeded profile
+    const seeded = await fetchSeededProfile(gigId);
+    if (seeded) {
+      const location = `${seeded.city}, ${seeded.state}`;
+      return {
+        title: {
+          absolute: `${seeded.name} - ${seeded.designation} in ${location} | ReachGig`,
+        },
+        description: `Find and book ${seeded.name}, a ${seeded.designation} in ${location}. ${
+          seeded.rating ? `Rated ${seeded.rating}/5` : ""
+        } Book on ReachGig.`,
+        alternates: {
+          canonical: `https://reachgig.com/${seeded.handle}`,
+        },
+        openGraph: {
+          title: `${seeded.name} - ${seeded.designation} in ${location}`,
+          description: `Book ${seeded.name}, a professional ${seeded.designation} in ${location}.`,
+          url: `https://reachgig.com/${seeded.handle}`,
+          type: "profile",
+          siteName: "ReachGig",
+        },
+        keywords: [
+          seeded.name.toLowerCase(),
+          seeded.designation.toLowerCase(),
+          seeded.city.toLowerCase(),
+          `${seeded.designation.toLowerCase()} in ${seeded.city.toLowerCase()}`,
+          `hire ${seeded.designation.toLowerCase()}`,
+          `${seeded.designation.toLowerCase()} near me`,
+          "reachgig",
+        ],
+        robots: {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-snippet": -1,
+            "max-image-preview": "large",
+            "max-video-preview": -1,
+          },
+        },
+      };
+    }
+
     return {
       title: "Professional Profile | ReachGig",
       description:
@@ -86,7 +134,7 @@ export const generateMetadata = async ({
       url: `https://reachgig.com/${response.partner.handle}`,
       type: "profile",
       siteName: "ReachGig",
-      locale: "en_US",
+      locale: "en_IN",
       firstName: response.partner.firstName,
       lastName: response.partner.lastName,
       gender: response.partner.gender,
@@ -125,21 +173,25 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { gigId: string };
-  searchParams: {
+export default async function Page(props: {
+  params: Promise<{ gigId: string }>;
+  searchParams: Promise<{
     whatsapp?: boolean;
     instagram?: boolean;
     backLink?: string;
     preview?: boolean;
-  };
+  }>;
 }) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const gigId = params.gigId;
   const response = await fetchPartnerByPartnerId(gigId);
   if (!response) {
+    // Try seeded profile fallback
+    const seeded = await fetchSeededProfile(gigId);
+    if (seeded && !seeded.claimed) {
+      return <SeededProfilePage profile={seeded} />;
+    }
     redirect("/404");
   }
 
@@ -155,6 +207,56 @@ export default async function Page({
     ? "preview"
     : null;
 
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: `${response.partner.firstName} ${response.partner.lastName}`,
+      jobTitle: response.partner.designation,
+      description: response.partner.bio || `Professional ${response.partner.designation} based in ${response.partner.city}, ${response.partner.state}`,
+      image: response.partner.imageUrl,
+      url: `https://reachgig.com/${response.partner.handle}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: response.partner.city,
+        addressRegion: response.partner.state,
+        addressCountry: "IN",
+      },
+      knowsLanguage: response.partner.languages,
+      ...(response.partner.rating && response.partner.rating > 0
+        ? {
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: response.partner.rating.toFixed(1),
+              ...(response.partner.totalRatings
+                ? { reviewCount: response.partner.totalRatings.toString() }
+                : {}),
+              bestRating: "5",
+              worstRating: "1",
+            },
+          }
+        : {}),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://reachgig.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: `${response.partner.firstName} ${response.partner.lastName}`,
+          item: `https://reachgig.com/${response.partner.handle}`,
+        },
+      ],
+    },
+  ];
+
   return response ? <Mobile /> : null;
 
   function Mobile() {
@@ -165,6 +267,13 @@ export default async function Page({
         transition={{ duration: 0.6 }}
         className="flex flex-col items-center justify-start w-full min-h-full pt-5 relative"
       >
+        {jsonLd.map((schema, index) => (
+          <script
+            key={index}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
         <TrackProfileComponent event={event} gigId={response.partner.gigId} />
 
         <motion.div
@@ -191,6 +300,7 @@ export default async function Page({
         >
           <HeroPage response={response} />
           <AboutMe response={response} />
+          <Availability response={response} />
           <MyServices response={response} />
         </motion.div>
 
@@ -312,9 +422,10 @@ function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
           <AspectRatio ratio={1}>
             <Image
               src={response.partner.imageUrl}
-              alt="Image"
+              alt={`${response.partner.firstName} ${response.partner.lastName} - ${response.partner.designation}`}
               className="rounded-md object-cover border"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               quality={100}
             />
           </AspectRatio>
@@ -464,6 +575,98 @@ function AboutMe({ response }: { response: FetchPartnerByPartnerIdResponse }) {
   );
 }
 
+function Availability({
+  response,
+}: {
+  response: FetchPartnerByPartnerIdResponse;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6 }}
+      className="flex flex-col items-start justify-start space-y-5 w-full lg:px-20 py-6 lg:py-32"
+    >
+      <div className="grid lg:grid-cols-2 gap-x-36 lg:gap-y-10 space-y-5 w-full self-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-start justify-start space-y-5 w-full"
+        >
+          <p className="lg:text-5xl text-3xl font-medium !leading-normal">
+            My <br />
+            <span className="text-primary">Availability</span>
+          </p>
+          <p className="lg:text-xl text-lg font-normal">
+            {response.partner.available
+              ? "I am currently available for new bookings. Check my calendar for specific dates."
+              : "I have limited availability right now. Please check my calendar for open slots."}
+          </p>
+
+          <div className="flex flex-row items-center justify-start space-x-2 flex-wrap gap-y-3">
+            {response.workingSlots?.map((slot, index) => (
+              <span
+                key={slot.date.toISOString()}
+                className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+              >
+                {slot.date.toLocaleDateString()}
+              </span>
+            )) || (
+              <>
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                  Mon-Fri
+                </span>
+                <span className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">
+                  9:00 AM - 6:00 PM
+                </span>
+              </>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Desktop Calendar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="lg:flex flex-col items-start justify-start w-full hidden max-w-lg"
+        >
+          <div className="w-full bg-white rounded-xl shadow-sm p-5 border">
+            <Calendar
+              date={null}
+              selectedDates={[]}
+              disabledDates={[]}
+              leftAligned={true}
+            />
+          </div>
+        </motion.div>
+
+        {/* Mobile Calendar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="w-full lg:hidden"
+        >
+          <div className="w-full bg-white rounded-xl shadow-sm p-5 border">
+            <Calendar
+              date={null}
+              selectedDates={[]}
+              disabledDates={[]}
+              leftAligned={true}
+            />
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
 function LargeSetting({
   title,
   description,
@@ -514,7 +717,7 @@ function MyServices({
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="flex flex-col items-start justify-start w-full lg:min-h-screen lg:p-20 lg:py-16 lg:space-y-20 space-y-10 py-12 bg-white text-text"
+      className="flex flex-col items-start justify-start w-full lg:min-h-screen lg:p-20 lg:py-16 lg:space-y-20 space-y-10 py-6 pb-12 bg-white text-text"
     >
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
@@ -701,6 +904,189 @@ function ContactMe({
         </motion.div>
       </div>
     </motion.div>
+  );
+}
+
+function SeededProfilePage({ profile }: { profile: SeededProfileResponse }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: profile.name,
+    description: `Professional ${profile.designation} in ${profile.city}, ${profile.state}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: profile.formattedAddress,
+      addressLocality: profile.city,
+      addressRegion: profile.state,
+      addressCountry: "IN",
+    },
+    ...(profile.rating && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: profile.rating.toString(),
+        reviewCount: profile.totalRatings.toString(),
+        bestRating: "5",
+        worstRating: "1",
+      },
+    }),
+    ...(profile.latitude &&
+      profile.longitude && {
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: profile.latitude,
+          longitude: profile.longitude,
+        },
+      }),
+    ...(profile.phoneNumber && { telephone: profile.phoneNumber }),
+    ...(profile.website && { url: profile.website }),
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-start w-full min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Header */}
+      <div className="w-full bg-white border-b px-5 py-4">
+        <Logo text="ReachGig" textStyle="text-2xl font-medium" />
+      </div>
+
+      {/* Hero Section */}
+      <div className="flex flex-col items-center justify-center w-full max-w-3xl px-5 py-16 space-y-8">
+        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+          <span className="text-4xl font-semibold text-primary">
+            {profile.name.charAt(0).toUpperCase()}
+          </span>
+        </div>
+
+        <div className="flex flex-col items-center space-y-3 text-center">
+          <h1 className="text-3xl lg:text-4xl font-semibold">{profile.name}</h1>
+          <h2 className="text-xl text-gray-600">{profile.designation}</h2>
+          <p className="text-gray-500">
+            {profile.city}, {profile.state}
+          </p>
+        </div>
+
+        {/* Rating */}
+        {profile.rating && profile.rating > 0 && (
+          <div className="flex items-center space-x-2">
+            <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+            <span className="text-lg font-medium">
+              {Number(profile.rating).toFixed(1)}
+            </span>
+            {profile.totalRatings > 0 && (
+              <span className="text-gray-400">
+                ({profile.totalRatings} reviews)
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Address */}
+        {profile.formattedAddress && (
+          <p className="text-gray-500 text-center max-w-md">
+            {profile.formattedAddress}
+          </p>
+        )}
+
+        {/* Claim Banner */}
+        <div className="w-full max-w-lg bg-primary/5 border-2 border-primary/20 rounded-2xl p-8 space-y-5 text-center">
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold">Is this your business?</h3>
+            <p className="text-gray-600">
+              Claim your free profile to start getting bookings, manage
+              appointments, and collect payments — all in one place.
+            </p>
+          </div>
+
+          <div className="flex flex-col space-y-3">
+            <Link
+              href={`https://reachgig.com/download?claim=${profile.handle}`}
+              className="w-full"
+            >
+              <Button variant="default" className="w-full text-lg py-6">
+                Claim Your Profile
+              </Button>
+            </Link>
+            <p className="text-sm text-gray-400">
+              Free forever. No commission on your earnings.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 pt-4 border-t border-primary/10">
+            <div className="flex flex-col items-center space-y-1">
+              <span className="text-2xl font-semibold text-primary">Free</span>
+              <span className="text-xs text-gray-500">Website</span>
+            </div>
+            <div className="flex flex-col items-center space-y-1">
+              <span className="text-2xl font-semibold text-primary">0%</span>
+              <span className="text-xs text-gray-500">Commission</span>
+            </div>
+            <div className="flex flex-col items-center space-y-1">
+              <span className="text-2xl font-semibold text-primary">2min</span>
+              <span className="text-xs text-gray-500">Setup</span>
+            </div>
+          </div>
+        </div>
+
+        {/* What you get section */}
+        <div className="w-full max-w-lg space-y-6 pt-8">
+          <h3 className="text-2xl font-semibold text-center">
+            What you get with ReachGig
+          </h3>
+          <div className="space-y-4">
+            {[
+              {
+                title: "Your own professional website",
+                desc: "A beautiful, shareable profile page with your services and pricing",
+              },
+              {
+                title: "Online booking & payments",
+                desc: "Collect advance payments and manage appointments in one place",
+              },
+              {
+                title: "Share your rate card instantly",
+                desc: "Stop typing the same prices on WhatsApp — just send a link",
+              },
+              {
+                title: "Get discovered by new customers",
+                desc: "Your profile ranks on Google for people searching for your services",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="flex items-start space-x-4 p-4 rounded-xl bg-white border"
+              >
+                <div className="mt-1 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-primary" />
+                </div>
+                <div>
+                  <p className="font-medium">{item.title}</p>
+                  <p className="text-sm text-gray-500">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="w-full bg-black text-white px-5 py-12">
+        <div className="max-w-3xl mx-auto space-y-5">
+          <Link className="flex flex-col w-full space-y-1" href={"/"}>
+            <p className="text-xl font-medium">ReachGig</p>
+            <p className="text-base tracking-wide text-gray-400">
+              Be your own Boss.
+            </p>
+          </Link>
+          <p className="text-gray-400">
+            <Link href={CustomerRoutes.EXPLORE}>Explore more professionals</Link>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 

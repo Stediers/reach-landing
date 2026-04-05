@@ -41,9 +41,63 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Staying Motivated and Overcoming Freelance Burnout | Freelance Guide",
+  description:
+    "Conquer freelance burnout and reignite your passion! Discover actionable tips to overcome stress, prevent overwhelm, and find work-life balance as a freelancer. Learn how to set boundaries, prioritize self-care, and create a sustainable freelance career.",
+  author: {
+    "@type": "Person",
+    name: "Deepakindresh Narayana Gandhi",
+  },
+  datePublished: "2024-05-07",
+  image: "/images/tired.svg",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://reachgig.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Learn",
+      item: "https://reachgig.com/learn",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Staying Motivated and Overcoming Freelance Burnout | Freelance Guide",
+      item: "https://reachgig.com/learn/staying-motivated-and-overcoming-freelance-burnout",
+    },
+  ],
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <BlogWrapper
         readTime={5}
         date={{

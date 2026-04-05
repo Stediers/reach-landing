@@ -10,7 +10,7 @@ import {
   getIpAddress,
   getCityStateCountry,
 } from "@helper_functions/getIpAddress";
-import debounce from "lodash/debounce";
+import { useEffect, useRef } from "react";
 
 async function _trackProfile({
   gigId,
@@ -43,8 +43,6 @@ async function _trackProfile({
   }
 }
 
-const _debounce = debounce(_trackProfile, 5000);
-
 export default function TrackProfileComponent({
   gigId,
   event,
@@ -52,21 +50,25 @@ export default function TrackProfileComponent({
   gigId: string;
   event: string | null;
 }) {
-  if (event === "instagram") {
-    _debounce({
-      gigId,
-      source: TrackingSource.INSTAGRAM,
-    });
-  } else if (event === "whatsapp") {
-    _debounce({
-      gigId,
-      source: TrackingSource.WHATSAPP,
-    });
-  } else {
-    _debounce({
-      gigId,
-      source: TrackingSource.SEARCH,
-    });
-  }
+  const tracked = useRef(false);
+
+  useEffect(() => {
+    if (tracked.current) return;
+    tracked.current = true;
+
+    const source =
+      event === "instagram"
+        ? TrackingSource.INSTAGRAM
+        : event === "whatsapp"
+        ? TrackingSource.WHATSAPP
+        : TrackingSource.SEARCH;
+
+    const timeout = setTimeout(() => {
+      _trackProfile({ gigId, source });
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [gigId, event]);
+
   return null;
 }

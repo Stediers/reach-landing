@@ -18,12 +18,20 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Dispatch, SetStateAction, useState } from "react";
 import SignInImage from "../../../public/images/sign-in.svg";
 import SignInImage2 from "../../../public/images/sign-in-desktop.svg";
 
 export default function Page() {
+  return (
+    <Suspense>
+      <PageContent />
+    </Suspense>
+  );
+}
+
+function PageContent() {
   const router = useRouter();
   const params = useParams();
   const [showOTP, setShowOTP] = useState(false);

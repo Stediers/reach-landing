@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         alt: "Refund Policy",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
 };
 

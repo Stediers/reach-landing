@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import Loading from "@components/Loading";
 import { Badge } from "@components/ui/badge";
 import { State } from "@data/enums";
@@ -43,14 +44,14 @@ export default function TextInput({
   titleClassName?: string;
   onClick?: () => void;
   showInfo?: boolean;
-  infoIcon?: JSX.Element;
-  infoText?: string | JSX.Element;
+  infoIcon?: React.JSX.Element;
+  infoText?: string | React.JSX.Element;
   autoFocus?: boolean;
   maxLength?: number;
   mandatory?: boolean;
   loading?: State;
-  icon?: JSX.Element;
-  preIcon?: JSX.Element;
+  icon?: React.JSX.Element;
+  preIcon?: React.JSX.Element;
 }) {
   return (
     <div className="flex flex-col items-start justify-start space-y-1 w-full">

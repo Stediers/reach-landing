@@ -6,7 +6,6 @@ import LineHeader from "@components/LineHeader";
 import { LocationCardWithName } from "@components/LocationCard";
 import AddressInput, { AddressNameInput } from "@components/input/AddressInput";
 import { showSnackBar } from "@components/notifications/Snackbar";
-import router from "next/router";
 import { Button } from "@components/ui/button";
 
 export default function Mobile({

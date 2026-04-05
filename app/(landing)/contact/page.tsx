@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         alt: "Contact Us",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
 };
 

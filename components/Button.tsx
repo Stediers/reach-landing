@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { State } from "@data/enums";
 import Link from "next/link";
 import Loading from "@components/Loading";
@@ -25,7 +26,7 @@ export default function LinkButton({
   onClick?: () => void;
   link?: string;
   disabled?: boolean;
-  icon?: JSX.Element;
+  icon?: React.JSX.Element;
   loadingColor?: string;
   newTab?: boolean;
   rel?: string;

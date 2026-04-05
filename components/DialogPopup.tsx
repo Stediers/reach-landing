@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@components/ui/button";
 import {
   Dialog,
@@ -97,8 +98,8 @@ export function ServiceDialog({
   ),
 }: {
   service: FetchServiceResponse;
-  footerJSX?: JSX.Element;
-  triggerJSX?: JSX.Element;
+  footerJSX?: React.JSX.Element;
+  triggerJSX?: React.JSX.Element;
 }) {
   return (
     // <Dialog>
@@ -317,8 +318,8 @@ function ListWrapper({
 // }: {
 //   response: FetchMyProfileResponse;
 //   title: string;
-//   triggerJSX?: JSX.Element;
-//   footerJSX?: JSX.Element;
+//   triggerJSX?: React.JSX.Element;
+//   footerJSX?: React.JSX.Element;
 // }) {
 //   const [name, setName] = useState<string>("");
 //   const [imageFile, setImageFile] = useState<File | null>(null);

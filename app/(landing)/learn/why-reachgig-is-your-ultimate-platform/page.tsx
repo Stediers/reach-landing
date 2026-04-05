@@ -41,9 +41,63 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Why ReachGig Is Your Ultimate Platform | The Best Gig Economy Platform",
+  description:
+    "Discover why ReachGig is the ultimate platform for gig professionals. Get free promotions, valuable insights, and connect with clients. Join our thriving gig economy community today!",
+  author: {
+    "@type": "Person",
+    name: "Deepakindresh Narayana Gandhi",
+  },
+  datePublished: "2024-03-03",
+  image: "/images/why-reachgig-is-your-ultimate-platform.webp",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://reachgig.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Learn",
+      item: "https://reachgig.com/learn",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Why ReachGig Is Your Ultimate Platform | The Best Gig Economy Platform",
+      item: "https://reachgig.com/learn/why-reachgig-is-your-ultimate-platform",
+    },
+  ],
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <BlogWrapper
         readTime={4}
         date={{

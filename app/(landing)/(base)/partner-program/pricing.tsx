@@ -75,7 +75,7 @@ function PricingCard({
       scale: 1,
       transition: {
         duration: 0.7,
-        type: "spring",
+        type: "spring" as const,
         bounce: 0.2,
       },
     },
