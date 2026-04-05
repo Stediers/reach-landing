@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     "Discover expert insights, tips, and guides for freelancers and gig workers. Learn about financial management, legal compliance, work-life balance, and success strategies in the gig economy.",
   alternates: {
     canonical: "https://reachgig.com/learn",
+    types: {
+      "application/rss+xml": "https://reachgig.com/feed.xml",
+    },
   },
   openGraph: {
     title: "ReachGig Learning Hub - Expert Guides for Gig Workers",
@@ -49,6 +52,25 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://reachgig.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Learn",
+      item: "https://reachgig.com/learn",
+    },
+  ],
+};
+
 export default async function Page() {
   const [videos, shorts] = await Promise.all([
     fetchYouTubeVideos(),
@@ -57,6 +79,10 @@ export default async function Page() {
 
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <HeaderWrapper
         paddingTopRemove={true}
         title={

@@ -422,7 +422,7 @@ function HeroPage({ response }: { response: FetchPartnerByPartnerIdResponse }) {
           <AspectRatio ratio={1}>
             <Image
               src={response.partner.imageUrl}
-              alt="Image"
+              alt={`${response.partner.firstName} ${response.partner.lastName} - ${response.partner.designation}`}
               className="rounded-md object-cover border"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

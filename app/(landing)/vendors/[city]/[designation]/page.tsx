@@ -182,9 +182,11 @@ export default async function ProfessionalsListingPage(props: {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           aria-label={`${professionName} profiles in ${cityName}`}
         >
-          {res.data.map((profile) => (
-            <Profile key={profile.handle} partner={profile} />
-          ))}
+          {res.data
+            .filter((profile) => profile.serviceImages.length > 0)
+            .map((profile) => (
+              <Profile key={profile.handle} partner={profile} />
+            ))}
         </section>
       )}
     </main>

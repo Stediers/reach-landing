@@ -98,6 +98,46 @@ const organizationJsonLd = {
   ],
 };
 
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "ReachGig",
+  url: "https://reachgig.com",
+  logo: "https://reachgig.com/images/logo.webp",
+  description:
+    "India's leading freelancer marketplace. Hire verified photographers, makeup artists, mehndi designers, DJs and more in your city.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Chennai",
+    addressRegion: "Tamil Nadu",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "13.0827",
+    longitude: "80.2707",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "India",
+  },
+  priceRange: "$$",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "00:00",
+    closes: "23:59",
+  },
+};
+
 export default function ConsoleLayout({ children }: RootLayoutProps) {
   return (
     <div className="w-full flex flex-col justify-start items-center relative !z-50 !hide-scrollbar">
@@ -108,6 +148,10 @@ export default function ConsoleLayout({ children }: RootLayoutProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
       />
       <div className="w-full flex flex-col justify-start items-center space-y-5  sticky top-0 z-50">
         <NavBar showMobileNav={true} />

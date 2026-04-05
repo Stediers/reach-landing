@@ -61,12 +61,42 @@ const jsonLd = {
   },
 };
 
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://reachgig.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Learn",
+      item: "https://reachgig.com/learn",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "India: The Land of Gig Economy | Understanding the Future of Work",
+      item: "https://reachgig.com/learn/india-the-land-of-gig-economy",
+    },
+  ],
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <BlogWrapper
         readTime={12}
