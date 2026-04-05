@@ -28,7 +28,7 @@ type RootLayoutProps = {
 //         alt: "ReachGig",
 //       },
 //     ],
-//     locale: "en_US",
+//     locale: "en_IN",
 //   },
 //   metadataBase: new URL("https://reachgig.com"),
 //   applicationName: "ReachGig",

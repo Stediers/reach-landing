@@ -42,9 +42,33 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Gigs vs Business Ownership: Which Path Is Right For You? | Complete Guide",
+  description:
+    "Compare the pros and cons of gig work versus business ownership. Learn about flexibility, income potential, risks, and benefits to make an informed career choice. Expert insights on modern work options.",
+  author: {
+    "@type": "Person",
+    name: "Deepakindresh NG",
+  },
+  datePublished: "2024-04-16",
+  image: "/images/gigvb.svg",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BlogWrapper
         readTime={5}
         date={{

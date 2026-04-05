@@ -9,7 +9,31 @@ import PopularDesignations from "./PopularDesignations";
 import * as motion from "motion/react-client";
 import { ArrowRightIcon } from "lucide-react";
 
-// ... (keeping all metadata)
+export const metadata: Metadata = {
+  title: "Browse Freelancers & Service Providers in India | ReachGig",
+  description:
+    "Explore verified freelancers across India — photographers, makeup artists, mehndi designers, DJs, fitness trainers & more. Compare profiles, read reviews, and book instantly on ReachGig.",
+  keywords:
+    "freelancers India, hire freelancers, photographers near me, makeup artists, mehndi designers, DJs, service providers, book online, ReachGig",
+  alternates: {
+    canonical: "https://reachgig.com",
+  },
+  openGraph: {
+    title: "Browse Freelancers & Service Providers | ReachGig",
+    description:
+      "Explore verified freelancers across India. Compare profiles, read reviews, and book instantly.",
+    url: "https://reachgig.com",
+    type: "website",
+    siteName: "ReachGig",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Browse Freelancers & Service Providers | ReachGig",
+    description:
+      "Explore verified freelancers across India. Compare profiles, read reviews, and book instantly.",
+  },
+};
 
 export default async function ExplorePage(props: {
   searchParams: Promise<{

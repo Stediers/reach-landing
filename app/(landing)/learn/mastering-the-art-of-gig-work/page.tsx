@@ -41,9 +41,33 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions",
+  description:
+    "In today's gig economy, where flexibility and independence are highly valued, mastering the art of client transactions is key to success as a gig worker. Whether you're a makeup artist, gym trainer, or any other type of gig worker, adhering to best practices can elevate your professionalism and enhance client satisfaction.",
+  author: {
+    "@type": "Person",
+    name: "Deepakindresh Narayana Gandhi",
+  },
+  datePublished: "2024-02-27",
+  image: "/images/why-reachgig-is-your-ultimate-platform.png",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BlogWrapper
         readTime={5}
         date={{

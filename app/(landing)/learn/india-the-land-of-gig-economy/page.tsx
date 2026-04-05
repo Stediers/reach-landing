@@ -41,9 +41,33 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "India: The Land of Gig Economy | Understanding the Future of Work",
+  description:
+    "Explore India's booming gig economy: benefits, challenges, government policies, and future trends. Learn how technology and regulations are shaping flexible work in India.",
+  author: {
+    "@type": "Person",
+    name: "Harshavardhan Jothi Kumar",
+  },
+  datePublished: "2024-03-02",
+  image: "/images/india-the-land-of-gig-economy.svg",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BlogWrapper
         readTime={12}
         date={{

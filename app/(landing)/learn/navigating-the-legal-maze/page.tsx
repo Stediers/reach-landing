@@ -35,9 +35,32 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Freelancer Legal Guide: Contracts, Taxes & Legal Protection | ReachGig",
+  description:
+    "Learn essential legal aspects of freelancing including contracts, taxes, IP rights, dispute resolution & insurance. Comprehensive guide for freelancers to protect their business.",
+  author: {
+    "@type": "Person",
+    name: "Gauthum J",
+  },
+  datePublished: "2024-03-03",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BlogWrapper
         readTime={10}
         date={{

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         alt: "Data Retention Policy",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
 };
 

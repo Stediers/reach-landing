@@ -41,9 +41,33 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Why ReachGig Is Your Ultimate Platform | The Best Gig Economy Platform",
+  description:
+    "Discover why ReachGig is the ultimate platform for gig professionals. Get free promotions, valuable insights, and connect with clients. Join our thriving gig economy community today!",
+  author: {
+    "@type": "Person",
+    name: "Deepakindresh Narayana Gandhi",
+  },
+  datePublished: "2024-03-03",
+  image: "/images/why-reachgig-is-your-ultimate-platform.webp",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BlogWrapper
         readTime={4}
         date={{

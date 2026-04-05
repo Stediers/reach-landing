@@ -31,7 +31,7 @@ export const generateMetadata = async (props: {
         description: baseDescription,
         url: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
         siteName: "ReachGig",
-        locale: "en_US",
+        locale: "en_IN",
       },
       twitter: {
         card: "summary_large_image",
@@ -68,7 +68,7 @@ export const generateMetadata = async (props: {
         description,
         url: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
         siteName: "ReachGig",
-        locale: "en_US",
+        locale: "en_IN",
       },
       twitter: {
         card: "summary_large_image",

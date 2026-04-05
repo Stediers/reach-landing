@@ -134,7 +134,7 @@ export const generateMetadata = async (props: {
       url: `https://reachgig.com/${response.partner.handle}`,
       type: "profile",
       siteName: "ReachGig",
-      locale: "en_US",
+      locale: "en_IN",
       firstName: response.partner.firstName,
       lastName: response.partner.lastName,
       gender: response.partner.gender,

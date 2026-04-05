@@ -39,9 +39,32 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
+  description:
+    "Learn crucial safety tips for gig workers: location sharing, cybersecurity, personal protection & legal rights. Expert guide for delivery drivers, rideshare & freelancers. Stay safe while maximizing earnings.",
+  author: {
+    "@type": "Person",
+    name: "Deepakindresh Narayana Gandhi",
+  },
+  datePublished: "2024-04-10",
+  image: "/images/secure.svg",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BlogWrapper
         readTime={5}
         date={{

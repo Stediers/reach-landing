@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         alt: "ReachGig Learning Hub",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
     siteName: "ReachGig",
   },
   keywords:
@@ -96,6 +96,48 @@ export default function Page() {
       >
         <div className="grid gap-20 lg:grid-cols-3 justify-items-center">
           {/* NEW BLOGS HERE */}
+          <BlogCard
+            title="How to Choose the Right Wedding Photographer in India"
+            description="Planning your wedding and looking for the perfect photographer? This complete guide covers everything from photography styles and portfolio evaluation to pricing ranges and red flags to watch out for. Make your special day unforgettable with the right choice."
+            imageUrl="/images/learn-placeholder.svg"
+            link="/learn/how-to-choose-wedding-photographer-india"
+            tags={[BlogCategory.TIPS]}
+          />
+          <BlogCard
+            title="Makeup Artist Price Guide India 2025 — How Much Does Bridal Makeup Cost?"
+            description="Wondering how much a makeup artist charges in India? This comprehensive price guide breaks down bridal makeup costs by city, compares HD vs airbrush makeup, reveals hidden costs, and helps you get the best value for your money."
+            imageUrl="/images/learn-placeholder.svg"
+            link="/learn/makeup-artist-price-guide-india"
+            tags={[BlogCategory.INFORMATION]}
+          />
+          <BlogCard
+            title="Top Mehndi Design Trends for Indian Weddings in 2025"
+            description="From minimalist elegance to portrait mehndi, discover the hottest bridal mehndi trends of 2025. Learn about traditional vs modern styles, pricing expectations, and tips for darker, longer-lasting mehndi for your special day."
+            imageUrl="/images/learn-placeholder.svg"
+            link="/learn/mehndi-design-trends-indian-weddings"
+            tags={[BlogCategory.TIPS]}
+          />
+          <BlogCard
+            title="How to Hire a DJ for Your Event in India — Complete Guide"
+            description="Throwing a wedding, sangeet, or corporate event? Learn how to choose the right DJ, what equipment to expect, typical pricing across Indian cities, and key questions to ask before you book. Make your event unforgettable."
+            imageUrl="/images/learn-placeholder.svg"
+            link="/learn/how-to-hire-dj-for-event"
+            tags={[BlogCategory.TIPS]}
+          />
+          <BlogCard
+            title="Freelancer vs Agency: Which Should You Hire?"
+            description="Not sure whether to hire a freelancer or an agency for your next project? This honest comparison breaks down costs, quality, communication, and flexibility to help you make the right choice for your specific needs."
+            imageUrl="/images/learn-placeholder.svg"
+            link="/learn/freelancer-vs-agency-which-to-hire"
+            tags={[BlogCategory.INFORMATION]}
+          />
+          <BlogCard
+            title="Top Questions to Ask Before Booking a Service Provider"
+            description="Don't book a service provider without asking these essential questions first. From pricing transparency to cancellation policies, this guide ensures you make informed hiring decisions and avoid costly mistakes."
+            imageUrl="/images/learn-placeholder.svg"
+            link="/learn/questions-to-ask-before-booking-service-provider"
+            tags={[BlogCategory.TIPS]}
+          />
           <BlogCard
             title="Staying Motivated and Overcoming Freelance Burnout"
             description="As freelancers, we're often depicted as living the dream - setting our own schedules, working from anywhere, and pursuing our passions on our own terms. However, the reality is that freelancing comes with its own set of challenges, one of the most prevalent being burnout. The relentless hustle, unpredictable income, and constant pressure to perform can take a toll on our mental and physical well-being, leading to feelings of exhaustion, disillusionment, and overwhelm. In this blog post, we'll explore the phenomenon of freelance burnout, its causes, and most importantly, how to overcome it and stay motivated in the long run."

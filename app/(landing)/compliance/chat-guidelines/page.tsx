@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         alt: "Chat Guidelines",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
 };
 

@@ -48,7 +48,7 @@ export async function generateMetadata(props: {
       description: `Find and hire the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Start your search now!`,
       url: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${params.designation.toLowerCase()}`,
       siteName: "ReachGig",
-      locale: "en_US",
+      locale: "en_IN",
     },
     twitter: {
       card: "summary_large_image",

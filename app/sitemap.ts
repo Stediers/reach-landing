@@ -24,6 +24,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/learn/india-the-land-of-gig-economy",
     "/learn/mastering-the-art-of-gig-work",
     "/learn/navigating-the-legal-maze",
+    "/learn/how-to-choose-wedding-photographer-india",
+    "/learn/makeup-artist-price-guide-india",
+    "/learn/mehndi-design-trends-indian-weddings",
+    "/learn/how-to-hire-dj-for-event",
+    "/learn/freelancer-vs-agency-which-to-hire",
+    "/learn/questions-to-ask-before-booking-service-provider",
   ];
 
   try {

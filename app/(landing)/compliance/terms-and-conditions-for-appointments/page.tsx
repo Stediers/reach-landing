@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         alt: "Terms and Conditions for Appointments",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
 };
 

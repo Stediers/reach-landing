@@ -39,9 +39,33 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "Mental Health Guide for Freelancers: Prevent Burnout & Thrive | Solopreneur Wellness",
+  description:
+    "Learn essential strategies for freelancer mental health: work-life balance, burnout prevention, self-care tips & building support networks. Expert guide for solopreneur wellbeing.",
+  author: {
+    "@type": "Person",
+    name: "Gauthum J",
+  },
+  datePublished: "2024-04-06",
+  image: "/images/mental-health.svg",
+  publisher: {
+    "@type": "Organization",
+    name: "ReachGig",
+    url: "https://reachgig.com",
+  },
+};
+
 export default function Page() {
   return (
     <div className="relative flex flex-col items-center justify-center scroll-smooth lg:p-10 p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BlogWrapper
         readTime={5}
         date={{

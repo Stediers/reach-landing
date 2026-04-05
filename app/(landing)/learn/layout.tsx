@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: "ReachGig Blog",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
   },
   metadataBase: new URL("https://reachgig.com"),
   applicationName: "ReachGig Blog",
