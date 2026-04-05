@@ -8,11 +8,10 @@ import stringFormater from "@helper_functions/text/string-formater";
 
 export const revalidate = 3600; // Revalidate every hour for fresh content
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { city: string };
+export const generateMetadata = async (props: {
+  params: Promise<{ city: string }>;
 }): Promise<Metadata> => {
+  const params = await props.params;
   const cityName = params.city.charAt(0).toUpperCase() + params.city.slice(1);
   const res = await fetchCategoriesByCity(params.city);
 
@@ -82,11 +81,10 @@ export const generateMetadata = async ({
   return generateSEOContent(topCategories.slice(0, 3));
 };
 
-export default async function FreelancerCategoryPage({
-  params,
-}: {
-  params: { city: string };
+export default async function FreelancerCategoryPage(props: {
+  params: Promise<{ city: string }>;
 }) {
+  const params = await props.params;
   const cityName = params.city.charAt(0).toUpperCase() + params.city.slice(1);
   const res = await fetchCategoriesByCity(params.city);
 
@@ -100,8 +98,67 @@ export default async function FreelancerCategoryPage({
 
   const hasServices = res.data.some((value) => value.count > 0);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://reachgig.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Vendors",
+        item: "https://reachgig.com/vendors",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: cityName,
+        item: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
+      },
+    ],
+  };
+
+  const availableCategories = res.data
+    .sort((a, b) => b.count - a.count)
+    .filter((value) => value.count > 0);
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `Professional Services in ${cityName}`,
+    description: `Find and hire trusted freelancers in ${cityName}`,
+    numberOfItems: availableCategories.length,
+    itemListElement: availableCategories.map((category, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: stringFormater(category.profession.name),
+        description: category.profession.description,
+        url: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${category.profession.code}`,
+        areaServed: {
+          "@type": "City",
+          name: cityName,
+        },
+      },
+    })),
+  };
+
   return (
     <main className="w-full max-w-7xl mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
       <header className="mb-8">
         <h1 className="text-2xl lg:text-3xl font-semibold text-gray-900">
           {hasServices

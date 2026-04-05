@@ -1,8 +1,8 @@
 "use client";
-import { redirect, useParams, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { redirect, useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
 
-export default function InstagramAuthPage() {
+function InstagramAuthContent() {
   const params = useSearchParams();
 
   const code = params.get("code");
@@ -20,5 +20,13 @@ export default function InstagramAuthPage() {
     <div>
       <h1>Instagram Auth Page</h1>
     </div>
+  );
+}
+
+export default function InstagramAuthPage() {
+  return (
+    <Suspense>
+      <InstagramAuthContent />
+    </Suspense>
   );
 }

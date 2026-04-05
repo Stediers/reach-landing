@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Footer from "@components/footer/Footer";
 import { WordSearchServiceRequest } from "@api_functions/explore/word-search-service";
 import { CustomSheet } from "@components/CustomSheet";
@@ -89,6 +89,14 @@ function updateFilterRouter({
 const debouncedUpdateFilterRouter = debounce(updateFilterRouter, 500);
 
 export default function ConsoleLayout({ children }: RootLayoutProps) {
+  return (
+    <Suspense>
+      <ConsoleLayoutInner>{children}</ConsoleLayoutInner>
+    </Suspense>
+  );
+}
+
+function ConsoleLayoutInner({ children }: RootLayoutProps) {
   const searchParams = useSearchParams();
 
   const currentPath = usePathname();

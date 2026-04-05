@@ -5,6 +5,7 @@ import {
   FetchPartnerResponse,
   FetchServiceResponse,
   ServicePackage,
+  Slot,
 } from "@data/types";
 
 export type FetchPartnerByPartnerIdResponse = {
@@ -12,6 +13,7 @@ export type FetchPartnerByPartnerIdResponse = {
   referrals: number;
   services: FetchServiceResponse[];
   packages: ServicePackage[];
+  workingSlots: Slot[];
 };
 
 export async function fetchPartnerByPartnerId(

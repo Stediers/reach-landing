@@ -29,7 +29,7 @@ const fadeInUp = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      ease: "easeOut" as const,
     },
   },
 };
@@ -46,7 +46,7 @@ const imageVariants = {
     x: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut",
+      ease: "easeOut" as const,
       delay: 0.4,
     },
   },
@@ -62,7 +62,7 @@ const badgeVariants = {
     y: 0,
     transition: {
       duration: 0.4,
-      ease: "easeOut",
+      ease: "easeOut" as const,
     },
   },
 };
@@ -157,6 +157,7 @@ function Hero() {
           className="w-full h-full pt-10 md:h-[30rem] md:w-[30rem] xl:h-[30rem] xl:w-[30rem]"
           width={1000}
           height={900}
+          priority
         />
       </div>
     </motion.div>

@@ -1,3 +1,4 @@
+import React from "react";
 import Setting from "@components/Setting";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import {
@@ -80,7 +81,7 @@ function SettingDialog({
 }: {
   title: string;
   isVerified: boolean;
-  footerJSX: JSX.Element;
+  footerJSX: React.JSX.Element;
 }) {
   return (
     <Dialog>

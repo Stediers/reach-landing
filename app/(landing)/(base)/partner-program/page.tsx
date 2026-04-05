@@ -66,85 +66,91 @@ export const metadata: Metadata = {
       "Launch your freelance career with ReachGig. Get a free business website, secure payment processing, appointment management, and powerful tools to grow your client base.",
     images: ["https://reachgig.com/images/landing-profiles/home.webp"],
   },
-  other: {
-    structured_data: JSON.stringify([
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "ReachGig",
-        url: "https://reachgig.com",
-        logo: "https://reachgig.com/images/logo.webp",
-        description:
-          "ReachGig is a comprehensive platform empowering freelancers and service providers with free business websites and professional tools.",
-        address: {
-          "@type": "PostalAddress",
-          addressRegion: "Tamil Nadu",
-          addressCountry: "IN",
-        },
-        sameAs: [
-          "https://facebook.com/reachgig",
-          "https://twitter.com/reachgig",
-          "https://instagram.com/reachgig",
-        ],
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: "ReachGig Partner Program",
-        description:
-          "Complete business management platform for freelancers and service providers",
-        offers: {
-          "@type": "Offer",
-          price: "0",
-          priceCurrency: "INR",
-          availability: "https://schema.org/InStock",
-        },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.8",
-          reviewCount: "1000",
-        },
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "Do I need to pay to become a partner?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Absolutely not! You can become a partner for free. You also get your own website for free.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Do I pay a commission for the services I provide?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "No, you do not pay a commission for the services you provide. But your clients pay a small advance fee for using our safe and secure payment gateway.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "How many services can I provide?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "You can provide a maximum of 5 services for free. If you want to provide more services, you can upgrade to our Pro plan.",
-            },
-          },
-        ],
-      },
-    ]),
-  },
 };
 
-export const revalidate = 60 * 60; // 1 hour
+export const revalidate = 3600; // 1 hour
 
 export default async function Main() {
   const response = await fetchBestPartners();
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "ReachGig",
+      url: "https://reachgig.com",
+      logo: "https://reachgig.com/images/logo.webp",
+      description:
+        "ReachGig is a comprehensive platform empowering freelancers and service providers with free business websites and professional tools.",
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: "Tamil Nadu",
+        addressCountry: "IN",
+      },
+      sameAs: [
+        "https://facebook.com/reachgig",
+        "https://twitter.com/reachgig",
+        "https://instagram.com/reachgig",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: "ReachGig Partner Program",
+      description:
+        "Complete business management platform for freelancers and service providers",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+      },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.8",
+        reviewCount: "1000",
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Do I need to pay to become a partner?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Absolutely not! You can become a partner for free. You also get your own website for free.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do I pay a commission for the services I provide?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No, you do not pay a commission for the services you provide. But your clients pay a small advance fee for using our safe and secure payment gateway.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How many services can I provide?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "You can provide a maximum of 5 services for free. If you want to provide more services, you can upgrade to our Pro plan.",
+          },
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth pb-20 lg:pt-0">
+      {jsonLd.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <Hero />
       {/* <PaymentHero /> */}
       <People response={response} />

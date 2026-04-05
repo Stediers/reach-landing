@@ -6,9 +6,9 @@ import ImageComponent from "@components/ImageComponent";
 import TextInput from "@components/input/TextInput";
 import ListWrapper from "@wrapper/ListWrapper";
 import MobileWrapper from "@wrapper/responsive/MobileWrapper";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import debounce from "lodash/debounce";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BiError } from "react-icons/bi";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
@@ -22,6 +22,7 @@ export default function Mobile({
   filter: "favourite" | "appointments" | null;
   setFilter: Dispatch<SetStateAction<"favourite" | "appointments" | null>>;
 }) {
+  const router = useRouter();
   const [filteredResponse, setFilteredResponse] =
     useState<FetchMyPartnersResponse[]>(response);
   const [searchQuery, setSearchQuery] = useState("");

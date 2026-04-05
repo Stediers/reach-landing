@@ -7,7 +7,7 @@ import { ArrowBigLeftDash, ArrowLeft, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { PropsWithChildren } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { BiLeftArrowAlt } from "react-icons/bi";
@@ -35,12 +35,14 @@ export default function MobileWrapper({
       id="mobile-wrapper"
     >
       {header ? (
-        <HeaderComponent
-          title={header}
-          backLink={backLink}
-          warnBeforeLeaving={warnBeforeLeaving}
-          showLineHeader={backLink ? false : true}
-        />
+        <Suspense>
+          <HeaderComponent
+            title={header}
+            backLink={backLink}
+            warnBeforeLeaving={warnBeforeLeaving}
+            showLineHeader={backLink ? false : true}
+          />
+        </Suspense>
       ) : null}
       <div className={`w-full flex-1`}>
         <div className={className}>{children}</div>

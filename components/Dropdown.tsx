@@ -1,3 +1,4 @@
+import React from "react";
 import {
   User,
   CreditCard,
@@ -33,7 +34,7 @@ import {
 type MenuItem = {
   label: string;
   subMenu: {
-    icon?: JSX.Element;
+    icon?: React.JSX.Element;
     title: string;
     onClick: () => void;
   }[];
@@ -45,7 +46,7 @@ export default function CustomDropdown({
   itemsClassName,
   width = "w-56",
 }: {
-  triggerJSX: JSX.Element;
+  triggerJSX: React.JSX.Element;
   items: MenuItem[];
   itemsClassName?: string;
   width?: string;

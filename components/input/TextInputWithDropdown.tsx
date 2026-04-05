@@ -1,3 +1,4 @@
+import React from "react";
 import { closest, distance } from "fastest-levenshtein";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
@@ -29,7 +30,7 @@ export default function TextInputWithDropdown({
   value: string;
   resetAfterSelect?: boolean;
   onFocusSelect?: boolean;
-  preIcon?: JSX.Element;
+  preIcon?: React.JSX.Element;
 }) {
   const [optionsToShow, setOptionsToShow] = useState<string[]>([]);
   const [text, setText] = useState(value);

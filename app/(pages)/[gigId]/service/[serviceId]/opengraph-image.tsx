@@ -6,9 +6,6 @@ import { MdLocationPin } from "react-icons/md";
 import { ImageResponse } from "next/og";
 import { loadGoogleFont } from "@/helper_functions/font";
 
-// Route segment config
-export const runtime = "edge";
-
 // Image metadata
 export const alt = "Service";
 export const size = {
@@ -18,11 +15,10 @@ export const size = {
 
 export const contentType = "image/png";
 
-export default async function Image({
-  params,
-}: {
-  params: { serviceId: string };
+export default async function Image(props: {
+  params: Promise<{ serviceId: string }>;
 }) {
+  const params = await props.params;
   // Load the font
   const poppins = await loadGoogleFont({
     family: "Poppins",

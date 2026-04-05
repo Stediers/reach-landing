@@ -1,3 +1,4 @@
+import React from "react";
 import ImageComponent from "@components/ImageComponent";
 import Share from "@components/learn/Share";
 import { Badge } from "@components/ui/badge";
@@ -168,7 +169,7 @@ export function BlogList({
   list,
   numbered,
 }: {
-  list: string[] | JSX.Element[];
+  list: string[] | React.JSX.Element[];
   numbered?: boolean;
 }) {
   return (

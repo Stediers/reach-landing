@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { sendOTP } from "@api_functions/auth/send-otp";
 import { verifyOTP } from "@api_functions/auth/verify-otp";
 import { getCookie, setCookie } from "@api_functions/internal/cookie";
@@ -23,7 +24,7 @@ export default function MobileLoginPopup({
   triggerJSX = <Button variant="default">Sign in</Button>,
 }: {
   onVerifyOTP?: (verified: boolean) => void;
-  triggerJSX?: JSX.Element;
+  triggerJSX?: React.JSX.Element;
 }) {
   const query = useSearchParams();
   const redirectUrl = query.get("redirectUrl");

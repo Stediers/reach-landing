@@ -95,6 +95,7 @@ export default function ImageCarousel({
                       border ? "border" : ""
                     }`}
                     objectFit="contain"
+                    unoptimized={index !== 0}
                   />
                 </div>
               </CarouselItem>

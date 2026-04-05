@@ -8,7 +8,6 @@ import { Address, LocationAttributes } from "@data/types";
 import DesktopWrapper from "@wrapper/responsive/DesktopWrapper";
 import { updateAddress } from "@api_functions/address/update-address";
 import { showSnackBar } from "@components/notifications/Snackbar";
-import router from "next/router";
 import { Button } from "@components/ui/button";
 
 export default function Desktop({

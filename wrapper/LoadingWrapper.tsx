@@ -1,3 +1,4 @@
+import React from "react";
 import Loading from "@components/Loading";
 import Logo from "@components/Logo";
 import { State } from "@data/enums";
@@ -31,8 +32,8 @@ export default function LoadingWrapper({
   text?: string;
   loadingTextClassName?: string;
   loadingSVGClassName?: string;
-  loadingJSX?: JSX.Element;
-  errorJSX?: JSX.Element;
+  loadingJSX?: React.JSX.Element;
+  errorJSX?: React.JSX.Element;
   id?: string;
 }>) {
   return (

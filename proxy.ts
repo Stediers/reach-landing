@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse, userAgent } from "next/server";
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { ua } = userAgent(req);
 
   console.log("User Agent: ", ua);

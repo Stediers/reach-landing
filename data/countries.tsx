@@ -1,9 +1,10 @@
+import React from "react";
 import { IndiaSVG } from "@components/svg/Countries";
 export interface Country {
   name: string;
   code: string;
   abbreviation: string;
-  svg: JSX.Element | null;
+  svg: React.JSX.Element | null;
   maxLength: number;
 }
 export const countries: { [key: string]: Country } = {

@@ -53,11 +53,10 @@ const getFullName = (firstName: string, lastName: string) => {
   );
 };
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { serviceId: string };
+export const generateMetadata = async (props: {
+  params: Promise<{ serviceId: string }>;
 }): Promise<Metadata> => {
+  const params = await props.params;
   const serviceId = params.serviceId;
   const response = await fetchServiceByServiceId(serviceId);
 
@@ -138,18 +137,17 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { serviceId: string };
-  searchParams: {
+export default async function Page(props: {
+  params: Promise<{ serviceId: string }>;
+  searchParams: Promise<{
     whatsapp?: boolean;
     search?: boolean;
     backLink?: string;
     preview?: boolean;
-  };
+  }>;
 }) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const serviceId = params.serviceId;
   const backLink = searchParams.backLink;
 
@@ -167,8 +165,82 @@ export default async function Page({
   const gig = response && response!!.gig;
   const callback = response && response!!.callback;
 
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: service.title,
+      description: service.whatsIncluded.join(". "),
+      provider: {
+        "@type": "Person",
+        name: `${gig.firstName} ${gig.lastName}`,
+        image: gig.imageUrl,
+        url: `https://reachgig.com/${gig.handle}`,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: gig.city,
+          addressRegion: gig.state,
+          addressCountry: "IN",
+        },
+      },
+      areaServed: {
+        "@type": "City",
+        name: gig.city,
+      },
+      image: service.imageUrls[0] || "",
+      offers: {
+        "@type": "Offer",
+        price: service.price.bookingBill.total.toString(),
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+      },
+      ...(service.rating && service.rating > 0
+        ? {
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: service.rating.toFixed(1),
+              bestRating: "5",
+              worstRating: "1",
+            },
+          }
+        : {}),
+      serviceType: service.serviceType,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://reachgig.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: `${gig.firstName} ${gig.lastName}`,
+          item: `https://reachgig.com/${gig.handle}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: service.title,
+          item: `https://reachgig.com${CustomerRoutes.SERVICE.replace("[serviceId]", serviceId).replace("[partnerHandle]", gig.handle!!)}`,
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="w-full flex flex-col items-start justify-center max-w-[85rem] lg:px-10 lg:py-10 relative">
+      {jsonLd.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <TrackServiceComponent event={event} serviceId={serviceId} />
       <div className="flex lg:hidden w-full  px-5 pt-5" hidden>
         <ImageCarousel

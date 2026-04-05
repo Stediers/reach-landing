@@ -4,13 +4,14 @@ import { State } from "@data/enums";
 import { Address, LocationAttributes } from "@data/types";
 import verifyLocation from "@helper_functions/verifyLocation";
 import ConsoleWrapper from "@wrapper/ConsoleWrapper";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Mobile from "@src/console/profile/address/edit/Mobile";
 import Desktop from "@src/console/profile/address/edit/Desktop";
 import { updateAddress } from "@api_functions/address/update-address";
 import { useRouter } from "next/navigation";
 
-export default function Page({ params }: { params: { addressId: string } }) {
+export default function Page(props: { params: Promise<{ addressId: string }> }) {
+  const params = use(props.params);
   const [location, setLocation] = useState<LocationAttributes | null>(null);
   const [oldLocation, setOldLocation] = useState<Address | null>(null);
   const [pageState, setPageState] = useState<State>(State.LOADING);

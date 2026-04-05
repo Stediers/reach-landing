@@ -72,7 +72,7 @@ export async function showImagePopup({
 }
 
 type CustomJSXPopupProps = {
-  jsx: JSX.Element;
+  jsx: React.JSX.Element;
   onOk?: () => void;
   onClose?: () => void;
   preventDefault?: boolean;
@@ -169,7 +169,7 @@ export async function showCustomJSXPopup({
   showCancelButton = true,
   cancelButtonClassName,
 }: {
-  jsx: JSX.Element;
+  jsx: React.JSX.Element;
   onOk?: () => void;
   onClose?: () => void;
   preventDefault?: boolean;
@@ -217,8 +217,8 @@ export async function showCustomJSXPopup({
 }
 
 type InfoPopupProps = {
-  icon?: JSX.Element;
-  message: string | JSX.Element;
+  icon?: React.JSX.Element;
+  message: string | React.JSX.Element;
   onOk: () => void;
   title: string;
 };
@@ -262,8 +262,8 @@ export async function showInfoPopup({
   message,
   title,
 }: {
-  icon?: JSX.Element;
-  message: string | JSX.Element;
+  icon?: React.JSX.Element;
+  message: string | React.JSX.Element;
   title: string;
 }) {
   const container = document.createElement("div");

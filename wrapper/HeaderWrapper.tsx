@@ -1,3 +1,4 @@
+import React from "react";
 export default function HeaderWrapper({
   title,
   children,
@@ -8,7 +9,7 @@ export default function HeaderWrapper({
   maxWidth = "",
   paddingTopRemove = false,
 }: {
-  title: JSX.Element | string;
+  title: React.JSX.Element | string;
   children: React.ReactNode;
   className?: string;
   underlineClassName?: string;
