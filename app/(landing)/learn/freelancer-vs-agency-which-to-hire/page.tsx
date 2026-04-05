@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     authors: ["ReachGig Team"],
     images: [
       {
-        url: "/images/learn-placeholder.svg",
+        url: "/images/negotiate.svg",
         width: 1200,
         height: 630,
         alt: "Freelancer vs Agency: Which Should You Hire?",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
       "Freelancer vs Agency: Which Should You Hire in 2025? | Honest Comparison",
     description:
       "Compare freelancers and agencies to decide which is right for your project. Covers cost, quality, flexibility, and scalability.",
-    images: ["/images/learn-placeholder.svg"],
+    images: ["/images/negotiate.svg"],
   },
 };
 
@@ -55,7 +55,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/learn-placeholder.svg",
+  image: "/images/negotiate.svg",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
@@ -80,7 +80,7 @@ export default function Page() {
           }}
           tags={[BlogCategory.INFORMATION]}
           title="Freelancer vs Agency: Which Should You Hire in 2025?"
-          imageUrl="/images/learn-placeholder.svg"
+          imageUrl="/images/negotiate.svg"
           link="/questions-to-ask-before-booking-service-provider"
           authors={[
             {

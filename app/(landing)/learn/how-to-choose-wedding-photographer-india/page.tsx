@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     authors: ["ReachGig Team"],
     images: [
       {
-        url: "/images/learn-placeholder.svg",
+        url: "/images/booking.svg",
         width: 1200,
         height: 630,
         alt: "How to Choose the Right Wedding Photographer in India",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       "How to Choose the Right Wedding Photographer in India | Complete Guide 2025",
     description:
       "A complete guide to choosing the perfect wedding photographer in India. Learn about photography styles, pricing, portfolio evaluation, and red flags to avoid.",
-    images: ["/images/learn-placeholder.svg"],
+    images: ["/images/booking.svg"],
   },
 };
 
@@ -54,7 +54,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/learn-placeholder.svg",
+  image: "/images/booking.svg",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
@@ -79,7 +79,7 @@ export default function Page() {
           }}
           tags={[BlogCategory.TIPS]}
           title="How to Choose the Right Wedding Photographer in India | Complete Guide 2025"
-          imageUrl="/images/learn-placeholder.svg"
+          imageUrl="/images/booking.svg"
           link="/makeup-artist-price-guide-india"
           authors={[
             {

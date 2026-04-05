@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     authors: ["ReachGig Team"],
     images: [
       {
-        url: "/images/learn-placeholder.svg",
+        url: "/images/grooming-service.svg",
         width: 1200,
         height: 630,
         alt: "Makeup Artist Price Guide India 2025",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       "Makeup Artist Price Guide India 2025 — How Much Does Bridal Makeup Cost?",
     description:
       "Comprehensive guide to makeup artist pricing in India for 2025. Compare bridal makeup costs by city, understand HD vs airbrush makeup, and learn how to get the best value.",
-    images: ["/images/learn-placeholder.svg"],
+    images: ["/images/grooming-service.svg"],
   },
 };
 
@@ -54,7 +54,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/learn-placeholder.svg",
+  image: "/images/grooming-service.svg",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
@@ -79,7 +79,7 @@ export default function Page() {
           }}
           tags={[BlogCategory.INFORMATION]}
           title="Makeup Artist Price Guide India 2025 — How Much Does Bridal Makeup Cost?"
-          imageUrl="/images/learn-placeholder.svg"
+          imageUrl="/images/grooming-service.svg"
           link="/how-to-choose-wedding-photographer-india"
           authors={[
             {

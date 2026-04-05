@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     authors: ["ReachGig Team"],
     images: [
       {
-        url: "/images/learn-placeholder.svg",
+        url: "/images/review.svg",
         width: 1200,
         height: 630,
         alt: "Questions to Ask Before Booking a Service Provider",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
       "Top Questions to Ask Before Booking a Service Provider | Smart Hiring Guide",
     description:
       "Never get burned by a bad hire again. Learn the essential questions to ask any service provider before booking.",
-    images: ["/images/learn-placeholder.svg"],
+    images: ["/images/review.svg"],
   },
 };
 
@@ -55,7 +55,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/learn-placeholder.svg",
+  image: "/images/review.svg",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
@@ -80,7 +80,7 @@ export default function Page() {
           }}
           tags={[BlogCategory.TIPS]}
           title="Top Questions to Ask Before Booking a Service Provider"
-          imageUrl="/images/learn-placeholder.svg"
+          imageUrl="/images/review.svg"
           link="/how-to-hire-dj-for-event"
           authors={[
             {

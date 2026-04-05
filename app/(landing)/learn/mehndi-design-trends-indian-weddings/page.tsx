@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     authors: ["ReachGig Team"],
     images: [
       {
-        url: "/images/learn-placeholder.svg",
+        url: "/images/discover.svg",
         width: 1200,
         height: 630,
         alt: "Top Mehndi Design Trends for Indian Weddings in 2025",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       "Top Mehndi Design Trends for Indian Weddings in 2025 | Bridal Mehndi Guide",
     description:
       "Discover the top mehndi design trends for Indian weddings in 2025. From minimalist patterns to portrait mehndi, learn about styles, pricing, and tips for longer-lasting mehndi.",
-    images: ["/images/learn-placeholder.svg"],
+    images: ["/images/discover.svg"],
   },
 };
 
@@ -54,7 +54,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/learn-placeholder.svg",
+  image: "/images/discover.svg",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
@@ -79,7 +79,7 @@ export default function Page() {
           }}
           tags={[BlogCategory.TIPS]}
           title="Top Mehndi Design Trends for Indian Weddings in 2025 | Bridal Mehndi Guide"
-          imageUrl="/images/learn-placeholder.svg"
+          imageUrl="/images/discover.svg"
           link="/makeup-artist-price-guide-india"
           authors={[
             {

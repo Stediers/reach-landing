@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     authors: ["ReachGig Team"],
     images: [
       {
-        url: "/images/learn-placeholder.svg",
+        url: "/images/community.svg",
         width: 1200,
         height: 630,
         alt: "How to Hire a DJ for Your Event in India",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
       "How to Hire a DJ for Your Event in India — Complete Guide 2025",
     description:
       "Learn how to hire the perfect DJ for your wedding, party, or corporate event in India. Covers DJ types, costs, equipment checklist, and booking tips.",
-    images: ["/images/learn-placeholder.svg"],
+    images: ["/images/community.svg"],
   },
 };
 
@@ -55,7 +55,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/learn-placeholder.svg",
+  image: "/images/community.svg",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
@@ -80,7 +80,7 @@ export default function Page() {
           }}
           tags={[BlogCategory.TIPS]}
           title="How to Hire a DJ for Your Event in India — Complete Guide 2025"
-          imageUrl="/images/learn-placeholder.svg"
+          imageUrl="/images/community.svg"
           link="/freelancer-vs-agency-which-to-hire"
           authors={[
             {
