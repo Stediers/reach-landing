@@ -67,31 +67,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const citiesData = await fetchAvilableCities();
     const cities = citiesData ? citiesData : { cities: [] };
-    const vendorCityRoutes = cities.cities.map((city) => ({
-      url: `${baseUrl}${vendorCityPath(city.name)}`,
-      changeFrequency: "daily" as const,
-      priority: 0.8,
-    }));
 
-    const vendorRoutes = (
-      await Promise.all(
-        cities.cities.map(async (city) => {
-          const designationsData = await fetchCategoriesByCity(city.name);
-          const designations = designationsData ? designationsData.data : [];
+    // Fetch each city's designations once, then derive both the city hubs and
+    // the city+designation routes from it. Only include cities/designations
+    // that actually have providers (count > 0) — empty/"invalid" ones render a
+    // noindex page, so listing them in the sitemap would just create
+    // "Submitted URL marked noindex" warnings in Search Console.
+    const cityResults = await Promise.all(
+      cities.cities.map(async (city) => {
+        const designationsData = await fetchCategoriesByCity(city.name);
+        const designations = (
+          designationsData ? designationsData.data : []
+        ).filter((designation) => designation.count > 0);
+        return { city, designations };
+      })
+    );
 
-          return designations
-            .filter((designation) => designation.count > 0)
-            .map((designation) => ({
-              url: `${baseUrl}${vendorDesignationPath(
-                city.name,
-                designation.profession.code
-              )}`,
-              changeFrequency: "daily" as const,
-              priority: 0.8,
-            }));
-        })
-      )
-    ).flat();
+    const vendorCityRoutes = cityResults
+      .filter(({ designations }) => designations.length > 0)
+      .map(({ city }) => ({
+        url: `${baseUrl}${vendorCityPath(city.name)}`,
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      }));
+
+    const vendorRoutes = cityResults.flatMap(({ city, designations }) =>
+      designations.map((designation) => ({
+        url: `${baseUrl}${vendorDesignationPath(
+          city.name,
+          designation.profession.code
+        )}`,
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      }))
+    );
 
     return [
       // Home page with highest priority

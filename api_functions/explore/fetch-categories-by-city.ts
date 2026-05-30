@@ -17,7 +17,9 @@ export async function fetchCategoriesByCity(
 ): Promise<FetchCategoriesByCityResponse | null> {
   try {
     const response = await fetch(
-      `${EXPLORE_API_URL}/fetch-categories-by-city?city=${city}`,
+      `${EXPLORE_API_URL}/fetch-categories-by-city?city=${encodeURIComponent(
+        city
+      )}`,
       {
         method: RequestMethod[RequestMethod.GET],
         headers: {

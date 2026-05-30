@@ -43,6 +43,12 @@ export async function generateMetadata(props: {
     title: `Top ${professionPlural} in ${cityName} | Verified Professionals`,
     description: `Find the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Get matched with experienced ${professionPlural.toLowerCase()} today!`,
     keywords: `${correctedDesignation.toLowerCase()}, ${cityName.toLowerCase()}, top ${professionPlural.toLowerCase()}, hire ${correctedDesignation.toLowerCase()}, professional ${correctedDesignation.toLowerCase()}, local services`,
+    // No providers in this city/designation yet — keep the empty listing out of
+    // the index while still allowing crawl-through.
+    robots:
+      res.data.length === 0
+        ? { index: false, follow: true }
+        : { index: true, follow: true },
     alternates: {
       canonical: `https://www.reachgig.com${vendorDesignationPath(
         params.city.toLowerCase(),

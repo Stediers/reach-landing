@@ -1,6 +1,5 @@
 import { fetchCategoriesByCity } from "@api_functions/explore/fetch-categories-by-city";
 import Card from "@components/Card";
-import { ServiceCardSkeleton } from "@components/ServiceCard";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -27,6 +26,9 @@ export const generateMetadata = async (props: {
       title: `Hire Local Freelancers in ${cityName} | Top Rated Professionals`,
       description: baseDescription,
       keywords: `freelancers, ${cityName.toLowerCase()}, hire freelancers, local services`,
+      // No services available for this city yet — keep it out of the index to
+      // avoid thin/empty pages, but allow crawling onward.
+      robots: { index: false, follow: true },
       alternates: {
         canonical: `https://www.reachgig.com${vendorCityPath(params.city.toLowerCase())}`,
       },
@@ -97,15 +99,10 @@ export default async function FreelancerCategoryPage(props: {
   const cityName = params.city.charAt(0).toUpperCase() + params.city.slice(1);
   const res = await fetchCategoriesByCity(params.city);
 
-  if (!res?.data) {
-    return (
-      <div className="w-full min-h-[400px] flex items-center justify-center">
-        <ServiceCardSkeleton />
-      </div>
-    );
-  }
-
-  const hasServices = res.data.some((value) => value.count > 0);
+  // Null data (e.g. an "invalid"/empty city) falls through to the empty state
+  // below — render a real heading + message, never a perpetual skeleton.
+  const categories = res?.data ?? [];
+  const hasServices = categories.some((value) => value.count > 0);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -132,7 +129,7 @@ export default async function FreelancerCategoryPage(props: {
     ],
   };
 
-  const availableCategories = res.data
+  const availableCategories = categories
     .sort((a, b) => b.count - a.count)
     .filter((value) => value.count > 0);
 
@@ -191,7 +188,7 @@ export default async function FreelancerCategoryPage(props: {
         </section>
       ) : (
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {res.data
+          {categories
             .sort((a, b) => b.count - a.count)
             .filter((value) => value.count > 0)
             .map((value) => (
