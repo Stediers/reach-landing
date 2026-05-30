@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: "Verification",
   description:
     "Know who you're dealing with. Our verification process ensures that you can trust the service providers on our platform.",
+  alternates: {
+    canonical: "https://www.reachgig.com/verification",
+  },
   openGraph: {
     title: "Verification",
     description:

@@ -35,6 +35,15 @@ export default async function Page() {
   if (!response) return null;
   return (
     <div className="relative w-full flex flex-col items-center justify-center scroll-smooth">
+      <header className="w-full max-w-7xl mx-auto text-center mt-4 mb-2 px-4">
+        <h1 className="text-2xl lg:text-3xl font-semibold text-gray-900">
+          Find Freelancers &amp; Service Providers by City
+        </h1>
+        <p className="mt-2 text-gray-600">
+          Browse verified photographers, makeup artists, DJs, mehndi designers
+          and more across cities in India.
+        </p>
+      </header>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
         {response.cities.map((city) => (
           <CityCard key={city.name} city={city.name} />

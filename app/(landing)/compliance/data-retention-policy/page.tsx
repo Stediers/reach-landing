@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     template: "%s | Data Retention Policy",
   },
   description: "Learn about ReachGig's data retention policy",
+  alternates: {
+    canonical: "https://www.reachgig.com/compliance/data-retention-policy",
+  },
   openGraph: {
     title: "Data Retention Policy",
     description: "Learn about ReachGig's data retention policy",

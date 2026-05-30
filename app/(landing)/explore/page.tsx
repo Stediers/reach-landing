@@ -82,6 +82,9 @@ export async function generateMetadata(
               .join(", ")
           : ""
       }`,
+      alternates: {
+        canonical: "https://www.reachgig.com/explore",
+      },
       openGraph: {
         title: `Find and Book ${searchTerm} ${serviceType}${state} | ReachGig`,
         description: `Compare prices and reviews for ${searchTerm} ${serviceType}${state}. Book safe appointments with trusted and verified vendors. 100% satisfaction guaranteed.`,
@@ -126,6 +129,9 @@ export async function generateMetadata(
               .join(", ")
           : ""
       }`,
+      alternates: {
+        canonical: "https://www.reachgig.com/explore",
+      },
       openGraph: {
         title: `Top-Rated ${serviceType}${state} | ReachGig`,
         description: `Find and book the best ${serviceType.toLowerCase()}${state}. Compare prices, read verified reviews, and book safe appointments with trusted service providers.`,

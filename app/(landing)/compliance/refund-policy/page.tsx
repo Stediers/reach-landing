@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     template: "%s | Refund Policy",
   },
   description: "Refund and Cancellation policy for ReachGig services",
+  alternates: {
+    canonical: "https://www.reachgig.com/compliance/refund-policy",
+  },
   openGraph: {
     title: "Refund Policy",
     description: "Refund and Cancellation policy for ReachGig services",

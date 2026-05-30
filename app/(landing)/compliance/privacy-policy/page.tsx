@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     template: "%s | Privacy Policy",
   },
   description: "Learn about our privacy policy",
+  alternates: {
+    canonical: "https://www.reachgig.com/compliance/privacy-policy",
+  },
   openGraph: {
     title: "Privacy Policy",
     description: "Learn about ReachGig's privacy policy",

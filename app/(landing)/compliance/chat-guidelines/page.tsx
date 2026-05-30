@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   },
   description:
     "Chat guidelines for ReachGig users. We aim to provide a safe and respectful environment for all users.",
+  alternates: {
+    canonical: "https://www.reachgig.com/compliance/chat-guidelines",
+  },
   openGraph: {
     title: "Chat Guidelines",
     description:

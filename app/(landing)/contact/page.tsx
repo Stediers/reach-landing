@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "ReachGig is the best platform for booking services from freelancers. Get in touch with us today!",
+  alternates: {
+    canonical: "https://www.reachgig.com/contact",
+  },
   openGraph: {
     title: "Contact Us",
     description:

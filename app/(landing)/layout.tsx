@@ -48,9 +48,6 @@ export const metadata: Metadata = {
     images: ["/images/landing-profiles/home.webp"],
     creator: "@ReachGig",
   },
-  alternates: {
-    canonical: "https://www.reachgig.com",
-  },
   applicationName: "ReachGig",
   appleWebApp: {
     title: "ReachGig",

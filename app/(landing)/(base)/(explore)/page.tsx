@@ -10,7 +10,7 @@ import * as motion from "motion/react-client";
 import { ArrowRightIcon } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Browse Freelancers & Service Providers in India | ReachGig",
+  title: "Browse Freelancers & Service Providers in India",
   description:
     "Explore verified freelancers across India — photographers, makeup artists, mehndi designers, DJs, fitness trainers & more. Compare profiles, read reviews, and book instantly on ReachGig.",
   keywords:

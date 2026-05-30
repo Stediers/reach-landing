@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     "online business tools",
     "professional networking",
   ].join(", "),
+  alternates: {
+    canonical: "https://www.reachgig.com/partner-program",
+  },
   openGraph: {
     title:
       "ReachGig Partner Program - Start Your Freelance Business | Free Website & Tools",

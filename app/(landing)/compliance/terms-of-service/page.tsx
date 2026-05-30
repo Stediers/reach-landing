@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     template: "%s | Terms of Use",
   },
   description: "Terms of Use for ReachGig",
+  alternates: {
+    canonical: "https://www.reachgig.com/compliance/terms-of-service",
+  },
   openGraph: {
     title: "Terms of Use",
     description: "Terms of Use for ReachGig",
