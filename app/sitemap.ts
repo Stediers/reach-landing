@@ -4,6 +4,10 @@ import fetchCities from "@api_functions/explore/fetch-cities";
 import { fetchGigHandles } from "@api_functions/explore/seo/get-gig-handles";
 import { fetchSeededHandles } from "@api_functions/explore/seo/fetch-seeded-handles";
 import { CustomerRoutes } from "@data/enums";
+import {
+  vendorCityPath,
+  vendorDesignationPath,
+} from "@helper_functions/text/vendor-url";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -58,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const citiesData = await fetchAvilableCities();
     const cities = citiesData ? citiesData : { cities: [] };
     const vendorCityRoutes = cities.cities.map((city) => ({
-      url: `${baseUrl}/vendors/${city.name}`,
+      url: `${baseUrl}${vendorCityPath(city.name)}`,
       lastModified: new Date().toISOString(),
       changeFrequency: "daily" as const,
       priority: 0.8,
@@ -73,7 +77,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           return designations
             .filter((designation) => designation.count > 0)
             .map((designation) => ({
-              url: `${baseUrl}/vendors/${city.name}/${designation.profession.code}`,
+              url: `${baseUrl}${vendorDesignationPath(
+                city.name,
+                designation.profession.code
+              )}`,
               lastModified: new Date().toISOString(),
               changeFrequency: "daily" as const,
               priority: 0.8,

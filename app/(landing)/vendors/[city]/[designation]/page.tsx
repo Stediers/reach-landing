@@ -4,6 +4,10 @@ import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import urlSpaceFixer from "@helper_functions/text/url-space-fixer";
 import stringFormater from "@helper_functions/text/string-formater";
+import {
+  vendorCityPath,
+  vendorDesignationPath,
+} from "@helper_functions/text/vendor-url";
 import { CustomerRoutes } from "@data/enums";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -40,13 +44,19 @@ export async function generateMetadata(props: {
     description: `Find the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Get matched with experienced ${professionPlural.toLowerCase()} today!`,
     keywords: `${correctedDesignation.toLowerCase()}, ${cityName.toLowerCase()}, top ${professionPlural.toLowerCase()}, hire ${correctedDesignation.toLowerCase()}, professional ${correctedDesignation.toLowerCase()}, local services`,
     alternates: {
-      canonical: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${params.designation.toLowerCase()}`,
+      canonical: `https://reachgig.com${vendorDesignationPath(
+        params.city.toLowerCase(),
+        params.designation.toLowerCase()
+      )}`,
     },
     openGraph: {
       title: `Top ${professionPlural} in ${cityName} | ReachGig`,
       type: "website",
       description: `Find and hire the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Start your search now!`,
-      url: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${params.designation.toLowerCase()}`,
+      url: `https://reachgig.com${vendorDesignationPath(
+        params.city.toLowerCase(),
+        params.designation.toLowerCase()
+      )}`,
       siteName: "ReachGig",
       locale: "en_IN",
     },
@@ -94,13 +104,18 @@ export default async function ProfessionalsListingPage(props: {
         "@type": "ListItem",
         position: 3,
         name: cityName,
-        item: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
+        item: `https://reachgig.com${vendorCityPath(
+          params.city.toLowerCase()
+        )}`,
       },
       {
         "@type": "ListItem",
         position: 4,
         name: professionName,
-        item: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${params.designation.toLowerCase()}`,
+        item: `https://reachgig.com${vendorDesignationPath(
+          params.city.toLowerCase(),
+          params.designation.toLowerCase()
+        )}`,
       },
     ],
   };
@@ -146,10 +161,7 @@ export default async function ProfessionalsListingPage(props: {
       />
       <nav className="mb-8" aria-label="Back to city services">
         <Link
-          href={CustomerRoutes.VENDORS_BY_CITY.replace(
-            "[city]",
-            params.city.toLowerCase()
-          )}
+          href={vendorCityPath(params.city.toLowerCase())}
           className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
         >
           <ArrowLeft className="h-5 w-5" aria-hidden="true" />

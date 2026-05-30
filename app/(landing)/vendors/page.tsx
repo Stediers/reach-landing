@@ -2,6 +2,7 @@ import { fetchAvilableCities } from "@api_functions/explore/fetch-available-citi
 import Card from "@components/Card";
 import Link from "next/link";
 import { Metadata } from "next";
+import { vendorCityPath } from "@helper_functions/text/vendor-url";
 
 export const metadata: Metadata = {
   title: "Find Freelancers by City | Hire Local Professionals",
@@ -45,7 +46,7 @@ export default async function Page() {
 
 function CityCard({ city }: { city: string }) {
   return (
-    <Link href={`/vendors/${city.toLowerCase()}`}>
+    <Link href={vendorCityPath(city.toLowerCase())}>
       <Card className="flex flex-col items-center justify-center hover:shadow-md transition-shadow cursor-pointer">
         <h3 className="text-lg font-medium">{city}</h3>
       </Card>

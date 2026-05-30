@@ -31,6 +31,7 @@ import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { AiFillCheckSquare } from "react-icons/ai";
 import Link from "next/link";
 import stringFormater from "@helper_functions/text/string-formater";
+import { vendorDesignationPath } from "@helper_functions/text/vendor-url";
 
 export default function TopBreadCrumb() {
   const path = usePathname();
@@ -155,7 +156,7 @@ export default function TopBreadCrumb() {
                 {stringFormater(params[3].replace("-", " "))}
               </BreadcrumbPage>
             ) : (
-              <BreadcrumbLink href={`/vendors/${city}/${designation}`}>
+              <BreadcrumbLink href={vendorDesignationPath(city, designation ?? "")}>
                 {designation}
               </BreadcrumbLink>
             )}

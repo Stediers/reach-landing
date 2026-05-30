@@ -5,6 +5,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import stringFormater from "@helper_functions/text/string-formater";
+import {
+  vendorCityPath,
+  vendorDesignationPath,
+} from "@helper_functions/text/vendor-url";
 
 export const revalidate = 3600; // Revalidate every hour for fresh content
 
@@ -23,13 +27,13 @@ export const generateMetadata = async (props: {
       description: baseDescription,
       keywords: `freelancers, ${cityName.toLowerCase()}, hire freelancers, local services`,
       alternates: {
-        canonical: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
+        canonical: `https://reachgig.com${vendorCityPath(params.city.toLowerCase())}`,
       },
       openGraph: {
         title: `Hire Local Freelancers in ${cityName} | ReachGig`,
         type: "website",
         description: baseDescription,
-        url: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
+        url: `https://reachgig.com${vendorCityPath(params.city.toLowerCase())}`,
         siteName: "ReachGig",
         locale: "en_IN",
       },
@@ -60,13 +64,13 @@ export const generateMetadata = async (props: {
       description,
       keywords: `${categoryList.toLowerCase()}, freelancers, ${cityName.toLowerCase()}, hire freelancers, professional services`,
       alternates: {
-        canonical: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
+        canonical: `https://reachgig.com${vendorCityPath(params.city.toLowerCase())}`,
       },
       openGraph: {
         title,
         type: "website",
         description,
-        url: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
+        url: `https://reachgig.com${vendorCityPath(params.city.toLowerCase())}`,
         siteName: "ReachGig",
         locale: "en_IN",
       },
@@ -118,7 +122,7 @@ export default async function FreelancerCategoryPage(props: {
         "@type": "ListItem",
         position: 3,
         name: cityName,
-        item: `https://reachgig.com/vendors/${params.city.toLowerCase()}`,
+        item: `https://reachgig.com${vendorCityPath(params.city.toLowerCase())}`,
       },
     ],
   };
@@ -140,7 +144,10 @@ export default async function FreelancerCategoryPage(props: {
         "@type": "Service",
         name: stringFormater(category.profession.name),
         description: category.profession.description,
-        url: `https://reachgig.com/vendors/${params.city.toLowerCase()}/${category.profession.code}`,
+        url: `https://reachgig.com${vendorDesignationPath(
+          params.city.toLowerCase(),
+          category.profession.code
+        )}`,
         areaServed: {
           "@type": "City",
           name: cityName,
@@ -213,7 +220,7 @@ function ProfessionCard({
 }) {
   return (
     <Link
-      href={`/vendors/${city.toLowerCase()}/${link}`}
+      href={vendorDesignationPath(city.toLowerCase(), link)}
       className="block h-full transition-transform hover:-translate-y-1"
       aria-label={`View ${name} services in ${city}`}
     >
