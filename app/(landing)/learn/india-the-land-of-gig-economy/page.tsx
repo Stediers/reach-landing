@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "Explore India's booming gig economy: benefits, challenges, government policies, and future trends. Learn how technology and regulations are shaping flexible work in India.",
   keywords:
     "gig economy India, freelance work India, digital economy, flexible work, Indian startups, gig workers rights, freelance platforms India",
+  alternates: {
+    canonical: "https://reachgig.com/learn/india-the-land-of-gig-economy",
+  },
   openGraph: {
     title: "India: The Land of Gig Economy | Understanding the Future of Work",
     description:

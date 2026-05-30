@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     "Learn essential financial management strategies for Indian freelancers. Covers tax planning, budgeting, investments, and compliance. Expert tips for financial success.",
   keywords:
     "freelancer finances india, financial management tips, freelancer tax india, gst for freelancers, financial planning freelancers",
+  alternates: {
+    canonical: "https://reachgig.com/learn/financial-management-tips",
+  },
   openGraph: {
     title:
       "Financial Management Tips for Freelancers in India | Complete Guide 2024",

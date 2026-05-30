@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "Compare freelancers and agencies to decide which is right for your project. Covers cost, quality, flexibility, scalability, and when to choose each option in India.",
   keywords:
     "freelancer vs agency, hire freelancer or agency, freelancer benefits, agency vs independent, outsource work India",
+  alternates: {
+    canonical: "https://reachgig.com/learn/freelancer-vs-agency-which-to-hire",
+  },
   openGraph: {
     title:
       "Freelancer vs Agency: Which Should You Hire in 2025? | Honest Comparison",

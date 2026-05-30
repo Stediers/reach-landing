@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "A complete guide to choosing the perfect wedding photographer in India. Learn about photography styles, pricing, portfolio evaluation, and red flags to avoid. Find verified photographers on ReachGig.",
   keywords:
     "wedding photographer India, how to hire photographer, wedding photography tips, bridal photography, wedding photographer cost",
+  alternates: {
+    canonical: "https://reachgig.com/learn/how-to-choose-wedding-photographer-india",
+  },
   openGraph: {
     title:
       "How to Choose the Right Wedding Photographer in India | Complete Guide 2025",

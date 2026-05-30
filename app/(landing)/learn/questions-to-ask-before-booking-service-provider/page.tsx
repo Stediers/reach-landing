@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "Never get burned by a bad hire again. Learn the essential questions to ask any service provider before booking — covering experience, pricing, deliverables, and communication.",
   keywords:
     "questions to ask service provider, how to hire freelancer, booking service provider tips, freelancer interview questions, hire professional services",
+  alternates: {
+    canonical: "https://reachgig.com/learn/questions-to-ask-before-booking-service-provider",
+  },
   openGraph: {
     title:
       "Top Questions to Ask Before Booking a Service Provider | Smart Hiring Guide",

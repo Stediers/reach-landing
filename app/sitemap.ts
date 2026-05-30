@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Learn routes
   const learnRoutes = [
     "/learn",
+    "/learn/financial-management-tips",
     "/learn/efficiency-hacks-for-stellar-service-and-maximum-income",
     "/learn/why-reachgig-is-your-ultimate-platform",
     "/learn/staying-motivated-and-overcoming-freelance-burnout",
@@ -45,7 +46,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "[partnerHandle]",
         handle as string
       )}`,
-      lastModified: new Date().toISOString(),
       changeFrequency: "daily" as const,
       priority: 0.8,
     }));
@@ -54,7 +54,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const seededHandles = await fetchSeededHandles();
     const seededRoutes = seededHandles.map((handle) => ({
       url: `${baseUrl}/${handle}`,
-      lastModified: new Date().toISOString(),
       changeFrequency: "weekly" as const,
       priority: 0.6,
     }));
@@ -63,7 +62,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const cities = citiesData ? citiesData : { cities: [] };
     const vendorCityRoutes = cities.cities.map((city) => ({
       url: `${baseUrl}${vendorCityPath(city.name)}`,
-      lastModified: new Date().toISOString(),
       changeFrequency: "daily" as const,
       priority: 0.8,
     }));
@@ -81,7 +79,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 city.name,
                 designation.profession.code
               )}`,
-              lastModified: new Date().toISOString(),
               changeFrequency: "daily" as const,
               priority: 0.8,
             }));
@@ -93,7 +90,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // Home page with highest priority
       {
         url: baseUrl,
-        lastModified: new Date(),
         changeFrequency: "yearly" as const,
         priority: 1,
       },
@@ -102,42 +98,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .filter((route) => route !== "")
         .map((route) => ({
           url: `${baseUrl}${route}`,
-          lastModified: new Date(),
           changeFrequency: "monthly" as const,
           priority: 0.8,
         })),
       // Learn routes
       ...learnRoutes.map((route) => ({
         url: `${baseUrl}${route}`,
-        lastModified: new Date(),
         changeFrequency: "monthly" as const,
         priority: 0.8,
       })),
       // Dynamic gig routes
       ...gigRoutes.map((route) => ({
         url: route.url,
-        lastModified: new Date().toISOString(),
         changeFrequency: "daily" as const,
         priority: 0.8,
       })),
       // Seeded profile routes
       ...seededRoutes.map((route) => ({
         url: route.url,
-        lastModified: new Date().toISOString(),
         changeFrequency: "weekly" as const,
         priority: 0.6,
       })),
       // Vendor city hub routes
       ...vendorCityRoutes.map((route) => ({
         url: route.url,
-        lastModified: new Date().toISOString(),
         changeFrequency: "daily" as const,
         priority: 0.8,
       })),
       // Dynamic vendor routes
       ...vendorRoutes.map((route) => ({
         url: route.url,
-        lastModified: new Date().toISOString(),
         changeFrequency: "daily" as const,
         priority: 0.8,
       })),
@@ -149,7 +139,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // Static routes remain accessible even on error
       {
         url: baseUrl,
-        lastModified: new Date(),
         changeFrequency: "yearly" as const,
         priority: 1,
       },
@@ -157,13 +146,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .filter((route) => route !== "")
         .map((route) => ({
           url: `${baseUrl}${route}`,
-          lastModified: new Date(),
           changeFrequency: "monthly" as const,
           priority: 0.8,
         })),
       ...learnRoutes.map((route) => ({
         url: `${baseUrl}${route}`,
-        lastModified: new Date(),
         changeFrequency: "monthly" as const,
         priority: 0.8,
       })),

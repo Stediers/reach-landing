@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const baseUrls = stateNames.map((state) => ({
     url: `${URL}?state=${state}`,
-    lastModified: new Date().toISOString(),
     changeFrequency: "daily" as const,
     priority: 0.7,
   }));

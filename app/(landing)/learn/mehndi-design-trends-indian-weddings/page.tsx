@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "Discover the top mehndi design trends for Indian weddings in 2025. From minimalist patterns to portrait mehndi, learn about styles, pricing, and tips for longer-lasting mehndi.",
   keywords:
     "mehndi designs 2025, bridal mehndi, mehndi artist, wedding mehndi trends, arabic mehndi, rajasthani mehndi",
+  alternates: {
+    canonical: "https://reachgig.com/learn/mehndi-design-trends-indian-weddings",
+  },
   openGraph: {
     title:
       "Top Mehndi Design Trends for Indian Weddings in 2025 | Bridal Mehndi Guide",

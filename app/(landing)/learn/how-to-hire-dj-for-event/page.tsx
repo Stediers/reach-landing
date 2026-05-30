@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "Learn how to hire the perfect DJ for your wedding, party, or corporate event in India. Covers DJ types, costs, equipment checklist, and booking tips to make your event unforgettable.",
   keywords:
     "hire DJ India, DJ for wedding, event DJ cost, how to book DJ, party DJ near me",
+  alternates: {
+    canonical: "https://reachgig.com/learn/how-to-hire-dj-for-event",
+  },
   openGraph: {
     title:
       "How to Hire a DJ for Your Event in India — Complete Guide 2025",

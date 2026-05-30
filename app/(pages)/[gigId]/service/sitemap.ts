@@ -15,7 +15,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "[partnerHandle]",
         serviceId.partnerHandle
       )}`,
-      lastModified: new Date().toISOString(),
       changeFrequency: "daily",
     }));
   } catch (error) {

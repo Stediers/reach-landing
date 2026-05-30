@@ -2,7 +2,6 @@ import { fetchPartners } from "@api_functions/explore/fetch-partners";
 import Profile from "./Profile";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
-import urlSpaceFixer from "@helper_functions/text/url-space-fixer";
 import stringFormater from "@helper_functions/text/string-formater";
 import {
   vendorCityPath,
@@ -34,7 +33,7 @@ export async function generateMetadata(props: {
     };
   }
 
-  const correctedDesignation = stringFormater(urlSpaceFixer(res.designation));
+  const correctedDesignation = stringFormater(res.designation);
   const professionPlural = correctedDesignation.endsWith("s")
     ? correctedDesignation
     : `${correctedDesignation}s`;

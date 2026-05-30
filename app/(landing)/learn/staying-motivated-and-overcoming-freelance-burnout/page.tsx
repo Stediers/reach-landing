@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     "Conquer freelance burnout and reignite your passion! Discover actionable tips to overcome stress, prevent overwhelm, and find work-life balance as a freelancer. Learn how to set boundaries, prioritize self-care, and create a sustainable freelance career.",
   keywords:
     "freelance burnout, freelancer motivation, work-life balance, freelance stress management, self-care for freelancers, freelance tips, preventing burnout, freelance career advice",
+  alternates: {
+    canonical: "https://reachgig.com/learn/staying-motivated-and-overcoming-freelance-burnout",
+  },
   openGraph: {
     title:
       "Staying Motivated and Overcoming Freelance Burnout | Freelance Guide",

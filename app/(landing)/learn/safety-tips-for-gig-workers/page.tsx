@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "Learn crucial safety tips for gig workers: location sharing, cybersecurity, personal protection & legal rights. Expert guide for delivery drivers, rideshare & freelancers. Stay safe while maximizing earnings.",
   keywords:
     "gig worker safety, freelancer security, delivery driver safety tips, rideshare safety, personal protection, cybersecurity for gig workers, legal rights gig economy",
+  alternates: {
+    canonical: "https://reachgig.com/learn/safety-tips-for-gig-workers",
+  },
   openGraph: {
     title: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
     description:

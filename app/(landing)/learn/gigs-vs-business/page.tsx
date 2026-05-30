@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     "Compare the pros and cons of gig work versus business ownership. Learn about flexibility, income potential, risks, and benefits to make an informed career choice. Expert insights on modern work options.",
   keywords:
     "gig work, business ownership, freelancing, entrepreneurship, career choices, work flexibility, business risks, gig economy, self-employment, career guide",
+  alternates: {
+    canonical: "https://reachgig.com/learn/gigs-vs-business",
+  },
   openGraph: {
     title: "Gigs vs Business Ownership: Which Path Is Right For You?",
     description:

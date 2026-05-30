@@ -12,7 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return gigHandles.map((handle) => ({
       url: `${URL}${CustomerRoutes.PARTNER.replace("[partnerHandle]", handle)}`,
-      lastModified: new Date().toISOString(),
       changeFrequency: "daily" as const,
       priority: 0.8,
     }));

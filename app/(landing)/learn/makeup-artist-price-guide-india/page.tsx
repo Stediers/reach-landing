@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "Comprehensive guide to makeup artist pricing in India for 2025. Compare bridal makeup costs by city, understand HD vs airbrush makeup, and learn how to get the best value.",
   keywords:
     "makeup artist cost India, bridal makeup price, how much does makeup artist charge, wedding makeup cost, freelance makeup artist rates",
+  alternates: {
+    canonical: "https://reachgig.com/learn/makeup-artist-price-guide-india",
+  },
   openGraph: {
     title:
       "Makeup Artist Price Guide India 2025 — How Much Does Bridal Makeup Cost?",

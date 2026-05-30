@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     "Master proven freelance efficiency hacks to boost your income and deliver exceptional service. Learn project management, automation, and time-saving strategies for freelance success in 2024.",
   keywords:
     "freelance efficiency, time management tips, freelance productivity, project management tools, freelance automation, increase freelance income, freelance business optimization, freelance workflow",
+  alternates: {
+    canonical: "https://reachgig.com/learn/efficiency-hacks-for-stellar-service-and-maximum-income",
+  },
   openGraph: {
     title:
       "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",

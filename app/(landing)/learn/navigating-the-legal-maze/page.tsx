@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     "Learn essential legal aspects of freelancing including contracts, taxes, IP rights, dispute resolution & insurance. Comprehensive guide for freelancers to protect their business.",
   keywords:
     "freelancer legal guide, freelance contracts, freelancer taxes, intellectual property rights, dispute resolution, freelance insurance, legal protection for freelancers",
+  alternates: {
+    canonical: "https://reachgig.com/learn/navigating-the-legal-maze",
+  },
   openGraph: {
     title:
       "Freelancer Legal Guide: Contracts, Taxes & Legal Protection | ReachGig",

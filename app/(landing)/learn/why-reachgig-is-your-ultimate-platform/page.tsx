@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "Discover why ReachGig is the ultimate platform for gig professionals. Get free promotions, valuable insights, and connect with clients. Join our thriving gig economy community today!",
   keywords:
     "ReachGig, gig economy, freelance platform, gig professionals, freelance opportunities, gig work",
+  alternates: {
+    canonical: "https://reachgig.com/learn/why-reachgig-is-your-ultimate-platform",
+  },
   openGraph: {
     title:
       "Why ReachGig Is Your Ultimate Platform | The Best Gig Economy Platform",

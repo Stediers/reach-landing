@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "Learn essential strategies for freelancer mental health: work-life balance, burnout prevention, self-care tips & building support networks. Expert guide for solopreneur wellbeing.",
   keywords:
     "freelancer mental health, solopreneur wellness, prevent burnout, work-life balance, freelance stress management, self-care for freelancers, freelancer support network",
+  alternates: {
+    canonical: "https://reachgig.com/learn/mental-health-and-wellbeing-for-freelancers",
+  },
   openGraph: {
     title:
       "Mental Health Guide for Freelancers: Prevent Burnout & Thrive | Solopreneur Wellness",
