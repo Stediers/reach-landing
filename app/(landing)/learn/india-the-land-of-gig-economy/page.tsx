@@ -9,6 +9,7 @@ import {
   BlogWrapper,
 } from "@wrapper/BlogWrapper";
 import Link from "next/link";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 export const metadata: Metadata = {
   title: "India: The Land of Gig Economy | Understanding the Future of Work",
@@ -26,21 +27,14 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2024-03-02T00:00:00.000Z",
     authors: ["Harshavardhan Jothi Kumar"],
-    images: [
-      {
-        url: "/images/india-the-land-of-gig-economy.svg",
-        width: 1200,
-        height: 630,
-        alt: "India Gig Economy Illustration",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "India: The Land of Gig Economy | Understanding the Future of Work",
     description:
       "Explore India's booming gig economy: benefits, challenges, government policies, and future trends. Learn how technology and regulations are shaping flexible work in India.",
-    images: ["/images/india-the-land-of-gig-economy.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -56,7 +50,7 @@ const jsonLd = {
     name: "Harshavardhan Jothi Kumar",
   },
   datePublished: "2024-03-02",
-  image: "/images/india-the-land-of-gig-economy.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

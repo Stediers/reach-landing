@@ -8,6 +8,7 @@ import {
   vendorDesignationPath,
 } from "@helper_functions/text/vendor-url";
 import { CustomerRoutes } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -50,6 +51,7 @@ export async function generateMetadata(props: {
     },
     openGraph: {
       title: `Top ${professionPlural} in ${cityName} | ReachGig`,
+      images: [DEFAULT_OG_IMAGE],
       type: "website",
       description: `Find and hire the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Start your search now!`,
       url: `https://www.reachgig.com${vendorDesignationPath(
@@ -62,6 +64,7 @@ export async function generateMetadata(props: {
     twitter: {
       card: "summary_large_image",
       title: `Top ${professionPlural} in ${cityName} | ReachGig`,
+      images: [DEFAULT_OG_IMAGE_URL],
       description: `Find and hire the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely.`,
     },
   };

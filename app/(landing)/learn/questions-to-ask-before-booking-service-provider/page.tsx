@@ -8,6 +8,7 @@ import {
   BlogWrapper,
 } from "@wrapper/BlogWrapper";
 import Link from "next/link";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 export const metadata: Metadata = {
   title:
@@ -27,14 +28,7 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2025-04-05T00:00:00.000Z",
     authors: ["ReachGig Team"],
-    images: [
-      {
-        url: "/images/review.svg",
-        width: 1200,
-        height: 630,
-        alt: "Questions to Ask Before Booking a Service Provider",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -42,7 +36,7 @@ export const metadata: Metadata = {
       "Top Questions to Ask Before Booking a Service Provider | Smart Hiring Guide",
     description:
       "Never get burned by a bad hire again. Learn the essential questions to ask any service provider before booking.",
-    images: ["/images/review.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -58,7 +52,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/review.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

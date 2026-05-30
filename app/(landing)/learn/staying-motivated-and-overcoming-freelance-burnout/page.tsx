@@ -1,4 +1,5 @@
 import { BlogCategory } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import React from "react";
 import { Metadata } from "next";
 import {
@@ -25,14 +26,7 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2024-05-07T00:00:00.000Z",
     authors: ["Deepakindresh Narayana Gandhi"],
-    images: [
-      {
-        url: "/images/tired.svg",
-        width: 1200,
-        height: 630,
-        alt: "Freelance Burnout and Motivation Guide",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -40,7 +34,7 @@ export const metadata: Metadata = {
       "Staying Motivated and Overcoming Freelance Burnout | Freelance Guide",
     description:
       "Learn proven strategies to overcome freelance burnout, maintain motivation, and create a sustainable freelance career with practical tips for work-life balance.",
-    images: ["/images/tired.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -56,7 +50,7 @@ const jsonLd = {
     name: "Deepakindresh Narayana Gandhi",
   },
   datePublished: "2024-05-07",
-  image: "/images/tired.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

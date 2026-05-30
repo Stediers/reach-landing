@@ -5,6 +5,7 @@ import { fetchAllPartners } from "@api_functions/explore/seo/fetch-all-partners"
 import { CustomerRoutes } from "@data/enums";
 import Link from "next/link";
 import { Metadata } from "next";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import PopularDesignations from "./PopularDesignations";
 import * as motion from "motion/react-client";
 import { ArrowRightIcon } from "lucide-react";
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Browse Freelancers & Service Providers | ReachGig",
+    images: [DEFAULT_OG_IMAGE],
     description:
       "Explore verified freelancers across India. Compare profiles, read reviews, and book instantly.",
     url: "https://www.reachgig.com",
@@ -30,6 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Browse Freelancers & Service Providers | ReachGig",
+    images: [DEFAULT_OG_IMAGE_URL],
     description:
       "Explore verified freelancers across India. Compare profiles, read reviews, and book instantly.",
   },

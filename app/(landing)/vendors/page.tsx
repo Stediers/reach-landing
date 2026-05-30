@@ -3,6 +3,7 @@ import Card from "@components/Card";
 import Link from "next/link";
 import { Metadata } from "next";
 import { vendorCityPath } from "@helper_functions/text/vendor-url";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 export const metadata: Metadata = {
   title: "Find Freelancers by City | Hire Local Professionals",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Find Freelancers by City | ReachGig",
+    images: [DEFAULT_OG_IMAGE],
     description:
       "Browse verified freelancers and service providers across cities in India. Book trusted professionals instantly.",
     url: "https://www.reachgig.com/vendors",
@@ -25,6 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Find Freelancers by City | ReachGig",
+    images: [DEFAULT_OG_IMAGE_URL],
     description:
       "Browse verified freelancers across cities in India. Book trusted professionals instantly.",
   },

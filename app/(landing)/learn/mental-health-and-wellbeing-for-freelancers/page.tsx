@@ -1,4 +1,5 @@
 import { BlogCategory, State } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import React from "react";
 import { Metadata } from "next";
 import {
@@ -24,21 +25,14 @@ export const metadata: Metadata = {
     description:
       "Learn essential strategies for freelancer mental health: work-life balance, burnout prevention, self-care tips & building support networks. Expert guide for solopreneur wellbeing.",
     type: "article",
-    images: [
-      {
-        url: "/images/mental-health.svg",
-        width: 1200,
-        height: 630,
-        alt: "Mental Health and Wellbeing for Freelancers Guide",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mental Health Guide for Freelancers: Prevent Burnout & Thrive",
     description:
       "Essential strategies for freelancer mental health: work-life balance, burnout prevention & self-care tips.",
-    images: ["/images/mental-health.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -54,7 +48,7 @@ const jsonLd = {
     name: "Gauthum J",
   },
   datePublished: "2024-04-06",
-  image: "/images/mental-health.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

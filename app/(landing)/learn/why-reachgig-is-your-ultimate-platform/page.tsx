@@ -1,4 +1,5 @@
 import { BlogCategory, State } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -25,14 +26,7 @@ export const metadata: Metadata = {
     description:
       "Discover why ReachGig is the ultimate platform for gig professionals. Get free promotions, valuable insights, and connect with clients. Join our thriving gig economy community today!",
     type: "article",
-    images: [
-      {
-        url: "/images/why-reachgig-is-your-ultimate-platform.webp",
-        width: 1200,
-        height: 630,
-        alt: "ReachGig Platform Overview",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -40,7 +34,7 @@ export const metadata: Metadata = {
       "Why ReachGig Is Your Ultimate Platform | The Best Gig Economy Platform",
     description:
       "Discover why ReachGig is the ultimate platform for gig professionals. Get free promotions, valuable insights, and connect with clients.",
-    images: ["/images/why-reachgig-is-your-ultimate-platform.webp"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -56,7 +50,7 @@ const jsonLd = {
     name: "Deepakindresh Narayana Gandhi",
   },
   datePublished: "2024-03-03",
-  image: "/images/why-reachgig-is-your-ultimate-platform.webp",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

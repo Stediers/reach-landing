@@ -1,4 +1,5 @@
 import { BlogCategory, State } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -27,21 +28,14 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2024-04-16T00:00:00.000Z",
     authors: ["Deepakindresh NG"],
-    images: [
-      {
-        url: "/images/gigvb.svg",
-        width: 1200,
-        height: 630,
-        alt: "Gigs vs Business Ownership comparison",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Gigs vs Business Ownership: Which Path Is Right For You?",
     description:
       "Compare the pros and cons of gig work versus business ownership. Expert insights on modern work options.",
-    images: ["/images/gigvb.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -57,7 +51,7 @@ const jsonLd = {
     name: "Deepakindresh NG",
   },
   datePublished: "2024-04-16",
-  image: "/images/gigvb.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

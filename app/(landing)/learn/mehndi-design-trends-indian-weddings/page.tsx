@@ -1,4 +1,5 @@
 import { BlogCategory } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import { Metadata } from "next";
 import {
   BlogList,
@@ -26,14 +27,7 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2025-04-05T00:00:00.000Z",
     authors: ["ReachGig Team"],
-    images: [
-      {
-        url: "/images/discover.svg",
-        width: 1200,
-        height: 630,
-        alt: "Top Mehndi Design Trends for Indian Weddings in 2025",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -41,7 +35,7 @@ export const metadata: Metadata = {
       "Top Mehndi Design Trends for Indian Weddings in 2025 | Bridal Mehndi Guide",
     description:
       "Discover the top mehndi design trends for Indian weddings in 2025. From minimalist patterns to portrait mehndi, learn about styles, pricing, and tips for longer-lasting mehndi.",
-    images: ["/images/discover.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -57,7 +51,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/discover.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

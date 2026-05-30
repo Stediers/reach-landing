@@ -9,6 +9,7 @@ import {
   BlogWrapper,
 } from "@wrapper/BlogWrapper";
 import Link from "next/link";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 export const metadata: Metadata = {
   title: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
@@ -24,21 +25,14 @@ export const metadata: Metadata = {
     description:
       "Learn crucial safety tips for gig workers: location sharing, cybersecurity, personal protection & legal rights. Expert guide for delivery drivers, rideshare & freelancers.",
     type: "article",
-    images: [
-      {
-        url: "/images/secure.svg",
-        width: 1200,
-        height: 630,
-        alt: "Safety Tips for Gig Workers",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
     description:
       "Learn crucial safety tips for gig workers: location sharing, cybersecurity, personal protection & legal rights. Expert guide for delivery drivers, rideshare & freelancers.",
-    images: ["/images/secure.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -53,7 +47,7 @@ const jsonLd = {
     name: "Deepakindresh Narayana Gandhi",
   },
   datePublished: "2024-04-10",
-  image: "/images/secure.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

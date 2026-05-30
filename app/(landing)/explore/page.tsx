@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { unstable_noStore } from "next/cache";
 import { Render } from "@components/explore/Render";
 import { ServiceCardSkeleton } from "@components/ServiceCard";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 type Props = {
   params: { id: string };
@@ -89,6 +90,7 @@ export async function generateMetadata(
       },
       openGraph: {
         title: `Find and Book ${searchTerm} ${serviceType}${state} | ReachGig`,
+        images: [DEFAULT_OG_IMAGE],
         description: `Compare prices and reviews for ${searchTerm} ${serviceType}${state}. Book safe appointments with trusted and verified vendors. 100% satisfaction guaranteed.`,
         // images: [
         //   {
@@ -136,6 +138,7 @@ export async function generateMetadata(
       },
       openGraph: {
         title: `Top-Rated ${serviceType}${state} | ReachGig`,
+        images: [DEFAULT_OG_IMAGE],
         description: `Find and book the best ${serviceType.toLowerCase()}${state}. Compare prices, read verified reviews, and book safe appointments with trusted service providers.`,
         // images: [
         //   {

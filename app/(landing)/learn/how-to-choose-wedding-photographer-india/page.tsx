@@ -1,4 +1,5 @@
 import { BlogCategory } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import { Metadata } from "next";
 import {
   BlogList,
@@ -26,14 +27,7 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2025-04-05T00:00:00.000Z",
     authors: ["ReachGig Team"],
-    images: [
-      {
-        url: "/images/booking.svg",
-        width: 1200,
-        height: 630,
-        alt: "How to Choose the Right Wedding Photographer in India",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -41,7 +35,7 @@ export const metadata: Metadata = {
       "How to Choose the Right Wedding Photographer in India | Complete Guide 2025",
     description:
       "A complete guide to choosing the perfect wedding photographer in India. Learn about photography styles, pricing, portfolio evaluation, and red flags to avoid.",
-    images: ["/images/booking.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -57,7 +51,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/booking.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

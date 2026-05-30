@@ -1,4 +1,5 @@
 import { BlogCategory, State } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -29,12 +30,14 @@ export const metadata: Metadata = {
     publishedTime: "2024-03-03T00:00:00.000Z",
     authors: ["Gauthum J"],
     tags: ["Legal Guide", "Freelancing Tips", "Business Information"],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Freelancer Legal Guide: Contracts, Taxes & Legal Protection",
     description:
       "Learn essential legal aspects of freelancing including contracts, taxes, IP rights, dispute resolution & insurance. Comprehensive guide for freelancers to protect their business.",
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -50,6 +53,7 @@ const jsonLd = {
     name: "Gauthum J",
   },
   datePublished: "2024-03-03",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

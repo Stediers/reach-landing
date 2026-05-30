@@ -9,6 +9,7 @@ import {
   BlogWrapper,
 } from "@wrapper/BlogWrapper";
 import Link from "next/link";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 export const metadata: Metadata = {
   title:
@@ -25,14 +26,7 @@ export const metadata: Metadata = {
       "Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions",
     description:
       "Learn essential tips for successful client transactions in the gig economy. Perfect for makeup artists, gym trainers, and all service providers.",
-    images: [
-      {
-        url: "/images/why-reachgig-is-your-ultimate-platform.png",
-        width: 1200,
-        height: 630,
-        alt: "Mastering the Art of Gig Work",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -40,7 +34,7 @@ export const metadata: Metadata = {
       "Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions",
     description:
       "Learn essential tips for successful client transactions in the gig economy. Perfect for makeup artists, gym trainers, and all service providers.",
-    images: ["/images/why-reachgig-is-your-ultimate-platform.png"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -56,7 +50,7 @@ const jsonLd = {
     name: "Deepakindresh Narayana Gandhi",
   },
   datePublished: "2024-02-27",
-  image: "/images/why-reachgig-is-your-ultimate-platform.png",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

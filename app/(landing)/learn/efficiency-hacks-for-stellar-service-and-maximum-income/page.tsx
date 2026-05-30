@@ -1,4 +1,5 @@
 import { BlogCategory } from "@data/enums";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 import {
   BlogList,
   BlogSubTitle,
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
     type: "article",
     authors: ["Gauthum J"],
     publishedTime: "2024-03-27T00:00:00.000Z",
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -32,6 +34,7 @@ export const metadata: Metadata = {
       "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",
     description:
       "Master proven freelance efficiency hacks to boost your income and deliver exceptional service. Learn project management, automation, and time-saving strategies for freelance success in 2024.",
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -42,6 +45,7 @@ const jsonLd = {
     "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",
   description:
     "Master proven freelance efficiency hacks to boost your income and deliver exceptional service. Learn project management, automation, and time-saving strategies for freelance success in 2024.",
+  image: "https://www.reachgig.com/opengraph-image.png",
   author: {
     "@type": "Person",
     name: "Gauthum J",

@@ -9,6 +9,7 @@ import {
   BlogWrapper,
 } from "@wrapper/BlogWrapper";
 import Link from "next/link";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 export const metadata: Metadata = {
   title:
@@ -28,14 +29,7 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2024-04-27T00:00:00.000Z",
     authors: ["Deepakindresh Narayana Gandhi"],
-    images: [
-      {
-        url: "/images/finance.svg",
-        width: 1200,
-        height: 630,
-        alt: "Financial Management Tips for Freelancers",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -43,7 +37,7 @@ export const metadata: Metadata = {
       "Financial Management Tips for Freelancers in India | Complete Guide 2024",
     description:
       "Learn essential financial management strategies for Indian freelancers. Covers tax planning, budgeting, investments, and compliance. Expert tips for financial success.",
-    images: ["/images/finance.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -59,13 +53,13 @@ const jsonLd = {
     name: "Deepakindresh Narayana Gandhi",
   },
   datePublished: "2024-04-27",
-  image: "/images/finance.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
-    name: "Your Website Name",
+    name: "ReachGig",
     logo: {
       "@type": "ImageObject",
-      url: "/images/logo.png", // Add your website logo URL
+      url: "https://www.reachgig.com/icon-512x512.png",
     },
   },
 };

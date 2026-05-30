@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "",
+        url: "https://www.reachgig.com/opengraph-image.png",
         width: 800,
         height: 600,
         alt: "Terms and Conditions for Appointments",

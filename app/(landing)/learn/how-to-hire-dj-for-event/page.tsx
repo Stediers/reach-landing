@@ -8,6 +8,7 @@ import {
   BlogWrapper,
 } from "@wrapper/BlogWrapper";
 import Link from "next/link";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 export const metadata: Metadata = {
   title:
@@ -27,14 +28,7 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2025-04-05T00:00:00.000Z",
     authors: ["ReachGig Team"],
-    images: [
-      {
-        url: "/images/community.svg",
-        width: 1200,
-        height: 630,
-        alt: "How to Hire a DJ for Your Event in India",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -42,7 +36,7 @@ export const metadata: Metadata = {
       "How to Hire a DJ for Your Event in India — Complete Guide 2025",
     description:
       "Learn how to hire the perfect DJ for your wedding, party, or corporate event in India. Covers DJ types, costs, equipment checklist, and booking tips.",
-    images: ["/images/community.svg"],
+    images: [DEFAULT_OG_IMAGE_URL],
   },
 };
 
@@ -58,7 +52,7 @@ const jsonLd = {
     name: "ReachGig Team",
   },
   datePublished: "2025-04-05",
-  image: "/images/community.svg",
+  image: "https://www.reachgig.com/opengraph-image.png",
   publisher: {
     "@type": "Organization",
     name: "ReachGig",

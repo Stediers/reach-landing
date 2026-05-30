@@ -80,7 +80,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "ReachGig",
   url: "https://www.reachgig.com",
-  logo: "https://www.reachgig.com/images/logo.webp",
+  logo: "https://www.reachgig.com/icon-512x512.png",
   description:
     "ReachGig connects customers with verified freelancers and service providers across India. Book photographers, makeup artists, DJs, mehndi designers and more.",
   address: {
@@ -100,7 +100,7 @@ const localBusinessJsonLd = {
   "@type": "LocalBusiness",
   name: "ReachGig",
   url: "https://www.reachgig.com",
-  logo: "https://www.reachgig.com/images/logo.webp",
+  logo: "https://www.reachgig.com/icon-512x512.png",
   description:
     "India's leading freelancer marketplace. Hire verified photographers, makeup artists, mehndi designers, DJs and more in your city.",
   address: {

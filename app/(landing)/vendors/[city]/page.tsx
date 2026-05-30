@@ -9,6 +9,7 @@ import {
   vendorCityPath,
   vendorDesignationPath,
 } from "@helper_functions/text/vendor-url";
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_URL } from "@data/seo";
 
 export const revalidate = 3600; // Revalidate every hour for fresh content
 
@@ -31,6 +32,7 @@ export const generateMetadata = async (props: {
       },
       openGraph: {
         title: `Hire Local Freelancers in ${cityName} | ReachGig`,
+        images: [DEFAULT_OG_IMAGE],
         type: "website",
         description: baseDescription,
         url: `https://www.reachgig.com${vendorCityPath(params.city.toLowerCase())}`,
@@ -40,6 +42,7 @@ export const generateMetadata = async (props: {
       twitter: {
         card: "summary_large_image",
         title: `Hire Local Freelancers in ${cityName} | ReachGig`,
+        images: [DEFAULT_OG_IMAGE_URL],
         description: baseDescription,
       },
     };
@@ -68,6 +71,7 @@ export const generateMetadata = async (props: {
       },
       openGraph: {
         title,
+        images: [DEFAULT_OG_IMAGE],
         type: "website",
         description,
         url: `https://www.reachgig.com${vendorCityPath(params.city.toLowerCase())}`,
@@ -77,6 +81,7 @@ export const generateMetadata = async (props: {
       twitter: {
         card: "summary_large_image",
         title,
+        images: [DEFAULT_OG_IMAGE_URL],
         description,
       },
     };

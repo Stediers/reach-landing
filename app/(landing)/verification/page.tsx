@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     title: "Verification",
     description:
       "Know who you're dealing with. Our verification process ensures that you can trust the service providers on our platform.",
-    url: "https://www.reachgig.com/bookings",
+    url: "https://www.reachgig.com/verification",
     type: "website",
     images: [
       {
-        url: "",
+        url: "https://www.reachgig.com/opengraph-image.png",
         width: 800,
         height: 600,
         alt: "Booking",
