@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Contact Us",
     description:
       "ReachGig is the best platform for booking services from freelancers. Get in touch with us today!",
-    url: "https://reachgig.com/contact",
+    url: "https://www.reachgig.com/contact",
     type: "website",
     images: [
       {

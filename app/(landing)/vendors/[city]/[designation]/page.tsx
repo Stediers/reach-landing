@@ -43,7 +43,7 @@ export async function generateMetadata(props: {
     description: `Find the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Get matched with experienced ${professionPlural.toLowerCase()} today!`,
     keywords: `${correctedDesignation.toLowerCase()}, ${cityName.toLowerCase()}, top ${professionPlural.toLowerCase()}, hire ${correctedDesignation.toLowerCase()}, professional ${correctedDesignation.toLowerCase()}, local services`,
     alternates: {
-      canonical: `https://reachgig.com${vendorDesignationPath(
+      canonical: `https://www.reachgig.com${vendorDesignationPath(
         params.city.toLowerCase(),
         params.designation.toLowerCase()
       )}`,
@@ -52,7 +52,7 @@ export async function generateMetadata(props: {
       title: `Top ${professionPlural} in ${cityName} | ReachGig`,
       type: "website",
       description: `Find and hire the best ${correctedDesignation.toLowerCase()} in ${cityName}. Compare profiles, read verified reviews, and book appointments securely. Start your search now!`,
-      url: `https://reachgig.com${vendorDesignationPath(
+      url: `https://www.reachgig.com${vendorDesignationPath(
         params.city.toLowerCase(),
         params.designation.toLowerCase()
       )}`,
@@ -91,19 +91,19 @@ export default async function ProfessionalsListingPage(props: {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://reachgig.com",
+        item: "https://www.reachgig.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Vendors",
-        item: "https://reachgig.com/vendors",
+        item: "https://www.reachgig.com/vendors",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: cityName,
-        item: `https://reachgig.com${vendorCityPath(
+        item: `https://www.reachgig.com${vendorCityPath(
           params.city.toLowerCase()
         )}`,
       },
@@ -111,7 +111,7 @@ export default async function ProfessionalsListingPage(props: {
         "@type": "ListItem",
         position: 4,
         name: professionName,
-        item: `https://reachgig.com${vendorDesignationPath(
+        item: `https://www.reachgig.com${vendorDesignationPath(
           params.city.toLowerCase(),
           params.designation.toLowerCase()
         )}`,
@@ -133,7 +133,7 @@ export default async function ProfessionalsListingPage(props: {
         name: profile.name,
         jobTitle: profile.designation,
         image: profile.imageUrl,
-        url: `https://reachgig.com${CustomerRoutes.PARTNER.replace("[partnerHandle]", profile.handle)}`,
+        url: `https://www.reachgig.com${CustomerRoutes.PARTNER.replace("[partnerHandle]", profile.handle)}`,
         ...(profile.rating
           ? {
               aggregateRating: {

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | ReachGig Blog",
   },
   alternates: {
-    canonical: "https://reachgig.com/learn",
+    canonical: "https://www.reachgig.com/learn",
   },
   keywords:
     "freelance blog, gig economy tips, freelance advice, freelance learning, freelance education, freelance resources, gig worker tips, freelance career guidance",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "ReachGig Blog",
     description:
       "Explore expert insights, practical tips, and comprehensive guides for freelancers and gig workers. Learn how to thrive in the gig economy with ReachGig's curated content.",
-    url: "https://reachgig.com/learn",
+    url: "https://www.reachgig.com/learn",
     type: "website",
     images: [
       {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     ],
     locale: "en_IN",
   },
-  metadataBase: new URL("https://reachgig.com"),
+  metadataBase: new URL("https://www.reachgig.com"),
   applicationName: "ReachGig Blog",
   robots: "index, follow",
 };

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   keywords:
     "gig work, business ownership, freelancing, entrepreneurship, career choices, work flexibility, business risks, gig economy, self-employment, career guide",
   alternates: {
-    canonical: "https://reachgig.com/learn/gigs-vs-business",
+    canonical: "https://www.reachgig.com/learn/gigs-vs-business",
   },
   openGraph: {
     title: "Gigs vs Business Ownership: Which Path Is Right For You?",
@@ -61,7 +61,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -74,19 +74,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Gigs vs Business Ownership: Which Path Is Right For You? | Complete Guide",
-      item: "https://reachgig.com/learn/gigs-vs-business",
+      item: "https://www.reachgig.com/learn/gigs-vs-business",
     },
   ],
 };

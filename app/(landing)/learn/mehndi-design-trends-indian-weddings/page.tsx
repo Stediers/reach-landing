@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   keywords:
     "mehndi designs 2025, bridal mehndi, mehndi artist, wedding mehndi trends, arabic mehndi, rajasthani mehndi",
   alternates: {
-    canonical: "https://reachgig.com/learn/mehndi-design-trends-indian-weddings",
+    canonical: "https://www.reachgig.com/learn/mehndi-design-trends-indian-weddings",
   },
   openGraph: {
     title:
@@ -61,7 +61,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -74,19 +74,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Top Mehndi Design Trends for Indian Weddings in 2025 | Bridal Mehndi Guide",
-      item: "https://reachgig.com/learn/mehndi-design-trends-indian-weddings",
+      item: "https://www.reachgig.com/learn/mehndi-design-trends-indian-weddings",
     },
   ],
 };
@@ -117,7 +117,7 @@ export default function Page() {
           authors={[
             {
               name: "ReachGig Team",
-              link: "https://reachgig.com",
+              link: "https://www.reachgig.com",
             },
           ]}
         >

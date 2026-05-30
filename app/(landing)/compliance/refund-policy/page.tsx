@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Refund Policy",
     description: "Refund and Cancellation policy for ReachGig services",
-    url: "https://reachgig.com/compliance/refund-policy",
+    url: "https://www.reachgig.com/compliance/refund-policy",
     type: "website",
     images: [
       {

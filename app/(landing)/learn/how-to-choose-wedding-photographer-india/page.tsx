@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   keywords:
     "wedding photographer India, how to hire photographer, wedding photography tips, bridal photography, wedding photographer cost",
   alternates: {
-    canonical: "https://reachgig.com/learn/how-to-choose-wedding-photographer-india",
+    canonical: "https://www.reachgig.com/learn/how-to-choose-wedding-photographer-india",
   },
   openGraph: {
     title:
@@ -61,7 +61,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -74,19 +74,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "How to Choose the Right Wedding Photographer in India | Complete Guide 2025",
-      item: "https://reachgig.com/learn/how-to-choose-wedding-photographer-india",
+      item: "https://www.reachgig.com/learn/how-to-choose-wedding-photographer-india",
     },
   ],
 };
@@ -117,7 +117,7 @@ export default function Page() {
           authors={[
             {
               name: "ReachGig Team",
-              link: "https://reachgig.com",
+              link: "https://www.reachgig.com",
             },
           ]}
         >

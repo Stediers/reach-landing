@@ -11,7 +11,7 @@ export default function Share() {
         className="w-6 h-6 text-primary hover:cursor-pointer hover:saturate-100"
         onClick={() => {
           window.open(
-            `https://api.whatsapp.com/send?text=https://reachgig.com/learn/${link}`,
+            `https://api.whatsapp.com/send?text=https://www.reachgig.com/learn/${link}`,
             "_blank"
           );
         }}
@@ -27,7 +27,7 @@ export default function Share() {
         onClick={() => {
           //copy to clipboard
           //   navigator.clipboard.writeText(
-          //     `https://reachgig.com/learn/${link}`
+          //     `https://www.reachgig.com/learn/${link}`
           //   );
         }}
       />

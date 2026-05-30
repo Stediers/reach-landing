@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Terms and Conditions for Appointments",
     description: "Terms and Conditions for Appointments in ReachGig",
-    url: "https://reachgig.com/terms",
+    url: "https://www.reachgig.com/terms",
     type: "website",
     images: [
       {

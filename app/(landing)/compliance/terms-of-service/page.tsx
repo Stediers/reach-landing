@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Terms of Use",
     description: "Terms of Use for ReachGig",
-    url: "https://reachgig.com/terms",
+    url: "https://www.reachgig.com/terms",
     type: "website",
     images: [
       {
@@ -70,7 +70,7 @@ export default function Main() {
             We operate the website&nbsp;
             <Link
               rel="noreferrer"
-              href="https://reachgig.com"
+              href="https://www.reachgig.com"
               target="_blank"
               className={link}
             >

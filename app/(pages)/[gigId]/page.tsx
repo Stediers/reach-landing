@@ -55,12 +55,12 @@ export const generateMetadata = async (props: {
           seeded.rating ? `Rated ${seeded.rating}/5` : ""
         } Book on ReachGig.`,
         alternates: {
-          canonical: `https://reachgig.com/${seeded.handle}`,
+          canonical: `https://www.reachgig.com/${seeded.handle}`,
         },
         openGraph: {
           title: `${seeded.name} - ${seeded.designation} in ${location}`,
           description: `Book ${seeded.name}, a professional ${seeded.designation} in ${location}.`,
-          url: `https://reachgig.com/${seeded.handle}`,
+          url: `https://www.reachgig.com/${seeded.handle}`,
           type: "profile",
           siteName: "ReachGig",
         },
@@ -118,7 +118,7 @@ export const generateMetadata = async (props: {
     },
     description,
     alternates: {
-      canonical: `https://reachgig.com/${response.partner.handle}`,
+      canonical: `https://www.reachgig.com/${response.partner.handle}`,
     },
     openGraph: {
       title: `${name} - Top Rated ${response.partner.designation} in ${location}`,
@@ -131,7 +131,7 @@ export const generateMetadata = async (props: {
           alt: `${name} - Professional ${response.partner.designation} in ${location}`,
         },
       ],
-      url: `https://reachgig.com/${response.partner.handle}`,
+      url: `https://www.reachgig.com/${response.partner.handle}`,
       type: "profile",
       siteName: "ReachGig",
       locale: "en_IN",
@@ -215,7 +215,7 @@ export default async function Page(props: {
       jobTitle: response.partner.designation,
       description: response.partner.bio || `Professional ${response.partner.designation} based in ${response.partner.city}, ${response.partner.state}`,
       image: response.partner.imageUrl,
-      url: `https://reachgig.com/${response.partner.handle}`,
+      url: `https://www.reachgig.com/${response.partner.handle}`,
       address: {
         "@type": "PostalAddress",
         addressLocality: response.partner.city,
@@ -245,13 +245,13 @@ export default async function Page(props: {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://reachgig.com",
+          item: "https://www.reachgig.com",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: `${response.partner.firstName} ${response.partner.lastName}`,
-          item: `https://reachgig.com/${response.partner.handle}`,
+          item: `https://www.reachgig.com/${response.partner.handle}`,
         },
       ],
     },
@@ -1003,7 +1003,7 @@ function SeededProfilePage({ profile }: { profile: SeededProfileResponse }) {
 
           <div className="flex flex-col space-y-3">
             <Link
-              href={`https://reachgig.com/download?claim=${profile.handle}`}
+              href={`https://www.reachgig.com/download?claim=${profile.handle}`}
               className="w-full"
             >
               <Button variant="default" className="w-full text-lg py-6">

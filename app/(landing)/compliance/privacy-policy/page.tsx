@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Privacy Policy",
     description: "Learn about ReachGig's privacy policy",
-    url: "https://reachgig.com/privacy-policy",
+    url: "https://www.reachgig.com/privacy-policy",
     type: "website",
     images: [
       {

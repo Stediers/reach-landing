@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords:
     "freelance efficiency, time management tips, freelance productivity, project management tools, freelance automation, increase freelance income, freelance business optimization, freelance workflow",
   alternates: {
-    canonical: "https://reachgig.com/learn/efficiency-hacks-for-stellar-service-and-maximum-income",
+    canonical: "https://www.reachgig.com/learn/efficiency-hacks-for-stellar-service-and-maximum-income",
   },
   openGraph: {
     title:
@@ -50,7 +50,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -63,19 +63,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Freelance Efficiency Hacks: Boost Service Quality & Income [2024 Guide]",
-      item: "https://reachgig.com/learn/efficiency-hacks-for-stellar-service-and-maximum-income",
+      item: "https://www.reachgig.com/learn/efficiency-hacks-for-stellar-service-and-maximum-income",
     },
   ],
 };

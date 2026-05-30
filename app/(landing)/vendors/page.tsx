@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   keywords:
     "freelancers near me, hire local freelancers, service providers India, photographers, makeup artists, DJs, mehndi designers, ReachGig vendors",
   alternates: {
-    canonical: "https://reachgig.com/vendors",
+    canonical: "https://www.reachgig.com/vendors",
   },
   openGraph: {
     title: "Find Freelancers by City | ReachGig",
     description:
       "Browse verified freelancers and service providers across cities in India. Book trusted professionals instantly.",
-    url: "https://reachgig.com/vendors",
+    url: "https://www.reachgig.com/vendors",
     type: "website",
     siteName: "ReachGig",
     locale: "en_IN",

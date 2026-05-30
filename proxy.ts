@@ -15,7 +15,7 @@ export function proxy(req: NextRequest) {
       "https://play.google.com/store/apps/details?id=com.reachtech.partnerapp&pcampaignid=web_share"
     );
   } else {
-    return NextResponse.redirect("https://reachgig.com/partner-program");
+    return NextResponse.redirect("https://www.reachgig.com/partner-program");
   }
 }
 

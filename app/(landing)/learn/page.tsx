@@ -18,20 +18,20 @@ export const metadata: Metadata = {
   description:
     "Discover expert insights, tips, and guides for freelancers and gig workers. Learn about financial management, legal compliance, work-life balance, and success strategies in the gig economy.",
   alternates: {
-    canonical: "https://reachgig.com/learn",
+    canonical: "https://www.reachgig.com/learn",
     types: {
-      "application/rss+xml": "https://reachgig.com/feed.xml",
+      "application/rss+xml": "https://www.reachgig.com/feed.xml",
     },
   },
   openGraph: {
     title: "ReachGig Learning Hub - Expert Guides for Gig Workers",
     description:
       "Expert insights, tips and comprehensive guides to help you succeed in the gig economy. Learn about finances, legal compliance, work-life balance and more.",
-    url: "https://reachgig.com/learn",
+    url: "https://www.reachgig.com/learn",
     type: "website",
     images: [
       {
-        url: "https://reachgig.com/images/og-learn.jpg",
+        url: "https://www.reachgig.com/images/og-learn.jpg",
         width: 1200,
         height: 630,
         alt: "ReachGig Learning Hub",
@@ -60,13 +60,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
   ],
 };

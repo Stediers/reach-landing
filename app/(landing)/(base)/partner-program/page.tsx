@@ -45,11 +45,11 @@ export const metadata: Metadata = {
       "ReachGig Partner Program - Start Your Freelance Business | Free Website & Tools",
     description:
       "Launch your freelance career with ReachGig. Get a free business website, secure payment processing, appointment management, and powerful tools to grow your client base.",
-    url: "https://reachgig.com/partner-program",
+    url: "https://www.reachgig.com/partner-program",
     type: "website",
     images: [
       {
-        url: "https://reachgig.com/images/landing-profiles/home.webp",
+        url: "https://www.reachgig.com/images/landing-profiles/home.webp",
         width: 1200,
         height: 630,
         alt: "ReachGig Partner Program - Professional Business Tools",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       "ReachGig Partner Program - Start Your Freelance Business | Free Website & Tools",
     description:
       "Launch your freelance career with ReachGig. Get a free business website, secure payment processing, appointment management, and powerful tools to grow your client base.",
-    images: ["https://reachgig.com/images/landing-profiles/home.webp"],
+    images: ["https://www.reachgig.com/images/landing-profiles/home.webp"],
   },
 };
 
@@ -77,8 +77,8 @@ export default async function Main() {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "ReachGig",
-      url: "https://reachgig.com",
-      logo: "https://reachgig.com/images/logo.webp",
+      url: "https://www.reachgig.com",
+      logo: "https://www.reachgig.com/images/logo.webp",
       description:
         "ReachGig is a comprehensive platform empowering freelancers and service providers with free business websites and professional tools.",
       address: {

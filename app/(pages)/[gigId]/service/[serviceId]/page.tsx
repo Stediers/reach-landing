@@ -83,7 +83,7 @@ export const generateMetadata = async (props: {
       absolute: serviceTitle,
     },
     alternates: {
-      canonical: `https://reachgig.com/${CustomerRoutes.SERVICE.replace(
+      canonical: `https://www.reachgig.com/${CustomerRoutes.SERVICE.replace(
         "[serviceId]",
         serviceId
       ).replace("[partnerHandle]", gig.handle!!)}`,
@@ -107,7 +107,7 @@ export const generateMetadata = async (props: {
       ],
       locale: "en_IN",
       type: "website",
-      url: `https://reachgig.com/${CustomerRoutes.SERVICE.replace(
+      url: `https://www.reachgig.com/${CustomerRoutes.SERVICE.replace(
         "[serviceId]",
         serviceId
       ).replace("[partnerHandle]", gig.handle!!)}`,
@@ -175,7 +175,7 @@ export default async function Page(props: {
         "@type": "Person",
         name: `${gig.firstName} ${gig.lastName}`,
         image: gig.imageUrl,
-        url: `https://reachgig.com/${gig.handle}`,
+        url: `https://www.reachgig.com/${gig.handle}`,
         address: {
           "@type": "PostalAddress",
           addressLocality: gig.city,
@@ -214,19 +214,19 @@ export default async function Page(props: {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://reachgig.com",
+          item: "https://www.reachgig.com",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: `${gig.firstName} ${gig.lastName}`,
-          item: `https://reachgig.com/${gig.handle}`,
+          item: `https://www.reachgig.com/${gig.handle}`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: service.title,
-          item: `https://reachgig.com${CustomerRoutes.SERVICE.replace("[serviceId]", serviceId).replace("[partnerHandle]", gig.handle!!)}`,
+          item: `https://www.reachgig.com${CustomerRoutes.SERVICE.replace("[serviceId]", serviceId).replace("[partnerHandle]", gig.handle!!)}`,
         },
       ],
     },

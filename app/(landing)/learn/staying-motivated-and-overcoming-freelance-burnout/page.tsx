@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords:
     "freelance burnout, freelancer motivation, work-life balance, freelance stress management, self-care for freelancers, freelance tips, preventing burnout, freelance career advice",
   alternates: {
-    canonical: "https://reachgig.com/learn/staying-motivated-and-overcoming-freelance-burnout",
+    canonical: "https://www.reachgig.com/learn/staying-motivated-and-overcoming-freelance-burnout",
   },
   openGraph: {
     title:
@@ -60,7 +60,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -73,19 +73,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Staying Motivated and Overcoming Freelance Burnout | Freelance Guide",
-      item: "https://reachgig.com/learn/staying-motivated-and-overcoming-freelance-burnout",
+      item: "https://www.reachgig.com/learn/staying-motivated-and-overcoming-freelance-burnout",
     },
   ],
 };

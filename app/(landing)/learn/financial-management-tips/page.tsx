@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   keywords:
     "freelancer finances india, financial management tips, freelancer tax india, gst for freelancers, financial planning freelancers",
   alternates: {
-    canonical: "https://reachgig.com/learn/financial-management-tips",
+    canonical: "https://www.reachgig.com/learn/financial-management-tips",
   },
   openGraph: {
     title:
@@ -79,19 +79,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Financial Management Tips for Freelancers in India",
-      item: "https://reachgig.com/learn/financial-management-tips",
+      item: "https://www.reachgig.com/learn/financial-management-tips",
     },
   ],
 };

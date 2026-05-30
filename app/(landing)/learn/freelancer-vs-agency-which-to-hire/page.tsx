@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   keywords:
     "freelancer vs agency, hire freelancer or agency, freelancer benefits, agency vs independent, outsource work India",
   alternates: {
-    canonical: "https://reachgig.com/learn/freelancer-vs-agency-which-to-hire",
+    canonical: "https://www.reachgig.com/learn/freelancer-vs-agency-which-to-hire",
   },
   openGraph: {
     title:
@@ -62,7 +62,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -75,19 +75,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Freelancer vs Agency: Which Should You Hire in 2025? | Honest Comparison",
-      item: "https://reachgig.com/learn/freelancer-vs-agency-which-to-hire",
+      item: "https://www.reachgig.com/learn/freelancer-vs-agency-which-to-hire",
     },
   ],
 };
@@ -118,7 +118,7 @@ export default function Page() {
           authors={[
             {
               name: "ReachGig Team",
-              link: "https://reachgig.com",
+              link: "https://www.reachgig.com",
             },
           ]}
         >

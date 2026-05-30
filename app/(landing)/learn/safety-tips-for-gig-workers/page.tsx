@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   keywords:
     "gig worker safety, freelancer security, delivery driver safety tips, rideshare safety, personal protection, cybersecurity for gig workers, legal rights gig economy",
   alternates: {
-    canonical: "https://reachgig.com/learn/safety-tips-for-gig-workers",
+    canonical: "https://www.reachgig.com/learn/safety-tips-for-gig-workers",
   },
   openGraph: {
     title: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
@@ -57,7 +57,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -70,19 +70,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "10 Essential Safety Tips for Gig Workers (2024 Guide)",
-      item: "https://reachgig.com/learn/safety-tips-for-gig-workers",
+      item: "https://www.reachgig.com/learn/safety-tips-for-gig-workers",
     },
   ],
 };

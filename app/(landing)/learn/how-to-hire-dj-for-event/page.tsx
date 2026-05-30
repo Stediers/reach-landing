@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   keywords:
     "hire DJ India, DJ for wedding, event DJ cost, how to book DJ, party DJ near me",
   alternates: {
-    canonical: "https://reachgig.com/learn/how-to-hire-dj-for-event",
+    canonical: "https://www.reachgig.com/learn/how-to-hire-dj-for-event",
   },
   openGraph: {
     title:
@@ -62,7 +62,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -75,19 +75,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "How to Hire a DJ for Your Event in India — Complete Guide 2025",
-      item: "https://reachgig.com/learn/how-to-hire-dj-for-event",
+      item: "https://www.reachgig.com/learn/how-to-hire-dj-for-event",
     },
   ],
 };
@@ -118,7 +118,7 @@ export default function Page() {
           authors={[
             {
               name: "ReachGig Team",
-              link: "https://reachgig.com",
+              link: "https://www.reachgig.com",
             },
           ]}
         >

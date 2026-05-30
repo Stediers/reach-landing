@@ -121,7 +121,7 @@ export default function People({
             </DialogDescription>
           </DialogHeader>
           <iframe
-            src={`https://reachgig.com/${data.handle}`}
+            src={`https://www.reachgig.com/${data.handle}`}
             className="w-full h-[82vh]"
           />
         </DialogContent>

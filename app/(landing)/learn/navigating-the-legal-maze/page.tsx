@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   keywords:
     "freelancer legal guide, freelance contracts, freelancer taxes, intellectual property rights, dispute resolution, freelance insurance, legal protection for freelancers",
   alternates: {
-    canonical: "https://reachgig.com/learn/navigating-the-legal-maze",
+    canonical: "https://www.reachgig.com/learn/navigating-the-legal-maze",
   },
   openGraph: {
     title:
@@ -53,7 +53,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -66,19 +66,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Freelancer Legal Guide: Contracts, Taxes & Legal Protection | ReachGig",
-      item: "https://reachgig.com/learn/navigating-the-legal-maze",
+      item: "https://www.reachgig.com/learn/navigating-the-legal-maze",
     },
   ],
 };

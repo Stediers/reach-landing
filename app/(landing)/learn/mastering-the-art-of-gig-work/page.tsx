@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   keywords:
     "gig work, freelancing, client transactions, professional etiquette, pricing strategy, client communication, service provider tips, gig economy",
   alternates: {
-    canonical: "https://reachgig.com/learn/mastering-the-art-of-gig-work",
+    canonical: "https://www.reachgig.com/learn/mastering-the-art-of-gig-work",
   },
   openGraph: {
     title:
@@ -60,7 +60,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -73,19 +73,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Mastering the Art of Gig Work: Best Practices for Seamless Client Transactions",
-      item: "https://reachgig.com/learn/mastering-the-art-of-gig-work",
+      item: "https://www.reachgig.com/learn/mastering-the-art-of-gig-work",
     },
   ],
 };

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "ReachGig",
     description:
       "ReachGig is India's leading freelancer marketplace. Hire verified photographers, makeup artists, mehndi designers, DJs & more in your city. Book trusted professionals instantly with secure payments.",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
     type: "website",
     images: [
       {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     creator: "@ReachGig",
   },
   alternates: {
-    canonical: "https://reachgig.com",
+    canonical: "https://www.reachgig.com",
   },
   applicationName: "ReachGig",
   appleWebApp: {
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     capable: true,
   },
-  metadataBase: new URL("https://reachgig.com"),
+  metadataBase: new URL("https://www.reachgig.com"),
 };
 //ola
 
@@ -65,14 +65,14 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "ReachGig",
-  url: "https://reachgig.com",
+  url: "https://www.reachgig.com",
   description:
     "India's leading freelancer marketplace. Hire verified photographers, makeup artists, mehndi designers, DJs & more.",
   potentialAction: {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://reachgig.com/vendors/{city}",
+      urlTemplate: "https://www.reachgig.com/vendors/{city}",
     },
     "query-input": "required name=city",
   },
@@ -82,8 +82,8 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "ReachGig",
-  url: "https://reachgig.com",
-  logo: "https://reachgig.com/images/logo.webp",
+  url: "https://www.reachgig.com",
+  logo: "https://www.reachgig.com/images/logo.webp",
   description:
     "ReachGig connects customers with verified freelancers and service providers across India. Book photographers, makeup artists, DJs, mehndi designers and more.",
   address: {
@@ -102,8 +102,8 @@ const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "ReachGig",
-  url: "https://reachgig.com",
-  logo: "https://reachgig.com/images/logo.webp",
+  url: "https://www.reachgig.com",
+  logo: "https://www.reachgig.com/images/logo.webp",
   description:
     "India's leading freelancer marketplace. Hire verified photographers, makeup artists, mehndi designers, DJs and more in your city.",
   address: {

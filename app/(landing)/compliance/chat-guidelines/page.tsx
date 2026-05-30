@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Chat Guidelines",
     description:
       "Chat guidelines for ReachGig users. We aim to provide a safe and respectful environment for all users.",
-    url: "https://reachgig.com/compliance/chat-guidelines",
+    url: "https://www.reachgig.com/compliance/chat-guidelines",
     type: "website",
     images: [
       {

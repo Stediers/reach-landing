@@ -18,7 +18,7 @@ type RootLayoutProps = {
 //     title: "ReachGig",
 //     description:
 //       "Discover endless opportunities for freelance work and connect with top-tier talent at ReachGig. Explore our platform for seamless collaboration and unlock your potential today!",
-//     url: "https://reachgig.com",
+//     url: "https://www.reachgig.com",
 //     type: "website",
 //     images: [
 //       {
@@ -30,7 +30,7 @@ type RootLayoutProps = {
 //     ],
 //     locale: "en_IN",
 //   },
-//   metadataBase: new URL("https://reachgig.com"),
+//   metadataBase: new URL("https://www.reachgig.com"),
 //   applicationName: "ReachGig",
 //   robots: "index, follow",
 // };

@@ -51,7 +51,7 @@ type RootLayoutProps = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://reachgig.com"),
+  metadataBase: new URL("https://www.reachgig.com"),
   title: {
     default: "ReachGig",
     template: "%s | ReachGig",

@@ -2,7 +2,7 @@ import { fetchGigHandles } from "@api_functions/explore/seo/get-gig-handles";
 import { CustomerRoutes } from "@data/enums";
 import { MetadataRoute } from "next";
 
-const URL = "https://reachgig.com";
+const URL = "https://www.reachgig.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   keywords:
     "questions to ask service provider, how to hire freelancer, booking service provider tips, freelancer interview questions, hire professional services",
   alternates: {
-    canonical: "https://reachgig.com/learn/questions-to-ask-before-booking-service-provider",
+    canonical: "https://www.reachgig.com/learn/questions-to-ask-before-booking-service-provider",
   },
   openGraph: {
     title:
@@ -62,7 +62,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -75,19 +75,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Top Questions to Ask Before Booking a Service Provider | Smart Hiring Guide",
-      item: "https://reachgig.com/learn/questions-to-ask-before-booking-service-provider",
+      item: "https://www.reachgig.com/learn/questions-to-ask-before-booking-service-provider",
     },
   ],
 };
@@ -118,7 +118,7 @@ export default function Page() {
           authors={[
             {
               name: "ReachGig Team",
-              link: "https://reachgig.com",
+              link: "https://www.reachgig.com",
             },
           ]}
         >

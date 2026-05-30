@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Verification",
     description:
       "Know who you're dealing with. Our verification process ensures that you can trust the service providers on our platform.",
-    url: "https://reachgig.com/bookings",
+    url: "https://www.reachgig.com/bookings",
     type: "website",
     images: [
       {

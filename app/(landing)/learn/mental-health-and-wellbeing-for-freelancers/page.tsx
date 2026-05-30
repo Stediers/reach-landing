@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   keywords:
     "freelancer mental health, solopreneur wellness, prevent burnout, work-life balance, freelance stress management, self-care for freelancers, freelancer support network",
   alternates: {
-    canonical: "https://reachgig.com/learn/mental-health-and-wellbeing-for-freelancers",
+    canonical: "https://www.reachgig.com/learn/mental-health-and-wellbeing-for-freelancers",
   },
   openGraph: {
     title:
@@ -58,7 +58,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -71,19 +71,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Mental Health Guide for Freelancers: Prevent Burnout & Thrive | Solopreneur Wellness",
-      item: "https://reachgig.com/learn/mental-health-and-wellbeing-for-freelancers",
+      item: "https://www.reachgig.com/learn/mental-health-and-wellbeing-for-freelancers",
     },
   ],
 };

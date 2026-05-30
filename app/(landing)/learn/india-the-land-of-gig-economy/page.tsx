@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   keywords:
     "gig economy India, freelance work India, digital economy, flexible work, Indian startups, gig workers rights, freelance platforms India",
   alternates: {
-    canonical: "https://reachgig.com/learn/india-the-land-of-gig-economy",
+    canonical: "https://www.reachgig.com/learn/india-the-land-of-gig-economy",
   },
   openGraph: {
     title: "India: The Land of Gig Economy | Understanding the Future of Work",
@@ -60,7 +60,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ReachGig",
-    url: "https://reachgig.com",
+    url: "https://www.reachgig.com",
   },
 };
 
@@ -73,19 +73,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://reachgig.com",
+      item: "https://www.reachgig.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Learn",
-      item: "https://reachgig.com/learn",
+      item: "https://www.reachgig.com/learn",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "India: The Land of Gig Economy | Understanding the Future of Work",
-      item: "https://reachgig.com/learn/india-the-land-of-gig-economy",
+      item: "https://www.reachgig.com/learn/india-the-land-of-gig-economy",
     },
   ],
 };

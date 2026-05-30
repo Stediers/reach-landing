@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { Country, State as StateType } from "country-state-city";
 
-const URL = "https://reachgig.com/explore";
+const URL = "https://www.reachgig.com/explore";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const country = Country.getCountryByCode("IN");

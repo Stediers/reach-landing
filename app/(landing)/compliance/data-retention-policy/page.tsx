@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Data Retention Policy",
     description: "Learn about ReachGig's data retention policy",
-    url: "https://reachgig.com/compliance/data-retention-policy",
+    url: "https://www.reachgig.com/compliance/data-retention-policy",
     type: "website",
     images: [
       {

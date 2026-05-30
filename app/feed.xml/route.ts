@@ -1,4 +1,4 @@
-const baseUrl = "https://reachgig.com";
+const baseUrl = "https://www.reachgig.com";
 
 const blogs = [
   {
