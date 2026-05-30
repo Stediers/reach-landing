@@ -15,7 +15,8 @@ import {
   BsGenderMale,
   BsGenderTrans,
 } from "react-icons/bs";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
+import stringFormater from "@helper_functions/text/string-formater";
 import Image from "next/image";
 import Link from "next/link";
 import { CallSetting, WhatsAppSetting } from "@components/contact/Contact";
@@ -46,31 +47,41 @@ export const generateMetadata = async (props: {
     // Try seeded profile
     const seeded = await fetchSeededProfile(gigId);
     if (seeded) {
-      const location = `${seeded.city}, ${seeded.state}`;
+      const clean = (s?: string) => (s ?? "").replace(/\s+/g, " ").trim();
+      const sName = clean(seeded.name);
+      const sDesignation = clean(stringFormater(seeded.designation ?? ""));
+      const sCity = clean(seeded.city);
+      const sCityState = [seeded.city, seeded.state]
+        .map(clean)
+        .filter(Boolean)
+        .join(", ");
+      const sIn = sCityState ? ` in ${sCityState}` : "";
       return {
         title: {
-          absolute: `${seeded.name} - ${seeded.designation} in ${location} | ReachGig`,
+          absolute: `${sName} - ${sDesignation}${sIn} | ReachGig`,
         },
-        description: `Find and book ${seeded.name}, a ${seeded.designation} in ${location}. ${
+        description: `Find and book ${sName}, a ${sDesignation}${sIn}. ${
           seeded.rating ? `Rated ${seeded.rating}/5` : ""
         } Book on ReachGig.`,
         alternates: {
           canonical: `https://www.reachgig.com/${seeded.handle}`,
         },
         openGraph: {
-          title: `${seeded.name} - ${seeded.designation} in ${location}`,
-          description: `Book ${seeded.name}, a professional ${seeded.designation} in ${location}.`,
+          title: `${sName} - ${sDesignation}${sIn}`,
+          description: `Book ${sName}, a professional ${sDesignation}${sIn}.`,
           url: `https://www.reachgig.com/${seeded.handle}`,
           type: "profile",
           siteName: "ReachGig",
         },
         keywords: [
-          seeded.name.toLowerCase(),
-          seeded.designation.toLowerCase(),
-          seeded.city.toLowerCase(),
-          `${seeded.designation.toLowerCase()} in ${seeded.city.toLowerCase()}`,
-          `hire ${seeded.designation.toLowerCase()}`,
-          `${seeded.designation.toLowerCase()} near me`,
+          sName.toLowerCase(),
+          sDesignation.toLowerCase(),
+          ...(sCity ? [sCity.toLowerCase()] : []),
+          ...(sCity
+            ? [`${sDesignation.toLowerCase()} in ${sCity.toLowerCase()}`]
+            : []),
+          `hire ${sDesignation.toLowerCase()}`,
+          `${sDesignation.toLowerCase()} near me`,
           "reachgig",
         ],
         robots: {
@@ -95,18 +106,29 @@ export const generateMetadata = async (props: {
     };
   }
 
-  const name = `${response.partner.firstName} ${response.partner.lastName}`;
-  const location = `${response.partner.city}, ${response.partner.state}`;
+  const clean = (s?: string) => (s ?? "").replace(/\s+/g, " ").trim();
+  const name = clean(
+    `${response.partner.firstName ?? ""} ${response.partner.lastName ?? ""}`
+  );
+  const designation = clean(stringFormater(response.partner.designation ?? ""));
+  const cityState = [response.partner.city, response.partner.state]
+    .map(clean)
+    .filter(Boolean)
+    .join(", ");
+  const inLocation = cityState ? ` in ${cityState}` : "";
+  const basedInLocation = cityState ? ` based in ${cityState}` : "";
+  const serviceCount = response.partner.serviceIds?.length || 0;
+  const servicesLabel = `${serviceCount} premium service${
+    serviceCount === 1 ? "" : "s"
+  }`;
   const servicesList = response.services
     .slice(0, 3)
-    .map((s) => s.title)
+    .map((s) => clean(s.title))
+    .filter(Boolean)
     .join(", ");
+  const includingServices = servicesList ? ` including ${servicesList}` : "";
 
-  const description = `Hire ${name}, an experienced ${
-    response.partner.designation
-  } based in ${location}. Professional offering ${
-    response.partner.serviceIds?.length || 0
-  } premium services including ${servicesList}. ✓ Verified Professional ${
+  const description = `Hire ${name}, an experienced ${designation}${basedInLocation}. Professional offering ${servicesLabel}${includingServices}. ✓ Verified Professional ${
     response.partner.rating
       ? `✓ ${response.partner.rating.toFixed(1)} Rating`
       : ""
@@ -114,21 +136,21 @@ export const generateMetadata = async (props: {
 
   return {
     title: {
-      absolute: `${name} - Professional ${response.partner.designation} in ${location} | ReachGig`,
+      absolute: `${name} - Professional ${designation}${inLocation} | ReachGig`,
     },
     description,
     alternates: {
       canonical: `https://www.reachgig.com/${response.partner.handle}`,
     },
     openGraph: {
-      title: `${name} - Top Rated ${response.partner.designation} in ${location}`,
+      title: `${name} - Top Rated ${designation}${inLocation}`,
       description,
       images: [
         {
           url: response.partner.imageUrl,
           width: 1200,
           height: 630,
-          alt: `${name} - Professional ${response.partner.designation} in ${location}`,
+          alt: `${name} - Professional ${designation}${inLocation}`,
         },
       ],
       url: `https://www.reachgig.com/${response.partner.handle}`,
@@ -141,20 +163,24 @@ export const generateMetadata = async (props: {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${name} - Expert ${response.partner.designation} | ReachGig`,
+      title: `${name} - Expert ${designation} | ReachGig`,
       description,
       images: [response.partner.imageUrl],
       creator: "@ReachGig",
     },
     keywords: [
       name.toLowerCase(),
-      response.partner.designation.toLowerCase(),
-      response.partner.city.toLowerCase(),
-      response.partner.state.toLowerCase(),
-      ...response.services.map((s) => s.title.toLowerCase()),
-      `hire ${response.partner.designation.toLowerCase()}`,
-      `${response.partner.designation.toLowerCase()} near me`,
-      `${response.partner.designation.toLowerCase()} in ${location.toLowerCase()}`,
+      designation.toLowerCase(),
+      ...[response.partner.city, response.partner.state]
+        .map(clean)
+        .filter(Boolean)
+        .map((x) => x.toLowerCase()),
+      ...response.services.map((s) => clean(s.title).toLowerCase()),
+      `hire ${designation.toLowerCase()}`,
+      `${designation.toLowerCase()} near me`,
+      ...(cityState
+        ? [`${designation.toLowerCase()} in ${cityState.toLowerCase()}`]
+        : []),
       "professional services",
       "book services online",
       "reachgig",
@@ -192,7 +218,7 @@ export default async function Page(props: {
     if (seeded && !seeded.claimed) {
       return <SeededProfilePage profile={seeded} />;
     }
-    redirect("/404");
+    notFound();
   }
 
   const backLink = searchParams.backLink

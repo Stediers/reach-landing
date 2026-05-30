@@ -28,7 +28,8 @@ export async function generateMetadata(
   // fetch data
   if (!searchParams)
     return {
-      title: "No search params",
+      title: "Explore Freelancers & Service Providers",
+      alternates: { canonical: "https://www.reachgig.com/explore" },
     };
   const explore = await wordSearchService({
     query: searchParams.search ?? "",
@@ -60,7 +61,8 @@ export async function generateMetadata(
 
   if (!explore)
     return {
-      title: "No search results",
+      title: "Explore Freelancers & Service Providers",
+      alternates: { canonical: "https://www.reachgig.com/explore" },
     };
 
   console.log("Explore: ", explore);
@@ -72,7 +74,7 @@ export async function generateMetadata(
       searchParams.online === "true" ? "online services" : "local services";
 
     return {
-      title: `${explore.data.length} ${searchTerm} ${serviceType}${state} | ReachGig`,
+      title: `${explore.data.length} ${searchTerm} ${serviceType}${state}`,
       description: `Compare and book trusted ${searchTerm} ${serviceType}${state}. ✓ Verified providers ✓ Real reviews ✓ Secure booking ✓ Best prices guaranteed.`,
       keywords: `${searchTerm}, ${serviceType}, book ${searchTerm}, ${searchTerm} near me, trusted ${searchTerm}, professional ${searchTerm}${state}, ${
         explore.data.length > 0
@@ -118,7 +120,7 @@ export async function generateMetadata(
       searchParams.online === "true" ? "Online Services" : "Local Services";
 
     return {
-      title: `Book Trusted ${serviceType} service partners in ${state} | ReachGig`,
+      title: `Book Trusted ${serviceType} service partners${state}`,
       description: `Discover and book professional ${serviceType.toLowerCase()}${state}. ✓ Verified providers ✓ Real customer reviews ✓ Secure booking ✓ Competitive prices ✓ Safe appointments.`,
       keywords: `book services${state}, professional services, trusted providers, local services, online services, service marketplace${
         explore.data.length > 0

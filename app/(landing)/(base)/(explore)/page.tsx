@@ -58,7 +58,7 @@ export default async function ExplorePage(props: {
   return (
     <>
       <div className="w-full flex flex-col justify-start items-start relative !hide-scrollbar py-5 space-y-5">
-        <h1 className="sr-only">Browse Freelancers & Service Providers in India</h1>
+        <h2 className="sr-only">Browse Freelancers & Service Providers in India</h2>
         <PopularDesignations
           designations={res.map((partner) => partner.group)}
           selectedDesignation={selectedDesignation}
